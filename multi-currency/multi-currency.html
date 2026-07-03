@@ -518,7 +518,7 @@ const D=[
   ['016','列表 > 帳號欄位 > 國家 / 幣種',0,'用戶管理 > 代理 > 列表 > 帳號欄位','帳號欄位內原已顯示的國家與法幣資訊，調整為依後端動態回傳','帳號欄位內，帳號資訊下方原已顯示國家與法幣，格式為「國家：XX」、「幣種：XX」。調整為依照該代理帳號設定動態帶出，不可手動修改。','帳號欄位渲染時，從後端回傳資料中讀取國家與幣種欄位，依格式顯示於帳號資訊下方。','帳號列表 API 回傳資料需包含該帳號綁定的國家與幣種欄位。','col-account'],
   ['017','列表 > 餘額欄位',0,'用戶管理 > 代理 > 列表 > 餘額欄位','餘額欄位改為純數字顯示，不顯示幣種代碼','餘額欄位數值改為純數字顯示，不再附加幣種代碼。','渲染餘額欄位時，僅顯示數字，不組合幣種代碼。','餘額欄位回傳資料需包含金額與對應法幣代碼。','col-single-amount'],
   ['018','列表 > 佣金餘額欄位',0,'用戶管理 > 代理 > 列表 > 佣金餘額欄位','佣金餘額欄位改為純數字顯示，不顯示幣種代碼','佣金餘額欄位數值改為純數字顯示，不再附加幣種代碼。','渲染佣金餘額欄位時，僅顯示數字，不組合幣種代碼。','佣金餘額欄位回傳資料需包含金額與對應法幣代碼。','col-single-amount'],
-  ['019','操作 > 變更代理線 > 彈窗 > 國家 / 幣種',0,'用戶管理 > 代理 > 列表 > 操作 > 變更代理線 > 彈窗 > 國家 / 幣種','彈窗內固定顯示國家與幣種欄位（預設「－」），依選擇的所屬大代理自動帶入。⚠️ 若轉線對象為大代理，待確認（見 Q6）','變更代理線彈窗內固定顯示「國家：－」與「幣種：－」，選定所屬大代理後自動帶入對應國家與法幣。','初始顯示「國家：－」、「幣種：－」，所屬大代理選定後自動讀取並帶入對應欄位。','所屬大代理查詢 API 回傳資料需包含該大代理綁定的國家與幣種欄位。','modal-auto'],
+  ['019','操作 > 變更代理線 > 彈窗 > 國家 / 幣種',0,'用戶管理 > 代理 > 列表 > 操作 > 變更代理線 > 彈窗 > 國家 / 幣種','彈窗內固定顯示國家與幣種欄位（預設「－」），依選擇的所屬大代理自動帶入。⚠️ 若轉線對象為大代理（Q6⚠️ 待 RD 確認）','變更代理線彈窗內固定顯示「國家：－」與「幣種：－」，選定所屬大代理後自動帶入對應國家與法幣。','初始顯示「國家：－」、「幣種：－」，所屬大代理選定後自動讀取並帶入對應欄位。','所屬大代理查詢 API 回傳資料需包含該大代理綁定的國家與幣種欄位。','modal-auto'],
   ['020','操作 > 直屬會員轉移 > 彈窗 > 國家 / 幣種',0,'用戶管理 > 代理 > 列表 > 操作 > 直屬會員轉移 > 彈窗 > 國家 / 幣種','彈窗內固定顯示國家與幣種欄位（預設「－」），依選擇的新代理自動帶入','直屬會員轉移彈窗內固定顯示「國家：－」與「幣種：－」，選定新代理後自動帶入對應國家與法幣。','初始顯示「國家：－」、「幣種：－」，新代理選定後自動讀取並帶入對應欄位。','代理查詢 API 回傳資料需包含該代理綁定的國家與幣種欄位。','modal-auto'],
   ['021','操作 > 資金明細 > 列表 > 交易金額',0,'用戶管理 > 代理 > 列表 > 操作 > 資金明細 > 跳轉頁面 > 列表 > 交易金額欄位','交易金額欄位兩行顯示，第一行法幣、第二行 USDT','交易金額欄位目前兩行均顯示相同法幣。調整為第一行顯示法幣金額，第二行顯示換算後的系統幣 USDT 金額。換算依後端匯率計算，前端直接顯示後端回傳值。','渲染交易金額欄位時，分兩行顯示後端回傳的法幣金額與 USDT 金額，格式為「數字(幣種代碼)」。','交易金額欄位回傳資料需同時包含法幣金額（含幣種代碼）與換算後的 USDT 金額。','col-two-row'],
   ['022','操作 > 資金明細 > 右上統計總額',0,'用戶管理 > 代理 > 列表 > 操作 > 資金明細 > 跳轉頁面 > 右上統計總額','右上統計總額改為以系統幣 USDT 顯示','右上統計總額目前以法幣顯示。需改為以系統幣 USDT 統計並顯示。','渲染統計總額時，幣種代碼改為固定顯示 USDT。','統計總額改為以 USDT 計算並回傳，幣種代碼固定為 USDT。','stat-usdt'],
@@ -598,7 +598,7 @@ function makeSpec(){
   <p class="prose"><strong>2.1 系統幣</strong><br>系統幣為 USDT，所有跨幣種統計、換算均以 USDT 為基準。</p><br>
   <p class="prose"><strong>2.2 後台啟用法幣設定</strong><br>總控後台設定此站點啟用哪些法幣，管理後台所有法幣相關下拉選單的選項來源依此設定顯示，未啟用的法幣不出現在任何選單中。</p><br>
   <p class="prose"><strong>2.3 支援國家與法幣</strong><br>目前支援法幣清單待後端提供。支援哪些國家由後端寫死於程式內，無法於後台手動新增或刪除。</p><br>
-  <p class="prose"><strong>2.4 匯率規則</strong><br>匯率（法幣與系統幣 USDT 之間）由後端寫死於程式內，無法於後台手動設定。換算精度：計算至小數點第二位，第三位四捨五入。（⚠️ 待後端確認）</p><br>
+  <p class="prose"><strong>2.4 匯率規則</strong><br>匯率（法幣與系統幣 USDT 之間）由後端寫死於程式內，無法於後台手動設定。換算精度：計算至小數點第二位，第三位四捨五入。（Q4⚠️ 待 RD 確認）</p><br>
   <p class="prose"><strong>2.5 幣種顯示格式</strong><br>後台目前幣種顯示不一致，部分顯示中文、部分顯示英文。本次調整後，所有幣種代碼統一改為半形大寫英文顯示（如 PHP、VND、USDT），不再使用中文或全形字元。</p>
   <div class="sec">三、層級結構與法幣綁定規則</div>
   <p class="prose"><strong>3.1 層級說明</strong></p><br>
@@ -606,13 +606,14 @@ function makeSpec(){
     <thead><tr><th style="background:#f5f7fa;padding:9px 12px;text-align:left;border-bottom:2px solid #e0e6ed;border-right:1px solid #e0e6ed;">層級</th><th style="background:#f5f7fa;padding:9px 12px;text-align:left;border-bottom:2px solid #e0e6ed;">說明</th></tr></thead>
     <tbody>
       <tr><td style="padding:9px 12px;border-bottom:1px solid #f0f2f5;border-right:1px solid #f0f2f5;">投注站</td><td style="padding:9px 12px;border-bottom:1px solid #f0f2f5;">最高層級，選擇「地區」，本身無法幣概念</td></tr>
-      <tr><td style="padding:9px 12px;border-bottom:1px solid #f0f2f5;border-right:1px solid #f0f2f5;">投注站直屬會員</td><td style="padding:9px 12px;border-bottom:1px solid #f0f2f5;">依投注站地區自動綁定對應國家與法幣</td></tr>
+      <tr><td style="padding:9px 12px;border-bottom:1px solid #f0f2f5;border-right:1px solid #f0f2f5;">投注站直屬會員</td><td style="padding:9px 12px;border-bottom:1px solid #f0f2f5;">依投注站地區自動綁定對應國家與法幣（Q2⚠️ 待 RD 確認）</td></tr>
       <tr><td style="padding:9px 12px;border-bottom:1px solid #f0f2f5;border-right:1px solid #f0f2f5;">大代理</td><td style="padding:9px 12px;border-bottom:1px solid #f0f2f5;">選擇國家與法幣的主要設定點</td></tr>
       <tr><td style="padding:9px 12px;border-bottom:1px solid #f0f2f5;border-right:1px solid #f0f2f5;">代理</td><td style="padding:9px 12px;border-bottom:1px solid #f0f2f5;">自動繼承上級大代理的國家與法幣</td></tr>
       <tr><td style="padding:9px 12px;border-right:1px solid #f0f2f5;">會員（含大代理直屬會員）</td><td style="padding:9px 12px;">自動繼承上級的國家與法幣</td></tr>
     </tbody>
   </table><br>
-  <p class="prose"><strong>3.2 綁定限制</strong><br>・同一條線（投注站 → 大代理 → 代理 → 會員）不允許出現不同國家或不同法幣。<br>・國家與法幣一經設定後不可更改。</p>
+  <p class="prose"><strong>3.2 綁定限制</strong><br>・同一條線（投注站 → 大代理 → 代理 → 會員）不允許出現不同國家或不同法幣。<br>・國家與法幣一經設定後不可更改。（Q6⚠️ 待 RD 確認）<br>・大代理依所屬投注站地區自動帶入對應國家與法幣（Q3⚠️ 待 RD 確認）<br>・同一投注站下所有大代理必須為相同法幣，不允許並存不同法幣的大代理（Q3⚠️ 待 RD 確認）</p>
+  <p class="prose"><strong>3.3 轉線規則</strong><br>投注站、大代理、代理、會員之間的轉線，僅允許在相同幣種之間進行，不得跨幣種互轉。（Q3、Q5、Q6⚠️ 待 RD 確認）</p>
   <div class="sec">四、金額顯示通用規則</div>
   <p class="prose"><strong>4.1 有法幣的金額欄位</strong><br>原本已為兩行顯示且有法幣的金額欄位，顯示方式調整如下：</p><br>
   <div style="display:flex;gap:14px;">
@@ -626,24 +627,24 @@ function makeSpec(){
   <p class="prose"><strong>5.3 報表統計通用規則</strong><br>所有報表統計金額均改以系統幣 USDT 為基準進行匯總計算，包含頁面顯示數據及導出數據（Excel/CSV 等）。</p>
   <div class="sec">六、子帳號法幣查看權限</div>
   <p class="prose"><strong>6.1 法幣權限設定</strong><br>子帳號（後台管理帳號）新增或編輯時，新增法幣權限設定，為下拉多選，選項來源為當前站點已啟用的法幣清單（見 2.2）。</p><br>
-  <p class="prose">規則如下：<br>・舊有子帳號（本次上線前已建立）原本均未勾選法幣，未勾選狀態視為「沒有限制」，可查看所有法幣的相關數據<br>・法幣權限欄位為必填，新增子帳號或保存編輯既有子帳號時，無論是否曾調整此欄位，皆須至少勾選一個法幣才能保存成功，不可保留空白；一經存入資料後，即不會再有未勾選的情況<br>・已勾選法幣後，該子帳號僅能查看對應法幣的會員、代理及任何相關數據<br>・用途為隔離不同法幣的運營人員查看權限</p>
+  <p class="prose">規則如下：<br>・舊有子帳號（本次上線前已建立）原本均未勾選法幣，未勾選狀態視為「沒有限制」，可查看所有法幣的相關數據<br>・法幣權限欄位為必填，新增子帳號或保存編輯既有子帳號時，無論是否曾調整此欄位，皆須至少勾選一個法幣才能保存成功，不可保留空白；一經存入資料後，即不會再有未勾選的情況<br>・已勾選法幣後，該子帳號僅能查看、編輯、調整額度對應法幣的會員、代理及任何相關數據（Q7⚠️ 待 RD 確認）<br>・用途為隔離不同法幣的運營人員查看權限</p>
   <div class="sec">七、VIP 相關規則</div>
   <p class="prose"><strong>7.1 VIP 設置與法幣綁定</strong><br>VIP 特權設置依法幣分開設定，不同法幣會員套用對應法幣的 VIP 設置。</p><br>
-  <p class="prose"><strong>7.2 成長值計算</strong><br>成長值由有效投注額乘上對應場館倍數計算而來，因各法幣有效投注額數值不同，成長值數字本身依法幣各自計算。</p><br>
-  <p class="prose"><strong>7.3 贈送成長值</strong><br>贈送成長值需綁定法幣，確保只計入對應法幣會員的 VIP 進度。實作方式待後端確認。</p>
+  <p class="prose"><strong>7.2 成長值計算</strong><br>成長值由有效投注額乘上對應場館倍數計算而來，因各法幣有效投注額數值不同，成長值數字本身依法幣各自計算。（Q7⚠️ 待 RD 確認）</p><br>
+  <p class="prose"><strong>7.3 贈送成長值</strong><br>贈送成長值需綁定法幣，確保只計入對應法幣會員的 VIP 進度。實作方式待後端確認。（Q7⚠️ 待 RD 確認）</p>
   <div class="sec">八、第三方廠商相關規則</div>
   <p class="prose"><strong>8.1 幣種支援顯示</strong><br>第三方廠商支援哪些幣種，以及各廠商內的遊戲各支援哪些幣種，由控制中心後台回傳顯示。管理後台無法指定或選擇幣種，僅負責顯示控制中心回傳的結果。</p><br>
   <p class="prose"><strong>8.2 不受幣種設置影響的項目</strong><br>以下項目維持原本邏輯，不吃幣種設置：<br>・第三方廠商排序<br>・第三方廠商名稱<br>・第三方廠商圖片<br>・廠商內各遊戲排序<br>・廠商內各遊戲展示名稱<br>・廠商內各遊戲圖片</p>
   <div class="sec">九、充值提款配置幣種規則</div>
-  <p class="prose"><strong>9.1 充值方式 / 提款方式</strong><br>充值方式與提款方式為管道類型層級（如銀行轉帳、第三方支付等開關設定）。是否需於此層級綁定幣種，待確認（見 Q9）。</p><br>
+  <p class="prose"><strong>9.1 充值方式 / 提款方式</strong><br>充值方式與提款方式為管道類型層級（如銀行轉帳、第三方支付等開關設定），均需綁定幣種，僅該幣種會員可看到對應充值／提款渠道。<br>充值側已實作幣種過濾；提款側目前尚未綁定幣種，需新增幣種欄位與過濾邏輯。（Q9⚠️ 待 RD 確認）</p><br>
   <p class="prose"><strong>9.2 銀行綁定幣種</strong><br>每間銀行於設定時需指定支援的幣種。僅對應幣種的會員可看到並使用該銀行進行充值或提款；非對應幣種的會員不顯示該銀行選項。</p><br>
   <p class="prose"><strong>9.3 第三方支付綁定幣種</strong><br>每個第三方支付通道於設定時需指定支援的幣種。僅對應幣種的會員可看到並使用該通道；非對應幣種的會員不顯示該通道選項。</p>
   <div class="sec">十、活動素材幣種區分規則</div>
   <p class="prose"><strong>10.1 區分邏輯</strong><br>現有素材管理已依語系區分素材內容。本次在語系基礎上新增幣種維度，使素材同時具備「語系 × 幣種」的雙重區分。同一語系下，不同幣種的會員應各自看到對應幣種的素材。</p><br>
   <p class="prose"><strong>10.2 目的</strong><br>活動素材上常帶有獎金、門檻等文宣內容，若不同幣種的會員看到同一份素材，獎金金額與幣別將產生錯亂，造成會員混淆。</p><br>
-  <p class="prose"><strong>10.3 例外：啟動頁 / 啟動圖 / 注冊登入頁</strong><br>APP 啟動頁、APP 啟動圖、注冊登入頁因使用者尚未登入，系統無法判斷其幣種，故此處維持原本邏輯，依照語系展示素材，不區分幣種。（⚠️ 待 RD 確認）</p>
+  <p class="prose"><strong>10.3 例外：啟動頁 / 啟動圖 / 注冊登入頁</strong><br>APP 啟動頁、APP 啟動圖、注冊登入頁因使用者尚未登入，系統無法判斷其幣種，故此處維持原本邏輯，依照語系展示素材，不區分幣種。（Q10⚠️ 待 RD 確認）</p>
   <div class="sec">十一、舊有活動幣種處理規則</div>
-  <p class="prose"><strong>11.1 舊有活動暫不調整</strong><br>舊有活動（復活節砸蛋、五一挖金、專項活動（全））暫由 RD 統一以程式邏輯帶入 PHP 幣種，後台畫面先不做任何幣種相關調整。</p><br>
+  <p class="prose"><strong>11.1 舊有活動暫不調整</strong><br>舊有活動（復活節砸蛋、五一挖金、專項活動（全））暫由 RD 統一以程式邏輯帶入 PHP 幣種，後台畫面先不做任何幣種相關調整。（Q8⚠️ 待 RD 確認）</p><br>
   <p class="prose"><strong>11.2 後續幣種區分討論</strong><br>若日後某舊有活動需加入幣種區分，再討論處理方式：是直接在活動配置(新)重構後加入，還是針對該活動先行優化幣種設定。</p><br>
   <p class="prose"><strong>11.3 已重構活動優先處理</strong><br>已重構的活動配置(新)優先加入幣種設定，本次規格已涵蓋（見編號 328～335）。</p>
   <hr style="border:none;border-top:1px solid #e0e6ed;margin:32px 0;">
@@ -652,14 +653,23 @@ function makeSpec(){
     <thead><tr><th style="background:#f5f7fa;padding:9px 12px;text-align:left;border-bottom:2px solid #e0e6ed;border-right:1px solid #e0e6ed;width:55px;">編號</th><th style="background:#f5f7fa;padding:9px 12px;text-align:left;border-bottom:2px solid #e0e6ed;border-right:1px solid #e0e6ed;">待確認內容</th><th style="background:#f5f7fa;padding:9px 12px;text-align:left;border-bottom:2px solid #e0e6ed;">影響範圍</th></tr></thead>
     <tbody>
       <tr><td style="padding:9px 12px;border-bottom:1px solid #f0f2f5;border-right:1px solid #f0f2f5;">Q2</td><td style="padding:9px 12px;border-bottom:1px solid #f0f2f5;border-right:1px solid #f0f2f5;">投注站直屬會員是否依投注站地區自動帶入法幣</td><td style="padding:9px 12px;border-bottom:1px solid #f0f2f5;">直屬會員新增流程</td></tr>
+      <tr><td colspan="3" style="padding:10px 16px;background:#f0f6ff;border-bottom:1px solid #d0e4ff;font-size:12px;"><span style="font-weight:600;color:#1a6abf;">🔍 技術確認</span><br><span style="color:#374151;"><b>現況：</b>系統已有 ENABLE_NATION_CURRENCY 開關，啟用時會員註冊自動帶入 currency 並驗證該國可用幣別；後台建會員時亦繼承上級 currency，投注站子帳號同樣繼承上級。</span><br><span style="color:#374151;"><b>結論：</b>現行已支援，幾乎不用新做<br><b>改動量級：</b>幾乎為零</span></td></tr>
       <tr><td style="padding:9px 12px;border-bottom:1px solid #f0f2f5;border-right:1px solid #f0f2f5;">Q3</td><td style="padding:9px 12px;border-bottom:1px solid #f0f2f5;border-right:1px solid #f0f2f5;">大代理是否依投注站地區自動帶入國家與法幣；若是，則同一投注站下不允許有不同法幣大代理；若否，需確認是否開放並存</td><td style="padding:9px 12px;border-bottom:1px solid #f0f2f5;">大代理新增流程、投注站管理邏輯</td></tr>
+      <tr><td colspan="3" style="padding:10px 16px;background:#f0f6ff;border-bottom:1px solid #d0e4ff;font-size:12px;"><span style="font-weight:600;color:#1a6abf;">🔍 技術確認</span><br><span style="color:#374151;"><b>現況：</b>記帳與代理佣金報表全走 sys_amount 匯總，系統邏輯不受影響。</span><br><span style="color:#374151;"><b>結論：</b>技術可行，屬純產品決策，維持原論<br><b>改動量級：</b>—</span></td></tr>
       <tr><td style="padding:9px 12px;border-bottom:1px solid #f0f2f5;border-right:1px solid #f0f2f5;">Q4</td><td style="padding:9px 12px;border-bottom:1px solid #f0f2f5;border-right:1px solid #f0f2f5;">換算精度：暫定小數點第二位，第三位四捨五入，需後端確認</td><td style="padding:9px 12px;border-bottom:1px solid #f0f2f5;">所有金額換算顯示</td></tr>
+      <tr><td colspan="3" style="padding:10px 16px;background:#fff8e6;border-bottom:1px solid #ffd080;font-size:12px;"><span style="font-weight:600;color:#b45309;">⚠️ 技術確認</span><br><span style="color:#374151;"><b>現況：</b>儲存精度是硬規範，原始幣 double(20,3)、系統幣 double(20,8)。「第二位／第三位四捨五入」只能作為顯示層規則，儲存層若砍到 2 位，VND/IDR 等幣別數值會直接失真。</span><br><span style="color:#374151;"><b>結論：</b>唯一真正衝突，必須回 PM 修正提案：只能在顯示時取 2 位，儲存層不能改精度<br><b>改動量級：</b>需回 PM 修正提案</span></td></tr>
       <tr><td style="padding:9px 12px;border-bottom:1px solid #f0f2f5;border-right:1px solid #f0f2f5;">Q5</td><td style="padding:9px 12px;border-bottom:1px solid #f0f2f5;border-right:1px solid #f0f2f5;">國家與法幣一經設定後不可更改。延伸確認：轉線時是否限制必須為相同國家與法幣</td><td style="padding:9px 12px;border-bottom:1px solid #f0f2f5;">轉線功能邏輯與提示文案</td></tr>
+      <tr><td colspan="3" style="padding:10px 16px;background:#f0f6ff;border-bottom:1px solid #d0e4ff;font-size:12px;"><span style="font-weight:600;color:#1a6abf;">🔍 技術確認 — 法幣不可更改</span><br><span style="color:#374151;"><b>現況：</b>轉線共 3 個 API，AgentChangeSO 根本沒有 currency 欄位，全程不檢查也不變更 currency。全 codebase 唯一的 updateCurrency 方法沒有任何呼叫處，是死代碼。</span><br><span style="color:#374151;"><b>結論：</b>「設定後不可更改」與現況一致，直接採納<br><b>改動量級：</b>零</span><br><br><span style="font-weight:600;color:#1a6abf;">🔍 技術確認 — 轉線限同法幣</span><br><span style="color:#374151;"><b>現況：</b>現行轉線完全無 currency 檢查。</span><br><span style="color:#374151;"><b>結論：</b>「轉線必須同法幣」現行無此檢查，是新增校驗，不是改既有邏輯<br><b>改動量級：</b>新增校驗（小）</span></td></tr>
       <tr><td style="padding:9px 12px;border-bottom:1px solid #f0f2f5;border-right:1px solid #f0f2f5;">Q6</td><td style="padding:9px 12px;border-bottom:1px solid #f0f2f5;border-right:1px solid #f0f2f5;">國家與法幣一經設定後不可更改。延伸確認：代理轉線升級為大代理時，是否沿用原有國家與法幣</td><td style="padding:9px 12px;border-bottom:1px solid #f0f2f5;">代理轉線升級流程</td></tr>
+      <tr><td colspan="3" style="padding:10px 16px;background:#f0f6ff;border-bottom:1px solid #d0e4ff;font-size:12px;"><span style="font-weight:600;color:#1a6abf;">🔍 技術確認</span><br><span style="color:#374151;"><b>現況：</b>大代理標誌 big_agent 在轉線時會被更新，但 currency 完全不被觸及。</span><br><span style="color:#374151;"><b>結論：</b>升級沿用原幣別為現行行為，零改動<br><b>改動量級：</b>零</span></td></tr>
       <tr><td style="padding:9px 12px;border-bottom:1px solid #f0f2f5;border-right:1px solid #f0f2f5;">Q7</td><td style="padding:9px 12px;border-bottom:1px solid #f0f2f5;border-right:1px solid #f0f2f5;">贈送成長值是否需綁定法幣，確保只計入對應法幣會員的 VIP 進度；子帳號法幣權限是否同步限制可操作的贈送幣別</td><td style="padding:9px 12px;border-bottom:1px solid #f0f2f5;">VIP 贈送成長值介面、子帳號權限邏輯</td></tr>
+      <tr><td colspan="3" style="padding:10px 16px;background:#f0f6ff;border-bottom:1px solid #d0e4ff;font-size:12px;"><span style="font-weight:600;color:#1a6abf;">🔍 技術確認 — 成長值綁法幣</span><br><span style="color:#374151;"><b>現況：</b>等級配置有 platform_id + currency 欄位，升降級判定時按會員 currency 過濾對應級別配置；成長值累加用原始幣的有效投注（非系統幣口徑）；VIP 活動門檻也做 currency 比對。</span><br><span style="color:#374151;"><b>結論：</b>已是幣別隔離架構，答案是「是」，零改動<br><b>改動量級：</b>零</span><br><br><span style="font-weight:600;color:#1a6abf;">🔍 技術確認 — 子帳號贈送幣別權限</span><br><span style="color:#374151;"><b>現況：</b>贈送／調整成長值只有 admin 端有此功能，代理端沒有；子帳號權限模型只有一維度（選單代碼），完全沒有幣別維度的權限欄位，子帳號 currency 建立時繼承上級、不可自訂。</span><br><span style="color:#374151;"><b>結論：</b>現行系統無「幣別權限」概念，要做這件事是新增一層權限模型，不是改既有邏輯；好消息是贈送紀錄的幣別落點已經是對的<br><b>改動量級：</b>新增權限層（中）</span></td></tr>
       <tr><td style="padding:9px 12px;border-bottom:1px solid #f0f2f5;border-right:1px solid #f0f2f5;">Q8</td><td style="padding:9px 12px;border-bottom:1px solid #f0f2f5;border-right:1px solid #f0f2f5;">各活動因目前各平台開啟的活動項目不同，且「活動配置(新)」已開始重構並支援選擇幣種。其餘尚未重構的活動，待與 RD 討論：是否先以程式邏輯帶入 PHP 幣種（非寫死），但畫面上不顯示幣種欄位</td><td style="padding:9px 12px;border-bottom:1px solid #f0f2f5;">復活節砸蛋管理、五一挖金、專項活動（全）</td></tr>
+      <tr><td colspan="3" style="padding:10px 16px;background:#f0f6ff;border-bottom:1px solid #d0e4ff;font-size:12px;"><span style="font-weight:600;color:#1a6abf;">🔍 技術確認</span><br><span style="color:#374151;"><b>現況：</b>活動配置與獎勵發放本就要求帶 currency（帳變鐵律）；過渡期程式帶入 PHP 只要配置結構保留 currency 欄位（非寫死在表結構），之後開放選幣是配置擴充。</span><br><span style="color:#374151;"><b>結論：</b>可行，結構已預留，維持原結論<br><b>改動量級：</b>小</span></td></tr>
       <tr><td style="padding:9px 12px;border-right:1px solid #f0f2f5;">Q9</td><td style="padding:9px 12px;border-right:1px solid #f0f2f5;">充值方式 / 提款方式（管道類型層級）是否需綁定幣種</td><td style="padding:9px 12px;">充值方式配置、提款方式配置</td></tr>
+      <tr><td colspan="3" style="padding:10px 16px;background:#f0f6ff;border-bottom:1px solid #d0e4ff;font-size:12px;"><span style="font-weight:600;color:#1a6abf;">🔍 技術確認 — 充值方式</span><br><span style="color:#374151;"><b>現況：</b>充值側為兩層結構均已綁幣種且已生效。第一層（支付類型/銀行層）：每家銀行的 ext_info JSON 裡有 currency 陣列，前台充值頁時用會員幣別過濾（RechCfgServiceImpl.java:175-182）；第二層（收款通道層）：rech_cfg 表 currency 為單值欄位，取充值配置時確實帶會員幣別查詢，DAO 端 andEqual("currency", currency) 確實過濾（RechCfgDao.java:39）。記錄表 UserRech（currency + sys_actual_money）欄位齊全。</span><br><span style="color:#374151;"><b>結論：</b>充值側「綁幣種」兩層均已生效，零改動<br><b>改動量級：</b>零</span><br><br><span style="font-weight:600;color:#1a6abf;">🔍 技術確認 — 提款方式</span><br><span style="color:#374151;"><b>現況：</b>提款方式（bankTransfer / cryptoTransfer / eWalletTransfer）配置存在 param_cfg 表（key = uw_type），取列表時只按平台查，完全沒有幣別欄位也沒有過濾（RechCfgServiceImpl.java:372）。幣別在提款側目前只做金額換算（上下限依會員幣別匯率換算），不做通道篩選。</span><br><span style="color:#374151;"><b>結論：</b>提款方式應綁定幣種（如微信僅接受 RMB，不應對其他幣種會員顯示），目前尚未實作，需 RD 在提款方式配置層新增幣種欄位與過濾邏輯<br><b>改動量級：</b>小～中（新增幣種欄位 + 過濾邏輯 + 後台配置頁面同步調整）</span></td></tr>
       <tr><td style="padding:9px 12px;border-right:1px solid #f0f2f5;">Q10</td><td style="padding:9px 12px;border-right:1px solid #f0f2f5;">APP 啟動頁 / APP 啟動圖 / 注冊登入頁是否有其他可判斷幣種的方式，或確認維持語系邏輯即可</td><td style="padding:9px 12px;">啟動頁、啟動圖、注冊登入頁</td></tr>
+      <tr><td colspan="3" style="padding:10px 16px;background:#f0f6ff;border-bottom:1px solid #d0e4ff;font-size:12px;"><span style="font-weight:600;color:#1a6abf;">🔍 技術確認</span><br><span style="color:#374151;"><b>現況：</b>ImageManage 已有 currency 欄位，類型涵蓋啟動頁、註冊登入頁；但取圖 API 目前只傳 platformId + imageType，未帶 currency 過濾。登入前系統只拿得到 platform code 與語系，拿不到會員幣別。</span><br><span style="color:#374151;"><b>結論：</b>「其他可判斷幣種的方式」沒有；若堅持要按幣別出圖結構已預留改查詢即可；否則「維持語系邏輯」是合理答案<br><b>改動量級：</b>小（改查詢）或維持語系邏輯</span></td></tr>
     </tbody>
   </table>`;
 }
