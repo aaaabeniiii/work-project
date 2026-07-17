@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>多國家多幣種 — 分階段上線規劃</title>
+<style>
+  :root{
+    --ink:#1f2430; --ink-soft:#4a5162; --line:#e3e5ea; --bg:#f7f8fa; --panel:#ffffff;
+    --accent:#2f5fd9; --accent-soft:#eaf0ff;
+    --warn-bg:#fff8e6; --warn-line:#f0c766; --warn-ink:#7a5b00;
+    --tag-p1:#2f8f5b; --tag-p1-bg:#e6f5ec;
+    --tag-p2:#2f5fd9; --tag-p2-bg:#eaf0ff;
+    --tag-p3:#a3492f; --tag-p3-bg:#fbebe6;
+    --tag-p4:#6b4fa3; --tag-p4-bg:#f0ebfa;
+    --mono:#eef0f4;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",-apple-system,BlinkMacSystemFont,sans-serif;
+    color:var(--ink);background:var(--bg);line-height:1.75;font-size:15.5px;}
+  .layout{display:flex;min-height:100vh;}
+  .sidebar{width:280px;flex-shrink:0;background:var(--panel);border-right:1px solid var(--line);
+    position:sticky;top:0;height:100vh;overflow-y:auto;padding:28px 0 40px;}
+  .sidebar-header{padding:0 24px 20px;border-bottom:1px solid var(--line);margin-bottom:14px;}
+  .sidebar-header .doc-label{font-size:11px;letter-spacing:2px;color:var(--accent);font-weight:700;text-transform:uppercase;}
+  .sidebar-header h1{font-size:16px;margin:8px 0 4px;line-height:1.5;}
+  .sidebar-header .doc-meta{font-size:12px;color:#8b93a3;}
+  .nav-group{margin-bottom:4px;}
+  .nav-group > a.nav-h1{display:block;padding:9px 24px;font-weight:700;font-size:13.5px;color:var(--ink);
+    text-decoration:none;border-left:3px solid transparent;cursor:pointer;}
+  .nav-group > a.nav-h1:hover{background:var(--accent-soft);}
+  .nav-sub{display:flex;flex-direction:column;}
+  .nav-sub a{padding:5px 24px 5px 38px;font-size:12.5px;color:var(--ink-soft);text-decoration:none;
+    border-left:3px solid transparent;cursor:pointer;}
+  .nav-sub a:hover{background:var(--accent-soft);color:var(--accent);}
+  .content{flex:1;max-width:940px;padding:48px 60px 120px;}
+  .doc-title-block{margin-bottom:44px;padding-bottom:28px;border-bottom:2px solid var(--ink);}
+  .doc-title-block .doc-label{font-size:12px;letter-spacing:3px;color:var(--accent);font-weight:700;text-transform:uppercase;margin-bottom:12px;}
+  .doc-title-block h1{font-size:30px;margin:0 0 12px;letter-spacing:0.5px;}
+  .doc-title-block .doc-sub{font-size:14.5px;color:var(--ink-soft);}
+  section.chapter{margin-bottom:60px;scroll-margin-top:24px;}
+  section.chapter > h2{font-size:22px;padding-bottom:14px;border-bottom:1px solid var(--line);margin-bottom:8px;
+    display:flex;align-items:baseline;gap:10px;scroll-margin-top:24px;}
+  section.chapter > h2 .chnum{color:var(--accent);font-weight:800;}
+  h3{font-size:17px;margin-top:34px;margin-bottom:12px;padding-left:12px;border-left:4px solid var(--accent);scroll-margin-top:24px;}
+  p{margin:10px 0;}
+  .lede{font-size:14.5px;color:var(--ink-soft);background:var(--panel);border:1px solid var(--line);
+    border-radius:8px;padding:16px 20px;margin-bottom:24px;}
+  .batch-desc{color:var(--ink-soft);font-size:14px;}
+  .mini{font-size:12.5px;color:#8b93a3;}
+  .callout{background:var(--warn-bg);border:1px solid var(--warn-line);border-radius:8px;padding:14px 18px;
+    margin:16px 0;font-size:14px;color:var(--warn-ink);}
+  .callout .callout-label{font-weight:800;font-size:12px;letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:6px;}
+  .note-box{background:var(--accent-soft);border:1px solid #cddafc;border-radius:8px;padding:14px 18px;margin:16px 0;font-size:14px;color:#26407f;}
+  table{width:100%;border-collapse:collapse;table-layout:fixed;margin:16px 0 26px;font-size:13.5px;background:var(--panel);}
+  th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top;word-break:break-word;}
+  th{background:#f1f3f7;font-weight:700;font-size:13px;}
+  tr:nth-child(even) td{background:#fbfbfd;}
+  td.c-id{font-weight:700;color:var(--accent);}
+  td.c-cnt{text-align:center;}
+  code{background:var(--mono);padding:1px 6px;border-radius:4px;font-size:12px;
+    font-family:"SFMono-Regular",Consolas,Menlo,monospace;color:#a3492f;word-break:break-all;}
+  .pg{margin:3px 0;display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+  .bk{display:inline-block;font-size:11px;font-weight:700;padding:1px 7px;border-radius:20px;white-space:nowrap;}
+  .bk-plat{color:var(--tag-p2);background:var(--tag-p2-bg);}
+  .bk-agent{color:var(--tag-p3);background:var(--tag-p3-bg);}
+  .bk-ctrl{color:var(--tag-p4);background:var(--tag-p4-bg);}
+  .pending-chip{display:inline-block;font-size:12px;font-weight:700;color:#8a6d00;background:#fff3d6;
+    border:1px dashed #e3bf5b;border-radius:6px;padding:3px 10px;}
+  .badge{display:inline-block;font-size:12px;font-weight:700;padding:2px 10px;border-radius:20px;vertical-align:middle;}
+  .b1{color:var(--tag-p1);background:var(--tag-p1-bg);}
+  .b2{color:var(--tag-p2);background:var(--tag-p2-bg);}
+  .b3{color:var(--tag-p3);background:var(--tag-p3-bg);}
+  .b4{color:var(--tag-p4);background:var(--tag-p4-bg);}
+  .visibility{display:inline-block;font-size:12px;font-weight:700;padding:2px 10px;border-radius:6px;margin-left:8px;}
+  .vis-hidden{color:#5b6472;background:#eceef2;}
+  .vis-user{color:#8a3d00;background:#ffe9d6;}
+  .footer-note{margin-top:60px;padding-top:20px;border-top:1px solid var(--line);font-size:12.5px;color:#8b93a3;}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;font-size:12.5px;color:var(--ink-soft);margin:10px 0 4px;}
+</style>
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="doc-label">Rollout Plan</div>
+      <h1>多國家多幣種<br>分階段上線規劃</h1>
+      <div class="doc-meta">PJM 視角 · 依 OKF-1857 分單 v3 整理</div>
+    </div>
+    <nav>
+      <div class="nav-group"><a class="nav-h1" onclick="goTo('overview')">總覽（先看這裡）</a></div>
+      <div class="nav-group">
+        <a class="nav-h1" onclick="goTo('phase1')">期1　資料就緒（暗發布）</a>
+        <div class="nav-sub">
+          <a onclick="goTo('b-1')">B-1　金流</a>
+          <a onclick="goTo('b-2')">B-2　風控稽核</a>
+          <a onclick="goTo('b-3')">B-3　會員 VIP 返水</a>
+          <a onclick="goTo('b-4')">B-4　代理佣金</a>
+          <a onclick="goTo('b-5')">B-5　投注站 + 三方</a>
+          <a onclick="goTo('b-6')">B-6　積分商城 + 全部活動</a>
+          <a onclick="goTo('b-7')">B-7　報表</a>
+          <a onclick="goTo('uncat')">未歸類（期1）</a>
+        </div>
+      </div>
+      <div class="nav-group"><a class="nav-h1" onclick="goTo('phase2')">期2　內部多幣</a></div>
+      <div class="nav-group"><a class="nav-h1" onclick="goTo('phase3')">期3　單一國家灰度</a></div>
+      <div class="nav-group"><a class="nav-h1" onclick="goTo('phase4')">期4　全量開放與擴國</a></div>
+      <div class="nav-group"><a class="nav-h1" onclick="goTo('risk')">待釐清 / 風險</a></div>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <div class="doc-title-block">
+      <div class="doc-label">Multi-Currency Rollout</div>
+      <h1>多國家多幣種 — 分階段上線規劃</h1>
+      <div class="doc-sub">本文件把工程分單(60 張單 / 237 表)重新整理為「以階段為主軸」的上線規劃,每一階段標明<strong>上什麼</strong>、<strong>用戶看不看得到</strong>、<strong>影響哪些後台頁面</strong>。</div>
+    </div>
+
+    <section class="chapter" id="overview">
+      <h2><span class="chnum">總覽</span>先看這裡</h2>
+      <div class="callout">
+        <span class="callout-label">最重要的一件事:「上線」有兩種意思</span>
+        期1 的所有批次都是<strong>「併入主線」——全程暗發布,用戶完全看不到,平台照樣跑純 PHP</strong>。真正<strong>「對用戶開放 / 開國」</strong>是從期2 以後才發生。看本文件時請把這兩件事分開。
+      </div>
+      <p class="lede">
+        <strong>期1(本文件細節最完整)</strong>:把 237 張表分成 B-1～B-7 七個批次,一個域一個域補上幣種與系統金額欄位。只加不改、暗發布,零風險併入主線。<br>
+        <strong>期2 / 期3 / 期4</strong>:才是真正讓後台可用、讓國家對外開放的階段。但這幾期的<strong>單票級細節不在本份分單文件內</strong>(分單文件只給了一句話帶過),本文件只能列出方向與範圍,詳細需併另一份 proposal(第七～九節)。
+      </p>
+      <div class="legend">
+        <span>後台別:</span>
+        <span class="bk bk-plat">平台後台</span>
+        <span class="bk bk-agent">代理後台</span>
+        <span class="bk bk-ctrl">控制中心</span>
+        <span class="pending-chip">待對號 · 頁面待查</span>
+      </div>
+      <table>
+        <colgroup><col style="width:150px"><col style="width:120px"><col><col style="width:130px"></colgroup>
+        <thead><tr><th>階段</th><th>用戶可見?</th><th>上什麼</th><th>時程(工程估)</th></tr></thead>
+        <tbody>
+          <tr><td><span class="badge b1">期1 資料就緒</span></td><td><span class="visibility vis-hidden">看不到</span></td><td>B-1～B-7 補齊 237 表的幣種/系統金額欄位 + 回填舊資料</td><td>約 3 個月</td></tr>
+          <tr><td><span class="badge b2">期2 內部多幣</span></td><td><span class="visibility vis-hidden">內部先用</span></td><td>子帳號幣種權限、後台幣種篩選/雙金額顯示、VIP/門檻 per-currency 配置</td><td>約 2 個月</td></tr>
+          <tr><td><span class="badge b3">期3 單一國家灰度</span></td><td><span class="visibility vis-user">少量真實用戶</span></td><td>站點上下文、開一個國家子網域(灰度)、該幣種充提通道、三方驗證</td><td>約 1.5～2 個月</td></tr>
+          <tr><td><span class="badge b4">期4 全量開放與擴國</span></td><td><span class="visibility vis-user">全面</span></td><td>報表/導出長尾、盤口限額、佣金多幣口徑;之後每開一國走 SOP</td><td>持續</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="chapter" id="phase1">
+      <h2><span class="chnum">期1</span>資料就緒 <span class="badge b1">暗發布</span><span class="visibility vis-hidden">用戶看不到</span></h2>
+      <p>把地基埋好——所有涉及金額的表補上 <code>currency</code> 與各金額欄的 <code>sys_</code> 配對欄位,並回填舊資料(幣種=PHP、系統金額=原金額)。此期分成 <strong>B-1～B-7 七個批次</strong>,按域依序併入主線;活動域彼此不相干,錯峰灑在各活動沒在開發的空檔。全程只加不改、暗發布,對現行單幣 PHP 行為零影響。</p>
+      <div class="note-box">共 <strong>60 張單 · 237 表</strong>。核心業務域(B-1～B-5、B-7)量不大;膨脹主要集中在 B-6 的 44 個活動。</div>
+
+      
+      <h3 id="b-1">B-1　金流</h3>
+
+
+      <p class="batch-desc">把充值/儲值相關的表補上幣種與系統金額欄位。　<span class="mini">共 1 張單 · 6 表</span></p>
+      <table>
+<colgroup><col style="width:64px"><col style="width:150px"><col style="width:56px"><col></colgroup>
+<thead><tr><th>單號</th><th>域</th><th>表數</th><th>影響的後台頁面（主要回歸畫面）</th></tr></thead>
+<tbody>
+<tr><td class="c-id">T01</td><td class="c-dom">金流</td><td class="c-cnt">6</td><td class="c-pg"><div class="pg"><span class="bk bk-plat">平台後台</span><code>charge/OnlinePayment.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>finance/UserRechList.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>xdbyeb/OverDueXdbRecordList.vue</code></div></td></tr>
+</tbody>
+</table>
+
+      
+      <h3 id="b-2">B-2　風控稽核</h3>
+
+
+      <p class="batch-desc">風控與稽核流水表補欄位,不改判斷邏輯。　<span class="mini">共 1 張單 · 4 表</span></p>
+      <table>
+<colgroup><col style="width:64px"><col style="width:150px"><col style="width:56px"><col></colgroup>
+<thead><tr><th>單號</th><th>域</th><th>表數</th><th>影響的後台頁面（主要回歸畫面）</th></tr></thead>
+<tbody>
+<tr><td class="c-id">T02</td><td class="c-dom">風控稽核</td><td class="c-cnt">4</td><td class="c-pg"><div class="pg"><span class="bk bk-plat">平台後台</span><code>finance/RiskOnlineUserDialog.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>finance/RiskOnlineUserIndex.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>finance/UserBalanceChangeAudit.vue</code></div></td></tr>
+</tbody>
+</table>
+
+      
+      <h3 id="b-3">B-3　會員 VIP 返水</h3>
+
+
+      <p class="batch-desc">會員層級、返水、額度相關表補欄位。　<span class="mini">共 2 張單 · 10 表</span></p>
+      <table>
+<colgroup><col style="width:64px"><col style="width:150px"><col style="width:56px"><col></colgroup>
+<thead><tr><th>單號</th><th>域</th><th>表數</th><th>影響的後台頁面（主要回歸畫面）</th></tr></thead>
+<tbody>
+<tr><td class="c-id">T03</td><td class="c-dom">會員 VIP 返水</td><td class="c-cnt">8</td><td class="c-pg"><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/weeklynegativeProfit/weeklynegativeProfitIstatistics.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/weeklySportsRebate/weeklySportsRebateStatistics.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>user/credit/CreditCircle.vue</code></div></td></tr>
+<tr><td class="c-id">T04</td><td class="c-dom">會員 VIP 返水</td><td class="c-cnt">2</td><td class="c-pg"><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/ActivityEdit.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/activityV2/Step3Audience.vue</code></div></td></tr>
+</tbody>
+</table>
+
+      
+      <h3 id="b-4">B-4　代理佣金</h3>
+
+
+      <p class="batch-desc">代理各類佣金(投注/盈利/活動/收益)表補欄位,達標門檻改成按幣種。　<span class="mini">共 4 張單 · 24 表</span></p>
+      <table>
+<colgroup><col style="width:64px"><col style="width:150px"><col style="width:56px"><col></colgroup>
+<thead><tr><th>單號</th><th>域</th><th>表數</th><th>影響的後台頁面（主要回歸畫面）</th></tr></thead>
+<tbody>
+<tr><td class="c-id">T05</td><td class="c-dom">代理佣金</td><td class="c-cnt">6</td><td class="c-pg"><div class="pg"><span class="bk bk-plat">平台後台</span><code>agent/v2/AgentCommissionBetReport.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>agent/v2/AgentCommissionBetManage.vue</code></div></td></tr>
+<tr><td class="c-id">T06</td><td class="c-dom">代理佣金</td><td class="c-cnt">6</td><td class="c-pg"><div class="pg"><span class="bk bk-plat">平台後台</span><code>agent/v2/AgentCommissionProfitManage.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>agent/v2/AgentCommissionProfitReport.vue</code></div></td></tr>
+<tr><td class="c-id">T07</td><td class="c-dom">代理佣金</td><td class="c-cnt">8</td><td class="c-pg"><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/consumptionActivity/ActivityHistory.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/consumptionActivity/ActivityRecord.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/delegateActivity/ActivityUser.vue</code></div></td></tr>
+<tr><td class="c-id">T08</td><td class="c-dom">代理佣金</td><td class="c-cnt">4</td><td class="c-pg"><div class="pg"><span class="bk bk-plat">平台後台</span><code>user/agent/DirectMemberConfig.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>common/Header.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>agent/report/AgentEarningsReport.vue</code></div></td></tr>
+</tbody>
+</table>
+
+      
+      <h3 id="b-5">B-5　投注站 + 三方</h3>
+
+
+      <p class="batch-desc">投注站佣金/額度、三方對帳表補欄位(一個順位掛兩個域)。　<span class="mini">共 2 張單 · 6 表</span></p>
+      <table>
+<colgroup><col style="width:64px"><col style="width:150px"><col style="width:56px"><col></colgroup>
+<thead><tr><th>單號</th><th>域</th><th>表數</th><th>影響的後台頁面（主要回歸畫面）</th></tr></thead>
+<tbody>
+<tr><td class="c-id">T10</td><td class="c-dom">投注站</td><td class="c-cnt">4</td><td class="c-pg"><div class="pg"><span class="bk bk-agent">代理後台</span><code>agent/report/AgentCommissionReport.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>statistics/StationStatReport.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>user/station/SubAccountManagement.vue</code></div></td></tr>
+<tr><td class="c-id">T09</td><td class="c-dom">三方</td><td class="c-cnt">2</td><td class="c-pg"><div class="pg"><span class="bk bk-plat">平台後台</span><code>game/ThirdDebateSetting.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/ActivityEdit.vue</code></div></td></tr>
+</tbody>
+</table>
+
+
+      <h3 id="b-6">B-6　積分商城 + 全部活動（大桶）</h3>
+
+
+      <p class="batch-desc">名義上是積分商城,實際上把 44 個活動全掛在這一順位。活動彼此不相干,錯峰處理,是量最大的一批。　<span class="mini">共 45 張單 · 約 161 表(含由體育遊戲切出的 game_jackpot)</span></p>
+      <p style="font-weight:700;margin-top:18px;">積分商城</p>
+      <table>
+<colgroup><col style="width:64px"><col style="width:150px"><col style="width:56px"><col></colgroup>
+<thead><tr><th>單號</th><th>域</th><th>表數</th><th>影響的後台頁面（主要回歸畫面）</th></tr></thead>
+<tbody>
+<tr><td class="c-id">T12</td><td class="c-dom">積分商城</td><td class="c-cnt">5</td><td class="c-pg"><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/activityV2/weekly/WeeklyStep4Condition.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/appReceiveenvelopes/appReceiveenvelopesIndexAdd.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>productsystem/ProductRedemptionRecord.vue</code></div></td></tr>
+</tbody>
+</table>
+      <div class="note-box">另有 <code>game_jackpot</code> 一張表,從體育遊戲域(T13)切出來併入本批 B-6;體育遊戲其餘部分見期4。</div>
+      <p style="font-weight:700;margin-top:18px;">活動波次（T14～T57,錯峰排入）</p>
+      <table>
+<colgroup><col style="width:64px"><col style="width:150px"><col style="width:56px"><col></colgroup>
+<thead><tr><th>單號</th><th>域</th><th>表數</th><th>影響的後台頁面（主要回歸畫面）</th></tr></thead>
+<tbody>
+<tr><td class="c-id">T14</td><td class="c-dom">活動-Acewin</td><td class="c-cnt">4</td><td class="c-pg"><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/acewinReservation/AcewinReservationLeaderboardRecords.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/acewinReservation/AcewinReservationRebateRecords.vue</code></div></td></tr>
+<tr><td class="c-id">T15</td><td class="c-dom">活動-BAC排行</td><td class="c-cnt">1</td><td class="c-pg"><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/OkgamesBacLeagueS1/ActivityConfig.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/OkgamesBacLeagueS1/LeaderboardRecord.vue</code></div></td></tr>
+<tr><td class="c-id">T16</td><td class="c-dom">活動-BK射擊</td><td class="c-cnt">3</td><td class="c-pg"><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/bkShotActivity/bkShotReport.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/wheelActivity/WheelRecord.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/bkShotActivity/bkShotActivity.vue</code></div></td></tr>
+<tr><td class="c-id">T17</td><td class="c-dom">活動-DropBall</td><td class="c-cnt">2</td><td class="c-pg"><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/dropBallGameActivity/DropBallGameActivityAdd.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>common/Header.vue</code></div></td></tr>
+<tr><td class="c-id">T18</td><td class="c-dom">活動-FDC</td><td class="c-cnt">5</td><td class="c-pg"><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/fdcActivity/fdcActivityConfig.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/fdcActivity/fdcDailyReport.vue</code></div></td></tr>
+<tr><td class="c-id">T19</td><td class="c-dom">活動-Jackpot</td><td class="c-cnt">8</td><td class="c-pg"><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/jackpotActivity/JackpotActivityConfig.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/jackpotActivity/JackpotActivityConfigAudit.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/jackpotActivity/jackpotDrawRecord/DrawInputConfirmDialog.vue</code></div></td></tr>
+<tr><td class="c-id">T20</td><td class="c-dom">活動-Jackpot</td><td class="c-cnt">1</td><td class="c-pg"><span class="pending-chip">待對號 · 頁面待查</span></td></tr>
+<tr><td class="c-id">T21</td><td class="c-dom">活動-Joint</td><td class="c-cnt">3</td><td class="c-pg"><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/slotMachineJointChallenge/SmJHistory.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>common/Header.vue</code></div></td></tr>
+<tr><td class="c-id">T22</td><td class="c-dom">活動-LuckyBox</td><td class="c-cnt">6</td><td class="c-pg"><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/luckyBoxActivity/LuckyBoxActivityConfig.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/luckyBoxActivity/LuckyBoxActivityList.vue</code></div></td></tr>
+<tr><td class="c-id">T23</td><td class="c-dom">活動-Payday</td><td class="c-cnt">1</td><td class="c-pg"><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/paydayActivity/PaydayHistory.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/ActivityEdit.vue</code></div></td></tr>
+<tr><td class="c-id">T24</td><td class="c-dom">活動-Slot巡迴</td><td class="c-cnt">3</td><td class="c-pg"><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/omniplayChestActivity/OmniplayChestActivity.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/slotTourmatchactivity/slotTourmatchactivityAdd.vue</code></div></td></tr>
+<tr><td class="c-id">T25</td><td class="c-dom">活動-VP預約</td><td class="c-cnt">2</td><td class="c-pg"><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/vpReservation/VpReservationRecords.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/vpReservation/VpReservationSettings.vue</code></div></td></tr>
+<tr><td class="c-id">T26</td><td class="c-dom">活動-五一挖金</td><td class="c-cnt">3</td><td class="c-pg"><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/wyShotActivity/wyShotActivity.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>common/Header.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/wyShotActivity/wyShotReport.vue</code></div></td></tr>
+<tr><td class="c-id">T27</td><td class="c-dom">活動-任務中心</td><td class="c-cnt">5</td><td class="c-pg"><span class="pending-chip">待對號 · 頁面待查</span></td></tr>
+<tr><td class="c-id">T28</td><td class="c-dom">活動-儲值轉盤</td><td class="c-cnt">2</td><td class="c-pg"><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/newUserRechargeTurntableactivity/newUserRechargeTurntableactivityRecord.vue</code></div></td></tr>
+<tr><td class="c-id">T29</td><td class="c-dom">活動-兌換碼</td><td class="c-cnt">2</td><td class="c-pg"><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/redeemCode/ActivityList.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/redeemCode/Add.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/redeemCode/CodeList.vue</code></div></td></tr>
+<tr><td class="c-id">T30</td><td class="c-dom">活動-召回</td><td class="c-cnt">4</td><td class="c-pg"><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/oldUserBackActivity/oldUserBackRecord.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/oldUserBackActivity/oldUserBackActivityConfig.vue</code></div></td></tr>
+<tr><td class="c-id">T31</td><td class="c-dom">活動-夏日</td><td class="c-cnt">4</td><td class="c-pg"><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/summerActivity/SummerActivityAdd.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>common/Header.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/summerActivity/SummerRecord.vue</code></div></td></tr>
+<tr><td class="c-id">T32</td><td class="c-dom">活動-專項</td><td class="c-cnt">2</td><td class="c-pg"><span class="pending-chip">待對號 · 頁面待查</span></td></tr>
+<tr><td class="c-id">T33</td><td class="c-dom">活動-排行榜</td><td class="c-cnt">2</td><td class="c-pg"><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/leaderboardActivity/LeaderboardActivityIndex.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/leaderboardActivity/LeaderboardActivityList.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/leaderboardActivity/LeaderboardRecord.vue</code></div></td></tr>
+<tr><td class="c-id">T34</td><td class="c-dom">活動-排行類</td><td class="c-cnt">4</td><td class="c-pg"><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/lmActivity/LmGameHistory.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>common/Header.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/masterActivity/MasterGameHistory.vue</code></div></td></tr>
+<tr><td class="c-id">T35</td><td class="c-dom">活動-提現紅包</td><td class="c-cnt">2</td><td class="c-pg"><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/withdrawalofMillions/withdrawalofMillionsAdd.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/withdrawalofMillions/withdrawalofMillionsRecord.vue</code></div></td></tr>
+<tr><td class="c-id">T36</td><td class="c-dom">活動-新手</td><td class="c-cnt">3</td><td class="c-pg"><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/newbieSignActivity/NewbieSignActivityAdd.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/signActivity/SignActivity.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/newbieFirstDepositActivity/NewbieFirstDepositActivityRewardList.vue</code></div></td></tr>
+<tr><td class="c-id">T37</td><td class="c-dom">活動-每日充值</td><td class="c-cnt">2</td><td class="c-pg"><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/dailyRechargeActivity/DailyRechargeActivityRewardList.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/rechargeActivity/RechargeActivityRewardList.vue</code></div></td></tr>
+<tr><td class="c-id">T38</td><td class="c-dom">活動-每日排行</td><td class="c-cnt">3</td><td class="c-pg"><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/DailyRankingActivity/DailyRankingClaimRecord.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/DailyRankingActivity/DailyRankingRecord.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/DailyRankingActivity/DailyRankingActivityIndex.vue</code></div></td></tr>
+<tr><td class="c-id">T39</td><td class="c-dom">活動-消費</td><td class="c-cnt">2</td><td class="c-pg"><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/newConsumptionActivity/NewConsumptionHistory.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/paydayActivity/PaydayHistory.vue</code></div></td></tr>
+<tr><td class="c-id">T40</td><td class="c-dom">活動-淘汰賽</td><td class="c-cnt">3</td><td class="c-pg"><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/knockoutGameReservation/KnockoutGameReservationLeaderboardRecords.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/knockoutGameReservation/KnockoutGameReservationRebateRecords.vue</code></div></td></tr>
+<tr><td class="c-id">T41</td><td class="c-dom">活動-澆水</td><td class="c-cnt">4</td><td class="c-pg"><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/planttreesandwinprizepoolactivities/PlanttreeswinRecord.vue</code></div></td></tr>
+<tr><td class="c-id">T42</td><td class="c-dom">活動-簽到</td><td class="c-cnt">3</td><td class="c-pg"><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/appReceiveenvelopes/appsiginRecord.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/signActivity/SignActivity.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/signActivity/SignActivityConfig.vue</code></div></td></tr>
+<tr><td class="c-id">T43</td><td class="c-dom">活動-紅包雨</td><td class="c-cnt">3</td><td class="c-pg"><div class="pg"><span class="bk bk-plat">平台後台</span><code>redenp/RedEnpGrapRankingList.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>redenp/RedEnpGrapRecordList.vue</code></div></td></tr>
+<tr><td class="c-id">T44</td><td class="c-dom">活動-綁定手機</td><td class="c-cnt">1</td><td class="c-pg"><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/bindPhoneActivity/BindPhoneActivityConfiguration.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/bindPhoneActivity/BindPhoneActivityList.vue</code></div></td></tr>
+<tr><td class="c-id">T45</td><td class="c-dom">活動-聖誕</td><td class="c-cnt">6</td><td class="c-pg"><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/christmasActivityConfig/ChristmasActivityConfigAdd.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/christmasActivity/ChristmasActivityAdd.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/christmasActivity/ChristmasRecord.vue</code></div></td></tr>
+<tr><td class="c-id">T46</td><td class="c-dom">活動-舊活動體系</td><td class="c-cnt">12</td><td class="c-pg"><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/ActivityCategory.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/ActivityEdit.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>user/UserGrowthRecordList.vue</code></div></td></tr>
+<tr><td class="c-id">T47</td><td class="c-dom">活動-舊活動體系</td><td class="c-cnt">5</td><td class="c-pg"><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/lotteryActivity/LotteryGiftTicket.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/lotteryActivity/LotteryPrizeRecord.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/activityV2/Step3Audience.vue</code></div></td></tr>
+<tr><td class="c-id">T48</td><td class="c-dom">活動-舊活動體系</td><td class="c-cnt">7</td><td class="c-pg"><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/appReceiveenvelopes/appReceiveenvelopesIndexAdd.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/appReceiveenvelopes/appReceiveenvelopesRecord.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/weeklynegativeProfit/weeklynegativeProfitIstatistics.vue</code></div></td></tr>
+<tr><td class="c-id">T49</td><td class="c-dom">活動-萬聖</td><td class="c-cnt">3</td><td class="c-pg"><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/TrickOrTreatActivity/TrickOrTreatActivityConfig.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/TrickOrTreatActivity/TrickOrTreatActivityRecord.vue</code></div></td></tr>
+<tr><td class="c-id">T50</td><td class="c-dom">活動-註冊禮</td><td class="c-cnt">2</td><td class="c-pg"><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/registerGiftActivity/registerGiftActivityConfig.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/registerGiftActivity/registerGiftActivityList.vue</code></div></td></tr>
+<tr><td class="c-id">T51</td><td class="c-dom">活動-轉盤</td><td class="c-cnt">4</td><td class="c-pg"><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/wheelActivity/WheelActivityAdd.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/summerActivity/SummerActivityAdd.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/wheelActivity/WheelRecord.vue</code></div></td></tr>
+<tr><td class="c-id">T52</td><td class="c-dom">活動-返水加倍</td><td class="c-cnt">3</td><td class="c-pg"><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/DailyRebateBoost/DailyRebateBoostForm.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/DailyRebateBoost/DailyRebateBoostList.vue</code></div></td></tr>
+<tr><td class="c-id">T53</td><td class="c-dom">活動-連勝</td><td class="c-cnt">4</td><td class="c-pg"><span class="pending-chip">待對號 · 頁面待查</span></td></tr>
+<tr><td class="c-id">T54</td><td class="c-dom">活動-遊戲挑戰</td><td class="c-cnt">4</td><td class="c-pg"><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/colorGameActivity/ColorGameConfig.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/gameChallengeActivity/GameChallengeEdit.vue</code></div></td></tr>
+<tr><td class="c-id">T55</td><td class="c-dom">活動-邀請</td><td class="c-cnt">2</td><td class="c-pg"><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/InviteFriendsActivity/InviteUserActivityConfig.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/InviteFriendsActivity/InviteUserActivityStatistics.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/InviteFriendsActivity/InviteUserSpinConfig.vue</code></div></td></tr>
+<tr><td class="c-id">T56</td><td class="c-dom">活動-配置(新 activity_v2)</td><td class="c-cnt">7</td><td class="c-pg"><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/activityV2/audit.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/activityV2/dataStat.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/activityV2/PreviewImageDialog.vue</code></div></td></tr>
+<tr><td class="c-id">T57</td><td class="c-dom">活動-首存優惠</td><td class="c-cnt">3</td><td class="c-pg"><span class="pending-chip">待對號 · 頁面待查</span></td></tr>
+</tbody>
+</table>
+
+      
+      <h3 id="b-7">B-7　報表</h3>
+
+
+      <p class="batch-desc">平台結算/排行等報表表補欄位;寫入端對了報表自動對。　<span class="mini">共 1 張單 · 4 表</span></p>
+      <table>
+<colgroup><col style="width:64px"><col style="width:150px"><col style="width:56px"><col></colgroup>
+<thead><tr><th>單號</th><th>域</th><th>表數</th><th>影響的後台頁面（主要回歸畫面）</th></tr></thead>
+<tbody>
+<tr><td class="c-id">T11</td><td class="c-dom">報表</td><td class="c-cnt">4</td><td class="c-pg"><div class="pg"><span class="bk bk-plat">平台後台</span><code>ranking/RankingUserList.vue</code></div></td></tr>
+</tbody>
+</table>
+
+
+      <h3 id="uncat">未歸類（期1,無 B 編號）</h3>
+
+
+      <p class="batch-desc">文件標為期1 但未給 B 編號的三張單(轉帳、子帳號充提、代理提現等)。　<span class="mini">共 3 張單 · 15 表</span></p>
+      <table>
+<colgroup><col style="width:64px"><col style="width:150px"><col style="width:56px"><col></colgroup>
+<thead><tr><th>單號</th><th>域</th><th>表數</th><th>影響的後台頁面（主要回歸畫面）</th></tr></thead>
+<tbody>
+<tr><td class="c-id">T58</td><td class="c-dom">未歸類</td><td class="c-cnt">6</td><td class="c-pg"><div class="pg"><span class="bk bk-plat">平台後台</span><code>agent/AgentWithdrawList.vue</code></div><div class="pg"><span class="bk bk-agent">代理後台</span><code>user/agentCommission/DrawList.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/v2/ActivityRuleEdit.vue</code></div></td></tr>
+<tr><td class="c-id">T59</td><td class="c-dom">未歸類</td><td class="c-cnt">8</td><td class="c-pg"><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/welcomeBackEvents/welcomeBackEventsAdd.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>activity/welcomeBackEvents/welcomeBackEventsRecord.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>subplatform/OkplayDataRech.vue</code></div></td></tr>
+<tr><td class="c-id">T60</td><td class="c-dom">未歸類</td><td class="c-cnt">1</td><td class="c-pg"><span class="pending-chip">待對號 · 頁面待查</span></td></tr>
+</tbody>
+</table>
+    </section>
+
+    <section class="chapter" id="phase2">
+      <h2><span class="chnum">期2</span>內部多幣 <span class="badge b2">後台先行</span><span class="visibility vis-hidden">外部仍單幣</span></h2>
+      <div class="callout"><span class="callout-label">細節不在本分單文件</span>以下為方向與範圍(取自規劃摘要);單票級的頁面清單需併另一份 proposal(第七～九節)才完整。</div>
+      <p><strong>上什麼:</strong>子帳號幣種權限機制、後台幣種篩選與雙金額顯示(交付順序:財務 → 報表 → 用戶管理)、VIP/門檻 per-currency 配置 + 同步配置、首批前端共用元件(幣種下拉/雙金額/同步配置彈窗)。</p>
+      <p><strong>特點:</strong>外部仍是單幣會員,後台用測試資料驗證——讓營運團隊在真正開國前先學會用這些工具。</p>
+      <p><strong>可預期影響的後台頁面方向:</strong>財務、報表、用戶管理相關頁面會出現幣種篩選與雙金額欄位。<span class="pending-chip">實際頁面清單待補</span></p>
+    </section>
+
+    <section class="chapter" id="phase3">
+      <h2><span class="chnum">期3</span>單一國家灰度 <span class="badge b3">第一次真多幣</span><span class="visibility vis-user">少量真實用戶</span></h2>
+      <div class="callout"><span class="callout-label">細節不在本分單文件</span>以下為方向與範圍;實際頁面與單票待補。</div>
+      <p><strong>上什麼:</strong>站點上下文、註冊站點化、per-nation 預設代理線、邀請碼跨幣校驗、開一個國家子網域(邀請制/白名單灰度)、該幣種充提通道、至少一家三方廠商驗證、素材幣種化;活動只開 activity_v2 類。</p>
+      <p><strong>選國建議(工程):</strong>選 VND 或 IDR 這種小幣值國家,對精度與顯示格式是最大壓力測試。</p>
+      <p><strong>可預期影響的後台頁面方向:</strong>站點/國家設定、代理線設定、素材管理、充提通道設定相關頁面。<span class="pending-chip">實際頁面清單待補</span></p>
+    </section>
+
+    <section class="chapter" id="phase4">
+      <h2><span class="chnum">期4</span>全量開放與擴國 <span class="badge b4">持續</span><span class="visibility vis-user">全面</span></h2>
+      <div class="callout"><span class="callout-label">細節不在本分單文件</span>以下為方向與範圍;實際頁面與單票待補。</div>
+      <p><strong>上什麼:</strong>報表/導出長尾補齊、盤口限額方案、佣金多幣口徑、子帳號權限覆蓋擴充;之後每開一國都走固定 SOP(啟用 → 子網域 → 預設代理線 → 通道 → 素材 → VIP 配置)。</p>
+      <p><strong>本期已知含在分單文件內的表:</strong></p>
+      <table>
+<colgroup><col style="width:64px"><col style="width:150px"><col style="width:56px"><col></colgroup>
+<thead><tr><th>單號</th><th>域</th><th>表數</th><th>影響的後台頁面（主要回歸畫面）</th></tr></thead>
+<tbody>
+<tr><td class="c-id">T13</td><td class="c-dom">體育遊戲</td><td class="c-cnt">8</td><td class="c-pg"><div class="pg"><span class="bk bk-plat">平台後台</span><code>game/InplayMatchManage.vue</code></div><div class="pg"><span class="bk bk-plat">平台後台</span><code>game/TimelineEvent.vue</code></div><div class="pg"><span class="bk bk-ctrl">控制中心</span><code>sport/league/SeasonList.vue</code></div></td></tr>
+</tbody>
+</table>
+      <div class="note-box"><strong>體育遊戲(T13)</strong>整體被標為期4(盤口方案<strong>待你 PM 拍板</strong>),僅 <code>game_jackpot</code> 一張表提前併入期1 B-6。此為分單文件內唯一明確落在期4 的「表」類項目。</div>
+    </section>
+
+    <section class="chapter" id="risk">
+      <h2><span class="chnum">待釐清</span>風險與需你確認的點</h2>
+      <div class="callout">
+        <span class="callout-label">① 欄位設計與規格書鎖定的不一致</span>
+        規格書鎖定的是三欄(<code>currency_amount</code> / <code>sys_rate</code> / <code>sys_amount</code>);分單文件記載工程在 <strong>2026-07-13 拍板拿掉 sys_rate</strong>,改為 <code>currency</code> + 每個金額欄各配一個 <code>sys_</code> 欄。此為實質差異,建議與工程確認兩邊對齊。
+      </div>
+      <div class="callout">
+        <span class="callout-label">② 待對號 35 張表 · 頁面尚不明</span>
+        自動掃描掃不到來源的 35 張表,現在連改完影響哪些頁面都還不知道,散落在 T20、T27、T32、T53、T57、T60 等單,本文件已標「待對號 · 頁面待查」。這批要等工程期1 人工對號後才補得齊。
+      </div>
+      <div class="callout">
+        <span class="callout-label">③ 期2/3/4 單票級細節不在本文件</span>
+        真正對用戶開放的三期,分單文件只有一句話帶過。若你要做「對用戶/開國」層級的規格,需向工程索取 v1 版規劃與 proposal 第七～九節。
+      </div>
+      <div class="callout">
+        <span class="callout-label">④ 頁面為「主要回歸畫面」,非完整清單</span>
+        表格內頁面取自分單文件每張單標的「主要回歸畫面」,是代表性的主要入口,非該單全部受影響頁面;完整頁面以 RD 逐表明細為準。
+      </div>
+    </section>
+
+    <div class="footer-note">
+      本文件由工程分單 v3(OKF-1857,2026-07-15)重新整理為 PJM 視角的分階段規劃。頁面資料取自分單文件「主要回歸畫面」欄,待對號項留白待查。內容依後續 RD／QA／PM 三方確認為準。
+    </div>
+  </main>
+</div>
+<script>
+  function goTo(id){
+    var el = document.getElementById(id);
+    if(el){ el.scrollIntoView({behavior:'smooth', block:'start'}); }
+  }
+</script>
+</body>
+</html>
