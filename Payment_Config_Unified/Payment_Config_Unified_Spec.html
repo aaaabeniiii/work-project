@@ -1,0 +1,1925 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>充值提款配置統一優化規格書 v1A</title>
+<style>
+/* === Design Tokens === */
+:root{
+  --color-text:#1f2937;
+  --color-text-soft:#6b7280;
+  --color-bg:#f5f7fa;
+  --color-panel:#ffffff;
+  --color-line:#e5e7eb;
+  --color-primary:#2563eb;
+  --color-primary-soft:#eff6ff;
+  --color-ok:#16a34a;   --color-ok-bg:#ecfdf3;
+  --color-maint:#d97706;--color-maint-bg:#fef7e6;
+  --color-off:#dc2626;  --color-off-bg:#fdf0ef;
+  --color-new:#7c3aed;  --color-new-bg:#f3eefe;
+  --color-warn-bg:#fff7ed; --color-warn-line:#fdba74;
+  --space-1:4px; --space-2:8px; --space-3:16px; --space-4:24px; --space-5:40px;
+  --radius:8px; --radius-sm:5px;
+  --font-base:16px;
+  --sidebar-w:248px;
+}
+html{font-size:18px;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:"PingFang TC","Microsoft JhengHei","Noto Sans TC",system-ui,sans-serif;
+  font-size:.83rem;line-height:1.65;color:var(--color-text);background:var(--color-bg);
+}
+h1,h2,h3,h4{line-height:1.35;}
+table{border-collapse:collapse;width:100%;}
+a{color:var(--color-primary);}
+img{max-width:100%;}
+
+/* === Layout === */
+.layout{display:flex;min-height:100vh;}
+.sidebar{
+  width:var(--sidebar-w);flex-shrink:0;background:#1e293b;color:#cbd5e1;
+  position:sticky;top:0;height:100vh;overflow-y:auto;padding:var(--space-3) 0;
+}
+.main{flex:1;min-width:0;padding:var(--space-4) var(--space-5);max-width:1200px;}
+@media (max-width:1024px){
+  .layout{flex-direction:column;}
+  .sidebar{width:100%;height:auto;position:static;}
+  .main{padding:var(--space-3);}
+}
+
+/* === Sidebar nav === */
+.nav__brand{padding:0 var(--space-3) var(--space-3);font-size:.9rem;font-weight:700;color:#fff;border-bottom:1px solid #334155;margin-bottom:var(--space-2);}
+.nav__brand small{display:block;font-weight:400;color:#94a3b8;font-size:.68rem;margin-top:2px;}
+.nav__group{margin-top:var(--space-2);}
+.nav__group-title{
+  display:flex;align-items:center;gap:6px;width:100%;text-align:left;border:0;cursor:pointer;
+  background:transparent;color:#e2e8f0;font-size:.8rem;font-weight:700;
+  padding:10px var(--space-3);
+}
+.nav__group-title:hover,.nav__group-title:focus-visible{background:#334155;outline:2px solid transparent;}
+.nav__group-title:focus-visible{outline:2px solid #93c5fd;outline-offset:-2px;}
+.nav__item{
+  display:block;width:100%;text-align:left;border:0;cursor:pointer;background:transparent;
+  color:#cbd5e1;font-size:.76rem;padding:8px var(--space-3) 8px 34px;border-left:3px solid transparent;
+}
+.nav__item:hover{background:#334155;color:#fff;}
+.nav__item:focus-visible{outline:2px solid #93c5fd;outline-offset:-2px;}
+.nav__item.is-active{background:#0f2f6d;color:#fff;border-left-color:#60a5fa;font-weight:600;}
+.nav__item--sub{padding-left:46px;font-size:.72rem;color:#94a3b8;}
+.nav__badge{display:inline-block;font-size:.6rem;padding:0 6px;border-radius:99px;margin-left:6px;vertical-align:1px;}
+.nav__badge--rename{background:#1d4ed8;color:#dbeafe;}
+.nav__badge--new{background:#6d28d9;color:#ede9fe;}
+.nav__badge--keep{background:#475569;color:#e2e8f0;}
+
+/* === Page switching === */
+.page{display:none;}
+.page.is-visible{display:block;}
+
+/* === Common blocks === */
+.doc-header{margin-bottom:var(--space-4);}
+.doc-header h1{font-size:1.35rem;}
+.doc-header .doc-header__meta{color:var(--color-text-soft);font-size:.74rem;margin-top:4px;}
+.section{background:var(--color-panel);border:1px solid var(--color-line);border-radius:var(--radius);padding:var(--space-4);margin-bottom:var(--space-4);}
+.section h2{font-size:1.05rem;margin-bottom:var(--space-3);padding-bottom:var(--space-2);border-bottom:2px solid var(--color-primary-soft);}
+.section h3{font-size:.92rem;margin:var(--space-4) 0 var(--space-2);}
+.section h3:first-of-type{margin-top:0;}
+.section h4{font-size:.84rem;margin:var(--space-3) 0 var(--space-2);color:#374151;}
+.section p{margin-bottom:var(--space-2);}
+.section ul,.section ol{padding-left:1.4em;margin-bottom:var(--space-2);}
+.section li{margin-bottom:4px;}
+
+/* badges */
+.badge{display:inline-block;font-size:.68rem;font-weight:700;padding:2px 10px;border-radius:99px;vertical-align:middle;}
+.badge--rename{background:#dbeafe;color:#1d4ed8;}
+.badge--new{background:var(--color-new-bg);color:var(--color-new);}
+.badge--keep{background:#f1f5f9;color:#475569;}
+.badge--logic{background:#fef3c7;color:#b45309;}
+.badge--hide{background:#f3f4f6;color:#6b7280;text-decoration:line-through;}
+
+/* status pills (mimic admin UI) */
+.pill{display:inline-block;font-size:.68rem;padding:1px 9px;border-radius:4px;border:1px solid transparent;white-space:nowrap;}
+.pill--ok{color:var(--color-ok);background:var(--color-ok-bg);border-color:#bbf7d0;}
+.pill--maint{color:var(--color-maint);background:var(--color-maint-bg);border-color:#fde68a;}
+.pill--off{color:var(--color-off);background:var(--color-off-bg);border-color:#fecaca;}
+
+/* markers */
+.mk{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:1.15rem;height:1.15rem;border-radius:50%;font-size:.62rem;font-weight:700;
+  background:#1d4ed8;color:#fff;vertical-align:middle;flex-shrink:0;
+}
+.mk--float{position:absolute;z-index:3;box-shadow:0 0 0 2px #fff;}
+
+/* data tables */
+.tbl{font-size:.74rem;margin-bottom:var(--space-2);}
+.tbl th,.tbl td{border:1px solid var(--color-line);padding:7px 10px;text-align:left;vertical-align:top;}
+.tbl thead th{background:#f8fafc;font-weight:700;}
+.tbl--center td,.tbl--center th{text-align:center;}
+.tbl .dim{color:#9ca3af;}
+
+/* compare grid */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-3);margin-bottom:var(--space-3);}
+@media (max-width:900px){.compare{grid-template-columns:1fr;}}
+.compare__col{border:1px solid var(--color-line);border-radius:var(--radius);overflow:hidden;background:#fff;}
+.compare__head{padding:8px 14px;font-weight:700;font-size:.78rem;}
+.compare__col--new .compare__head{background:var(--color-ok-bg);color:#15803d;border-bottom:1px solid #bbf7d0;}
+.compare__col--old .compare__head{background:#f8fafc;color:#64748b;border-bottom:1px solid var(--color-line);}
+.compare__body{padding:var(--space-3);}
+.compare__body ul{padding-left:1.3em;}
+.problem{color:var(--color-off);font-size:.72rem;background:var(--color-off-bg);border-left:3px solid #fca5a5;padding:6px 10px;border-radius:0 var(--radius-sm) var(--radius-sm) 0;margin-top:var(--space-2);}
+
+/* card (改動點卡片) */
+.card{border:1px solid var(--color-line);border-left:4px solid var(--color-primary);border-radius:var(--radius-sm);padding:var(--space-3);margin-bottom:var(--space-3);background:#fff;}
+.card__title{font-weight:700;font-size:.85rem;margin-bottom:var(--space-2);display:flex;align-items:center;gap:8px;}
+.reason{background:var(--color-primary-soft);border-radius:var(--radius-sm);padding:8px 12px;font-size:.74rem;margin-top:var(--space-2);}
+.reason strong{color:var(--color-primary);}
+
+/* callouts */
+.callout{border-radius:var(--radius-sm);padding:10px 14px;font-size:.76rem;margin:var(--space-2) 0;}
+.callout--warn{background:var(--color-warn-bg);border:1px solid var(--color-warn-line);}
+.callout--info{background:var(--color-primary-soft);border:1px solid #bfdbfe;}
+.callout--rule{background:#f0fdf4;border:1px solid #bbf7d0;}
+
+/* === Backend mockup === */
+.mock{border:1px solid #cbd5e1;border-radius:var(--radius);overflow:hidden;margin:var(--space-2) 0 var(--space-3);background:#fff;position:relative;}
+.mock__bar{background:#f1f5f9;border-bottom:1px solid #e2e8f0;padding:8px 14px;font-size:.72rem;color:#475569;display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+.mock__crumb{color:#334155;font-weight:600;}
+.mock__body{padding:var(--space-3);overflow-x:auto;}
+.mock__btn{display:inline-block;background:var(--color-primary);color:#fff;font-size:.7rem;border-radius:4px;padding:3px 14px;}
+.mock__tabs{display:flex;gap:0;border-bottom:1px solid var(--color-line);margin-bottom:var(--space-3);}
+.mock__tab{padding:7px 18px;font-size:.74rem;color:#64748b;border:1px solid transparent;border-bottom:0;}
+.mock__tab.is-on{color:var(--color-primary);font-weight:700;background:#fff;border-color:var(--color-line);border-radius:6px 6px 0 0;position:relative;top:1px;}
+.mock table{font-size:.71rem;}
+.mock th,.mock td{border:1px solid #eef1f5;padding:6px 9px;text-align:center;white-space:nowrap;}
+.mock thead th{background:#f8fafc;color:#475569;}
+.mock .op{color:var(--color-primary);}
+.mock .icon-chip{display:inline-block;min-width:52px;padding:2px 7px;border-radius:4px;font-size:.62rem;font-weight:700;color:#fff;}
+.mock__note{font-size:.68rem;color:#9ca3af;padding:6px 14px 10px;}
+.mock--modal .mock__body{max-width:560px;}
+.mock .frow{display:flex;align-items:flex-start;gap:12px;margin-bottom:10px;font-size:.73rem;}
+.mock .frow label{width:8.5em;text-align:right;color:#475569;flex-shrink:0;padding-top:2px;}
+.mock .frow .req{color:#dc2626;margin-right:2px;}
+.mock .fbox{border:1px solid #d1d5db;border-radius:4px;padding:3px 10px;color:#9ca3af;flex:1;max-width:320px;}
+.mock .fradio{display:inline-flex;align-items:center;gap:4px;margin-right:14px;}
+.mock .dot{width:.7rem;height:.7rem;border-radius:50%;border:1px solid #9ca3af;display:inline-block;}
+.mock .dot.on{border:4px solid var(--color-primary);}
+.mock .fnote{font-size:.66rem;color:#9ca3af;}
+.mock .strike{text-decoration:line-through;color:#c2c8d0;}
+
+/* === Frontend mockup === */
+.fe-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-3);}
+@media (max-width:900px){.fe-grid{grid-template-columns:1fr;}}
+.fe{border:1px solid #cbd5e1;border-radius:14px;overflow:hidden;background:#fff;position:relative;}
+.fe__head{padding:9px 14px;font-weight:700;text-align:center;font-size:.8rem;border-bottom:1px solid var(--color-line);background:#fff;position:relative;}
+.fe__site{position:absolute;left:10px;top:8px;font-size:.6rem;font-weight:700;padding:1px 8px;border-radius:99px;background:#0f172a;color:#fff;}
+.fe__body{padding:var(--space-3);background:#f2f5f9;}
+.fe__card{background:#fff;border-radius:10px;padding:10px 12px;margin-bottom:10px;position:relative;}
+.fe__label{font-size:.72rem;font-weight:700;margin-bottom:8px;}
+.fe__tabs{display:flex;gap:12px;margin-bottom:10px;align-items:center;position:relative;}
+.fe__tab{font-size:.68rem;color:#64748b;padding:3px 12px;border-radius:99px;}
+.fe__tab.is-on{background:var(--color-primary);color:#fff;font-weight:700;}
+.fe__tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.tile{border:1px solid #e2e8f0;border-radius:8px;min-height:2.4rem;display:flex;align-items:center;justify-content:center;font-size:.66rem;font-weight:700;background:#fff;position:relative;color:#334155;}
+.tile.is-sel{border-color:var(--color-primary);background:var(--color-primary-soft);}
+.tile--maint{background:#8f9aa8;color:#fff;}
+.tile--maint::after{content:"🛠 維護中";font-weight:400;font-size:.62rem;}
+.tile--maint span:not(.mk){display:none;}
+.fe__row{border:1px solid #e2e8f0;border-radius:8px;padding:7px 10px;font-size:.7rem;display:flex;align-items:center;gap:8px;margin-bottom:6px;background:#fff;position:relative;}
+.fe__row--maint{background:#8f9aa8;color:#fff;}
+.fe__row--maint .acct{color:#e2e8f0;}
+.fe__row .acct{color:#64748b;font-size:.64rem;}
+.fe__none{border:1px dashed #cbd5e1;border-radius:8px;padding:10px;text-align:center;color:#94a3b8;font-size:.66rem;}
+
+/* === Menu structure diagram === */
+.menu-diagram{display:grid;grid-template-columns:1fr auto 1fr;gap:var(--space-3);align-items:start;}
+@media (max-width:900px){.menu-diagram{grid-template-columns:1fr;}}
+.menu-diagram__arrow{align-self:center;font-size:1.6rem;color:var(--color-primary);text-align:center;}
+.menu-box{border:1px solid var(--color-line);border-radius:var(--radius);overflow:hidden;}
+.menu-box__head{padding:8px 14px;font-weight:700;font-size:.78rem;background:#f8fafc;border-bottom:1px solid var(--color-line);}
+.menu-box--new .menu-box__head{background:var(--color-ok-bg);color:#15803d;}
+.menu-box ul{list-style:none;padding:6px 0;}
+.menu-box li{padding:6px 14px;font-size:.74rem;border-bottom:1px dashed #f1f5f9;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.menu-box li:last-child{border-bottom:0;}
+.menu-box .old-name{color:#9ca3af;font-size:.66rem;}
+.menu-box li.hidden-item{color:#b0b7c0;text-decoration:line-through;}
+.menu-box .seq{display:inline-flex;width:1.2rem;height:1.2rem;border-radius:50%;background:#eef2f7;color:#475569;font-size:.62rem;align-items:center;justify-content:center;font-weight:700;flex-shrink:0;}
+
+/* === Flowchart === */
+.flow{margin:var(--space-3) 0;overflow-x:auto;}
+.flow__lane{display:flex;align-items:stretch;gap:0;min-width:720px;}
+.flow__q{
+  background:#1e3a8a;color:#fff;border-radius:var(--radius-sm);padding:10px 14px;
+  font-size:.74rem;font-weight:700;display:flex;align-items:center;justify-content:center;
+  text-align:center;flex-shrink:0;width:9.5rem;
+}
+.flow__branches{display:flex;flex-direction:column;gap:8px;padding-left:26px;position:relative;flex:1;}
+.flow__branches::before{content:"";position:absolute;left:12px;top:12px;bottom:12px;width:2px;background:#cbd5e1;}
+.flow__branch{display:flex;align-items:center;gap:10px;position:relative;}
+.flow__branch::before{content:"";position:absolute;left:-14px;top:50%;width:14px;height:2px;background:#cbd5e1;}
+.flow__state{width:4.4rem;text-align:center;flex-shrink:0;}
+.flow__result{
+  background:#fff;border:1px solid var(--color-line);border-radius:var(--radius-sm);
+  padding:8px 12px;font-size:.72rem;flex:1;min-width:15rem;
+}
+.flow__result--stop{border-left:4px solid #dc2626;}
+.flow__result--maint{border-left:4px solid #d97706;}
+.flow__result--pass{border-left:4px solid #16a34a;}
+.flow__next{display:flex;flex-direction:column;gap:8px;flex:1;}
+
+/* misc */
+.kv{font-size:.74rem;}
+.kv dt{font-weight:700;float:left;clear:left;width:7em;}
+.kv dd{margin-left:7.5em;margin-bottom:6px;}
+.rel-links{font-size:.74rem;color:var(--color-text-soft);border-top:1px dashed var(--color-line);padding-top:var(--space-2);margin-top:var(--space-3);}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:.7rem;color:#64748b;margin:var(--space-2) 0;}
+.legend span{display:inline-flex;align-items:center;gap:6px;}
+footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(--space-4) 0;}
+:focus-visible{outline:2px solid var(--color-primary);outline-offset:2px;}
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="sidebar" aria-label="文件導覽">
+  <div class="nav__brand">充值提款配置統一優化規格書<small>v1A ｜ 2026-08-05</small></div>
+
+  <div class="nav__group">
+    <button class="nav__group-title" data-page-btn="spec">📋 規格書</button>
+    <button class="nav__item nav__item--sub" data-page-btn="spec" data-anchor="s-info">1. 文檔資訊</button>
+    <button class="nav__item nav__item--sub" data-page-btn="spec" data-anchor="s-goal">2. 需求目的</button>
+    <button class="nav__item nav__item--sub" data-page-btn="spec" data-anchor="s-menu">3. 菜單結構</button>
+    <button class="nav__item nav__item--sub" data-page-btn="spec" data-anchor="s-status">4. 統一狀態定義</button>
+    <button class="nav__item nav__item--sub" data-page-btn="spec" data-anchor="s-layer">5. 層級判斷原則</button>
+    <button class="nav__item nav__item--sub" data-page-btn="spec" data-anchor="s-deposit">6. 充值側規則</button>
+    <button class="nav__item nav__item--sub" data-page-btn="spec" data-anchor="s-withdraw">7. 提款側規則</button>
+    <button class="nav__item nav__item--sub" data-page-btn="spec" data-anchor="s-other">8. 其他既定原則</button>
+  </div>
+
+  <div class="nav__group">
+    <button class="nav__group-title" data-page-btn="p1">⚙️ 充值配置</button>
+    <button class="nav__item" data-page-btn="p1">支付層級配置<span class="nav__badge nav__badge--keep">不異動</span></button>
+    <button class="nav__item" data-page-btn="p2">充值渠道管理<span class="nav__badge nav__badge--rename">改名</span></button>
+    <button class="nav__item" data-page-btn="p3">在線充值商戶配置<span class="nav__badge nav__badge--rename">改名</span></button>
+    <button class="nav__item" data-page-btn="p4">在線支付展示配置<span class="nav__badge nav__badge--keep">邏輯異動</span></button>
+    <button class="nav__item" data-page-btn="p5">提款渠道管理<span class="nav__badge nav__badge--rename">改名</span></button>
+    <button class="nav__item" data-page-btn="p6">在線提款商戶配置<span class="nav__badge nav__badge--new">新增</span></button>
+    <button class="nav__item" data-page-btn="p7">提款展示配置<span class="nav__badge nav__badge--rename">改名</span></button>
+  </div>
+
+  <div class="nav__group">
+    <button class="nav__group-title" data-page-btn="h1">🚫 需隱藏頁面</button>
+    <button class="nav__item" data-page-btn="h1">銀行支付配置</button>
+    <button class="nav__item" data-page-btn="h2">虛擬幣支付</button>
+    <button class="nav__item" data-page-btn="h3">PayMaya配置</button>
+    <button class="nav__item" data-page-btn="h4">GrabPay配置</button>
+    <button class="nav__item" data-page-btn="h5">Gcash配置</button>
+    <button class="nav__item" data-page-btn="h6">E-Wallet配置</button>
+  </div>
+</nav>
+
+<main class="main">
+
+<!-- ============ 規格書（一頁到底） ============ -->
+<article class="page is-visible" id="page-spec">
+  <header class="doc-header">
+    <h1>充值提款配置統一優化規格書</h1>
+    <p class="doc-header__meta">後台「充值配置」菜單重整與充提款狀態邏輯統一</p>
+  </header>
+
+  <!-- 1. 文檔資訊 -->
+  <section class="section" id="s-info">
+    <h2>1. 文檔資訊</h2>
+    <table class="tbl">
+      <tbody>
+        <tr><th style="width:9em;">文件版本</th><td>v1A（於 v1.0 基礎上，頁 3／頁 6 更名為「在線充值商戶配置」「在線提款商戶配置」；其餘內容同 v1.0）</td></tr>
+        <tr><th>日期</th><td>2026-08-05</td></tr>
+        <tr><th>適用平台</th><td>WOWGame、OKBET（共用同一管理後台）</td></tr>
+        <tr>
+          <th>本次新增</th>
+          <td>「在線提款商戶配置」頁面（自原在線支付配置拆出代付部分）；渠道層與提款子通道層補齊「維護」狀態。</td>
+        </tr>
+        <tr>
+          <th>本次修改</th>
+          <td><ul style="margin:0;padding-left:1.3em;">
+            <li>4 個菜單改名：充值方式配置→充值渠道管理、在線支付配置→在線充值商戶配置、提款方式配置→提款渠道管理、綁定銀行配置→提款展示配置。</li>
+            <li>全站狀態統一為「正常／維護／停用」三態，列表顯示文字與所選一致。</li>
+            <li>前台充值展示改為只吃「在線支付展示配置」，未配置即不顯示。</li>
+            <li>提款展示配置的「狀態＋維護狀態」兩欄合併為單一三態。</li>
+            <li>提款展示配置的自動出款設定改為兩層：新增「渠道類型」下拉，原「自動出款渠道」改名「自動出款商戶」。</li>
+          </ul></td>
+        </tr>
+        <tr>
+          <th>本次刪除／隱藏</th>
+          <td>隱藏 6 個菜單（不刪除功能）：銀行支付配置、虛擬幣支付、PayMaya配置、GrabPay配置、Gcash配置、E-Wallet配置。詳見「需隱藏頁面」。</td>
+        </tr>
+        <tr>
+          <th>作廢文件</th>
+          <td>「前台提款入口維護狀態說明」之情境表（基於舊「狀態×維護狀態」兩欄組合撰寫），由本文件第 7 章的三態層級判斷取代。</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 2. 需求目的 -->
+  <section class="section" id="s-goal">
+    <h2>2. 需求目的</h2>
+    <p>後台「充值配置」歷經多次迭代，配置頁面分散、狀態定義不一致（二態／三態／兩欄組合並存，同一狀態在表單叫「停用」、列表顯示「關閉」），運營難以判斷「要配置某個東西該去哪一頁、配完前台長什麼樣」。</p>
+    <p>本次在<strong>不大幅改動架構</strong>的前提下進行統一，目標：</p>
+    <ol>
+      <li><strong>菜單即導覽</strong>：運營看菜單名稱與順序，即可理解各配置頁的定位與相互關係（渠道 → 方式 → 展示，充值與提款兩側對稱）。</li>
+      <li><strong>狀態全站統一</strong>：所有層級只有「正常／維護／停用」三態，選什麼、列表就顯示什麼，前台呈現依同一套層級判斷。</li>
+      <li><strong>展示來源單一化</strong>：前台看得到的東西，一定能在後台對應的「展示配置」頁找到來源。</li>
+      <li><strong>充提分流</strong>：第三方儲值與代付分成兩頁配置，運營新增金流廠商時不會再混淆。</li>
+    </ol>
+  </section>
+
+  <!-- 3. 菜單結構 -->
+  <section class="section" id="s-menu">
+    <h2>3. 菜單結構</h2>
+    <p>一級菜單「充值配置」底下，由現行 12 個二級菜單調整為 <strong>7 個</strong>（隱藏 6 個、新增 1 個、改名 4 個），並依「基礎 → 充值側 → 提款側」重新排序。</p>
+
+    <div class="menu-diagram">
+      <div class="menu-box">
+        <div class="menu-box__head">調整前（現行 12 個）</div>
+        <ul>
+          <li>在線支付配置</li>
+          <li>在線支付展示配置</li>
+          <li class="hidden-item">銀行支付配置</li>
+          <li>支付層級配置</li>
+          <li>綁定銀行配置</li>
+          <li>充值方式配置</li>
+          <li>提款方式配置</li>
+          <li class="hidden-item">虛擬幣支付</li>
+          <li class="hidden-item">PayMaya配置</li>
+          <li class="hidden-item">GrabPay配置</li>
+          <li class="hidden-item">Gcash配置</li>
+          <li class="hidden-item">E-Wallet配置</li>
+        </ul>
+      </div>
+      <div class="menu-diagram__arrow" aria-hidden="true">➜</div>
+      <div class="menu-box menu-box--new">
+        <div class="menu-box__head">調整後（7 個）</div>
+        <ul>
+          <li><span class="seq">1</span>支付層級配置<span class="badge badge--keep">不異動</span></li>
+          <li><span class="seq">2</span>充值渠道管理<span class="badge badge--rename">改名</span><span class="old-name">原：充值方式配置</span></li>
+          <li><span class="seq">3</span>在線充值商戶配置<span class="badge badge--rename">改名</span><span class="old-name">原：在線支付配置（僅保留儲值）</span></li>
+          <li><span class="seq">4</span>在線支付展示配置<span class="badge badge--logic">邏輯異動</span></li>
+          <li><span class="seq">5</span>提款渠道管理<span class="badge badge--rename">改名</span><span class="old-name">原：提款方式配置</span></li>
+          <li><span class="seq">6</span>在線提款商戶配置<span class="badge badge--new">新增</span><span class="old-name">原在線支付配置之代付拆出</span></li>
+          <li><span class="seq">7</span>提款展示配置<span class="badge badge--rename">改名</span><span class="old-name">原：綁定銀行配置</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout callout--info">
+      <strong>隱藏方式</strong>：6 個隱藏頁面由最高權限帳號設定「不展示」，功能與資料保留、不刪除。隱藏原因逐頁記錄於「需隱藏頁面」章節。
+    </div>
+
+    <h3>排序邏輯</h3>
+    <table class="tbl">
+      <thead><tr><th style="width:4em;">順序</th><th>菜單</th><th>定位</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>支付層級配置</td><td>充提共用基礎：會員層級、額度、稽核。所有通道配置的「層設定」來源，須最先完成。</td></tr>
+        <tr><td>2</td><td>充值渠道管理</td><td>充值第一層（渠道）：金流後台開通後同步回傳，後台管理狀態。</td></tr>
+        <tr><td>3</td><td>在線充值商戶配置</td><td>充值第二層（方式）：第三方<strong>儲值</strong>通道，操作人配置，本頁僅有充值。</td></tr>
+        <tr><td>4</td><td>在線支付展示配置</td><td>充值展示層：前台入口圖、子通道圖、分頁歸屬。前台充值展示的唯一來源。</td></tr>
+        <tr><td>5</td><td>提款渠道管理</td><td>提款第一層：出款渠道＝出款方式的前台入口，含入口圖。</td></tr>
+        <tr><td>6</td><td>在線提款商戶配置</td><td>提款第三方<strong>代付</strong>通道：與頁 3 共用底層表，本頁僅有代付。</td></tr>
+        <tr><td>7</td><td>提款展示配置</td><td>提款子通道層：實際銀行／錢包清單、子通道圖、狀態。前台提款展示的唯一來源。</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 4. 統一狀態定義 -->
+  <section class="section" id="s-status">
+    <h2>4. 統一狀態定義</h2>
+    <p>全站（充值、提款、各層級）狀態一律只有三態。<strong>表單選項、列表顯示、篩選條件使用完全相同的文字</strong>——選「停用」列表就顯示「停用」，不再出現「關閉」等別名。</p>
+    <table class="tbl tbl--center">
+      <thead>
+        <tr><th style="width:7em;">管理後台狀態</th><th>前台展示</th><th>充值／提款</th><th>會員是否可綁定</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="pill pill--ok">正常</span></td>
+          <td>展示</td><td>可正常使用</td><td>可綁定</td>
+        </tr>
+        <tr>
+          <td><span class="pill pill--maint">維護</span></td>
+          <td>展示，標示維護、不可點選使用</td><td>不可使用</td><td><strong>不影響綁定</strong></td>
+        </tr>
+        <tr>
+          <td><span class="pill pill--off">停用</span></td>
+          <td>不展示</td><td>不可使用</td><td>不可新綁定；已綁定帳戶亦不顯示</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="callout callout--rule">
+      <strong>撰寫口徑</strong>：本文件僅定義狀態的「結果」（展示／不展示／顯示維護）。維護樣式沿用前台原有樣式，不另行定義。
+    </div>
+  </section>
+
+  <!-- 5. 層級判斷原則 -->
+  <section class="section" id="s-layer">
+    <h2>5. 層級判斷原則</h2>
+    <p>前台呈現依 <strong>渠道 → 方式（入口）→ 子通道</strong> 三層由上而下判斷，先判斷渠道、再判斷方式，<strong>兩層互不覆蓋、上層決定是否往下判斷</strong>：</p>
+    <ul>
+      <li>上層<span class="pill pill--off">停用</span> → 不再判斷下層，該層以下前台整塊不顯示。</li>
+      <li>上層<span class="pill pill--maint">維護</span> → 該層入口顯示維護，下層不再顯示（子通道不展開）。</li>
+      <li>上層<span class="pill pill--ok">正常</span> → 才繼續往下判斷下一層。</li>
+    </ul>
+    <table class="tbl tbl--center">
+      <thead>
+        <tr><th></th><th>第一層：渠道</th><th>第二層：方式（入口）</th><th>第三層：子通道</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>充值側</th>
+          <td>充值渠道管理<br><span class="dim">獨立判斷</span></td>
+          <td>在線充值商戶配置<br><span class="dim">獨立判斷（展示由頁 4 配置）</span></td>
+          <td>金流 API 回傳<br><span class="dim">不做狀態判斷</span></td>
+        </tr>
+        <tr>
+          <th>提款側</th>
+          <td colspan="2">提款渠道管理<br><span class="dim">渠道＝方式，同一筆設定一次判斷</span></td>
+          <td>提款展示配置<br><span class="dim">可獨立判斷三態</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <p>充值與提款的關鍵差異：<strong>充值子通道由第三方 API 回傳、無法在後台設定狀態</strong>；<strong>提款子通道（實際銀行／錢包）在「提款展示配置」有完整三態</strong>。</p>
+  </section>
+
+  <!-- 6. 充值側規則 -->
+  <section class="section" id="s-deposit">
+    <h2>6. 充值側規則</h2>
+
+    <h3>6.1 各層規則</h3>
+    <h4>第一層　渠道｜充值渠道管理</h4>
+    <ul>
+      <li>清單由金流後台開通充值方式後<strong>同步回傳</strong>顯示，管理後台不可新增／刪除，可編輯狀態（三態）。</li>
+      <li>渠道為最高層判斷：停用 → 該渠道下所有方式與子通道前台皆不顯示；維護 → 該渠道下所有方式入口顯示維護、子通道不顯示；正常 → 往下判斷方式層。</li>
+    </ul>
+    <div class="callout callout--warn">
+      <strong>特別注意</strong>：目前所有第三方在線支付方式均掛在 <code>onlinePayment</code> 這一個渠道下。此渠道一旦停用，前台將<strong>沒有任何可用的充值方式</strong>；設為維護，則所有充值入口一律顯示維護。
+    </div>
+
+    <h4>第二層　方式（入口）｜在線充值商戶配置（展示由「在線支付展示配置」承接）</h4>
+    <ul>
+      <li>新增流程：金流後台先配置好 → 於「在線充值商戶配置」選<strong>支付類型</strong>新增（其餘欄位操作人自填）→ 保存後列表<strong>顯示</strong>對應的<strong>渠道類型</strong>（如 326 - dragonpay_qrph，為金流後台既定對應）→ 再至「在線支付展示配置」選該渠道類型＋廠商、配置前台圖片，<strong>配置後前台才會展示</strong>。</li>
+      <li>同一渠道類型可在「在線充值商戶配置」建立<strong>多筆</strong>（多家金流商承做同一種支付）；但「在線支付展示配置」中一個渠道類型<strong>只能建立一筆</strong>展示設定，且指定的廠商必須是同渠道類型底下的配置。</li>
+      <li>前台一個渠道類型只會出現一個入口；實際承接訂單的廠商由展示設定的「顯示商戶」指定（未指定＝取狀態正常的排序最小一筆）。</li>
+      <li>入口的狀態吃「在線充值商戶配置」的狀態；「在線支付展示配置」本身無狀態、只負責展示。</li>
+    </ul>
+
+    <h4>第三層　子通道（金流 API 回傳）</h4>
+    <ul>
+      <li>子通道清單由金流後台 API 回傳（如銀行類方式底下的 BDO、BOC 等），<strong>充值側不做子通道狀態判斷</strong>——第三方通常只回傳可用的子通道。</li>
+      <li>子通道圖片於「在線支付展示配置」內設定。若先前 API 曾回傳且已設置過該子通道的圖片，後續 API 未回傳時，後台的子通道圖片設定區即不出現該子通道；之後再度回傳時，會自動帶回先前上傳過的圖片。</li>
+      <li>若方式底下只有一個子通道，前台不展開子通道清單，點擊入口直接進入對應頁面。</li>
+    </ul>
+
+    <h3>6.2 判斷流程圖</h3>
+    <div class="flow" role="img" aria-label="充值判斷流程：先判斷渠道狀態，再判斷方式狀態，子通道不判斷">
+      <div class="flow__lane">
+        <div class="flow__q">渠道狀態？<br><span style="font-weight:400;font-size:.66rem;">充值渠道管理</span></div>
+        <div class="flow__branches">
+          <div class="flow__branch">
+            <span class="flow__state"><span class="pill pill--off">停用</span></span>
+            <div class="flow__result flow__result--stop">前台不顯示該渠道下所有方式（入口）與子通道</div>
+          </div>
+          <div class="flow__branch">
+            <span class="flow__state"><span class="pill pill--maint">維護</span></span>
+            <div class="flow__result flow__result--maint">該渠道下所有方式（入口）顯示維護，子通道不顯示</div>
+          </div>
+          <div class="flow__branch">
+            <span class="flow__state"><span class="pill pill--ok">正常</span></span>
+            <div class="flow__next">
+              <div class="flow__lane" style="min-width:0;">
+                <div class="flow__q" style="background:#1d4ed8;">方式狀態？<br><span style="font-weight:400;font-size:.66rem;">在線充值商戶配置</span></div>
+                <div class="flow__branches">
+                  <div class="flow__branch">
+                    <span class="flow__state"><span class="pill pill--off">停用</span></span>
+                    <div class="flow__result flow__result--stop">前台不顯示該方式（入口）</div>
+                  </div>
+                  <div class="flow__branch">
+                    <span class="flow__state"><span class="pill pill--maint">維護</span></span>
+                    <div class="flow__result flow__result--maint">該方式（入口）顯示維護，子通道不顯示</div>
+                  </div>
+                  <div class="flow__branch">
+                    <span class="flow__state"><span class="pill pill--ok">正常</span></span>
+                    <div class="flow__result flow__result--pass">入口正常顯示；子通道正常顯示（由金流 API 回傳，不做狀態判斷）</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>6.3 情境穷舉表</h3>
+    <table class="tbl tbl--center">
+      <thead>
+        <tr>
+          <th>第一層<br>渠道</th><th>是否判斷下一層</th><th>第二層<br>方式（入口）</th><th>是否判斷下一層</th><th>第三層<br>子通道</th><th style="text-align:left;">最終結果</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="pill pill--off">停用</span></td><td>不用</td><td class="dim">停用／維護／正常</td><td>不用</td>
+          <td rowspan="7" class="dim" style="vertical-align:middle;">子通道由第三方回傳<br>通常僅回傳可用的子通道<br>（不做狀態判斷）</td>
+          <td style="text-align:left;">前台不顯示該渠道下各方式（入口）</td>
+        </tr>
+        <tr><td rowspan="3"><span class="pill pill--maint">維護</span></td><td rowspan="3">要</td><td><span class="pill pill--off">停用</span></td><td>不用</td><td style="text-align:left;">前台不顯示該方式（入口）</td></tr>
+        <tr><td><span class="pill pill--maint">維護</span></td><td>不用</td><td style="text-align:left;">該方式（入口）顯示維護，子通道不顯示</td></tr>
+        <tr><td><span class="pill pill--ok">正常</span></td><td>不用</td><td style="text-align:left;">該方式（入口）顯示維護，子通道不顯示</td></tr>
+        <tr><td rowspan="3"><span class="pill pill--ok">正常</span></td><td rowspan="3">要</td><td><span class="pill pill--off">停用</span></td><td>不用</td><td style="text-align:left;">前台不顯示該方式（入口）</td></tr>
+        <tr><td><span class="pill pill--maint">維護</span></td><td>不用</td><td style="text-align:left;">該方式（入口）顯示維護，子通道不顯示</td></tr>
+        <tr><td><span class="pill pill--ok">正常</span></td><td>不用</td><td style="text-align:left;">該方式（入口）顯示正常，子通道正常顯示</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 7. 提款側規則 -->
+  <section class="section" id="s-withdraw">
+    <h2>7. 提款側規則</h2>
+
+    <h3>7.1 各層規則</h3>
+    <h4>第一層　渠道＝方式（入口）｜提款渠道管理</h4>
+    <ul>
+      <li><strong>出款渠道＝出款方式的前台入口</strong>（一筆記錄＝一個入口）；入口圖於本頁設定。</li>
+      <li>清單來源同樣為金流後台開通後才顯示；管理後台可上傳入口圖、調整狀態（三態）。</li>
+      <li>提款側渠道與方式為<strong>同一筆設定</strong>，狀態一次判斷（方式狀態隨渠道）。</li>
+    </ul>
+
+    <h4>第三方代付通道｜在線提款商戶配置</h4>
+    <ul>
+      <li>原「在線支付配置」中的<strong>代付</strong>記錄全數移至本頁顯示；與「在線充值商戶配置」共用同一張底層表，以渠道類型（充值／代付）區分。</li>
+      <li>本頁僅有代付：新增與編輯彈窗的支付類型下拉僅出現代付類選項。</li>
+      <li>本頁狀態<strong>不參與前台顯示判斷</strong>，僅影響提款流程走自動出款或人工出款（商戶維護／停用時不走自動出款、回人工出款）。</li>
+    </ul>
+
+    <h4>第三層　子通道｜提款展示配置</h4>
+    <ul>
+      <li>各入口方式底下的子通道（實際銀行／錢包清單，如 BDO、BPI、GCash、JuanCash），名稱、子通道圖示與<strong>狀態</strong>皆於本頁設定。</li>
+      <li>前台提款頁的所有顯示內容（含 eWallet 有哪些類型錢包）唯一來源即本頁。</li>
+      <li>子通道三態：停用 → 該子通道不顯示；維護 → 該子通道顯示維護；正常 → 正常顯示。</li>
+    </ul>
+
+    <h3>7.2 判斷流程圖</h3>
+    <div class="flow" role="img" aria-label="提款判斷流程：渠道與方式同一筆判斷，再判斷子通道狀態">
+      <div class="flow__lane">
+        <div class="flow__q">渠道＝方式<br>狀態？<br><span style="font-weight:400;font-size:.66rem;">提款渠道管理</span></div>
+        <div class="flow__branches">
+          <div class="flow__branch">
+            <span class="flow__state"><span class="pill pill--off">停用</span></span>
+            <div class="flow__result flow__result--stop">前台不顯示該入口與其子通道</div>
+          </div>
+          <div class="flow__branch">
+            <span class="flow__state"><span class="pill pill--maint">維護</span></span>
+            <div class="flow__result flow__result--maint">該入口顯示維護，子通道不顯示</div>
+          </div>
+          <div class="flow__branch">
+            <span class="flow__state"><span class="pill pill--ok">正常</span></span>
+            <div class="flow__next">
+              <div class="flow__lane" style="min-width:0;">
+                <div class="flow__q" style="background:#1d4ed8;">子通道狀態？<br><span style="font-weight:400;font-size:.66rem;">提款展示配置</span></div>
+                <div class="flow__branches">
+                  <div class="flow__branch">
+                    <span class="flow__state"><span class="pill pill--off">停用</span></span>
+                    <div class="flow__result flow__result--stop">入口顯示正常；該子通道不顯示</div>
+                  </div>
+                  <div class="flow__branch">
+                    <span class="flow__state"><span class="pill pill--maint">維護</span></span>
+                    <div class="flow__result flow__result--maint">入口顯示正常；該子通道顯示維護</div>
+                  </div>
+                  <div class="flow__branch">
+                    <span class="flow__state"><span class="pill pill--ok">正常</span></span>
+                    <div class="flow__result flow__result--pass">入口顯示正常；該子通道正常顯示</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>7.3 情境穷舉表</h3>
+    <table class="tbl tbl--center">
+      <thead>
+        <tr>
+          <th>第一層<br>渠道</th><th>是否判斷下一層</th><th>第二層<br>方式（入口）</th><th>是否判斷下一層</th><th>第三層<br>子通道</th><th style="text-align:left;">最終結果</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><span class="pill pill--off">停用</span></td><td>不用</td><td class="dim">狀態隨渠道</td><td>不用</td><td class="dim">停用／維護／正常</td><td style="text-align:left;">前台不顯示該渠道下各方式（入口）</td></tr>
+        <tr><td><span class="pill pill--maint">維護</span></td><td>不用</td><td class="dim">狀態隨渠道</td><td>不用</td><td class="dim">停用／維護／正常</td><td style="text-align:left;">該方式（入口）顯示維護，子通道不顯示</td></tr>
+        <tr><td rowspan="3"><span class="pill pill--ok">正常</span></td><td rowspan="3">不用</td><td rowspan="3" class="dim">狀態隨渠道</td><td rowspan="3">要</td><td><span class="pill pill--off">停用</span></td><td style="text-align:left;">該方式（入口）顯示正常，該子通道不顯示</td></tr>
+        <tr><td><span class="pill pill--maint">維護</span></td><td style="text-align:left;">該方式（入口）顯示正常，該子通道顯示維護</td></tr>
+        <tr><td><span class="pill pill--ok">正常</span></td><td style="text-align:left;">該方式（入口）顯示正常，該子通道正常顯示</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 8. 其他既定原則 -->
+  <section class="section" id="s-other">
+    <h2>8. 其他既定原則</h2>
+    <h3>8.1 操作注意事項（不做系統判斷）</h3>
+    <ul>
+      <li><strong>同渠道類型多家金流商的切換</strong>：排序最小（或展示配置指定）的承接廠商若維護／停用，系統<strong>不會</strong>自動輪替至其他廠商，需自行注意並手動切換「顯示商戶」或調整排序。</li>
+    </ul>
+    <h3>8.2 用詞統一</h3>
+    <ul>
+      <li>狀態文案全站統一為「正常／維護／停用」：編輯表單選了什麼，列表與篩選就顯示相同的文字，廢除「關閉」等別名。</li>
+    </ul>
+    <h3>8.3 技術依賴</h3>
+    <ul>
+      <li>「在線充值商戶配置」與「在線提款商戶配置」共用同一張底層表，以<strong>渠道類型（充值／代付）</strong>過濾分頁。支付類型清單 API 須於<strong>列表階段即回傳渠道類型</strong>（而非保存後才回傳），兩頁的支付類型下拉才能各自過濾出儲值／代付選項。</li>
+    </ul>
+    <h3>8.4 平台差異</h3>
+    <p>「在線支付展示配置」含兩個頁籤：充值展示配置、分頁類型設定。分頁類型於「分頁類型設定」建立後，在充值展示配置的「分頁歸屬」皆可勾選；<strong>勾選後僅 WOWGame 生效</strong>。兩平台差異如下：</p>
+    <table class="tbl tbl--center">
+      <thead><tr><th style="width:8em;">平台</th><th>充值展示配置</th><th>分頁歸屬勾選</th><th style="text-align:left;">說明</th></tr></thead>
+      <tbody>
+        <tr><td><strong>WOWGame</strong></td><td>生效</td><td>生效</td><td style="text-align:left;">前台充值頁有分類（All／E-Wallets／Banks），各入口依勾選的分頁歸屬顯示在對應分類下</td></tr>
+        <tr><td><strong>OKBET</strong></td><td>生效</td><td>不生效</td><td style="text-align:left;">前台未做分類，一頁展示所有入口，勾選的分頁歸屬對其無作用</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <footer class="doc-footer">充值提款配置統一優化規格書 v1A ｜ 2026-08-05 ｜ 對應原型：本文件「充值配置」各頁刻版</footer>
+</article>
+
+<!-- ============ 頁 1 支付層級配置 ============ -->
+<article class="page" id="page-p1">
+  <header class="doc-header">
+    <h1>支付層級配置 <span class="badge badge--keep">本次不異動</span></h1>
+    <p class="doc-header__meta">菜單順序 1 ｜ 充提共用基礎</p>
+  </header>
+
+  <section class="section">
+    <h2>頁面定位</h2>
+    <p>設定會員的分層。支付層級配置用於管理會員的充值及提款分層規則，每個層級可設定不同的存提款限額與流水稽核規則。所有充值及提款通道的「層設定」欄位均來自此處設定的層級。修改或刪除層級會影響所有套用該層級的通道與會員，操作前請務必確認影響範圍。</p>
+    <div class="callout callout--info">本頁<strong>不改動</strong>。</div>
+    <div class="rel-links"><strong>關聯頁面</strong>：所有通道配置頁（在線充值商戶配置、在線提款商戶配置等）的「層設定」下拉來源。</div>
+  </section>
+</article>
+
+<!-- ============ 頁 2 充值渠道管理 ============ -->
+<article class="page" id="page-p2">
+  <header class="doc-header">
+    <h1>充值渠道管理 <span class="badge badge--rename">改名</span> <span class="badge badge--logic">狀態邏輯異動</span></h1>
+    <p class="doc-header__meta">菜單順序 2 ｜ 原名：充值方式配置 ｜ 充值第一層（渠道）</p>
+  </header>
+
+  <section class="section">
+    <h2>頁面定位</h2>
+    <ul>
+      <li>原名「充值方式配置」，改名為「<strong>充值渠道管理</strong>」。
+        <ul><li>改名原因：明確本頁為渠道層，並與「提款渠道管理」對稱。</li></ul>
+      </li>
+      <li>充值側最高層的「渠道」清單。</li>
+      <li>內容由<strong>金流後台開通充值方式後同步回傳</strong>。</li>
+      <li>管理後台不可新增／刪除，可編輯狀態。</li>
+      <li>渠道狀態是前台充值展示的<strong>第一層判斷</strong>。</li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <h2>① 後台畫面（調整後預期）</h2>
+    <div class="mock">
+      <div class="mock__bar"><span class="mock__crumb">位置 &gt; 充值渠道管理</span></div>
+      <div class="mock__body">
+        <table>
+          <thead>
+            <tr><th>#</th><th>充值類型</th><th>類型值</th><th>排序</th><th style="position:relative;">狀態 <span class="mk">A</span></th><th>操作人</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>3505</td><td>银行汇款</td><td>bankTransfer</td><td>1</td><td><span class="pill pill--ok">正常</span></td><td><span class="op">编辑</span></td></tr>
+            <tr><td>3504</td><td>在线</td><td>onlinePayment</td><td>5</td><td><span class="pill pill--ok">正常</span></td><td><span class="op">编辑</span></td></tr>
+            <tr><td>3507</td><td>微信支付</td><td>weixin</td><td>4</td><td><span class="pill pill--maint">維護</span></td><td><span class="op">编辑</span></td></tr>
+            <tr><td>3506</td><td>支付宝支付</td><td>alipay</td><td>5</td><td><span class="pill pill--off">停用</span></td><td><span class="op">编辑</span></td></tr>
+            <tr><td>4897</td><td>ewallet支付</td><td>ewallet</td><td>6</td><td><span class="pill pill--ok">正常</span></td><td><span class="op">编辑</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="mock__note">示意資料。<span class="mk">A</span> 狀態欄：三態顯示，文字與編輯彈窗選項一致（不再顯示「关闭」）。</div>
+    </div>
+
+    <div class="mock mock--modal">
+      <div class="mock__bar"><span class="mock__crumb">編輯充值配置（彈窗）</span></div>
+      <div class="mock__body">
+        <div class="frow"><label>充值类型:</label><span class="fbox">ewallet支付</span></div>
+        <div class="frow"><label>类型值:</label><span class="fbox" style="background:#f3f4f6;">ewallet（鎖定）</span></div>
+        <div class="frow"><label>排序:</label><span class="fbox" style="max-width:120px;">6</span></div>
+        <div class="frow"><label>页面url:</label><span class="fbox"></span></div>
+        <div class="frow"><label>描述:</label><span class="fbox" style="min-height:2.2rem;"></span></div>
+        <div class="frow"><label>状态:</label>
+          <span>
+            <span class="fradio"><span class="dot on"></span>正常</span>
+            <span class="fradio"><span class="dot"></span>維護</span>
+            <span class="fradio"><span class="dot"></span>停用</span>
+            <span class="mk">B</span>
+          </span>
+        </div>
+      </div>
+      <div class="mock__note"><span class="mk">B</span> 狀態選項由二態改為三態；其餘欄位不異動。</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>② 邏輯對照</h2>
+    <div class="compare">
+      <div class="compare__col compare__col--new">
+        <div class="compare__head">新邏輯</div>
+        <div class="compare__body">
+          <ul>
+            <li><span class="mk">A</span> 狀態三態：<span class="pill pill--ok">正常</span><span class="pill pill--maint">維護</span><span class="pill pill--off">停用</span>，列表顯示＝表單所選文字。</li>
+            <li><span class="mk">B</span> 編輯彈窗狀態選項：正常／維護／停用。</li>
+            <li>渠道為第一層判斷：
+              <ul>
+                <li>停用 → 渠道下所有方式、子通道前台不顯示。</li>
+                <li>維護 → 渠道下所有方式入口顯示維護。</li>
+                <li>正常 → 往下判斷方式層。</li>
+              </ul>
+            </li>
+            <li>清單由金流後台回傳，後台無法新增。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="compare__col compare__col--old">
+        <div class="compare__head">原邏輯與問題</div>
+        <div class="compare__body">
+          <ul>
+            <li>狀態僅二態：正常／停用，渠道層<strong>無維護可選</strong>。</li>
+            <li>表單選「停用」，列表卻顯示「<strong>关闭</strong>」，用詞不一致。</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="reason"><strong>改動原因</strong>：補齊渠道層維護態，使「渠道 → 方式 → 子通道」三層共用同一套三態判斷；統一狀態用詞，運營選什麼、看到什麼。</div>
+  </section>
+
+  <section class="section">
+    <h2>③ 前台影響</h2>
+    <div class="callout callout--warn">
+      <ul style="margin:0;padding-left:1.3em;">
+        <li>渠道層無獨立前台元件。</li>
+        <li>渠道狀態影響<strong>方式（入口）的顯示狀態</strong>，不影響展示的呈現圖片（圖片由「在線支付展示配置」決定）。</li>
+        <li>兩平台呈現邏輯相同。</li>
+        <li>目前所有在線支付方式皆掛在 <code>onlinePayment</code> 渠道下：
+          <ul>
+            <li>此渠道停用 ＝ 前台充值頁<strong>無任何可用充值方式</strong>。</li>
+            <li>維護 ＝ 所有充值入口一律顯示維護。</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <p style="margin-top:12px;">渠道三種狀態下的前台呈現如下（以 WOWGame 為範例示意圖；僅為示意，元件無更新調整，維護與各狀態樣式沿用前台既有樣式）：</p>
+    <div class="fe-grid" style="grid-template-columns:repeat(auto-fit,minmax(210px,1fr));">
+      <div class="fe">
+        <div class="fe__head"><span class="pill pill--ok">正常</span></div>
+        <div class="fe__body">
+          <div class="fe__card">
+            <div class="fe__label">充值方式</div>
+            <div class="fe__tiles" style="grid-template-columns:repeat(2,1fr);">
+              <div class="tile">GCash</div>
+              <div class="tile">FortunePay</div>
+            </div>
+          </div>
+          <p style="font-size:.68rem;color:var(--color-text-soft);margin:0;">渠道正常，所有方式（入口）正常顯示。</p>
+        </div>
+      </div>
+      <div class="fe">
+        <div class="fe__head"><span class="pill pill--maint">維護</span></div>
+        <div class="fe__body">
+          <div class="fe__card">
+            <div class="fe__label">充值方式</div>
+            <div class="fe__tiles" style="grid-template-columns:repeat(2,1fr);">
+              <div class="tile tile--maint"><span>GCash</span></div>
+              <div class="tile tile--maint"><span>FortunePay</span></div>
+            </div>
+          </div>
+          <p style="font-size:.68rem;color:var(--color-text-soft);margin:0;">渠道維護，所有方式（入口）一律顯示維護、不可點選。</p>
+        </div>
+      </div>
+      <div class="fe">
+        <div class="fe__head"><span class="pill pill--off">停用</span></div>
+        <div class="fe__body">
+          <div class="fe__card">
+            <div class="fe__label">充值方式</div>
+            <div class="fe__none">（無任何充值方式）</div>
+          </div>
+          <p style="font-size:.68rem;color:var(--color-text-soft);margin:0;">渠道停用，充值方式下方為空、所有入口皆不顯示。</p>
+        </div>
+      </div>
+    </div>
+    <div class="rel-links"><strong>關聯頁面</strong>：下游——在線充值商戶配置（第二層）、在線支付展示配置（展示層）。</div>
+  </section>
+</article>
+
+<!-- ============ 頁 3 在線充值商戶配置 ============ -->
+<article class="page" id="page-p3">
+  <header class="doc-header">
+    <h1>在線充值商戶配置 <span class="badge badge--rename">改名</span> <span class="badge badge--logic">拆分：僅保留儲值</span></h1>
+    <p class="doc-header__meta">菜單順序 3 ｜ 原名：在線支付配置 ｜ 充值第二層（方式）</p>
+  </header>
+
+  <section class="section">
+    <h2>頁面定位</h2>
+    <ul>
+      <li>原名「在線支付配置」，改名為「<strong>在線充值商戶配置</strong>」。
+        <ul><li>改名原因：本頁每筆記錄為一家金流商戶（商戶號、密鑰等），與「在線支付展示配置」的「顯示商戶」、「提款展示配置」的「自動出款商戶」用詞對應。</li></ul>
+      </li>
+      <li>配置第三方<strong>儲值</strong>通道。</li>
+      <li><strong>支付類型</strong>下拉來源為金流後台；其餘欄位（商戶號、密鑰、網址、金額限制、層設定等）由操作人自行填寫。</li>
+      <li>個別入口的狀態調整於本頁設定（渠道層狀態另由「充值渠道管理」判斷）。</li>
+      <li>入口是否展示、圖片長什麼樣，由「在線支付展示配置」決定。</li>
+    </ul>
+    <div class="callout callout--rule"><strong>本頁僅有充值（儲值）</strong>：代付一律於「在線提款商戶配置」處理。兩頁共用同一張底層表，以渠道類型（充值／代付）過濾。</div>
+  </section>
+
+  <section class="section">
+    <h2>① 後台畫面（調整後預期）</h2>
+    <div class="mock">
+      <div class="mock__bar"><span class="mock__crumb">位置 &gt; 在線充值商戶配置</span><span class="mock__btn">新增</span></div>
+      <div class="mock__body">
+        <table>
+          <thead>
+            <tr><th>#</th><th>支付名稱</th><th>支付類型</th><th style="position:relative;">渠道類型 <span class="mk">A</span></th><th>商戶號</th><th>支付層級</th><th style="position:relative;">狀態 <span class="mk">B</span></th><th>幣種</th><th>操作</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1035</td><td>PayCools支付 - GCASH</td><td>PayCools支付 - GCASH</td><td>204 - Gcash（充值）</td><td>92d08d4acd5e43e698c</td><td class="dim">默认层；第二层⋯</td><td><span class="pill pill--ok">正常</span></td><td>菲律宾比索</td><td><span class="op">编辑 停用 删除 复制</span></td></tr>
+            <tr><td>779</td><td>PayMaya--OKFUN</td><td>Maya(Maya)</td><td>206 - PayMaya（充值）</td><td>OKFunDirectPayPHP01</td><td class="dim">默认层；QASL⋯</td><td><span class="pill pill--maint">維護</span></td><td>菲律宾比索</td><td><span class="op">编辑 启用 删除 复制</span></td></tr>
+            <tr><td>772</td><td>coins-qrph</td><td>Coins_QRPH</td><td>326 - dragonpay_qrph（充值）</td><td>ZTR3Z2swxAFr2BEqMr</td><td class="dim">第二层；默认层⋯</td><td><span class="pill pill--off">停用</span></td><td>菲律宾比索</td><td><span class="op">编辑 启用 删除 复制</span></td></tr>
+            <tr style="text-decoration:line-through;color:#c2c8d0;"><td>1037</td><td>PayCools代付 - GCASH</td><td>PayCools代付 - GCASH</td><td>202（代付）</td><td>92d08d4acd5e43e698c</td><td>默认层；第二层⋯</td><td>停用</td><td>菲律宾比索</td><td>（不出現在本頁）</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="mock__note">
+        <ul style="margin:0;padding-left:1.3em;">
+          <li><span class="mk">A</span> 列表僅出現渠道類型為「（充值）」的記錄；（代付）記錄不出現在本頁，顯示於「在線提款商戶配置」。</li>
+          <li><span class="mk">B</span> 狀態文字統一（原「关闭」→「停用」）。</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mock mock--modal">
+      <div class="mock__bar"><span class="mock__crumb">新增／編輯彈窗 — 支付類型</span></div>
+      <div class="mock__body">
+        <div class="frow"><label><span class="req">*</span>支付类型:</label>
+          <span style="flex:1;max-width:320px;">
+            <span class="fbox" style="display:block;max-width:none;">Select <span class="mk" style="float:right;">C</span></span>
+            <span style="display:block;border:1px solid #d1d5db;border-top:0;border-radius:0 0 4px 4px;font-size:.7rem;">
+              <span style="display:block;padding:3px 10px;">Gcashtest(jc)</span>
+              <span style="display:block;padding:3px 10px;background:#f0f7ff;">PalawanPay 儲值</span>
+              <span style="display:block;padding:3px 10px;">MayaMiniPay支付</span>
+              <span style="display:block;padding:3px 10px;" class="strike">MayaMini代付（不出現）</span>
+              <span style="display:block;padding:3px 10px;" class="strike">PalawanPay 提款（不出現）</span>
+            </span>
+          </span>
+        </div>
+      </div>
+      <div class="mock__note"><span class="mk">C</span> 支付類型下拉<strong>僅出現儲值類</strong>選項；新增與編輯皆同樣限制。</div>
+    </div>
+
+    <div class="mock mock--modal">
+      <div class="mock__bar"><span class="mock__crumb">新增／編輯彈窗 — 狀態</span></div>
+      <div class="mock__body">
+        <div class="frow"><label>状态:</label>
+          <span>
+            <span class="fradio"><span class="dot on"></span>正常</span>
+            <span class="fradio"><span class="dot"></span>維護</span>
+            <span class="fradio"><span class="dot"></span>停用</span>
+            <span class="mk">B</span>
+          </span>
+        </div>
+      </div>
+      <div class="mock__note"><span class="mk">B</span> 狀態三態，列表顯示與所選文字一致。</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>② 邏輯對照</h2>
+    <div class="compare">
+      <div class="compare__col compare__col--new">
+        <div class="compare__head">新邏輯</div>
+        <div class="compare__body">
+          <ul>
+            <li><span class="mk">A</span> 列表僅顯示渠道類型為「（充值）」的記錄；頁面即代表「第三方儲值通道」。</li>
+            <li><span class="mk">B</span> 狀態三態文字統一，本頁狀態＝前台入口狀態（第二層判斷）。</li>
+            <li><span class="mk">C</span> 新增／編輯彈窗的支付類型下拉僅出現儲值類選項——從入口防呆，不可能在本頁配出代付。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="compare__col compare__col--old">
+        <div class="compare__head">原邏輯與問題</div>
+        <div class="compare__body">
+          <ul>
+            <li>儲值與代付<strong>混在同一列表</strong>（渠道類型欄同時出現「（充值）」與「（代付）」）。</li>
+            <li>新增彈窗下拉混列儲值與代付選項（如「PalawanPay 儲值」「PalawanPay 提款」並列）。</li>
+            <li>狀態列表顯示「关闭」與表單「停用」不一致。</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="reason"><strong>改動原因</strong>：充提分流——設第三方充值廠商來本頁、設提款代付廠商去「在線提款商戶配置」。</div>
+  </section>
+
+  <section class="section">
+    <h2>③ 前台影響</h2>
+    <ul>
+      <li>入口是否展示、圖片、分頁歸屬由「在線支付展示配置」決定；本頁決定<strong>個別入口的狀態</strong>。</li>
+    </ul>
+    <p>方式（入口）三種狀態下的前台呈現如下（以 WOWGame 為範例示意圖；僅為示意，元件無更新調整，維護與各狀態樣式沿用前台既有樣式）。GCash 為襯托、恆為正常，僅示意：</p>
+    <div class="fe-grid" style="grid-template-columns:repeat(auto-fit,minmax(210px,1fr));">
+      <div class="fe">
+        <div class="fe__head"><span class="pill pill--ok">正常</span></div>
+        <div class="fe__body">
+          <div class="fe__card">
+            <div class="fe__label">充值方式</div>
+            <div class="fe__tiles" style="grid-template-columns:repeat(2,1fr);">
+              <div class="tile">GCash</div>
+              <div class="tile is-sel">FortunePay</div>
+            </div>
+          </div>
+          <div class="fe__card">
+            <div class="fe__label">支付银行</div>
+            <div class="fe__tiles" style="grid-template-columns:repeat(3,1fr);">
+              <div class="tile">BDO</div><div class="tile">BOC</div><div class="tile">BPI</div>
+            </div>
+          </div>
+          <p style="font-size:.68rem;color:var(--color-text-soft);margin:0;">入口正常顯示、可點選；點擊後下方顯示其子通道（支付銀行）。</p>
+        </div>
+      </div>
+      <div class="fe">
+        <div class="fe__head"><span class="pill pill--maint">維護</span></div>
+        <div class="fe__body">
+          <div class="fe__card">
+            <div class="fe__label">充值方式</div>
+            <div class="fe__tiles" style="grid-template-columns:repeat(2,1fr);">
+              <div class="tile">GCash</div>
+              <div class="tile tile--maint"><span>FortunePay</span></div>
+            </div>
+          </div>
+          <p style="font-size:.68rem;color:var(--color-text-soft);margin:0;">入口顯示維護、不可點選；下方支付銀行（子通道）區塊直接不顯示。</p>
+        </div>
+      </div>
+      <div class="fe">
+        <div class="fe__head"><span class="pill pill--off">停用</span></div>
+        <div class="fe__body">
+          <div class="fe__card">
+            <div class="fe__label">充值方式</div>
+            <div class="fe__tiles" style="grid-template-columns:repeat(2,1fr);">
+              <div class="tile">GCash</div>
+            </div>
+          </div>
+          <p style="font-size:.68rem;color:var(--color-text-soft);margin:0;">入口直接不顯示，僅剩其他方式。</p>
+        </div>
+      </div>
+    </div>
+    <div class="rel-links"><strong>關聯頁面</strong>：上游——充值渠道管理（第一層）；下游——在線支付展示配置（展示層）；共表——在線提款商戶配置（以渠道類型過濾）。</div>
+  </section>
+</article>
+
+<!-- ============ 頁 4 在線支付展示配置 ============ -->
+<article class="page" id="page-p4">
+  <header class="doc-header">
+    <h1>在線支付展示配置 <span class="badge badge--logic">邏輯異動：前台展示唯一來源</span></h1>
+    <p class="doc-header__meta">菜單順序 4 ｜ 名稱不變 ｜ 充值展示層（無狀態，僅負責展示）</p>
+  </header>
+
+  <section class="section">
+    <h2>頁面定位</h2>
+    <ul>
+      <li>決定前台充值頁<strong>展示哪些在線支付方式、圖片長什麼樣</strong>。</li>
+      <li>含兩個頁籤：
+        <ul>
+          <li><strong>充值展示配置</strong>：入口圖、子通道圖、分頁歸屬、顯示商戶。</li>
+          <li><strong>分頁類型設定</strong>：前台充值頁的區塊分類。</li>
+        </ul>
+      </li>
+      <li>一個渠道類型只能綁定一個商戶，等同一個前台入口。
+        <ul><li>補充說明：「在線充值商戶配置」中，同一渠道類型可以設置多個商戶。</li></ul>
+      </li>
+      <li>此處對應前台充值頁的入口區塊，前台稱「支付方式」。</li>
+      <li>本頁無狀態欄位，僅負責展示（入口狀態由「充值渠道管理」與「在線充值商戶配置」逐層判斷）。</li>
+    </ul>
+    <div class="callout callout--info"><strong>平台差異</strong>
+      <ul style="margin:4px 0 0;padding-left:1.3em;">
+        <li><strong>WOWGame</strong>：兩個頁籤皆生效，前台依「分頁類型設定」自行設定的分類頁籤展示。</li>
+        <li><strong>OKBET</strong>：僅吃「充值展示配置」，前台充值展示不分類，分頁相關設定對其無效。</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>① 後台畫面（調整後預期）</h2>
+    <div class="mock">
+      <div class="mock__bar"><span class="mock__crumb">位置 &gt; 在線支付展示配置</span></div>
+      <div class="mock__body">
+        <div class="mock__tabs">
+          <span class="mock__tab is-on">充值展示配置</span>
+          <span class="mock__tab">分頁類型設定</span>
+        </div>
+        <div style="background:var(--color-warn-bg);border:1px solid var(--color-warn-line);border-radius:6px;padding:8px 12px;font-size:.7rem;margin-bottom:12px;position:relative;">
+          <span class="mk mk--float" style="left:-10px;top:-10px;">A</span>
+          ⚠ 有 1 個已啟用在線支付配置對應的渠道類型尚未建立充值展示配置，請及時配置：<br>
+          渠道類型 320 - fortunepayFourth（在線支付配置(按排序)：FortunePay四方支付）
+        </div>
+        <span class="mock__btn">新增</span>
+        <table style="margin-top:10px;">
+          <thead>
+            <tr><th>渠道類型</th><th>類型名稱</th><th>顯示名</th><th style="position:relative;">渠道圖示 <span class="mk">B</span></th><th style="position:relative;">分頁歸屬 <span class="mk">C</span></th><th>排序</th><th style="position:relative;">顯示商戶 <span class="mk">D</span></th><th>操作</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>204</td><td>Gcash（充值）</td><td>Gcash-中文</td><td><span class="icon-chip" style="background:#2f6fdd;">GCash</span></td><td>all,ewallet</td><td>100</td><td>V5Pay充值 - GCash</td><td><span class="op">编辑 删除</span></td></tr>
+            <tr><td>206</td><td>PayMaya（充值）</td><td>maya-中文</td><td><span class="icon-chip" style="background:#19b56e;">maya</span></td><td>all,ewallet</td><td>99</td><td>PayMaya(PayMaya)-QATest</td><td><span class="op">编辑 删除</span></td></tr>
+            <tr><td>326</td><td>dragonpay_qrph（充值）</td><td>QRPH-中文</td><td><span class="icon-chip" style="background:#e8452c;">QR Ph</span></td><td>all,ewallet</td><td>98</td><td>dragonpay-qrph 扫码支付</td><td><span class="op">编辑 删除</span></td></tr>
+            <tr><td>315</td><td>BankTransfer（充值）</td><td>BankTransfer</td><td><span class="icon-chip" style="background:#111827;">Bank</span></td><td>all,ewallet,bank</td><td>0</td><td>PayCools支付-BankTransfer</td><td><span class="op">编辑 删除</span></td></tr>
+            <tr><td>212</td><td>FortunePay（充值）</td><td>FortunePay-ZH</td><td><span class="icon-chip" style="background:#f59e0b;">FP</span></td><td>all,ewallet,bank</td><td>95</td><td>未指定(取排序第一筆)</td><td><span class="op">编辑 删除</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="mock__note">
+        <ul style="margin:0;padding-left:1.3em;">
+          <li><span class="mk">A</span> 未配置提醒條保留不改。</li>
+          <li><span class="mk">B</span> 入口圖／子通道圖於編輯內設定。</li>
+          <li><span class="mk">C</span> 分頁歸屬勾選來源＝分頁類型設定頁籤。</li>
+          <li><span class="mk">D</span> 指定承接廠商，未指定＝取狀態正常的排序最小一筆。</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mock">
+      <div class="mock__bar"><span class="mock__crumb">位置 &gt; 在線支付展示配置</span></div>
+      <div class="mock__body">
+        <div class="mock__tabs">
+          <span class="mock__tab">充值展示配置</span>
+          <span class="mock__tab is-on" style="position:relative;">分頁類型設定 <span class="mk">E</span></span>
+        </div>
+        <table>
+          <thead><tr><th>分頁Key</th><th>顯示名</th><th>排序</th><th>狀態</th><th>操作人</th></tr></thead>
+          <tbody>
+            <tr><td>all</td><td>All</td><td>0</td><td><span class="pill pill--ok">正常</span></td><td><span class="op">编辑 删除</span></td></tr>
+            <tr><td>ewallet</td><td>E-Wallets</td><td>1</td><td><span class="pill pill--ok">正常</span></td><td><span class="op">编辑 删除</span></td></tr>
+            <tr><td>bank</td><td>Banks</td><td>2</td><td><span class="pill pill--ok">正常</span></td><td><span class="op">编辑 删除</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="mock__note">
+        <ul style="margin:0;padding-left:1.3em;">
+          <li><span class="mk">E</span> 前台充值頁的區塊分類定義；充值展示配置的「分頁歸屬」勾選項即來自此表（WOWGame 生效）。</li>
+          <li>此列表的「狀態」為該分類是否啟用的開關，與本次統一的通道三態（正常／維護／停用）無關。</li>
+          <li>本頁籤功能不異動。</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  
+
+  <section class="section">
+    <h2>② 邏輯對照</h2>
+    <div class="compare">
+      <div class="compare__col compare__col--new">
+        <div class="compare__head">新邏輯</div>
+        <div class="compare__body">
+          <ul>
+            <li><strong>前台充值展示一律只吃本頁</strong>：未建立展示配置的渠道類型，前台<strong>不顯示</strong>，不吃任何預設圖。</li>
+            <li><span class="mk">A</span> 後台未配置提醒條<strong>保留</strong>，照樣提示哪個渠道類型尚未配置。</li>
+            <li>推論：前台充值入口數量 ＝ 本頁設定數量（扣除方式狀態為停用者）。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="compare__col compare__col--old">
+        <div class="compare__head">原邏輯與問題</div>
+        <div class="compare__body">
+          <ul>
+            <li>在線支付配置開啟後，即使未建立展示配置，前台<strong>仍自動顯示</strong>該入口。</li>
+            <li>未配置時由後端回傳預設值：入口帶「Payment Services」圖、子通道帶綠色預設圖，兩個站點同一套圖。</li>
+          </ul>
+          <p class="problem">問題：展示來源兩套並存（配了吃本頁、沒配吃後端預設），運營無法從後台判斷前台實際樣貌；預設圖無辨識度，用戶不知道是哪家支付，前台觀感差。</p>
+        </div>
+      </div>
+    </div>
+    <h3>原邏輯問題示意（未配置展示時，前台自動帶預設圖）</h3>
+    <div class="fe" style="max-width:420px;">
+      <div class="fe__head">前台充值頁（原邏輯）</div>
+      <div class="fe__body">
+        <div class="fe__card">
+          <div class="fe__label">充值方式</div>
+          <div class="fe__tiles" style="grid-template-columns:repeat(2,1fr);">
+            <div class="tile is-sel" style="gap:6px;"><span style="display:inline-block;width:.95rem;height:.95rem;border-radius:4px;background:#16a34a;color:#fff;font-size:.6rem;line-height:.95rem;text-align:center;">✎</span><span style="color:#16a34a;">Payment Services</span></div>
+            <div class="tile">Bank Transfer</div>
+          </div>
+        </div>
+        <div class="fe__card">
+          <div class="fe__label">支付银行</div>
+          <div class="fe__tiles" style="grid-template-columns:repeat(3,1fr);">
+            <div class="tile"><span style="display:inline-block;width:1.5rem;height:1.5rem;border-radius:6px;background:#16a34a;color:#fff;font-size:.8rem;line-height:1.5rem;text-align:center;">✎</span></div>
+            <div class="tile"><span style="display:inline-block;width:1.5rem;height:1.5rem;border-radius:6px;background:#16a34a;color:#fff;font-size:.8rem;line-height:1.5rem;text-align:center;">✎</span></div>
+            <div class="tile"><span style="display:inline-block;width:1.5rem;height:1.5rem;border-radius:6px;background:#16a34a;color:#fff;font-size:.8rem;line-height:1.5rem;text-align:center;">✎</span></div>
+          </div>
+        </div>
+        <p style="font-size:.68rem;color:var(--color-text-soft);margin:0;">入口帶入「Payment Services」預設圖、子通道帶入綠色預設圖；兩個站點皆同一套圖，用戶無法辨識是哪家支付。</p>
+      </div>
+    </div>
+    <div class="reason" style="margin-top:16px;"><strong>改動原因</strong>：展示來源單一化——前台看得到的，一定在本頁找得到來源；後台提醒條負責催配置，前台不再替未完成的配置「補位」。</div>
+  </section>
+
+  <section class="section">
+    <h2>子通道與分頁歸屬規則</h2>
+    <div class="callout callout--info">本節為<strong>既有邏輯</strong>，非本次異動，僅在此完整說明，供撰寫與驗收對照。</div>
+
+    <h3>子通道配置區的出現條件</h3>
+    <table class="tbl">
+      <thead><tr><th style="width:11em;">該方式的子通道數量</th><th>展示配置行為</th><th style="width:14em;">角色定位</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>僅 1 個子通道</td>
+          <td>編輯內<strong>不出現</strong>子通道配置區，不需配置子通道圖片與分類。</td>
+          <td>方式（入口）＝充值的通道</td>
+        </tr>
+        <tr>
+          <td>2 個（含）以上子通道</td>
+          <td>編輯內顯示<strong>所有子通道</strong>，各子通道需分別配置圖片並勾選分類。</td>
+          <td>方式（入口）＝純展示<br>子通道＝充值的通道</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>分頁歸屬的勾選與顯示判斷（僅 WOWGame 生效）</h3>
+    <ul>
+      <li>分頁歸屬可<strong>多選</strong>。</li>
+      <li>方式（入口）與各子通道的分頁歸屬<strong>各自獨立勾選</strong>，互不連動。</li>
+      <li>顯示判斷：子通道要在某分類底下顯示，前提是<strong>方式（入口）也勾選了該分類</strong>——入口未勾選的分類，整組（入口＋子通道）皆不可見。</li>
+    </ul>
+
+    <h4>情境示例（分類為 分類名稱Ａ／分類名稱Ｂ／分類名稱Ｃ；方式底下有子通道1、子通道2）</h4>
+    <table class="tbl tbl--center">
+      <thead><tr><th style="width:9em;">方式（入口）勾選</th><th style="width:12em;">子通道勾選</th><th>前台「分類名稱Ａ」區塊顯示</th><th>前台「分類名稱Ｂ」區塊顯示</th><th>前台「分類名稱Ｃ」區塊顯示</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>分類名稱Ａ</td>
+          <td>子通道1：分類名稱Ａ<br>子通道2：分類名稱Ａ</td>
+          <td>入口＋子通道1＋子通道2</td>
+          <td class="dim">—</td>
+          <td class="dim">—</td>
+        </tr>
+        <tr>
+          <td>分類名稱Ａ</td>
+          <td>子通道1：分類名稱Ａ<br>子通道2：分類名稱Ｂ</td>
+          <td>入口＋子通道1<br>（子通道2 不顯示）</td>
+          <td>無入口，看不到入口＋子通道</td>
+          <td class="dim">—</td>
+        </tr>
+        <tr>
+          <td>分類名稱Ａ</td>
+          <td>子通道1：分類名稱Ｂ<br>子通道2：分類名稱Ｃ</td>
+          <td>看得到入口，底下<strong>無</strong>子通道</td>
+          <td>無入口，看不到入口＋子通道</td>
+          <td>無入口，看不到入口＋子通道</td>
+        </tr>
+        <tr>
+          <td>分類名稱Ａ、分類名稱Ｂ</td>
+          <td>子通道1：分類名稱Ａ<br>子通道2：分類名稱Ｂ</td>
+          <td>入口＋子通道1</td>
+          <td>入口＋子通道2</td>
+          <td class="dim">—</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-size:.72rem;color:var(--color-text-soft);">OKBET 前台未做分類，一頁展示所有入口，以上分頁歸屬勾選對其無作用。</p>
+  </section>
+
+  <section class="section">
+    <h2>③ 前台畫面（調整後預期）</h2>
+    <div class="legend">
+      <span><span class="mk">B</span> 入口圖／子通道圖＝本頁「充值展示配置」設定的圖片</span>
+      <span><span class="mk">C</span> 分頁歸屬 × <span class="mk">E</span> 分頁類型設定 ＝ 分類頁籤（僅 WOWGame）</span>
+      <span><span class="mk">F</span> 標在維護中的入口上：該入口的維護狀態來自「在線充值商戶配置」該筆的狀態（本頁無狀態欄位）</span>
+    </div>
+    <div class="fe-grid">
+      <div class="fe">
+        <div class="fe__head" style="font-size:.95rem;background:#0f172a;color:#fff;">OKBET <span style="font-weight:400;font-size:.68rem;color:#cbd5e1;">錢包 · 充值（無分類頁籤）</span></div>
+        <div class="fe__body">
+          <div class="fe__card">
+            <div class="fe__label">支付方式</div>
+            <div class="fe__tiles">
+              <div class="tile is-sel" style="position:relative;">GCash<span class="mk mk--float" style="right:-8px;top:-8px;">B</span></div>
+              <div class="tile">maya</div>
+              <div class="tile">QR Ph</div>
+              <div class="tile">GrabPay</div>
+              <div class="tile tile--maint" style="position:relative;"><span>FortunePay</span><span class="mk mk--float" style="right:-8px;top:-8px;">F</span></div>
+              <div class="tile">instaPay</div>
+              <div class="tile">Bank Transfer</div>
+              <div class="fe__none" style="grid-column:span 2;">未建立展示配置的渠道類型：不顯示</div>
+            </div>
+          </div>
+          <div class="fe__card">
+            <div class="fe__label">子通道（點選方式後展開）</div>
+            <div class="fe__tiles">
+              <div class="tile" style="position:relative;">BDO<span class="mk mk--float" style="right:-8px;top:-8px;">B</span></div><div class="tile">BPI</div><div class="tile">UnionBank</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fe">
+        <div class="fe__head" style="font-size:.95rem;background:#1d4ed8;color:#fff;">WOWGame <span style="font-weight:400;font-size:.68rem;color:#dbeafe;">存款 H5（有分類頁籤）</span></div>
+        <div class="fe__body">
+          <div class="fe__card">
+            <div class="fe__label">充值方式</div>
+            <div class="fe__tabs">
+              <span class="fe__tab is-on">All</span>
+              <span class="fe__tab">E-Wallets</span>
+              <span class="fe__tab">Banks</span>
+              <span class="mk">C</span><span class="mk">E</span>
+            </div>
+            <div class="fe__tiles">
+              <div class="tile tile--maint" style="position:relative;"><span>GCash</span><span class="mk mk--float" style="right:-8px;top:-8px;">F</span></div>
+              <div class="tile" style="position:relative;">maya<span class="mk mk--float" style="right:-8px;top:-8px;">B</span></div>
+              <div class="tile">QR Ph</div>
+              <div class="tile">GrabPay</div>
+              <div class="tile is-sel">V5pay</div>
+              <div class="tile">instaPay</div>
+              <div class="tile">Bank Transfer</div>
+            </div>
+          </div>
+          <div class="fe__card">
+            <div class="fe__label">支付银行（選中方式的子通道）</div>
+            <div class="fe__tiles">
+              <div class="tile is-sel" style="position:relative;">BDO<span class="mk mk--float" style="right:-8px;top:-8px;">B</span></div><div class="tile">BOC</div><div class="tile">RCBC</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ul style="font-size:.72rem;color:var(--color-text-soft);margin-top:8px;padding-left:1.3em;">
+      <li>子通道呈現的圖片同樣為本頁設定之圖（<span class="mk">B</span>，編輯內的子通道配置區；僅方式有 2 個以上子通道時出現，見上方規則）。</li>
+      <li>子通道清單本身由金流 API 回傳（充值側不做子通道狀態判斷）。</li>
+      <li>方式底下僅一個子通道時，前台不展開清單、點入口直接跳轉。</li>
+    </ul>
+    <div class="rel-links"><strong>關聯頁面</strong>：上游——在線充值商戶配置（入口狀態與承接通道）、充值渠道管理（第一層）；本頁分頁歸屬來源——分頁類型設定頁籤。</div>
+  </section>
+</article>
+
+<!-- ============ 頁 5 提款渠道管理 ============ -->
+<article class="page" id="page-p5">
+  <header class="doc-header">
+    <h1>提款渠道管理 <span class="badge badge--rename">改名</span> <span class="badge badge--logic">狀態邏輯異動</span></h1>
+    <p class="doc-header__meta">菜單順序 5 ｜ 原名：提款方式配置 ｜ 提款第一層（渠道＝方式＝入口）</p>
+  </header>
+
+  <section class="section">
+    <h2>頁面定位</h2>
+    <ul>
+      <li>原名「提款方式配置」，改名為「<strong>提款渠道管理</strong>」。
+        <ul><li>改名原因：明確本頁為渠道層，並與「充值渠道管理」對稱。</li></ul>
+      </li>
+      <li>提款側的渠道清單，與充值渠道管理同性質（金流後台開通才顯示）。</li>
+      <li>出款渠道＝出款方式的前台入口（一筆記錄＝一個入口）。</li>
+      <li>入口圖於本頁設定。</li>
+      <li>渠道與方式為同一筆設定，狀態一次判斷。</li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <h2>① 後台畫面（調整後預期）</h2>
+    <div class="mock">
+      <div class="mock__bar"><span class="mock__crumb">位置 &gt; 提款渠道管理</span></div>
+      <div class="mock__body">
+        <table>
+          <thead>
+            <tr><th>出款方式</th><th>類型值</th><th>排序</th><th style="position:relative;">顯示圖片 <span class="mk">B</span></th><th style="position:relative;">狀態 <span class="mk">A</span></th><th>直連模式</th><th>操作</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>银行卡提款</td><td>bankTransfer</td><td>1</td><td><span class="icon-chip" style="background:#b91c1c;">BankCard</span></td><td><span class="pill pill--ok">正常</span></td><td><span class="pill pill--ok">是</span></td><td><span class="op">编辑</span></td></tr>
+            <tr><td>Paymaya直连提款</td><td>paymayaTransfer</td><td>3</td><td><span class="icon-chip" style="background:#19b56e;">maya</span></td><td><span class="pill pill--ok">正常</span></td><td><span class="pill pill--ok">是</span></td><td><span class="op">编辑</span></td></tr>
+            <tr><td>Gcash直连提款</td><td>eWalletTransfer</td><td>4</td><td><span class="icon-chip" style="background:#2f6fdd;">GCash</span></td><td><span class="pill pill--maint">維護</span></td><td><span class="pill pill--ok">是</span></td><td><span class="op">编辑</span></td></tr>
+            <tr><td>电子钱包提款</td><td>eWalletTransfer</td><td>5</td><td><span class="icon-chip" style="background:#0ea5e9;">E-Wallet</span></td><td><span class="pill pill--ok">正常</span></td><td><span class="pill pill--ok">是</span></td><td><span class="op">编辑</span></td></tr>
+            <tr><td>虚拟币提款</td><td>cryptoTransfer</td><td>20</td><td class="dim">-</td><td><span class="pill pill--off">停用</span></td><td><span class="pill pill--off">否</span></td><td><span class="op">编辑</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="mock__note">
+        <ul style="margin:0;padding-left:1.3em;">
+          <li><span class="mk">A</span> 三態＋文字統一（原「关闭」→「停用」）。</li>
+          <li><span class="mk">B</span> 入口圖於編輯彈窗上傳，<strong>一筆記錄＝一個入口</strong>。</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mock mock--modal">
+      <div class="mock__bar"><span class="mock__crumb">編輯提款配置（彈窗）</span></div>
+      <div class="mock__body">
+        <div class="frow"><label>出款方式:</label><span class="fbox" style="background:#f3f4f6;">银行卡提款（鎖定）</span></div>
+        <div class="frow"><label>类型值:</label><span class="fbox" style="background:#f3f4f6;">bankTransfer（鎖定）</span></div>
+        <div class="frow"><label>排序:</label><span class="fbox" style="max-width:120px;">1</span></div>
+        <div class="frow"><label>状态:</label>
+          <span>
+            <span class="fradio"><span class="dot on"></span>正常</span>
+            <span class="fradio"><span class="dot"></span>維護</span>
+            <span class="fradio"><span class="dot"></span>停用</span>
+            <span class="mk">A</span>
+          </span>
+        </div>
+        <div class="frow"><label>通道模式:</label><span><span class="fradio"><span class="dot on"></span>是</span><span class="fradio"><span class="dot"></span>否</span></span></div>
+        <div class="frow"><label>显示图片(日间):</label><span class="fnote">建議尺寸 232 × 76　[選擇文件]</span></div>
+        <div class="frow"><label>显示图片(夜间):</label><span class="fnote">建議尺寸 232 × 76　[選擇文件]</span></div>
+      </div>
+      <div class="mock__note">狀態改三態；其餘欄位不異動。</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>② 邏輯對照</h2>
+    <div class="compare">
+      <div class="compare__col compare__col--new">
+        <div class="compare__head">新邏輯</div>
+        <div class="compare__body">
+          <ul>
+            <li><span class="mk">A</span> 狀態三態：正常／維護／停用，列表顯示＝表單所選。</li>
+            <li>渠道＝方式一次判斷：
+              <ul>
+                <li>停用 → 入口不顯示。</li>
+                <li>維護 → 入口顯示維護、子通道不顯示。</li>
+                <li>正常 → 往下判斷子通道（提款展示配置）。</li>
+              </ul>
+            </li>
+            <li><span class="mk">B</span> 一筆記錄＝一個前台入口，入口圖於本頁設定。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="compare__col compare__col--old">
+        <div class="compare__head">原邏輯與問題</div>
+        <div class="compare__body">
+          <ul>
+            <li>狀態僅二態（正常／停用），列表顯示「关闭」。</li>
+            <li>入口層無維護態；入口的「維護中」呈現須靠子通道（舊綁定銀行配置）的維護狀態組合推導。</li>
+          </ul>
+          <p class="problem">問題：入口要顯示維護只能繞道子通道組合判斷，規則複雜（需一整份情境表說明）；且用詞不一致。</p>
+        </div>
+      </div>
+    </div>
+    <div class="reason"><strong>改動原因</strong>：入口自身補上維護態後，「入口顯示什麼」由本頁直接決定、「子通道顯示什麼」由提款展示配置決定，兩層各自獨立、不再互相推導。</div>
+  </section>
+
+  <section class="section">
+    <h2>③ 前台畫面（調整後預期）</h2>
+    <ul>
+      <li>兩平台呈現邏輯相同。</li>
+    </ul>
+    <p>渠道三種狀態下的前台呈現如下（以 WOWGame 為範例示意圖；僅為示意，元件無更新調整，維護與各狀態樣式沿用前台既有樣式）。GCash 為襯托、恆為正常，僅示意：</p>
+    <div class="fe-grid" style="grid-template-columns:repeat(auto-fit,minmax(210px,1fr));">
+      <div class="fe">
+        <div class="fe__head"><span class="pill pill--ok">正常</span></div>
+        <div class="fe__body">
+          <div class="fe__card">
+            <div class="fe__label">提款方式</div>
+            <div class="fe__tiles" style="grid-template-columns:repeat(2,1fr);">
+              <div class="tile">GCash</div>
+              <div class="tile is-sel">E-Wallet</div>
+            </div>
+          </div>
+          <div class="fe__card">
+            <div class="fe__label">选择账户</div>
+            <div class="fe__row"><span style="font-weight:700;">JuanCash</span><span class="acct">(******5655)</span></div>
+            <div class="fe__none">＋ 关联一个新账户</div>
+          </div>
+          <p style="font-size:.68rem;color:var(--color-text-soft);margin:0;">入口正常顯示、可點選；點擊後下方顯示關聯帳戶（選擇賬戶）區塊。</p>
+        </div>
+      </div>
+      <div class="fe">
+        <div class="fe__head"><span class="pill pill--maint">維護</span></div>
+        <div class="fe__body">
+          <div class="fe__card">
+            <div class="fe__label">提款方式</div>
+            <div class="fe__tiles" style="grid-template-columns:repeat(2,1fr);">
+              <div class="tile">GCash</div>
+              <div class="tile tile--maint"><span>E-Wallet</span></div>
+            </div>
+          </div>
+          <p style="font-size:.68rem;color:var(--color-text-soft);margin:0;">入口顯示維護、不可點選；下方關聯帳戶區塊直接不顯示。</p>
+        </div>
+      </div>
+      <div class="fe">
+        <div class="fe__head"><span class="pill pill--off">停用</span></div>
+        <div class="fe__body">
+          <div class="fe__card">
+            <div class="fe__label">提款方式</div>
+            <div class="fe__tiles" style="grid-template-columns:repeat(2,1fr);">
+              <div class="tile">GCash</div>
+            </div>
+          </div>
+          <p style="font-size:.68rem;color:var(--color-text-soft);margin:0;">入口直接不顯示，僅剩其他方式；下方無關聯帳戶區塊。</p>
+        </div>
+      </div>
+    </div>
+    <div class="rel-links"><strong>關聯頁面</strong>：下游——提款展示配置（子通道層）、在線提款商戶配置（第三方代付通道）。</div>
+  </section>
+</article>
+
+<!-- ============ 頁 6 在線提款商戶配置 ============ -->
+<article class="page" id="page-p6">
+  <header class="doc-header">
+    <h1>在線提款商戶配置 <span class="badge badge--new">新增頁面</span></h1>
+    <p class="doc-header__meta">菜單順序 6 ｜ 自原「在線支付配置」拆出代付部分 ｜ 與在線充值商戶配置共用底層表</p>
+  </header>
+
+  <section class="section">
+    <h2>頁面定位</h2>
+    <p>配置第三方<strong>提款（代付）</strong>廠商。畫面結構與「在線充值商戶配置」相同（列表＋新增／編輯彈窗），差別在於<strong>本頁僅有代付</strong>。運營要設定第三方提款廠商時，一律來本頁。</p>
+    <div class="callout callout--rule">原「在線支付配置」中所有渠道類型為「（代付）」的既有記錄，全數改顯示於本頁；資料不搬遷——兩頁共用同一張底層表，以渠道類型過濾。</div>
+  </section>
+
+  <section class="section">
+    <h2>① 後台畫面（調整後預期）</h2>
+    <div class="mock">
+      <div class="mock__bar"><span class="mock__crumb">位置 &gt; 在線提款商戶配置</span><span class="mock__btn">新增</span></div>
+      <div class="mock__body">
+        <table>
+          <thead>
+            <tr><th>#</th><th>支付名稱</th><th>支付類型</th><th style="position:relative;">渠道類型 <span class="mk">A</span></th><th>商戶號</th><th>支付層級</th><th>狀態</th><th>幣種</th><th>操作</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1037</td><td>PayCools代付 - GCASH</td><td>PayCools代付 - GCASH</td><td>202（代付）</td><td>92d08d4acd5e43e698c</td><td class="dim">默认层；第二层⋯</td><td><span class="pill pill--off">停用</span></td><td>菲律宾比索</td><td><span class="op">编辑 启用 删除 复制</span></td></tr>
+            <tr><td>777</td><td>coins-instapay</td><td>coins代付</td><td>202（代付）</td><td>ZTR3Z2swxAFr2BEqMr</td><td class="dim">默认层；第二层⋯</td><td><span class="pill pill--ok">正常</span></td><td>菲律宾比索</td><td><span class="op">编辑 停用 删除 复制</span></td></tr>
+            <tr style="text-decoration:line-through;color:#c2c8d0;"><td>1035</td><td>PayCools支付 - GCASH</td><td>PayCools支付 - GCASH</td><td>204 - Gcash（充值）</td><td>92d08d4acd5e43e698c</td><td>默认层；第二层⋯</td><td>正常</td><td>菲律宾比索</td><td>（不出現在本頁）</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="mock__note">
+        <ul style="margin:0;padding-left:1.3em;">
+          <li><span class="mk">A</span> 列表僅出現渠道類型為「（代付）」的記錄，既有代付記錄自動出現在本頁；（充值）記錄不出現在本頁，顯示於「在線充值商戶配置」。</li>
+        </ul>
+      </div>
+    </div>
+    <div class="mock mock--modal">
+      <div class="mock__bar"><span class="mock__crumb">新增／編輯彈窗 — 支付類型</span></div>
+      <div class="mock__body">
+        <div class="frow"><label><span class="req">*</span>支付类型:</label>
+          <span style="flex:1;max-width:320px;">
+            <span class="fbox" style="display:block;max-width:none;">Select <span class="mk" style="float:right;">B</span></span>
+            <span style="display:block;border:1px solid #d1d5db;border-top:0;border-radius:0 0 4px 4px;font-size:.7rem;">
+              <span style="display:block;padding:3px 10px;">MayaMini代付</span>
+              <span style="display:block;padding:3px 10px;background:#f0f7ff;">PalawanPay 提款</span>
+              <span style="display:block;padding:3px 10px;">ClickPay代收(直連)</span>
+              <span style="display:block;padding:3px 10px;" class="strike">PalawanPay 儲值（不出現）</span>
+              <span style="display:block;padding:3px 10px;" class="strike">MayaMiniPay支付（不出現）</span>
+            </span>
+          </span>
+        </div>
+      </div>
+      <div class="mock__note"><span class="mk">B</span> 支付類型下拉<strong>僅出現代付類</strong>選項；新增與編輯皆同樣限制。</div>
+    </div>
+
+    <div class="mock mock--modal">
+      <div class="mock__bar"><span class="mock__crumb">新增／編輯彈窗 — 狀態</span></div>
+      <div class="mock__body">
+        <div class="frow"><label>状态:</label>
+          <span>
+            <span class="fradio"><span class="dot on"></span>正常</span>
+            <span class="fradio"><span class="dot"></span>維護</span>
+            <span class="fradio"><span class="dot"></span>停用</span>
+            <span class="mk">C</span>
+          </span>
+        </div>
+      </div>
+      <div class="mock__note"><span class="mk">C</span> 狀態三態，列表顯示與所選文字一致。</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>② 邏輯對照</h2>
+    <div class="compare">
+      <div class="compare__col compare__col--new">
+        <div class="compare__head">新邏輯</div>
+        <div class="compare__body">
+          <ul>
+            <li><span class="mk">A</span> 本頁僅顯示代付記錄。</li>
+            <li><span class="mk">B</span> 新增／編輯彈窗的支付類型下拉僅出現代付類選項。</li>
+            <li><span class="mk">C</span> 狀態三態文字統一，本頁狀態為該代付通道的狀態。</li>
+            <li>與「在線充值商戶配置」共用同一張底層表，以渠道類型（充值／代付）過濾。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="compare__col compare__col--old">
+        <div class="compare__head">原邏輯與問題</div>
+        <div class="compare__body">
+          <ul>
+            <li>無此頁——代付與儲值混在「在線支付配置」同一列表與同一個下拉裡。</li>
+          </ul>
+          <p class="problem">問題：運營設定第三方提款廠商時，得在充值配置頁面裡找代付選項，動線與命名皆不直覺。</p>
+        </div>
+      </div>
+    </div>
+    <div class="reason"><strong>改動原因</strong>：充提分流，讓「要設第三方充值還是提款廠商」對應到明確的頁面。</div>
+  </section>
+
+  <section class="section">
+    <h2>③ 前台影響</h2>
+    <ul>
+      <li>本頁為代付通道設定，前台無直接對應畫面。</li>
+      <li><strong>本頁狀態不影響前台顯示</strong>：不論商戶狀態為正常／維護／停用，前台提款入口與子通道的顯示皆不受影響（前台分別由「提款渠道管理」「提款展示配置」判斷）。本頁狀態供操作人辨認、管理商戶用。</li>
+      <li>本頁狀態影響的是<strong>提款流程走自動出款或人工出款</strong>：綁定的自動出款商戶狀態為維護／停用時，不走自動出款、回到人工出款（流程見「提款展示配置」的自動出款流程說明）。</li>
+    </ul>
+    <div class="rel-links"><strong>關聯頁面</strong>：共表——在線充值商戶配置；下游關聯——提款展示配置的「自動出款渠道」選項。</div>
+  </section>
+</article>
+
+<!-- ============ 頁 7 提款展示配置 ============ -->
+<article class="page" id="page-p7">
+  <header class="doc-header">
+    <h1>提款展示配置 <span class="badge badge--rename">改名</span> <span class="badge badge--logic">狀態合併三態</span></h1>
+    <p class="doc-header__meta">菜單順序 7 ｜ 原名：綁定銀行配置 ｜ 提款子通道層</p>
+  </header>
+
+  <section class="section">
+    <h2>頁面定位</h2>
+    <ul>
+      <li>原名「綁定銀行配置」，改名為「<strong>提款展示配置</strong>」。
+        <ul><li>改名原因：本頁已是前台提款展示的唯一來源，命名對齊「在線支付展示配置」。</li></ul>
+      </li>
+      <li>各提款入口底下的<strong>子通道</strong>（實際銀行／電子錢包清單：BDO、BPI、GCash、JuanCash⋯）。</li>
+      <li>子通道的名稱、圖示與<strong>狀態</strong>皆於本頁設定。</li>
+      <li><strong>前台提款頁所有顯示內容（含 eWallet 有哪些類型錢包）唯一來源即本頁</strong>。</li>
+      <li>入口圖吃「提款渠道管理」。</li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <h2>① 後台畫面（調整後預期）</h2>
+    <div class="mock">
+      <div class="mock__bar"><span class="mock__crumb">位置 &gt; 提款展示配置</span><span class="mock__btn">新增</span></div>
+      <div class="mock__body">
+        <table>
+          <thead>
+            <tr><th>#</th><th>銀行名稱</th><th>銀行標識</th><th style="position:relative;">渠道圖示 <span class="mk">B</span></th><th style="position:relative;">狀態 <span class="mk">A</span></th><th>銀行種類</th><th style="position:relative;">自動出款商戶 <span class="mk">C</span></th><th>幣種</th><th>操作</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>4136</td><td>BPI</td><td>bpi</td><td><span class="icon-chip" style="background:#a16207;">BPI</span></td><td><span class="pill pill--maint">維護</span></td><td>一般銀行</td><td>FortunePay代付</td><td>菲律宾比索</td><td><span class="op">编辑 删除</span></td></tr>
+            <tr><td>4137</td><td>BDO</td><td>bdo</td><td><span class="icon-chip" style="background:#1e3a8a;">BDO</span></td><td><span class="pill pill--ok">正常</span></td><td>一般銀行</td><td class="dim">-</td><td>菲律宾比索</td><td><span class="op">编辑 删除</span></td></tr>
+            <tr><td>98</td><td>JuanCash</td><td>juancash</td><td><span class="icon-chip" style="background:#0ea5e9;">Juan</span></td><td><span class="pill pill--ok">正常</span></td><td>eWallet</td><td class="dim">-</td><td>菲律宾比索</td><td><span class="op">编辑 删除</span></td></tr>
+            <tr><td>97</td><td>Grabpay</td><td>grabpay</td><td><span class="icon-chip" style="background:#16a34a;">Grab</span></td><td><span class="pill pill--maint">維護</span></td><td>eWallet</td><td class="dim">-</td><td>菲律宾比索</td><td><span class="op">编辑 删除</span></td></tr>
+            <tr><td>96</td><td>OldWallet</td><td>oldwallet</td><td class="dim">-</td><td><span class="pill pill--off">停用</span></td><td>eWallet</td><td class="dim">-</td><td>菲律宾比索</td><td><span class="op">编辑 删除</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="mock__note">
+        <ul style="margin:0;padding-left:1.3em;">
+          <li><span class="mk">A</span> <strong>單一狀態欄</strong>三態（原「狀態＋維護狀態」兩欄合併）。</li>
+          <li><span class="mk">B</span> 子通道圖示。</li>
+          <li><span class="mk">C</span> 原名「自動出款渠道」，改為「自動出款商戶」。</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mock mock--modal">
+      <div class="mock__bar"><span class="mock__crumb">添加銀行配置（彈窗）</span></div>
+      <div class="mock__body">
+        <div class="frow"><label>银行名称:</label><span class="fbox"></span></div>
+        <div class="frow"><label>银行标识:</label><span class="fbox"></span></div>
+        <div class="frow"><label>状态:</label>
+          <span>
+            <span class="fradio"><span class="dot on"></span>正常</span>
+            <span class="fradio"><span class="dot"></span>維護</span>
+            <span class="fradio"><span class="dot"></span>停用</span>
+            <span class="mk">A</span>
+          </span>
+        </div>
+        <div class="frow"><label>币种:</label><span class="fbox">Select</span></div>
+        <div class="frow"><label>银行种类:</label><span><span class="fradio"><span class="dot"></span>eWallet</span><span class="fradio"><span class="dot on"></span>一般银行</span></span></div>
+        <div class="frow"><label>渠道图示(日间):</label><span class="fnote">建議尺寸 56 × 56　[選擇文件]</span></div>
+        <div class="frow"><label>渠道图示(夜间):</label><span class="fnote">建議尺寸 56 × 56　[選擇文件]</span></div>
+        <div class="frow"><label>渠道类型:</label><span class="fbox">Select</span><span class="mk">D</span></div>
+        <div class="frow"><label>自动出款商户:</label><span class="fbox">请选择</span><span class="mk">C</span></div>
+        <div class="frow"><label>银行卡号位数:</label><span class="fnote">最小／最大位数（不異動）</span></div>
+        <div class="frow"><label class="strike">维护状态:</label><span class="fnote strike">正常／维护中（欄位移除，併入狀態）</span></div>
+      </div>
+      <div class="mock__note">
+        <ul style="margin:0;padding-left:1.3em;">
+          <li><span class="mk">A</span> 「状态」「维护状态」兩組 radio 合併為一組三態。</li>
+          <li><span class="mk">D</span> 新增「渠道類型」下拉，來源：在線提款商戶配置的「渠道類型」。</li>
+          <li><span class="mk">C</span> 原「自動出款渠道」改名「自動出款商戶」；下拉來源由在線支付配置的「支付類型」欄位，改為所選渠道類型底下的「支付名稱」（在線提款商戶配置）。</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>② 邏輯對照</h2>
+    <div class="compare">
+      <div class="compare__col compare__col--new">
+        <div class="compare__head">新邏輯</div>
+        <div class="compare__body">
+          <ul>
+            <li><span class="mk">A</span> 單一狀態欄三態，直接對應統一定義：
+              <ul>
+                <li>正常＝顯示、可提款、可綁定。</li>
+                <li>維護＝顯示維護、不可提款、<strong>不影響綁定</strong>。</li>
+                <li>停用＝不顯示、不可新綁、已綁帳戶不顯示。</li>
+              </ul>
+            </li>
+            <li>每一筆子通道各自依自身狀態判斷、互不影響；前提是其入口在「提款渠道管理」為正常（入口維護／停用時，子通道整批不顯示，見規格書 7.2 流程圖）。</li>
+            <li>前台提款顯示唯一來源＝本頁。</li>
+            <li><span class="mk">C</span><span class="mk">D</span> 自動出款設定改為兩層：先選「渠道類型」（D，新增）、再選「自動出款商戶」（C，改名），操作邏輯對齊「在線支付展示配置」。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="compare__col compare__col--old">
+        <div class="compare__head">原邏輯與問題</div>
+        <div class="compare__body">
+          <ul>
+            <li>兩個獨立欄位：「狀態」（正常／停用，控制能否綁定）＋「維護狀態」（正常／維護中，控制能否出款）。</li>
+            <li>「自動出款渠道」下拉直接吃在線支付配置的「支付類型」欄位，與充值側展示配置的操作邏輯不一致。</li>
+            <li>前台呈現由兩欄 2×2 組合＋入口層規則推導，需要一整份「前台提款入口維護狀態說明」情境表才能講清楚，且一般銀行與 eWallet 規則不對稱。</li>
+          </ul>
+          <p class="problem">問題：兩欄組合的判斷成本高，運營須對照文件才能預測前台樣貌；與全站其他頁面的狀態模型不一致。</p>
+        </div>
+      </div>
+    </div>
+    <div class="reason"><strong>改動原因</strong>：與全站三態統一——一個欄位、三個狀態、一套層級判斷。</div>
+  </section>
+
+  <section class="section">
+    <h2>自動出款流程說明（既有邏輯）</h2>
+    <div class="callout callout--info">本節為<strong>既有邏輯</strong>，非本次異動，僅說明子通道設定「自動出款商戶」後，提款申請的流程與提款紀錄的對應呈現。</div>
+
+    <h3>流程</h3>
+    <div class="flow" role="img" aria-label="自動出款流程：先判斷是否綁定自動出款商戶，再判斷商戶狀態，最後判斷自動出款成功與否">
+      <div class="flow__lane">
+        <div class="flow__q">子通道是否綁定<br>自動出款商戶？</div>
+        <div class="flow__branches">
+          <div class="flow__branch">
+            <span class="flow__state">未綁定</span>
+            <div class="flow__result">走<strong>人工出款</strong>；提款紀錄不顯示「出款渠道」「出款備注」</div>
+          </div>
+          <div class="flow__branch">
+            <span class="flow__state">已綁定</span>
+            <div class="flow__next">
+              <div class="flow__lane" style="min-width:0;">
+                <div class="flow__q" style="background:#1d4ed8;">商戶狀態？<br><span style="font-weight:400;font-size:.66rem;">在線提款商戶配置</span></div>
+                <div class="flow__branches">
+                  <div class="flow__branch">
+                    <span class="flow__state"><span class="pill pill--maint">維護</span>／<span class="pill pill--off">停用</span></span>
+                    <div class="flow__result flow__result--stop">不走自動出款，回<strong>人工出款</strong>；提款紀錄不顯示「出款渠道」「出款備注」</div>
+                  </div>
+                  <div class="flow__branch">
+                    <span class="flow__state"><span class="pill pill--ok">正常</span></span>
+                    <div class="flow__next">
+                      <div class="flow__lane" style="min-width:0;">
+                        <div class="flow__q" style="background:#3b82f6;">走自動出款<br>結果？</div>
+                        <div class="flow__branches">
+                          <div class="flow__branch">
+                            <span class="flow__state">成功</span>
+                            <div class="flow__result flow__result--pass">自動出款完成</div>
+                          </div>
+                          <div class="flow__branch">
+                            <span class="flow__state">失敗</span>
+                            <div class="flow__result flow__result--maint">轉<strong>人工出款</strong>；提款紀錄顯示「出款渠道」（使用的自動出款商戶）＋「出款備注」（失敗原因）</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>提款紀錄對應呈現</h3>
+    <div class="mock">
+      <div class="mock__bar"><span class="mock__crumb">財務管理 &gt; 提款記錄（節錄相關欄位）</span></div>
+      <div class="mock__body">
+        <table>
+          <thead><tr><th>訂單號</th><th>出款方式</th><th>具體渠道</th><th style="position:relative;">出款備注 <span class="mk">1</span></th><th style="position:relative;">出款渠道 <span class="mk">1</span></th><th>操作</th></tr></thead>
+          <tbody>
+            <tr><td>W01534559701608603648</td><td>银行卡</td><td>BPI</td><td>暂不支持BPI的出款请求</td><td>FortunePay代付</td><td><span class="op">出款 取回</span></td></tr>
+            <tr><td>W01534558537911541760</td><td>银行卡</td><td>BPI</td><td class="dim" style="position:relative;">- <span class="mk">2</span></td><td class="dim">-</td><td><span class="op">出款 取回</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="mock__note">
+        <ul style="margin:0;padding-left:1.3em;">
+          <li><span class="mk">1</span> 第一筆：有走自動出款但失敗、轉人工出款——「出款渠道」顯示使用的自動出款商戶，「出款備注」顯示失敗原因。</li>
+          <li><span class="mk">2</span> 第二筆：綁定的自動出款商戶在「在線提款商戶配置」被設為維護／停用，未走自動出款、直接人工出款——「出款渠道」「出款備注」皆不顯示。</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>③ 前台畫面（調整後預期）</h2>
+    <ul>
+      <li>兩平台呈現邏輯相同。</li>
+    </ul>
+    <p>子通道三種狀態下的前台呈現如下（以 WOWGame 為範例示意圖；僅為示意，元件無更新調整，維護與各狀態樣式沿用前台既有樣式）。GrabPay 為襯托、恆為正常，示意重點為 <strong>JuanCash</strong>。每個狀態分「已綁定」與「正要綁定」兩個情境框：</p>
+    <h3>情境一：已綁定該子通道帳戶（提款頁）</h3><div class="fe-grid" style="grid-template-columns:repeat(auto-fit,minmax(230px,1fr));"><div class="fe"><div class="fe__head"><span class="pill pill--ok">正常</span></div><div class="fe__body"><div class="fe__card"><div class="fe__label">提款方式</div><div class="fe__tiles" style="grid-template-columns:repeat(2,1fr);"><div class="tile">GCash</div><div class="tile is-sel">E-Wallet</div></div></div><div class="fe__card"><div class="fe__label">选择账户</div><div class="fe__row"><span style="font-weight:700;">GrabPay</span><span class="acct">(******1234)</span></div><div class="fe__row"><span style="font-weight:700;">JuanCash</span><span class="acct">(******5655)</span></div><div class="fe__none">＋ 关联一个新账户</div></div><p style="font-size:.68rem;color:var(--color-text-soft);margin:6px 0 0;">JuanCash 正常顯示、可選擇提款。</p></div></div><div class="fe"><div class="fe__head"><span class="pill pill--maint">維護</span></div><div class="fe__body"><div class="fe__card"><div class="fe__label">提款方式</div><div class="fe__tiles" style="grid-template-columns:repeat(2,1fr);"><div class="tile">GCash</div><div class="tile is-sel">E-Wallet</div></div></div><div class="fe__card"><div class="fe__label">选择账户</div><div class="fe__row"><span style="font-weight:700;">GrabPay</span><span class="acct">(******1234)</span></div><div class="fe__row fe__row--maint"><span style="font-weight:700;">JuanCash</span><span class="acct">(******5655)</span><span style="margin-left:auto;font-size:.62rem;">🛠 維護中</span></div><div class="fe__none">＋ 关联一个新账户</div></div><p style="font-size:.68rem;color:var(--color-text-soft);margin:6px 0 0;">JuanCash 顯示維護、不可選擇提款；其他子通道不受影響。</p></div></div><div class="fe"><div class="fe__head"><span class="pill pill--off">停用</span></div><div class="fe__body"><div class="fe__card"><div class="fe__label">提款方式</div><div class="fe__tiles" style="grid-template-columns:repeat(2,1fr);"><div class="tile">GCash</div><div class="tile is-sel">E-Wallet</div></div></div><div class="fe__card"><div class="fe__label">选择账户</div><div class="fe__row"><span style="font-weight:700;">GrabPay</span><span class="acct">(******1234)</span></div><div class="fe__none">＋ 关联一个新账户</div></div><p style="font-size:.68rem;color:var(--color-text-soft);margin:6px 0 0;">JuanCash 不顯示。</p></div></div></div>
+    <h3>情境二：正要綁定該子通道帳戶（點擊「＋关联一个新账户」後）</h3><div class="fe-grid" style="grid-template-columns:repeat(auto-fit,minmax(230px,1fr));"><div class="fe"><div class="fe__head"><span class="pill pill--ok">正常</span></div><div class="fe__body"><div class="fe__card"><div class="fe__label">选择您的账户</div><div class="fe__row"><span style="font-weight:700;">GrabPay</span></div><div class="fe__row"><span style="font-weight:700;">JuanCash</span></div></div><p style="font-size:.68rem;color:var(--color-text-soft);margin:6px 0 0;">JuanCash 正常顯示、可綁定。</p></div></div><div class="fe"><div class="fe__head"><span class="pill pill--maint">維護</span></div><div class="fe__body"><div class="fe__card"><div class="fe__label">选择您的账户</div><div class="fe__row"><span style="font-weight:700;">GrabPay</span></div><div class="fe__row"><span style="font-weight:700;">JuanCash</span></div></div><p style="font-size:.68rem;color:var(--color-text-soft);margin:6px 0 0;">維護不影響綁定：JuanCash 仍可綁定，綁定後於選擇賬戶顯示維護。</p></div></div><div class="fe"><div class="fe__head"><span class="pill pill--off">停用</span></div><div class="fe__body"><div class="fe__card"><div class="fe__label">选择您的账户</div><div class="fe__row"><span style="font-weight:700;">GrabPay</span></div></div><p style="font-size:.68rem;color:var(--color-text-soft);margin:6px 0 0;">JuanCash 不顯示於關聯清單，無法新綁定。</p></div></div></div>
+    <div class="rel-links"><strong>關聯頁面</strong>：上游——提款渠道管理（入口層，正常時才判斷本層）；「自動出款商戶」選項來源——在線提款商戶配置。</div>
+  </section>
+</article>
+
+<!-- ============ 需隱藏頁面 ============ -->
+<article class="page" id="page-h1">
+  <header class="doc-header">
+    <h1>銀行支付配置 <span class="badge badge--hide">隱藏</span></h1>
+    <p class="doc-header__meta">由最高權限帳號設定「不展示」；功能與資料保留、不刪除，未來可直接恢復展示。</p>
+  </header>
+
+  <section class="section">
+    <h2>背景</h2>
+    <ul>
+      <li>管理平台的銀行轉帳收款帳號（線下人工對帳渠道），每一筆記錄代表一個銀行收款帳戶。</li>
+      <li>本頁原本是一張被充值、提款兩側共同依賴的表：充值側——線下銀行轉帳充值時，前台顯示本頁的收款銀行帳號（戶名／帳號／支行）；提款側——前台提款的銀行清單原本吃本頁。</li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <h2>隱藏原因</h2>
+    <ul>
+      <li>充值側依賴已斷：平台現行僅使用第三方在線支付；前台的「Bank Transfer」入口實為第三方渠道（走在線充值商戶配置＋在線支付展示配置，含其子通道），與本頁無關。</li>
+      <li>提款側依賴已斷：前台銀行／錢包清單已改吃「提款展示配置」（原綁定銀行配置）。</li>
+      <li>雙邊依賴皆斷，本頁已無實際用途，予以隱藏。</li>
+    </ul>
+  </section>
+</article>
+
+<article class="page" id="page-h2">
+  <header class="doc-header">
+    <h1>虛擬幣支付 <span class="badge badge--hide">隱藏</span></h1>
+    <p class="doc-header__meta">由最高權限帳號設定「不展示」；功能與資料保留、不刪除，未來可直接恢復展示。</p>
+  </header>
+
+  <section class="section">
+    <h2>背景</h2>
+    <ul>
+      <li>線下自有帳號充值渠道：管理平台的虛擬幣收款錢包地址，每一筆記錄代表一個收款地址，會員直接轉幣至平台錢包。</li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <h2>隱藏原因</h2>
+    <ul>
+      <li>目前未啟用：平台現行僅使用第三方在線支付。</li>
+      <li>本次不做線下充值的調整，予以隱藏。</li>
+    </ul>
+  </section>
+</article>
+
+<article class="page" id="page-h3">
+  <header class="doc-header">
+    <h1>PayMaya配置 <span class="badge badge--hide">隱藏</span></h1>
+    <p class="doc-header__meta">由最高權限帳號設定「不展示」；功能與資料保留、不刪除，未來可直接恢復展示。</p>
+  </header>
+
+  <section class="section">
+    <h2>背景</h2>
+    <ul>
+      <li>線下自有帳號收款渠道：管理平台自有的 PayMaya 電子錢包收款帳號，會員直接轉帳至平台帳號。</li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <h2>隱藏原因</h2>
+    <ul>
+      <li>目前未啟用：平台現行僅使用第三方在線支付。</li>
+      <li>本次不做線下充值的調整，予以隱藏。</li>
+    </ul>
+    <div class="callout callout--info">前台現有的同名充值入口為<strong>第三方渠道</strong>（資料來自「在線充值商戶配置」＋「在線支付展示配置」），與本頁無關——隱藏不影響前台任何現有入口。</div>
+  </section>
+</article>
+
+<article class="page" id="page-h4">
+  <header class="doc-header">
+    <h1>GrabPay配置 <span class="badge badge--hide">隱藏</span></h1>
+    <p class="doc-header__meta">由最高權限帳號設定「不展示」；功能與資料保留、不刪除，未來可直接恢復展示。</p>
+  </header>
+
+  <section class="section">
+    <h2>背景</h2>
+    <ul>
+      <li>線下自有帳號收款渠道：管理平台自有的 GrabPay 電子錢包收款帳號，會員直接轉帳至平台帳號。</li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <h2>隱藏原因</h2>
+    <ul>
+      <li>目前未啟用：平台現行僅使用第三方在線支付。</li>
+      <li>本次不做線下充值的調整，予以隱藏。</li>
+    </ul>
+    <div class="callout callout--info">前台現有的同名充值入口為<strong>第三方渠道</strong>（資料來自「在線充值商戶配置」＋「在線支付展示配置」），與本頁無關——隱藏不影響前台任何現有入口。</div>
+  </section>
+</article>
+
+<article class="page" id="page-h5">
+  <header class="doc-header">
+    <h1>Gcash配置 <span class="badge badge--hide">隱藏</span></h1>
+    <p class="doc-header__meta">由最高權限帳號設定「不展示」；功能與資料保留、不刪除，未來可直接恢復展示。</p>
+  </header>
+
+  <section class="section">
+    <h2>背景</h2>
+    <ul>
+      <li>線下自有帳號收款渠道：管理平台自有的 Gcash 電子錢包收款帳號，會員直接轉帳至平台帳號。</li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <h2>隱藏原因</h2>
+    <ul>
+      <li>目前未啟用：平台現行僅使用第三方在線支付。</li>
+      <li>本次不做線下充值的調整，予以隱藏。</li>
+    </ul>
+    <div class="callout callout--info">前台現有的同名充值入口為<strong>第三方渠道</strong>（資料來自「在線充值商戶配置」＋「在線支付展示配置」），與本頁無關——隱藏不影響前台任何現有入口。</div>
+  </section>
+</article>
+
+<article class="page" id="page-h6">
+  <header class="doc-header">
+    <h1>E-Wallet配置 <span class="badge badge--hide">隱藏</span></h1>
+    <p class="doc-header__meta">由最高權限帳號設定「不展示」；功能與資料保留、不刪除，未來可直接恢復展示。</p>
+  </header>
+
+  <section class="section">
+    <h2>背景</h2>
+    <ul>
+      <li>線下自有帳號收款渠道：管理泛用電子錢包收款帳號（GrabPay、Gcash、PayMaya 以外的其他電子錢包），會員直接轉帳至平台帳號。</li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <h2>隱藏原因</h2>
+    <ul>
+      <li>目前未啟用：平台現行僅使用第三方在線支付。</li>
+      <li>本次不做線下充值的調整，予以隱藏。</li>
+    </ul>
+    <div class="callout callout--info">前台現有的同名充值入口為<strong>第三方渠道</strong>（資料來自「在線充值商戶配置」＋「在線支付展示配置」），與本頁無關——隱藏不影響前台任何現有入口。</div>
+  </section>
+</article>
+
+</main>
+
+
+</div>
+<script>
+(function(){
+  var buttons = document.querySelectorAll('[data-page-btn]');
+  var pages = document.querySelectorAll('.page');
+
+  function showPage(id, anchor){
+    pages.forEach(function(p){ p.classList.toggle('is-visible', p.id === 'page-' + id); });
+    buttons.forEach(function(b){
+      var active = b.getAttribute('data-page-btn') === id;
+      if (b.classList.contains('nav__item') && !b.hasAttribute('data-anchor')) {
+        b.classList.toggle('is-active', active);
+      }
+    });
+    if (anchor) {
+      var el = document.getElementById(anchor);
+      if (el) { el.scrollIntoView({behavior:'smooth', block:'start'}); }
+    } else {
+      window.scrollTo({top:0});
+    }
+    if (id === 'spec') { highlightAnchor(anchor || null); }
+    else {
+      document.querySelectorAll('[data-anchor]').forEach(function(b){ b.classList.remove('is-active'); });
+    }
+  }
+
+  function highlightAnchor(anchorId){
+    document.querySelectorAll('[data-anchor]').forEach(function(b){
+      b.classList.toggle('is-active', b.getAttribute('data-anchor') === anchorId);
+    });
+  }
+
+  buttons.forEach(function(b){
+    b.addEventListener('click', function(){
+      showPage(b.getAttribute('data-page-btn'), b.getAttribute('data-anchor'));
+    });
+  });
+
+  /* scrollspy for spec page */
+  var specPage = document.getElementById('page-spec');
+  var sections = specPage ? specPage.querySelectorAll('section[id]') : [];
+  window.addEventListener('scroll', function(){
+    if (!specPage.classList.contains('is-visible')) return;
+    var current = null;
+    sections.forEach(function(s){
+      var r = s.getBoundingClientRect();
+      if (r.top <= 120) current = s.id;
+    });
+    if (current) highlightAnchor(current);
+  }, {passive:true});
+
+  showPage('spec');
+})();
+</script>
+
+</body>
+</html>
