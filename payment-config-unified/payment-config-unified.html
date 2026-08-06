@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>充值提款配置統一優化規格書 v1A</title>
+<title>充值提款配置統一優化規格書 v1.1A</title>
 <style>
 /* === Design Tokens === */
 :root{
@@ -241,7 +241,7 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
 <body>
 <div class="layout">
 <nav class="sidebar" aria-label="文件導覽">
-  <div class="nav__brand">充值提款配置統一優化規格書<small>v1A ｜ 2026-08-05</small></div>
+  <div class="nav__brand">充值提款配置統一優化規格書<small>v1.1A ｜ 2026-08-06</small></div>
 
   <div class="nav__group">
     <button class="nav__group-title" data-page-btn="spec">📋 規格書</button>
@@ -259,7 +259,7 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
     <button class="nav__group-title" data-page-btn="p1">⚙️ 充值配置</button>
     <button class="nav__item" data-page-btn="p1">支付層級配置<span class="nav__badge nav__badge--keep">不異動</span></button>
     <button class="nav__item" data-page-btn="p2">充值渠道管理<span class="nav__badge nav__badge--rename">改名</span></button>
-    <button class="nav__item" data-page-btn="p3">在線充值商戶配置<span class="nav__badge nav__badge--rename">改名</span></button>
+    <button class="nav__item" data-page-btn="p3">在線支付商戶配置<span class="nav__badge nav__badge--rename">改名</span></button>
     <button class="nav__item" data-page-btn="p4">在線支付展示配置<span class="nav__badge nav__badge--keep">邏輯異動</span></button>
     <button class="nav__item" data-page-btn="p5">提款渠道管理<span class="nav__badge nav__badge--rename">改名</span></button>
     <button class="nav__item" data-page-btn="p6">在線提款商戶配置<span class="nav__badge nav__badge--new">新增</span></button>
@@ -291,8 +291,8 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
     <h2>1. 文檔資訊</h2>
     <table class="tbl">
       <tbody>
-        <tr><th style="width:9em;">文件版本</th><td>v1A（於 v1.0 基礎上，頁 3／頁 6 更名為「在線充值商戶配置」「在線提款商戶配置」；其餘內容同 v1.0）</td></tr>
-        <tr><th>日期</th><td>2026-08-05</td></tr>
+        <tr><th style="width:9em;">文件版本</th><td>v1.1A（於 v1A 基礎上套用修訂清單 28 處；頁 3／頁 6 命名為「在線支付商戶配置」「在線提款商戶配置」）</td></tr>
+        <tr><th>日期</th><td>2026-08-06</td></tr>
         <tr><th>適用平台</th><td>WOWGame、OKBET（共用同一管理後台）</td></tr>
         <tr>
           <th>本次新增</th>
@@ -301,7 +301,7 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
         <tr>
           <th>本次修改</th>
           <td><ul style="margin:0;padding-left:1.3em;">
-            <li>4 個菜單改名：充值方式配置→充值渠道管理、在線支付配置→在線充值商戶配置、提款方式配置→提款渠道管理、綁定銀行配置→提款展示配置。</li>
+            <li>4 個菜單改名：充值方式配置→充值渠道管理、在線支付配置→在線支付商戶配置、提款方式配置→提款渠道管理、綁定銀行配置→提款展示配置。</li>
             <li>全站狀態統一為「正常／維護／停用」三態，列表顯示文字與所選一致。</li>
             <li>前台充值展示改為只吃「在線支付展示配置」，未配置即不顯示。</li>
             <li>提款展示配置的「狀態＋維護狀態」兩欄合併為單一三態。</li>
@@ -312,11 +312,7 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
           <th>本次刪除／隱藏</th>
           <td>隱藏 6 個菜單（不刪除功能）：銀行支付配置、虛擬幣支付、PayMaya配置、GrabPay配置、Gcash配置、E-Wallet配置。詳見「需隱藏頁面」。</td>
         </tr>
-        <tr>
-          <th>作廢文件</th>
-          <td>「前台提款入口維護狀態說明」之情境表（基於舊「狀態×維護狀態」兩欄組合撰寫），由本文件第 7 章的三態層級判斷取代。</td>
-        </tr>
-      </tbody>
+              </tbody>
     </table>
   </section>
 
@@ -328,7 +324,7 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
     <ol>
       <li><strong>菜單即導覽</strong>：運營看菜單名稱與順序，即可理解各配置頁的定位與相互關係（渠道 → 方式 → 展示，充值與提款兩側對稱）。</li>
       <li><strong>狀態全站統一</strong>：所有層級只有「正常／維護／停用」三態，選什麼、列表就顯示什麼，前台呈現依同一套層級判斷。</li>
-      <li><strong>展示來源單一化</strong>：前台看得到的東西，一定能在後台對應的「展示配置」頁找到來源。</li>
+      <li><strong>展示來源單一化</strong>：前台看得到的東西，一定能在後台找到唯一的來源頁，不再有「配了吃展示配置、沒配吃後端預設」兩套並存的情況。</li>
       <li><strong>充提分流</strong>：第三方儲值與代付分成兩頁配置，運營新增金流廠商時不會再混淆。</li>
     </ol>
   </section>
@@ -362,7 +358,7 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
         <ul>
           <li><span class="seq">1</span>支付層級配置<span class="badge badge--keep">不異動</span></li>
           <li><span class="seq">2</span>充值渠道管理<span class="badge badge--rename">改名</span><span class="old-name">原：充值方式配置</span></li>
-          <li><span class="seq">3</span>在線充值商戶配置<span class="badge badge--rename">改名</span><span class="old-name">原：在線支付配置（僅保留儲值）</span></li>
+          <li><span class="seq">3</span>在線支付商戶配置<span class="badge badge--rename">改名</span><span class="old-name">原：在線支付配置（僅保留儲值）</span></li>
           <li><span class="seq">4</span>在線支付展示配置<span class="badge badge--logic">邏輯異動</span></li>
           <li><span class="seq">5</span>提款渠道管理<span class="badge badge--rename">改名</span><span class="old-name">原：提款方式配置</span></li>
           <li><span class="seq">6</span>在線提款商戶配置<span class="badge badge--new">新增</span><span class="old-name">原在線支付配置之代付拆出</span></li>
@@ -381,11 +377,11 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
       <tbody>
         <tr><td>1</td><td>支付層級配置</td><td>充提共用基礎：會員層級、額度、稽核。所有通道配置的「層設定」來源，須最先完成。</td></tr>
         <tr><td>2</td><td>充值渠道管理</td><td>充值第一層（渠道）：金流後台開通後同步回傳，後台管理狀態。</td></tr>
-        <tr><td>3</td><td>在線充值商戶配置</td><td>充值第二層（方式）：第三方<strong>儲值</strong>通道，操作人配置，本頁僅有充值。</td></tr>
+        <tr><td>3</td><td>在線支付商戶配置</td><td>充值第二層（方式）：第三方<strong>儲值</strong>通道，操作人配置，本頁僅有充值。</td></tr>
         <tr><td>4</td><td>在線支付展示配置</td><td>充值展示層：前台入口圖、子通道圖、分頁歸屬。前台充值展示的唯一來源。</td></tr>
-        <tr><td>5</td><td>提款渠道管理</td><td>提款第一層：出款渠道＝出款方式的前台入口，含入口圖。</td></tr>
+        <tr><td>5</td><td>提款渠道管理</td><td>提款第一層：出款渠道＝出款方式的前台入口。入口圖、入口狀態於本頁設定，為前台提款入口層的唯一來源。</td></tr>
         <tr><td>6</td><td>在線提款商戶配置</td><td>提款第三方<strong>代付</strong>通道：與頁 3 共用底層表，本頁僅有代付。</td></tr>
-        <tr><td>7</td><td>提款展示配置</td><td>提款子通道層：實際銀行／錢包清單、子通道圖、狀態。前台提款展示的唯一來源。</td></tr>
+        <tr><td>7</td><td>提款展示配置</td><td>提款子通道層：實際銀行／錢包清單、子通道圖、狀態。前台提款子通道展示的唯一來源。</td></tr>
       </tbody>
     </table>
   </section>
@@ -396,7 +392,7 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
     <p>全站（充值、提款、各層級）狀態一律只有三態。<strong>表單選項、列表顯示、篩選條件使用完全相同的文字</strong>——選「停用」列表就顯示「停用」，不再出現「關閉」等別名。</p>
     <table class="tbl tbl--center">
       <thead>
-        <tr><th style="width:7em;">管理後台狀態</th><th>前台展示</th><th>充值／提款</th><th>會員是否可綁定</th></tr>
+        <tr><th style="width:7em;">管理後台狀態</th><th>前台展示</th><th>充值／提款</th><th>會員是否可綁定<br><span style="font-weight:400;font-size:.68rem;">（僅適用提款子通道）</span></th></tr>
       </thead>
       <tbody>
         <tr>
@@ -405,7 +401,7 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
         </tr>
         <tr>
           <td><span class="pill pill--maint">維護</span></td>
-          <td>展示，標示維護、不可點選使用</td><td>不可使用</td><td><strong>不影響綁定</strong></td>
+          <td>展示，標示維護</td><td>不可使用</td><td>不影響綁定，仍可綁定</td>
         </tr>
         <tr>
           <td><span class="pill pill--off">停用</span></td>
@@ -435,7 +431,7 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
         <tr>
           <th>充值側</th>
           <td>充值渠道管理<br><span class="dim">獨立判斷</span></td>
-          <td>在線充值商戶配置<br><span class="dim">獨立判斷（展示由頁 4 配置）</span></td>
+          <td>在線支付商戶配置<br><span class="dim">獨立判斷（展示由頁 4 配置）</span></td>
           <td>金流 API 回傳<br><span class="dim">不做狀態判斷</span></td>
         </tr>
         <tr>
@@ -445,7 +441,11 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
         </tr>
       </tbody>
     </table>
-    <p>充值與提款的關鍵差異：<strong>充值子通道由第三方 API 回傳、無法在後台設定狀態</strong>；<strong>提款子通道（實際銀行／錢包）在「提款展示配置」有完整三態</strong>。</p>
+    <p>充值與提款的關鍵差異：</p>
+    <ul>
+      <li>充值側三層各自獨立判斷；提款側的渠道與方式為同一筆記錄（提款渠道管理），第一、二層一次判斷。</li>
+      <li>充值子通道由第三方 API 回傳、無法在後台設定狀態；提款子通道（實際銀行／錢包）在「提款展示配置」有完整三態。</li>
+    </ul>
   </section>
 
   <!-- 6. 充值側規則 -->
@@ -462,12 +462,12 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
       <strong>特別注意</strong>：目前所有第三方在線支付方式均掛在 <code>onlinePayment</code> 這一個渠道下。此渠道一旦停用，前台將<strong>沒有任何可用的充值方式</strong>；設為維護，則所有充值入口一律顯示維護。
     </div>
 
-    <h4>第二層　方式（入口）｜在線充值商戶配置（展示由「在線支付展示配置」承接）</h4>
+    <h4>第二層　方式（入口）｜在線支付商戶配置（展示由「在線支付展示配置」承接）</h4>
     <ul>
-      <li>新增流程：金流後台先配置好 → 於「在線充值商戶配置」選<strong>支付類型</strong>新增（其餘欄位操作人自填）→ 保存後列表<strong>顯示</strong>對應的<strong>渠道類型</strong>（如 326 - dragonpay_qrph，為金流後台既定對應）→ 再至「在線支付展示配置」選該渠道類型＋廠商、配置前台圖片，<strong>配置後前台才會展示</strong>。</li>
-      <li>同一渠道類型可在「在線充值商戶配置」建立<strong>多筆</strong>（多家金流商承做同一種支付）；但「在線支付展示配置」中一個渠道類型<strong>只能建立一筆</strong>展示設定，且指定的廠商必須是同渠道類型底下的配置。</li>
-      <li>前台一個渠道類型只會出現一個入口；實際承接訂單的廠商由展示設定的「顯示商戶」指定（未指定＝取狀態正常的排序最小一筆）。</li>
-      <li>入口的狀態吃「在線充值商戶配置」的狀態；「在線支付展示配置」本身無狀態、只負責展示。</li>
+      <li>新增流程：金流後台先配置好 → 於「在線支付商戶配置」選<strong>支付類型</strong>新增（其餘欄位操作人自填）→ 保存後列表<strong>顯示</strong>對應的<strong>渠道類型</strong>（如 326 - dragonpay_qrph，為金流後台既定對應）→ 再至「在線支付展示配置」選該渠道類型＋商戶、配置前台圖片，<strong>配置後前台才會展示</strong>。</li>
+      <li>同一渠道類型可在「在線支付商戶配置」建立<strong>多筆</strong>（多家金流商承做同一種支付）；但「在線支付展示配置」中一個渠道類型<strong>只能建立一筆</strong>展示設定，且指定的商戶必須是同渠道類型底下的配置。</li>
+      <li>前台一個渠道類型只會出現一個入口；實際承接訂單的商戶由展示設定的「顯示商戶」指定；未指定時，取當下該渠道類型底下狀態正常且排序最小的一筆商戶綁定。</li>
+      <li>入口的狀態吃「在線支付商戶配置」中承接商戶那一筆的狀態；同渠道類型下其他商戶的狀態不影響入口呈現。「在線支付展示配置」本身無狀態、只負責展示。</li>
     </ul>
 
     <h4>第三層　子通道（金流 API 回傳）</h4>
@@ -494,7 +494,7 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
             <span class="flow__state"><span class="pill pill--ok">正常</span></span>
             <div class="flow__next">
               <div class="flow__lane" style="min-width:0;">
-                <div class="flow__q" style="background:#1d4ed8;">方式狀態？<br><span style="font-weight:400;font-size:.66rem;">在線充值商戶配置</span></div>
+                <div class="flow__q" style="background:#1d4ed8;">方式狀態？<br><span style="font-weight:400;font-size:.66rem;">在線支付商戶配置</span></div>
                 <div class="flow__branches">
                   <div class="flow__branch">
                     <span class="flow__state"><span class="pill pill--off">停用</span></span>
@@ -516,7 +516,7 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
       </div>
     </div>
 
-    <h3>6.3 情境穷舉表</h3>
+    <h3>6.3 情境窮舉表</h3>
     <table class="tbl tbl--center">
       <thead>
         <tr>
@@ -549,11 +549,12 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
       <li><strong>出款渠道＝出款方式的前台入口</strong>（一筆記錄＝一個入口）；入口圖於本頁設定。</li>
       <li>清單來源同樣為金流後台開通後才顯示；管理後台可上傳入口圖、調整狀態（三態）。</li>
       <li>提款側渠道與方式為<strong>同一筆設定</strong>，狀態一次判斷（方式狀態隨渠道）。</li>
+      <li>前台有哪些提款方式（Bank Card、eWallet 等），以及各入口顯示的入口圖與入口狀態，唯一來源即本頁。</li>
     </ul>
 
     <h4>第三方代付通道｜在線提款商戶配置</h4>
     <ul>
-      <li>原「在線支付配置」中的<strong>代付</strong>記錄全數移至本頁顯示；與「在線充值商戶配置」共用同一張底層表，以渠道類型（充值／代付）區分。</li>
+      <li>原「在線支付配置」中的<strong>代付</strong>記錄全數移至本頁顯示；與「在線支付商戶配置」共用同一張底層表，以渠道類型（充值／代付）區分。</li>
       <li>本頁僅有代付：新增與編輯彈窗的支付類型下拉僅出現代付類選項。</li>
       <li>本頁狀態<strong>不參與前台顯示判斷</strong>，僅影響提款流程走自動出款或人工出款（商戶維護／停用時不走自動出款、回人工出款）。</li>
     </ul>
@@ -561,7 +562,7 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
     <h4>第三層　子通道｜提款展示配置</h4>
     <ul>
       <li>各入口方式底下的子通道（實際銀行／錢包清單，如 BDO、BPI、GCash、JuanCash），名稱、子通道圖示與<strong>狀態</strong>皆於本頁設定。</li>
-      <li>前台提款頁的所有顯示內容（含 eWallet 有哪些類型錢包）唯一來源即本頁。</li>
+      <li>前台提款頁的子通道層顯示內容（Bank Card 下有哪些銀行、eWallet 下有哪些類型錢包）唯一來源即本頁。</li>
       <li>子通道三態：停用 → 該子通道不顯示；維護 → 該子通道顯示維護；正常 → 正常顯示。</li>
     </ul>
 
@@ -604,7 +605,7 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
       </div>
     </div>
 
-    <h3>7.3 情境穷舉表</h3>
+    <h3>7.3 情境窮舉表</h3>
     <table class="tbl tbl--center">
       <thead>
         <tr>
@@ -626,15 +627,16 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
     <h2>8. 其他既定原則</h2>
     <h3>8.1 操作注意事項（不做系統判斷）</h3>
     <ul>
-      <li><strong>同渠道類型多家金流商的切換</strong>：排序最小（或展示配置指定）的承接廠商若維護／停用，系統<strong>不會</strong>自動輪替至其他廠商，需自行注意並手動切換「顯示商戶」或調整排序。</li>
+      <li><strong>同渠道類型多家金流商的切換</strong>：承接商戶於展示設定保存時即固定（指定與未指定皆同）；其後承接商戶維護／停用，系統<strong>不會</strong>自動輪替至其他商戶，需自行注意並手動切換「顯示商戶」。</li>
     </ul>
     <h3>8.2 用詞統一</h3>
     <ul>
       <li>狀態文案全站統一為「正常／維護／停用」：編輯表單選了什麼，列表與篩選就顯示相同的文字，廢除「關閉」等別名。</li>
+      <li>改動範圍說明：狀態文案統一（「關閉」→「停用」等）僅調整前端顯示文字，不改變既有資料的狀態值；渠道層由二態補為三態，屬新增「維護」狀態值，非文案調整。</li>
     </ul>
     <h3>8.3 技術依賴</h3>
     <ul>
-      <li>「在線充值商戶配置」與「在線提款商戶配置」共用同一張底層表，以<strong>渠道類型（充值／代付）</strong>過濾分頁。支付類型清單 API 須於<strong>列表階段即回傳渠道類型</strong>（而非保存後才回傳），兩頁的支付類型下拉才能各自過濾出儲值／代付選項。</li>
+      <li>「在線支付商戶配置」與「在線提款商戶配置」共用同一張底層表，以<strong>渠道類型（充值／代付）</strong>過濾分頁。支付類型清單 API 須於<strong>列表階段即回傳渠道類型</strong>（而非保存後才回傳），兩頁的支付類型下拉才能各自過濾出儲值／代付選項。</li>
     </ul>
     <h3>8.4 平台差異</h3>
     <p>「在線支付展示配置」含兩個頁籤：充值展示配置、分頁類型設定。分頁類型於「分頁類型設定」建立後，在充值展示配置的「分頁歸屬」皆可勾選；<strong>勾選後僅 WOWGame 生效</strong>。兩平台差異如下：</p>
@@ -645,9 +647,19 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
         <tr><td><strong>OKBET</strong></td><td>生效</td><td>不生效</td><td style="text-align:left;">前台未做分類，一頁展示所有入口，勾選的分頁歸屬對其無作用</td></tr>
       </tbody>
     </table>
+    <h3>8.5 清單空狀態</h3>
+    <ul>
+      <li>充值側：渠道下所有方式（入口）皆停用、或皆未建立展示配置時，前台充值頁面內的「充值方式」區塊內，無任何可點擊的入口圖。</li>
+      <li>提款側：提款渠道管理下所有入口皆停用時，前台提款頁面內的「提款方式」區塊內，無任何可點擊的入口圖。</li>
+      <li>注意：提款側入口狀態不由子通道反推——即使某入口底下的子通道全部停用或清空，也不影響「提款渠道管理」的入口設定，入口仍照自身狀態顯示。</li>
+    </ul>
+    <h3>8.6 生產環境上線方式</h3>
+    <ul>
+      <li>先上後台，由操作人完成配置（含各渠道類型的展示配置）後，再上前台。</li>
+    </ul>
   </section>
 
-  <footer class="doc-footer">充值提款配置統一優化規格書 v1A ｜ 2026-08-05 ｜ 對應原型：本文件「充值配置」各頁刻版</footer>
+  <footer class="doc-footer">充值提款配置統一優化規格書 v1.1A ｜ 2026-08-06 ｜ 對應原型：本文件「充值配置」各頁刻版</footer>
 </article>
 
 <!-- ============ 頁 1 支付層級配置 ============ -->
@@ -661,7 +673,7 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
     <h2>頁面定位</h2>
     <p>設定會員的分層。支付層級配置用於管理會員的充值及提款分層規則，每個層級可設定不同的存提款限額與流水稽核規則。所有充值及提款通道的「層設定」欄位均來自此處設定的層級。修改或刪除層級會影響所有套用該層級的通道與會員，操作前請務必確認影響範圍。</p>
     <div class="callout callout--info">本頁<strong>不改動</strong>。</div>
-    <div class="rel-links"><strong>關聯頁面</strong>：所有通道配置頁（在線充值商戶配置、在線提款商戶配置等）的「層設定」下拉來源。</div>
+    <div class="rel-links"><strong>關聯頁面</strong>：所有通道配置頁（在線支付商戶配置、在線提款商戶配置等）的「層設定」下拉來源。</div>
   </section>
 </article>
 
@@ -814,21 +826,21 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
         </div>
       </div>
     </div>
-    <div class="rel-links"><strong>關聯頁面</strong>：下游——在線充值商戶配置（第二層）、在線支付展示配置（展示層）。</div>
+    <div class="rel-links"><strong>關聯頁面</strong>：下游——在線支付商戶配置（第二層）、在線支付展示配置（展示層）。</div>
   </section>
 </article>
 
-<!-- ============ 頁 3 在線充值商戶配置 ============ -->
+<!-- ============ 頁 3 在線支付商戶配置 ============ -->
 <article class="page" id="page-p3">
   <header class="doc-header">
-    <h1>在線充值商戶配置 <span class="badge badge--rename">改名</span> <span class="badge badge--logic">拆分：僅保留儲值</span></h1>
+    <h1>在線支付商戶配置 <span class="badge badge--rename">改名</span> <span class="badge badge--logic">拆分：僅保留儲值</span></h1>
     <p class="doc-header__meta">菜單順序 3 ｜ 原名：在線支付配置 ｜ 充值第二層（方式）</p>
   </header>
 
   <section class="section">
     <h2>頁面定位</h2>
     <ul>
-      <li>原名「在線支付配置」，改名為「<strong>在線充值商戶配置</strong>」。
+      <li>原名「在線支付配置」，改名為「<strong>在線支付商戶配置</strong>」。
         <ul><li>改名原因：本頁每筆記錄為一家金流商戶（商戶號、密鑰等），與「在線支付展示配置」的「顯示商戶」、「提款展示配置」的「自動出款商戶」用詞對應。</li></ul>
       </li>
       <li>配置第三方<strong>儲值</strong>通道。</li>
@@ -842,7 +854,7 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
   <section class="section">
     <h2>① 後台畫面（調整後預期）</h2>
     <div class="mock">
-      <div class="mock__bar"><span class="mock__crumb">位置 &gt; 在線充值商戶配置</span><span class="mock__btn">新增</span></div>
+      <div class="mock__bar"><span class="mock__crumb">位置 &gt; 在線支付商戶配置</span><span class="mock__btn">新增</span></div>
       <div class="mock__body">
         <table>
           <thead>
@@ -897,6 +909,16 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
       </div>
       <div class="mock__note"><span class="mk">B</span> 狀態三態，列表顯示與所選文字一致。</div>
     </div>
+
+    <div class="mock mock--modal">
+      <div class="mock__bar"><span class="mock__crumb">刪除商戶 — 已綁定提示（彈窗）</span></div>
+      <div class="mock__body">
+        <p style="font-size:.8rem;font-weight:700;margin-bottom:8px;">提示</p>
+        <p style="font-size:.74rem;">⚠ 該商戶已綁定於「在線支付展示配置」，無法刪除。請先至該頁解除綁定（變更顯示商戶）或刪除對應展示設定後，再進行刪除。</p>
+        <p style="text-align:right;margin:10px 0 0;"><span class="mock__btn">确定</span></p>
+      </div>
+      <div class="mock__note"><span class="mk">D</span> 點擊「删除」時判斷該商戶是否已被「在線支付展示配置」綁定為顯示商戶（僅判斷是否被綁定，不論展示設定內容）；未綁定照現行流程刪除，已綁定跳此提示、不允許刪除。</div>
+    </div>
   </section>
 
   <section class="section">
@@ -907,8 +929,9 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
         <div class="compare__body">
           <ul>
             <li><span class="mk">A</span> 列表僅顯示渠道類型為「（充值）」的記錄；頁面即代表「第三方儲值通道」。</li>
-            <li><span class="mk">B</span> 狀態三態文字統一，本頁狀態＝前台入口狀態（第二層判斷）。</li>
+            <li><span class="mk">B</span> 狀態三態文字統一；前台入口狀態＝本頁中承接商戶那一筆的狀態（第二層判斷）。</li>
             <li><span class="mk">C</span> 新增／編輯彈窗的支付類型下拉僅出現儲值類選項——從入口防呆，不可能在本頁配出代付。</li>
+            <li><span class="mk">D</span> 刪除防呆：商戶已被「在線支付展示配置」綁定為顯示商戶時不可刪除，需先解除綁定或刪除對應展示設定。</li>
           </ul>
         </div>
       </div>
@@ -919,6 +942,7 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
             <li>儲值與代付<strong>混在同一列表</strong>（渠道類型欄同時出現「（充值）」與「（代付）」）。</li>
             <li>新增彈窗下拉混列儲值與代付選項（如「PalawanPay 儲值」「PalawanPay 提款」並列）。</li>
             <li>狀態列表顯示「关闭」與表單「停用」不一致。</li>
+            <li>刪除無綁定檢查：已被綁定為顯示商戶的商戶可直接刪除，刪除後展示配置的「顯示商戶」殘留原商戶代碼、前台該入口不顯示。</li>
           </ul>
         </div>
       </div>
@@ -1000,10 +1024,10 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
         </ul>
       </li>
       <li>一個渠道類型只能綁定一個商戶，等同一個前台入口。
-        <ul><li>補充說明：「在線充值商戶配置」中，同一渠道類型可以設置多個商戶。</li></ul>
+        <ul><li>補充說明：「在線支付商戶配置」中，同一渠道類型可以設置多個商戶。</li></ul>
       </li>
       <li>此處對應前台充值頁的入口區塊，前台稱「支付方式」。</li>
-      <li>本頁無狀態欄位，僅負責展示（入口狀態由「充值渠道管理」與「在線充值商戶配置」逐層判斷）。</li>
+      <li>本頁無狀態欄位，僅負責展示（入口狀態由「充值渠道管理」與「在線支付商戶配置」逐層判斷）。</li>
     </ul>
     <div class="callout callout--info"><strong>平台差異</strong>
       <ul style="margin:4px 0 0;padding-left:1.3em;">
@@ -1024,8 +1048,8 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
         </div>
         <div style="background:var(--color-warn-bg);border:1px solid var(--color-warn-line);border-radius:6px;padding:8px 12px;font-size:.7rem;margin-bottom:12px;position:relative;">
           <span class="mk mk--float" style="left:-10px;top:-10px;">A</span>
-          ⚠ 有 1 個已啟用在線支付配置對應的渠道類型尚未建立充值展示配置，請及時配置：<br>
-          渠道類型 320 - fortunepayFourth（在線支付配置(按排序)：FortunePay四方支付）
+          ⚠ 有 1 個已啟用<strong style="color:var(--color-primary);">「在線支付商戶配置」</strong>對應的渠道類型尚未建立充值展示配置，請及時配置：<br>
+          渠道類型 320 - fortunepayFourth（<strong style="color:var(--color-primary);">「在線支付商戶配置」</strong>(按排序)：FortunePay四方支付）
         </div>
         <span class="mock__btn">新增</span>
         <table style="margin-top:10px;">
@@ -1035,7 +1059,7 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
           <tbody>
             <tr><td>204</td><td>Gcash（充值）</td><td>Gcash-中文</td><td><span class="icon-chip" style="background:#2f6fdd;">GCash</span></td><td>all,ewallet</td><td>100</td><td>V5Pay充值 - GCash</td><td><span class="op">编辑 删除</span></td></tr>
             <tr><td>206</td><td>PayMaya（充值）</td><td>maya-中文</td><td><span class="icon-chip" style="background:#19b56e;">maya</span></td><td>all,ewallet</td><td>99</td><td>PayMaya(PayMaya)-QATest</td><td><span class="op">编辑 删除</span></td></tr>
-            <tr><td>326</td><td>dragonpay_qrph（充值）</td><td>QRPH-中文</td><td><span class="icon-chip" style="background:#e8452c;">QR Ph</span></td><td>all,ewallet</td><td>98</td><td>dragonpay-qrph 扫码支付</td><td><span class="op">编辑 删除</span></td></tr>
+            <tr><td>326</td><td>dragonpay_qrph（充值）</td><td>QRPH-中文</td><td><span class="icon-chip" style="background:#e8452c;">QR Ph</span></td><td>all,ewallet</td><td>98</td><td><span style="text-decoration:line-through;color:#c2c8d0;">1041</span> <span class="mk">G</span></td><td><span class="op">编辑 删除</span></td></tr>
             <tr><td>315</td><td>BankTransfer（充值）</td><td>BankTransfer</td><td><span class="icon-chip" style="background:#111827;">Bank</span></td><td>all,ewallet,bank</td><td>0</td><td>PayCools支付-BankTransfer</td><td><span class="op">编辑 删除</span></td></tr>
             <tr><td>212</td><td>FortunePay（充值）</td><td>FortunePay-ZH</td><td><span class="icon-chip" style="background:#f59e0b;">FP</span></td><td>all,ewallet,bank</td><td>95</td><td>未指定(取排序第一筆)</td><td><span class="op">编辑 删除</span></td></tr>
           </tbody>
@@ -1043,10 +1067,11 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
       </div>
       <div class="mock__note">
         <ul style="margin:0;padding-left:1.3em;">
-          <li><span class="mk">A</span> 未配置提醒條保留不改。</li>
+          <li><span class="mk">A</span> 未配置提醒條機制保留不改；後台提示文案內的頁面名稱由「在線支付配置」改為「在線支付商戶配置」，文字改為藍色並用「」標示。</li>
           <li><span class="mk">B</span> 入口圖／子通道圖於編輯內設定。</li>
           <li><span class="mk">C</span> 分頁歸屬勾選來源＝分頁類型設定頁籤。</li>
-          <li><span class="mk">D</span> 指定承接廠商，未指定＝取狀態正常的排序最小一筆。</li>
+          <li><span class="mk">D</span> 指定承接商戶；未指定＝取當下狀態正常的排序最小一筆綁定，保存後即固定、不隨商戶狀態變動更新。</li>
+          <li><span class="mk">G</span> 示意原邏輯問題：綁定的商戶遭刪除後，本欄殘留商戶代碼。因「在線支付商戶配置」的刪除已新增綁定檢查（見該頁），此情況不應再出現。</li>
         </ul>
       </div>
     </div>
@@ -1100,6 +1125,10 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
             <li>未配置時由後端回傳預設值：入口帶「Payment Services」圖、子通道帶綠色預設圖，兩個站點同一套圖。</li>
           </ul>
           <p class="problem">問題：展示來源兩套並存（配了吃本頁、沒配吃後端預設），運營無法從後台判斷前台實際樣貌；預設圖無辨識度，用戶不知道是哪家支付，前台觀感差。</p>
+          <ul>
+            <li><span class="mk">G</span> 原綁定商戶若在「在線支付商戶配置」被刪除，顯示商戶會殘留原商戶代碼（如 1041），前台該入口不顯示；本頁此邏輯不異動。</li>
+          </ul>
+          <p class="problem">問題：操作人從列表僅見一組代碼，無法直觀判斷該支付已不在前台展示。故「在線支付商戶配置」的刪除已新增綁定檢查（見該頁），此情況不會再出現。</p>
         </div>
       </div>
     </div>
@@ -1198,7 +1227,7 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
     <div class="legend">
       <span><span class="mk">B</span> 入口圖／子通道圖＝本頁「充值展示配置」設定的圖片</span>
       <span><span class="mk">C</span> 分頁歸屬 × <span class="mk">E</span> 分頁類型設定 ＝ 分類頁籤（僅 WOWGame）</span>
-      <span><span class="mk">F</span> 標在維護中的入口上：該入口的維護狀態來自「在線充值商戶配置」該筆的狀態（本頁無狀態欄位）</span>
+      <span><span class="mk">F</span> 該入口的維護狀態來自「在線支付商戶配置」中承接商戶那一筆的狀態</span>
     </div>
     <div class="fe-grid">
       <div class="fe">
@@ -1260,7 +1289,13 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
       <li>子通道清單本身由金流 API 回傳（充值側不做子通道狀態判斷）。</li>
       <li>方式底下僅一個子通道時，前台不展開清單、點入口直接跳轉。</li>
     </ul>
-    <div class="rel-links"><strong>關聯頁面</strong>：上游——在線充值商戶配置（入口狀態與承接通道）、充值渠道管理（第一層）；本頁分頁歸屬來源——分頁類型設定頁籤。</div>
+    <div class="rel-links"><strong>關聯頁面</strong>：
+      <ul style="margin:4px 0 0;padding-left:1.3em;">
+        <li>上游——充值渠道管理（第一層）。</li>
+        <li>上游——在線支付商戶配置（承接商戶，入口狀態吃承接那一筆）。</li>
+        <li>本頁分頁歸屬來源——分頁類型設定頁籤。</li>
+      </ul>
+    </div>
   </section>
 </article>
 
@@ -1424,12 +1459,12 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
 <article class="page" id="page-p6">
   <header class="doc-header">
     <h1>在線提款商戶配置 <span class="badge badge--new">新增頁面</span></h1>
-    <p class="doc-header__meta">菜單順序 6 ｜ 自原「在線支付配置」拆出代付部分 ｜ 與在線充值商戶配置共用底層表</p>
+    <p class="doc-header__meta">菜單順序 6 ｜ 自原「在線支付配置」拆出代付部分 ｜ 與在線支付商戶配置共用底層表</p>
   </header>
 
   <section class="section">
     <h2>頁面定位</h2>
-    <p>配置第三方<strong>提款（代付）</strong>廠商。畫面結構與「在線充值商戶配置」相同（列表＋新增／編輯彈窗），差別在於<strong>本頁僅有代付</strong>。運營要設定第三方提款廠商時，一律來本頁。</p>
+    <p>配置第三方<strong>提款（代付）</strong>廠商。畫面結構與「在線支付商戶配置」相同（列表＋新增／編輯彈窗），差別在於<strong>本頁僅有代付</strong>。運營要設定第三方提款廠商時，一律來本頁。</p>
     <div class="callout callout--rule">原「在線支付配置」中所有渠道類型為「（代付）」的既有記錄，全數改顯示於本頁；資料不搬遷——兩頁共用同一張底層表，以渠道類型過濾。</div>
   </section>
 
@@ -1451,7 +1486,7 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
       </div>
       <div class="mock__note">
         <ul style="margin:0;padding-left:1.3em;">
-          <li><span class="mk">A</span> 列表僅出現渠道類型為「（代付）」的記錄，既有代付記錄自動出現在本頁；（充值）記錄不出現在本頁，顯示於「在線充值商戶配置」。</li>
+          <li><span class="mk">A</span> 列表僅出現渠道類型為「（代付）」的記錄，既有代付記錄自動出現在本頁；（充值）記錄不出現在本頁，顯示於「在線支付商戶配置」。</li>
         </ul>
       </div>
     </div>
@@ -1500,7 +1535,7 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
             <li><span class="mk">A</span> 本頁僅顯示代付記錄。</li>
             <li><span class="mk">B</span> 新增／編輯彈窗的支付類型下拉僅出現代付類選項。</li>
             <li><span class="mk">C</span> 狀態三態文字統一，本頁狀態為該代付通道的狀態。</li>
-            <li>與「在線充值商戶配置」共用同一張底層表，以渠道類型（充值／代付）過濾。</li>
+            <li>與「在線支付商戶配置」共用同一張底層表，以渠道類型（充值／代付）過濾。</li>
           </ul>
         </div>
       </div>
@@ -1524,7 +1559,7 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
       <li><strong>本頁狀態不影響前台顯示</strong>：不論商戶狀態為正常／維護／停用，前台提款入口與子通道的顯示皆不受影響（前台分別由「提款渠道管理」「提款展示配置」判斷）。本頁狀態供操作人辨認、管理商戶用。</li>
       <li>本頁狀態影響的是<strong>提款流程走自動出款或人工出款</strong>：綁定的自動出款商戶狀態為維護／停用時，不走自動出款、回到人工出款（流程見「提款展示配置」的自動出款流程說明）。</li>
     </ul>
-    <div class="rel-links"><strong>關聯頁面</strong>：共表——在線充值商戶配置；下游關聯——提款展示配置的「自動出款渠道」選項。</div>
+    <div class="rel-links"><strong>關聯頁面</strong>：共表——在線支付商戶配置；下游關聯——提款展示配置的「自動出款商戶」選項。</div>
   </section>
 </article>
 
@@ -1539,12 +1574,12 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
     <h2>頁面定位</h2>
     <ul>
       <li>原名「綁定銀行配置」，改名為「<strong>提款展示配置</strong>」。
-        <ul><li>改名原因：本頁已是前台提款展示的唯一來源，命名對齊「在線支付展示配置」。</li></ul>
+        <ul><li>改名原因：本頁已是前台提款子通道展示的唯一來源，命名對齊「在線支付展示配置」。</li></ul>
       </li>
       <li>各提款入口底下的<strong>子通道</strong>（實際銀行／電子錢包清單：BDO、BPI、GCash、JuanCash⋯）。</li>
       <li>子通道的名稱、圖示與<strong>狀態</strong>皆於本頁設定。</li>
-      <li><strong>前台提款頁所有顯示內容（含 eWallet 有哪些類型錢包）唯一來源即本頁</strong>。</li>
-      <li>入口圖吃「提款渠道管理」。</li>
+      <li>本頁為前台提款頁「子通道層」的唯一來源：Bank Card 下有哪些銀行、eWallet 下有哪些類型錢包，以及各子通道的名稱、圖示、狀態，全部只吃本頁。</li>
+      <li>入口層不在本頁：前台有哪些提款方式（Bank Card、eWallet 等），以及各入口的入口圖與入口狀態，來源為「提款渠道管理」。</li>
     </ul>
   </section>
 
@@ -1600,7 +1635,7 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
       <div class="mock__note">
         <ul style="margin:0;padding-left:1.3em;">
           <li><span class="mk">A</span> 「状态」「维护状态」兩組 radio 合併為一組三態。</li>
-          <li><span class="mk">D</span> 新增「渠道類型」下拉，來源：在線提款商戶配置的「渠道類型」。</li>
+          <li><span class="mk">D</span> 新增「渠道類型」下拉，來源：在線提款商戶配置的「渠道類型」。切換渠道類型時，已選的「自動出款商戶」自動清空、需重新選擇。</li>
           <li><span class="mk">C</span> 原「自動出款渠道」改名「自動出款商戶」；下拉來源由在線支付配置的「支付類型」欄位，改為所選渠道類型底下的「支付名稱」（在線提款商戶配置）。</li>
         </ul>
       </div>
@@ -1622,7 +1657,7 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
               </ul>
             </li>
             <li>每一筆子通道各自依自身狀態判斷、互不影響；前提是其入口在「提款渠道管理」為正常（入口維護／停用時，子通道整批不顯示，見規格書 7.2 流程圖）。</li>
-            <li>前台提款顯示唯一來源＝本頁。</li>
+            <li>前台提款子通道顯示唯一來源＝本頁。</li>
             <li><span class="mk">C</span><span class="mk">D</span> 自動出款設定改為兩層：先選「渠道類型」（D，新增）、再選「自動出款商戶」（C，改名），操作邏輯對齊「在線支付展示配置」。</li>
           </ul>
         </div>
@@ -1640,6 +1675,21 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
       </div>
     </div>
     <div class="reason"><strong>改動原因</strong>：與全站三態統一——一個欄位、三個狀態、一套層級判斷。</div>
+  </section>
+
+  <section class="section">
+    <h2>既有資料狀態轉換</h2>
+    <p>「狀態」「維護狀態」兩欄合併為單一三態時，既有資料依下表轉換：</p>
+    <table class="tbl tbl--center" style="max-width:560px;">
+      <thead><tr><th>舊「狀態」</th><th>舊「維護狀態」</th><th>新「狀態」</th></tr></thead>
+      <tbody>
+        <tr><td>正常</td><td>正常</td><td><span class="pill pill--ok">正常</span></td></tr>
+        <tr><td>正常</td><td>維護中</td><td><span class="pill pill--maint">維護</span></td></tr>
+        <tr><td>停用</td><td>正常</td><td><span class="pill pill--off">停用</span></td></tr>
+        <tr><td>停用</td><td>維護中</td><td><span class="pill pill--off">停用</span></td></tr>
+      </tbody>
+    </table>
+    <p>說明：兩項限制並存（停用＋維護中）時，取較嚴格者「停用」。</p>
   </section>
 
   <section class="section">
@@ -1742,7 +1792,7 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
   <section class="section">
     <h2>隱藏原因</h2>
     <ul>
-      <li>充值側依賴已斷：平台現行僅使用第三方在線支付；前台的「Bank Transfer」入口實為第三方渠道（走在線充值商戶配置＋在線支付展示配置，含其子通道），與本頁無關。</li>
+      <li>充值側依賴已斷：平台現行僅使用第三方在線支付；前台的「Bank Transfer」入口實為第三方渠道（走在線支付商戶配置＋在線支付展示配置，含其子通道），與本頁無關。</li>
       <li>提款側依賴已斷：前台銀行／錢包清單已改吃「提款展示配置」（原綁定銀行配置）。</li>
       <li>雙邊依賴皆斷，本頁已無實際用途，予以隱藏。</li>
     </ul>
@@ -1790,7 +1840,7 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
       <li>目前未啟用：平台現行僅使用第三方在線支付。</li>
       <li>本次不做線下充值的調整，予以隱藏。</li>
     </ul>
-    <div class="callout callout--info">前台現有的同名充值入口為<strong>第三方渠道</strong>（資料來自「在線充值商戶配置」＋「在線支付展示配置」），與本頁無關——隱藏不影響前台任何現有入口。</div>
+    <div class="callout callout--info">前台現有的同名充值入口為<strong>第三方渠道</strong>（資料來自「在線支付商戶配置」＋「在線支付展示配置」），與本頁無關——隱藏不影響前台任何現有入口。</div>
   </section>
 </article>
 
@@ -1813,7 +1863,7 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
       <li>目前未啟用：平台現行僅使用第三方在線支付。</li>
       <li>本次不做線下充值的調整，予以隱藏。</li>
     </ul>
-    <div class="callout callout--info">前台現有的同名充值入口為<strong>第三方渠道</strong>（資料來自「在線充值商戶配置」＋「在線支付展示配置」），與本頁無關——隱藏不影響前台任何現有入口。</div>
+    <div class="callout callout--info">前台現有的同名充值入口為<strong>第三方渠道</strong>（資料來自「在線支付商戶配置」＋「在線支付展示配置」），與本頁無關——隱藏不影響前台任何現有入口。</div>
   </section>
 </article>
 
@@ -1836,7 +1886,7 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
       <li>目前未啟用：平台現行僅使用第三方在線支付。</li>
       <li>本次不做線下充值的調整，予以隱藏。</li>
     </ul>
-    <div class="callout callout--info">前台現有的同名充值入口為<strong>第三方渠道</strong>（資料來自「在線充值商戶配置」＋「在線支付展示配置」），與本頁無關——隱藏不影響前台任何現有入口。</div>
+    <div class="callout callout--info">前台現有的同名充值入口為<strong>第三方渠道</strong>（資料來自「在線支付商戶配置」＋「在線支付展示配置」），與本頁無關——隱藏不影響前台任何現有入口。</div>
   </section>
 </article>
 
@@ -1859,7 +1909,7 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
       <li>目前未啟用：平台現行僅使用第三方在線支付。</li>
       <li>本次不做線下充值的調整，予以隱藏。</li>
     </ul>
-    <div class="callout callout--info">前台現有的同名充值入口為<strong>第三方渠道</strong>（資料來自「在線充值商戶配置」＋「在線支付展示配置」），與本頁無關——隱藏不影響前台任何現有入口。</div>
+    <div class="callout callout--info">前台現有的同名充值入口為<strong>第三方渠道</strong>（資料來自「在線支付商戶配置」＋「在線支付展示配置」），與本頁無關——隱藏不影響前台任何現有入口。</div>
   </section>
 </article>
 
