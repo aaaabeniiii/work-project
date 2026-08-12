@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>後台多幣種改動規格書 V3</title>
+<title>後台多幣種改動規格書 V3.1</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,BlinkMacSystemFont,'PingFang TC','Microsoft JhengHei',sans-serif;background:#f0f2f5;color:#333;font-size:14px}
@@ -25,6 +25,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang TC','Microsoft Jheng
 .label-admin .tag-chip{background:#4e9af1;color:#0d2440}
 .label-phase .tag-chip{background:#9b7bd4;color:#1a0f2e}
 .label-spec .tag-chip{background:#5cb884;color:#0d2a1a}
+.label-record .tag-chip{background:#e08e8e;color:#3a0f0f}
 .nav-g-label.nav-toggl{cursor:pointer}
 .pl-bk{display:inline-block;padding:1px 7px;border-radius:4px;font-size:11px;font-weight:700;margin-right:6px}
 .pl-bk-plat{background:#e6effb;color:#1d4e89}
@@ -398,18 +399,44 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
 .pg-overview .ov-dir-list li{margin:2px 0}
 /* 側邊選單編號範圍標記 */
 .nav-si-range{font-size:10px;font-weight:700;color:#5b7396;font-family:Consolas,Menlo,monospace;margin-left:8px;letter-spacing:.5px}
+/* 討論紀錄／版本更新紀錄 頁面 */
+.rec-wrap{background:#fff;border:1px solid #e0e6ed;border-radius:10px;padding:28px 32px;max-width:1000px}
+.rec-wrap h1{font-size:20px;color:#1f2430;margin:0 0 6px}
+.rec-wrap .rec-sub{font-size:12px;color:#8fa8c8;margin:0 0 20px}
+.rec-table{width:100%;border-collapse:collapse;font-size:13px;color:#2b3446}
+.rec-table th{background:#f0f4f9;border:1px solid #dde4ec;padding:8px 10px;text-align:left;font-size:12px;color:#3a4a63;white-space:nowrap}
+.rec-table td{border:1px solid #e3e8ef;padding:8px 10px;vertical-align:top;line-height:1.7}
+.rec-table td.rec-no{text-align:center;white-space:nowrap;color:#5b7396;font-weight:700;width:44px}
+.rec-table td.rec-date{white-space:nowrap;width:72px}
+.rec-table td.rec-who{width:170px}
+.rec-table td.rec-upd{width:150px}
+.rec-table .rec-ol{margin:6px 0 0;padding-left:1.6em}
+.rec-table .rec-ol ol{margin:2px 0;padding-left:1.6em}
+.rec-table .rec-ol li{margin:3px 0}
+.rec-item-tt{font-weight:700;color:#1f2430}
+.rec-del{text-decoration:line-through;color:#9aa4b2}
+.rec-adj{display:block;margin-top:6px}
+.rec-adj-tag{color:#c0392b;font-weight:700}
+.rec-mini{font-size:11px;color:#8fa8c8}
 </style>
 </head>
 <body>
 
 <div class="doc-header">
-  <h1>後台多幣種改動規格書 V3</h1>
+  <h1>後台多幣種改動規格書 V3.1</h1>
   
 </div>
 
 <div class="layout">
   <nav class="sidebar" id="sidebar">
     
+<div class="nav-g-hd nav-g-label label-record nav-toggl open" onclick="toggleGroup('update-record')" data-group="update-record"><span class="arr">▸</span><span class="tag-chip">📝 更新紀錄</span></div>
+<div class="nav-sub open" id="grp-update-record">
+  <a class="nav-si" data-page="spec-discussion" onclick="showPg('spec-discussion')">討論紀錄</a>
+  <a class="nav-si" data-page="spec-changelog" onclick="showPg('spec-changelog')">版本更新紀錄</a>
+  <a class="nav-si" data-page="spec-pending" onclick="showPg('spec-pending')">待確認內容</a>
+</div>
+
 <div class="nav-g-hd nav-g-label label-spec nav-toggl open" onclick="toggleGroup('spec-book')" data-group="spec-book"><span class="arr">▸</span><span class="tag-chip">📘 規格書</span></div>
 <div class="nav-sub open" id="grp-spec-book">
   <a class="nav-si" data-page="spec-content" onclick="showPg('spec-content')">需求目的與通用規則</a>
@@ -595,6 +622,180 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
   </nav>
 
   <main class="content" id="content">
+    <div class="pg" id="pg-spec-discussion">
+  <div class="pg-crumb">更新紀錄 &gt; 討論紀錄</div>
+  <div class="rec-wrap">
+    <h1>討論紀錄</h1>
+    <p class="rec-sub">記錄各次會議與討論的決議內容。新的紀錄由上往下疊加（項次由下往上遞增）；決議內容若後續被調整，原文以刪除線標示並於下方註記調整內容與確認人。</p>
+    <table class="rec-table">
+      <tr><th>日期</th><th>項次</th><th>內容</th><th>規格書更新</th><th>參與人</th></tr>
+      <tr>
+        <td class="rec-date">8/11</td>
+        <td class="rec-no">18</td>
+        <td><span class="rec-item-tt">公告管理</span>：併入「活動」同期開發。</td>
+        <td class="rec-upd"></td>
+        <td class="rec-who">Cyril、Zack</td>
+      </tr>
+      <tr>
+        <td class="rec-date" rowspan="17">8/11</td>
+        <td class="rec-no">17</td>
+        <td><span class="rec-item-tt">時程</span>：11 月底全部開發完成、上 UAT；11～12 月修復＋測試；1 月底上生產。</td>
+        <td class="rec-upd"></td>
+        <td class="rec-who" rowspan="17">8/11 第一次週會<br>（Mark、Zack、Cyril、Ody、Wade、Mars、Zaken、Abeni）</td>
+      </tr>
+      <tr>
+        <td class="rec-no">16</td>
+        <td><span class="rec-item-tt">開發與測試節奏</span>：採分批分期進行——每一期完成即上 DEV 交 QA 測試；全部分期須待 DEV 都驗證 OK 後，才整包一起上 UAT，UAT 通過後上生產。</td>
+        <td class="rec-upd"></td>
+      </tr>
+      <tr>
+        <td class="rec-no">15</td>
+        <td><span class="rec-item-tt">範圍調整</span>：開發分多期進行；第一批上線時程不包含「活動」與「代理佣金」兩期，其餘照常開發，此兩期非自專案中移除，僅不在第一批上線範圍內。</td>
+        <td class="rec-upd">－</td>
+      </tr>
+      <tr>
+        <td class="rec-no">14</td>
+        <td><span class="rec-item-tt">在線支付展示配置</span>：納入本案，補多幣種。</td>
+        <td class="rec-upd"></td>
+      </tr>
+      <tr>
+        <td class="rec-no">13</td>
+        <td><span class="rec-item-tt">支付層級配置</span>：要做，維度為「國家＋幣種」。</td>
+        <td class="rec-upd"></td>
+      </tr>
+      <tr>
+        <td class="rec-no">12</td>
+        <td><span class="rec-item-tt">同步配置</span>：選 A 國家後，將數值帶入 B 國家；此時畫面停留在編輯頁，數值尚未寫入，按「保存」才真正保存。</td>
+        <td class="rec-upd"></td>
+      </tr>
+      <tr>
+        <td class="rec-no">11</td>
+        <td><span class="rec-del"><span class="rec-item-tt">在線支付配置的幣種</span>：直接吃 PAYMENT 回傳的值，不開放人工選擇；畫面上仍顯示幣種，但不可編輯（唯讀）。</span>
+        <span class="rec-adj"><span class="rec-adj-tag">8/11 調整：</span>幣種不由 PAYMENT 回傳限制，維持人工選擇；設定時手動選擇對應的國家＋幣種，該商戶即綁定此國家＋幣種；商戶支援多個國家＋幣種時，每一個組合各設定一筆；國家與幣種可再次編輯調整。（Mark、Cyril）</span></td>
+        <td class="rec-upd"></td>
+      </tr>
+      <tr>
+        <td class="rec-no">10</td>
+        <td><span class="rec-del"><span class="rec-item-tt">在線支付類型不給調整（支付優化）</span>：支付類型不開放編輯調整，作法為擋掉或不給權限配置。</span>
+        <span class="rec-adj"><span class="rec-adj-tag">8/11 調整：</span>支付類型照樣開放調整，操作邏輯不變，僅新增「國家＋幣種」綁定限制。（Mark、Cyril）</span></td>
+        <td class="rec-upd"></td>
+      </tr>
+      <tr>
+        <td class="rec-no">9</td>
+        <td><span class="rec-item-tt">充值提款匹配邏輯</span>：現況寫死、邏輯不合理（例：Maya 直連）。依照目前規則直接重做；另補開一張需求單先改（誰開單都可以），細節再討論。</td>
+        <td class="rec-upd"></td>
+      </tr>
+      <tr>
+        <td class="rec-no">8</td>
+        <td><span class="rec-item-tt">六個舊線下支付頁</span>：銀行支付配置保留——頁面不能拿掉，既有部分邏輯仍會走這張表，RD 先確認既有邏輯，先不用做多幣種；其餘五頁（虛擬幣支付、PayMaya、GrabPay、Gcash、E-Wallet）全部隱藏、先不做，日後有需要再拿出來改。</td>
+        <td class="rec-upd"></td>
+      </tr>
+      <tr>
+        <td class="rec-no">7</td>
+        <td><span class="rec-item-tt">系統預設幣種</span>：系統應默認 PHP。RD 需列出目前沒有默認值的部分；後端改完自行測試。</td>
+        <td class="rec-upd">－</td>
+      </tr>
+      <tr>
+        <td class="rec-no">6</td>
+        <td><span class="rec-item-tt">USDT／USD 定位</span>：USDT 為國家底下的第二幣種；USD 為法幣。顯示上依實際歸屬顯示，不再沿用「USD 一律顯示成 USDT」的寫死轉換。</td>
+        <td class="rec-upd">－</td>
+      </tr>
+      <tr>
+        <td class="rec-no">5</td>
+        <td><span class="rec-item-tt">控制後台——操作日誌</span>：要補內容，要有。</td>
+        <td class="rec-upd"></td>
+      </tr>
+      <tr>
+        <td class="rec-no">4</td>
+        <td><span class="rec-item-tt">控制後台——匯率每月歷史紀錄</span>：要有。</td>
+        <td class="rec-upd"></td>
+      </tr>
+      <tr>
+        <td class="rec-no">3</td>
+        <td><span class="rec-item-tt">換算精度</span>：維持現況、不做調整。既有精度即使不一致也不處理；QA 驗收時若認為數字有問題，交由 RD 查明。</td>
+        <td class="rec-upd"></td>
+      </tr>
+      <tr>
+        <td class="rec-no">2</td>
+        <td><span class="rec-item-tt">系統參數管理——開關設計</span>：採一個主開關，國家與幣種為主開關底下的次開關；細節後續看畫面再討論。</td>
+        <td class="rec-upd"></td>
+      </tr>
+      <tr>
+        <td class="rec-no">1</td>
+        <td><span class="rec-item-tt">系統參數管理——參數維度</span>：與金額有關的三個分頁，維度定為「國家＋幣種」。</td>
+        <td class="rec-upd"></td>
+      </tr>
+    </table>
+  </div>
+</div>
+    <div class="pg" id="pg-spec-changelog">
+  <div class="pg-crumb">更新紀錄 &gt; 版本更新紀錄</div>
+  <div class="rec-wrap">
+    <h1>版本更新紀錄</h1>
+        <table class="rec-table">
+      <tr><th>版本</th><th>日期</th><th>更新內容／原因</th></tr>
+      <tr>
+        <td class="rec-date">V3.1</td>
+        <td class="rec-date">8/12</td>
+        <td>新增：<br>1. 討論紀錄<br>2. 版本更新紀錄<br>3. 待確認內容</td>
+      </tr>
+      <tr>
+        <td class="rec-date">V3</td>
+        <td class="rec-date">8/3</td>
+        <td>原認知需求：各管理後台可分別設定不同的系統幣。<br>實際需求：系統幣於控制中心搭建時即已選定，其下整套相互作用的管理後台、金流等均強制沿用控制中心的同一系統幣，固定不可變更。依此改版。</td>
+      </tr>
+      <tr>
+        <td class="rec-date">V2</td>
+        <td class="rec-date">7/24</td>
+        <td>原認知需求：系統幣固定為 USDT。<br>實際需求：系統幣可自行選擇，並需加入「國家＋幣種」概念（原僅有幣種單一維度）。依此改版。</td>
+      </tr>
+      <tr>
+        <td class="rec-date">V1</td>
+        <td class="rec-date">7/3</td>
+        <td>—</td>
+      </tr>
+    </table>
+  </div>
+</div>
+    <div class="pg" id="pg-spec-pending">
+  <div class="pg-crumb">更新紀錄 &gt; 待確認內容</div>
+  <div class="rec-wrap">
+    <h1>待確認內容</h1>
+    <table class="rec-table">
+      <tr><th>日期</th><th>項次</th><th>內容</th><th>討論人</th><th>預計討論時間</th></tr>
+      <tr>
+        <td class="rec-date">8/12</td>
+        <td class="rec-no">2</td>
+        <td><span class="rec-item-tt">同步配置</span>
+          <ol class="rec-ol">
+            <li>VIP
+              <ol>
+                <li>部分設定為逐條保存；同步配置需額外做一個流程：同步配置後，當前所有設定可一次編輯、一次保存。非將整頁改為一次編輯模式，僅同步配置時才走此流程。</li>
+                <li>若各幣種在程式端已寫好預設值，是否還需要做同步配置功能？</li>
+              </ol>
+            </li>
+            <li>支付層級配置
+              <ol>
+                <li>預設分層只有默認層、第一層～第五層，且可自行新增更多分層；同步時是否連同分層名稱整張表一同複製？</li>
+                <li>同 VIP 問題：目前為逐條保存，需額外做「當前所有欄位一次編輯、一次保存」的流程。</li>
+                <li>若僅同步默認層、第一層～第五層，是否就不需要做此功能？</li>
+              </ol>
+            </li>
+          </ol>
+        </td>
+        <td class="rec-who">Abeni</td>
+        <td class="rec-date"></td>
+      </tr>
+      <tr>
+        <td class="rec-date">8/11</td>
+        <td class="rec-no">1</td>
+        <td><span class="rec-item-tt">國家地區定製 IP 白名單</span>：是否需要實作。</td>
+        <td class="rec-who">Cyril、Zack</td>
+        <td class="rec-date"></td>
+      </tr>
+    </table>
+  </div>
+</div>
     <div class="pg" id="pg-spec-content">
   <div class="pg-crumb">規格書 &gt; 需求目的與通用規則</div>
   <div class="legacy-overview">
