@@ -540,8 +540,8 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
   <a class="nav-si" data-page="station-region" onclick="showPg('station-region')">投注站地區對應法幣</a>
 </div>
 
-    <div class="nav-g-hd nav-g-label label-phase nav-toggl" onclick="toggleGroup('phase-range')" data-group="phase-range"><span class="arr">▸</span><span class="tag-chip">📅 分期上線</span></div>
-<div class="nav-sub" id="grp-phase-range">
+    <div class="nav-g-hd nav-g-label label-phase nav-toggl open" onclick="toggleGroup('phase-range')" data-group="phase-range"><span class="arr">▸</span><span class="tag-chip">📅 分期上線</span></div>
+<div class="nav-sub open" id="grp-phase-range">
   <a class="nav-si" data-page="phase-scope" onclick="showPg('phase-scope');document.getElementById('grp-phase-scope-anchors').classList.add('open')">分期上線範圍</a>
 <div class="nav-anch" id="grp-phase-scope-anchors">
   <a class="nav-si3" onclick="showPg('phase-scope');goTo('phx-1')">期 1 基礎工程</a>
@@ -1647,17 +1647,17 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
 
     <h3 class="plan-h">各期 DEV 進度</h3>
     <table class="rec-table">
-      <tr><th>期數</th><th>名稱</th><th>範圍</th><th>開發中</th><th>上 DEV</th><th>DEV 驗收通過</th><th>備註</th></tr>
-      <tr><td class="rec-no">1</td><td>基礎工程</td><td class="plan-scope">5 頁 15 張｜交付項 4</td><td class="ph-cell"></td><td class="ph-cell"></td><td class="ph-cell"></td><td></td></tr>
-      <tr><td class="rec-no">—</td><td>充值提款匹配邏輯優化（<a class="x-jump" href="https://okbetokbet.atlassian.net/browse/OKF-2074" target="_blank">OKF-2074</a>）</td><td class="plan-scope">期 2 前置</td><td class="ph-cell"></td><td class="ph-cell"></td><td class="ph-cell"></td><td>需先完成才可進行期 2；不影響期 3、期 4（可先帶假資料）</td></tr>
-      <tr><td class="rec-no">2</td><td>金流</td><td class="plan-scope">11 頁 44 張｜交付項 2</td><td class="ph-cell"></td><td class="ph-cell"></td><td class="ph-cell"></td><td></td></tr>
-      <tr><td class="rec-no">3</td><td>代理線</td><td class="plan-scope">5 頁 37 張</td><td class="ph-cell"></td><td class="ph-cell"></td><td class="ph-cell"></td><td></td></tr>
-      <tr><td class="rec-no">4</td><td>三方 GAME ＋ 體育</td><td class="plan-scope">13 頁 63 張</td><td class="ph-cell"></td><td class="ph-cell"></td><td class="ph-cell"></td><td></td></tr>
-      <tr><td class="rec-no">5</td><td>匯總報表</td><td class="plan-scope">11 頁 69 張</td><td class="ph-cell"></td><td class="ph-cell"></td><td class="ph-cell"></td><td></td></tr>
-      <tr><td class="rec-no">6</td><td>金流風控</td><td class="plan-scope">2 頁 21 張</td><td class="ph-cell"></td><td class="ph-cell"></td><td class="ph-cell"></td><td></td></tr>
-      <tr><td class="rec-no">7</td><td>VIP</td><td class="plan-scope">1 頁 18 張</td><td class="ph-cell"></td><td class="ph-cell"></td><td class="ph-cell"></td><td></td></tr>
-      <tr class="ph-out"><td class="rec-no">8</td><td>活動</td><td class="plan-scope">30 頁 202 張</td><td class="ph-cell"></td><td class="ph-cell"></td><td class="ph-cell"></td><td>UAT 範圍外，不在第一批上線</td></tr>
-      <tr class="ph-out"><td class="rec-no">9</td><td>代理傭金</td><td class="plan-scope">5 頁 28 張</td><td class="ph-cell"></td><td class="ph-cell"></td><td class="ph-cell"></td><td>UAT 範圍外，不在第一批上線</td></tr>
+      <tr><th>期數</th><th>名稱</th><th>範圍</th><th>盤點</th><th>開發中</th><th>上 DEV</th><th>DEV 驗收通過</th><th>備註</th></tr>
+      <tr><td class="rec-no">1</td><td>基礎工程</td><td class="plan-scope">5 頁 15 張｜交付項 4</td><td class="ph-cell ph-now">進行中</td><td class="ph-cell"></td><td class="ph-cell"></td><td class="ph-cell"></td><td></td></tr>
+      <tr><td class="rec-no">—</td><td>充值提款匹配邏輯優化（<a class="x-jump" href="https://okbetokbet.atlassian.net/browse/OKF-2074" target="_blank">OKF-2074</a>）</td><td class="plan-scope">期 2 前置</td><td class="ph-cell ph-now">進行中</td><td class="ph-cell"></td><td class="ph-cell"></td><td class="ph-cell"></td><td>需先完成才可進行期 2；不影響期 3、期 4（可先帶假資料）</td></tr>
+      <tr><td class="rec-no">2</td><td>金流</td><td class="plan-scope">11 頁 44 張｜交付項 2</td><td class="ph-cell"></td><td class="ph-cell"></td><td class="ph-cell"></td><td class="ph-cell"></td><td></td></tr>
+      <tr><td class="rec-no">3</td><td>代理線</td><td class="plan-scope">5 頁 37 張</td><td class="ph-cell"></td><td class="ph-cell"></td><td class="ph-cell"></td><td class="ph-cell"></td><td></td></tr>
+      <tr><td class="rec-no">4</td><td>三方 GAME ＋ 體育</td><td class="plan-scope">13 頁 63 張</td><td class="ph-cell"></td><td class="ph-cell"></td><td class="ph-cell"></td><td class="ph-cell"></td><td></td></tr>
+      <tr><td class="rec-no">5</td><td>匯總報表</td><td class="plan-scope">11 頁 69 張</td><td class="ph-cell"></td><td class="ph-cell"></td><td class="ph-cell"></td><td class="ph-cell"></td><td></td></tr>
+      <tr><td class="rec-no">6</td><td>金流風控</td><td class="plan-scope">2 頁 21 張</td><td class="ph-cell"></td><td class="ph-cell"></td><td class="ph-cell"></td><td class="ph-cell"></td><td></td></tr>
+      <tr><td class="rec-no">7</td><td>VIP</td><td class="plan-scope">1 頁 18 張</td><td class="ph-cell"></td><td class="ph-cell"></td><td class="ph-cell"></td><td class="ph-cell"></td><td></td></tr>
+      <tr class="ph-out"><td class="rec-no">8</td><td>活動</td><td class="plan-scope">30 頁 202 張</td><td class="ph-cell"></td><td class="ph-cell"></td><td class="ph-cell"></td><td class="ph-cell"></td><td>UAT 範圍外，不在第一批上線</td></tr>
+      <tr class="ph-out"><td class="rec-no">9</td><td>代理傭金</td><td class="plan-scope">5 頁 28 張</td><td class="ph-cell"></td><td class="ph-cell"></td><td class="ph-cell"></td><td class="ph-cell"></td><td>UAT 範圍外，不在第一批上線</td></tr>
     </table>
 
     <h3 class="plan-h">整包上線階段（期 1～7 全部 DEV 驗收通過後啟動）</h3>
@@ -1669,7 +1669,35 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
     <h3 class="plan-h">開發進度紀錄（每週一更新上週進度，日期為該週週五）</h3>
     <table class="rec-table">
       <tr><th>日期</th><th>範圍</th><th>本週進度</th><th>備註</th></tr>
-      <tr><td class="rec-date">8/14</td><td></td><td></td><td></td></tr>
+      <tr><td class="rec-date">8/14</td><td>全案盤點</td><td>
+        <strong>1. 盤點已完成：</strong>
+        <ul class="rec-ol">
+          <li>系統參數盤點文件</li>
+          <li>「系統幣最終為 USD」問題文件</li>
+          <li>「USD 等同 USDT」問題文件</li>
+          <li>投注站盤點（001–010）</li>
+          <li>大代理盤點（011–023）</li>
+          <li>代理盤點（024–036）</li>
+          <li>會員盤點（037–046）</li>
+          <li>充值紀錄盤點（065–068）</li>
+          <li>提款紀錄盤點（069–079）</li>
+          <li>資金明細盤點（080–084）</li>
+          <li>兌換紀錄盤點（085–086）</li>
+          <li>投注站兌換記錄盤點（087–088）</li>
+          <li>修改餘額審批盤點（089–091）</li>
+          <li>資金明細新盤點（092–094）</li>
+          <li>提現出款設置盤點（095–096）</li>
+          <li>提現風控審核盤點（097–114）</li>
+        </ul>
+        <strong>2. 盤點中：</strong>
+        <ul class="rec-ol">
+          <li>RMB 盤點（預計 8/17 週一完成）</li>
+        </ul>
+        <strong>3. 渠道匹配邏輯：</strong>
+        <ul class="rec-ol">
+          <li>分析已執行，文件待整理</li>
+        </ul>
+      </td><td></td></tr>
       <tr><td class="rec-date">8/21</td><td></td><td></td><td></td></tr>
       <tr><td class="rec-date">8/28</td><td></td><td></td><td></td></tr>
       <tr><td class="rec-date">9/4</td><td></td><td></td><td></td></tr>
