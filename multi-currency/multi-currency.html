@@ -414,7 +414,9 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
 .rec-table .rec-ol ol{margin:2px 0;padding-left:1.6em}
 .rec-table .rec-ol li{margin:3px 0}
 .rec-item-tt{font-weight:700;color:#1f2430}
-.rec-del{text-decoration:line-through;color:#9aa4b2}
+.rec-del{text-decoration:line-through;text-decoration-thickness:2px;text-decoration-color:#7d8794;color:#9aa4b2}
+.rec-del strong,.rec-del b,.rec-del code,.rec-del span,.rec-del em,.rec-del li{color:#9aa4b2}
+.pg-dep .spec-row strong,.pg-dep .spec-row b,.pg-dep .ov-dir strong,.pg-dep .ov-dir b,.card-dep .spec-row strong,.card-dep .spec-row b{color:#9aa4b2}
 .rec-adj{display:block;margin-top:6px}
 .rec-adj-tag{color:#c0392b;font-weight:700}
 .rec-mini{font-size:11px;color:#8fa8c8}
@@ -431,7 +433,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
 .mk-tbl-wrap{overflow-x:auto}
 .mk-banner{background:#fdf6ec;border:1px solid #f5dab1;color:#b8860b;border-radius:4px;padding:8px 12px;font-size:12.5px;margin-bottom:12px}
 /* 本期不做／隱藏頁：卡片內文與改動目標內容整頁刪除線（編號、麵包屑、區塊標題不受影響） */
-.pg-dep .spec-row, .pg-dep .ov-dir{text-decoration:line-through;text-decoration-thickness:2px;text-decoration-color:#7d8794;color:#9aa4b2}
+.pg-dep .spec-row, .pg-dep .ov-dir, .card-dep .spec-row{text-decoration:line-through;text-decoration-thickness:2px;text-decoration-color:#7d8794;color:#9aa4b2}
 .pg-dep .spec-row *, .pg-dep .ov-dir *{color:#9aa4b2 !important}
 /* 卡片標頭調整標記（定稿後被會議決議調整的卡） */
 .spec-card-adj{font-size:11px;font-weight:700;color:#c0392b;margin-left:10px;letter-spacing:.5px}
@@ -499,6 +501,63 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
 .rdphase .tot .hint{font-weight:400;color:#9099a3;font-size:11.5px}
 .rdphase .tot .foot{margin-top:12px;padding-top:11px;border-top:1px solid #eef0f2;font-size:12.5px;color:#6b7280;line-height:1.6}
 .rdphase .tot .foot b{color:#374151}
+
+/* ===== VIP 同步配置整頁流程示意（tplVipSyncFlow,依 8/18 週會通過流程） ===== */
+.vsf{position:relative;border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#fff;font-size:12.5px}
+.vsf-hd{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.vsf-title{font-weight:700;font-size:14px;color:#1f2430;margin-right:4px}
+.vsf-cap{color:#e2504c;font-size:12px;margin:6px 0 2px}
+.vsf-btn{background:#409eff;color:#fff;border:none;border-radius:4px;padding:5px 12px;font-size:12px;cursor:pointer}
+.vsf-btn.ghost{background:#fff;color:#606266;border:1px solid #dcdfe6}
+.vsf-btn.sm{padding:3px 10px}
+.vsf-hide{display:none!important}
+.vsf-sel{position:relative;min-width:96px;border:1px solid #dcdfe6;border-radius:4px;padding:5px 22px 5px 10px;background:#fff;cursor:pointer;user-select:none}
+.vsf-sel.disabled{background:#f5f7fa;cursor:not-allowed}
+.vsf-sel-face{color:#374151}
+.vsf-sel-face.ph{color:#9ca3af}
+.vsf-sel-arr{position:absolute;right:8px;top:50%;transform:translateY(-50%);color:#c0c4cc;font-size:10px}
+.vsf-sel-menu{display:none;position:absolute;left:0;top:calc(100% + 4px);min-width:100%;background:#fff;border:1px solid #e4e7ed;border-radius:4px;box-shadow:0 4px 14px rgba(0,0,0,.12);z-index:99}
+.vsf-sel.open .vsf-sel-menu{display:block}
+.vsf-sel-item{padding:6px 12px;white-space:nowrap;color:#606266}
+.vsf-sel-item:hover{background:#f5f7fa}
+.vsf-sel-item.on{color:#409eff;font-weight:700}
+.vsf-table{width:100%;border-collapse:collapse;margin-top:8px}
+.vsf-table th,.vsf-table td{border:1px solid #ebeef5;padding:6px 8px;text-align:center;color:#374151;font-size:12px}
+.vsf-table th{background:#f5f7fa;color:#909399;font-weight:600}
+.vsf-op{color:#409eff;cursor:pointer;margin:0 4px}
+.vsf-op.red{color:#e2504c;cursor:default}
+.vsf-op.dis{color:#c0c4cc;cursor:not-allowed}
+.vsf-btn.dis{background:#a0cfff;cursor:not-allowed}
+.demo-star{color:#e2504c;margin-right:2px}
+.demo-formrow{display:flex;border:1px solid #ebeef5;background:#fff;align-items:stretch;font-size:12.5px;max-width:640px}
+.demo-formrow .demo-form-lbl{width:96px;flex:none;display:flex;align-items:center;padding:10px 12px;border-right:1px solid #ebeef5;color:#606266}
+.demo-formrow .demo-form-val{display:flex;align-items:center;padding:8px 12px;min-width:190px;border-right:1px solid #ebeef5}
+.demo-formrow .demo-form-val:last-child{border-right:none}
+.demo-formrow .demo-form-ctx{min-width:120px}
+.plsw{display:flex;flex-direction:column;gap:10px;font-size:13px;color:#374151}
+.plsw-box{border:1px solid #e5e7eb;border-radius:8px;padding:14px;background:#fff;display:flex;flex-direction:column;gap:10px}
+.plsw-box-hd{font-weight:700;color:#1f2430;padding-bottom:8px;border-bottom:1px solid #f0f0f0}
+.plsw-row{display:flex;align-items:center;flex-wrap:wrap;gap:4px}
+.plsw-row.plsw-hide{display:none}
+.plsw-lbl{width:150px;flex:none;text-align:right;color:#606266}
+.plsw-rd{display:inline-flex;align-items:center;margin-right:16px;cursor:pointer;user-select:none}
+.plsw-dis .plsw-rd{cursor:not-allowed;opacity:.55}
+.plsw-rd.plsw-static{cursor:default}
+.plan-h4{font-size:14px;font-weight:700;color:#1f2430;margin:14px 0 6px}
+.plan-note{font-size:12.5px;color:#6b7280;margin:4px 0 10px}
+.plsw-foot{justify-content:flex-end;margin-top:6px}
+.demo-rd{display:inline-block;width:14px;height:14px;border:1px solid #dcdfe6;border-radius:50%;margin-right:5px;background:#fff;box-sizing:border-box}
+.demo-rd.on{border:4px solid #409eff}
+.vsf-input{width:84px;max-width:100%;padding:3px 6px;border:1px solid #dcdfe6;border-radius:4px;font-size:12px;text-align:center;box-sizing:border-box}
+.vsf-mask{position:absolute;inset:0;background:rgba(0,0,0,.28);display:none;z-index:99;border-radius:8px}
+.vsf-mask.show{display:block}
+.vsf-modal{position:absolute;left:50%;top:12px;transform:translateX(-50%);width:330px;max-width:92%;background:#fff;border-radius:8px;box-shadow:0 10px 30px rgba(0,0,0,.2);padding:0 0 12px}
+.vsf-m-hd{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-bottom:1px solid #f0f0f0;font-weight:700;color:#1f2430}
+.vsf-m-x{cursor:pointer;color:#909399;font-weight:400}
+.vsf-m-row{display:flex;align-items:center;gap:8px;padding:10px 14px 0}
+.vsf-m-lbl{width:60px;color:#606266;flex:none}
+.vsf-m-bd{padding:16px 14px;color:#374151}
+.vsf-m-ft{display:flex;justify-content:flex-end;gap:8px;padding:12px 14px 0}
 </style>
 </head>
 <body>
@@ -559,6 +618,10 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
 </div>
 
     <div class="nav-g-hd nav-g-label label-control"  data-group="control-backend"><span class="tag-chip">⚙ 控制後台</span></div>
+<div class="nav-m-hd" onclick="toggleGroup('ctl-plat-mgmt')" data-group="ctl-plat-mgmt"><span class="arr">▸</span><span>平台管理</span></div>
+<div class="nav-sub" id="grp-ctl-plat-mgmt">
+<a class="nav-si" data-page="ctl-plat-mgmt-plat-list" onclick="showPg('ctl-plat-mgmt-plat-list')">平台列表</a>
+</div>
 <div class="nav-m-hd" onclick="toggleGroup('ctl-log-mgmt')" data-group="ctl-log-mgmt"><span class="arr">▸</span><span>日誌管理</span></div>
 <div class="nav-sub" id="grp-ctl-log-mgmt">
 <a class="nav-si" data-page="ctl-log-mgmt-op-log" onclick="showPg('ctl-log-mgmt-op-log')">操作日誌</a>
@@ -725,6 +788,13 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
     <p class="rec-sub">記錄各次會議與討論的決議內容。新的紀錄由上往下疊加（項次由下往上遞增）；決議內容若後續被調整，原文以刪除線標示並於下方註記調整內容與確認人。</p>
     <table class="rec-table">
       <tr><th>日期</th><th>項次</th><th>內容</th><th>規格書更新</th><th>參與人</th></tr>
+      <tr id="rec-30">
+        <td class="rec-date">8/20</td>
+        <td class="rec-no">30</td>
+        <td><span class="rec-item-tt">RD 預計時程 V1</span>：排定期 1～7 的預計開發／進 QA 時程（前提為兩名完整人力），含排程依賴規則與時程變因；1.5（OKF-2074）資料整理尚需約一週、實作人力未定。</td>
+        <td class="rec-upd"><span class="x-jump" onclick="showPg('phase-plan');goTo('rd-sched')">8/20已更新</span></td>
+        <td class="rec-who">RD 時程討論<br>（Cyril、O、Abeni）</td>
+      </tr>
       <tr id="rec-28">
         <td class="rec-date" rowspan="8">8/18</td>
         <td class="rec-no">28</td>
@@ -754,13 +824,15 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
       </tr>
       <tr id="rec-24">
         <td class="rec-no">24</td>
-        <td><span class="rec-item-tt">大額存取款</span>：新增「各幣種大額設置」，維度為「國家＋幣種」。</td>
-        <td class="rec-upd"></td>
+        <td><span class="rec-item-tt">大額存取款</span>：新增「各幣種大額設置」，維度為「國家＋幣種」。
+        <span class="rec-adj"><span class="rec-adj-tag">8/20 補充：</span>定名「大額門檻設置」，為大額存取款報表第三分頁；列表依控制後台啟用的國家＋幣種自動生成、逐列設定存款／取款門檻，新組合門檻預設 0（全納入統計），舊寫死值帶入菲律賓＋PHP；存款統計、取款統計改依此門檻判斷。</span></td>
+        <td class="rec-upd"><span class="x-jump" onclick="showPg('adm-data-report-dr-large')">8/20已更新</span></td>
       </tr>
       <tr id="rec-23">
         <td class="rec-no">23</td>
-        <td><span class="rec-item-tt">投注站統計</span>：新增「國家＋幣種」篩選，金額以法幣顯示。</td>
-        <td class="rec-upd"></td>
+        <td><span class="rec-item-tt">投注站統計</span>：新增「國家＋幣種」篩選，金額以法幣顯示。
+        <span class="rec-adj"><span class="rec-adj-tag">8/20 補充：</span>原有規劃就已是「國家＋幣種」篩選。</span></td>
+        <td class="rec-upd"><span class="x-jump" onclick="showPg('adm-data-report-dr-stationtotal')">8/20已更新</span></td>
       </tr>
       <tr id="rec-22">
         <td class="rec-no">22</td>
@@ -773,7 +845,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
             <li>投注站「地域」欄位不動，歸類為展示地址；實際國家＋幣種依「國家」「幣種」欄位所選為準。</li>
           </ol>
         </td>
-        <td class="rec-upd"></td>
+        <td class="rec-upd">1. <span class="x-jump" onclick="showPg('ctl-plat-mgmt-plat-list')">8/20已更新</span><br>2. <span class="x-jump" onclick="showPg('ctl-plat-mgmt-plat-list')">8/20已更新</span><br>3. <br>4. <br>5. <span class="x-jump" onclick="showPg('adm-user-mgmt-station')">8/20已更新</span></td>
       </tr>
       <tr id="rec-21">
         <td class="rec-no">21</td>
@@ -842,13 +914,13 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
         <td class="rec-no">13</td>
         <td><span class="rec-item-tt">支付層級配置</span>：要做，維度為「國家＋幣種」。
         <span class="rec-adj"><span class="rec-adj-tag">8/18 補充：</span>不做同步配置。</span></td>
-        <td class="rec-upd"><span class="x-jump" onclick="showPg('adm-pay-config-pay-level')">8/13已更新</span></td>
+        <td class="rec-upd"><span class="x-jump" onclick="showPg('adm-pay-config-pay-level')">8/20已更新</span></td>
       </tr>
       <tr id="rec-12">
         <td class="rec-no">12</td>
         <td><span class="rec-item-tt">同步配置</span>：選 A 國家後，將數值帶入 B 國家；此時畫面停留在編輯頁，數值尚未寫入，按「保存」才真正保存。
         <span class="rec-adj"><span class="rec-adj-tag">8/18 確認：</span>VIP 同步配置流程通過——頁面原維持逐列編輯保存；同步配置走額外的整頁編輯流程。</span></td>
-        <td class="rec-upd"></td>
+        <td class="rec-upd"><span class="x-jump" onclick="showPg('adm-user-mgmt-vip')">8/20已更新</span></td>
       </tr>
       <tr>
         <td class="rec-no">11</td>
@@ -897,7 +969,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
         <td class="rec-no">3</td>
         <td><span class="rec-item-tt">換算精度</span>：<span class="rec-del">維持現況、不做調整。既有精度即使不一致也不處理；QA 驗收時若認為數字有問題，交由 RD 查明。</span>
         <span class="rec-adj"><span class="rec-adj-tag">8/18 調整：</span>精度統一——DB 儲存至小數點後 4 位（第 5 位依實際情況捨入／進位）；顯示至小數點後 2 位（第 3 位無條件捨去）。QA 如需確認實際數值，再請開發查詢。</span></td>
-        <td class="rec-upd"><span class="x-jump" onclick="showPg('spec-content');goTo('s2-3-4')">8/13已更新</span></td>
+        <td class="rec-upd"><span class="x-jump" onclick="showPg('spec-content');goTo('s2-3-4')">8/20已更新</span></td>
       </tr>
       <tr>
         <td class="rec-no">2</td>
@@ -920,6 +992,11 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
     <h1>版本更新紀錄</h1>
         <table class="rec-table">
       <tr><th>版本</th><th>日期</th><th>更新內容／原因</th></tr>
+      <tr>
+        <td class="rec-date">V3.3</td>
+        <td class="rec-date">8/20</td>
+        <td>依照 8/18 第二次週會決議調整<br><br>新增：<br>1. <span class="x-jump" onclick="showPg('ctl-plat-mgmt-plat-list')">控制後台平台列表（投注站啟用狀態相關規格，卡 541~543）</span><br>2. <span class="x-jump" onclick="showPg('adm-data-report-dr-large')">大額存取款報表－大額門檻設置分頁（卡 544~547）</span><br>3. <span class="x-jump" onclick="showPg('phase-plan');goTo('rd-sched')">上線計劃與進度－RD 預計時程 V1 區塊</span><br><br>調整：<br>1. <span class="x-jump" onclick="showPg('spec-content');goTo('s2-3-4')">數值精度統一（DB 儲存 4 位／顯示 2 位）</span><br>2. <span class="x-jump" onclick="showPg('adm-user-mgmt-vip')">VIP 同步配置改為「複製來源→同步目標、整頁編輯一次保存」流程</span><br>3. <span class="x-jump" onclick="showPg('spec-content');goTo('s2-4-1')">投注站系統啟用狀態補充：啟用時選擇適用國家</span><br>4. <span class="x-jump" onclick="showPg('adm-user-mgmt-station')">投注站改以「國家」「幣種」欄位綁定，地域歸地址性質</span><br><br>刪除：<br>1. <span class="x-jump" onclick="showPg('adm-pay-config-pay-level')">支付層級配置－同步配置功能（卡 275，本期不做、劃線保留備查）</span><br>2. <span class="x-jump" onclick="showPg('adm-user-mgmt-station')">投注站－新增頁「地區」調整（卡 003，地區確認不調整，劃線保留備查）</span><br>3. <span class="x-jump" onclick="showPg('adm-data-report-dr-stationtotal')">投注站统计－金額欄位改系統幣顯示（卡 180，決議維持法幣顯示，劃線保留備查）</span></td>
+      </tr>
       <tr>
         <td class="rec-date">V3.2</td>
         <td class="rec-date">8/13</td>
@@ -1097,26 +1174,35 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
         </li>
       </ul>
 
-      <h4 id="s2-3-4"><span class="rec-del">2.3.4 數值精度</span></h4>
+      <h4 id="s2-3-4">2.3.4 數值精度</h4>
       <ul class="rec-del">
         <li><strong>儲存與計算精度</strong>：所有數值計算至小數點<strong>第 8 位，第 9 位無條件捨去</strong></li>
         <li><strong>顯示精度</strong>：後台顯示最後計算結果，至小數點<strong>第 2 位，第 3 位無條件捨去</strong></li>
       </ul>
-      <p class="rec-adj"><span class="rec-adj-tag">8/13 更新：</span>依照 <span class="x-jump" onclick="showPg('spec-discussion');goTo('rec-3')">8/11 週會討論</span>，精度此處不調整。</p>
+      <p class="rec-adj"><span class="rec-adj-tag">8/20 更新：</span>依照 <span class="x-jump" onclick="showPg('spec-discussion');goTo('rec-3')">8/18 第二次週會（項次 3）</span>，精度統一調整如下。</p>
+      <ul>
+        <li><strong>儲存精度</strong>：DB 統一儲存至小數點後 4 位，第 5 位依實際情況捨入／進位</li>
+        <li><strong>顯示精度</strong>：顯示至小數點後 2 位，第 3 位無條件捨去</li>
+      </ul>
 
       <h4>2.3.5 幣種顯示格式</h4>
       <p>後台目前幣種顯示不一致，部分顯示中文、部分顯示英文。本次調整後，所有幣種代碼統一改為<strong>半形大寫英文</strong>顯示（如 PHP、VND、USDT），不再使用中文或全形字元。</p>
 
       <h3 id="s2-4">2.4 層級結構與國家幣種綁定規則</h3>
 
-      <h4>2.4.1 投注站系統啟用狀態（原有邏輯調整）</h4>
+      <h4 id="s2-4-1">2.4.1 投注站系統啟用狀態（原有邏輯調整）</h4>
       <p>路徑：控制後台 &gt; 平台管理 &gt; 平台列表 &gt; 新增平台 &gt; 投注站系統啟用狀態</p>
       <table>
         <tr><th class="th-w100"></th><th>邏輯</th></tr>
         <tr><td><strong>原邏輯</strong></td><td>管理後台建立平台站點時，需選擇是否啟用投注站；有啟用投注站則管理後台不出現總代頁面，未啟用投注站才出現總代頁面（兩者互斥，二擇一顯示）。</td></tr>
         <tr><td><strong>調整後</strong></td><td>總代頁面<strong>固定顯示</strong>，不受此開關值影響。此開關設定僅決定該平台是否額外啟用「投注站」功能頁面，與總代頁面顯示與否無關。此設定於<strong>新增平台時決定後不可修改</strong>。</td></tr>
       </table>
-      <p>調整原因：投注站為 PHP（菲律賓）特有概念，若要運營多國家幣種，「總代」概念須為所有國家通用存在的層級。</p>
+            <p class="rec-adj"><span class="rec-adj-tag">8/20 更新：</span>依照 <span class="x-jump" onclick="showPg('spec-discussion');goTo('rec-22')">8/18 第二次週會（項次 22）</span>，本節補充如下。</p>
+      <ul>
+        <li>開關啟用時需選擇適用國家</li>
+        <li>投注站僅渲染所選的適用國家，總代則排除這些國家</li>
+        <li>投注站相關內容隨此開關開啟／隱藏</li>
+      </ul>
       <div class="callout">
         <span class="callout-label">適用範圍</span>
         此調整規則僅適用於<strong>未來新建立的平台</strong>。現有平台（OKBET）不受此規則影響，僅需直接將總代頁面開啟顯示，不牽動既有的投注站啟用狀態設定。
@@ -1685,6 +1771,34 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
       <li>時程：<strong>11 月底</strong>全部開發完成、上 UAT；11～12 月修復＋測試；<strong>1 月底</strong>上生產</li>
     </ul>
 
+    <h3 class="plan-h" id="rd-sched">RD 預計時程 V1（8/20 排定）</h3>
+    <p class="plan-note">前提：兩名完整人力投入。本表為預估、將隨情況改版；改版時本區僅保留最新版（版本號遞增），歷史沿革見<span class="x-jump" onclick="showPg('spec-discussion');goTo('rec-30')">討論紀錄（項次 30）</span>。</p>
+    <table class="rec-table">
+      <tr><th>期數</th><th>內容</th><th>開發開始</th><th>進 QA</th><th>時長</th><th>備註</th></tr>
+      <tr><td class="rec-no">1</td><td>基礎工程</td><td>8/24</td><td>9/5</td><td>2 週</td><td></td></tr>
+      <tr><td class="rec-no">1.5</td><td>充值提款匹配邏輯優化（<a href="https://okbetokbet.atlassian.net/browse/OKF-2074" target="_blank">OKF-2074</a>）</td><td></td><td></td><td></td><td>資料整理尚需約一週；實作人力未定</td></tr>
+      <tr><td class="rec-no">2</td><td>金流</td><td>9/7</td><td>9/11</td><td>1 週</td><td></td></tr>
+      <tr><td class="rec-no">3</td><td>代理線（投注站＋會員）</td><td>9/14</td><td>9/18</td><td>1 週</td><td></td></tr>
+      <tr><td class="rec-no">4</td><td>三方 GAME ＋ 體育</td><td>9/21</td><td>10/8</td><td>3 週</td><td>兩項內容各 2 週，兩人分工整體 3 週</td></tr>
+      <tr><td class="rec-no">5</td><td>匯總報表</td><td>10/12</td><td>10/16</td><td>1 週</td><td></td></tr>
+      <tr><td class="rec-no">6</td><td>金流風控</td><td>10/19</td><td>10/23</td><td>1 週</td><td></td></tr>
+      <tr><td class="rec-no">7</td><td>VIP</td><td>10/26</td><td>10/30</td><td>1 週</td><td></td></tr>
+      <tr><td colspan="6">里程碑：11/2 全部開發完成（約 10 週）→ 11 月底全上 UAT（11/26）→ 1 月底上正式（1/25，過年 2/4～2/10 前）</td></tr>
+    </table>
+    <h4 class="plan-h4">排程依賴規則</h4>
+    <ul class="plan-flow">
+      <li>期 2 須待 1.5（OKF-2074）完成後才可開始</li>
+      <li>期 3、期 4 只要期 1 完成即可開始，可平行進行、不需等期 2（可先帶假資料）</li>
+      <li>期 5 為唯一必須等期 1～4 全部完成後才能開工的項目</li>
+      <li>期 6、期 7 於期 1 完成後可隨時做、可平行，但重要性較低，原則上待期 5 完成後才開始</li>
+    </ul>
+    <h4 class="plan-h4">時程變因</h4>
+    <ul class="plan-flow">
+      <li>期 1 受系統參數管理實作範圍影響</li>
+      <li>期 4 受三方 GAME「商戶與遊戲是否要做」影響</li>
+      <li>多頭平行開發下，其他新開發／調整可能影響本專案，需安排人力定期回頭確認並修正已完成項目；此人力配置本身亦為時程變因</li>
+    </ul>
+
     <h3 class="plan-h">各期 DEV 進度</h3>
     <table class="rec-table">
       <tr><th>期數</th><th>名稱</th><th>範圍</th><th>盤點</th><th>開發中</th><th>上 DEV</th><th>DEV 驗收通過</th><th>備註</th></tr>
@@ -1754,6 +1868,77 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
       <tr><td class="rec-date">11/20</td><td></td><td></td><td></td></tr>
       <tr><td class="rec-date">11/27</td><td></td><td></td><td></td></tr>
     </table>
+  </div>
+</div>
+
+<div class="pg" id="pg-ctl-plat-mgmt-plat-list">
+  <div class="pg-crumb">控制後台 &gt; 平台管理 &gt; 平台列表</div>
+  <p class="rec-adj"><span class="rec-adj-tag">8/20 新增：</span>依照 <span class="x-jump" onclick="showPg('spec-discussion');goTo('rec-22')">8/18 第二次週會（項次 22）</span>，補上投注站系統啟用狀態的適用國家選擇與列表投注站欄位規格。</p>
+  <div class="pg-overview">
+    <h4>本頁改動目標</h4>
+    <div class="ov-dir"><div class="ov-dir-lbl">管理後台：</div><ul class="ov-dir-list"><li>投注站功能頁面與相關內容隨「投注站系統啟用狀態」開啟／隱藏</li><li>投注站可綁定的國家(<code>nation_code</code>)僅限本頁所選的投注站適用國家，總代則排除這些國家</li></ul></div>
+    <div class="ov-dir"><div class="ov-dir-lbl">控制後台：</div><ul class="ov-dir-list"><li>新增平台彈窗：啟用投注站時需選擇投注站適用國家(<code>nation_code</code>)，選項來源為「可使用國家」已選的國家，必填至少一個</li><li>平台列表新增「投注站」欄位，純文字顯示啟用／停用</li><li>修改平台彈窗：投注站系統啟用狀態維持不可修改，投注站適用國家可編輯調整</li></ul></div>
+    <div class="ov-dir"><div class="ov-dir-lbl">前台影響：</div><ul class="ov-dir-list"><li>無（此為控制後台平台建置設定；透過投注站綁定間接影響會員歸屬，實際前台內容由管理後台各項設定決定）</li></ul></div>
+  </div>
+
+  <div class="mk-screen">
+    <h4>後台畫面</h4>
+    <div id="tpl-ctl-platlist-screen"></div>
+  </div>
+
+  <div class="spec-card">
+    <div class="spec-card-hd"><span class="spec-card-num">541</span><span class="spec-card-adj">8/20新增</span></div>
+    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">平台管理 &gt; 平台列表 &gt; 新增平台 &gt; 新增平台彈窗 &gt; 投注站系統啟用狀態 &gt; 投注站適用國家</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge new">新增</span></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">新增平台彈窗的「投注站系統啟用狀態」僅為啟用／停用單選，啟用後無法指定投注站適用的國家範圍。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
+      <ol>
+        <li>「投注站系統啟用狀態」點選「啟用」後，下方出現「投注站適用國家」(<code>nation_code</code>)下拉選單，可多選；點選「停用」則不顯示此欄位</li>
+        <li>選項來源為本彈窗「可使用國家」已選的國家，於其中渲染，不可選到可使用國家以外的國家</li>
+        <li>啟用投注站時，投注站適用國家為必填，至少選擇一個國家才能保存</li>
+        <li>僅所選適用國家啟用投注站；投注站僅渲染這些國家，總代則排除這些國家</li>
+      </ol>
+    </div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">點「啟用」顯示「投注站適用國家」多選下拉、點「停用」隱藏；選項讀取本彈窗「可使用國家」已選清單渲染；啟用狀態為啟用時，驗證適用國家至少選一個，未選不可保存。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">新增平台 API 儲存投注站適用國家(<code>nation_code</code>)清單；此清單供管理後台投注站頁的國家下拉選項來源使用。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（此為控制後台建置設定，透過投注站綁定間接影響會員歸屬，不直接作用於前台會員端）</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-ctl-platlist-001"></div></div></div>
+  </div>
+
+  <div class="spec-card">
+    <div class="spec-card-hd"><span class="spec-card-num">542</span><span class="spec-card-adj">8/20新增</span></div>
+    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">平台管理 &gt; 平台列表 &gt; 列表 &gt; 投注站欄位</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge new">新增</span></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">平台列表無投注站相關欄位，看不出各平台是否啟用投注站系統。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
+      <ol>
+        <li>在「報表顯示(Boss後台)」與「狀態」欄位之間新增「投注站」欄位，排列為「報表顯示(Boss後台)｜投注站｜狀態」</li>
+        <li>顯示該平台的投注站系統啟用狀態，內容為純文字「啟用」／「停用」，不做狀態顏色</li>
+      </ol>
+    </div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">列表新增「投注站」欄位渲染，依後端回傳的投注站系統啟用狀態顯示純文字。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">平台列表 API 回傳資料需包含投注站系統啟用狀態欄位。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（此為控制後台列表顯示，不影響前台會員端）</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-ctl-platlist-002"></div></div></div>
+  </div>
+
+  <div class="spec-card">
+    <div class="spec-card-hd"><span class="spec-card-num">543</span><span class="spec-card-adj">8/20新增</span></div>
+    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">平台管理 &gt; 平台列表 &gt; 列表 &gt; 操作 &gt; 修改 &gt; 修改平台彈窗</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge new">新增</span></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">修改平台彈窗的「投注站系統啟用狀態」反灰不可修改；彈窗內無投注站適用國家欄位。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
+      <ol>
+        <li>「投注站系統啟用狀態」維持反灰、不可修改</li>
+        <li>顯示「投注站適用國家」(<code>nation_code</code>)多選下拉，帶入已保存的適用國家，可編輯調整</li>
+        <li>選項來源為本彈窗「可使用國家」已選的國家，於其中渲染</li>
+        <li>啟用投注站的平台，適用國家至少需選擇一個才能保存</li>
+      </ol>
+    </div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">開啟修改平台彈窗時帶入已保存的投注站適用國家，可增減調整；投注站系統啟用狀態欄位維持 disabled；保存時驗證適用國家至少一個。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">修改平台 API 支援更新投注站適用國家(<code>nation_code</code>)清單；不接受投注站系統啟用狀態變更。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（此為控制後台建置設定，透過投注站綁定間接影響會員歸屬，不直接作用於前台會員端）</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-ctl-platlist-003"></div></div></div>
   </div>
 </div>
 
@@ -1887,11 +2072,12 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
 
 <div class="pg" id="pg-adm-user-mgmt-station">
   <div class="pg-crumb">管理後台 &gt; 用戶管理 &gt; 投注站</div>
+  <p class="rec-adj"><span class="rec-adj-tag">8/20 調整：</span>依照 <span class="x-jump" onclick="showPg('spec-discussion');goTo('rec-22')">8/18 第二次週會（項次 22）</span>，投注站改以獨立的「國家」「幣種」欄位綁定國家幣種，「地區／地域」歸為地址性質、不再代表國家。</p>
 
   <div class="pg-overview">
     <h4>本頁改動目標</h4>
     <div class="ov-dir"><div class="ov-dir-lbl">管理後台：</div><ul class="ov-dir-list"><li>新增投注站時需綁定國家(<code>nation_code</code>)＋幣種(<code>currency</code>)，幣種依所選國家聯動，儲存後鎖定不可修改</li><li>列表上方可依國家(<code>nation_code</code>)＋幣種(<code>currency</code>)篩選投注站（兩者連動）</li><li>列表與各操作彈窗（押金／增加額度／減少額度／設置基準額度／詳情）顯示所屬國家(<code>nation_code</code>)＋幣種(<code>currency</code>)</li><li>用戶轉移限制僅能轉到同國家(<code>nation_code</code>)＋幣種(<code>currency</code>)的投注站</li><li>既有投注站資料批次回填，國家(<code>nation_code</code>)回填菲律賓、幣種(<code>currency</code>)回填 PHP</li></ul></div>
-    <div class="ov-dir"><div class="ov-dir-lbl">控制後台：</div><ul class="ov-dir-list"><li>投注站可選的國家(<code>nation_code</code>)／幣種(<code>currency</code>)，改讀控制後台的可使用國家設定聯動供給，前端不寫死</li></ul></div>
+    <div class="ov-dir"><div class="ov-dir-lbl">控制後台：</div><ul class="ov-dir-list"><li>投注站可選的國家(<code>nation_code</code>)僅為控制後台「投注站系統啟用狀態」啟用時所選的適用國家；幣種(<code>currency</code>)依國家聯動供給，前端不寫死</li></ul></div>
     <div class="ov-dir"><div class="ov-dir-lbl">前台影響：</div><ul class="ov-dir-list"><li>投注站無直接對應的前台頁面；但其綁定的國家(<code>nation_code</code>)＋幣種(<code>currency</code>)會向下決定底下大代理、代理、會員的歸屬，最終影響這些會員在前台看到的活動、VIP、幣種顯示等內容。</li></ul></div>
   </div>
 
@@ -1916,14 +2102,14 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
   </div>
 
   <div class="spec-card">
-    <div class="spec-card-hd"><span class="spec-card-num">002</span></div>
+    <div class="spec-card-hd"><span class="spec-card-num">002</span><span class="spec-card-adj">8/20調整</span></div>
     <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">用戶管理 &gt; 投注站 &gt; 列表 &gt; 欄位</div></div>
     <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge new">新增</span></div></div>
     <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">在名跟用戶數量欄位中間，目前無國家/幣種相關欄位。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
       <ol>
         <li>在「名」與「用戶數量」欄位之間新增「國家/幣種」(<code>nation_code</code>/<code>currency</code>)欄位，排列為「名｜國家/幣種｜用戶數量」</li>
-        <li>國家/幣種依投注站帳號的地區幣種帶入，內容為：国家：菲律賓／币种：PHP</li>
+        <li>國家/幣種依投注站帳號綁定的國家(<code>nation_code</code>)＋幣種(<code>currency</code>)帶入，內容為：国家：菲律賓／币种：PHP</li>
       </ol>
     </div></div>
     <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">渲染列表時，於名跟用戶數量欄位中間新增「國家(<code>nation_code</code>)/幣種(<code>currency</code>)」欄位，讀取後端回傳資料顯示。</div></div>
@@ -1932,8 +2118,8 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
     <div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-station-002"></div></div></div>
   </div>
 
-  <div class="spec-card">
-    <div class="spec-card-hd"><span class="spec-card-num">003</span></div>
+  <div class="spec-card card-dep">
+    <div class="spec-card-hd"><span class="spec-card-num">003</span><span class="spec-card-adj">8/20調整</span></div>
     <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">用戶管理 &gt; 投注站 &gt; 新增投注站按鈕 &gt; 新增投注站頁面 &gt; 地區</div></div>
     <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge mod">調整</span></div></div>
     <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">地區下拉選單目前是顯示所有國家。</div></div>
@@ -1949,20 +2135,22 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
   </div>
 
   <div class="spec-card">
-    <div class="spec-card-hd"><span class="spec-card-num">004</span></div>
-    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">用戶管理 &gt; 投注站 &gt; 新增投注站按鈕 &gt; 新增投注站頁面 &gt; 幣種</div></div>
+    <div class="spec-card-hd"><span class="spec-card-num">004</span><span class="spec-card-adj">8/20調整</span></div>
+    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">用戶管理 &gt; 投注站 &gt; 新增投注站按鈕 &gt; 新增投注站頁面 &gt; 國家、幣種</div></div>
     <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge new">新增</span></div></div>
-    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">原投注站沒有幣種概念，需要綁定幣種。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">新增投注站頁面僅有地址性質的「地區」欄位，沒有「國家」「幣種」欄位，無法綁定國家＋幣種。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
       <ol>
-        <li>在「國家」(<code>nation_code</code>)下拉選單的右側，新增「幣種」(<code>currency</code>)下拉選單</li>
-        <li>依選擇的國家，自動帶入可選擇的幣種範圍，選定國家後幣種下拉的選項範圍依該國家對應帶出，仍需手動點選，不會自動代入</li>
+        <li>在「系統類型」後方（同一行右側）新增「國家」(<code>nation_code</code>)與「幣種」(<code>currency</code>)下拉選單</li>
+        <li>國家：單選，選項僅列出控制後台「投注站系統啟用狀態」啟用時所選的適用國家</li>
+        <li>依選擇的國家，自動帶入可選擇的幣種範圍，選定國家後幣種下拉的選項依該國家對應帶出，仍需手動點選，不會自動代入</li>
         <li>未選擇國家時，幣種下拉顯示「No data」，不可點擊</li>
         <li>保存後無法修改</li>
+        <li>「地區」欄位不做調整，維持地址性質，與國家幣種綁定無關</li>
       </ol>
     </div></div>
-    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">國家(<code>nation_code</code>)選定後，幣種(<code>currency</code>)下拉依國家更新可選範圍並改為可點擊；未選國家時幣種下拉顯示「No data」；送出後鎖定不可修改。</div></div>
-    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">提供地區對應幣種(<code>currency</code>)的映射關係 API；新增投注站 API 需儲存國家(<code>nation_code</code>)與幣種，保存後不可異動。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">於「系統類型」右側渲染國家(<code>nation_code</code>)與幣種(<code>currency</code>)下拉；國家選項讀取後端回傳的投注站適用國家清單、不寫死；國家選定後幣種依國家更新可選範圍並改為可點擊，未選國家時幣種下拉顯示「No data」；送出後鎖定不可修改。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">提供投注站適用國家(<code>nation_code</code>)清單（來源為控制後台投注站系統啟用狀態所選的適用國家）與國家對應幣種(<code>currency</code>)的映射關係 API；新增投注站 API 需儲存國家與幣種，保存後不可異動。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">此設定決定該投注站底下所有帳號（含前台會員）歸屬的國家＋幣種，直接影響這些會員最終看到的前台內容（活動、VIP、幣種顯示等）。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-station-004"></div></div></div>
   </div>
@@ -2019,18 +2207,19 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
   </div>
 
   <div class="spec-card">
-    <div class="spec-card-hd"><span class="spec-card-num">008</span></div>
+    <div class="spec-card-hd"><span class="spec-card-num">008</span><span class="spec-card-adj">8/20調整</span></div>
     <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">用戶管理 &gt; 投注站 &gt; 列表 &gt; 操作欄位 &gt; 投注站詳情 &gt; 投注站詳情彈窗</div></div>
-    <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge new">新增</span></div></div>
-    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">舊有投注站只有國家沒有幣種概念，投注站詳情彈窗僅顯示國家。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge mod">調整</span></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">投注站詳情彈窗僅顯示地址性質的「國家」（如 PHILIPPINES）與省份、城市，沒有綁定的國家＋幣種欄位。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
       <ol>
-        <li>在國家(<code>nation_code</code>)的右邊，自動帶入該投注站幣種(<code>currency</code>)，標題「幣種」，內文如「PHP」，無法編輯</li>
+        <li>原「國家」欄位改名為「地域」，內容不變（如 PHILIPPINES），維持地址性質</li>
+        <li>在「地域」左邊新增「國家」(<code>nation_code</code>)與「幣種」(<code>currency</code>)欄位，排列為「國家｜幣種｜地域」，依該投注站綁定值帶入，無法編輯</li>
         <li>此處新增後，舊有投注站帳號統一套上菲律賓國家與PHP幣種</li>
       </ol>
     </div></div>
-    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">於「國家(<code>nation_code</code>)」欄位右邊新增唯讀幣種(<code>currency</code>)欄位，讀取後端回傳資料顯示，不提供編輯。</div></div>
-    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">投注站詳情 API 回傳資料需包含幣種(<code>currency</code>)欄位；需對舊有投注站帳號執行批次回填，統一套上菲律賓國家(<code>nation_code</code>)與PHP幣種。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">原「國家」欄位標題改為「地域」；於其左邊新增唯讀國家(<code>nation_code</code>)與幣種(<code>currency</code>)欄位，讀取後端回傳資料顯示，不提供編輯。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">投注站詳情 API 回傳資料需包含綁定的國家(<code>nation_code</code>)與幣種(<code>currency</code>)欄位；需對舊有投注站帳號執行批次回填，統一套上菲律賓國家與PHP幣種。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（此為管理後台投注站詳情顯示，不影響前台會員端）</div></div>
     <div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-station-008"></div></div></div>
   </div>
@@ -3066,6 +3255,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
 </div>
 <div class="pg" id="pg-adm-user-mgmt-vip">
   <div class="pg-crumb">管理後台 &gt; 用戶管理 &gt; VIP特權</div>
+  <p class="rec-adj"><span class="rec-adj-tag">8/20 調整：</span>依照 <span class="x-jump" onclick="showPg('spec-discussion');goTo('rec-12')">8/18 第二次週會（項次 12）</span>，同步配置改為「選擇複製來源與同步目標，帶入來源數值編輯後一次保存」的流程，相關卡片依此重寫。</p>
   <div class="pg-tabs">
     <div class="pg-tab active" data-tabgroup="vip" data-tab="vip-priv" onclick="showPgTab('vip','vip-priv')">VIP特權</div>
     <div class="pg-tab" data-tabgroup="vip" data-tab="growth" onclick="showPgTab('vip','growth')">成長值紀錄</div>
@@ -3074,7 +3264,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
   <div class="pg-tabpane" data-tabgroup="vip" data-tab="vip-priv">
   <div class="pg-overview">
     <h4>本頁改動目標</h4>
-    <div class="ov-dir"><div class="ov-dir-lbl">管理後台：</div><ul class="ov-dir-list"><li>VIP各設定分頁標題右側新增幣種(<code>currency</code>)與國家(<code>nation_code</code>)下拉，各項數值依國家＋幣種分別配置</li><li>同步配置為將數值照搬遷移至指定幣種，不做匯率換算</li></ul></div>
+    <div class="ov-dir"><div class="ov-dir-lbl">管理後台：</div><ul class="ov-dir-list"><li>VIP各設定分頁標題右側新增幣種(<code>currency</code>)與國家(<code>nation_code</code>)下拉，各項數值依國家＋幣種分別配置</li><li>同步配置：於彈窗選擇複製來源與同步目標（國家＋幣種）後，帶入來源數值進入整頁編輯、確認保存後一次寫入目標組合；數值照搬、不做匯率換算</li></ul></div>
     <div class="ov-dir"><div class="ov-dir-lbl">控制後台：</div><ul class="ov-dir-list"><li>幣種(<code>currency</code>)／國家(<code>nation_code</code>)下拉的選項範圍由控制後台的國家與幣種設定向下供給，前端不寫死</li></ul></div>
     <div class="ov-dir"><div class="ov-dir-lbl">前台影響：</div><ul class="ov-dir-list"><li>前台會員僅會看到自己國家＋幣種的 VIP 活動，所有 VIP 數值設定、活動彩金等，皆套用該國家＋幣種的數據</li></ul></div>
   </div>
@@ -3100,22 +3290,26 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
   </div>
 
 <div class="spec-card">
-    <div class="spec-card-hd"><span class="spec-card-num">048</span></div>
+    <div class="spec-card-hd"><span class="spec-card-num">048</span><span class="spec-card-adj">8/20調整</span></div>
     <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">用戶管理 &gt; VIP特權 &gt; VIP特權分頁 &gt; 成長值及流水倍數 &gt; 幣種選單右側</div></div>
     <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge new">新增</span></div></div>
-    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">成長值及流水倍數各幣種設定需逐一手動輸入，無法將設定同步換算至其他幣種。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">成長值及流水倍數為逐列編輯保存；各幣種設定需逐一手動輸入，沒有將某一組合的設定同步複製至其他組合的功能。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
       <ol>
-        <li>在「幣種」(<code>currency</code>)選單右側新增「同步配置」按鈕，點擊後跳出幣種勾選彈窗</li>
-        <li>彈窗最上方左邊第一個為「全部」，下方顯示各幣種，最下方左「取消」右「保存」</li>
-        <li>勾選後按保存，所有勾選的幣種僅做數值同步遷移：原本設定多少就照搬至指定幣種，不做匯率換算</li>
-        <li>勾選「全部」時下方所有幣種同時勾選；再點擊取消任一下方幣種，「全部」同時取消勾選</li>
-        <li>「全部」最右邊有「取消全部」文字，點擊後取消所有勾選</li>
+        <li>在「幣種」(<code>currency</code>)選單右側新增「同步配置」按鈕，點擊後跳出同步配置彈窗</li>
+        <li>彈窗內分「複製來源」與「同步目標」兩組，各為國家(<code>nation_code</code>)＋幣種(<code>currency</code>)連動單選；複製來源預設帶入當前頁面所選組合，同步目標預設未選</li>
+        <li>來源與目標皆須選齊國家＋幣種才可送出；同步目標不可與複製來源相同</li>
+        <li>按「確定」跳出二次確認（確認是否將「來源」的數值配置至「目標」），確認後彈窗關閉，頁面切換至同步目標組合並帶入複製來源的全部設定值</li>
+        <li>進入整頁編輯狀態：所有數值欄開放編輯，頂部國家、幣種下拉反灰不可切換，「同步配置」按鈕隱藏，改顯示「取消」「保存」；原逐列操作欄（設定等）反灰、不可點擊</li>
+        <li>頁面原有的逐列「設定→保存」編輯方式不變，僅同步配置時走整頁編輯流程</li>
+        <li>按「保存」跳出保存確認，確認後數值一次寫入同步目標組合、回到一般檢視；按「取消」放棄本次同步與所有修改，目標組合維持原值</li>
+        <li>數值為直接照搬複製、不做匯率換算；寫入後各欄位仍可再手動修改</li>
       </ol>
     </div></div>
-    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">新增同步配置按鈕與彈窗元件，彈窗內含全選/取消全選連動勾選邏輯。</div></div>
-    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">同步配置 API 接收幣種(<code>currency</code>)清單，依匯率(<code>sys_rate</code>)換算為系統幣並儲存各幣種設定值。</div></div>
-    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（系統幣數值係後台依匯率換算後之顯示，會員端不涉及系統幣、僅以法幣呈現，不影響前台）</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-vip-002"></div></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">同步配置彈窗（複製來源／同步目標各自國家(<code>nation_code</code>)幣種(<code>currency</code>)連動，含選齊與不可相同檢核）；確認後頁面切至目標組合、帶入來源值進入整頁編輯（下拉反灰、顯示取消／保存）；保存前確認彈窗；未確認保存前數值僅暫存、不寫入。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">同步配置寫入 API 接收複製來源與同步目標的國家(<code>nation_code</code>)＋幣種(<code>currency</code>)組合及整頁設定值，確認保存後一次寫入目標組合；數值照搬、不做匯率換算。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">同步配置將設定寫入同步目標組合後，該國家(<code>nation_code</code>)＋幣種(<code>currency</code>)會員適用的 VIP 相關條件與前台 VIP 顯示隨之變更。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-vip-002"></div></div></div>
   </div>
 
 <div class="spec-card">
@@ -3139,22 +3333,26 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
   </div>
 
 <div class="spec-card">
-    <div class="spec-card-hd"><span class="spec-card-num">050</span></div>
+    <div class="spec-card-hd"><span class="spec-card-num">050</span><span class="spec-card-adj">8/20調整</span></div>
     <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">用戶管理 &gt; VIP特權 &gt; VIP特權分頁 &gt; 成长值倍数设定 &gt; 幣種選單右側</div></div>
     <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge new">新增</span></div></div>
-    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">成长值倍数设定各幣種設定需逐一手動輸入，無法將設定同步換算至其他幣種。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">成長值倍數設定為整組一次編輯保存；設定僅單一一組、未依國家＋幣種區分，也沒有將設定同步複製至其他組合的功能。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
       <ol>
-        <li>在「幣種」(<code>currency</code>)選單右側新增「同步配置」按鈕，點擊後跳出幣種勾選彈窗</li>
-        <li>彈窗最上方左邊第一個為「全部」，下方顯示各幣種，最下方左「取消」右「保存」</li>
-        <li>勾選後按保存，所有勾選的幣種僅做數值同步遷移：原本設定多少就照搬至指定幣種，不做匯率換算</li>
-        <li>勾選「全部」時下方所有幣種同時勾選；再點擊取消任一下方幣種，「全部」同時取消勾選</li>
-        <li>「全部」最右邊有「取消全部」文字，點擊後取消所有勾選</li>
+        <li>在「幣種」(<code>currency</code>)選單右側新增「同步配置」按鈕，點擊後跳出同步配置彈窗</li>
+        <li>彈窗內分「複製來源」與「同步目標」兩組，各為國家(<code>nation_code</code>)＋幣種(<code>currency</code>)連動單選；複製來源預設帶入當前頁面所選組合，同步目標預設未選</li>
+        <li>來源與目標皆須選齊國家＋幣種才可送出；同步目標不可與複製來源相同</li>
+        <li>按「確定」跳出二次確認（確認是否將「來源」的數值配置至「目標」），確認後彈窗關閉，頁面切換至同步目標組合並帶入複製來源的全部設定值</li>
+        <li>進入整頁編輯狀態：所有數值欄開放編輯，頂部國家、幣種下拉反灰不可切換，「同步配置」與「編輯」按鈕隱藏，改顯示「取消」「保存」</li>
+        <li>本區塊原即為整組一次編輯保存（編輯按鈕），同步配置帶入來源數值後沿用相同的整組編輯方式、一次保存</li>
+        <li>按「保存」跳出保存確認，確認後數值一次寫入同步目標組合、回到一般檢視；按「取消」放棄本次同步與所有修改，目標組合維持原值</li>
+        <li>數值為直接照搬複製、不做匯率換算；寫入後各欄位仍可再手動修改</li>
       </ol>
     </div></div>
-    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">新增同步配置按鈕與彈窗元件，彈窗內含全選/取消全選連動勾選邏輯。</div></div>
-    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">同步配置 API 接收幣種(<code>currency</code>)清單，依匯率(<code>sys_rate</code>)換算為系統幣並儲存各幣種設定值。</div></div>
-    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（系統幣數值係後台依匯率換算後之顯示，會員端不涉及系統幣、僅以法幣呈現，不影響前台）</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-vip-004"></div></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">同步配置彈窗（複製來源／同步目標各自國家(<code>nation_code</code>)幣種(<code>currency</code>)連動，含選齊與不可相同檢核）；確認後頁面切至目標組合、帶入來源值進入整頁編輯（下拉反灰、顯示取消／保存）；保存前確認彈窗；未確認保存前數值僅暫存、不寫入。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">同步配置寫入 API 接收複製來源與同步目標的國家(<code>nation_code</code>)＋幣種(<code>currency</code>)組合及整頁設定值，確認保存後一次寫入目標組合；數值照搬、不做匯率換算。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">同步配置將設定寫入同步目標組合後，該國家(<code>nation_code</code>)＋幣種(<code>currency</code>)會員適用的 VIP 相關條件與前台 VIP 顯示隨之變更。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-vip-004"></div></div></div>
   </div>
 
 <div class="spec-card">
@@ -3178,22 +3376,26 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
   </div>
 
 <div class="spec-card">
-    <div class="spec-card-hd"><span class="spec-card-num">052</span></div>
+    <div class="spec-card-hd"><span class="spec-card-num">052</span><span class="spec-card-adj">8/20調整</span></div>
     <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">用戶管理 &gt; VIP特權 &gt; VIP特權分頁 &gt; 返水/下注相關 &gt; 幣種選單右側</div></div>
     <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge new">新增</span></div></div>
-    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">返水/下注相關各幣種設定需逐一手動輸入，無法將設定同步換算至其他幣種。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">返水/下注相關為整組一次編輯保存；各幣種設定需逐一手動輸入，沒有將某一組合的設定同步複製至其他組合的功能。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
       <ol>
-        <li>在「幣種」(<code>currency</code>)選單右側新增「同步配置」按鈕，點擊後跳出幣種勾選彈窗</li>
-        <li>彈窗最上方左邊第一個為「全部」，下方顯示各幣種，最下方左「取消」右「保存」</li>
-        <li>勾選後按保存，所有勾選的幣種僅做數值同步遷移：原本設定多少就照搬至指定幣種，不做匯率換算</li>
-        <li>勾選「全部」時下方所有幣種同時勾選；再點擊取消任一下方幣種，「全部」同時取消勾選</li>
-        <li>「全部」最右邊有「取消全部」文字，點擊後取消所有勾選</li>
+        <li>在「幣種」(<code>currency</code>)選單右側新增「同步配置」按鈕，點擊後跳出同步配置彈窗</li>
+        <li>彈窗內分「複製來源」與「同步目標」兩組，各為國家(<code>nation_code</code>)＋幣種(<code>currency</code>)連動單選；複製來源預設帶入當前頁面所選組合，同步目標預設未選</li>
+        <li>來源與目標皆須選齊國家＋幣種才可送出；同步目標不可與複製來源相同</li>
+        <li>按「確定」跳出二次確認（確認是否將「來源」的數值配置至「目標」），確認後彈窗關閉，頁面切換至同步目標組合並帶入複製來源的全部設定值</li>
+        <li>進入整頁編輯狀態：所有數值欄開放編輯，頂部國家、幣種下拉反灰不可切換，「同步配置」與「編輯」按鈕隱藏，改顯示「取消」「保存」</li>
+        <li>本區塊原即為整組一次編輯保存（編輯按鈕），同步配置帶入來源數值後沿用相同的整組編輯方式、一次保存</li>
+        <li>按「保存」跳出保存確認，確認後數值一次寫入同步目標組合、回到一般檢視；按「取消」放棄本次同步與所有修改，目標組合維持原值</li>
+        <li>數值為直接照搬複製、不做匯率換算；寫入後各欄位仍可再手動修改</li>
       </ol>
     </div></div>
-    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">新增同步配置按鈕與彈窗元件，彈窗內含全選/取消全選連動勾選邏輯。</div></div>
-    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">同步配置 API 接收幣種(<code>currency</code>)清單，依匯率(<code>sys_rate</code>)換算為系統幣並儲存各幣種設定值。</div></div>
-    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（系統幣數值係後台依匯率換算後之顯示，會員端不涉及系統幣、僅以法幣呈現，不影響前台）</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-vip-006"></div></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">同步配置彈窗（複製來源／同步目標各自國家(<code>nation_code</code>)幣種(<code>currency</code>)連動，含選齊與不可相同檢核）；確認後頁面切至目標組合、帶入來源值進入整頁編輯（下拉反灰、顯示取消／保存）；保存前確認彈窗；未確認保存前數值僅暫存、不寫入。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">同步配置寫入 API 接收複製來源與同步目標的國家(<code>nation_code</code>)＋幣種(<code>currency</code>)組合及整頁設定值，確認保存後一次寫入目標組合；數值照搬、不做匯率換算。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">同步配置將設定寫入同步目標組合後，該國家(<code>nation_code</code>)＋幣種(<code>currency</code>)會員適用的 VIP 相關條件與前台 VIP 顯示隨之變更。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-vip-006"></div></div></div>
   </div>
 
 <div class="spec-card">
@@ -3217,22 +3419,26 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
   </div>
 
 <div class="spec-card">
-    <div class="spec-card-hd"><span class="spec-card-num">054</span></div>
+    <div class="spec-card-hd"><span class="spec-card-num">054</span><span class="spec-card-adj">8/20調整</span></div>
     <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">用戶管理 &gt; VIP特權 &gt; VIP特權分頁 &gt; VIP回归成长值加成 &gt; 幣種選單右側</div></div>
     <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge new">新增</span></div></div>
-    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">VIP回归成长值加成各幣種設定需逐一手動輸入，無法將設定同步換算至其他幣種。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">VIP回歸成長值加成為逐列編輯保存；設定僅單一一組、未依國家＋幣種區分，也沒有將設定同步複製至其他組合的功能。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
       <ol>
-        <li>在「幣種」(<code>currency</code>)選單右側新增「同步配置」按鈕，點擊後跳出幣種勾選彈窗</li>
-        <li>彈窗最上方左邊第一個為「全部」，下方顯示各幣種，最下方左「取消」右「保存」</li>
-        <li>勾選後按保存，所有勾選的幣種僅做數值同步遷移：原本設定多少就照搬至指定幣種，不做匯率換算</li>
-        <li>勾選「全部」時下方所有幣種同時勾選；再點擊取消任一下方幣種，「全部」同時取消勾選</li>
-        <li>「全部」最右邊有「取消全部」文字，點擊後取消所有勾選</li>
+        <li>在「幣種」(<code>currency</code>)選單右側新增「同步配置」按鈕，點擊後跳出同步配置彈窗</li>
+        <li>彈窗內分「複製來源」與「同步目標」兩組，各為國家(<code>nation_code</code>)＋幣種(<code>currency</code>)連動單選；複製來源預設帶入當前頁面所選組合，同步目標預設未選</li>
+        <li>來源與目標皆須選齊國家＋幣種才可送出；同步目標不可與複製來源相同</li>
+        <li>按「確定」跳出二次確認（確認是否將「來源」的數值配置至「目標」），確認後彈窗關閉，頁面切換至同步目標組合並帶入複製來源的全部設定值</li>
+        <li>進入整頁編輯狀態：所有數值欄開放編輯，頂部國家、幣種下拉反灰不可切換，「同步配置」按鈕隱藏，改顯示「取消」「保存」；原逐列操作欄（設定等）反灰、不可點擊</li>
+        <li>頁面原有的逐列「設定→保存」編輯方式不變，僅同步配置時走整頁編輯流程</li>
+        <li>按「保存」跳出保存確認，確認後數值一次寫入同步目標組合、回到一般檢視；按「取消」放棄本次同步與所有修改，目標組合維持原值</li>
+        <li>數值為直接照搬複製、不做匯率換算；寫入後各欄位仍可再手動修改</li>
       </ol>
     </div></div>
-    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">新增同步配置按鈕與彈窗元件，彈窗內含全選/取消全選連動勾選邏輯。</div></div>
-    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">同步配置 API 接收幣種(<code>currency</code>)清單，依匯率(<code>sys_rate</code>)換算為系統幣並儲存各幣種設定值。</div></div>
-    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（系統幣數值係後台依匯率換算後之顯示，會員端不涉及系統幣、僅以法幣呈現，不影響前台）</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-vip-008"></div></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">同步配置彈窗（複製來源／同步目標各自國家(<code>nation_code</code>)幣種(<code>currency</code>)連動，含選齊與不可相同檢核）；確認後頁面切至目標組合、帶入來源值進入整頁編輯（下拉反灰、顯示取消／保存）；保存前確認彈窗；未確認保存前數值僅暫存、不寫入。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">同步配置寫入 API 接收複製來源與同步目標的國家(<code>nation_code</code>)＋幣種(<code>currency</code>)組合及整頁設定值，確認保存後一次寫入目標組合；數值照搬、不做匯率換算。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">同步配置將設定寫入同步目標組合後，該國家(<code>nation_code</code>)＋幣種(<code>currency</code>)會員適用的 VIP 相關條件與前台 VIP 顯示隨之變更。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-vip-008"></div></div></div>
   </div>
 
 <div class="spec-card">
@@ -3256,22 +3462,26 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
   </div>
 
 <div class="spec-card">
-    <div class="spec-card-hd"><span class="spec-card-num">056</span></div>
+    <div class="spec-card-hd"><span class="spec-card-num">056</span><span class="spec-card-adj">8/20調整</span></div>
     <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">用戶管理 &gt; VIP特權 &gt; VIP特權分頁 &gt; VIP充值金额稽核流水比例 &gt; 幣種選單右側</div></div>
     <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge new">新增</span></div></div>
-    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">VIP充值金额稽核流水比例各幣種設定需逐一手動輸入，無法將設定同步換算至其他幣種。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">VIP充值金額稽核流水比例為逐列編輯保存；設定僅單一一組、未依國家＋幣種區分，也沒有將設定同步複製至其他組合的功能。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
       <ol>
-        <li>在「幣種」(<code>currency</code>)選單右側新增「同步配置」按鈕，點擊後跳出幣種勾選彈窗</li>
-        <li>彈窗最上方左邊第一個為「全部」，下方顯示各幣種，最下方左「取消」右「保存」</li>
-        <li>勾選後按保存，所有勾選的幣種僅做數值同步遷移：原本設定多少就照搬至指定幣種，不做匯率換算</li>
-        <li>勾選「全部」時下方所有幣種同時勾選；再點擊取消任一下方幣種，「全部」同時取消勾選</li>
-        <li>「全部」最右邊有「取消全部」文字，點擊後取消所有勾選</li>
+        <li>在「幣種」(<code>currency</code>)選單右側新增「同步配置」按鈕，點擊後跳出同步配置彈窗</li>
+        <li>彈窗內分「複製來源」與「同步目標」兩組，各為國家(<code>nation_code</code>)＋幣種(<code>currency</code>)連動單選；複製來源預設帶入當前頁面所選組合，同步目標預設未選</li>
+        <li>來源與目標皆須選齊國家＋幣種才可送出；同步目標不可與複製來源相同</li>
+        <li>按「確定」跳出二次確認（確認是否將「來源」的數值配置至「目標」），確認後彈窗關閉，頁面切換至同步目標組合並帶入複製來源的全部設定值</li>
+        <li>進入整頁編輯狀態：所有數值欄開放編輯，頂部國家、幣種下拉反灰不可切換，「同步配置」按鈕隱藏，改顯示「取消」「保存」；原逐列操作欄（設定等）反灰、不可點擊</li>
+        <li>頁面原有的逐列「設定→保存」編輯方式不變，僅同步配置時走整頁編輯流程</li>
+        <li>按「保存」跳出保存確認，確認後數值一次寫入同步目標組合、回到一般檢視；按「取消」放棄本次同步與所有修改，目標組合維持原值</li>
+        <li>數值為直接照搬複製、不做匯率換算；寫入後各欄位仍可再手動修改</li>
       </ol>
     </div></div>
-    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">新增同步配置按鈕與彈窗元件，彈窗內含全選/取消全選連動勾選邏輯。</div></div>
-    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">同步配置 API 接收幣種(<code>currency</code>)清單，依匯率(<code>sys_rate</code>)換算為系統幣並儲存各幣種設定值。</div></div>
-    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（系統幣數值係後台依匯率換算後之顯示，會員端不涉及系統幣、僅以法幣呈現，不影響前台）</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-vip-010"></div></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">同步配置彈窗（複製來源／同步目標各自國家(<code>nation_code</code>)幣種(<code>currency</code>)連動，含選齊與不可相同檢核）；確認後頁面切至目標組合、帶入來源值進入整頁編輯（下拉反灰、顯示取消／保存）；保存前確認彈窗；未確認保存前數值僅暫存、不寫入。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">同步配置寫入 API 接收複製來源與同步目標的國家(<code>nation_code</code>)＋幣種(<code>currency</code>)組合及整頁設定值，確認保存後一次寫入目標組合；數值照搬、不做匯率換算。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">同步配置將設定寫入同步目標組合後，該國家(<code>nation_code</code>)＋幣種(<code>currency</code>)會員適用的 VIP 相關條件與前台 VIP 顯示隨之變更。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-vip-010"></div></div></div>
   </div>
 </div>
 
@@ -5624,10 +5834,11 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
 </div>
 <div class="pg" id="pg-adm-data-report-dr-stationtotal">
   <div class="pg-crumb">管理後台 &gt; 數據報表 &gt; 投注站统计</div>
+  <p class="rec-adj"><span class="rec-adj-tag">8/20 調整：</span>依照 <span class="x-jump" onclick="showPg('spec-discussion');goTo('rec-23')">8/18 第二次週會（項次 23）</span>，本頁金額欄位維持法幣顯示。</p>
   <div class="pg-overview">
     <h4>本頁改動目標</h4>
-    <div class="ov-dir"><div class="ov-dir-lbl">管理後台：</div><ul class="ov-dir-list"><li>搜尋欄最前方新增國家(<code>nation_code</code>)與幣種(<code>currency</code>)單選下拉，雙向聯動過濾</li><li>列表新增國家、幣種欄位</li><li>列表各金額欄位統一改以系統幣顯示，導出內容同步</li></ul></div>
-    <div class="ov-dir"><div class="ov-dir-lbl">控制後台：</div><ul class="ov-dir-list"><li>國家與幣種下拉的選項範圍由控制後台的國家與幣種設定向下供給，前端不寫死</li><li>系統幣換算所用匯率(<code>sys_rate</code>)由控制後台的匯率設定向下供給，前端不寫死</li></ul></div>
+    <div class="ov-dir"><div class="ov-dir-lbl">管理後台：</div><ul class="ov-dir-list"><li>搜尋欄最前方新增國家(<code>nation_code</code>)與幣種(<code>currency</code>)單選下拉，雙向聯動過濾</li><li>列表新增國家、幣種欄位</li></ul></div>
+    <div class="ov-dir"><div class="ov-dir-lbl">控制後台：</div><ul class="ov-dir-list"><li>國家與幣種下拉的選項範圍由控制後台的國家與幣種設定向下供給，前端不寫死</li></ul></div>
     <div class="ov-dir"><div class="ov-dir-lbl">前台影響：</div><ul class="ov-dir-list"><li>無（此為後台查詢／報表功能，不影響前台會員端）</li></ul></div>
   </div>
 
@@ -5667,8 +5878,8 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
     <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">投注站統計 API 回傳資料需包含該帳號綁定的國家(<code>nation_code</code>)與幣種(<code>currency</code>)欄位。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（此為後台報表顯示，不影響前台會員端）</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-dr-stationtotal-102"></div></div></div>
   </div>
-  <div class="spec-card">
-    <div class="spec-card-hd"><span class="spec-card-num">180</span></div>
+  <div class="spec-card card-dep">
+    <div class="spec-card-hd"><span class="spec-card-num">180</span><span class="spec-card-adj">8/20調整</span></div>
     <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">數據報表 &gt; 投注站统计 &gt; 列表 &gt; 欄位</div></div>
     <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge mod">調整</span></div></div>
     <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">列表各金額欄位以法幣金額顯示，不同幣種投注站的數值混在同一份報表，無法直接比較與加總。</div></div>
@@ -5686,91 +5897,197 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
 </div>
 <div class="pg" id="pg-adm-data-report-dr-large">
   <div class="pg-crumb">管理後台 &gt; 數據報表 &gt; 大額存取款報表</div>
+  <p class="rec-adj"><span class="rec-adj-tag">8/20 調整：</span>依照 <span class="x-jump" onclick="showPg('spec-discussion');goTo('rec-24')">8/18 第二次週會（項次 24）</span>，新增「大額門檻設置」分頁，依國家＋幣種設置大額存款／取款門檻；存款統計與取款統計改依此門檻統計。</p>
   <div class="pg-tabs">
     <div class="pg-tab active" data-tabgroup="dr-large" data-tab="dep" onclick="showPgTab('dr-large','dep')">存款統計</div>
     <div class="pg-tab" data-tabgroup="dr-large" data-tab="wit" onclick="showPgTab('dr-large','wit')">取款統計</div>
+    <div class="pg-tab" data-tabgroup="dr-large" data-tab="cfg" onclick="showPgTab('dr-large','cfg')">大額門檻設置</div>
   </div>
   <div class="pg-tabpane" data-tabgroup="dr-large" data-tab="dep">
   <div class="pg-overview">
     <h4>本頁改動目標</h4>
-    <div class="ov-dir"><div class="ov-dir-lbl">管理後台：</div><ul class="ov-dir-list"><li>搜尋欄最前方新增幣種(<code>currency</code>)單選下拉（幣種｜時間選單），預設「全部幣種」</li><li>列表在用戶名與金額間新增幣種欄位，顯示各帳號幣種</li><li>依所選幣種篩選存款資料，金額以法幣(<code>currency_amount</code>)顯示（不換算系統幣）</li></ul></div>
-    <div class="ov-dir"><div class="ov-dir-lbl">控制後台：</div><ul class="ov-dir-list"><li>幣種下拉的選項範圍由控制後台的幣種設定向下供給，前端不寫死</li></ul></div>
+    <div class="ov-dir"><div class="ov-dir-lbl">管理後台：</div><ul class="ov-dir-list"><li>搜尋欄最前方新增國家(<code>nation_code</code>)與幣種(<code>currency</code>)單選下拉（國家｜幣種｜時間選單），預設「全部國家」「全部幣種」，雙向連動</li><li>列表在用戶名與金額間新增國家(<code>nation_code</code>)與幣種(<code>currency</code>)欄位，顯示各帳號所屬國家與幣種</li><li>依所選國家＋幣種篩選存款資料，金額以法幣(<code>currency_amount</code>)顯示（不換算系統幣）</li><li>大額判斷門檻改讀「大額門檻設置」分頁中該帳號國家＋幣種的大額存款門檻</li></ul></div>
+    <div class="ov-dir"><div class="ov-dir-lbl">控制後台：</div><ul class="ov-dir-list"><li>國家與幣種下拉的選項範圍由控制後台的國家與幣種設定向下供給，前端不寫死</li></ul></div>
     <div class="ov-dir"><div class="ov-dir-lbl">前台影響：</div><ul class="ov-dir-list"><li>無（此為後台查詢／報表功能，不影響前台會員端）</li></ul></div>
   </div>
+  <div class="mk-screen">
+    <h4>後台畫面</h4>
+    <div id="tpl-dr-large-screen-dep"></div>
+  </div>
+
 <div class="spec-card">
-    <div class="spec-card-hd"><span class="spec-card-num">181</span></div>
+    <div class="spec-card-hd"><span class="spec-card-num">181</span><span class="spec-card-adj">8/20調整</span></div>
     <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">數據報表 &gt; 大額存取款報表 &gt; 存款統計分頁 &gt; 上方搜尋欄 &gt; 幣種</div></div>
     <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge new">新增</span></div></div>
-    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">搜尋欄沒有幣種篩選條件，多幣種帳號的資料無法依幣種過濾。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">搜尋欄沒有國家、幣種篩選條件，多國家多幣種帳號的資料無法依國家、幣種過濾。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
       <ol>
-        <li>在「最前面、時間」選單前方新增「幣種」(<code>currency</code>)下拉選單</li>
-        <li>預設為「全部幣種」，僅單選</li>
-        <li>選項來源為後端動態回傳的啟用幣種清單，不寫死</li>
-        <li>依篩選顯示該幣種的資料，顯示法幣(<code>currency_amount</code>)數值</li>
+        <li>在「時間」選單前方新增「國家」(<code>nation_code</code>)與「幣種」(<code>currency</code>)單選下拉，排列為「國家｜幣種｜時間」</li>
+        <li>國家、幣種清單第一項為「全部國家」／「全部幣種」並設為預設</li>
+        <li>國家與幣種無先後選擇限制，可任一先選</li>
+        <li>先選國家、幣種仍停在「全部幣種」時，幣種維持「全部幣種」（即該國家所有幣種）；再選特定幣種時，幣種選單僅列出所選國家支援的幣種</li>
+        <li>先選幣種、國家仍停在「全部國家」時，國家維持「全部國家」（即該幣種支援的所有國家）；再選特定國家時，國家選單僅列出支援所選幣種的國家</li>
+        <li>依篩選顯示對應資料，金額顯示法幣(<code>currency_amount</code>)數值</li>
       </ol>
     </div></div>
-    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">新增幣種(<code>currency</code>)單選下拉元件，選項讀取後端回傳的啟用幣種清單，預設選擇「全部幣種」。</div></div>
-    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">大額存取款報表查詢 API 支援幣種(<code>currency</code>)篩選參數。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">新增國家(<code>nation_code</code>)與幣種(<code>currency</code>)兩個單選下拉（位於時間選單前方），雙向連動；選項來源為後端回傳的啟用國家與其對應幣種，不寫死。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">大額存取款報表查詢 API 支援國家(<code>nation_code</code>)與幣種(<code>currency</code>)篩選參數；提供國家對應幣種映射供雙向連動。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（此為管理後台統計顯示，不影響前台會員端）</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-dr-large-001"></div></div></div>
   </div>
 
   <div class="spec-card">
-    <div class="spec-card-hd"><span class="spec-card-num">182</span></div>
+    <div class="spec-card-hd"><span class="spec-card-num">182</span><span class="spec-card-adj">8/20調整</span></div>
     <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">數據報表 &gt; 大額存取款報表 &gt; 存款統計分頁 &gt; 列表 &gt; 欄位</div></div>
     <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge new">新增</span></div></div>
-    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">列表未顯示各帳號綁定的幣種，多幣種環境下無法辨識金額欄位對應的幣種。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">列表未顯示各帳號綁定的國家與幣種，多國家多幣種環境下無法辨識各筆資料的國家與幣種。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
       <ol>
-        <li>在「用戶名」與「金額」之間新增「幣種」(<code>currency</code>)欄位，排列為「用戶名｜幣種｜金額」</li>
-        <li>顯示該帳號的幣種，統一使用半形大寫英文（如 PHP、VND）</li>
+        <li>在「用戶名」與「金額」之間新增「國家」(<code>nation_code</code>)與「幣種」(<code>currency</code>)欄位，排列為「用戶名｜國家｜幣種｜金額」</li>
+        <li>國家顯示該帳號所屬國家</li>
+        <li>幣種顯示該帳號綁定幣種，統一使用半形大寫英文（如 PHP、VND）</li>
       </ol>
     </div></div>
-    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">新增欄位渲染，從後端回傳資料讀取幣種(<code>currency</code>)欄位並統一大寫顯示。</div></div>
-    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">列表 API 回傳資料需包含幣種(<code>currency</code>)欄位。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">新增國家(<code>nation_code</code>)與幣種(<code>currency</code>)兩欄渲染，讀取後端回傳資料顯示，幣種統一大寫。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">列表 API 回傳資料需包含該帳號綁定的國家(<code>nation_code</code>)與幣種(<code>currency</code>)欄位。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（此為管理後台列表顯示，不影響前台會員端）</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-dr-large-002"></div></div></div>
+  </div>
+
+<div class="spec-card">
+    <div class="spec-card-hd"><span class="spec-card-num">546</span><span class="spec-card-adj">8/20新增</span></div>
+    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">數據報表 &gt; 大額存取款報表 &gt; 存款統計分頁 &gt; 統計邏輯</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge mod">調整</span></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">搜尋期間內累計存款金額達到門檻才會統計列出，門檻值為程式寫死，無法由後台調整。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
+      <ol>
+        <li>大額判斷門檻改讀「大額門檻設置」分頁中，該帳號所屬國家(<code>nation_code</code>)＋幣種(<code>currency</code>)的大額存款門檻</li>
+        <li>搜尋期間內累計存款金額達門檻（含）以上者列入統計；門檻為 0 時全部列入</li>
+      </ol>
+    </div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">無（純後端統計邏輯調整，頁面顯示不變）。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">存款統計查詢改依「大額門檻設置」中該帳號國家(<code>nation_code</code>)＋幣種(<code>currency</code>)的大額存款門檻過濾，不再使用寫死門檻。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（此為後台統計邏輯，不影響前台會員端）</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-dr-large-007"></div></div></div>
   </div>
 
     </div>
   <div class="pg-tabpane pg-tab-hidden" data-tabgroup="dr-large" data-tab="wit">
   <div class="pg-overview">
     <h4>本頁改動目標</h4>
-    <div class="ov-dir"><div class="ov-dir-lbl">管理後台：</div><ul class="ov-dir-list"><li>搜尋欄最前方新增幣種(<code>currency</code>)單選下拉（幣種｜時間選單），預設「全部幣種」</li><li>列表在用戶名與金額間新增幣種欄位，顯示各帳號幣種</li><li>依所選幣種篩選取款資料，金額以法幣(<code>currency_amount</code>)顯示（不換算系統幣）</li></ul></div>
-    <div class="ov-dir"><div class="ov-dir-lbl">控制後台：</div><ul class="ov-dir-list"><li>幣種下拉的選項範圍由控制後台的幣種設定向下供給，前端不寫死</li></ul></div>
+    <div class="ov-dir"><div class="ov-dir-lbl">管理後台：</div><ul class="ov-dir-list"><li>搜尋欄最前方新增國家(<code>nation_code</code>)與幣種(<code>currency</code>)單選下拉（國家｜幣種｜時間選單），預設「全部國家」「全部幣種」，雙向連動</li><li>列表在用戶名與金額間新增國家(<code>nation_code</code>)與幣種(<code>currency</code>)欄位，顯示各帳號所屬國家與幣種</li><li>依所選國家＋幣種篩選取款資料，金額以法幣(<code>currency_amount</code>)顯示（不換算系統幣）</li><li>大額判斷門檻改讀「大額門檻設置」分頁中該帳號國家＋幣種的大額取款門檻</li></ul></div>
+    <div class="ov-dir"><div class="ov-dir-lbl">控制後台：</div><ul class="ov-dir-list"><li>國家與幣種下拉的選項範圍由控制後台的國家與幣種設定向下供給，前端不寫死</li></ul></div>
     <div class="ov-dir"><div class="ov-dir-lbl">前台影響：</div><ul class="ov-dir-list"><li>無（此為後台查詢／報表功能，不影響前台會員端）</li></ul></div>
   </div>
+  <div class="mk-screen">
+    <h4>後台畫面</h4>
+    <div id="tpl-dr-large-screen-wit"></div>
+  </div>
+
 <div class="spec-card">
-    <div class="spec-card-hd"><span class="spec-card-num">183</span></div>
+    <div class="spec-card-hd"><span class="spec-card-num">183</span><span class="spec-card-adj">8/20調整</span></div>
     <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">數據報表 &gt; 大額存取款報表 &gt; 取款統計分頁 &gt; 上方搜尋欄 &gt; 幣種</div></div>
     <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge new">新增</span></div></div>
-    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">搜尋欄沒有幣種篩選條件，多幣種帳號的資料無法依幣種過濾。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">搜尋欄沒有國家、幣種篩選條件，多國家多幣種帳號的資料無法依國家、幣種過濾。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
       <ol>
-        <li>在「最前面、時間」選單前方新增「幣種」(<code>currency</code>)下拉選單</li>
-        <li>預設為「全部幣種」，僅單選</li>
-        <li>選項來源為後端動態回傳的啟用幣種清單，不寫死</li>
-        <li>依篩選顯示該幣種的資料，顯示法幣(<code>currency_amount</code>)數值</li>
+        <li>在「時間」選單前方新增「國家」(<code>nation_code</code>)與「幣種」(<code>currency</code>)單選下拉，排列為「國家｜幣種｜時間」</li>
+        <li>國家、幣種清單第一項為「全部國家」／「全部幣種」並設為預設</li>
+        <li>國家與幣種無先後選擇限制，可任一先選</li>
+        <li>先選國家、幣種仍停在「全部幣種」時，幣種維持「全部幣種」（即該國家所有幣種）；再選特定幣種時，幣種選單僅列出所選國家支援的幣種</li>
+        <li>先選幣種、國家仍停在「全部國家」時，國家維持「全部國家」（即該幣種支援的所有國家）；再選特定國家時，國家選單僅列出支援所選幣種的國家</li>
+        <li>依篩選顯示對應資料，金額顯示法幣(<code>currency_amount</code>)數值</li>
       </ol>
     </div></div>
-    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">新增幣種(<code>currency</code>)單選下拉元件，選項讀取後端回傳的啟用幣種清單，預設選擇「全部幣種」。</div></div>
-    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">大額存取款報表查詢 API 支援幣種(<code>currency</code>)篩選參數。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">新增國家(<code>nation_code</code>)與幣種(<code>currency</code>)兩個單選下拉（位於時間選單前方），雙向連動；選項來源為後端回傳的啟用國家與其對應幣種，不寫死。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">大額存取款報表查詢 API 支援國家(<code>nation_code</code>)與幣種(<code>currency</code>)篩選參數；提供國家對應幣種映射供雙向連動。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（此為管理後台統計顯示，不影響前台會員端）</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-dr-large-003"></div></div></div>
   </div>
 
   <div class="spec-card">
-    <div class="spec-card-hd"><span class="spec-card-num">184</span></div>
+    <div class="spec-card-hd"><span class="spec-card-num">184</span><span class="spec-card-adj">8/20調整</span></div>
     <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">數據報表 &gt; 大額存取款報表 &gt; 取款統計分頁 &gt; 列表 &gt; 欄位</div></div>
     <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge new">新增</span></div></div>
-    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">列表未顯示各帳號綁定的幣種，多幣種環境下無法辨識金額欄位對應的幣種。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">列表未顯示各帳號綁定的國家與幣種，多國家多幣種環境下無法辨識各筆資料的國家與幣種。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
       <ol>
-        <li>在「用戶名」與「金額」之間新增「幣種」(<code>currency</code>)欄位，排列為「用戶名｜幣種｜金額」</li>
-        <li>顯示該帳號的幣種，統一使用半形大寫英文（如 PHP、VND）</li>
+        <li>在「用戶名」與「金額」之間新增「國家」(<code>nation_code</code>)與「幣種」(<code>currency</code>)欄位，排列為「用戶名｜國家｜幣種｜金額」</li>
+        <li>國家顯示該帳號所屬國家</li>
+        <li>幣種顯示該帳號綁定幣種，統一使用半形大寫英文（如 PHP、VND）</li>
       </ol>
     </div></div>
-    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">新增欄位渲染，從後端回傳資料讀取幣種(<code>currency</code>)欄位並統一大寫顯示。</div></div>
-    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">列表 API 回傳資料需包含幣種(<code>currency</code>)欄位。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">新增國家(<code>nation_code</code>)與幣種(<code>currency</code>)兩欄渲染，讀取後端回傳資料顯示，幣種統一大寫。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">列表 API 回傳資料需包含該帳號綁定的國家(<code>nation_code</code>)與幣種(<code>currency</code>)欄位。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（此為管理後台列表顯示，不影響前台會員端）</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-dr-large-004"></div></div></div>
+  </div>
+
+<div class="spec-card">
+    <div class="spec-card-hd"><span class="spec-card-num">547</span><span class="spec-card-adj">8/20新增</span></div>
+    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">數據報表 &gt; 大額存取款報表 &gt; 取款統計分頁 &gt; 統計邏輯</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge mod">調整</span></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">搜尋期間內累計取款金額達到門檻才會統計列出，門檻值為程式寫死，無法由後台調整。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
+      <ol>
+        <li>大額判斷門檻改讀「大額門檻設置」分頁中，該帳號所屬國家(<code>nation_code</code>)＋幣種(<code>currency</code>)的大額取款門檻</li>
+        <li>搜尋期間內累計取款金額達門檻（含）以上者列入統計；門檻為 0 時全部列入</li>
+      </ol>
+    </div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">無（純後端統計邏輯調整，頁面顯示不變）。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">取款統計查詢改依「大額門檻設置」中該帳號國家(<code>nation_code</code>)＋幣種(<code>currency</code>)的大額取款門檻過濾，不再使用寫死門檻。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（此為後台統計邏輯，不影響前台會員端）</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-dr-large-008"></div></div></div>
+  </div>
+
+  </div>
+  <div class="pg-tabpane pg-tab-hidden" data-tabgroup="dr-large" data-tab="cfg">
+  <div class="pg-overview">
+    <h4>本頁改動目標</h4>
+    <div class="ov-dir"><div class="ov-dir-lbl">管理後台：</div><ul class="ov-dir-list"><li>新增「大額門檻設置」分頁，列表依控制後台啟用的國家(<code>nation_code</code>)＋幣種(<code>currency</code>)自動生成，逐列設定大額存款／取款門檻</li><li>存款統計與取款統計的大額判斷改依此處門檻</li></ul></div>
+    <div class="ov-dir"><div class="ov-dir-lbl">控制後台：</div><ul class="ov-dir-list"><li>列表的國家＋幣種組合由控制後台啟用設定向下供給自動生成，前端不寫死；新啟用組合自動長出</li></ul></div>
+    <div class="ov-dir"><div class="ov-dir-lbl">前台影響：</div><ul class="ov-dir-list"><li>無（此為後台統計門檻設定，不影響前台會員端）</li></ul></div>
+  </div>
+
+  <div class="mk-screen">
+    <h4>後台畫面</h4>
+    <div id="tpl-dr-large-screen-cfg"></div>
+  </div>
+
+<div class="spec-card">
+    <div class="spec-card-hd"><span class="spec-card-num">544</span><span class="spec-card-adj">8/20新增</span></div>
+    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">數據報表 &gt; 大額存取款報表 &gt; 大額門檻設置分頁 &gt; 列表</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge new">新增</span></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">大額存取款報表僅有存款統計、取款統計兩個分頁，大額判斷門檻為程式寫死，無法由後台設置。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
+      <ol>
+        <li>新增第三分頁「大額門檻設置」，位於「取款統計」右側</li>
+        <li>列表欄位排列為「國家｜幣種｜大額存款門檻｜大額取款門檻｜操作」</li>
+        <li>列表依控制後台啟用的國家(<code>nation_code</code>)＋幣種(<code>currency</code>)組合自動生成，每組合一列；新啟用的組合自動長出，不需手動新增</li>
+        <li>新組合門檻預設為 0，0 代表期間內累計金額皆納入統計</li>
+        <li>舊有程式寫死的門檻值遷移帶入「菲律賓＋PHP」列（實際數值由 RD 依現行程式提供）</li>
+        <li>門檻金額以該列幣種的法幣為單位</li>
+      </ol>
+    </div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">依後端回傳的啟用國家(<code>nation_code</code>)＋幣種(<code>currency</code>)組合渲染列表，不寫死。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">提供啟用國家＋幣種組合清單與各組合門檻值 API；新啟用組合自動建立門檻資料、預設 0；舊寫死門檻遷移寫入菲律賓＋PHP。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（此為後台統計門檻設定，不影響前台會員端）</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-dr-large-005"></div></div></div>
+  </div>
+
+<div class="spec-card">
+    <div class="spec-card-hd"><span class="spec-card-num">545</span><span class="spec-card-adj">8/20新增</span></div>
+    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">數據報表 &gt; 大額存取款報表 &gt; 大額門檻設置分頁 &gt; 列表 &gt; 操作 &gt; 設定</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge new">新增</span></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">無此功能，大額門檻無法由後台編輯。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
+      <ol>
+        <li>點擊該列「設定」後，大額存款門檻與大額取款門檻轉為輸入框，可編輯</li>
+        <li>僅允許輸入數字，單位為該列幣種的法幣</li>
+        <li>「保存」寫入該列設定並回到一般顯示；「取消」放棄本次修改</li>
+        <li>國家、幣種欄位不可編輯</li>
+      </ol>
+    </div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">逐列編輯：點「設定」該列兩個門檻轉輸入框並顯示保存／取消；輸入限數字；保存後依新值刷新該列。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">大額門檻設置 API 接收國家(<code>nation_code</code>)＋幣種(<code>currency</code>)與兩個門檻值，逐列保存。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（此為後台統計門檻設定，不影響前台會員端）</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-dr-large-006"></div></div></div>
   </div>
   </div>
 </div>
@@ -7783,10 +8100,11 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
 </div>
 <div class="pg" id="pg-adm-pay-config-pay-level">
   <div class="pg-crumb">管理後台 &gt; 充值配置 &gt; 支付層級配置</div>
-  <p class="rec-adj"><span class="rec-adj-tag">8/13 調整：</span>依照 <span class="x-jump" onclick="showPg('spec-discussion');goTo('rec-13')">8/11 週會決議（項次 13）</span>，本頁設定維度由「幣種」調整為「國家＋幣種」；同步配置相關內容待 8/18 週會確認後另行調整。</p>
+  <p class="rec-adj"><span class="rec-adj-tag">8/13 調整：</span>依照 <span class="x-jump" onclick="showPg('spec-discussion');goTo('rec-13')">8/11 週會決議（項次 13）</span>，本頁設定維度由「幣種」調整為「國家＋幣種」。</p>
+  <p class="rec-adj"><span class="rec-adj-tag">8/20 調整：</span>依照 <span class="x-jump" onclick="showPg('spec-discussion');goTo('rec-13')">8/18 第二次週會（項次 13）</span>，本頁不做同步配置。</p>
   <div class="pg-overview">
     <h4>本頁改動目標</h4>
-    <div class="ov-dir"><div class="ov-dir-lbl">管理後台：</div><ul class="ov-dir-list"><li>搜尋欄新增國家(<code>nation_code</code>)與幣種(<code>currency</code>)單選下拉（預設菲律賓＋PHP，雙向連動），依所選國家＋幣種顯示對應的支付層級配置</li><li>新增同步配置按鈕：將當前幣種設定好的數值直接複製到指定幣種內，不做匯率換算</li><li>添加支付層級彈窗新增國家＋幣種連動單選（皆必填），選定保存後不可更換</li><li>列表「分值層」左邊新增國家與幣種欄位（舊有分值層填入菲律賓＋PHP）</li></ul></div>
+    <div class="ov-dir"><div class="ov-dir-lbl">管理後台：</div><ul class="ov-dir-list"><li>搜尋欄新增國家(<code>nation_code</code>)與幣種(<code>currency</code>)單選下拉（預設菲律賓＋PHP，雙向連動），依所選國家＋幣種顯示對應的支付層級配置</li><li>添加支付層級彈窗新增國家＋幣種連動單選（皆必填），選定保存後不可更換</li><li>列表「分值層」左邊新增國家與幣種欄位（舊有分值層填入菲律賓＋PHP）</li></ul></div>
     <div class="ov-dir"><div class="ov-dir-lbl">控制後台：</div><ul class="ov-dir-list"><li>無（此頁幣種選項來源為平台可使用幣種，該範圍由控制後台國家信息設定向下供給）</li></ul></div>
     <div class="ov-dir"><div class="ov-dir-lbl">前台影響：</div><ul class="ov-dir-list"><li>依國家＋幣種生效：僅該國家(<code>nation_code</code>)＋幣種(<code>currency</code>)的會員適用對應的充提金額限制與稽核等設定</li></ul></div>
   </div>
@@ -7797,26 +8115,24 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
   </div>
 
   <div class="spec-card">
-    <div class="spec-card-hd"><span class="spec-card-num">274</span><span class="spec-card-adj">8/13調整</span></div>
+    <div class="spec-card-hd"><span class="spec-card-num">274</span><span class="spec-card-adj">8/13調整</span><span class="spec-card-adj">8/20調整</span></div>
     <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">充值配置 &gt; 支付层级配置 &gt; 上方搜尋欄 &gt; 幣種</div></div>
     <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge new">新增</span></div></div>
-    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">支付層級配置沒有幣種維度，層級設定不分幣種共用一份，也沒有跨幣種同步機制。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">支付層級配置沒有國家、幣種維度，層級設定不分國家幣種、共用一份。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
       <ol>
-        <li>在「同步配置」按鈕左側新增「國家」(<code>nation_code</code>)與「幣種」(<code>currency</code>)單選下拉，排列為「國家｜幣種｜同步配置」；同步配置按鈕位於新增按鈕左側</li>
+        <li>在「新增」按鈕左側新增「國家」(<code>nation_code</code>)與「幣種」(<code>currency</code>)單選下拉，排列為「國家｜幣種｜新增」</li>
         <li>預設菲律賓＋PHP，依所選國家＋幣種顯示對應的支付層級配置內容</li>
         <li>國家與幣種雙向連動：先選國家，幣種選單只列支援該國家的幣種；先選幣種，國家選單只列支援該幣種的國家</li>
-        <li>新增同步配置按鈕，點擊後跳出彈窗，可勾選目標幣種</li>
-        <li>同步配置為直接複製：將當前幣種設定好的數值直接複製到指定幣種內，不做匯率換算</li>
       </ol>
     </div></div>
-    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">新增國家(<code>nation_code</code>)與幣種(<code>currency</code>)單選下拉與同步配置按鈕元件。同步邏輯：金額類換算、比例類直接複製。</div></div>
-    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">支付層級配置 API 支援依國家(<code>nation_code</code>)＋幣種(<code>currency</code>)查詢；同步配置 API 接收來源幣種(<code>currency</code>)與目標幣種清單。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">新增國家(<code>nation_code</code>)與幣種(<code>currency</code>)單選下拉元件，選項來源為後端啟用清單、不寫死；切換後列表依所選組合刷新。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">支付層級配置 API 支援依國家(<code>nation_code</code>)＋幣種(<code>currency</code>)查詢。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（此為管理後台篩選功能，不影響前台會員端）</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-pay-level-001"></div></div></div>
   </div>
 
-  <div class="spec-card">
-    <div class="spec-card-hd"><span class="spec-card-num">275</span></div>
+  <div class="spec-card card-dep">
+    <div class="spec-card-hd"><span class="spec-card-num">275</span><span class="spec-card-adj">8/20調整</span></div>
     <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">充值配置 &gt; 支付层级配置 &gt; 幣種選單右側 &gt; 同步配置按鈕 &gt; 彈窗</div></div>
     <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge new">新增</span></div></div>
     <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">沒有同步配置功能，各幣種的層級設定需逐一手動維護。</div></div>
@@ -13745,6 +14061,34 @@ function tplLinkedSelect(prefix, aPlaceholder, aOptions, bPlaceholder){
     </div>
   </div>`;
 }
+// 連動下拉的表單列變體：截圖式「標籤｜下拉｜標籤｜下拉」欄位列（沿用 tplLinkedSelect 的元件與連動邏輯）
+function tplLinkedSelectFormRow(prefix, aLabel, aPlaceholder, aOptions, bLabel, bPlaceholder, ctxLabel){
+  const ctx = ctxLabel ? `<div class="demo-form-lbl"><span class="demo-star">*</span>${ctxLabel}</div>
+    <div class="demo-form-val demo-form-ctx"></div>` : '';
+  return `<div class="demo-formrow">
+    ${ctx}
+    <div class="demo-form-lbl"><span class="demo-star">*</span>${aLabel}</div>
+    <div class="demo-form-val"><div class="demo-select" id="dsel-${prefix}-a">
+      <div class="demo-select-box" onclick="toggleDemoSelect('dsel-${prefix}-a')">
+        <span class="txt placeholder" id="dsel-${prefix}-a-txt">${aPlaceholder}</span>
+        <span class="arr">▼</span>
+      </div>
+      <div class="demo-select-menu" id="dsel-${prefix}-a-menu">
+        ${aOptions.map(o=>`<div class="demo-select-opt" onclick="pickLinkedSelectA('${prefix}','${o}')">${o}</div>`).join('')}
+      </div>
+    </div></div>
+    <div class="demo-form-lbl"><span class="demo-star">*</span>${bLabel}</div>
+    <div class="demo-form-val"><div class="demo-select" id="dsel-${prefix}-b">
+      <div class="demo-select-box" onclick="toggleDemoSelect('dsel-${prefix}-b')">
+        <span class="txt placeholder" id="dsel-${prefix}-b-txt" data-placeholder="${bPlaceholder}">${bPlaceholder}</span>
+        <span class="arr">▼</span>
+      </div>
+      <div class="demo-select-menu" id="dsel-${prefix}-b-menu">
+        <div class="demo-select-opt-nodata">No data</div>
+      </div>
+    </div></div>
+  </div>`;
+}
 
 // 聯動彈窗：彈窗形式、上下兩列（各列 label 左 + 下拉右），選上列連動下列選項範圍
 // 沿用同一套聯動邏輯（pickLinkedSelectA + LINKED_SELECT_MAP），僅排版改為彈窗上下堆疊
@@ -14410,18 +14754,18 @@ function renderStationDemos(){
   set('tpl-station-001', `<div class="demo-inline-group">${tpl_TMP_dualLinkedSelect({prefix:'station-001', map:{'菲律賓':['PHP'],'越南':['VND']}})}<div class="demo-select"><div class="demo-select-box"><span class="txt placeholder">搜索帳號</span><span class="arr">▼</span></div></div></div>`);
   // 002 列表「國家/幣種」欄位（col-three-field，中欄兩行）
   set('tpl-station-002', tplColThreeField('名', '國家/幣種', '国家：菲律賓<br>币种：PHP', '用戶數量'));
-  // 003 地區下拉（單純單選下拉，不顯示左側標題文字）
+  // 003 地區下拉——8/18 決議地區不調整（項次22），卡 003 整卡劃線保留備查
   set('tpl-station-003', tplSingleSelect('station-003', '請選擇地區', ['菲律賓','越南'], null));
-  // 004 幣種聯動下拉（開放式：A/B選項、對應、灰字提示皆資料驅動）
-  set('tpl-station-004', tplLinkedSelect('station-004', '請選擇國家', ['菲律賓','越南'], '請選擇幣種'));
+  // 004 新增投注站表單列：系統類型（上下文欄位、值不填）＋國家＋幣種連動下拉（截圖式表單樣式）
+  set('tpl-station-004', tplLinkedSelectFormRow('station-004', '國家', '請選擇國家', ['菲律賓','越南'], '幣種', '請選擇幣種', '系統類型'));
   // 005 押金彈窗（modal-row：幣種唯讀 + 當前押金空白）
   set('tpl-station-005', tplModalRow('modal-station-005', [{label:'幣種',disabled:true,value:'PHP'},{label:'當前押金',disabled:false}]));
   // 006 增加額度彈窗
   set('tpl-station-006', tplModalRow('modal-station-006', [{label:'幣種',disabled:true,value:'PHP'},{label:'押金',disabled:false}]));
   // 007 減少額度彈窗
   set('tpl-station-007', tplModalRow('modal-station-007', [{label:'幣種',disabled:true,value:'PHP'},{label:'押金',disabled:false}]));
-  // 008 投注站詳情彈窗（col-three-field：國家 | 幣種，無後欄）
-  set('tpl-station-008', tplColThreeField('國家', '幣種', 'PHP', ''));
+  // 008 投注站詳情彈窗（截圖式表格：國家｜幣種｜地域）
+  set('tpl-station-008', tplMockTable(['國家','幣種','地域'], [['菲律賓','PHP','PHILIPPINES']]));
   // 009 用戶轉移彈窗：待補（示意尚未定義）
   // 009 用戶轉移彈窗（兩個示意並排：越南VND / 菲律賓PHP 帳號）
   // 排版沿用 demo-fieldcard 並排+說明；彈窗本體用 tplModalRow（當前代理唯讀 + 新代理自訂帳號下拉）
@@ -14616,26 +14960,216 @@ function renderMemberDemos(){
 // VIP特權區塊：套用統一模板庫，逐卡填入
 function render_vip_Demos(){
   const set = (elId, html) => { const el = document.getElementById(elId); if(el) el.innerHTML = html; };
+
+  // ===== VIP 同步配置整頁流程示意（共用模板 tplVipSyncFlow,依 8/18 週會通過流程） =====
+  window.VSF = window.VSF || {};
+  window.VSF_NC = {'菲律賓':['PHP'],'越南':['VND']};
+  window.vsfSel = function(uid, face, ph){
+    return '<div class="vsf-sel" id="'+uid+'" onclick="vsfTgl(event,\''+uid+'\')">'
+      + '<span class="vsf-sel-face'+(face?'':' ph')+'">'+(face||ph||'請選擇')+'</span>'
+      + '<span class="vsf-sel-arr">▾</span><div class="vsf-sel-menu"></div></div>';
+  };
+  window.vsfFace = function(uid, text, ph){
+    var sel=document.getElementById(uid); if(!sel) return;
+    var f=sel.querySelector('.vsf-sel-face');
+    f.textContent = text || ph || '請選擇';
+    f.className = 'vsf-sel-face' + (text?'':' ph');
+  };
+  window.vsfTgl = function(ev, uid){
+    ev.stopPropagation();
+    var sel=document.getElementById(uid);
+    if(sel.classList.contains('disabled')) return;
+    var open=sel.classList.contains('open');
+    document.querySelectorAll('.vsf-sel.open').forEach(function(s){s.classList.remove('open');});
+    if(!open) sel.classList.add('open');
+  };
+  window.vsfMenu = function(uid, opts, cur, pick){
+    var sel=document.getElementById(uid); if(!sel) return;
+    var m=sel.querySelector('.vsf-sel-menu'); m.innerHTML='';
+    opts.forEach(function(o){
+      var d=document.createElement('div'); d.className='vsf-sel-item'+(o===cur?' on':''); d.textContent=o;
+      d.onclick=function(ev){ ev.stopPropagation(); vsfFace(uid,o); sel.classList.remove('open'); pick(o); };
+      m.appendChild(d);
+    });
+  };
+  window.tplVipSyncFlow = function(id, cfg){
+    var data={}; for(var k in cfg.data){ data[k]=cfg.data[k].map(function(r){return r.slice();}); }
+    window.VSF[id]={cfg:cfg,data:data,nation:'菲律賓',cur:'PHP',mode:'view',rowEditing:-1,draft:null,src:null,dst:null};
+    var ths=cfg.cols.map(function(c){return '<th>'+c+'</th>';}).join('');
+    if(cfg.ops==='row') ths+='<th class="vsf-thop">操作</th>';
+    var editBtn = cfg.ops==='block' ? '<button class="vsf-btn" id="'+id+'-btnEdit">編輯</button>' : '';
+    var cap = cfg.cap ? '<div class="vsf-cap">'+cfg.cap+'</div>' : '';
+    return '<div class="vsf" id="'+id+'">'
+      + '<div class="vsf-hd"><span class="vsf-title">'+cfg.title+'</span>'
+      + vsfSel(id+'-n','菲律賓') + vsfSel(id+'-c','PHP')
+      + '<button class="vsf-btn" id="'+id+'-btnSync" onclick="vsfOpenSync(\''+id+'\')">同步配置</button>'
+      + editBtn
+      + '<button class="vsf-btn ghost vsf-hide" id="'+id+'-btnCancel" onclick="vsfCancelAll(\''+id+'\')">取消</button>'
+      + '<button class="vsf-btn vsf-hide" id="'+id+'-btnSave" onclick="vsfOpenSave(\''+id+'\')">保存</button>'
+      + '</div>' + cap
+      + '<table class="vsf-table"><thead><tr>'+ths+'</tr></thead><tbody class="vsf-tb"></tbody></table>'
+      + '<div class="vsf-mask" id="'+id+'-mSync"><div class="vsf-modal">'
+      +   '<div class="vsf-m-hd">同步配置<span class="vsf-m-x" onclick="vsfClose(\''+id+'\',\'mSync\')">✕</span></div>'
+      +   '<div class="vsf-m-row"><span class="vsf-m-lbl">複製來源</span>'+vsfSel(id+'-sn',null,'請選擇國家')+vsfSel(id+'-sc',null,'請選擇幣種')+'</div>'
+      +   '<div class="vsf-m-row"><span class="vsf-m-lbl">同步目標</span>'+vsfSel(id+'-dn',null,'請選擇國家')+vsfSel(id+'-dc',null,'請選擇幣種')+'</div>'
+      +   '<div class="vsf-m-ft"><button class="vsf-btn ghost" onclick="vsfClose(\''+id+'\',\'mSync\')">取消</button><button class="vsf-btn" onclick="vsfConfirmStep(\''+id+'\')">確定</button></div>'
+      + '</div></div>'
+      + '<div class="vsf-mask" id="'+id+'-mConfirm"><div class="vsf-modal">'
+      +   '<div class="vsf-m-hd">提示<span class="vsf-m-x" onclick="vsfClose(\''+id+'\',\'mConfirm\')">✕</span></div>'
+      +   '<div class="vsf-m-bd" id="'+id+'-cTxt"></div>'
+      +   '<div class="vsf-m-ft"><button class="vsf-btn ghost" onclick="vsfClose(\''+id+'\',\'mConfirm\')">取消</button><button class="vsf-btn" onclick="vsfApply(\''+id+'\')">確認</button></div>'
+      + '</div></div>'
+      + '<div class="vsf-mask" id="'+id+'-mSave"><div class="vsf-modal">'
+      +   '<div class="vsf-m-hd">提示<span class="vsf-m-x" onclick="vsfClose(\''+id+'\',\'mSave\')">✕</span></div>'
+      +   '<div class="vsf-m-bd">確認是否保存當前設定？</div>'
+      +   '<div class="vsf-m-ft"><button class="vsf-btn ghost" onclick="vsfClose(\''+id+'\',\'mSave\')">取消</button><button class="vsf-btn" onclick="vsfSaveAll(\''+id+'\')">確認</button></div>'
+      + '</div></div>'
+      + '</div>';
+  };
+  window.vsfMount = function(id){ vsfBindTop(id); vsfTable(id); };
+  window.vsfBindTop = function(id){
+    var st=VSF[id];
+    vsfMenu(id+'-n', Object.keys(VSF_NC), st.nation, function(n){ st.nation=n; st.cur=VSF_NC[n][0]; vsfFace(id+'-c',st.cur); vsfBindTop(id); vsfTable(id); });
+    vsfMenu(id+'-c', VSF_NC[st.nation], st.cur, function(c){ st.cur=c; vsfTable(id); });
+  };
+  window.vsfTable = function(id){
+    var st=VSF[id], cfg=st.cfg, el=document.getElementById(id); if(!el) return;
+    var rows = st.mode==='syncEdit' ? st.draft : st.data[st.nation+'|'+st.cur];
+    var html='';
+    rows.forEach(function(r,i){
+      html+='<tr>';
+      r.forEach(function(v,ci){
+        if(ci<cfg.fixed){ html+='<td>'+v+'</td>'; }
+        else if(st.mode==='syncEdit' || st.rowEditing===i){ html+='<td><input class="vsf-input" id="'+id+'-in-'+i+'-'+ci+'" value="'+v+'"></td>'; }
+        else { html+='<td>'+v+'</td>'; }
+      });
+      if(cfg.ops==='row'){
+        if(st.mode==='syncEdit'){
+          if(cfg.opsKind==='btn'){ html+='<td><button class="vsf-btn sm dis">设定</button></td>'; }
+          else { html+='<td>'+(i===0?'':'<span class="vsf-op dis">关闭</span>')+'<span class="vsf-op dis">设定</span></td>'; }
+        }
+        else if(st.rowEditing===i){
+          html+='<td><span class="vsf-op" onclick="vsfSaveRow(\''+id+'\','+i+')">保存</span><span class="vsf-op" onclick="vsfCancelRow(\''+id+'\')">取消</span></td>';
+        } else if(cfg.opsKind==='btn'){
+          html+='<td><button class="vsf-btn sm" onclick="vsfEditRow(\''+id+'\','+i+')">设定</button></td>';
+        } else {
+          html+='<td>'+(i===0?'':'<span class="vsf-op red">关闭</span>')+'<span class="vsf-op" onclick="vsfEditRow(\''+id+'\','+i+')">设定</span></td>';
+        }
+      }
+      html+='</tr>';
+    });
+    el.querySelector('.vsf-tb').innerHTML=html;
+  };
+  window.vsfEditRow=function(id,i){ var st=VSF[id]; if(st.mode!=='view') return; st.rowEditing=i; vsfTable(id); };
+  window.vsfSaveRow=function(id,i){
+    var st=VSF[id], rows=st.data[st.nation+'|'+st.cur];
+    for(var c=st.cfg.fixed;c<rows[i].length;c++){ var el=document.getElementById(id+'-in-'+i+'-'+c); if(el) rows[i][c]=el.value; }
+    st.rowEditing=-1; vsfTable(id);
+  };
+  window.vsfCancelRow=function(id){ VSF[id].rowEditing=-1; vsfTable(id); };
+  window.vsfOpenSync=function(id){
+    var st=VSF[id]; if(st.mode!=='view') return;
+    st.rowEditing=-1; vsfTable(id);
+    st.src={n:st.nation,c:st.cur}; st.dst={n:null,c:null};
+    vsfFace(id+'-sn',st.src.n,'請選擇國家'); vsfFace(id+'-sc',st.src.c,'請選擇幣種');
+    vsfFace(id+'-dn',null,'請選擇國家'); vsfFace(id+'-dc',null,'請選擇幣種');
+    vsfBindModal(id);
+    document.getElementById(id+'-mSync').classList.add('show');
+  };
+  window.vsfBindModal=function(id){
+    var st=VSF[id];
+    vsfMenu(id+'-sn', Object.keys(VSF_NC), st.src.n, function(n){ st.src.n=n; st.src.c=null; vsfFace(id+'-sc',null,'請選擇幣種'); vsfBindModal(id); });
+    vsfMenu(id+'-sc', st.src.n?VSF_NC[st.src.n]:[], st.src.c, function(c){ st.src.c=c; });
+    vsfMenu(id+'-dn', Object.keys(VSF_NC), st.dst.n, function(n){ st.dst.n=n; st.dst.c=null; vsfFace(id+'-dc',null,'請選擇幣種'); vsfBindModal(id); });
+    vsfMenu(id+'-dc', st.dst.n?VSF_NC[st.dst.n]:[], st.dst.c, function(c){ st.dst.c=c; });
+  };
+  window.vsfConfirmStep=function(id){
+    var st=VSF[id], s=st.src, d=st.dst;
+    if(!s.n||!s.c||!d.n||!d.c){ alert('請選擇完整的複製來源與同步目標（國家＋幣種）'); return; }
+    if(s.n===d.n && s.c===d.c){ alert('複製來源與同步目標不可相同'); return; }
+    document.getElementById(id+'-cTxt').innerHTML='確認是否將「<b>'+s.n+'-'+s.c+'</b>」的數值配置至「<b>'+d.n+'-'+d.c+'</b>」？';
+    document.getElementById(id+'-mConfirm').classList.add('show');
+  };
+  window.vsfApply=function(id){
+    var st=VSF[id];
+    vsfClose(id,'mConfirm'); vsfClose(id,'mSync');
+    st.nation=st.dst.n; st.cur=st.dst.c;
+    vsfFace(id+'-n',st.nation); vsfFace(id+'-c',st.cur);
+    st.draft=st.data[st.src.n+'|'+st.src.c].map(function(r){return r.slice();});
+    st.mode='syncEdit'; st.rowEditing=-1;
+    document.getElementById(id+'-n').classList.add('disabled');
+    document.getElementById(id+'-c').classList.add('disabled');
+    document.getElementById(id+'-btnSync').classList.add('vsf-hide');
+    var eb=document.getElementById(id+'-btnEdit'); if(eb) eb.classList.add('vsf-hide');
+    document.getElementById(id+'-btnCancel').classList.remove('vsf-hide');
+    document.getElementById(id+'-btnSave').classList.remove('vsf-hide');
+    vsfTable(id);
+  };
+  window.vsfExit=function(id){
+    var st=VSF[id];
+    st.mode='view'; st.draft=null;
+    document.getElementById(id+'-n').classList.remove('disabled');
+    document.getElementById(id+'-c').classList.remove('disabled');
+    document.getElementById(id+'-btnSync').classList.remove('vsf-hide');
+    var eb=document.getElementById(id+'-btnEdit'); if(eb) eb.classList.remove('vsf-hide');
+    document.getElementById(id+'-btnCancel').classList.add('vsf-hide');
+    document.getElementById(id+'-btnSave').classList.add('vsf-hide');
+    vsfTable(id);
+  };
+  window.vsfCancelAll=function(id){ vsfExit(id); };
+  window.vsfOpenSave=function(id){
+    var st=VSF[id];
+    st.draft.forEach(function(r,i){ for(var c=st.cfg.fixed;c<r.length;c++){ var el=document.getElementById(id+'-in-'+i+'-'+c); if(el) r[c]=el.value; } });
+    document.getElementById(id+'-mSave').classList.add('show');
+  };
+  window.vsfSaveAll=function(id){
+    var st=VSF[id];
+    st.data[st.nation+'|'+st.cur]=st.draft.map(function(r){return r.slice();});
+    vsfClose(id,'mSave'); vsfExit(id);
+  };
+  window.vsfClose=function(id,m){ document.getElementById(id+'-'+m).classList.remove('show'); };
+  var VSF_CFGS = {
+    c048:{title:'成長值及流水倍數', cap:'成長值計算方式為該遊戲的有效投注額乘上流水倍數',
+      cols:['等级','等级名称','成长值最低要求','保级经验值','回归经验值'], fixed:2, ops:'row', opsKind:'link',
+      data:{'菲律賓|PHP':[[0,'VIP0',0,0,0],[1,'VIP1',1234560,250,500]],
+            '越南|VND':[[0,'VIP0',0,0,0],[1,'VIP1',5000000,5000,8000]]}},
+    c050:{title:'成长值倍数设定', cap:'成长值计算方式为该游戏的有效投注乘上对应场馆的成长值倍数，成长值倍数修改后于次日03:50生效',
+      cols:['厂商分类','成长值倍数'], fixed:1, ops:'block',
+      data:{'菲律賓|PHP':[['OK体育',2],['三方体育',2]],
+            '越南|VND':[['OK体育',3],['三方体育',1]]}},
+    c052:{title:'返水/下注相關',
+      cols:['','单注最大下注额','串关最大下注额','单注冠军最大下注额','充值返水比例(%)','体育返水比例(%)','单注最大返水'], fixed:1, ops:'block',
+      data:{'菲律賓|PHP':[['VIP0',1200000,1200000,1200000,'','3.0',''],['VIP1',1200000,1200000,1200000,'','4.0','']],
+            '越南|VND':[['VIP0',500000,500000,500000,'','2.0',''],['VIP1',500000,500000,500000,'','2.5','']]}},
+    c054:{title:'VIP回归成长值加成', cap:'按照每一等级的成长要求，在每个产品的成长值基础下加成，有效期，登入后7天内',
+      cols:['当前VIP等级','不活跃60-90天','不活跃91-120天','不活跃121-180天','不活跃超过180天'], fixed:1, ops:'row', opsKind:'btn',
+      data:{'菲律賓|PHP':[['VIP0',1,1,1,1],['VIP1',1,1,1,1]],
+            '越南|VND':[['VIP0',1,1,1,1],['VIP1',1.5,2,2.2,2.5]]}},
+    c056:{title:'VIP充值金额稽核流水比例',
+      cols:['当前VIP等级','稽核流水比例(%)'], fixed:1, ops:'row', opsKind:'btn',
+      data:{'菲律賓|PHP':[['VIP0',51],['VIP1',30]],
+            '越南|VND':[['VIP0',40],['VIP1',20]]}}
+  };
   // vip-001 成長值及流水倍數>標題右側幣種下拉（標題+單選+同步配置按鈕）
   set('tpl-vip-001', tplCurrencyTabTitled('vip-001', '成長值及流水倍數', 'PHP', {id:'vip-001-nation', def:'菲律賓'}));
   // vip-002 成長值及流水倍數>同步配置彈窗
-  set('tpl-vip-002', tplSyncModal('sync-vip-002'));
+  set('tpl-vip-002', tplVipSyncFlow('vsf048', VSF_CFGS.c048)); vsfMount('vsf048');
   // vip-003 成长值倍数设定>標題右側幣種下拉（標題+單選+同步配置按鈕）
   set('tpl-vip-003', tplCurrencyTabTitled('vip-003', '成长值倍数设定', 'PHP', {id:'vip-003-nation', def:'菲律賓'}));
   // vip-004 成长值倍数设定>同步配置彈窗
-  set('tpl-vip-004', tplSyncModal('sync-vip-004'));
+  set('tpl-vip-004', tplVipSyncFlow('vsf050', VSF_CFGS.c050)); vsfMount('vsf050');
   // vip-005 返水/下注相關>標題右側幣種下拉（標題+單選+同步配置按鈕）
   set('tpl-vip-005', tplCurrencyTabTitled('vip-005', '返水/下注相關', 'PHP', {id:'vip-005-nation', def:'菲律賓'}));
   // vip-006 返水/下注相關>同步配置彈窗
-  set('tpl-vip-006', tplSyncModal('sync-vip-006'));
+  set('tpl-vip-006', tplVipSyncFlow('vsf052', VSF_CFGS.c052)); vsfMount('vsf052');
   // vip-007 VIP回归成长值加成>標題右側幣種下拉（標題+單選+同步配置按鈕）
   set('tpl-vip-007', tplCurrencyTabTitled('vip-007', 'VIP回归成长值加成', 'PHP', {id:'vip-007-nation', def:'菲律賓'}));
   // vip-008 VIP回归成长值加成>同步配置彈窗
-  set('tpl-vip-008', tplSyncModal('sync-vip-008'));
+  set('tpl-vip-008', tplVipSyncFlow('vsf054', VSF_CFGS.c054)); vsfMount('vsf054');
   // vip-009 VIP充值金额稽核流水比例>標題右側幣種下拉（標題+單選+同步配置按鈕）
   set('tpl-vip-009', tplCurrencyTabTitled('vip-009', 'VIP充值金额稽核流水比例', 'PHP', {id:'vip-009-nation', def:'菲律賓'}));
   // vip-010 VIP充值金额稽核流水比例>同步配置彈窗
-  set('tpl-vip-010', tplSyncModal('sync-vip-010'));
+  set('tpl-vip-010', tplVipSyncFlow('vsf056', VSF_CFGS.c056)); vsfMount('vsf056');
   // vip-011 成長值紀錄>搜尋欄幣種多選（會員名輸入欄右方；並排排版屬本卡 render 層）
   set('tpl-vip-011', `<div class="demo-inline-group">${tpl_TMP_dualLinkedSelect({prefix:'vip-011', map:{'菲律賓':['PHP'],'越南':['VND']}})}<input class="demo-amount-input" placeholder="會員名" readonly></div>`);
   // vip-012 成長值紀錄>列表幣種欄位（當前成長值｜幣種｜新增時間）
@@ -15010,16 +15544,80 @@ function render_dr_stationtotal_Demos(){
 }
 
 // 數據報表 > 大額存取款報表：套用統一模板庫，逐卡填入
+// ===== 大額門檻設置:逐列設定互動（設定→輸入框→保存/取消） =====
+window.DRLCFG = {};
+window.drlcfgInit = function(id, rows, tagHead, tagOp, startEdit){
+  DRLCFG[id] = {rows: rows.map(function(r){return r.slice();}), edit: (startEdit===undefined? -1 : startEdit), tagHead: tagHead||'', tagOp: tagOp||''};
+  drlcfgRender(id);
+};
+window.drlcfgRender = function(id){
+  var st = DRLCFG[id], el = document.getElementById(id); if(!st || !el) return;
+  var th = tagHead => '';
+  var head = '<tr><th>國家' + (st.tagHead ? '<span class="mk-tag">'+st.tagHead+'</span>' : '') + '</th><th>幣種</th><th>大額存款門檻</th><th>大額取款門檻</th><th>操作</th></tr>';
+  var body = st.rows.map(function(r,i){
+    if(st.edit === i){
+      return '<tr><td>'+r[0]+'</td><td>'+r[1]+'</td>'
+        + '<td><input class="vsf-input" id="'+id+'-in-'+i+'-2" value="'+r[2]+'"></td>'
+        + '<td><input class="vsf-input" id="'+id+'-in-'+i+'-3" value="'+r[3]+'"></td>'
+        + '<td><span class="mk-link" onclick="drlcfgSave(\''+id+'\','+i+')">保存</span> <span class="mk-link" onclick="drlcfgCancel(\''+id+'\')">取消</span></td></tr>';
+    }
+    return '<tr><td>'+r[0]+'</td><td>'+r[1]+'</td><td>'+r[2]+'</td><td>'+r[3]+'</td>'
+      + '<td><span class="mk-link" onclick="drlcfgEdit(\''+id+'\','+i+')">設定</span>' + (st.tagOp ? '<span class="mk-tag">'+st.tagOp+'</span>' : '') + '</td></tr>';
+  }).join('');
+  el.innerHTML = '<div class="mk-tbl-wrap"><table class="mk-table">' + head + body + '</table></div>';
+};
+window.drlcfgEdit = function(id,i){ var st=DRLCFG[id]; if(st.edit!==-1) return; st.edit=i; drlcfgRender(id); };
+window.drlcfgCancel = function(id){ DRLCFG[id].edit=-1; drlcfgRender(id); };
+window.drlcfgSave = function(id,i){
+  var st=DRLCFG[id];
+  [2,3].forEach(function(c){ var el=document.getElementById(id+'-in-'+i+'-'+c); if(el) st.rows[i][c]=el.value; });
+  st.edit=-1; drlcfgRender(id);
+};
 function render_dr_large_Demos(){
   const set = (elId, html) => { const el = document.getElementById(elId); if(el) el.innerHTML = html; };
-  // dr-large-001 存款統計搜尋欄新增幣種單選下拉（後接時間下拉）
-  set('tpl-dr-large-001', tplSearchCtxFrontCurrencySingle('dr-large-001', {type:'select', name:'時間'}));
-  // dr-large-002 存款統計列表新增幣種欄位（用戶名與金額中間）
-  set('tpl-dr-large-002', tplColCtxAgentCurrency('用戶名', '金額'));
-  // dr-large-003 取款統計搜尋欄新增幣種單選下拉（後接時間下拉）
-  set('tpl-dr-large-003', tplSearchCtxFrontCurrencySingle('dr-large-003', {type:'select', name:'時間'}));
-  // dr-large-004 取款統計列表新增幣種欄位（用戶名與金額中間）
-  set('tpl-dr-large-004', tplColCtxAgentCurrency('用戶名', '金額'));
+  // dr-large-001 存款統計搜尋欄新增國家＋幣種雙連動（後接時間下拉）
+  set('tpl-dr-large-001', `<div class="demo-inline-group">${tpl_TMP_dualLinkedSelect({prefix:'dr-large-001', map:{'菲律賓':['PHP'],'越南':['VND']}})}<div class="demo-select"><div class="demo-select-box"><span class="txt">時間</span><span class="arr">▼</span></div></div></div>`);
+  // dr-large-002 存款統計列表新增國家＋幣種欄位（用戶名與金額中間）
+  set('tpl-dr-large-002', tplColField([{hd:'用戶名',lines:['']},{hd:'國家',lines:['菲律賓']},{hd:'幣種',lines:['PHP']},{hd:'金額',lines:['']}]));
+  // dr-large-003 取款統計搜尋欄新增國家＋幣種雙連動（後接時間下拉）
+  set('tpl-dr-large-003', `<div class="demo-inline-group">${tpl_TMP_dualLinkedSelect({prefix:'dr-large-003', map:{'菲律賓':['PHP'],'越南':['VND']}})}<div class="demo-select"><div class="demo-select-box"><span class="txt">時間</span><span class="arr">▼</span></div></div></div>`);
+  // dr-large-004 取款統計列表新增國家＋幣種欄位（用戶名與金額中間）
+  set('tpl-dr-large-004', tplColField([{hd:'用戶名',lines:['']},{hd:'國家',lines:['菲律賓']},{hd:'幣種',lines:['PHP']},{hd:'金額',lines:['']}]));
+  // dr-large-005 大額門檻設置列表(依啟用國家幣種自動生成;可互動逐列設定)
+  drlcfgInit('tpl-dr-large-005', [['菲律賓','PHP','500000','900000'],['越南','VND','0','0']]);
+  // dr-large-006 逐列設定編輯(可互動;起始即越南列編輯中)
+  drlcfgInit('tpl-dr-large-006', [['菲律賓','PHP','500000','900000'],['越南','VND','0','0']], '', '', 1);
+  // dr-large-007/008 存款/取款統計邏輯(達門檻才列出,靜態列表示意)
+  set('tpl-dr-large-007', tplMockTable(['用戶名','國家','幣種','金額'],[['okbet99906d1uz','菲律賓','PHP','1000099'],['okbet9999vyfzr','菲律賓','PHP','888888'],['总计','','','1888987']]));
+  set('tpl-dr-large-008', tplMockTable(['用戶名','國家','幣種','金額'],[['xnjobe10','菲律賓','PHP','999999'],['xnjobe13','菲律賓','PHP','1000000'],['总计','','','1999999']]));
+  // 後台畫面:存款統計/取款統計 完整畫面(截圖版型;國家幣種與幣種欄為新增,綠底掛卡號)
+  const drlMap = {'菲律賓':['PHP'],'越南':['VND']};
+  set('tpl-dr-large-screen-dep',
+    tplMockSearchBar([
+      {type:'raw', html: tpl_TMP_dualLinkedSelect({prefix:'dr-large-mock181', map:drlMap}) + '<span class="mk-tag">181</span>'},
+      {type:'date', name:'2026-08-01 ～ 2026-08-19'},
+      {type:'input', name:'用户名'},
+      {type:'btn', name:'搜索'}
+    ]) +
+    tplMockTable(['用户名','國家<span class="mk-tag">182</span>','幣種<span class="mk-tag">182</span>','金额'],
+      [['okbet99906d1uz',{t:'菲律賓',cls:'mk-new'},{t:'PHP',cls:'mk-new'},'1000099'],
+       ['okbet9999vyfzr',{t:'菲律賓',cls:'mk-new'},{t:'PHP',cls:'mk-new'},'888888'],
+       ['okbet7777pw8x1',{t:'越南',cls:'mk-new'},{t:'VND',cls:'mk-new'},'777777'],
+       ['总计','','','12789324']]));
+  set('tpl-dr-large-screen-wit',
+    tplMockSearchBar([
+      {type:'raw', html: tpl_TMP_dualLinkedSelect({prefix:'dr-large-mock183', map:drlMap}) + '<span class="mk-tag">183</span>'},
+      {type:'date', name:'2025-07-01 ～ 2026-08-19'},
+      {type:'input', name:'用户名'},
+      {type:'btn', name:'搜索'}
+    ]) +
+    tplMockTable(['用户名','國家<span class="mk-tag">184</span>','幣種<span class="mk-tag">184</span>','金额'],
+      [['xnjobe10',{t:'菲律賓',cls:'mk-new'},{t:'PHP',cls:'mk-new'},'999999'],
+       ['xnjobe13',{t:'菲律賓',cls:'mk-new'},{t:'PHP',cls:'mk-new'},'1000000'],
+       ['okbet0030trq5y',{t:'越南',cls:'mk-new'},{t:'VND',cls:'mk-new'},'900001'],
+       ['总计','','','2900000']]));
+  // 後台畫面:大額門檻設置分頁(整分頁為新增;544列表/545設定;可互動)
+  drlcfgInit('tpl-dr-large-screen-cfg', [['菲律賓','PHP','500000','900000'],['越南','VND','0','0']], '544', '545');
 }
 
 // 數據報表 > 存取款统计：套用統一模板庫，逐卡填入
@@ -15506,12 +16104,11 @@ function render_pay_bank_Demos(){
 function render_pay_level_Demos(){
   const set = (elId, html) => { const el = document.getElementById(elId); if(el) el.innerHTML = html; };
   const LV_MAP = {'菲律賓':['PHP'],'越南':['VND']};
-  // 後台畫面總覽：搜尋列（國家＋幣種預設菲律賓/PHP掛274、同步配置掛275、新增掛277）＋列表（國家/幣種新欄掛276、編輯掛278）
+  // 後台畫面總覽：搜尋列（國家＋幣種預設菲律賓/PHP掛274、新增掛277）＋列表（國家/幣種新欄掛276、編輯掛278）
   const lvEdit = `<span class="mk-link" onclick="toggleMockPop('mk-pop-pay-level-edit')">編輯</span><span class="mk-tag">278</span> 刪除 全部轉移 條件轉移`;
   set('tpl-pay-level-screen',
     tplMockSearchBar([
       {type:'raw', html: tpl_TMP_dualLinkedSelect({prefix:'pay-level-mock274', map:LV_MAP, aDef:'菲律賓', bDef:'PHP', noAll:true}) + `<span class="mk-tag">274</span>`},
-      {type:'raw', html:`<div class="mk-btn">同步配置</div><span class="mk-tag">275</span>`},
       {type:'raw', html:`<div class="mk-btn" onclick="toggleMockPop('mk-pop-pay-level-add')">新增</div><span class="mk-tag">277</span>`}
     ]) +
     tplMockTable(
@@ -15542,9 +16139,9 @@ function render_pay_level_Demos(){
         {label:'每筆最高充值', val:'input:100000'}
       ])}
     </div>`);
-  // pay-level-001 搜尋列示意：國家＋幣種雙向連動（預設菲律賓/PHP）＋同步配置＋新增（展示用）
-  set('tpl-pay-level-001', `<div class="demo-inline-group">${tpl_TMP_dualLinkedSelect({prefix:'pay-level-001', map:LV_MAP, aDef:'菲律賓', bDef:'PHP', noAll:true})}<button class="demo-sync-btn primary">同步配置</button><button class="demo-sync-btn primary">新增</button></div>`);
-  // pay-level-002 同步配置彈窗（全部/PHP/VND 勾選 + 取消/保存）——同步配置待 8/18 確認，維持現狀
+  // pay-level-001 搜尋列示意：國家＋幣種雙向連動（預設菲律賓/PHP）＋新增（展示用）
+  set('tpl-pay-level-001', `<div class="demo-inline-group">${tpl_TMP_dualLinkedSelect({prefix:'pay-level-001', map:LV_MAP, aDef:'菲律賓', bDef:'PHP', noAll:true})}<button class="demo-sync-btn primary">新增</button></div>`);
+  // pay-level-002 同步配置彈窗——8/18 決議不做（項次13），卡 275 整卡劃線保留備查
   set('tpl-pay-level-002', tplSyncModal('sync-pay-level-002'));
   // pay-level-003 添加支付層級彈窗：分值層（上下文）＋國家→幣種連動單選
   set('tpl-pay-level-003', withRowBefore(
@@ -16573,6 +17170,66 @@ function render_payshow_Demos(){
   set('tpl-payshow-538', tplColField([{hd:'狀態', lines:['']},{hd:'國家', lines:['菲律賓']},{hd:'幣種', lines:['PHP']},{hd:'操作人', lines:['']}]));
 }
 
+// ===== 控制後台平台列表:投注站啟用狀態互動（啟用→顯示適用國家多選） =====
+window.plswSet = function(prefix, on){
+  var a=document.querySelector('#'+prefix+'-on .demo-rd'), b=document.querySelector('#'+prefix+'-off .demo-rd');
+  if(a) a.classList.toggle('on', on);
+  if(b) b.classList.toggle('on', !on);
+  var n=document.getElementById(prefix+'-nations');
+  if(n) n.classList.toggle('plsw-hide', !on);
+};
+// 開關列+適用國家列。opts:{on:預設啟用, dis:開關反灰不可點, sel:適用國家預選, tagSwitch/tagNations:卡號chip, newNations:適用國家列綠底}
+function tplPlatSwitch(prefix, opts){
+  opts = opts || {};
+  var on = !!opts.on;
+  var click1 = opts.dis ? '' : ' onclick="plswSet(\''+prefix+'\',true)"';
+  var click2 = opts.dis ? '' : ' onclick="plswSet(\''+prefix+'\',false)"';
+  var disCls = opts.dis ? ' plsw-dis' : '';
+  var tagS = opts.tagSwitch ? '<span class="mk-tag">'+opts.tagSwitch+'</span>' : '';
+  var tagN = opts.tagNations ? '<span class="mk-tag">'+opts.tagNations+'</span>' : '';
+  var rowCls = 'plsw-row' + (on ? '' : ' plsw-hide') + (opts.newNations ? ' mk-new' : '');
+  return '<div class="plsw">'
+    + '<div class="plsw-row'+disCls+'"><span class="plsw-lbl"><span class="demo-star">*</span>投注站系統啟用狀態：</span>'
+    + '<span class="plsw-rd" id="'+prefix+'-on"'+click1+'><span class="demo-rd'+(on?' on':'')+'"></span>啟用</span>'
+    + '<span class="plsw-rd" id="'+prefix+'-off"'+click2+'><span class="demo-rd'+(on?'':' on')+'"></span>停用</span>'
+    + tagS + '</div>'
+    + '<div class="'+rowCls+'" id="'+prefix+'-nations"><span class="plsw-lbl"><span class="demo-star">*</span>投注站適用國家：</span>'
+    + tplMultiSelect(prefix+'-msd', ['菲律賓','越南'], opts.sel||[])
+    + tagN + '</div>'
+    + '</div>';
+}
+// 控制後台平台列表區塊
+function render_ctl_platlist_Demos(){
+  const set = (elId, html) => { const el = document.getElementById(elId); if(el) el.innerHTML = html; };
+  // 後台畫面:完整畫面總覽（搜尋欄＋完整列表＋新增/修改平台彈窗；新增元素綠底掛卡號）
+  // 彈窗只刻投注站系統啟用狀態段（其餘欄位非本次範圍不帶出）
+  const plAddBody = tplPlatSwitch('plmock', {on:false, tagSwitch:'541', tagNations:'541', newNations:true});
+  const plEditBody = tplPlatSwitch('pledit', {on:true, dis:true, sel:['菲律賓'], tagNations:'543', newNations:true});
+  const plOps = '修改密碼 清除錯誤次數 <span class="mk-link" onclick="toggleMockPop(\'mk-pop-platlist-edit\')">修改</span><span class="mk-tag">543</span> 關閉';
+  set('tpl-ctl-platlist-screen',
+    tplMockSearchBar([
+      {type:'raw', html:'<div class="mk-btn" onclick="toggleMockPop(\'mk-pop-platlist-add\')">＋ 新增平台</div><span class="mk-tag">541</span>'},
+      {type:'select', name:'錢包類型'},
+      {type:'select', name:'篩選平台'},
+      {type:'input',  name:'平台名稱'},
+      {type:'btn',    name:'搜索'}
+    ]) +
+    tplMockTable(
+      ['平台ID','平台標識','平台名稱','平台類型','錢包類型','保底費用','啟用動畫','抽成比例','其他費用','充值層級','抽成方案','上線時間','平台管理員賬號','內部管理員賬號','報表顯示(Boss後台)','投注站<span class="mk-tag">542</span>','狀態','操作'],
+      [
+        ['45','spplat6','平台6','直營（現金）','－－','1120304','開啟','0.04','0','默認層','直營2%','－－','admin','cxadmin8899','顯示',{t:'啟用',cls:'mk-new'},'正常', plOps],
+        ['36','spplat_bruce','測試平台6','直營（現金）','－－','100000','關閉','0.1','20000','默認層','直營2%','－－','admin','cxadmin8899','顯示',{t:'停用',cls:'mk-new'},'正常', plOps]
+      ]
+    ) +
+    '<div class="mk-detail-pop" id="mk-pop-platlist-add"><div class="mk-pop-hd"><span>新增平台</span><span class="mk-pop-x" onclick="toggleMockPop(\'mk-pop-platlist-add\')">✕</span></div><div class="plsw">' + plAddBody + '</div></div>' +
+    '<div class="mk-detail-pop" id="mk-pop-platlist-edit"><div class="mk-pop-hd"><span>修改平台</span><span class="mk-pop-x" onclick="toggleMockPop(\'mk-pop-platlist-edit\')">✕</span></div><div class="plsw">' + plEditBody + '</div></div>');
+  // 541 啟用→適用國家 互動示意
+  set('tpl-ctl-platlist-001', tplPlatSwitch('pl541', {on:true}));
+  // 542 列表投注站欄位（報表顯示(Boss後台)｜投注站｜狀態）
+  set('tpl-ctl-platlist-002', tplColThreeField('報表顯示(Boss後台)', '投注站', '啟用', '狀態'));
+  // 543 修改平台彈窗:開關反灰不可點+適用國家帶入已選可調
+  set('tpl-ctl-platlist-003', tplPlatSwitch('pl543', {on:true, dis:true, sel:['菲律賓']}));
+}
 function render_ctl_oplog_Demos(){
   const set = (elId, html) => { const el = document.getElementById(elId); if(el) el.innerHTML = html; };
   // 匯率調整明細（卡527示意與畫面總覽彈窗共用同一份資料驅動內容）
@@ -16732,6 +17389,7 @@ render_point_spin_Demos();
 render_payshow_Demos();
 render_ctl_oplog_Demos();
 render_ctl_currency_Demos();
+render_ctl_platlist_Demos();
 initMsdAll();
 renumberCards();
 computeMenuRanges();
