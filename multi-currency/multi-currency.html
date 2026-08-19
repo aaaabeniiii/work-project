@@ -725,6 +725,76 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
     <p class="rec-sub">記錄各次會議與討論的決議內容。新的紀錄由上往下疊加（項次由下往上遞增）；決議內容若後續被調整，原文以刪除線標示並於下方註記調整內容與確認人。</p>
     <table class="rec-table">
       <tr><th>日期</th><th>項次</th><th>內容</th><th>規格書更新</th><th>參與人</th></tr>
+      <tr id="rec-28">
+        <td class="rec-date" rowspan="8">8/18</td>
+        <td class="rec-no">28</td>
+        <td><span class="rec-item-tt">提現出款設置</span>：改依「國家＋幣種」區分；另需新增一個設置頁面，供運營自行配置，維度同為「國家＋幣種」。</td>
+        <td class="rec-upd"></td>
+        <td class="rec-who" rowspan="8">8/18 第二次週會<br>（Mark、Zack、Cyril、Evan、Wade、Mars、Din、Zaken、Abeni）</td>
+      </tr>
+      <tr id="rec-27">
+        <td class="rec-no">27</td>
+        <td><span class="rec-item-tt">新遊戲入口設置＋廠商設置——素材多語系模式</span>
+          <ol class="rec-ol">
+            <li>比照多語系做法：初始設置上傳的圖為「全部＝預設」；不同國家＋幣種需顯示不同圖時，圖片欄位提供「＋」，選定國家＋幣種後上傳指定圖。</li>
+            <li>屬前台顯示問題，待 Cyril 確認可否放後期處理、不在本期。</li>
+          </ol>
+        </td>
+        <td class="rec-upd"></td>
+      </tr>
+      <tr id="rec-26">
+        <td class="rec-no">26</td>
+        <td><span class="rec-item-tt">查詢條件通用原則</span>：整份規格書的查詢條件儘量統一採「國家＋幣種」兩維度，需重掃一次規格書補上（例：三方相關頁面查詢條件加上國家）。</td>
+        <td class="rec-upd"></td>
+      </tr>
+      <tr id="rec-25">
+        <td class="rec-no">25</td>
+        <td><span class="rec-item-tt">存取款統計</span>：改依「國家＋幣種」篩選；統計邏輯與渠道來源待 Cyril 確認。</td>
+        <td class="rec-upd"></td>
+      </tr>
+      <tr id="rec-24">
+        <td class="rec-no">24</td>
+        <td><span class="rec-item-tt">大額存取款</span>：新增「各幣種大額設置」，維度為「國家＋幣種」。</td>
+        <td class="rec-upd"></td>
+      </tr>
+      <tr id="rec-23">
+        <td class="rec-no">23</td>
+        <td><span class="rec-item-tt">投注站統計</span>：新增「國家＋幣種」篩選，金額以法幣顯示。</td>
+        <td class="rec-upd"></td>
+      </tr>
+      <tr id="rec-22">
+        <td class="rec-no">22</td>
+        <td><span class="rec-item-tt">投注站系統啟用狀態與總代</span>
+          <ol class="rec-ol">
+            <li>開關邏輯調整：原為「啟用投注站→不顯示總代、停用→顯示總代」二擇一；改為總代固定顯示，「投注站系統啟用狀態」單純決定是否啟用投注站功能，投注站相關內容隨開關開啟／隱藏。</li>
+            <li>開關啟用時需選擇適用國家：僅所選國家啟用投注站；投注站僅渲染這些國家，總代則排除這些國家。</li>
+            <li>功能歸屬原則：通用型功能做在總代、投注站專屬功能做在投注站，待 Cyril 盤點確認功能歸屬；未啟用投注站的站點顯示總代報表。</li>
+            <li>總代綁定「國家＋幣種」。</li>
+            <li>投注站「地域」欄位不動，歸類為展示地址；實際國家＋幣種依「國家」「幣種」欄位所選為準。</li>
+          </ol>
+        </td>
+        <td class="rec-upd"></td>
+      </tr>
+      <tr id="rec-21">
+        <td class="rec-no">21</td>
+        <td><span class="rec-item-tt">平台結算付款渠道（<code>fiat_currency</code>）</span>
+          <ol class="rec-ol">
+            <li>平台費費率來源為「控制中心 &gt; 平台管理 &gt; 平台支付配置」；Cyril 確認此表是否有吃 RMB 需改 PHP。</li>
+            <li>添加下拉的銀行列表來源需為 PHP 版本；銀行先支持 PHP，最終仍須支持多國。</li>
+            <li>不可見地區可拔掉，優先級放後面。</li>
+            <li>原「虛擬幣／法幣」判斷可直接改掉；改動會影響所有虛擬幣，但目前僅平台費使用到，不影響平台運營。</li>
+          </ol>
+          <span class="rec-adj"><span class="rec-adj-tag">8/18 補充：</span>併入 OKF-2074 的優化一併處理——影響的是期 2，須 OKF-2074 先處理完才能作。（Cyril）</span>
+        </td>
+        <td class="rec-upd"><span class="x-jump" onclick="goTo('rec-20')">併入 OKF-2074，見項次 20</span></td>
+      </tr>
+      <tr id="rec-29">
+        <td class="rec-date">8/17</td>
+        <td class="rec-no">29</td>
+        <td><span class="rec-item-tt">國家地區定製 IP 白名單</span>：確定不做；若要做，需跟著前台前端的實作方案走。</td>
+        <td class="rec-upd">－</td>
+        <td class="rec-who">Cyril、Mark</td>
+      </tr>
       <tr id="rec-19">
         <td class="rec-date">8/13</td>
         <td class="rec-no">19</td>
@@ -770,23 +840,25 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
       </tr>
       <tr id="rec-13">
         <td class="rec-no">13</td>
-        <td><span class="rec-item-tt">支付層級配置</span>：要做，維度為「國家＋幣種」。</td>
+        <td><span class="rec-item-tt">支付層級配置</span>：要做，維度為「國家＋幣種」。
+        <span class="rec-adj"><span class="rec-adj-tag">8/18 補充：</span>不做同步配置。</span></td>
         <td class="rec-upd"><span class="x-jump" onclick="showPg('adm-pay-config-pay-level')">8/13已更新</span></td>
       </tr>
-      <tr>
+      <tr id="rec-12">
         <td class="rec-no">12</td>
-        <td><span class="rec-item-tt">同步配置</span>：選 A 國家後，將數值帶入 B 國家；此時畫面停留在編輯頁，數值尚未寫入，按「保存」才真正保存。</td>
+        <td><span class="rec-item-tt">同步配置</span>：選 A 國家後，將數值帶入 B 國家；此時畫面停留在編輯頁，數值尚未寫入，按「保存」才真正保存。
+        <span class="rec-adj"><span class="rec-adj-tag">8/18 確認：</span>VIP 同步配置流程通過——頁面原維持逐列編輯保存；同步配置走額外的整頁編輯流程。</span></td>
         <td class="rec-upd"></td>
       </tr>
       <tr>
         <td class="rec-no">11</td>
-        <td><span class="rec-del"><span class="rec-item-tt">在線支付配置的幣種</span>：直接吃 PAYMENT 回傳的值，不開放人工選擇；畫面上仍顯示幣種，但不可編輯（唯讀）。</span>
+        <td><span class="rec-item-tt">在線支付配置的幣種</span>：<span class="rec-del">直接吃 PAYMENT 回傳的值，不開放人工選擇；畫面上仍顯示幣種，但不可編輯（唯讀）。</span>
         <span class="rec-adj"><span class="rec-adj-tag">8/11 調整：</span>幣種不由 PAYMENT 回傳限制，維持人工選擇；設定時手動選擇對應的國家＋幣種，該商戶即綁定此國家＋幣種；商戶支援多個國家＋幣種時，每一個組合各設定一筆；國家與幣種可再次編輯調整。（Mark、Cyril）</span></td>
         <td class="rec-upd"><span class="x-jump" onclick="showPg('adm-pay-config-pay-online')">8/13已更新</span></td>
       </tr>
       <tr id="rec-10">
         <td class="rec-no">10</td>
-        <td><span class="rec-del"><span class="rec-item-tt">在線支付類型不給調整（支付優化）</span>：支付類型不開放編輯調整，作法為擋掉或不給權限配置。</span>
+        <td><span class="rec-item-tt">在線支付類型不給調整（支付優化）</span>：<span class="rec-del">支付類型不開放編輯調整，作法為擋掉或不給權限配置。</span>
         <span class="rec-adj"><span class="rec-adj-tag">8/11 調整：</span>支付類型照樣開放調整，操作邏輯不變，僅新增「國家＋幣種」綁定限制。（Mark、Cyril）</span></td>
         <td class="rec-upd"><span class="x-jump" onclick="showPg('adm-pay-config-pay-online')">8/13已更新</span></td>
       </tr>
@@ -802,7 +874,8 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
       </tr>
       <tr>
         <td class="rec-no">7</td>
-        <td><span class="rec-item-tt">系統預設幣種</span>：系統應默認 PHP。RD 需列出目前沒有默認值的部分；後端改完自行測試。</td>
+        <td><span class="rec-item-tt">系統預設幣種</span>：系統應默認 PHP。RD 需列出目前沒有默認值的部分；後端改完自行測試。
+        <span class="rec-adj"><span class="rec-adj-tag">8/18 補充：</span><code>sys_currency</code> 默認值目前為 RMB；因目前幾乎沒有地方使用到此參數，直接改為 PHP，QA 不需驗收。</span></td>
         <td class="rec-upd">－</td>
       </tr>
       <tr>
@@ -822,17 +895,20 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
       </tr>
       <tr id="rec-3">
         <td class="rec-no">3</td>
-        <td><span class="rec-item-tt">換算精度</span>：維持現況、不做調整。既有精度即使不一致也不處理；QA 驗收時若認為數字有問題，交由 RD 查明。</td>
+        <td><span class="rec-item-tt">換算精度</span>：<span class="rec-del">維持現況、不做調整。既有精度即使不一致也不處理；QA 驗收時若認為數字有問題，交由 RD 查明。</span>
+        <span class="rec-adj"><span class="rec-adj-tag">8/18 調整：</span>精度統一——DB 儲存至小數點後 4 位（第 5 位依實際情況捨入／進位）；顯示至小數點後 2 位（第 3 位無條件捨去）。QA 如需確認實際數值，再請開發查詢。</span></td>
         <td class="rec-upd"><span class="x-jump" onclick="showPg('spec-content');goTo('s2-3-4')">8/13已更新</span></td>
       </tr>
       <tr>
         <td class="rec-no">2</td>
-        <td><span class="rec-item-tt">系統參數管理——開關設計</span>：採一個主開關，國家與幣種為主開關底下的次開關；細節後續看畫面再討論。待定，待 Cyril 整理表之後與 Mark 討論。</td>
+        <td><span class="rec-item-tt">系統參數管理——開關設計</span>：採一個主開關，國家與幣種為主開關底下的次開關；細節後續看畫面再討論。<span class="rec-del">待定，待 Cyril 整理表之後與 Mark 討論。</span>
+        <span class="rec-adj"><span class="rec-adj-tag">8/18 更新：</span>會後由 Cyril 與 Mark 對齊。</span></td>
         <td class="rec-upd"></td>
       </tr>
       <tr>
         <td class="rec-no">1</td>
-        <td><span class="rec-item-tt">系統參數管理——參數維度</span>：與金額有關的三個分頁，維度定為「國家＋幣種」。待定，待 Cyril 整理表之後與 Mark 討論。</td>
+        <td><span class="rec-item-tt">系統參數管理——參數維度</span>：與金額有關的三個分頁，維度定為「國家＋幣種」。<span class="rec-del">待定，待 Cyril 整理表之後與 Mark 討論。</span>
+        <span class="rec-adj"><span class="rec-adj-tag">8/18 更新：</span>會後由 Cyril 與 Mark 對齊。</span></td>
         <td class="rec-upd"></td>
       </tr>
     </table>
@@ -879,13 +955,6 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
     <table class="rec-table">
       <tr><th>日期</th><th>項次</th><th>內容</th><th>討論人</th><th>預計討論時間</th></tr>
       <tr>
-        <td class="rec-date">8/13</td>
-        <td class="rec-no">4</td>
-        <td><span class="rec-item-tt">提現出款設置</span>：目前僅以幣種區分，是否需要加上國家限制？</td>
-        <td class="rec-who">Cyril、Abeni</td>
-        <td class="rec-date">8/18 第 2 次週會</td>
-      </tr>
-      <tr>
         <td class="rec-date">8/11</td>
         <td class="rec-no">3</td>
         <td><span class="rec-item-tt">系統參數管理</span>
@@ -895,37 +964,8 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
           </ol>
         </td>
         <td class="rec-who">Cyril、Mark</td>
-        <td class="rec-date">待 Cyril 整理表後</td>
-      </tr>
-      <tr>
-        <td class="rec-date">8/12</td>
-        <td class="rec-no">2</td>
-        <td><span class="rec-item-tt">同步配置</span>
-          <ol class="rec-ol">
-            <li>VIP
-              <ol>
-                <li>部分設定為逐條保存；同步配置需額外做一個流程：同步配置後，當前所有設定可一次編輯、一次保存。非將整頁改為一次編輯模式，僅同步配置時才走此流程。</li>
-                <li>若各幣種在程式端已寫好預設值，是否還需要做同步配置功能？</li>
-              </ol>
-            </li>
-            <li>支付層級配置
-              <ol>
-                <li>預設分層只有默認層、第一層～第五層，且可自行新增更多分層；同步時是否連同分層名稱整張表一同複製？</li>
-                <li>同 VIP 問題：目前為逐條保存，需額外做「當前所有欄位一次編輯、一次保存」的流程。</li>
-                <li>若僅同步默認層、第一層～第五層，是否就不需要做此功能？</li>
-              </ol>
-            </li>
-          </ol>
-        </td>
-        <td class="rec-who">Abeni</td>
-        <td class="rec-date">8/18 第 2 次週會</td>
-      </tr>
-      <tr>
-        <td class="rec-date">8/11</td>
-        <td class="rec-no">1</td>
-        <td><span class="rec-item-tt">國家地區定製 IP 白名單</span>：是否需要實作。</td>
-        <td class="rec-who">Cyril、Zack</td>
-        <td class="rec-date"></td>
+        <td class="rec-date"><span class="rec-del">待 Cyril 整理表後</span><br>
+          <span class="rec-adj"><span class="rec-adj-tag">8/18 更新：</span><br>待 Cyril 與 Mark 對齊後</span></td>
       </tr>
     </table>
   </div>
