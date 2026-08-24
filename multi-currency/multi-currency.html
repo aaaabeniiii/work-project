@@ -787,6 +787,55 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
     <p class="rec-sub">記錄各次會議與討論的決議內容。新的紀錄由上往下疊加（項次由下往上遞增）；決議內容若後續被調整，原文以刪除線標示並於下方註記調整內容與確認人。</p>
     <table class="rec-table">
       <tr><th>日期</th><th>項次</th><th>內容</th><th>規格書更新</th><th>參與人</th></tr>
+      <tr id="rec-37">
+        <td class="rec-date">8/21</td>
+        <td class="rec-no">37</td>
+        <td><span class="rec-item-tt">標籤依國家分類</span>：參數管理中有「標籤」者決議依國家分類；會員代理標籤配置（用戶管理 &gt; 會員代理標籤配置）需增加國家維度。</td>
+        <td class="rec-upd"></td>
+        <td>Cyril</td>
+      </tr>
+      <tr id="rec-36">
+        <td class="rec-date">8/21</td>
+        <td class="rec-no">36</td>
+        <td><span class="rec-item-tt">郵箱設置／第三方註冊</span>（系統管理 &gt; 郵箱設置）：<br>1. Facebook、Google 註冊依前端傳入的推薦碼決定歸屬，幣種採用平台預設國家的法幣；新增 Exception：推薦碼的國家與預設國家法幣不一致時報錯。<br>2. 信箱註冊按鈕保留，並依國家分別處理。<br>3. 會員註冊時包含第三方等資訊，後端將新開 table 儲存；實際傳入的欄位內容確認中。</td>
+        <td class="rec-upd"></td>
+        <td>Cyril、Evan</td>
+      </tr>
+      <tr id="rec-35">
+        <td class="rec-date">8/21</td>
+        <td class="rec-no">35</td>
+        <td><span class="rec-item-tt">國家與法幣原則</span>：一個國家僅有一個法幣，第二幣種必為虛擬幣；不會有國家支援第二種法幣的情形。</td>
+        <td class="rec-upd"></td>
+        <td>Cyril、Mark</td>
+      </tr>
+      <tr id="rec-34">
+        <td class="rec-date">8/20</td>
+        <td class="rec-no">34</td>
+        <td><span class="rec-item-tt">總代</span>：總代目前操作欄內所有功能皆無法使用、與線上運營功能不一致，功能對齊不屬於多幣種範圍，故本次僅新增密碼功能。</td>
+        <td class="rec-upd"></td>
+        <td>Abeni、Zack、Cyril</td>
+      </tr>
+      <tr id="rec-33">
+        <td class="rec-date">8/20</td>
+        <td class="rec-no">33</td>
+        <td><span class="rec-item-tt">總代理報表</span>：與現有投注站報表版面與功能相同，需分為兩個不同標籤（分頁）分別呈現。</td>
+        <td class="rec-upd"></td>
+        <td>Cyril、Abeni、Zack</td>
+      </tr>
+      <tr id="rec-32">
+        <td class="rec-date">8/20</td>
+        <td class="rec-no">32</td>
+        <td><span class="rec-item-tt">賽事管理</span>：「最大投注額」欄位改為點擊跳出彈窗、依「國家＋幣種」配置各組合設定值的模式（遊戲管理 &gt; 賽事管理 &gt; 所有球類 tab 分頁）。</td>
+        <td class="rec-upd"></td>
+        <td>Cyril</td>
+      </tr>
+      <tr id="rec-31">
+        <td class="rec-date">8/20</td>
+        <td class="rec-no">31</td>
+        <td><span class="rec-item-tt">反水設定</span>：三方與體育的反水均不處理，「遊戲管理 &gt; 反水設定」整頁不做；因此「用戶管理 &gt; VIP特權 &gt; VIP特權 tab &gt; 返水/下注相關區塊」中的體育反水失效。</td>
+        <td class="rec-upd"></td>
+        <td>Cyril</td>
+      </tr>
       <tr id="rec-30">
         <td class="rec-date">8/20</td>
         <td class="rec-no">30</td>
@@ -972,13 +1021,15 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
       <tr>
         <td class="rec-no">2</td>
         <td><span class="rec-item-tt">系統參數管理——開關設計</span>：採一個主開關，國家與幣種為主開關底下的次開關；細節後續看畫面再討論。<span class="rec-del">待定，待 Cyril 整理表之後與 Mark 討論。</span>
-        <span class="rec-adj"><span class="rec-adj-tag">8/18 更新：</span>會後由 Cyril 與 Mark 對齊。</span></td>
+        <span class="rec-del">8/18 更新：會後由 Cyril 與 Mark 對齊。</span>
+        <span class="rec-adj"><span class="rec-adj-tag">8/21 更新：</span>系統參數改動結論已整理成文件，內容以該文件為準。</span></td>
         <td class="rec-upd"></td>
       </tr>
       <tr>
         <td class="rec-no">1</td>
         <td><span class="rec-item-tt">系統參數管理——參數維度</span>：與金額有關的三個分頁，維度定為「國家＋幣種」。<span class="rec-del">待定，待 Cyril 整理表之後與 Mark 討論。</span>
-        <span class="rec-adj"><span class="rec-adj-tag">8/18 更新：</span>會後由 Cyril 與 Mark 對齊。</span></td>
+        <span class="rec-del">8/18 更新：會後由 Cyril 與 Mark 對齊。</span>
+        <span class="rec-adj"><span class="rec-adj-tag">8/21 更新：</span>系統參數改動結論已整理成文件，內容以該文件為準。</span></td>
         <td class="rec-upd"></td>
       </tr>
     </table>
