@@ -840,10 +840,32 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
     <p class="rec-sub">記錄各次會議與討論的決議內容。新的紀錄由上往下疊加（項次由下往上遞增）；決議內容若後續被調整，原文以刪除線標示並於下方註記調整內容與確認人。</p>
     <table class="rec-table">
       <tr><th>日期</th><th>項次</th><th>內容</th><th>規格書更新</th><th>參與人</th></tr>
+      <tr id="rec-42">
+        <td class="rec-date" rowspan="4">8/24</td>
+        <td class="rec-no">42</td>
+        <td><span class="rec-item-tt">前台申請代理</span>：該功能目前未使用，進行註冊相關調整時可將其排除。</td>
+        <td class="rec-upd"></td>
+        <td class="rec-who" rowspan="4">8/24 第三次週會<br>（Mark、Zack、Cyril、Ody、Wade、Mars、Din、Zaken、Abeni）</td>
+      </tr>
+      <tr id="rec-41">
+        <td class="rec-no">41</td>
+        <td><span class="rec-item-tt">VIP特權 &gt; 會員福利記錄</span>：幣種目前為寫死，改為讀取會員的幣種；幣種／金額／積分目前顯示會混亂，需再確認調整方式。</td>
+        <td class="rec-upd"></td>
+      </tr>
+      <tr id="rec-40">
+        <td class="rec-no">40</td>
+        <td><span class="rec-item-tt">會員批量操作</span>（用戶管理 &gt; 會員）：批量操作行為需限制為同國家＋幣種。</td>
+        <td class="rec-upd"></td>
+      </tr>
+      <tr id="rec-39">
+        <td class="rec-no">39</td>
+        <td><span class="rec-item-tt">修改餘額審批匯率</span>：修改餘額的審批以單據生成當下的匯率計算；需確認充值、提款是否為同一口徑，匯率取值時點需統一。</td>
+        <td class="rec-upd"></td>
+      </tr>
       <tr id="rec-38">
         <td class="rec-date">8/24</td>
         <td class="rec-no">38</td>
-        <td><span class="rec-item-tt">系統參數</span>（系統管理 &gt; 系統參數）：<br>1. 設置層級由「平台」改為「國家」。<br>2. 總開關確定不做，統一為多國家維度。<br>3. 下拉選單僅做「國家」，切換國家後底下 10 個 tab 分頁一起連動、皆顯示該國家數據（非在各 tab 分頁內個別切換）。<br>4. 涉及數值金額的欄位比照多語系做法：提供「＋」依各幣種分別設置，即以下拉選單的「國家」＋該欄位的「幣種」兩維度設置。</td>
+        <td><span class="rec-item-tt">系統參數</span>（系統管理 &gt; 系統參數）：<br>1. 設置層級由「平台」改為「國家」。<br>2. 總開關確定不做，統一為多國家維度。<br><span class="rec-del">3. 下拉選單僅做「國家」，切換國家後底下 10 個 tab 分頁一起連動、皆顯示該國家數據（非在各 tab 分頁內個別切換）。</span><br><span class="rec-adj"><span class="rec-adj-tag">8/24 調整：</span>平台維度的參數獨立一區呈現；其餘參數依國家區分，以國家下拉切換、各國家顯示各自的設定。頁面畫面待 PM 產出。</span><br>4. 涉及數值金額的欄位比照多語系做法：提供「＋」依各幣種分別設置，即以下拉選單的「國家」＋該欄位的「幣種」兩維度設置。<br><span class="rec-adj"><span class="rec-adj-tag">8/24 補充：</span>參數實作方式：舊有參數（code）不異動，新增維度後的參數另行寫入 DB；若新參數判斷有問題則回退使用舊參數，不影響線上既有功能。</span></td>
         <td class="rec-upd"></td>
         <td>Cyril、Abeni、Zack、Evan、Ody</td>
       </tr>
