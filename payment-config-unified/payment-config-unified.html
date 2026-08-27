@@ -489,7 +489,25 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
           </div>
           <div class="flow__branch">
             <span class="flow__state"><span class="pill pill--maint">維護</span></span>
-            <div class="flow__result flow__result--maint">該渠道下所有方式（入口）顯示維護，子通道不顯示</div>
+            <div class="flow__next">
+              <div class="flow__lane" style="min-width:0;">
+                <div class="flow__q" style="background:#1d4ed8;">方式狀態？<br><span style="font-weight:400;font-size:.66rem;">在線支付商戶配置</span></div>
+                <div class="flow__branches">
+                  <div class="flow__branch">
+                    <span class="flow__state"><span class="pill pill--off">停用</span></span>
+                    <div class="flow__result flow__result--stop">前台不顯示該方式（入口）</div>
+                  </div>
+                  <div class="flow__branch">
+                    <span class="flow__state"><span class="pill pill--maint">維護</span></span>
+                    <div class="flow__result flow__result--maint">該方式（入口）顯示維護，子通道不顯示</div>
+                  </div>
+                  <div class="flow__branch">
+                    <span class="flow__state"><span class="pill pill--ok">正常</span></span>
+                    <div class="flow__result flow__result--maint">該方式（入口）顯示維護，子通道不顯示</div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="flow__branch">
             <span class="flow__state"><span class="pill pill--ok">正常</span></span>
