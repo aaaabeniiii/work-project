@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>系統參數管理－畫面版本比較</title>
+<style>
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:-apple-system,"PingFang TC","PingFang SC","Microsoft JhengHei","Microsoft YaHei",sans-serif; background:#eef1f5; color:#333; font-size:14px; }
+
+  /* ===== 頂部工具列（非後台畫面，比較器自身的控制） ===== */
+  .stickhdr { position:sticky; top:0; z-index:200; }
+  .topbar { background:#1f2937; color:#fff; padding:12px 20px; display:flex; align-items:center; flex-wrap:wrap; gap:10px; }
+  .topbar h1 { font-size:16px; font-weight:600; margin-right:14px; }
+  .vbtn { background:#374151; color:#d1d5db; border:1px solid #4b5563; border-radius:6px; padding:7px 16px; cursor:pointer; font-size:14px; }
+  .vbtn:hover { background:#4b5563; color:#fff; }
+  .vbtn.on { background:#2563eb; border-color:#2563eb; color:#fff; }
+  .chkcol { margin-left:auto; display:flex; flex-direction:column; gap:5px; }
+  .scopechk { display:flex; align-items:center; gap:6px; font-size:13px; color:#d1d5db; cursor:pointer; user-select:none; }
+  .seclbl { color:#111; font-weight:600; font-size:15px; margin:18px 14px 0; }
+  .natrow { display:flex; align-items:center; gap:14px; margin:16px 14px 2px; }
+  .natrow .seclbl, .natrow .natwrap { margin:0; }
+  body:not(.showsec) .seclbl { display:none; }
+  .scopechk input { cursor:pointer; }
+
+  /* ===== 版本說明條 ===== */
+  .verdesc { background:#fffbe6; border-bottom:1px solid #f0e6c0; color:#8a6d1a; padding:8px 20px; font-size:13px; }
+
+  /* ===== 後台畫面容器 ===== */
+  .screen { max-width:1500px; margin:16px auto 60px; background:#fff; border:1px solid #e5e7eb; border-radius:6px; overflow:visible; box-shadow:0 1px 3px rgba(0,0,0,.05); }
+
+  /* tab 列 */
+  .mtabs { display:flex; flex-wrap:wrap; border-bottom:1px solid #e5e7eb; background:#fff; }
+  .mtab { padding:15px 20px; cursor:pointer; color:#666; border-right:1px solid #f0f0f0; white-space:nowrap; }
+  .mtab.active { color:#409eff; font-weight:500; }
+  .mtab:hover { color:#409eff; }
+  .mtabs2 { border-top:1px solid #e5e7eb; margin-top:12px; }
+  .mtab.nogeo { color:#c0c4cc; }
+  .mtab.nogeo.active { color:#409eff; }
+
+  /* 區塊 */
+  .pane { padding:6px 14px 20px; }
+  .blk { border:1px solid #ebeef5; border-radius:4px; margin-top:14px; background:#fff; }
+  .blk-t { color:#409eff; padding:13px 18px 9px; font-size:14px; }
+  .blk-t .bhint { color:#b0b6bf; font-size:13px; margin-left:2px; }
+
+  /* 參數列 */
+  .prow { display:flex; align-items:center; min-height:52px; padding:8px 18px; border-top:1px solid #f0f2f5; }
+  .blk .prow:first-child { border-top:none; }
+  .blk-t + .prow { border-top:none; }
+  .prow-l { flex:1 1 auto; padding-right:16px; color:#333; line-height:1.5; }
+  .prow-l .hint { color:#b0b6bf; font-size:13px; }
+  .prow-c { flex:0 0 52%; display:flex; align-items:flex-start; gap:10px; }
+  .prow-c.rgt { flex:0 0 auto; margin-left:auto; }
+  .pinput { flex:1 1 auto; border:1px solid #dcdfe6; border-radius:4px; padding:9px 12px; font-size:14px; color:#333; background:#fff; min-width:0; }
+  .pinput::placeholder { color:#c0c4cc; }
+  .pinput.ro { background:#f5f7fa; color:#909399; }
+  textarea.pinput { resize:vertical; min-height:58px; font-family:Menlo,Consolas,monospace; font-size:13px; line-height:1.5; }
+  .savebtn { background:#5e9bf7; color:#fff; border:none; border-radius:4px; padding:9px 18px; font-size:14px; cursor:pointer; flex:0 0 auto; }
+  .savebtn:hover { background:#4a8bf0; }
+  .upbtn { background:#5e9bf7; color:#fff; border:none; border-radius:4px; padding:9px 14px; font-size:14px; cursor:pointer; flex:0 0 auto; }
+  .delbtn { background:#f56c6c; color:#fff; border:none; border-radius:4px; padding:8px 16px; font-size:14px; cursor:pointer; }
+
+  /* 開關 */
+  .tgwrap { display:inline-flex; align-items:center; gap:8px; cursor:pointer; user-select:none; flex:0 0 auto; }
+  .tg { width:40px; height:22px; border-radius:11px; background:#dcdfe6; position:relative; transition:background .15s; flex:0 0 auto; }
+  .tg::after { content:''; position:absolute; top:2px; left:2px; width:18px; height:18px; border-radius:50%; background:#fff; transition:left .15s; box-shadow:0 1px 2px rgba(0,0,0,.2); }
+  .tg.on { background:#5e9bf7; }
+  .tg.on::after { left:20px; }
+  .tglbl { color:#909399; font-size:14px; }
+  .tg.on + .tglbl { color:#5e9bf7; }
+
+  /* 三欄開關格 */
+  .grid3 { display:flex; border-top:1px solid #f0f2f5; }
+  .blk-t + .grid3 { border-top:none; }
+  .g3cell { flex:1 1 33.33%; display:flex; align-items:center; justify-content:space-between; padding:14px 18px; border-right:1px solid #f0f2f5; min-height:52px; }
+  .g3cell:last-child { border-right:none; }
+  .g3cell .gname { padding-right:10px; }
+
+  /* radio / checkbox */
+  .rdgrp { display:flex; align-items:center; gap:26px; flex-wrap:wrap; }
+  .rditem { display:inline-flex; align-items:center; gap:7px; cursor:pointer; color:#333; }
+  .rdo { width:15px; height:15px; border-radius:50%; border:1px solid #dcdfe6; position:relative; flex:0 0 auto; background:#fff; }
+  .rdo.on { border-color:#409eff; }
+  .rdo.on::after { content:''; position:absolute; top:3px; left:3px; width:7px; height:7px; border-radius:50%; background:#409eff; }
+  .rditem.sel { color:#409eff; }
+  .ckb { width:15px; height:15px; border:1px solid #dcdfe6; border-radius:2px; position:relative; flex:0 0 auto; background:#fff; }
+  .ckb.on { background:#409eff; border-color:#409eff; }
+  .ckb.on::after { content:''; position:absolute; left:4px; top:1px; width:4px; height:8px; border:solid #fff; border-width:0 2px 2px 0; transform:rotate(45deg); }
+
+  /* 數字步進器 */
+  .stepper { display:inline-flex; align-items:center; border:1px solid #dcdfe6; border-radius:4px; overflow:hidden; }
+  .stepper .stbtn { width:34px; height:38px; background:#f5f7fa; border:none; color:#606266; font-size:16px; cursor:pointer; }
+  .stepper .stval { width:110px; text-align:center; border:none; border-left:1px solid #dcdfe6; border-right:1px solid #dcdfe6; height:38px; font-size:14px; padding:0 6px; }
+
+  /* 皮膚切換 pill */
+  .pillgrp { display:inline-flex; border:1px solid #dcdfe6; border-radius:4px; overflow:hidden; }
+  .pill { padding:8px 20px; cursor:pointer; color:#606266; background:#fff; font-size:14px; }
+  .pill.on { background:#5e9bf7; color:#fff; }
+
+  /* 假下拉 */
+  .fsel { display:inline-flex; align-items:center; justify-content:space-between; border:1px solid #dcdfe6; border-radius:4px; padding:9px 12px; color:#333; min-width:150px; gap:10px; background:#fff; cursor:pointer; }
+  .fsel .ph { color:#c0c4cc; }
+  .fsel .arr { color:#c0c4cc; font-size:12px; }
+
+  /* 語系 chips */
+  .chipbox { display:inline-flex; align-items:center; gap:6px; border:1px solid #dcdfe6; border-radius:4px; padding:6px 10px; background:#fff; }
+  .chip { background:#f0f2f5; border-radius:3px; padding:3px 8px; color:#606266; font-size:13px; display:inline-flex; align-items:center; gap:5px; }
+  .chip .x { color:#b0b6bf; font-size:12px; }
+
+  /* 表格 */
+  .ptable { width:100%; border-collapse:collapse; margin:4px 0 2px; }
+  .ptable th { color:#909399; font-weight:400; padding:12px 10px; border-bottom:1px solid #ebeef5; text-align:center; font-size:14px; }
+  .ptable td { padding:10px; border-bottom:1px solid #f5f7fa; text-align:center; vertical-align:middle; }
+  .ptable tr:last-child td { border-bottom:none; }
+  .ptable .tin { width:90%; border:1px solid #dcdfe6; border-radius:4px; padding:8px 10px; font-size:14px; text-align:left; }
+  .ptable .greentx { color:#67c23a; }
+  .ptable .bluetx { color:#409eff; cursor:pointer; }
+  .ptable .tagcell { display:inline-block; background:#fafafa; border:1px solid #e4e7ed; border-radius:3px; padding:6px 14px; color:#909399; }
+  .addlink { color:#409eff; cursor:pointer; padding:10px 18px; display:inline-flex; align-items:center; gap:5px; font-size:14px; }
+  .addbtn-outline { display:inline-flex; align-items:center; gap:6px; border:1px solid #cfe1fb; color:#5e9bf7; background:#f4f9ff; border-radius:4px; padding:8px 16px; cursor:pointer; margin:12px 18px; font-size:14px; }
+  .blkfoot { display:flex; justify-content:flex-end; align-items:center; gap:14px; padding:12px 18px; border-top:1px solid #f0f2f5; }
+
+  /* 紅字提示 */
+  .rnote { color:#f56c6c; }
+
+  /* 維度標記 chip（核對用，非後台元素） */
+  .scopetag { display:none; margin-left:8px; font-size:11px; border-radius:3px; padding:1px 7px; vertical-align:2px; white-space:nowrap; }
+  body.showscope .scopetag { display:inline-block; }
+  .sc-P  { background:#eceff3; color:#6b7280; border:1px solid #d6dae1; }
+  .sc-PH { background:#fff3e0; color:#c2660a; border:1px solid #f5d9ac; }
+  .sc-N  { background:#e3f0ff; color:#1d6fd6; border:1px solid #bcd9fb; }
+  .sc-NC { background:#e3f8e9; color:#1d8f43; border:1px solid #b7e6c6; }
+  .sc-X  { background:#f4f4f5; color:#9ca3af; border:1px solid #e4e4e7; text-decoration:line-through; }
+  .sc-L  { background:#f3e8ff; color:#7c3aed; border:1px solid #ddc7f7; }
+  .sc-O  { background:#fdf6d8; color:#8a6d1a; border:1px solid #efe0a3; }
+
+  /* ===== 版本 1：下方國家區 ===== */
+  .botdivider { border-top:2px dashed #cbd5e1; margin:26px 14px 0; }
+  .natwrap { position:relative; display:inline-block; margin:16px 14px 2px; }
+  .natsel { display:inline-flex; align-items:center; gap:26px; border:1px solid #7bc796; background:#eefcf3; border-radius:4px; padding:9px 14px; min-width:190px; justify-content:space-between; cursor:pointer; color:#333; }
+  .natsel .arr { color:#8aa598; font-size:12px; }
+  .natopts { position:absolute; top:calc(100% + 4px); left:0; min-width:190px; background:#fff; border:1px solid #e4e7ed; border-radius:4px; box-shadow:0 2px 12px rgba(0,0,0,.1); z-index:99; }
+  .natopt { padding:10px 14px; cursor:pointer; }
+  .natopt:hover { background:#f5f7fa; }
+  .natopt.on { color:#409eff; }
+
+  /* ＋ 按鈕與組合彈窗 */
+  .plusbtn { width:34px; height:36px; border:1px solid #7bc796; background:#eefcf3; color:#1d8f43; border-radius:4px; font-size:18px; cursor:pointer; flex:0 0 auto; line-height:1; }
+  .plusbtn:hover { background:#ddf5e6; }
+  .pmask { display:none; position:fixed; inset:0; background:rgba(0,0,0,.35); z-index:300; }
+  .pmask.show { display:flex; align-items:flex-start; justify-content:center; }
+  .pmodal { background:#fff; border-radius:6px; margin-top:110px; min-width:720px; max-width:92vw; box-shadow:0 4px 24px rgba(0,0,0,.18); }
+  .pmodal-hd { display:flex; justify-content:space-between; align-items:center; padding:16px 20px; border-bottom:1px solid #f0f2f5; font-size:15px; color:#333; }
+  .pmodal-x { cursor:pointer; color:#909399; font-size:18px; padding:0 4px; }
+  .pmodal-bd { padding:8px 20px 20px; }
+  .pmodal .savebtn { padding:7px 14px; }
+  .pmodal .cancelbtn { background:#fff; border:1px solid #dcdfe6; color:#606266; border-radius:4px; padding:7px 14px; cursor:pointer; }
+  .pmodal .tin { text-align:left; }
+
+  /* 佔位提示 */
+  .placebox { margin:30px auto; max-width:820px; border:1px dashed #cbd5e1; border-radius:8px; background:#f8fafc; color:#64748b; padding:40px 30px; text-align:center; line-height:1.9; font-size:14px; }
+  .placebox b { color:#334155; }
+</style>
+</head>
+<body>
+
+<div class="stickhdr">
+<div class="topbar">
+  <h1>系統參數管理－畫面版本比較</h1>
+  <button class="vbtn on" data-v="0" onclick="pickVer(0)">現行畫面</button>
+  <button class="vbtn" data-v="1" onclick="pickVer(1)">版本 1</button>
+  <button class="vbtn" data-v="2" onclick="pickVer(2)">版本 2</button>
+  <button class="vbtn" data-v="3" onclick="pickVer(3)">版本 3</button>
+  <button class="vbtn" data-v="4" onclick="pickVer(4)">版本 4</button>
+  <button class="vbtn" data-v="5" onclick="pickVer(5)">版本 5</button>
+  <div class="chkcol"><label class="scopechk"><input type="checkbox" id="scopechk" onchange="scopeToggle(this.checked)">顯示維度標記（核對用）</label><label class="scopechk"><input type="checkbox" id="secchk" checked onchange="secToggle(this.checked)">顯示區域名稱（通用設定／國家設定）</label></div>
+</div>
+<div class="verdesc" id="verdesc">現行畫面：依真實後台截圖 1:1 刻製，為五個版本的共同基準。</div>
+</div>
+
+<div class="screen">
+  <div id="predrop"></div>
+  <div class="mtabs" id="mtabs"></div>
+  <div id="content"></div>
+</div>
+
+<script>
+/* ==========================================================================
+   系統參數管理－畫面版本比較
+   資料驅動：MT ＝ 各分頁的現行畫面資料（照真實後台截圖 1:1）
+   每個項目掛 sc 維度標記（依 RD 系統參數決議表）：
+     P＝平台  PH＝菲律賓  N＝國家  NC＝國家＋幣種
+     X＝裁減／移除／排除  L＝語系  O＝其他（逐項處置）
+   ========================================================================== */
+
+var SCOPE_NAME = { P:'平台', PH:'菲律賓', N:'國家', NC:'國家＋幣種', X:'裁減/移除', L:'語系', O:'其他' };
+
+var MTAB_LIST = ['注册登陆','充值提款','推广相关','游戏配置','系统相关配置','在线用户数配置','短信相关配置','直播聊天室配置','发送邮箱配置','风控配置','KYC配置'];
+
+/* ---------- 分頁資料 ---------- */
+var MT = {};
+
+/* ===== 注册登陆 ===== */
+MT[0] = [
+ { t:'注册参数配置', hint:'（注册默认需要填写账号、密码）', grid:[
+   ['qq号码',false,'X'],['邮箱',true,'N'],['手机号',true,'N'],
+   ['微信',false,'X'],['注册验证码',true,'P'],['提款密码',false,'N'],
+   ['真实姓名',false,'N'],['短信验证码',true,'N'],['邀请码',false,'N'],
+   ['zalo',false,'X'],['facebook',false,'X'],['whatsapp',false,'X'],
+   ['telegram',true,'X'],['地址',true,'X'],['国家与币种',false,'P'],
+   ['KYC验证',true,'PH'],['生日',false,'X'],['薪资来源',true,'X'],
+   ['安全问题回答',false,'N'],['投注站',true,'X'],['邮箱注册/邮箱OTP登陆',true,'O']
+ ]},
+ { t:'验证码参数配置', items:[
+   {k:'sw', n:'会员系统登录验证码', on:false, sc:'P'},
+   {k:'rd', n:'前台验证码类型', opts:['数字验证码','滑动图片验证码'], sel:1, sc:'P'},
+   {k:'in', n:'腾讯滑动拼图验证码CaptchaAppId', v:'189989674', sc:'P'},
+   {k:'sw', n:'管理后台登录入口验证码', on:false, sc:'P'},
+   {k:'sw', n:'管理后台登录入口google验证码', on:true, sc:'P'},
+   {k:'sw', n:'是否验证重复手机号码', on:false, sc:'P'},
+   {k:'in', n:'长时间未登录天数OTP设置', v:'0', sc:'N'}
+ ]},
+ { t:'过期时间参数配置', items:[
+   {k:'in', n:'会员在线过期时间', h:'（分钟）', v:'1440', sc:'P'},
+   {k:'in', n:'会员在线过期时间(glife)', h:'（分钟）', v:'1440', sc:'PH'},
+   {k:'sw', n:'会员注册的真实姓名检测', h:'（关闭检测表示支持同名，开启检测表示不支持同名）', on:true, sc:'X'},
+   {k:'in', n:'管理员在线过期时间', h:'（分钟）', v:'1440', sc:'P'}
+ ]},
+ { t:'用户其它参数', items:[
+   {k:'sw', n:'隐藏用户资料为**', on:true, sc:'P'},
+   {k:'sw', n:'注册资料完善', on:true, sc:'O'},
+   {k:'in', n:'试玩账号默认金额', h:'（预设币种:PHP）', v:'10000', sc:'X'},
+   {k:'in', n:'注册黑名单', h:'（多个使用分号“;”分隔）', v:';', sc:'X'},
+   {k:'in', n:'注册ip黑名单', h:'（多个使用分号“;”分隔）', v:';', sc:'P'},
+   {k:'in', n:'用户注册成功的消息内容', v:'注册成功，欢迎你', sc:'X'},
+   {k:'in', n:'一天一个ip能注册多少用户', h:'（留空为不限制）', v:'', sc:'P'},
+   {k:'in', n:'一天一个ip能试玩多少次', h:'（留空为不限制）', v:'10000', sc:'X'},
+   {k:'in', n:'游客试玩同IP一天试玩次数', h:'（留空为不限制）', v:'', sc:'X'},
+   {k:'sw', n:'注册条款是否默认为已勾选', on:true, sc:'N'},
+   {k:'sw', n:'是否默认勾选21岁验证', on:true, sc:'PH'},
+   {k:'sw', n:'是否开启Google授权登录', on:true, sc:'PH'},
+   {k:'sw', n:'是否开启Facebook授权登录', on:true, sc:'N'},
+   {k:'sw', n:'是否开启Apple授权登录（仅限iOS使用）', on:true, sc:'N'}
+ ]},
+ { t:'登入时验证相关参数', items:[
+   {k:'sw', n:'非完全验证的用户登入Glife时是否提示KYC', on:true, sc:'PH'},
+   {k:'sw', n:'会员登入是否提示kyc', on:true, sc:'N'},
+   {k:'sw', n:'会员登入是否验证手机号码', on:false, sc:'N'},
+   {k:'ck', n:'会员IP是勾选的国家时显示单独登录页', opts:['中国大陆','菲律宾','越南','泰国','印尼'], checked:[1], sc:'O'},
+   {k:'sw', n:'是否自动临时冻结超过3天未KYC的平台类型帐号', on:false, sc:'PH'},
+   {k:'sw', n:'是否自动临时冻结超过3天未KYC的其他类型帐号', on:false, sc:'PH'},
+   {k:'sw', n:'ndrp冻结开关', on:true, sc:'PH'},
+   {k:'sw', n:'账号合并', on:false, sc:'PH'},
+   {k:'in', n:'会员注册默认代理邀请码', v:'Pasay-0000', sc:'NC'}
+ ]},
+ { items:[
+   {k:'sw', n:'用户注册成功发送站内信开关', on:true, sc:'P'},
+   {k:'ti', n:'用户注册成功发送站内信内容', sub:[['标题','Register a new account',false],['内容','Welcome to OKBet.单纯的',true]], sc:'L'}
+ ]},
+ { items:[
+   {k:'sw', n:'用户注册成功发送短信开关', on:true, sc:'P'},
+   {k:'ta', n:'用户注册成功发送短信内容', v:'Welcome to OKBet. Kindly fill up your personal information on the profile page. Have a good day!', sc:'L'}
+ ]},
+ { items:[
+   {k:'sw', n:'用户注册成功发送邮箱开关', on:true, sc:'P'},
+   {k:'ti', n:'用户注册成功发送邮箱内容', sub:[['标题','OKBET',false],['内容','Welcome to OKBET!!',true]], sc:'L'}
+ ]},
+ { items:[
+   {k:'sw', n:'代理前台注册入口', on:false, sc:'P'},
+   {k:'sw', n:'代理注册图形验证码', on:true, sc:'P'},
+   {k:'in', n:'一天一个IP能注册多少代理', h:'（留空为不限制）', v:'100', sc:'P'},
+   {k:'in', n:'代理注册默认挂靠大代理', v:'1021032', sc:'P'},
+   {k:'sw', n:'代理注册成功是否需要审核', on:false, sc:'P'},
+   {k:'sw', n:'Glife页面提示跳转主站开关', on:true, sc:'PH'}
+ ]},
+ { t:'玩家自动冻结', freeze:true, sc:'N' }
+];
+
+/* ===== 充值提款 ===== */
+MT[1] = [
+ { t:'提款参数配置', hint:'（提款默认开启真实姓名、提款密码）', grid:[
+   ['真实姓名',true,'X'],['提款密码',true,'X'],['qq号码',false,'X'],
+   ['邮箱',false,'N'],['手机号',true,'N'],['微信',false,'X']
+ ], gridAfter:'wdVerify', items:[
+   {k:'in', n:'前台上传实名证件数量', h:'（个数，默认1个）', v:'1', sc:'N'},
+   {k:'in', n:'提款间隔时间', h:'（单位：小时）', v:'', sc:'P'},
+   {k:'in', n:'提款审核方式', h:'（0-直接通过驳回、1-锁定方式）', v:'1', sc:'N'},
+   {k:'in', n:'银行卡黑名单', h:'（多个使用分号“;”分隔）', v:'09378773637;09123456781', sc:'N'},
+   {k:'in', n:'提款总层级配置', v:'7', sc:'P'},
+   {k:'sw', n:'是否可以修改及删除银行卡', on:true, sc:'P'},
+   {k:'sw', n:'eWallet绑定手机门号', on:true, sc:'N'},
+   {k:'sw', n:'新增修改以及删除银行卡是否需要短信验证', on:false, sc:'N'},
+   {k:'in', n:'最大限制未处理线上充值订单次数(0则最多只能充值一筆)', v:'3', sc:'P'},
+   {k:'in', n:'最大限制未处理线下充值订单次数(0则最多只能充值一筆)', v:'2', sc:'P'},
+   {k:'sw', n:'是否开启额度锁定功能', h:' 提款限制时间30天', on:true, sc:'PH'},
+   {k:'st', n:'锁定额度功能开启时的冻结金额', v:'1000', sc:'PH'},
+   {k:'st', n:'首次充值最小金额限制', h:'（0视为无设定）', v:'0', sc:'O'},
+   {k:'sw', n:'Glife中是否限制玩家首充金额 1是0否', on:true, sc:'PH'},
+   {k:'st', n:'Glife中首次充值最小金额限制', h:'（0视为无设定）', v:'1', sc:'PH'},
+   {k:'sw', n:'是否准许代理为未通过KYC的用户充值', on:false, sc:'O'},
+   {k:'sw', n:'是否开启提现稽核', on:true, sc:'P'},
+   {k:'sw', n:'稽核不通过限制提款', on:false, sc:'P'},
+   {k:'sw', n:'是否开启清除过往稽核', on:false, sc:'P'},
+   {k:'sw', n:'是否开启找回提款密码', on:false, sc:'O'}
+ ]},
+ { t:'充值参数', items:[
+   {k:'in', n:'充值返利最大次数', v:'', sc:'P'},
+   {k:'in', n:'充值快捷选择金额设置', h:'（多个金额，用逗号“,”隔开）', v:'10,50,100,500,1000,10000,20000', sc:'NC'},
+   {k:'in', n:'用户总余额小于设定金额则流水稽核清零', v:'100', sc:'NC'}
+ ]},
+ { t:'提款参数', items:[
+   {k:'in', n:'提现快捷选择金额设置', h:'（多个金额，用逗号“,”隔开）', v:'10,100,199,19999,99999,9999999', sc:'NC'}
+ ]},
+ { t:'其他参数', items:[
+   {k:'in', n:'抽奖活动派奖审核的金额下限', h:'（填0表示所有金额都要审核）', v:'10000000000009.99999', sc:'X'},
+   {k:'in', n:'充值排序', v:'[{"name":"Gcash","onlineType":204,"sort":2},{"name":"paymaya","onlineType":206,"sort":4},{"name":"(', sc:'O'},
+   {k:'sw', n:'Glife-OKBET小程序充值维护开关', on:false, sc:'PH'},
+   {k:'sw', n:'Glife-OKBET小程序提款维护开关', on:false, sc:'PH'},
+   {k:'sw', n:'Glife-OkFun小程序充值维护开关', on:false, sc:'PH'},
+   {k:'sw', n:'Glife-OkFun小程序取款维护开关', on:false, sc:'PH'},
+   {k:'sw', n:'MayaMini-OkBet小程序充值维护开关', on:false, sc:'PH'},
+   {k:'sw', n:'MayaMini-OkBet小程序取款维护开关', on:false, sc:'PH'}
+ ]},
+ { t:'Glife会员充提款配置', items:[
+   {k:'sw', n:'Glife会员是否可以在平台充提款', on:true, sc:'PH'},
+   {k:'in', n:'Glife会员当月充值大于此配置时，启用平台会员同样的充值渠道', v:'0', sc:'PH'},
+   {k:'sw', n:'Glife OKFUN是否可以使用Gcash Webpay充值', on:true, sc:'PH'}
+ ]},
+ { t:'Maya会员充提款配置', items:[
+   {k:'sw', n:'Maya会员是否可以在平台充提款', on:false, sc:'PH'}
+ ]},
+ { t:'新增银行卡/虚拟币, 更新提款密码, 更新用户密码, 设定真实姓名, 提款', items:[
+   {k:'sw', n:'手机验证开关', on:false, sc:'N'},
+   {k:'in', n:'重新验证时间 ', h:'（分钟，默认2分钟）', v:'2', sc:'P'}
+ ]},
+ { t:'提款驳回提醒', items:[
+   {k:'sw', n:'提现风控驳回站内信提醒', on:true, sc:'P'},
+   {k:'in', n:'站内信标题', v:'驳回提款', sc:'L'},
+   {k:'in', n:'站内信抬头', v:'驳回提款驳回提款驳回提款驳回提款', sc:'L'}
+ ]}
+];
+
+/* ===== 推广相关 ===== */
+MT[2] = [
+ { t:'推广页参数', items:[
+   {k:'in', n:'QQ连接', v:'https://im.qq.com/pcqq', sc:'X'},
+   {k:'in', n:'微信连接', v:'https://weixin.qq.com/', sc:'X'},
+   {k:'in', n:'联系电话', h:'（多个用英文逗号隔开）', v:'+157533967,+135798888888', sc:'X'},
+   {k:'in', n:'客服QQ', h:'（多个用英文逗号隔开）', v:'0911268833', sc:'X'},
+   {k:'in', n:'QQ', v:'https://im.qq.com/pcqq2', sc:'X'},
+   {k:'in', n:'Email', v:'QATest123@QQ.com', sc:'X'},
+   {k:'in', n:'加盟电话', h:'（多个用英文逗号隔开）', v:'+639934569991', sc:'X'},
+   {k:'in', n:'加盟Email', v:'support@okbet.com', sc:'X'},
+   {k:'in', n:'联系Skype', v:'live:333666888999', sc:'X'}
+ ]},
+ { t:'代理入口参数', items:[
+   {k:'in', n:'代理专属域名', v:'okbet-v1.cxsport.net', sc:'P'},
+   {k:'in', n:'代理专属在线客服url', v:'sports.cxsport.net', sc:'X'},
+   {k:'sw', n:'代理审核开关', on:true, sc:'P'}
+ ]},
+ { t:'更多联系参数', items:[
+   {k:'in', n:'Facebook', v:'https://www.facebook.com/okgamesofficial', sc:'N'},
+   {k:'in', n:'Instagram', v:'https://www.instagram.com/OKBETPHL', sc:'N'},
+   {k:'in', n:'Youtube', v:'https://www.youtube.com/', sc:'N'},
+   {k:'in', n:'Twitter', v:'https://x.com/i', sc:'N'},
+   {k:'in', n:'Tiktok', v:'https://www.douyin.com/', sc:'N'},
+   {k:'in', n:'Telegram', v:'https://web.telegram.org/', sc:'N'},
+   {k:'in', n:'Viber', v:'https://www.viber.com/en/', sc:'N'},
+   {k:'in', n:'WhatsApp', v:'https://www.whatsapp.com/', sc:'N'},
+   {k:'in', n:'Facebook跳转链接', v:'https://www.facebook.com', sc:'X'},
+   {k:'up', n:'微信二维码', v:'', ph:'请输入二维码图片地址', sc:'X'},
+   {k:'in', n:'WhatsApp', v:'', ph:'请输入账号', sc:'X'},
+   {k:'up', n:'WhatsApp二维码', v:'', ph:'/p/20230602/cx_sports/1/1018826/jpg/1685677783989.jpg', sc:'X'},
+   {k:'in', n:'WhatsApp跳转链接', v:'https://www.facebook.com/', sc:'X'},
+   {k:'in', n:'telegram', v:'', ph:'请输入账号', sc:'X'},
+   {k:'up', n:'Telegram二维码', v:'', ph:'请输入二维码图片地址', sc:'X'},
+   {k:'in', n:'Telegram跳转链接', v:'https://www.facebook.com/', sc:'X'},
+   {k:'in', n:'zalo', v:'https://www.google.com/', sc:'X'},
+   {k:'up', n:'Zalo二维码', v:'', ph:'请输入二维码图片地址', sc:'X'},
+   {k:'in', n:'Zalo跳转链接', v:'https://chat.zalo.me/', sc:'X'},
+   {k:'in', n:'facebook', v:'okbetsportsbook128', sc:'X'},
+   {k:'up', n:'Facebook二维码', v:'', ph:'请输入二维码图片地址', sc:'X'},
+   {k:'in', n:'Facebook跳转链接', v:'https://www.facebook.com', sc:'X'},
+   {k:'in', n:'viber', v:'', ph:'请输入账号', sc:'X'},
+   {k:'up', n:'viber二维码', v:'', ph:'/p/20211213/lion/1/788/png/1639380805071.png', sc:'X'},
+   {k:'in', n:'viber跳转链接', v:'https://www.facebook.com/', sc:'X'}
+ ]}
+];
+
+/* ===== 游戏配置 ===== */
+MT[3] = [
+ { t:'游戏相关参数', items:[
+   {k:'sw', n:'自我约束开关', on:true, sc:'N'},
+   {k:'sw', n:'jackpot总奖池显示', on:true, sc:'X'},
+   {k:'sw', n:'沙巴体育显示开关', on:true, sc:'P'},
+   {k:'sw', n:'fantasy sports显示开关', on:true, sc:'P'},
+   {k:'in', n:'最大设置下注金額(自我约束显示)', v:'9999999', sc:'PH'},
+   {k:'in', n:'最小设置下注金額(自我约束显示)', v:'1', sc:'PH'},
+   {k:'in', n:'体育单注小于指定赔率不计算有效投注和反水，预设为欧洲盘赔率1', v:'', sc:'P'},
+   {k:'in', n:'最小设定天数(自我约束显示)', v:'1', sc:'PH'},
+   {k:'sw', n:'篮球末尾比分新玩法开关', on:true, sc:'P'},
+   {k:'sw', n:'不同球种是否能串关', on:true, sc:'P'}
+ ]},
+ { t:'排行榜相关参数', items:[
+   {k:'sw', n:'首页最新大奖历史数据取值开关', on:false, sc:'O'},
+   {k:'sw', n:'棋牌电子最新大奖历史数据取值开关', on:true, sc:'O'},
+   {k:'sw', n:'真人游戏最新大奖历史数据取值开关', on:true, sc:'O'},
+   {k:'in', n:'数据取值频率', v:'60', sc:'O'}
+ ]},
+ { t:'首页游戏分类排序配置', oldSort:true, sc:'O' },
+ { t:'新版首页游戏分类排序配置', newSort:true, sc:'O' }
+];
+
+/* ===== 系统相关配置 ===== */
+MT[4] = [
+ { t:'系统相关参数', items:[
+   {k:'in', n:'富文本编辑器的密钥key', v:'dcfw2tpywgjuy8vjd3va3m6o1y075dad4iwa858iiaq018pr', sc:'P'},
+   {k:'sw', n:'在线客服悬浮按钮开关', on:true, sc:'P'},
+   {k:'in', n:'平台在线客服url', v:'https://secure.livechatenterprise.com/customer/action/open_chat?license_id=15545493&', sc:'P'},
+   {k:'in', n:'平台在线客服url2', v:'https://secure.livechatenterprise.com/customer/action/open_chat?license_id=15545493&', sc:'P'},
+   {k:'in', n:'平台Tagalog语言客服Url', v:'https://www.bilibili.com', sc:'P'},
+   {k:'in', n:'平台Cebuano语言客服Url', v:'https://translate.google.com/?hl=zh-CN&sl=en&tl=zh-CN&op=translate', sc:'P'},
+   {k:'ta', n:'平台在线客服使用js', v:"(function(d, src, c) { var t = d.scripts[d.scripts.length - 1],\n              s = d.createElement('script');", sc:'P'},
+   {k:'in', n:'VIP在线客服URL', v:'https://secure.livechatenterprise.com/customer/action/open_chat?license_id=15545493&', sc:'P'},
+   {k:'sel', n:'VIP在线客服标签', v:'VIP LIVECHAT', sc:'P'},
+   {k:'in', n:'平台在线客服视频地址', v:'https://okbetsports.ladesk.com/scripts/generateWidget.php?v=5.31.1.5&t=1662362414&', sc:'P'},
+   {k:'in', n:'客服邮箱地址配置', v:'jobe9279201995@gmail.com', sc:'P'},
+   {k:'in', n:'开奖直播地址', v:'http://www.1688.com', sc:'X'},
+   {k:'sw', n:'未登录观看视频/动画开关', on:false, sc:'P'},
+   {k:'in', n:'代理地址', v:'https://sports.cxsport.net/', sc:'N'},
+   {k:'in', n:'导航地址', v:'', sc:'P'},
+   {k:'in', n:'SEO地址', v:'https://sports.cxsport.net', sc:'P'},
+   {k:'in', n:'CMS地址', v:'https://cms-api.cxsport.net', sc:'P'},
+   {k:'pill', n:'系统默认皮肤', opts:['red','blue'], sel:0, sc:'P'},
+   {k:'sw', n:'体育系统维护开关', on:false, sc:'P'},
+   {k:'in', n:'体育维护描述', v:'别开维护，测试中', sc:'L'},
+   {k:'sw', n:'系统维护开关', on:false, sc:'P'},
+   {k:'in', n:'维护页面描述', v:'System Maintenance：12:00 - 18:00 (GMT+8)', sc:'L'},
+   {k:'in', n:'平台统计代码', v:'1', sc:'P'},
+   {k:'si', n:'三方遊戲排序排序', h:'（多个使用分号“;”分隔）', ph:'请选择三方游戏', v:'CGCP;LIVE;DZ', sc:'O'},
+   {k:'si', n:'前台球类排序', h:'（多个使用分号“;”分隔）', ph:'请选择球种', v:'FT;BK;TN;VB;BM;IH;TT;BX;CB;CK;BB;RB;AFT;MR;GF;FB;ES', sc:'N'},
+   {k:'chips', n:'平台支援语系 (使用豆号“,”分隔)', v:'zh,en,vi,ph,ceb', sc:'O'},
+   {k:'sw', n:'是否将世界杯页面做为首页进入', on:false, sc:'X'},
+   {k:'sw', n:'开启第三方游戏自动转账', on:true, sc:'P'},
+   {k:'sw', n:'防沉迷2小时提示开关', on:false, sc:'PH'},
+   {k:'sw', n:'防沉迷4小时强制冻结', on:false, sc:'PH'},
+   {k:'sw', n:'开启防沉迷', on:false, sc:'PH'},
+   {k:'sw', n:'Web端是否开启兴趣选择开关', on:true, sc:'O'},
+   {k:'sw', n:'APP端是否开启兴趣选择开关', on:true, sc:'O'}
+ ]},
+ { t:'app相关参数', items:[
+   {k:'in', n:'电脑版APP下载地址', h:'（为空不显示，不为空则显示）', v:'', sc:'P'},
+   {k:'in', n:'手机版APP下载地址', h:'（为空不显示，不为空则显示）', v:'https://app.okbet.com/', sc:'P'},
+   {k:'in', n:'苹果商店下载链接', h:'（为空不显示，不为空则显示）', v:'https://sporttest.24w2pjn3.com/?platform=spplat123', sc:'P'},
+   {k:'in', n:'谷歌商店下载链接', h:'（为空不显示，不为空则显示）', v:'https://app.okbet.com/', sc:'P'},
+   {k:'in', n:'华为商店下载链接', h:'（为空不显示，不为空则显示）', v:'https://app.okbet.com/', sc:'P'},
+   {k:'sw', n:'移动设备发送S2S事件的开关', on:true, sc:'P'},
+   {k:'in', n:'发送S2S事件安卓客户端APP ID', v:'come.sport.oksport', sc:'P'},
+   {k:'in', n:'发送S2S事件iOS客户端APP ID', v:'test', sc:'P'},
+   {k:'in', n:'发送S2S事件时的开发者密钥', v:'**tTSN', sc:'P'},
+   {k:'in', n:'IOS登录包名配置', h:'（IOS登录包名配置）', v:'{"default":"com.ekxinum.okbet","id6469493995":"com.ekxinum.okGame","id6505056989"', sc:'P'},
+   {k:'in', n:'安卓送审版本号', h:'（此版本号的app会隐藏相应功能）', v:'1.1.50', sc:'P'},
+   {k:'in', n:'IOS送审版本号', h:'（此版本号的app会隐藏相应功能）', v:'1.4.6', sc:'P'}
+ ]},
+ { t:'VIP参数设定', items:[
+   {k:'sw', n:'新版VIP特权状态', on:true, lbl:'Enable new version of VIP', sc:'O'}
+ ]},
+ { bare:true, items:[
+   {k:'sw', n:'是否展示奖金日历', on:true, sc:'O'}
+ ]},
+ { t:'后台账号安全设置', items:[
+   {k:'in', n:'连续未登录停用天数', v:'1', sc:'P'}
+ ]}
+];
+
+/* ===== 在线用户数配置 ===== */
+MT[5] = [
+ { t:'游戏浮动人数配置参数', items:[
+   {k:'sw', n:'收藏人数开关', on:true, sc:'P'},
+   {k:'sw', n:'浮动人数开关 ', rn:'（开启后即套用浮动人数配置）', on:false, sc:'P'},
+   {k:'sel', n:'浮动人数更新周期', v:'30秒', save:true, sc:'P'}
+ ]},
+ { t:'游戏类型浮动人数配置', floatType:true, sc:'P' },
+ { t:'标签浮动人数配置', floatLabel:true, sc:'P' }
+];
+
+/* ===== 短信相关配置 ===== */
+MT[6] = [
+ { t:'短信相关参数', items:[
+   {k:'rdsv', n:'OTP短信供应商', opts:['M360','ONBUKA','EngageLab极光','Buzzinga','Brandtxt','Laaffic'], sel:0, sc:'P'},
+   {k:'rdsv', n:'营销短信供应商', opts:['M360','ONBUKA','EngageLab极光','Buzzinga','Brandtxt','Laaffic'], sel:0, sc:'P'},
+   {k:'ta', n:'M360 OTP短信验证码使用', rows:5, v:'{"service":"M360SmsSecurityCode","accessId":"zcMmbgxqAZaiv8sz","accessKey":"utMcfxFqv4I02tD1419M8uWhjOHjUCyq","transitUrl":"http://okbet.m360/v3/api/broadcast","sid":"OKBet OTP","templates":[{"templateid":104848,"type":0,"content":"your verification code is {0}. It will expire in {1} minutes"}]}', sc:'P'},
+   {k:'ta', n:'M360 其他短信使用', rows:5, v:'{"service":"M360SmsSecurityCode","accessId":"W3OA8zoDa69yXkCM","accessKey":"ZhQjLRa2Sw6WXKeFkuBDxP3bGVGZk19P","transitUrl":"https://api.m360.com.ph/v3/api/broadcast","sid":"OKBet","templates":[{"templateid":104848,"type":0,"content":"your verification code is {0}. It will expire in {1} minutes"}]}', sc:'P'},
+   {k:'ta', n:'ONBUKA短信配置信息', rows:5, v:'{"service":"OnbukaSmsSecurityCode","accessId":"fBrxxBRo","accessKey":"hMviwMS7","apisecret":"Uz3Asevy","transitUrl":"https://api.onbuka.com/v3/sendSms","templates":[{"templateid":104848,"type":0,"content":"your verification code is {0}. It will expire in {1} minutes"}]}', sc:'P'},
+   {k:'ta', n:'EngageLab极光短信配置信息', rows:5, v:'{"service":"EngageLabSmsSecurityCode","accessId":"9aj8tj0i07ry0mew5ft3av8n","accessKey":"d2480ekao9hb8k7ohegg","transitUrl":"https://otp.api.engagelab.cc/v1/custom-messages","templates":[{"templateid":20250911,"type":0,"content":"Your verification code is {{code}}. It will expire in {{ttl}} minutes."},{"templateid":20250912,"type":1,"content":"{{content}}"}]}', sc:'P'},
+   {k:'ta', n:'Buzzinga OTP验证码配置信息', rows:5, v:'{"service":"BuzzingaSmsSecurityCode","accessId":"11jt486","accessKey":"Jez56ZJO","transitUrl":"https://api-ace.buzzingga.com/message/send","sid":"OKBet OTP","marketSid":"OKBet OTP","templates":[{"type":0,"content":"Your verification code is {{code}}. It will expire in {{ttl}} minutes"},{"type":1,"content":"{{content}}"}]}', sc:'P'},
+   {k:'ta', n:'Buzzinga短信配置信息', rows:5, v:'{"service":"BuzzingaSmsSecurityCode","accessId":"11uuVnz","accessKey":"Li2NBduT","transitUrl":"https://api-ace.buzzingga.com/message/send","sid":"OKBet","marketSid":"OKBet OTP","templates":[{"type":0,"content":"Your verification code is {{code}}. It will expire in {{ttl}} minutes."},{"type":1,"content":"{{content}}"}]}', sc:'P'},
+   {k:'ta', n:'Brandtxt短信配置信息', rows:5, v:'{"service":"BrandtxtSmsSecurityCode","accessId":"b4246daf-2b23-4546-997a-2a6c917628fc","accessKey":"M3RoMD9b+bqQU4bR6P6MF3GYqEP6lHCJ7Ewh6oPYUg0=","transitUrl":"https://app.brandtxt.io/api/v2/SendSMS","sid":"MBB Trial","templates":[{"type":0,"content":"Your verification code is {{code}}. It will expire in {{ttl}} minutes."},{"type":1,"content":"{{content}}"}]}', sc:'P'},
+   {k:'ta', n:'Laaffic 验证码配置信息', rows:5, v:'{"service":"LaafficSmsSecurityCode","accessId":"hbpfCilP","accessKey":"oXquCzZw","apisecret":"5IrDZzI0","transitUrl":"https://api.laaffic.com/v3/sendSms","sid":"OKBet OTP","templates":[{"type":0,"content":"Your verification code is {0}. It will expire in {1} minutes."}]}', sc:'P'},
+   {k:'ta', n:'Laaffic 短信配置信息', rows:5, v:'{"service":"LaafficSmsSecurityCode","accessId":"2xDzscDA","accessKey":"oXquCzZw","apisecret":"5IrDZzI0","transitUrl":"https://api.laaffic.com/v3/sendSms","sid":"OKBet","templates":[{"type":0,"content":"Your verification code is {0}. It will expire in {1} minutes."}]}', sc:'P'},
+   {k:'in', n:'一天一个ip能发送最大条数', v:'1000000', sc:'P'},
+   {k:'in', n:'一天一个手机能发送最大条数', v:'1000', sc:'P'},
+   {k:'in', n:'短信验证码有效时间', h:'（分钟）', v:'1', sc:'P'},
+   {k:'sw', n:'是否开启验证失败清除验证码', on:false, sc:'P'},
+   {k:'sw', n:'是否开启验证失败清除验证码', on:false, sc:'P'}
+ ]},
+ { t:'Lazada短信设置', items:[
+   {k:'sw', n:'是否开启lazada通过短信自动发货功能', on:true, sc:'P'}
+ ]}
+];
+
+/* ===== 直播聊天室配置 ===== */
+MT[7] = [
+ { t:'直播聊天室配置', items:[
+   {k:'sw', n:'是否开启直播聊天室', on:true, sc:'X'},
+   {k:'in', n:'直播聊天室地址', v:'https://chat-3.cxsport.net/', sc:'X'}
+ ]}
+];
+
+/* ===== 发送邮箱配置（RD 決議表範圍外，照現行呈現） ===== */
+MT[8] = [ { emailList:true } ];
+
+/* ===== 风控配置 ===== */
+MT[9] = [
+ { t:'风控自动短信配置', items:[
+   {k:'sw', n:'提款驳回短信开关', on:true, sc:'N'}
+ ]},
+ { t:'风控自动审核配置', items:[
+   {k:'sw', n:'未触发风控审核条件用户是否自动通过风控审核', on:true, sc:'P'}
+ ]},
+ { t:'触发风控审核条件配置', items:[
+   {k:'sw', n:'用户首次提款', on:false, sc:'P'},
+   {k:'insw', n:'平台用户单笔提款金额大于指定值', v:'20', on:false, sc:'NC'},
+   {k:'insw', n:'glife用户单笔提款金额大于指定值', v:'1000', on:false, sc:'PH'},
+   {k:'sw', n:'用户IP是否在黑名单', on:false, sc:'P'},
+   {k:'sw', n:'用户真实姓名是否在黑名单', on:false, sc:'N'},
+   {k:'insw', n:'用户7天的总输赢大于指定值', v:'10000', on:false, sc:'NC'},
+   {k:'insw', n:'用户总的充提差小于指定值', v:'6000', on:false, sc:'NC'},
+   {k:'sw', n:'用户提款IP是否与其他用户提款IP重复', on:false, sc:'P'},
+   {k:'sw', n:'用户在风控预警中存在待处理或确认风险的记录', on:false, sc:'NC'},
+   {k:'insw', n:'用户7天的体育总输赢大于指定值', v:'1000', on:false, sc:'NC'},
+   {k:'sw', n:'用户是否在NDRP名单', on:false, sc:'P'},
+   {k:'sw', n:'用户名是否在黑名单中', on:false, sc:'N'},
+   {k:'insw', n:'取款金额+账户余额>=', v:'20000', on:false, sc:'NC'},
+   {k:'duosw', parts:[['取款金额: >=','1000'],['累计存款次数: ≤','200']], on:false, sc:'NC'},
+   {k:'insw', n:'取款金额+账户余额>=', v:'20000', on:false, sc:'NC'},
+   {k:'insw', n:'活动红利:', v:'2000', on:false, sc:'NC'},
+   {k:'insw', n:'当日累计充值: >=', v:'500000', on:false, sc:'NC'},
+   {k:'insw', n:'当日累计提款: >=', v:'500000', on:false, sc:'NC'},
+   {k:'insw', n:'当日提款次数: >=', v:'0', on:false, sc:'P'},
+   {k:'wdchg', on:false, sc:'NC'},
+   {k:'chipsw', n:'会员标签', chips:['AAmember','OPS TEST ACCOUNT','jasmine_member'], on:false, sc:'N'}
+ ]},
+ { t:'三方游戏风控预警条件', items:[
+   {k:'duosv', parts:[['派彩/投注大于','0'],['，且派彩金额大于','0']], sc:'X'}
+ ]},
+ { t:'体育游戏风控预警条件', items:[
+   {k:'insv', n:'投注金额最大百分比（%）', v:'0', suffix:'%', sc:'P'}
+ ]}
+];
+
+/* ===== KYC配置 ===== */
+MT[10] = [
+ { t:'KYC方式', items:[
+   {k:'rdsv', n:'资料完善提示KYC方式', opts:['手动KYC','EKYC'], sel:1, sc:'O'}
+ ]},
+ { t:'EKYC相关参数', items:[
+   {k:'rdsv', n:'KYC供应商选择', opts:['华为','腾讯','Zoloz(阿里)','Entrust','Jumio'], sel:2, sc:'O'},
+   {k:'sw', n:'EKYC人工复验', on:false, sc:'P'},
+   {k:'sw', n:'EKYC重复信息人工审核', on:false, sc:'P'},
+   {k:'sw', n:'部分认证用户是否可以提款', on:false, sc:'O'},
+   {k:'sw', n:'部分认证用户是否需要继续完全认证', on:true, sc:'O'},
+   {k:'selsw', n:'手动通过KYC的用户标签', v:'test', on:true, sc:'N'},
+   {k:'selsw', n:'未满21岁自动冻结用户标签', v:'未满21岁标签', on:true, sc:'N'},
+   {k:'selsw', n:'NDRP名单自动冻结用户标签', v:'NDRP标签', on:true, sc:'PH'},
+   {k:'selsw', n:'玩家开启自我约束用户标签', v:'自我约束标签', on:true, sc:'PH'}
+ ]},
+ { t:'站内信相关配置', items:[
+   {k:'sw', n:'KYC验证结果站内信开关', on:true, sc:'P'},
+   {k:'ti', n:'通过KYC验证信息内容', sub:[['标题','111',false],['内容','222',true]], sc:'L'},
+   {k:'ti', n:'拒绝KYC验证信息内容', sub:[['标题','333',false],['内容','Your KYC verification request has been rejected.\n\nReason:{}\n\nPlease review the reason below, update the required information or documents, and submit your KYC verification again. If you require further assistance, please contact Customer Support.',true]], note:'说明：拒绝原因变量用{}代替即可', sc:'L'},
+   {k:'ti', n:'KYC须补充信息内容', sub:[['标题','555',false],['内容','6{}66',true]], note:'说明：补充信息变量用{}代替即可', sc:'L'}
+ ]},
+ { t:'KYC短信配置', items:[
+   {k:'sw', n:'KYC不通过短信', on:true, sc:'P'},
+   {k:'ta', n:'KYC短信内容', v:'Your KYC verification request has been rejected.', sc:'L'}
+ ]},
+ { t:'EKYC提交信息配置', items:[
+   {k:'ekyc', n:'国籍', sc:'N'},
+   {k:'ekyc', n:'出生地', sc:'N'},
+   {k:'ekyc', n:'工作性质', sc:'N'},
+   {k:'ekyc', n:'收入来源', sc:'N'},
+   {k:'ekyc', n:'性别', sc:'N'},
+   {k:'ekyc', n:'当前地址', sc:'N'},
+   {k:'ekyc', n:'永久居住地', sc:'N'},
+   {k:'ekyc', n:'收入区间', sc:'N'}
+ ]}
+];
+
+/* 尚無截圖／範圍外的分頁 */
+var MTAB_EMPTY = {};
+
+/* ---------- 版本說明 ---------- */
+var VER_DESC = {
+  0:'現行畫面：依真實後台截圖 1:1 刻製，為五個版本的共同基準。',
+  1:'版本 1：各分頁上方平台參數不動；頁面最底下新增「菲律賓／其他國家」下拉，下方依原區塊名稱重刻該分頁內的國家／國家＋幣種參數。',
+  2:'版本 2：同版本 1，但下拉下方不分區塊，所有國家維度參數直接平鋪列出。',
+  3:'版本 3：上方平台通用參數取消區塊framing平鋪呈現；下方國家區保留區塊。',
+  4:'版本 4：上下兩區各自一套 10 個分頁 tab、各自切換；下方國家區僅顯示有可設置項的 tab。',
+  5:'版本 5：不分上下區；tab 列上方新增「通用設置／菲律賓／其他國家」下拉，選什麼顯示什麼。'
+};
+
+/* ---------- 狀態 ---------- */
+var ST = { ver:0, tab:0, tab2:0, nation:'菲律賓', natOpen:false, showScope:false, showSec:true, scope5:'通用設置', pre5Open:false };
+window.scopeToggle = function(on){ ST.showScope = !!on; applyScope(); };
+window.secToggle = function(on){ ST.showSec = !!on; applyScope(); };
+function applyScope(){
+  document.body.classList.toggle('showscope', ST.showScope);
+  document.body.classList.toggle('showsec', ST.showSec);
+  var ck = document.getElementById('scopechk'); if(ck) ck.checked = ST.showScope;
+  var sk = document.getElementById('secchk'); if(sk) sk.checked = ST.showSec;
+}
+
+/* ---------- 小工具 ---------- */
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function scopeTag(sc){ if(!sc) return ''; return '<span class="scopetag sc-'+sc+'">'+SCOPE_NAME[sc]+'</span>'; }
+function tgHtml(on, extraLbl){
+  var lbl = extraLbl || '开启';
+  return '<span class="tgwrap" onclick="tgFlip(this)"><span class="tg'+(on?' on':'')+'"></span><span class="tglbl">'+esc(lbl)+'</span></span>';
+}
+window.tgFlip = function(el){ var t = el.querySelector('.tg'); t.classList.toggle('on'); };
+
+/* ---------- 列渲染 ---------- */
+function rowHtml(it){
+  var lbl = '<div class="prow-l">'+esc(it.n)+(it.h?'<span class="hint">'+esc(it.h)+'</span>':'')+(it.rn?'<span class="rnote">'+esc(it.rn)+'</span>':'')+scopeTag(it.sc)+'</div>';
+  var c = '';
+  switch(it.k){
+    case 'sw':
+      c = '<div class="prow-c rgt" style="gap:12px;">'+(it.plus?plusBtn(it,true):'')+tgHtml(it.on, it.lbl)+'</div>'; break;
+    case 'in':
+      c = '<div class="prow-c"><input class="pinput" value="'+esc(it.v)+'"'+(it.ph?' placeholder="'+esc(it.ph)+'"':'')+'>'+(it.plus?plusBtn(it):'')+'<button class="savebtn">保存</button></div>'; break;
+    case 'ta':
+      c = '<div class="prow-c"><textarea class="pinput" rows="'+(it.rows||2)+'">'+esc(it.v)+'</textarea><button class="savebtn">保存</button></div>'; break;
+    case 'ti':
+      var subs = it.sub.map(function(s){
+        var field = s[2] ? '<textarea class="pinput" rows="2">'+esc(s[1])+'</textarea>' : '<input class="pinput" value="'+esc(s[1])+'">';
+        return '<div style="display:flex;align-items:center;gap:10px;"><span style="flex:0 0 34px;color:#333;">'+esc(s[0])+'</span>'+field+'</div>';
+      }).join('');
+      if(it.note) subs += '<div style="color:#606266;font-size:13px;">'+esc(it.note)+'</div>';
+      c = '<div class="prow-c"><div style="flex:1 1 auto;display:flex;flex-direction:column;gap:10px;min-width:0;">'+subs+'</div><button class="savebtn">保存</button></div>'; break;
+    case 'rd':
+      var rds = it.opts.map(function(o,i){
+        var on = (i===it.sel);
+        return '<span class="rditem'+(on?' sel':'')+'" onclick="rdPick(this)"><span class="rdo'+(on?' on':'')+'"></span>'+esc(o)+'</span>';
+      }).join('');
+      c = '<div class="prow-c rgt"><span class="rdgrp">'+rds+'</span></div>'; break;
+    case 'ck':
+      var cks = it.opts.map(function(o,i){
+        var on = it.checked.indexOf(i)>=0;
+        return '<span class="rditem" onclick="ckPick(this)"><span class="ckb'+(on?' on':'')+'"></span>'+esc(o)+'</span>';
+      }).join('');
+      c = '<div class="prow-c" style="flex-basis:60%;justify-content:space-between;"><span class="rdgrp" style="flex:1;justify-content:space-between;">'+cks+'</span><button class="savebtn">保存</button></div>'; break;
+    case 'st':
+      c = '<div class="prow-c"><span class="stepper"><button class="stbtn">−</button><input class="stval" value="'+esc(it.v)+'"><button class="stbtn">＋</button></span><span style="flex:1"></span><button class="savebtn">保存</button></div>'; break;
+    case 'pill':
+      var ps = it.opts.map(function(o,i){ return '<span class="pill'+(i===it.sel?' on':'')+'" onclick="pillPick(this)">'+esc(o)+'</span>'; }).join('');
+      c = '<div class="prow-c rgt"><span class="pillgrp">'+ps+'</span></div>'; break;
+    case 'sel':
+      c = it.save
+        ? '<div class="prow-c"><span class="fsel" style="flex:1 1 auto;"><span>'+esc(it.v)+'</span><span class="arr">▾</span></span><button class="savebtn">保存</button></div>'
+        : '<div class="prow-c"><span class="fsel" style="flex:1 1 auto;"><span>'+esc(it.v)+'</span><span class="arr">▾</span></span><button class="savebtn">保存</button></div>';
+      break;
+    case 'si':
+      c = '<div class="prow-c" style="flex-basis:62%;"><span class="fsel"><span class="ph">'+esc(it.ph)+'</span><span class="arr">▾</span></span><input class="pinput" value="'+esc(it.v)+'"><button class="savebtn">保存</button></div>';
+      lbl = '<div class="prow-l" style="flex-basis:auto;">'+esc(it.n)+(it.h?'<span class="hint">'+esc(it.h)+'</span>':'')+scopeTag(it.sc)+'</div>';
+      break;
+    case 'chips':
+      c = '<div class="prow-c" style="flex-basis:62%;"><span class="chipbox"><span class="chip">zh <span class="x">⊗</span></span><span class="chip">+ 4</span><span class="arr" style="color:#c0c4cc;">▾</span></span><input class="pinput" value="'+esc(it.v)+'"><button class="savebtn">保存</button></div>';
+      break;
+    case 'rdsv':
+      var rds2 = it.opts.map(function(o,i){
+        var on = (i===it.sel);
+        return '<span class="rditem'+(on?' sel':'')+'" onclick="rdPick(this)"><span class="rdo'+(on?' on':'')+'"></span>'+esc(o)+'</span>';
+      }).join('');
+      c = '<div class="prow-c" style="flex-basis:64%;justify-content:space-between;"><span class="rdgrp" style="flex:1;justify-content:space-around;">'+rds2+'</span><button class="savebtn">保存</button></div>'; break;
+    case 'insw':
+      c = '<div class="prow-c" style="flex-basis:62%;"><input class="pinput" value="'+esc(it.v)+'">'+(it.plus?plusBtn(it):'')+'<button class="savebtn">保存</button></div><div class="prow-c rgt" style="margin-left:20px;">'+tgHtml(it.on)+'</div>'; break;
+    case 'insv':
+      c = '<div class="prow-c" style="flex-basis:40%;"><input class="pinput" value="'+esc(it.v)+'">'+(it.suffix?'<span style="color:#333;">'+esc(it.suffix)+'</span>':'')+'</div><div class="prow-c rgt"><button class="savebtn">保存</button></div>'; break;
+    case 'duosw':
+      c = '<div class="prow-c" style="flex-basis:66%;gap:14px;">'
+        +'<input class="pinput" style="flex:0 1 220px;" value="'+esc(it.parts[0][1])+'">'
+        +'<span style="color:#333;white-space:nowrap;">'+esc(it.parts[1][0])+'</span>'
+        +'<input class="pinput" style="flex:0 1 220px;" value="'+esc(it.parts[1][1])+'">'
+        +(it.plus?plusBtn(it):'')+'<button class="savebtn">保存</button></div><div class="prow-c rgt" style="margin-left:20px;">'+tgHtml(it.on)+'</div>';
+      lbl = '<div class="prow-l" style="flex:0 0 auto;padding-right:24px;">'+esc(it.parts[0][0])+scopeTag(it.sc)+'</div>'; break;
+    case 'duosv':
+      c = '<div class="prow-c" style="flex-basis:66%;gap:14px;">'
+        +'<input class="pinput" style="flex:0 1 240px;" value="'+esc(it.parts[0][1])+'">'
+        +'<span style="color:#333;white-space:nowrap;">'+esc(it.parts[1][0])+'</span>'
+        +'<input class="pinput" style="flex:0 1 240px;" value="'+esc(it.parts[1][1])+'"></div>'
+        +'<div class="prow-c rgt"><button class="savebtn">保存</button></div>';
+      lbl = '<div class="prow-l" style="flex:0 0 auto;padding-right:24px;">'+esc(it.parts[0][0])+scopeTag(it.sc)+'</div>'; break;
+    case 'wdchg':
+      lbl = '<div class="prow-l" style="flex:0 0 auto;padding-right:24px;">提款账户变动: ≤'+scopeTag(it.sc)+'</div>';
+      c = '<div class="prow-c" style="flex-basis:70%;gap:12px;align-items:center;">'
+        +'<input class="pinput" style="flex:0 1 180px;" value="1"><span style="color:#333;">小时</span>'
+        +'<span style="color:#333;line-height:1.5;">（修改手机号，新增/修改/删除<br>提款账号）</span>'
+        +'<span style="color:#333;white-space:nowrap;">提款金额≥</span>'
+        +'<input class="pinput" style="flex:0 1 140px;" value="1">'
+        +(it.plus?plusBtn(it):'')+'<button class="savebtn">保存</button></div><div class="prow-c rgt" style="margin-left:20px;">'+tgHtml(it.on)+'</div>'; break;
+    case 'chipsw':
+      var cps = it.chips.map(function(x){ return '<span class="chip">'+esc(x)+' <span class="x">⊗</span></span>'; }).join('');
+      c = '<div class="prow-c" style="flex-basis:62%;"><span class="chipbox" style="flex:1 1 auto;justify-content:space-between;"><span style="display:flex;gap:6px;flex-wrap:wrap;">'+cps+'</span><span class="arr" style="color:#c0c4cc;">▾</span></span><button class="savebtn">保存</button></div><div class="prow-c rgt" style="margin-left:20px;">'+tgHtml(it.on)+'</div>'; break;
+    case 'selsw':
+      c = '<div class="prow-c" style="flex-basis:40%;"><span class="fsel" style="flex:1 1 auto;"><span>'+esc(it.v)+'</span><span class="arr">▾</span></span><button class="savebtn">保存</button></div><div class="prow-c rgt" style="margin-left:20px;">'+tgHtml(it.on)+'</div>'; break;
+    case 'ekyc':
+      c = '<div class="prow-c" style="flex-basis:52%;justify-content:flex-start;gap:60px;">'
+        +'<span class="tgwrap" onclick="tgFlip(this)"><span style="color:#333;">是否显示</span><span class="tg on"></span><span class="tglbl" style="color:#5e9bf7;">开启</span></span>'
+        +'<span class="tgwrap" onclick="tgFlip(this)"><span style="color:#333;">该项必填</span><span class="tg on"></span><span class="tglbl" style="color:#5e9bf7;">开启</span></span>'
+        +'</div>'; break;
+    case 'up':
+      c = '<div class="prow-c"><input class="pinput ro" value="'+esc(it.v)+'"'+(it.ph?' placeholder="'+esc(it.ph)+'"':'')+'><button class="upbtn">🗎 上传文件</button><button class="savebtn">保存</button></div>'; break;
+  }
+  return '<div class="prow">'+lbl+c+'</div>';
+}
+window.rdPick = function(el){
+  var grp = el.parentElement;
+  grp.querySelectorAll('.rditem').forEach(function(x){ x.classList.remove('sel'); x.querySelector('.rdo') && x.querySelector('.rdo').classList.remove('on'); });
+  el.classList.add('sel'); var r = el.querySelector('.rdo'); if(r) r.classList.add('on');
+};
+window.ckPick = function(el){ var c = el.querySelector('.ckb'); if(c) c.classList.toggle('on'); };
+window.pillPick = function(el){
+  el.parentElement.querySelectorAll('.pill').forEach(function(x){ x.classList.remove('on'); });
+  el.classList.add('on');
+};
+
+/* ---------- 特殊區塊 ---------- */
+function gridHtml(pairs){
+  var out = '';
+  for(var i=0;i<pairs.length;i+=3){
+    var cells = '';
+    for(var j=i;j<i+3;j++){
+      if(j<pairs.length){
+        var p = pairs[j];
+        cells += '<div class="g3cell"><span class="gname">'+esc(p[0])+scopeTag(p[2])+'</span>'+tgHtml(p[1])+'</div>';
+      } else {
+        cells += '<div class="g3cell"></div>';
+      }
+    }
+    out += '<div class="grid3">'+cells+'</div>';
+  }
+  return out;
+}
+function wdVerifyHtml(){
+  /* 充值提款＞提款参数配置：实名验证特殊列（提现开关｜充值 radio） */
+  return '<div class="grid3">'
+    +'<div class="g3cell"><span class="gname">实名验证'+scopeTag('O')+'</span><span class="tgwrap" onclick="tgFlip(this)"><span style="color:#333;">提现</span><span class="tg on"></span><span class="tglbl">开启</span></span></div>'
+    +'<div class="g3cell" style="flex:2 1 66.66%;justify-content:flex-start;gap:30px;"><span style="color:#333;">充值</span>'
+    +'<span class="rdgrp">'
+    +'<span class="rditem sel" onclick="rdPick(this)"><span class="rdo on"></span>不限制</span>'
+    +'<span class="rditem" onclick="rdPick(this)"><span class="rdo"></span>通过KYC用户</span>'
+    +'<span class="rditem" onclick="rdPick(this)"><span class="rdo"></span>非未认证用户</span>'
+    +'</span></div></div>';
+}
+function freezeHtml(sc){
+  var rows = [ ['规则1','小会员','200'], ['规则2','超级会员','10'] ];
+  var trs = rows.map(function(r){
+    return '<tr><td style="width:130px;">'+r[0]+'</td>'
+      +'<td><span class="fsel" style="width:92%;justify-content:space-between;"><span>'+r[1]+'</span><span class="arr">▾</span></span></td>'
+      +'<td style="width:280px;"><span style="color:#606266;margin-right:6px;">≥</span><input class="tin" style="width:120px;display:inline-block;" value="'+r[2]+'"><span style="color:#606266;margin-left:6px;">天</span></td>'
+      +'<td style="width:110px;"><span class="bluetx">删除</span></td></tr>';
+  }).join('');
+  return '<div class="blk"><div class="blk-t" style="color:#333;">玩家自动冻结'+scopeTag(sc)+'</div>'
+    +'<div style="padding:0 18px 4px;"><table class="ptable"><tr><th style="width:130px;">规则</th><th>用户标签</th><th style="width:280px;">未登录天数</th><th style="width:110px;">操作</th></tr>'+trs+'</table></div>'
+    +'<div><span class="addbtn-outline">＋ 新增规则</span></div>'
+    +'<div class="blkfoot"><button class="savebtn">保存</button>'+tgHtml(true)+'</div>'
+    +'</div>';
+}
+function oldSortHtml(sc){
+  var rows = [ ['OKSports','8'], ['Slot','10'], ['ESports','233333'], ['Casino','103'], ['Perya','1444'] ];
+  var trs = rows.map(function(r){
+    return '<tr><td><input class="tin" value="'+r[0]+'"></td><td><input class="tin" value="'+r[1]+'"></td>'
+      +'<td class="greentx">显示</td><td class="greentx">显示</td><td class="greentx">已启用</td><td class="bluetx">关闭</td>'
+      +'<td style="width:110px;"><button class="savebtn">保存</button></td></tr>';
+  }).join('');
+  return '<div class="blk"><div class="blk-t">首页游戏分类排序配置'+scopeTag(sc)+'</div>'
+    +'<div style="padding:0 18px 12px;"><table class="ptable"><tr><th>分类名称</th><th>分类排序</th><th>左侧菜单显示状态</th><th>顶部导航显示状态</th><th>分类启用状态</th><th>分类启用开关</th><th style="width:110px;">op</th></tr>'+trs+'</table></div></div>';
+}
+function newSortHtml(sc){
+  var rows = [ ['SPORT','22'],['SLOT','28'],['PERYA','24'],['CASINO','26'],['POKER','20'],['ARCADE','18'],['EBINGO','16'],['NUMERIC','14'],['OKWIN','30'],['POPULAR','32'],['POPULAR_SLOT','1'],['POPULAR_CASINO','2'],['POPULAR_PERYA','3'] ];
+  var trs = rows.map(function(r){
+    return '<tr><td><input class="tin" value="'+r[0]+'"></td><td><input class="tin" value="'+r[1]+'"></td>'
+      +'<td style="width:110px;"><button class="savebtn">保存</button></td></tr>';
+  }).join('');
+  return '<div class="blk"><div class="blk-t">新版首页游戏分类排序配置'+scopeTag(sc)+'</div>'
+    +'<div style="padding:0 18px 12px;"><table class="ptable"><tr><th>分类名称</th><th>分类排序</th><th style="width:110px;">op</th></tr>'+trs+'</table></div></div>';
+}
+function floatTypeHtml(sc){
+  var rows = [ ['1','SLOT','100','1100000'],['2','PERYA','110','1200000'],['3','CASINO','120','1300000'],['4','POKER','130','1400000'],['5','ARCADE','140','1500000'],['6','EBINGO','150','1600000'],['7','NUMERIC','160','1700000'],['8','SPORT','170','1800000'],['9','POPULAR','180','1900000'],['10','POPULAR_SLOT','190','2000000'],['11','POPULAR_CASINO','200','2100000'],['12','POPULAR_PERYA','210','2100000'] ];
+  var trs = rows.map(function(r){
+    return '<tr><td style="width:70px;">'+r[0]+'</td><td><span class="tagcell">'+r[1]+'</span></td>'
+      +'<td><input class="tin" value="'+r[2]+'"></td><td><input class="tin" value="'+r[3]+'"></td></tr>';
+  }).join('');
+  return '<div class="blk"><div class="blk-t">游戏类型浮动人数配置'+scopeTag(sc)+'</div>'
+    +'<div style="padding:0 18px 12px;"><table class="ptable"><tr><th style="width:70px;">序号</th><th>首页分类</th><th>最少人数</th><th>最大人数</th></tr>'+trs+'</table></div></div>';
+}
+function floatLabelHtml(sc){
+  var rows = [ ['Slot','SLOT小标签','300','3100000'],['Popular','Hot','400','3200000'],['Slot','mili标签','500','3300000'],['Slot','TOP','600','3400000'] ];
+  var trs = rows.map(function(r){
+    return '<tr><td><span class="fsel" style="width:92%;justify-content:space-between;"><span>'+r[0]+'</span><span class="arr">▾</span></span></td>'
+      +'<td><span class="fsel" style="width:92%;justify-content:space-between;"><span>'+r[1]+'</span><span class="arr">▾</span></span></td>'
+      +'<td><input class="tin" value="'+r[2]+'"></td><td><input class="tin" value="'+r[3]+'"></td>'
+      +'<td style="width:110px;"><button class="delbtn">删除</button></td></tr>';
+  }).join('');
+  return '<div class="blk"><div class="blk-t">标签浮动人数配置'+scopeTag(sc)+'</div>'
+    +'<div style="padding:0 18px 4px;"><table class="ptable"><tr><th>首页分类</th><th>标签</th><th>最少人数</th><th>最大人数</th><th style="width:110px;">操作</th></tr>'+trs+'</table></div>'
+    +'<div><span class="addlink">＋ 新增标签配置</span></div>'
+    +'<div class="blkfoot"><button class="savebtn">保存</button></div>'
+    +'</div>';
+}
+
+/* 发送邮箱配置：列表頁（RD 決議表範圍外，照現行呈現） */
+function emailListHtml(){
+  var rows = [
+    ['jobe9958522108@gmail.com','exndpgnlrarrarzz','2023-08-14 17:31','olivia','停用','#f56c6c','#fef0f0',"Couldn't connect to host, port: smtp.gmail.com, 465; timeout -1",'2024-12-25 11:37'],
+    ['zhangexingchen@gmail.com','roxqiuudwulfhzxc','2023-08-14 17:27','olivia','正常','#67c23a','#f0f9eb',"Couldn't connect to host, port: smtp.gmail.com, 465; timeout -1",'2024-12-25 11:36']
+  ];
+  var trs = rows.map(function(r){
+    return '<tr><td>'+r[0]+'</td><td>'+r[1]+'</td><td>'+r[2]+'</td><td>'+r[3]+'</td>'
+      +'<td><span style="background:'+r[6]+';color:'+r[5]+';border:1px solid '+r[5]+'33;border-radius:3px;padding:3px 10px;">'+r[4]+'</span></td>'
+      +'<td style="max-width:260px;">'+esc(r[7])+'</td><td>'+r[8]+'</td>'
+      +'<td><button class="savebtn" style="padding:7px 14px;">修改</button> <button class="delbtn" style="padding:7px 14px;">删除</button></td></tr>';
+  }).join('');
+  return '<div style="padding:14px 4px 0;">'
+    +'<div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">'
+    +'<input class="pinput" style="flex:0 1 260px;" placeholder="邮箱地址">'
+    +'<span class="fsel" style="min-width:200px;"><span>全部</span><span class="arr">▾</span></span>'
+    +'<button class="savebtn">搜索</button><button class="savebtn">同步更新缓存</button>'
+    +'<button class="savebtn" style="margin-left:auto;">新增</button></div>'
+    +'<table class="ptable"><tr><th>邮箱地址</th><th>邮箱密钥</th><th>创建时间</th><th>操作人</th><th>状态</th><th>错误信息</th><th>错误时间</th><th>操作</th></tr>'+trs+'</table>'
+    +'<div style="display:flex;justify-content:flex-end;align-items:center;gap:14px;padding:14px 6px;color:#606266;">'
+    +'<span class="fsel" style="min-width:100px;"><span>10/page</span><span class="arr">▾</span></span>'
+    +'<span>Total 2</span><span style="color:#c0c4cc;">‹</span><span style="color:#409eff;">1</span><span style="color:#c0c4cc;">›</span></div>'
+    +'</div>';
+}
+
+/* ---------- 區塊渲染 ---------- */
+function blockHtml(b){
+  if(b.freeze) return freezeHtml(b.sc);
+  if(b.oldSort) return oldSortHtml(b.sc);
+  if(b.newSort) return newSortHtml(b.sc);
+  if(b.floatType) return floatTypeHtml(b.sc);
+  if(b.floatLabel) return floatLabelHtml(b.sc);
+  if(b.emailList) return emailListHtml();
+  var inner = '';
+  if(b.t) inner += '<div class="blk-t">'+esc(b.t)+(b.hint?'<span class="bhint">'+esc(b.hint)+'</span>':'')+'</div>';
+  if(b.grid) inner += gridHtml(b.grid);
+  if(b.gridAfter === 'wdVerify') inner += wdVerifyHtml();
+  if(b.items) inner += b.items.map(rowHtml).join('');
+  return '<div class="blk">'+inner+'</div>';
+}
+
+/* ---------- 版本 1：上下分區的過濾邏輯 ---------- */
+function tabHasGeo(t){
+  var blocks = MT[t]; if(!blocks) return false;
+  var hit = false;
+  blocks.forEach(function(b){
+    if(b.freeze && (b.sc==='N'||b.sc==='NC'||b.sc==='PH')) hit = true;
+    if(b.grid) b.grid.forEach(function(p){ if(p[2]==='N'||p[2]==='NC'||p[2]==='PH') hit = true; });
+    if(b.items) b.items.forEach(function(it){ if(it.sc==='N'||it.sc==='NC'||it.sc==='PH') hit = true; });
+  });
+  return hit;
+}
+function keepTop(sc){ return !(sc==='N' || sc==='NC' || sc==='PH'); }
+function keepBot(sc){ return sc==='N' || sc==='NC' || (ST.nation==='菲律賓' && sc==='PH'); }
+
+/* 由現行資料切出「上方通用區」版本的區塊清單 */
+function topBlocks(blocks){
+  var out = [];
+  blocks.forEach(function(b){
+    if(b.freeze || b.oldSort || b.newSort || b.floatType || b.floatLabel || b.emailList){
+      var sc = b.sc;
+      if(b.emailList || keepTop(sc)) out.push(b);
+      return;
+    }
+    var nb = { t:b.t, hint:b.hint, bare:b.bare };
+    if(b.grid){ nb.grid = b.grid.filter(function(p){ return keepTop(p[2]); }); }
+    if(b.gridAfter){ nb.gridAfter = b.gridAfter; } /* 实名验证列 sc=O，留上方 */
+    if(b.items){ nb.items = b.items.filter(function(it){ return keepTop(it.sc); }); }
+    var has = (nb.grid && nb.grid.length) || nb.gridAfter || (nb.items && nb.items.length);
+    if(has) out.push(nb);
+  });
+  return out;
+}
+
+/* 由現行資料切出「下方國家區」版本的區塊清單（NC 項掛＋） */
+function botBlocks(blocks){
+  var out = [];
+  blocks.forEach(function(b){
+    if(b.freeze){ if(keepBot(b.sc)) out.push(b); return; }
+    if(b.oldSort || b.newSort || b.floatType || b.floatLabel || b.emailList) return;
+    var nb = { t:b.t, hint:b.hint, bare:b.bare };
+    if(b.grid){ nb.grid = b.grid.filter(function(p){ return keepBot(p[2]); }); }
+    if(b.items){
+      nb.items = b.items.filter(function(it){ return keepBot(it.sc); }).map(function(it){
+        var c = Object.assign({}, it);
+        if(it.sc === 'NC') c.plus = true;
+        return c;
+      });
+    }
+    var has = (nb.grid && nb.grid.length) || (nb.items && nb.items.length);
+    if(has) out.push(nb);
+  });
+  return out;
+}
+
+/* ＋ 按鈕（帶入彈窗設定） */
+function plusBtn(it, swOnly){
+  var fields;
+  if(it.k === 'duosw'){ fields = it.parts.map(function(p){ return {l:p[0], v:p[1]}; }); }
+  else if(it.k === 'wdchg'){ fields = [{l:'提款账户变动: ≤（小时）', v:'1'},{l:'提款金额≥', v:'1'}]; }
+  else if(it.k === 'sw'){ fields = []; }
+  else { fields = [{l:'', v:(it.v||'')}]; }
+  var cfg = { name:(it.n || (it.parts ? it.parts[0][0] : '')), sw:(it.k==='sw' || it.psw ? 1 : 0), fields:fields };
+  return '<button class="plusbtn" data-cfg="'+esc(JSON.stringify(cfg))+'" onclick="plusOpen(this)">＋</button>';
+}
+
+/* ＋ 組合彈窗（單國家模式：該國家法幣＋USDT） */
+var PLUS = { cfg:null, rows:[] };
+window.plusOpen = function(el){
+  var cfg = JSON.parse(el.getAttribute('data-cfg').replace(/&quot;/g,'"').replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>'));
+  var combos = (ST.nation === '菲律賓') ? [['菲律宾','PHP'],['菲律宾','USDT']] : [['越南','VND'],['越南','USDT']];
+  PLUS.cfg = cfg;
+  PLUS.rows = combos.map(function(c){
+    return { nation:c[0], cur:c[1], vals:cfg.fields.map(function(f){ return f.v; }), on:true, editing:false };
+  });
+  renderPlus();
+};
+window.plusClose = function(){ document.getElementById('pmask').classList.remove('show'); };
+window.plusEdit = function(i){ PLUS.rows[i].editing = true; renderPlus(); };
+window.plusSaveRow = function(i){ PLUS.rows[i].editing = false; renderPlus(); };
+window.plusCancelRow = function(i){ PLUS.rows[i].editing = false; renderPlus(); };
+window.plusTg = function(i){ PLUS.rows[i].on = !PLUS.rows[i].on; renderPlus(); };
+function renderPlus(){
+  var m = document.getElementById('pmask');
+  var cfg = PLUS.cfg;
+  var valHds = cfg.sw ? '<th>开关</th>' : cfg.fields.map(function(f){ return '<th>'+esc(f.l || cfg.name)+'</th>'; }).join('');
+  var trs = PLUS.rows.map(function(r,i){
+    var cells;
+    if(cfg.sw){
+      cells = '<td><span class="tgwrap" onclick="plusTg('+i+')"><span class="tg'+(r.on?' on':'')+'"></span><span class="tglbl">开启</span></span></td>';
+    } else {
+      cells = r.vals.map(function(v,j){
+        return '<td>'+(r.editing ? '<input class="tin" id="pv'+i+'_'+j+'" value="'+esc(v)+'">' : '<span>'+esc(v)+'</span>')+'</td>';
+      }).join('');
+    }
+    var op = r.editing
+      ? '<button class="savebtn" onclick="plusSaveRow('+i+')">保存</button> <button class="cancelbtn" onclick="plusCancelRow('+i+')">取消</button>'
+      : (cfg.sw ? '<span style="color:#c0c4cc;">—</span>' : '<span class="bluetx" onclick="plusEdit('+i+')">编辑</span>');
+    return '<tr><td>'+r.nation+'</td><td>'+r.cur+'</td>'+cells+'<td style="width:150px;">'+op+'</td></tr>';
+  }).join('');
+  m.innerHTML = '<div class="pmodal">'
+    +'<div class="pmodal-hd"><span>'+esc(cfg.name)+'</span><span class="pmodal-x" onclick="plusClose()">✕</span></div>'
+    +'<div class="pmodal-bd"><table class="ptable"><tr><th style="width:120px;">国家</th><th style="width:110px;">币种</th>'+valHds+'<th style="width:150px;">操作</th></tr>'+trs+'</table></div>'
+    +'</div>';
+  m.classList.add('show');
+}
+
+/* 國家下拉（下方國家區） */
+function natDropHtml(){
+  var opts = ['菲律賓','其他國家'];
+  var dd = '';
+  if(ST.natOpen){
+    dd = '<div class="natopts">' + opts.map(function(o){
+      return '<div class="natopt'+(o===ST.nation?' on':'')+'" onclick="natPick(\''+o+'\')">'+o+'</div>';
+    }).join('') + '</div>';
+  }
+  return '<div class="natrow"><span class="seclbl">國家設定</span><div class="natwrap"><div class="natsel" onclick="natToggle()"><span>'+ST.nation+'</span><span class="arr">▾</span></div>'+dd+'</div></div>';
+}
+window.natToggle = function(){ ST.natOpen = !ST.natOpen; renderContent(); applyScope(); };
+window.natPick = function(n){ ST.nation = n; ST.natOpen = false; renderContent(); applyScope(); };
+
+/* 版本 2：下方平鋪（無區塊標題，全部設定連續列出） */
+function botFlatHtml(blocks){
+  var bots = botBlocks(blocks);
+  var html = '', cur = '';
+  function flush(){ if(cur){ html += '<div class="blk">' + cur + '</div>'; cur = ''; } }
+  bots.forEach(function(b){
+    if(b.freeze){ flush(); html += freezeHtml(b.sc); return; }
+    if(b.grid && b.grid.length) cur += gridHtml(b.grid);
+    if(b.items && b.items.length) cur += b.items.map(rowHtml).join('');
+  });
+  flush();
+  return html;
+}
+
+/* 版本 3：上方平鋪（表格型設定保留原表與名稱，屬單一設定本身） */
+function topFlatHtml(blocks){
+  var tops = topBlocks(blocks);
+  var html = '', cur = '';
+  function flush(){ if(cur){ html += '<div class="blk">' + cur + '</div>'; cur = ''; } }
+  tops.forEach(function(b){
+    if(b.oldSort || b.newSort || b.floatType || b.floatLabel || b.emailList || b.freeze){
+      flush(); html += blockHtml(b); return;
+    }
+    if(b.grid && b.grid.length) cur += gridHtml(b.grid);
+    if(b.gridAfter === 'wdVerify') cur += wdVerifyHtml();
+    if(b.items && b.items.length) cur += b.items.map(rowHtml).join('');
+  });
+  flush();
+  return html;
+}
+
+/* ---------- 分頁與版本渲染 ---------- */
+function renderTabs(){
+  var el = document.getElementById('mtabs');
+  el.innerHTML = MTAB_LIST.map(function(t,i){
+    var gray = ((ST.ver >= 1 && ST.ver <= 3) || (ST.ver === 5 && ST.scope5 !== '通用設置')) && !tabHasGeo(i) ? ' nogeo' : '';
+    return '<div class="mtab'+(i===ST.tab?' active':'')+gray+'" onclick="pickTab('+i+')">'+t+'</div>';
+  }).join('');
+  var pre = document.getElementById('predrop');
+  if(ST.ver === 5){
+    var opts = ['通用設置','菲律賓','其他國家'];
+    var dd = '';
+    if(ST.pre5Open){
+      dd = '<div class="natopts">' + opts.map(function(o){
+        return '<div class="natopt'+(o===ST.scope5?' on':'')+'" onclick="pre5Pick(\''+o+'\')">'+o+'</div>';
+      }).join('') + '</div>';
+    }
+    pre.innerHTML = '<div class="natrow" style="margin:14px 14px 12px;"><div class="natwrap"><div class="natsel" onclick="pre5Toggle()"><span>'+ST.scope5+'</span><span class="arr">▾</span></div>'+dd+'</div></div>';
+  } else {
+    pre.innerHTML = '';
+  }
+}
+window.pre5Toggle = function(){ ST.pre5Open = !ST.pre5Open; renderTabs(); };
+window.pre5Pick = function(o){ ST.scope5 = o; ST.pre5Open = false; ST.nation = (o==='其他國家') ? '其他國家' : '菲律賓'; renderTabs(); renderContent(); applyScope(); };
+function renderContent(){
+  var el = document.getElementById('content');
+  var blocks = MT[ST.tab];
+  if(!blocks){ el.innerHTML = '<div class="placebox">內容待補。</div>'; return; }
+  if(ST.ver === 0){
+    el.innerHTML = '<div class="pane">'+blocks.map(blockHtml).join('')+'</div>';
+    return;
+  }
+  if(ST.ver === 1 || ST.ver === 2 || ST.ver === 3){
+    var tops = topBlocks(blocks);
+    var bots = botBlocks(blocks);
+    var topHtml = (ST.ver === 3) ? topFlatHtml(blocks) : tops.map(blockHtml).join('');
+    var html = '<div class="seclbl">通用設定</div><div class="pane">'+topHtml+'</div>';
+    if(bots.length){
+      var botHtml = (ST.ver === 2) ? botFlatHtml(blocks) : bots.map(blockHtml).join('');
+      html += natDropHtml() + '<div class="pane" style="padding-top:0;">'+botHtml+'</div>';
+    }
+    el.innerHTML = html;
+    return;
+  }
+  if(ST.ver === 5){
+    var html5;
+    if(ST.scope5 === '通用設置'){
+      html5 = topBlocks(blocks).map(blockHtml).join('');
+    } else {
+      ST.nation = (ST.scope5 === '其他國家') ? '其他國家' : '菲律賓';
+      var bots5 = botBlocks(blocks);
+      html5 = bots5.length ? bots5.map(blockHtml).join('')
+        : '<div class="placebox">本分頁無可依國家設置的參數。</div>';
+    }
+    el.innerHTML = '<div class="pane">'+html5+'</div>';
+    return;
+  }
+  if(ST.ver === 4){
+    var geoTabs = [];
+    for(var i=0;i<MTAB_LIST.length;i++){ if(tabHasGeo(i)) geoTabs.push(i); }
+    if(geoTabs.indexOf(ST.tab2) < 0) ST.tab2 = geoTabs[0];
+    var topHtml4 = topBlocks(blocks).map(blockHtml).join('');
+    var tabs2 = '<div class="mtabs mtabs2">' + geoTabs.map(function(i){
+      return '<div class="mtab'+(i===ST.tab2?' active':'')+'" onclick="pickTab2('+i+')">'+MTAB_LIST[i]+'</div>';
+    }).join('') + '</div>';
+    var botHtml4 = botBlocks(MT[ST.tab2]).map(blockHtml).join('');
+    el.innerHTML = '<div class="seclbl">通用設定</div><div class="pane">'+topHtml4+'</div>'
+      + natDropHtml() + tabs2
+      + '<div class="pane" style="padding-top:0;">'+botHtml4+'</div>';
+    return;
+  }
+  el.innerHTML = '<div class="placebox"><b>版本 '+ST.ver+'</b><br>'+esc(VER_DESC[ST.ver])+'<br><br>本版本佈局製作中——版本 1 定稿後依序製作。</div>';
+}
+window.pickTab2 = function(i){ ST.tab2 = i; ST.natOpen = false; renderContent(); applyScope(); };
+window.pickTab = function(i){ ST.tab = i; renderTabs(); renderContent(); applyScope(); };
+window.pickVer = function(v){
+  ST.ver = v;
+  document.querySelectorAll('.vbtn').forEach(function(b){ b.classList.toggle('on', Number(b.dataset.v)===v); });
+  document.getElementById('verdesc').textContent = VER_DESC[v];
+  renderTabs();
+  renderContent();
+  applyScope();
+};
+
+renderTabs();
+renderContent();
+applyScope();
+
+</script>
+<div class="pmask" id="pmask"></div>
+</body>
+</html>
