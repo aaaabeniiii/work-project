@@ -847,6 +847,13 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
     <p class="rec-sub">記錄各次會議與討論的決議內容。新的紀錄由上往下疊加（項次由下往上遞增）；決議內容若後續被調整，原文以刪除線標示並於下方註記調整內容與確認人。</p>
     <table class="rec-table">
       <tr><th>日期</th><th>項次</th><th>內容</th><th>規格書更新</th><th>參與人</th></tr>
+      <tr id="rec-47">
+        <td class="rec-date">8/28</td>
+        <td class="rec-no">47</td>
+        <td><span class="rec-item-tt">風控系統參數維度改判</span>（系統管理 &gt; 系統參數管理 &gt; 风控配置）：「用户在风控预警中存在待处理或确认风险的记录」由平台維度改判為「國家＋幣種」維度，已與 Mark 確認。</td>
+        <td class="rec-upd"></td>
+        <td>Cyril、Mark</td>
+      </tr>
       <tr id="rec-46">
         <td class="rec-date">8/27</td>
         <td class="rec-no">46</td>
@@ -1975,10 +1982,10 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
     <h3 class="plan-h">各期 DEV 進度</h3>
     <table class="rec-table">
       <tr><th>期數</th><th>名稱</th><th>範圍</th><th>盤點</th><th>開發中</th><th>上 DEV</th><th>DEV 驗收通過</th><th>備註</th></tr>
-      <tr><td class="rec-no">1</td><td>基礎工程</td><td class="plan-scope">5 頁 15 張｜交付項 4</td><td class="ph-cell ph-now">進行中</td><td class="ph-cell"></td><td class="ph-cell"></td><td class="ph-cell"></td><td>依系統參數盤點結果復盤中</td></tr>
-      <tr><td class="rec-no">—</td><td>充值提款匹配邏輯優化（<a class="x-jump" href="https://okbetokbet.atlassian.net/browse/OKF-2074" target="_blank">OKF-2074</a>）</td><td class="plan-scope">期 2 前置</td><td class="ph-cell ph-now">進行中</td><td class="ph-cell"></td><td class="ph-cell"></td><td class="ph-cell"></td><td>需先完成才可進行期 2；不影響期 3、期 4（可先帶假資料）</td></tr>
+      <tr><td class="rec-no">1</td><td>基礎工程</td><td class="plan-scope">5 頁 15 張｜交付項 4</td><td class="ph-cell ph-done">8/28 已完成</td><td class="ph-cell ph-now">開發文件撰寫中</td><td class="ph-cell"></td><td class="ph-cell"></td><td></td></tr>
+      <tr><td class="rec-no">—</td><td>充值提款匹配邏輯優化（<a class="x-jump" href="https://okbetokbet.atlassian.net/browse/OKF-2074" target="_blank">OKF-2074</a>）</td><td class="plan-scope">期 2 前置</td><td class="ph-cell ph-done">8/28 已完成</td><td class="ph-cell"></td><td class="ph-cell"></td><td class="ph-cell"></td><td>需先完成才可進行期 2；不影響期 3、期 4（可先帶假資料）</td></tr>
       <tr><td class="rec-no">2</td><td>金流</td><td class="plan-scope">11 頁 44 張｜交付項 2</td><td class="ph-cell"></td><td class="ph-cell"></td><td class="ph-cell"></td><td class="ph-cell"></td><td></td></tr>
-      <tr><td class="rec-no">3</td><td>代理線</td><td class="plan-scope">5 頁 37 張</td><td class="ph-cell ph-now">進行中</td><td class="ph-cell"></td><td class="ph-cell"></td><td class="ph-cell"></td><td>依系統參數盤點結果復盤中</td></tr>
+      <tr><td class="rec-no">3</td><td>代理線</td><td class="plan-scope">5 頁 37 張</td><td class="ph-cell ph-done">8/28 已完成</td><td class="ph-cell"></td><td class="ph-cell"></td><td class="ph-cell"></td><td></td></tr>
       <tr><td class="rec-no">4</td><td>三方 GAME ＋ 體育</td><td class="plan-scope">13 頁 63 張</td><td class="ph-cell ph-done">8/21 已完成</td><td class="ph-cell"></td><td class="ph-cell"></td><td class="ph-cell"></td><td></td></tr>
       <tr><td class="rec-no">5</td><td>匯總報表</td><td class="plan-scope">11 頁 69 張</td><td class="ph-cell ph-done">8/21 已完成</td><td class="ph-cell"></td><td class="ph-cell"></td><td class="ph-cell"></td><td></td></tr>
       <tr><td class="rec-no">6</td><td>金流風控</td><td class="plan-scope">2 頁 21 張</td><td class="ph-cell ph-done">8/21 已完成</td><td class="ph-cell"></td><td class="ph-cell"></td><td class="ph-cell"></td><td></td></tr>
@@ -1996,6 +2003,35 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
     <h3 class="plan-h">開發進度紀錄（每週一更新上週進度，日期為該週週五）</h3>
     <table class="rec-table">
       <tr><th>日期</th><th>範圍</th><th>本週進度</th><th>備註</th></tr>
+      <tr><td class="rec-date">8/28</td><td>全案盤點＋期 1</td><td>
+        <strong>Cyril：</strong>
+        <ul class="rec-ol">
+          <li>多幣種任務盤點完成，第一期作業由 Evan 展開。</li>
+          <li>渠道優化任務已完成盤點，文件整理中。</li>
+        </ul>
+        <strong>Evan：</strong>
+        <ul class="rec-ol">
+          <li>第一期開發文件撰寫接近尾聲，文件定稿後即進入開發。</li>
+          <li>盤點做法與文件內既定做法存在技術出入，分析兼容可行性中，預計週二（9/1）週會討論。</li>
+        </ul>
+      </td><td></td></tr>
+      <tr><td class="rec-date">8/21</td><td>全案盤點</td><td>
+        <strong>1. 各期盤點：</strong>
+        <ul class="rec-ol">
+          <li>期 4、5、6、7 本週完成盤點</li>
+          <li>期 1、期 3 需依系統參數盤點結果復盤，尚未完成</li>
+        </ul>
+        <strong>2. 系統參數：</strong>
+        <ul class="rec-ol">
+          <li>系統參數盤點完成</li>
+          <li>PM 文件完成：系統參數的做法已整理成文件、交付 PM，內容需更新至規格書</li>
+          <li>QA 文件：已先提供一份規格文件供 QA 確認格式，QA 回覆 OK 後依該格式製作系統參數改動文件</li>
+        </ul>
+        <strong>3. OKF-2074：</strong>
+        <ul class="rec-ol">
+          <li>盤點中</li>
+        </ul>
+      </td><td></td></tr>
       <tr><td class="rec-date">8/14</td><td>全案盤點</td><td>
         <strong>1. 盤點已完成：</strong>
         <ul class="rec-ol">
@@ -2025,37 +2061,6 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
           <li>分析已執行，文件待整理</li>
         </ul>
       </td><td></td></tr>
-      <tr><td class="rec-date">8/21</td><td>全案盤點</td><td>
-        <strong>1. 各期盤點：</strong>
-        <ul class="rec-ol">
-          <li>期 4、5、6、7 本週完成盤點</li>
-          <li>期 1、期 3 需依系統參數盤點結果復盤，尚未完成</li>
-        </ul>
-        <strong>2. 系統參數：</strong>
-        <ul class="rec-ol">
-          <li>系統參數盤點完成</li>
-          <li>PM 文件完成：系統參數的做法已整理成文件、交付 PM，內容需更新至規格書</li>
-          <li>QA 文件：已先提供一份規格文件供 QA 確認格式，QA 回覆 OK 後依該格式製作系統參數改動文件</li>
-        </ul>
-        <strong>3. OKF-2074：</strong>
-        <ul class="rec-ol">
-          <li>盤點中</li>
-        </ul>
-      </td><td></td></tr>
-      <tr><td class="rec-date">8/28</td><td></td><td></td><td></td></tr>
-      <tr><td class="rec-date">9/4</td><td></td><td></td><td></td></tr>
-      <tr><td class="rec-date">9/11</td><td></td><td></td><td></td></tr>
-      <tr><td class="rec-date">9/18</td><td></td><td></td><td></td></tr>
-      <tr><td class="rec-date">9/25</td><td></td><td></td><td></td></tr>
-      <tr><td class="rec-date">10/2</td><td></td><td></td><td></td></tr>
-      <tr><td class="rec-date">10/9</td><td></td><td></td><td></td></tr>
-      <tr><td class="rec-date">10/16</td><td></td><td></td><td></td></tr>
-      <tr><td class="rec-date">10/23</td><td></td><td></td><td></td></tr>
-      <tr><td class="rec-date">10/30</td><td></td><td></td><td></td></tr>
-      <tr><td class="rec-date">11/6</td><td></td><td></td><td></td></tr>
-      <tr><td class="rec-date">11/13</td><td></td><td></td><td></td></tr>
-      <tr><td class="rec-date">11/20</td><td></td><td></td><td></td></tr>
-      <tr><td class="rec-date">11/27</td><td></td><td></td><td></td></tr>
     </table>
   </div>
 </div>
