@@ -137,16 +137,22 @@
     color:#b6bcc9;font-size:12px;
   }
   .pb-title{font-size:15px;font-weight:700;margin-bottom:10px;}
-  .pb-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;min-height:64px;}
+  #secPB,#secEW{margin-bottom:16px;}
+  .pb-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
   .pb-card{
     background:#000;color:#fff;border:1px solid #e8eaf0;border-radius:8px;height:60px;
     display:flex;align-items:center;justify-content:center;
     font-size:16px;font-weight:700;letter-spacing:2px;
   }
-  .pb-empty{
-    grid-column:1/-1;display:none;align-items:center;justify-content:center;
-    color:var(--sub);font-size:13px;border:1px dashed var(--line);border-radius:8px;height:60px;
+  .tile.entry{
+    background:#fff;border:1.5px solid #3b62e0;color:#3b62e0;font-weight:700;
   }
+  .notice{
+    margin-top:14px;background:var(--new-bg);border:1px solid var(--new);
+    border-radius:8px;padding:12px 14px;font-size:13.5px;color:#8a5a10;line-height:1.6;
+  }
+  .notice b{color:#8a5a10;}
+  .notice .n-icon{margin-right:6px;}
   .demo-tip{color:var(--sub);font-size:13px;margin-bottom:14px;}
   .demo-tip b{color:var(--new);}
 </style>
@@ -192,14 +198,22 @@
       <li>既有（歷史）子渠道資料一律視為 <code>是</code>，維持與現況一致的展示行為。</li>
       <li>選 <code>是</code>：該子渠道於前台正常展示。</li>
       <li>選 <code>否</code>：該子渠道於前台不展示；後台配置完整保留，隨時可再切回 <code>是</code> 恢復展示。</li>
+      <li>前台子渠道分為兩個區塊：<code>Payment Bank</code> 與 <code>Other E-Wallet</code>。若某個區塊內沒有任何展示中的子渠道，該區塊（含標題）整個不顯示。</li>
+      <li>若兩個區塊皆沒有展示中的子渠道（即該渠道下所有子渠道皆設為「否」），前台該渠道入口也對應不展示。</li>
       <li>設定儲存成功後即生效，前台依最新設定值決定是否展示。</li>
+    </ol>
+
+    <h3>3.3 特殊情境說明</h3>
+    <ol>
+      <li><b>無需配置子渠道的商戶</b>：若該商戶本身不需要另外配置子渠道（通常為會員點擊入口後直接選擇金額即可提交），因無法配置子渠道開關故維持原邏輯，前台入口照常展示。請注意區分這兩種情境。</li>
+      <li><b>子渠道關閉至只剩一個</b>：若商戶原有多個子渠道，透過本開關關閉至只剩一個展示中，前台仍依照原本展示方式（點擊入口後仍有子區塊需選擇子渠道），不需調整為上述「直接選擇金額」的模式。</li>
     </ol>
   </section>
 
   <!-- 互動示意 -->
   <section class="block">
     <h2>四、畫面示意（可互動）</h2>
-    <p class="demo-tip">左側為<b>後台調整後畫面</b>（橘色虛線框為本次新增欄位），右側為<b>前台錢包充值頁</b>。點選左側任一子渠道的「是／否」，右側 Payment Bank 區塊會即時同步增減對應的子渠道。前台上方區塊僅為示意，非本次需求範圍。</p>
+    <p class="demo-tip">左側為<b>後台調整後畫面</b>（橘色虛線框為本次新增欄位），右側為<b>前台錢包充值頁</b>。子渠道1、子渠道2 屬於 Payment Bank 區塊，子渠道3 屬於 Other E-Wallet 區塊。點選左側任一子渠道的「是／否」，右側會即時同步，並於前台示意圖下方以<b>黃色提醒</b>說明本次操作造成的前台變化（區塊隱藏／恢復、渠道入口隱藏／恢復）。前台上方其餘支付方式僅為示意，非本次需求範圍。</p>
 
     <div class="demo-wrap">
 
@@ -265,6 +279,33 @@
                 </div>
               </div>
 
+              <!-- 子渠道3 -->
+              <div class="sub-channel">
+                <div class="sc-name">子渠道3</div>
+
+                <div class="hint">渠道圖示（日間）　建議尺寸：232 × 76</div>
+                <button class="btn-file dim">📄 選擇文件</button>
+                <div class="logo-thumb">子渠道3<span class="del">🗑</span></div>
+
+                <div class="hint">渠道圖示（夜間）　建議尺寸：232 × 76</div>
+                <button class="btn-file">📄 選擇文件</button>
+
+                <div class="field-label">分頁歸屬</div>
+                <div class="checks">
+                  <label><span class="fake-check"></span>All</label>
+                  <label><span class="fake-check on"></span><span class="on-text">E-Wallets</span></label>
+                  <label><span class="fake-check"></span>Banks</label>
+                </div>
+
+                <div class="switch-row">
+                  <div class="field-label">前台是否展示 <span class="tag-new">新增</span></div>
+                  <div class="radios">
+                    <label><input type="radio" name="show3" value="yes" checked onchange="sync()">是</label>
+                    <label><input type="radio" name="show3" value="no" onchange="sync()">否</label>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
@@ -285,7 +326,7 @@
                 <div class="balance"><span>🟠 <b>5,686.11</b></span><span class="fund">Fund Accounts</span></div>
 
                 <div class="tile-grid">
-                  <div class="tile">支付方式（示意）</div>
+                  <div class="tile entry" id="entryTile">渠道入口（本渠道）</div>
                   <div class="tile">支付方式（示意）</div>
                   <div class="tile">支付方式（示意）</div>
                   <div class="tile">支付方式（示意）</div>
@@ -293,15 +334,24 @@
                   <div class="tile">支付方式（示意）</div>
                 </div>
 
-                <div class="pb-title">Payment Bank</div>
-                <div class="pb-grid">
-                  <div class="pb-card" id="pb1">子渠道1</div>
-                  <div class="pb-card" id="pb2">子渠道2</div>
-                  <div class="pb-empty" id="pbEmpty">（目前無展示中的子渠道）</div>
+                <div id="secPB">
+                  <div class="pb-title">Payment Bank</div>
+                  <div class="pb-grid">
+                    <div class="pb-card" id="pb1">子渠道1</div>
+                    <div class="pb-card" id="pb2">子渠道2</div>
+                  </div>
+                </div>
+
+                <div id="secEW">
+                  <div class="pb-title">Other E-Wallet</div>
+                  <div class="pb-grid">
+                    <div class="pb-card" id="pb3">子渠道3</div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+          <div class="notice" id="notice"><span class="n-icon">⚠️</span><span id="noticeText"></span></div>
         </div>
       </div>
 
@@ -311,12 +361,57 @@
 </div>
 
 <script>
+var prev = { s1:true, s2:true, s3:true };
+
+function setNotice(text){
+  document.getElementById('noticeText').innerHTML = text;
+}
+
 function sync(){
   var s1 = document.querySelector('input[name="show1"]:checked').value === 'yes';
   var s2 = document.querySelector('input[name="show2"]:checked').value === 'yes';
+  var s3 = document.querySelector('input[name="show3"]:checked').value === 'yes';
+
+  // 子渠道本身
   document.getElementById('pb1').style.display = s1 ? 'flex' : 'none';
   document.getElementById('pb2').style.display = s2 ? 'flex' : 'none';
-  document.getElementById('pbEmpty').style.display = (!s1 && !s2) ? 'flex' : 'none';
+  document.getElementById('pb3').style.display = s3 ? 'flex' : 'none';
+
+  // 區塊內沒有任何展示中的子渠道 → 整個區塊（含標題）不顯示
+  var pbNow = s1 || s2, ewNow = s3;
+  document.getElementById('secPB').style.display = pbNow ? 'block' : 'none';
+  document.getElementById('secEW').style.display = ewNow ? 'block' : 'none';
+
+  // 所有子渠道皆關閉 → 前台該渠道入口不展示
+  var anyOn = s1 || s2 || s3;
+  document.getElementById('entryTile').style.display = anyOn ? 'flex' : 'none';
+
+  // ===== 依前後狀態比對，顯示對應提示 =====
+  var anyOnPrev = prev.s1 || prev.s2 || prev.s3;
+  var pbPrev = prev.s1 || prev.s2, ewPrev = prev.s3;
+
+  if (!anyOn) {
+    setNotice('因所有子渠道皆已關閉，前台該渠道入口不展示（上方入口已隱藏）');
+  } else if (!anyOnPrev && anyOn) {
+    var sec = pbNow ? 'Payment Bank' : 'Other E-Wallet';
+    setNotice('原本所有子渠道皆關閉，因開啟子渠道，前台渠道入口恢復展示，並顯示「' + sec + '」區塊與該子渠道');
+  } else if (pbPrev && !pbNow) {
+    setNotice('因「Payment Bank」區塊下無子渠道展示，前台不展示該區塊');
+  } else if (ewPrev && !ewNow) {
+    setNotice('因「Other E-Wallet」區塊下無子渠道展示，前台不展示該區塊');
+  } else if (!pbPrev && pbNow) {
+    setNotice('因「Payment Bank」區塊下的子渠道開啟，前台展示該區塊與子渠道');
+  } else if (!ewPrev && ewNow) {
+    setNotice('因「Other E-Wallet」區塊下的子渠道開啟，前台展示該區塊與子渠道');
+  } else if (s1 !== prev.s1 || s2 !== prev.s2 || s3 !== prev.s3) {
+    var name = s1 !== prev.s1 ? '子渠道1' : (s2 !== prev.s2 ? '子渠道2' : '子渠道3');
+    var on = (s1 !== prev.s1 ? s1 : (s2 !== prev.s2 ? s2 : s3));
+    setNotice('「' + name + '」已' + (on ? '開啟，前台同步展示該子渠道' : '關閉，前台同步隱藏該子渠道（所屬區塊仍有其他子渠道展示中）'));
+  } else {
+    setNotice('目前所有子渠道皆展示中，可切換左側「是／否」觀察前台變化');
+  }
+
+  prev = { s1:s1, s2:s2, s3:s3 };
 }
 sync();
 </script>
