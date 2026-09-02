@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>在線支付商戶配置 — 新增 VIP 等級限制 規格書</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: "PingFang TC","PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-serif;
+    background:#f0f2f5; color:#303133; font-size:14px; padding:32px 40px 80px;
+  }
+  h1 { font-size:20px; margin-bottom:6px; }
+
+  .section { background:#fff; border:1px solid #e4e7ed; border-radius:4px; padding:24px; margin-bottom:36px; position:relative; }
+  .section-title { font-size:16px; font-weight:600; margin-bottom:16px; display:flex; align-items:center; gap:10px; }
+
+  /* 紅色標號 */
+  .mark {
+    display:inline-flex; align-items:center; justify-content:center;
+    min-width:22px; height:22px; padding:0 4px; border-radius:50%;
+    background:#f5222d; color:#fff; font-size:13px; font-weight:700; line-height:1;
+  }
+  .mark-abs { position:absolute; z-index:5; }
+
+  /* ===== 列表 ===== */
+  .toolbar { display:flex; gap:10px; margin-bottom:14px; align-items:center; position:relative; }
+  .btn { display:inline-block; padding:7px 16px; border-radius:4px; font-size:13px; cursor:pointer; border:1px solid transparent; }
+  .btn-primary { background:#409eff; color:#fff; }
+  .btn-plain { background:#fff; border-color:#dcdfe6; color:#606266; }
+  .btn-wrap { position:relative; display:inline-block; }
+  .btn-wrap .mark { position:absolute; top:-11px; right:-11px; }
+
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th, td { border-bottom:1px solid #ebeef5; padding:12px 10px; text-align:center; vertical-align:middle; }
+  th { background:#f5f7fa; color:#909399; font-weight:500; white-space:nowrap; }
+  td { color:#606266; }
+  .col-new { background:#fff7f7; }
+  th.col-new { color:#f5222d; font-weight:600; position:relative; }
+  .tier-cell { font-size:12px; color:#909399; max-width:200px; }
+  .tag { display:inline-block; padding:2px 8px; border-radius:3px; font-size:12px; }
+  .tag-green { background:#f0f9eb; color:#67c23a; }
+  .tag-red { background:#fef0f0; color:#f56c6c; }
+  .tag-orange { background:#fdf6ec; color:#e6a23c; }
+  .link { color:#409eff; cursor:pointer; margin:0 4px; white-space:nowrap; }
+  .op-edit { position:relative; display:inline-block; }
+  .op-edit .mark { position:absolute; top:-14px; left:50%; transform:translateX(-50%); }
+
+  /* ===== 彈窗示意 ===== */
+  .dialog {
+    border:1px solid #e4e7ed; border-radius:8px; max-width:860px;
+    box-shadow:0 4px 16px rgba(0,0,0,.08); background:#fff; overflow:hidden;
+  }
+  .dialog-header { padding:16px 24px; font-size:16px; font-weight:600; border-bottom:1px solid #f0f0f0; display:flex; justify-content:space-between; }
+  .dialog-header .close { color:#909399; font-weight:400; cursor:pointer; }
+  .dialog-body { padding:24px 32px; }
+  .dialog-footer { padding:14px 24px; text-align:right; border-top:1px solid #f0f0f0; }
+  .dialog-footer .btn { margin-left:10px; }
+
+  .form-row { display:flex; margin-bottom:22px; }
+  .form-label { width:130px; flex:none; text-align:right; padding-right:14px; padding-top:2px; color:#606266; }
+  .required::before { content:"* "; color:#f56c6c; }
+  .form-content { flex:1; }
+  .ellipsis-row { text-align:center; color:#c0c4cc; letter-spacing:4px; margin-bottom:18px; }
+  .placeholder-note { color:#c0c4cc; font-size:13px; padding-top:2px; }
+
+  .checkbox-group { display:flex; flex-wrap:wrap; gap:12px 26px; }
+  .cb { display:inline-flex; align-items:center; gap:6px; cursor:pointer; user-select:none; color:#606266; }
+  .cb input { width:15px; height:15px; accent-color:#409eff; cursor:pointer; }
+  .cb-all { font-weight:600; }
+
+  .vip-row-highlight { outline:2px dashed #f5222d; outline-offset:8px; border-radius:2px; position:relative; }
+
+  .note { background:#fdf6ec; border:1px solid #faecd8; color:#e6a23c; border-radius:4px; padding:12px 16px; font-size:13px; margin-top:16px; line-height:1.8; }
+  .note-title { font-weight:600; margin-bottom:4px; }
+  .note ol { margin:0; padding-left:22px; }
+  .note ol li { margin:2px 0; }
+  .req-box { background:#fff; border:1px solid #e4e7ed; border-radius:4px; padding:24px; margin-bottom:36px; }
+  .req-box ol { margin:0; padding-left:24px; line-height:2; color:#606266; }
+  .sub-list { list-style:none; padding-left:18px; margin-top:2px; }
+  .sub-list li::before { content:"－ "; color:#909399; }
+</style>
+</head>
+<body>
+
+<h1 style="margin-bottom:28px;">在線支付商戶配置 — 新增「VIP 等級」限制 規格書</h1>
+
+<!-- ============ 需求 ============ -->
+<div class="req-box">
+  <div class="section-title" style="margin-bottom:12px;">需求</div>
+  <ol>
+    <li>功能位置：管理後台 > 充值配置 > 在線支付商戶配置。</li>
+    <li>在線支付商戶新增「VIP等級」限制，與既有「支付層級」功能共同過濾。</li>
+    <li>前台僅「支付層級 ＋ VIP等級」兩者皆符合的會員可看到該商戶的充值入口。
+      <ul class="sub-list">
+        <li>例：A 商戶層設置勾「默認層」、VIP等級勾「VIP0」→ 僅默認層內的 VIP0 會員可看到此商戶的充值入口。</li>
+      </ul>
+    </li>
+    <li>VIP等級與層設置相同，採勾選式、可多選、必須勾選（必填）；選項為「全部」及 VIP0～VIP10。</li>
+    <li>「全部」連動邏輯：
+      <ul class="sub-list">
+        <li>勾選「全部」→ VIP0～VIP10 一起被勾選。</li>
+        <li>此時取消「全部」→ 全部取消勾選。</li>
+        <li>勾選「全部」後可單獨取消某個等級，此時「全部」自動取消勾選。</li>
+        <li>若手動將 VIP0～VIP10 全部勾選，「全部」也會自動被勾選。</li>
+      </ul>
+    </li>
+    <li>影響範圍：
+      <ul class="sub-list">
+        <li>① 列表新增「VIP等級」欄位。</li>
+        <li>② 新增彈窗於「層設置」下方新增 VIP等級勾選。</li>
+        <li>③ 編輯彈窗自動帶入上次保存結果，可編輯。</li>
+      </ul>
+    </li>
+    <li>前台版面不需調整，僅依上述條件過濾商戶的充值入口顯示。</li>
+  </ol>
+</div>
+
+<!-- ============ 區塊 1：列表 ============ -->
+<div class="section">
+  <div class="section-title"><span class="mark">1</span> 列表 — 新增「VIP等級」欄位</div>
+
+  <div class="toolbar">
+    <span class="btn btn-plain" style="min-width:120px;color:#c0c4cc;">All ▾</span>
+    <span class="btn btn-plain" style="min-width:100px;color:#c0c4cc;">狀態 ▾</span>
+    <span class="btn btn-primary">搜尋</span>
+    <span class="btn-wrap">
+      <span class="btn btn-primary">新增</span>
+      <span class="mark">2</span>
+    </span>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>支付名稱</th>
+        <th>支付型別</th>
+        <th>商戶號</th>
+        <th>支付層級</th>
+        <th class="col-new">VIP等級 <span class="mark" style="vertical-align:middle;margin-left:4px;">1</span></th>
+        <th>狀態</th>
+        <th>幣種</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>772</td>
+        <td>coins-qrph</td>
+        <td>Coins_QRPH</td>
+        <td>ZTR3Z2swxAFr2BEq</td>
+        <td class="tier-cell">默認層；第二層；第三層；第四層；第五層</td>
+        <td class="col-new"><b>全部</b></td>
+        <td><span class="tag tag-green">正常</span></td>
+        <td>菲律賓比索</td>
+        <td>
+          <span class="link">編輯</span><span class="link">停用</span><span class="link">刪除</span><span class="link">複製</span>
+        </td>
+      </tr>
+      <tr>
+        <td>1033</td>
+        <td>Gcashtest(jc)</td>
+        <td>Gcashtest(jc)</td>
+        <td>test</td>
+        <td class="tier-cell">第三層；默認層；第二層；第四層</td>
+        <td class="col-new">VIP3</td>
+        <td><span class="tag tag-red">停用</span></td>
+        <td>菲律賓比索</td>
+        <td>
+          <span class="link">編輯</span><span class="link">啟用</span><span class="link">刪除</span><span class="link">複製</span>
+        </td>
+      </tr>
+      <tr>
+        <td>779</td>
+        <td>PayMaya--OKFUN</td>
+        <td>Maya(Maya)</td>
+        <td>OKFun Direct Pay</td>
+        <td class="tier-cell">默認層；第二層；第三層</td>
+        <td class="col-new">VIP1,VIP3,VIP5,VIP7,VIP9</td>
+        <td><span class="tag tag-orange">維護</span></td>
+        <td>菲律賓比索</td>
+        <td>
+          <span class="op-edit"><span class="mark">3</span><span class="link">編輯</span></span><span class="link">啟用</span><span class="link">刪除</span><span class="link">複製</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="note">
+    <div class="note-title">說明</div>
+    <ol>
+      <li>列表於「支付層級」欄位右邊新增「VIP等級」欄位。</li>
+      <li>多個 VIP 等級以「,」分隔顯示，例：VIP1,VIP3,VIP5,VIP7,VIP9。</li>
+      <li>若 VIP0～VIP10 全部勾選，欄位僅顯示「全部」兩字。</li>
+    </ol>
+  </div>
+</div>
+
+<!-- ============ 區塊 2：新增 ============ -->
+<div class="section">
+  <div class="section-title"><span class="mark">2</span> 新增 — 彈窗內於「層設置」下方新增「VIP等級」勾選項</div>
+
+  <div class="dialog">
+    <div class="dialog-header">添加在線支付配置 <span class="close">✕</span></div>
+    <div class="dialog-body">
+      <div class="ellipsis-row">⋯ ⋯ ⋯（其餘既有設置項目略）⋯ ⋯ ⋯</div>
+
+      <div class="form-row">
+        <div class="form-label required">層設置:</div>
+        <div class="form-content placeholder-note">（既有功能，勾選專案略）</div>
+      </div>
+
+      <div class="form-row vip-row-highlight">
+        <div class="form-label required">VIP等級:</div>
+        <div class="form-content">
+          <div class="checkbox-group" id="vip-group-add"></div>
+        </div>
+      </div>
+
+      <div class="ellipsis-row" style="margin-top:22px;">⋯ ⋯ ⋯</div>
+    </div>
+    <div class="dialog-footer">
+      <span class="btn btn-plain">取 消</span>
+      <span class="btn btn-primary">確 定</span>
+    </div>
+  </div>
+
+  <div class="note">
+    <div class="note-title">說明</div>
+    <ol>
+      <li>新增彈窗於「層設置」下方新增「VIP等級」勾選列（層設置為既有功能，本示意不展示其勾選項目）。</li>
+      <li>VIP等級為必填：未勾選任何等級時不可保存。</li>
+      <li>新增時預設全部未勾選。</li>
+      <li>勾選連動邏輯（上方勾選可實際操作驗證）：
+        <ul class="sub-list">
+          <li>勾「全部」→ VIP0～VIP10 全勾。</li>
+          <li>取消「全部」→ 全部取消勾選。</li>
+          <li>全勾狀態下單獨取消任一等級 →「全部」自動取消勾選。</li>
+          <li>手動勾滿 VIP0～VIP10 →「全部」自動勾選。</li>
+        </ul>
+      </li>
+      <li>生效邏輯：前台僅同時符合「層設置」與「VIP等級」的會員可看到此商戶的充值入口。
+        <ul class="sub-list">
+          <li>例：層設置勾「默認層」、VIP等級勾「VIP0」→ 僅默認層內的 VIP0 會員可見此商戶的充值入口。</li>
+        </ul>
+      </li>
+    </ol>
+  </div>
+</div>
+
+<!-- ============ 區塊 3：編輯 ============ -->
+<div class="section">
+  <div class="section-title"><span class="mark">3</span> 編輯 — 自動帶入上次保存結果，可編輯</div>
+
+  <div class="dialog">
+    <div class="dialog-header">編輯在線支付配置 <span class="close">✕</span></div>
+    <div class="dialog-body">
+      <div class="ellipsis-row">⋯ ⋯ ⋯（其餘既有設置項目略）⋯ ⋯ ⋯</div>
+
+      <div class="form-row">
+        <div class="form-label required">層設置:</div>
+        <div class="form-content placeholder-note">（既有功能，帶入已保存勾選，略）</div>
+      </div>
+
+      <div class="form-row vip-row-highlight">
+        <div class="form-label required">VIP等級:</div>
+        <div class="form-content">
+          <div class="checkbox-group" id="vip-group-edit"></div>
+        </div>
+      </div>
+
+      <div class="ellipsis-row" style="margin-top:22px;">⋯ ⋯ ⋯</div>
+    </div>
+    <div class="dialog-footer">
+      <span class="btn btn-plain">取 消</span>
+      <span class="btn btn-primary">確 定</span>
+    </div>
+  </div>
+
+  <div class="note">
+    <div class="note-title">說明</div>
+    <ol>
+      <li>點擊「編輯」進入後，自動帶入上次保存的 VIP等級勾選結果，可直接編輯。</li>
+      <li>勾選連動邏輯與新增（區塊 2）完全相同。（上方勾選可實際操作驗證）</li>
+      <li>保存後，列表「VIP等級」欄位同步更新顯示。</li>
+    </ol>
+  </div>
+</div>
+
+<script>
+function buildVipGroup(containerId, presetLevels) {
+  const container = document.getElementById(containerId);
+  const levels = [];
+  for (let i = 0; i <= 10; i++) levels.push('VIP' + i);
+
+  // 全部
+  const allLabel = document.createElement('label');
+  allLabel.className = 'cb cb-all';
+  const allInput = document.createElement('input');
+  allInput.type = 'checkbox';
+  allLabel.appendChild(allInput);
+  allLabel.appendChild(document.createTextNode('全部'));
+  container.appendChild(allLabel);
+
+  const vipInputs = [];
+  levels.forEach(lv => {
+    const label = document.createElement('label');
+    label.className = 'cb';
+    const input = document.createElement('input');
+    input.type = 'checkbox';
+    input.value = lv;
+    if (presetLevels.includes(lv)) input.checked = true;
+    label.appendChild(input);
+    label.appendChild(document.createTextNode(lv));
+    container.appendChild(label);
+    vipInputs.push(input);
+  });
+
+  function syncAll() {
+    allInput.checked = vipInputs.every(i => i.checked);
+  }
+
+  allInput.addEventListener('change', () => {
+    vipInputs.forEach(i => { i.checked = allInput.checked; });
+  });
+
+  vipInputs.forEach(i => i.addEventListener('change', syncAll));
+
+  syncAll();
+}
+
+buildVipGroup('vip-group-add', []);
+buildVipGroup('vip-group-edit', ['VIP1','VIP3','VIP5','VIP7','VIP9']);
+</script>
+
+</body>
+</html>
