@@ -327,9 +327,9 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
         <tr>
           <td>9/3</td>
           <td><ul style="margin:0;padding-left:1.3em;">
-            <li><button class="rev-link" data-page-btn="spec" data-anchor="s-8-6">新增 8.6「全渠道停用邏輯說明」——全停用阻斷進入並彈提示（充值 Q321／提款 Q322，新增），含通用情況與 PC 雙 Tab 行為；原 8.6 生產環境上線方式改 8.7、8.7 圖片讀取防呆改 8.8</button></li>
+            <li><button class="rev-link" data-page-btn="spec" data-anchor="s-8-6">新增 8.6「全渠道停用邏輯說明」——全停用阻斷進入並彈提示（充值 Q321／提款 Q322，新增），含通用情況與 PC 雙 Tab 行為；原 8.6 生產環境上線方式改 8.7、8.7 圖片讀取防呆改 8.8。後補：APP／H5 被跳轉時不跳轉並彈提示、WOWGame PC My Profile 特殊情況、充值渠道開啟但無商戶入口視同全停用</button></li>
             <li><button class="rev-link" data-page-btn="spec" data-anchor="s-8-5-withdraw">8.5 提款側空狀態句更新——改為單一入口無子通道之空狀態（No Data／Submit 不可點擊）；全渠道停用阻斷移至 8.6</button></li>
-            <li><button class="rev-link" data-page-btn="spec" data-anchor="s-8-5-deposit">8.5 充值側空狀態句更新——限定「渠道正常」前提（仍可進入充值頁）；渠道全停用之阻斷見 8.6</button></li>
+            <li><button class="rev-link" data-page-btn="spec" data-anchor="s-8-5-deposit">8.5 充值側空狀態句更新（二次）——渠道開啟但無商戶入口視同全停用，前台行為同 8.6，無可進頁空清單情境</button></li>
             <li><button class="rev-link" data-page-btn="p2" data-anchor="p2-front-off">充值渠道管理＞③前台影響——渠道停用改為阻斷＋彈窗提示（Q321），停用示意圖說明同步更新</button></li>
             <li><button class="rev-link" data-page-btn="p5" data-anchor="p5-front-notice">提款渠道管理＞③前台畫面——補充全停用阻斷＋彈窗提示（Q322）</button></li>
           </ul></td>
@@ -757,7 +757,7 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
     <h3 id="s-8-5">8.5 清單空狀態</h3>
     <p>本節僅涵蓋<strong>可進入頁面、但清單為空</strong>的情境；全渠道停用之阻斷行為見 8.6「全渠道停用邏輯說明」。</p>
     <ul>
-      <li id="s-8-5-deposit"><span class="rev-del">充值側：渠道下所有方式（入口）皆停用、或皆未建立展示配置時，前台充值頁面內的「充值方式」區塊內，無任何可點擊的入口圖。</span><br><span class="rev-tag">9/3 更新：</span>充值側：<strong>渠道正常</strong>，但其下所有方式（入口）皆停用、或皆未建立展示配置時，前台充值頁面內的「充值方式」區塊內，無任何可點擊的入口圖（仍可進入充值頁）。</li>
+      <li id="s-8-5-deposit"><span class="rev-del">充值側：渠道下所有方式（入口）皆停用、或皆未建立展示配置時，前台充值頁面內的「充值方式」區塊內，無任何可點擊的入口圖。</span><br><span class="rev-tag">9/3 更新：</span><span class="rev-del">充值側：渠道正常，但其下所有方式（入口）皆停用、或皆未建立展示配置時，前台充值頁面內的「充值方式」區塊內，無任何可點擊的入口圖（仍可進入充值頁）。</span><br><span class="rev-tag">9/3 更新（二）：</span>充值側：渠道開啟但未設置任何商戶入口時，後端已過濾視同回傳充值渠道全停用，前台行為同 8.6 全渠道停用邏輯，無「可進頁的空清單」情境。</li>
       <li id="s-8-5-withdraw"><span class="rev-del">提款側：提款渠道管理下所有入口皆停用時，前台提款頁面內的「提款方式」區塊內，無任何可點擊的入口圖。</span><br><span class="rev-tag">9/3 更新：</span>提款側：單一入口下無子通道可顯示（未設定子通道或子通道全部停用）時：<br>① 提款彈窗——帳戶下拉選單顯示 No Data 且反灰無法點擊，Submit 按鈕無法點擊。<br>② 提款彈窗 &gt; Fund Accounts &gt; ＋Add bank card／eWallet／Maya——帳戶下拉選單顯示 No Data 且反灰無法點擊，Submit 按鈕無法點擊。</li>
       <li>注意：提款側入口狀態不由子通道反推——即使某入口底下的子通道全部停用或清空，也不影響「提款渠道管理」的入口設定，入口仍照自身狀態顯示。</li>
     </ul>
@@ -811,6 +811,14 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
         </ul>
       </li>
     </ul>
+    <p id="s-8-6-more"><strong>APP／H5</strong>：若於其他頁面點擊後會被跳轉至充值／提款頁，當該側已全停用時，停留在原頁面不跳轉，並跳出彈窗提示。</p>
+    <p><strong>WOWGame PC 特殊情況</strong>：充值與提款位於 My Profile 頁內。</p>
+    <ul>
+      <li>於 My Profile 頁內點擊已全停用的充值或提款：停留在原 tab 分頁不跳轉，並跳出彈窗提示。</li>
+      <li>透過網址強制進入 My Profile 頁的充值或提款 tab 分頁：一樣進入 My Profile 頁，但導向 Personal Information tab 分頁，並跳出彈窗提示。</li>
+    </ul>
+    <p><strong>充值渠道開啟但無商戶入口</strong>：若充值渠道開啟，但未設置任何商戶入口，因後端已過濾會視同回傳充值渠道全停用，故前台展示方式與充值渠道全停用邏輯相同。</p>
+
     <h3>8.7 生產環境上線方式</h3>
     <ul>
       <li>先上後台，由操作人完成配置（含各渠道類型的展示配置）後，再上前台。</li>
