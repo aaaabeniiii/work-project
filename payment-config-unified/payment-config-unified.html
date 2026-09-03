@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>充值提款配置統一優化規格書 v1.2A</title>
+<title>充值提款配置統一優化規格書 v1.3A</title>
 <style>
 /* === Design Tokens === */
 :root{
@@ -234,12 +234,23 @@ img{max-width:100%;}
 .legend span{display:inline-flex;align-items:center;gap:6px;}
 footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(--space-4) 0;}
 :focus-visible{outline:2px solid var(--color-primary);outline-offset:2px;}
+
+/* === v1.3A revision marks === */
+.rev-del{text-decoration:line-through;color:#9ca3af;}
+.rev-tag{color:#c0392b;font-weight:700;}
+.req{color:#dc2626;margin-right:2px;font-weight:700;}
+.rev-link{background:none;border:none;color:var(--color-primary);cursor:pointer;padding:0;font:inherit;text-align:left;text-decoration:underline;}
+.rev-link:hover{color:#1d4ed8;}
 </style>
 </head>
 <body>
 <div class="layout">
 <nav class="sidebar" aria-label="文件導覽">
-  <div class="nav__brand">充值提款配置統一優化規格書<small>v1.2A ｜ 2026-08-13</small></div>
+  <div class="nav__brand">充值提款配置統一優化規格書<small>v1.3A ｜ 2026-09-03</small></div>
+
+  <div class="nav__group">
+    <button class="nav__group-title" data-page-btn="rec">📝 更新紀錄</button>
+  </div>
 
   <div class="nav__group">
     <button class="nav__group-title" data-page-btn="spec">📋 規格書</button>
@@ -277,6 +288,64 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
 
 <main class="main">
 
+<!-- ============ 更新紀錄 ============ -->
+<article class="page" id="page-rec">
+  <header class="doc-header">
+    <h1>更新紀錄</h1>
+    <p class="doc-header__meta">版本更新內容與原因（點擊條目可跳至文件對應段落）</p>
+  </header>
+
+  <section class="section">
+    <table class="tbl">
+      <thead><tr><th style="width:6em;">版本</th><th style="width:6em;">日期</th><th>更新內容／原因</th></tr></thead>
+      <tbody>
+        <tr>
+          <td rowspan="4" style="vertical-align:top;"><strong>v1.3A</strong></td>
+          <td>8/27</td>
+          <td><ul style="margin:0;padding-left:1.3em;">
+            <li><button class="rev-link" data-page-btn="spec" data-anchor="s-7-4">新增 7.4 提款申請提示語——新增 code 70018、70019（2253 為既有），msg 比照原有提示</button></li>
+            <li><button class="rev-link" data-page-btn="p4" data-anchor="p4-img-note">在線支付展示配置＞新增／編輯——渠道图示（日间、夜间）、子渠道圖標（日间、夜间）改為必填</button></li>
+            <li><button class="rev-link" data-page-btn="p5" data-anchor="p5-modal">提款渠道管理＞編輯——显示图片（日间、夜间）、显示小图片改為必填（補刻显示小图片欄位）</button></li>
+            <li><button class="rev-link" data-page-btn="p7" data-anchor="p7-modal">提款展示配置＞新增／編輯——渠道图示（日间、夜间）改為必填</button></li>
+            <li><button class="rev-link" data-page-btn="spec" data-anchor="s-8-8">新增 8.8 圖片讀取防呆——前端讀取不到圖片時顯示原有預設圖片（原編 8.7，章節重編後為 8.8）</button></li>
+          </ul></td>
+        </tr>
+        <tr>
+          <td>9/1</td>
+          <td><ul style="margin:0;padding-left:1.3em;">
+            <li><button class="rev-link" data-page-btn="p7" data-anchor="p7-note-d">提款展示配置＞新增／編輯彈窗——「渠道类型」改名「自動出款渠道类型」</button></li>
+            <li><button class="rev-link" data-page-btn="p7" data-anchor="p7-migrate">新增「自動出款綁定資料轉移（上線時）」——舊綁定支付類型，改綁渠道類型＋支付名稱，自動繼承、多商戶取 Top 1、無綁定不異動</button></li>
+            <li><button class="rev-link" data-page-btn="spec" data-anchor="s-8-5-withdraw">8.5 補充提款側單一入口無子通道可顯示——帳戶下拉 No Data 反灰、Submit 不可點擊（提款彈窗、Fund Accounts 新增皆同）</button></li>
+          </ul></td>
+        </tr>
+        <tr>
+          <td>9/2</td>
+          <td><ul style="margin:0;padding-left:1.3em;">
+            <li><button class="rev-link" data-page-btn="spec" data-anchor="s-8-4-app">8.4 補充前台綁定提款帳號彈窗——APP 對齊 H5 顯示 Select Your Account；APP 隱藏綁定錢包數量與上限提示（先隱藏、不刪除功能）</button></li>
+          </ul></td>
+        </tr>
+        <tr>
+          <td>9/3</td>
+          <td><ul style="margin:0;padding-left:1.3em;">
+            <li><button class="rev-link" data-page-btn="spec" data-anchor="s-8-6">新增 8.6「全渠道停用邏輯說明」——全停用阻斷進入並彈提示（充值 Q321／提款 Q322，新增），含通用情況與 PC 雙 Tab 行為；原 8.6 生產環境上線方式改 8.7、8.7 圖片讀取防呆改 8.8</button></li>
+            <li><button class="rev-link" data-page-btn="spec" data-anchor="s-8-5-withdraw">8.5 提款側空狀態句更新——改為單一入口無子通道之空狀態（No Data／Submit 不可點擊）；全渠道停用阻斷移至 8.6</button></li>
+            <li><button class="rev-link" data-page-btn="spec" data-anchor="s-8-5-deposit">8.5 充值側空狀態句更新——限定「渠道正常」前提（仍可進入充值頁）；渠道全停用之阻斷見 8.6</button></li>
+            <li><button class="rev-link" data-page-btn="p2" data-anchor="p2-front-off">充值渠道管理＞③前台影響——渠道停用改為阻斷＋彈窗提示（Q321），停用示意圖說明同步更新</button></li>
+            <li><button class="rev-link" data-page-btn="p5" data-anchor="p5-front-notice">提款渠道管理＞③前台畫面——補充全停用阻斷＋彈窗提示（Q322）</button></li>
+          </ul></td>
+        </tr>
+        <tr>
+          <td><strong>v1.2A</strong></td>
+          <td>8/13</td>
+          <td>基線版本。</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <footer class="doc-footer">充值提款配置統一優化規格書 v1.3A ｜ 2026-09-03</footer>
+</article>
+
 <!-- ============ 規格書（一頁到底） ============ -->
 <article class="page is-visible" id="page-spec">
   <header class="doc-header">
@@ -289,8 +358,8 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
     <h2>1. 文檔資訊</h2>
     <table class="tbl">
       <tbody>
-        <tr><th style="width:9em;">文件版本</th><td>v1.2A</td></tr>
-        <tr><th>日期</th><td>2026-08-13</td></tr>
+        <tr><th style="width:9em;">文件版本</th><td>v1.3A</td></tr>
+        <tr><th>日期</th><td>2026-09-03</td></tr>
         <tr><th>適用平台</th><td>WOWGame、OKBET（共用同一管理後台）</td></tr>
         <tr>
           <th>本次新增</th>
@@ -305,6 +374,7 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
             <li>提款展示配置的「狀態＋維護狀態」兩欄合併為單一三態。</li>
             <li>提款展示配置的自動出款設定改為兩層：新增「渠道類型」下拉，原「自動出款渠道」改名「自動出款商戶」。</li>
             <li>在線支付展示配置新增時，渠道類型下拉先判斷該類型底下商戶狀態，至少一筆正常或維護才顯示。</li>
+            <li><span class="rev-tag">v1.3A（2026-09-03）：</span>新增提款申請提示語、圖片必填與讀取防呆、自動出款綁定資料轉移、提款無子通道空狀態、綁定彈窗 APP 對齊 H5、全渠道停用邏輯說明；調整「自動出款渠道類型」欄名。詳見「更新紀錄」頁。</li>
           </ul></td>
         </tr>
         <tr>
@@ -639,6 +709,17 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
         <tr><td><span class="pill pill--ok">正常</span></td><td style="text-align:left;">該方式（入口）顯示正常，該子通道正常顯示</td></tr>
       </tbody>
     </table>
+
+    <h3 id="s-7-4">7.4 提款申請提示語<span class="rev-tag" style="font-size:.72rem;margin-left:8px;">8/27 補充</span></h3>
+    <p>新狀態提示語，比照其他狀態原有提示：</p>
+    <table class="tbl">
+      <thead><tr><th>情境</th><th style="width:9em;">code</th><th>msg</th></tr></thead>
+      <tbody>
+        <tr><td>綁定的銀行／錢包維護中提款</td><td>70018（新增）</td><td rowspan="3">The channel has been suspended, if you have any questions, please contact customer service</td></tr>
+        <tr><td>通道停用／暫停</td><td>2253（既有）</td></tr>
+        <tr><td>提款方式（入口）維護中提款</td><td>70019（新增）</td></tr>
+      </tbody>
+    </table>
   </section>
 
   <!-- 8. 其他既定原則 -->
@@ -666,19 +747,83 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
         <tr><td><strong>OKBET</strong></td><td>生效</td><td>不生效</td><td style="text-align:left;">前台未做分類，一頁展示所有入口，勾選的分頁歸屬對其無作用</td></tr>
       </tbody>
     </table>
-    <h3>8.5 清單空狀態</h3>
+    <div id="s-8-4-app">
+      <p style="margin-bottom:4px;"><span class="rev-tag">9/2 補充：</span>前台綁定提款帳號彈窗：</p>
+      <ul style="margin-top:0;">
+        <li>APP 調整與 H5 一致，標題顯示「Select Your Account」。</li>
+        <li>APP 隱藏綁定錢包的數量與上限的提示（先隱藏，不刪除該功能）。</li>
+      </ul>
+    </div>
+    <h3 id="s-8-5">8.5 清單空狀態</h3>
+    <p>本節僅涵蓋<strong>可進入頁面、但清單為空</strong>的情境；全渠道停用之阻斷行為見 8.6「全渠道停用邏輯說明」。</p>
     <ul>
-      <li>充值側：渠道下所有方式（入口）皆停用、或皆未建立展示配置時，前台充值頁面內的「充值方式」區塊內，無任何可點擊的入口圖。</li>
-      <li>提款側：提款渠道管理下所有入口皆停用時，前台提款頁面內的「提款方式」區塊內，無任何可點擊的入口圖。</li>
+      <li id="s-8-5-deposit"><span class="rev-del">充值側：渠道下所有方式（入口）皆停用、或皆未建立展示配置時，前台充值頁面內的「充值方式」區塊內，無任何可點擊的入口圖。</span><br><span class="rev-tag">9/3 更新：</span>充值側：<strong>渠道正常</strong>，但其下所有方式（入口）皆停用、或皆未建立展示配置時，前台充值頁面內的「充值方式」區塊內，無任何可點擊的入口圖（仍可進入充值頁）。</li>
+      <li id="s-8-5-withdraw"><span class="rev-del">提款側：提款渠道管理下所有入口皆停用時，前台提款頁面內的「提款方式」區塊內，無任何可點擊的入口圖。</span><br><span class="rev-tag">9/3 更新：</span>提款側：單一入口下無子通道可顯示（未設定子通道或子通道全部停用）時：<br>① 提款彈窗——帳戶下拉選單顯示 No Data 且反灰無法點擊，Submit 按鈕無法點擊。<br>② 提款彈窗 &gt; Fund Accounts &gt; ＋Add bank card／eWallet／Maya——帳戶下拉選單顯示 No Data 且反灰無法點擊，Submit 按鈕無法點擊。</li>
       <li>注意：提款側入口狀態不由子通道反推——即使某入口底下的子通道全部停用或清空，也不影響「提款渠道管理」的入口設定，入口仍照自身狀態顯示。</li>
     </ul>
-    <h3>8.6 生產環境上線方式</h3>
+
+    <h3 id="s-8-6">8.6 全渠道停用邏輯說明<span class="rev-tag" style="font-size:.72rem;margin-left:8px;">9/3 補充</span></h3>
+    <ul>
+      <li>當充值／提款所有渠道皆被停用時，前台將阻斷該功能的進入路徑，並跳出對應的語系提示彈窗。</li>
+      <li>充值與提款的渠道控管屬於各自獨立的平行邏輯。當其中一方全停用、另一方仍有正常渠道時，正常功能的所有入口與頁面均不受影響，維持正常展示、點擊與交互。</li>
+      <li>充值全停用對應提示翻譯表 <a href="https://docs.google.com/spreadsheets/d/1zDRdUWyZVV3wZOLsAGX34IasC1QrrfRiUjjHU-Of-Dc/edit?pli=1&gid=1438480935#gid=1438480935" target="_blank" rel="noopener">Q321</a>（Please wait while the top-up system is being upgraded.）。</li>
+      <li>提款全停用對應提示翻譯表 <a href="https://docs.google.com/spreadsheets/d/1zDRdUWyZVV3wZOLsAGX34IasC1QrrfRiUjjHU-Of-Dc/edit?pli=1&gid=1438480935#gid=1438480935" target="_blank" rel="noopener">Q322</a>（新增；Please wait while the withdrawal system is being upgraded.）。</li>
+    </ul>
+    <p><strong>通用情況</strong></p>
+    <ul>
+      <li>情境 A【充值全停用，提款正常】：
+        <ul>
+          <li>用戶點擊【充值】按鈕：無法進入充值頁面／彈窗，直接跳出彈窗提示（Q321）。</li>
+          <li>用戶點擊【提款】按鈕：正常進入提款頁面／彈窗。</li>
+        </ul>
+      </li>
+      <li>情境 B【提款全停用，充值正常】：
+        <ul>
+          <li>用戶點擊【提款】按鈕：無法進入提款頁面／彈窗，直接跳出彈窗提示（Q322）。</li>
+          <li>用戶點擊【充值】按鈕：正常進入充值頁面／彈窗。</li>
+        </ul>
+      </li>
+    </ul>
+    <p><strong>PC 版本（雙 Tab 彈窗）</strong>：由於 PC 版本點擊充值／提款按鈕後，整合在同一個彈窗（雙 Tab 切換）內，當其中一方全停用時，依循以下邏輯處理：</p>
+    <ul>
+      <li>情境 A【充值全停用，提款正常】：
+        <ul>
+          <li>當用戶點擊【充值】按鈕：直接阻斷，不開啟彈窗，並跳出彈窗提示（Q321）。</li>
+          <li>當用戶點擊【提款】按鈕：
+            <ul>
+              <li>正常開啟雙 Tab 彈窗，畫面預設停留在【提款】Tab。</li>
+              <li>彈窗內仍保留【充值】與【提款】兩個 Tab 標籤。</li>
+              <li>用戶如果在彈窗內點擊【充值】Tab，畫面保持在【提款】分頁（不進行切換），同時跳出彈窗提示（Q321）。</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>情境 B【提款全停用，充值正常】：
+        <ul>
+          <li>當用戶點擊【提款】按鈕：直接阻斷，不開啟彈窗，並跳出彈窗提示（Q322）。</li>
+          <li>當用戶點擊【充值】按鈕：
+            <ul>
+              <li>正常開啟雙 Tab 彈窗，畫面預設停留在【充值】Tab。</li>
+              <li>彈窗內仍保留【充值】與【提款】兩個 Tab 標籤。</li>
+              <li>用戶如果在彈窗內點擊【提款】Tab，畫面保持在【充值】分頁（不進行切換），同時跳出彈窗提示（Q322）。</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h3>8.7 生產環境上線方式</h3>
     <ul>
       <li>先上後台，由操作人完成配置（含各渠道類型的展示配置）後，再上前台。</li>
     </ul>
+
+    <h3 id="s-8-8">8.8 圖片讀取防呆<span class="rev-tag" style="font-size:.72rem;margin-left:8px;">8/27 補充</span></h3>
+    <ul>
+      <li>保留預設圖片：若前端讀取不到後端回傳的圖片時，顯示前台原有的預設圖片（例如：充值子渠道新增、提款渠道新增後開啟）。</li>
+      <li>與「未建立展示配置＝不顯示、不吃任何預設圖」（在線支付展示配置）為不同層：彼為未建立配置即不顯示；此為已有配置但前端讀圖失敗時的防護。</li>
+    </ul>
   </section>
 
-  <footer class="doc-footer">充值提款配置統一優化規格書 v1.2A ｜ 2026-08-13 ｜ 對應原型：本文件「充值配置」各頁刻版</footer>
+  <footer class="doc-footer">充值提款配置統一優化規格書 v1.3A ｜ 2026-09-03 ｜ 對應原型：本文件「充值配置」各頁刻版</footer>
 </article>
 
 <!-- ============ 頁 1 支付層級配置 ============ -->
@@ -800,7 +945,7 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
         <li>兩平台呈現邏輯相同。</li>
         <li>目前所有在線支付方式皆掛在 <code>onlinePayment</code> 渠道下：
           <ul>
-            <li>此渠道停用 ＝ 前台充值頁<strong>無任何可用充值方式</strong>。</li>
+            <li id="p2-front-off"><span class="rev-del">此渠道停用 ＝ 前台充值頁無任何可用充值方式。</span><br><span class="rev-tag">9/3 更新：</span>此渠道停用 ＝ 前台充值頁無任何充值入口，點擊充值按鈕直接阻斷、不進入頁面，彈窗提示（翻譯表 <a href="https://docs.google.com/spreadsheets/d/1zDRdUWyZVV3wZOLsAGX34IasC1QrrfRiUjjHU-Of-Dc/edit?pli=1&gid=1438480935#gid=1438480935" target="_blank" rel="noopener">Q321</a>）；PC 雙 Tab 行為詳見規格書 8.6「全渠道停用邏輯說明」。</li>
             <li>維護 ＝ 所有充值入口一律顯示維護。</li>
           </ul>
         </li>
@@ -838,10 +983,13 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
         <div class="fe__head"><span class="pill pill--off">停用</span></div>
         <div class="fe__body">
           <div class="fe__card">
-            <div class="fe__label">充值方式</div>
-            <div class="fe__none">（無任何充值方式）</div>
+            <div style="background:#fff;border:1px solid var(--color-line);border-radius:12px;padding:16px 14px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.06);">
+              <div style="font-weight:700;font-size:.85rem;margin-bottom:8px;">Tips</div>
+              <div style="font-size:.7rem;color:#6b7f9e;line-height:1.5;margin-bottom:12px;">Please wait while the top-up system is being upgraded</div>
+              <div style="background:#2563eb;color:#fff;border-radius:8px;padding:7px 0;font-size:.74rem;font-weight:600;">Confirm</div>
+            </div>
           </div>
-          <p style="font-size:.68rem;color:var(--color-text-soft);margin:0;">渠道停用，充值方式下方為空、所有入口皆不顯示。</p>
+          <p style="font-size:.68rem;color:var(--color-text-soft);margin:0;" id="p2-off-caption"><span class="rev-del">渠道停用，充值方式下方為空、所有入口皆不顯示。</span><br><span class="rev-tag">9/3 更新：</span>渠道停用，點擊充值按鈕直接阻斷、不進入頁面，彈窗提示（Q321）。</p>
         </div>
       </div>
     </div>
@@ -1087,7 +1235,7 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
       <div class="mock__note">
         <ul style="margin:0;padding-left:1.3em;">
           <li><span class="mk">A</span> 未配置提醒條機制保留不改；後台提示文案內的頁面名稱由「在線支付配置」改為「在線支付商戶配置」，文字改為藍色並用「」標示。</li>
-          <li><span class="mk">B</span> 入口圖／子通道圖於編輯內設定。</li>
+          <li id="p4-img-note"><span class="mk">B</span> 入口圖／子通道圖於編輯內設定。<span class="rev-tag">8/27 補充：</span>渠道图示（日间）、渠道图示（夜间）、子渠道圖標（日间）、子渠道圖標（夜间）為<strong>必填</strong>。</li>
           <li><span class="mk">C</span> 分頁歸屬勾選來源＝分頁類型設定頁籤。</li>
           <li><span class="mk">D</span> 指定承接商戶；未指定＝取當下狀態正常的排序最小一筆綁定，保存後即固定、不隨商戶狀態變動更新。</li>
           <li><span class="mk">G</span> 示意原邏輯問題：綁定的商戶遭刪除後，本欄殘留商戶代碼。因「在線支付商戶配置」的刪除已新增綁定檢查（見該頁），此情況不應再出現。</li>
@@ -1389,7 +1537,7 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
     </div>
 
     <div class="mock mock--modal">
-      <div class="mock__bar"><span class="mock__crumb">編輯提款配置（彈窗）</span></div>
+      <div class="mock__bar" id="p5-modal"><span class="mock__crumb">編輯提款配置（彈窗）</span></div>
       <div class="mock__body">
         <div class="frow"><label>出款方式:</label><span class="fbox" style="background:#f3f4f6;">银行卡提款（鎖定）</span></div>
         <div class="frow"><label>类型值:</label><span class="fbox" style="background:#f3f4f6;">bankTransfer（鎖定）</span></div>
@@ -1403,10 +1551,11 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
           </span>
         </div>
         <div class="frow"><label>通道模式:</label><span><span class="fradio"><span class="dot on"></span>是</span><span class="fradio"><span class="dot"></span>否</span></span></div>
-        <div class="frow"><label>显示图片(日间):</label><span class="fnote">建議尺寸 232 × 76　[選擇文件]</span></div>
-        <div class="frow"><label>显示图片(夜间):</label><span class="fnote">建議尺寸 232 × 76　[選擇文件]</span></div>
+        <div class="frow"><label><span class="req">*</span>显示图片(日间):</label><span class="fnote">建議尺寸 232 × 76　[選擇文件]</span></div>
+        <div class="frow"><label><span class="req">*</span>显示图片(夜间):</label><span class="fnote">建議尺寸 232 × 76　[選擇文件]</span></div>
+        <div class="frow"><label><span class="req">*</span>显示小图片:</label><span class="fnote">建議尺寸 56 × 56　[選擇文件]</span></div>
       </div>
-      <div class="mock__note">狀態改三態；其餘欄位不異動。</div>
+      <div class="mock__note">狀態改三態；其餘欄位不異動。<span class="rev-tag">8/27 補充：</span>显示图片（日间）、显示图片（夜间）、显示小图片改為<strong>必填</strong>（显示小图片為既有欄位，原刻版未列出，此次補列）。</div>
     </div>
   </section>
 
@@ -1448,6 +1597,7 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
     <ul>
       <li>兩平台呈現邏輯相同。</li>
     </ul>
+    <p id="p5-front-notice"><span class="rev-tag">9/3 補充：</span>提款渠道管理所有渠道（入口）皆停用時，點擊提款按鈕直接阻斷、不進入頁面，彈窗提示（翻譯表 <a href="https://docs.google.com/spreadsheets/d/1zDRdUWyZVV3wZOLsAGX34IasC1QrrfRiUjjHU-Of-Dc/edit?pli=1&gid=1438480935#gid=1438480935" target="_blank" rel="noopener">Q322</a>，新增）；PC 雙 Tab 行為詳見規格書 8.6「全渠道停用邏輯說明」。</p>
     <p>渠道三種狀態下的前台呈現如下（以 WOWGame 為範例示意圖；僅為示意，元件無更新調整，維護與各狀態樣式沿用前台既有樣式）。GCash 為襯托、恆為正常，僅示意：</p>
     <div class="fe-grid" style="grid-template-columns:repeat(auto-fit,minmax(210px,1fr));">
       <div class="fe">
@@ -1491,6 +1641,19 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
             </div>
           </div>
           <p style="font-size:.68rem;color:var(--color-text-soft);margin:0;">入口直接不顯示，僅剩其他方式；下方無關聯帳戶區塊。</p>
+        </div>
+      </div>
+      <div class="fe" id="p5-front-alloff">
+        <div class="fe__head"><span class="pill pill--off">全部停用</span><span class="rev-tag" style="font-size:.66rem;margin-left:6px;">9/3 補充</span></div>
+        <div class="fe__body">
+          <div class="fe__card">
+            <div style="background:#fff;border:1px solid var(--color-line);border-radius:12px;padding:16px 14px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.06);">
+              <div style="font-weight:700;font-size:.85rem;margin-bottom:8px;">Tips</div>
+              <div style="font-size:.7rem;color:#6b7f9e;line-height:1.5;margin-bottom:12px;">Please wait while the withdrawal system is being upgraded</div>
+              <div style="background:#2563eb;color:#fff;border-radius:8px;padding:7px 0;font-size:.74rem;font-weight:600;">Confirm</div>
+            </div>
+          </div>
+          <p style="font-size:.68rem;color:var(--color-text-soft);margin:0;">所有渠道（入口）皆停用，點擊提款按鈕直接阻斷、不進入頁面，彈窗提示（Q322）。</p>
         </div>
       </div>
     </div>
@@ -1654,7 +1817,7 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
     </div>
 
     <div class="mock mock--modal">
-      <div class="mock__bar"><span class="mock__crumb">添加銀行配置（彈窗）</span></div>
+      <div class="mock__bar" id="p7-modal"><span class="mock__crumb">添加銀行配置（彈窗）</span></div>
       <div class="mock__body">
         <div class="frow"><label>银行名称:</label><span class="fbox"></span></div>
         <div class="frow"><label>银行标识:</label><span class="fbox"></span></div>
@@ -1668,9 +1831,9 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
         </div>
         <div class="frow"><label>币种:</label><span class="fbox">Select</span></div>
         <div class="frow"><label>银行种类:</label><span><span class="fradio"><span class="dot"></span>eWallet</span><span class="fradio"><span class="dot on"></span>一般银行</span></span></div>
-        <div class="frow"><label>渠道图示(日间):</label><span class="fnote">建議尺寸 56 × 56　[選擇文件]</span></div>
-        <div class="frow"><label>渠道图示(夜间):</label><span class="fnote">建議尺寸 56 × 56　[選擇文件]</span></div>
-        <div class="frow"><label>渠道类型:</label><span class="fbox">Select</span><span class="mk">D</span></div>
+        <div class="frow"><label><span class="req">*</span>渠道图示(日间):</label><span class="fnote">建議尺寸 56 × 56　[選擇文件]</span></div>
+        <div class="frow"><label><span class="req">*</span>渠道图示(夜间):</label><span class="fnote">建議尺寸 56 × 56　[選擇文件]</span></div>
+        <div class="frow"><label>自動出款渠道类型:</label><span class="fbox">Select</span><span class="mk">D</span></div>
         <div class="frow"><label>自动出款商户:</label><span class="fbox">请选择</span><span class="mk">C</span></div>
         <div class="frow"><label>银行卡号位数:</label><span class="fnote">最小／最大位数（不異動）</span></div>
         <div class="frow"><label class="strike">维护状态:</label><span class="fnote strike">正常／维护中（欄位移除，併入狀態）</span></div>
@@ -1678,8 +1841,8 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
       <div class="mock__note">
         <ul style="margin:0;padding-left:1.3em;">
           <li><span class="mk">A</span> 「状态」「维护状态」兩組 radio 合併為一組三態。</li>
-          <li><span class="mk">D</span> 新增「渠道類型」下拉，來源：在線提款商戶配置的「渠道類型」。切換渠道類型時，已選的「自動出款商戶」自動清空、需重新選擇。</li>
-          <li><span class="mk">C</span> 原「自動出款渠道」改名「自動出款商戶」；下拉來源由在線支付配置的「支付類型」欄位，改為所選渠道類型底下的「支付名稱」（在線提款商戶配置）。</li>
+          <li id="p7-note-d"><span class="mk">D</span> <span class="rev-del">新增「渠道類型」下拉，來源：在線提款商戶配置的「渠道類型」。切換渠道類型時，已選的「自動出款商戶」自動清空、需重新選擇。</span><br><span class="rev-tag">9/1 更新：</span>新增「自動出款渠道類型」下拉，來源：在線提款商戶配置的「渠道類型」。切換自動出款渠道類型時，已選的「自動出款商戶」自動清空、需重新選擇。</li>
+          <li><span class="mk">C</span> <span class="rev-del">原「自動出款渠道」改名「自動出款商戶」；下拉來源由在線支付配置的「支付類型」欄位，改為所選渠道類型底下的「支付名稱」（在線提款商戶配置）。</span><br><span class="rev-tag">9/1 更新：</span>原「自動出款渠道」改名「自動出款商戶」；下拉來源由在線支付配置的「支付類型」欄位，改為所選「自動出款渠道類型」底下的「支付名稱」（在線提款商戶配置）。</li>
         </ul>
       </div>
     </div>
@@ -1701,7 +1864,7 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
             </li>
             <li>每一筆子通道各自依自身狀態判斷、互不影響；前提是其入口在「提款渠道管理」為正常（入口維護／停用時，子通道整批不顯示，見規格書 7.2 流程圖）。</li>
             <li>前台提款子通道顯示唯一來源＝本頁。</li>
-            <li><span class="mk">C</span><span class="mk">D</span> 自動出款設定改為兩層：先選「渠道類型」（D，新增）、再選「自動出款商戶」（C，改名），操作邏輯對齊「在線支付展示配置」。</li>
+            <li id="p7-two-layer"><span class="mk">C</span><span class="mk">D</span> <span class="rev-del">自動出款設定改為兩層：先選「渠道類型」（D，新增）、再選「自動出款商戶」（C，改名），操作邏輯對齊「在線支付展示配置」。</span><br><span class="rev-tag">9/1 更新：</span>自動出款設定改為兩層：先選「自動出款渠道類型」（D，新增）、再選「自動出款商戶」（C，改名），操作邏輯對齊「在線支付展示配置」。</li>
           </ul>
         </div>
       </div>
@@ -1733,6 +1896,17 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
       </tbody>
     </table>
     <p>說明：兩項限制並存（停用＋維護中）時，取較嚴格者「停用」。</p>
+  </section>
+
+  <section class="section" id="p7-migrate">
+    <h2>自動出款綁定資料轉移（上線時）<span class="rev-tag" style="font-size:.72rem;margin-left:8px;">9/1 補充</span></h2>
+    <p>「自動出款綁定」自本次改版起：舊邏輯——綁定於第二層「支付類型」；新邏輯——綁定第一層「渠道類型」＋第三層「支付名稱」。上線時既有資料依下列規則轉移與顯示：</p>
+    <ul>
+      <li><strong>自動對應繼承</strong>：系統須自動抓取原第二層「支付類型」，並將其對應的第一層「渠道類型」與第三層「支付名稱」進行自動綁定與帶入顯示。</li>
+      <li><strong>多商戶相容規則（取排序最前）</strong>：若該第二層「支付類型」下含有多個商戶（第三層「支付名稱」），系統預設抓取排序最前方（Top 1）的值進行綁定。</li>
+      <li>若無綁定則不異動。</li>
+    </ul>
+    <p style="font-size:.72rem;color:var(--color-text-soft);">註：核對生產環境現況，目前各第二層「支付類型」均僅綁定一個商戶（第三層「支付名稱」），此規則作為系統邏輯防護。</p>
   </section>
 
   <section class="section">
