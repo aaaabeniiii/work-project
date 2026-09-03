@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>eWallet自動出款配置</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Helvetica Neue", Helvetica, "PingFang TC", "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+    font-size: 14px;
+    color: #303133;
+    background: #f0f2f5;
+    padding: 32px 40px 80px;
+  }
+
+  /* ===== 規格書排版 ===== */
+  .doc { max-width: 1200px; margin: 0 auto; }
+  .doc-title { font-size: 24px; font-weight: 600; margin-bottom: 6px; }
+  .doc-meta { color: #909399; font-size: 13px; margin-bottom: 28px; }
+  .sec { margin-bottom: 40px; }
+  .sec-title {
+    font-size: 17px;
+    font-weight: 600;
+    padding-left: 10px;
+    border-left: 4px solid #409eff;
+    margin-bottom: 14px;
+  }
+  .sec p, .sec li { line-height: 1.9; color: #303133; }
+  .sec ul, .sec ol { padding-left: 24px; }
+  .kw { color: #409eff; font-weight: 500; }
+  .mono {
+    font-family: "SFMono-Regular", Consolas, Menlo, monospace;
+    background: #f5f7fa;
+    border: 1px solid #ebeef5;
+    border-radius: 3px;
+    padding: 1px 6px;
+    font-size: 13px;
+  }
+  .caption { color: #909399; font-size: 13px; margin: 8px 0 0; }
+
+  /* ===== 模擬畫面外框 ===== */
+  .mock {
+    background: #fff;
+    border: 1px solid #dcdfe6;
+    border-radius: 6px;
+    overflow: visible;
+    box-shadow: 0 1px 4px rgba(0,0,0,.06);
+    margin-top: 12px;
+  }
+  .mock-bar {
+    background: #2b3648;
+    color: #fff;
+    padding: 10px 16px;
+    font-size: 13px;
+    border-radius: 6px 6px 0 0;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  .mock-body { padding: 18px 20px 24px; }
+  .crumb { color: #606266; font-size: 13px; margin-bottom: 14px; }
+  .crumb .sep { color: #c0c4cc; margin: 0 6px; }
+
+  .hint-block {
+    background: #fdf6ec;
+    border: 1px solid #faecd8;
+    color: #e6a23c;
+    border-radius: 4px;
+    padding: 10px 14px;
+    font-size: 13px;
+    line-height: 1.7;
+    margin-bottom: 14px;
+  }
+
+  .toolbar { display: flex; gap: 10px; margin-bottom: 14px; }
+  .input {
+    height: 34px; width: 220px;
+    border: 1px solid #dcdfe6; border-radius: 4px;
+    padding: 0 12px; font-size: 14px; color: #606266; outline: none;
+  }
+  .input:focus { border-color: #409eff; }
+  .btn {
+    height: 34px; padding: 0 16px; border-radius: 4px;
+    border: 1px solid transparent; font-size: 14px; cursor: pointer;
+  }
+  .btn-primary { background: #409eff; color: #fff; }
+  .btn-primary:hover { background: #66b1ff; }
+
+  table { width: 100%; border-collapse: collapse; }
+  th, td {
+    padding: 12px 14px; text-align: center;
+    border-bottom: 1px solid #ebeef5; font-size: 14px;
+  }
+  th { color: #909399; font-weight: 500; background: #fafafa; }
+  td { color: #606266; }
+  tr:hover td { background: #f5f7fa; }
+  td.wallet-cell { min-width: 260px; }
+
+  .op-link { color: #409eff; cursor: pointer; margin: 0 6px; }
+  .op-link:hover { color: #66b1ff; }
+  .op-link.cancel { color: #909399; }
+
+  /* 多選下拉 */
+  .multiselect { position: relative; display: inline-block; width: 240px; text-align: left; }
+  .ms-control {
+    min-height: 34px;
+    border: 1px solid #409eff; border-radius: 4px;
+    background: #fff; padding: 3px 28px 3px 8px;
+    cursor: pointer; display: flex; flex-wrap: wrap; gap: 4px; align-items: center;
+  }
+  .ms-control .placeholder { color: #c0c4cc; padding-left: 4px; }
+  .ms-control::after {
+    content: "▾"; position: absolute; right: 10px; top: 50%;
+    transform: translateY(-50%); color: #c0c4cc; font-size: 12px;
+  }
+  .ms-tag {
+    background: #f0f2f5; border: 1px solid #e4e7ed; color: #909399;
+    border-radius: 3px; padding: 1px 6px; font-size: 12px;
+    display: inline-flex; align-items: center; gap: 4px;
+  }
+  .ms-tag .x { cursor: pointer; color: #c0c4cc; font-style: normal; }
+  .ms-dropdown {
+    position: absolute; top: calc(100% + 6px); left: 0; width: 100%;
+    background: #fff; border: 1px solid #e4e7ed; border-radius: 4px;
+    box-shadow: 0 2px 12px rgba(0,0,0,.1); z-index: 50; display: none;
+  }
+  .multiselect.open .ms-dropdown { display: block; }
+  .ms-option {
+    display: flex; align-items: center; gap: 8px;
+    padding: 8px 14px; cursor: pointer; color: #606266;
+  }
+  .ms-option:hover { background: #f5f7fa; }
+  .ms-option input { accent-color: #409eff; width: 15px; height: 15px; cursor: pointer; }
+  .ms-option.checked { color: #409eff; font-weight: 500; }
+  .empty-dash { color: #909399; }
+
+  /* ===== 管理後台示意（表單片段） ===== */
+  .form-frag { padding: 22px 26px; }
+  .frow { display: flex; align-items: center; margin-bottom: 18px; }
+  .flabel { width: 150px; text-align: right; color: #606266; padding-right: 12px; flex-shrink: 0; }
+  .fselect {
+    width: 420px; height: 36px;
+    border: 1px solid #dcdfe6; border-radius: 4px;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 12px; color: #606266; background: #fff;
+  }
+  .fselect .caret { color: #c0c4cc; font-size: 12px; }
+  .red-hint {
+    display: inline-block;
+    border: 2px solid #f04134;
+    color: #f04134;
+    font-size: 14px;
+    padding: 8px 14px;
+    border-radius: 2px;
+    margin-top: 2px;
+    background: #fff;
+  }
+  .two-col { display: flex; gap: 24px; flex-wrap: wrap; }
+  .two-col .mock { flex: 1 1 460px; }
+
+  .toast {
+    position: fixed; top: 24px; left: 50%; transform: translateX(-50%);
+    background: #f0f9eb; border: 1px solid #e1f3d8; color: #67c23a;
+    padding: 10px 20px; border-radius: 4px; font-size: 14px;
+    display: none; z-index: 999;
+  }
+
+  .rule-table { margin-top: 10px; border: 1px solid #b3d8ff; border-radius: 4px; overflow: hidden; }
+  .rule-table th, .rule-table td { text-align: left; border-bottom: 1px solid #d9ecff; }
+  .rule-table th { background: #ecf5ff; color: #409eff; font-weight: 600; font-size: 14px; }
+  .rule-table td { font-size: 14px; color: #303133; padding: 16px 14px; background: #fff; }
+  .rule-table tr:last-child td { border-bottom: none; }
+  .rule-table tr:hover td { background: #fff; }
+  .hint-chip {
+    color: #f04134;
+    font-weight: 600;
+  }
+  .rule-note { color: #e6a23c; font-weight: 500; margin-left: 10px; }
+</style>
+</head>
+<body>
+<div class="doc">
+
+  <div class="doc-title">eWallet自動出款配置</div>
+  <div class="doc-meta">所屬專案規格書之一節（其餘章節另行補充）｜位置：控制後台 › 平台管理 › eWallet自動出款配置</div>
+
+  <!-- ===== 一、需求說明 ===== -->
+  <div class="sec">
+    <div class="sec-title">一、需求說明</div>
+    <p style="font-weight:600; margin:6px 0 4px">現況</p>
+    <ul>
+      <li>管理後台 › 充值配置 › 提款展示配置 › 編輯/新增彈窗 設定自動出款時，支援範圍目前為<span class="kw">寫死</span>：僅 GCash、Grabpay、Coins 三種 eWallet 可自動出款。</li>
+      <li>設定此三種以外的 eWallet 時仍可正常保存，但出款會走<span class="kw">人工出款</span>模式。</li>
+    </ul>
+    <p style="font-weight:600; margin:14px 0 4px">本次需求</p>
+    <ul>
+      <li>控制後台新增「eWallet自動出款配置」頁面，可<span class="kw">針對各平台</span>設定開放哪些 eWallet 自動出款。</li>
+      <li>管理後台彈窗內的提示文字依該平台的設定連動。例：Ａ平台僅開啟 GCash，提示文字即僅顯示 GCash。</li>
+    </ul>
+    <p style="font-weight:600; margin:14px 0 4px">不變動範圍</p>
+    <ul>
+      <li><span class="kw">不限制綁定</span>：未開啟的 eWallet 仍可正常設定與綁定，綁定邏輯不需調整。</li>
+      <li>未開啟的 eWallet 出款走人工出款模式，此為<span class="kw">現行既有邏輯</span>，同樣不需調整。</li>
+    </ul>
+  </div>
+
+  <!-- ===== 二、控制後台 ===== -->
+  <div class="sec">
+    <div class="sec-title">二、控制後台畫面（可互動）</div>
+    <ul>
+      <li>頁面位置：<span class="kw">控制後台 › 平台管理</span> 下新增二級頁面「eWallet自動出款配置」，置於<span class="kw">「平台支付配置」之後、「初始角色」之前</span>（即：平台列表 → 抽成方案 → 平台支付配置 → <b>eWallet自動出款配置</b> → 初始角色 → 創信客服）。</li>
+      <li>表格渲染來源：<span class="kw">控制後台 › 平台管理 › 平台列表</span>。平台列表每新增一個平台，本頁自動帶入一列，無需手動維護。</li>
+      <li>預設值規則：
+        <ul style="margin-top:4px">
+          <li><span class="kw">舊有平台</span>：本功能上線時預設三項皆勾選（GCash,Grabpay,Coins），確保上線後不影響現行平台的自動出款行為。</li>
+          <li><span class="kw">新建平台</span>：預設三項皆不勾選，欄位顯示 <span class="mono">-</span>。</li>
+        </ul>
+      </li>
+      <li>點「編輯」→ 欄位變為多選下拉；點「保存」→ 變回文字，以 <span class="mono">,</span> 分隔，順序固定為 GCash → Grabpay → Coins。</li>
+    </ul>
+
+    <div class="mock">
+      <div class="mock-bar">控制中心</div>
+      <div class="mock-body">
+        <div class="crumb">位置 <span class="sep">›</span> 平台管理 <span class="sep">›</span> eWallet自動出款配置</div>
+        <div class="toolbar">
+          <input class="input" id="kw" placeholder="平台名稱 / 平台標識" />
+          <button class="btn btn-primary" onclick="doSearch()">搜索</button>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th style="width:90px">平台ID</th>
+              <th style="width:150px">平台標識</th>
+              <th style="width:160px">平台名稱</th>
+              <th>eWallet自動出款</th>
+              <th style="width:130px">操作</th>
+            </tr>
+          </thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+    </div>
+    <p class="caption">▲ 示意資料：既有平台上線時預設三項皆勾選；「新平台」列示意上線後新增平台的預設狀態（-）；平台6、多平台測試示意編輯後的結果。可直接點「編輯」操作看互動。</p>
+  </div>
+
+  <!-- ===== 三、管理後台對應顯示 ===== -->
+  <div class="sec">
+    <div class="sec-title">三、管理後台對應顯示</div>
+    <ul>
+      <li>影響位置：<span class="kw">管理後台 › 充值配置 › 提款展示配置 › 編輯/新增彈窗</span>。</li>
+      <li>提示文字位置不變（自動出款商戶下方），內容依該平台於控制後台勾選的結果變動。</li>
+      <li>提示文字中 eWallet 的排列順序固定，與控制後台下拉選單順序相同：<span class="kw">GCash → Grabpay → Coins</span>。</li>
+    </ul>
+    <table class="rule-table">
+      <thead>
+        <tr><th style="width:300px">控制後台勾選狀態</th><th>管理後台提示文字</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>皆未勾選（新建平台之預設）</td><td><span class="hint-chip">eWallet不支援自動出款</span></td></tr>
+        <tr><td>有勾選（例：Grabpay、Coins）</td><td><span class="hint-chip">eWallet仅支援Grabpay、Coins</span></td></tr>
+      </tbody>
+    </table>
+
+    <div class="two-col" style="margin-top:18px">
+
+      <!-- 狀態一：都沒設定 -->
+      <div class="mock">
+        <div class="mock-bar">管理後台 › 充值配置 › 提款展示配置 › 編輯/新增彈窗（狀態一：皆未勾選）</div>
+        <div class="form-frag">
+          <div class="frow">
+            <div class="flabel">自动出款渠道类型:</div>
+            <div class="fselect">202 - 出款 <span class="caret">▾</span></div>
+          </div>
+          <div class="frow">
+            <div class="flabel">自动出款商户:</div>
+            <div class="fselect">FortunePay代付instapay <span class="caret">▾</span></div>
+          </div>
+          <div class="frow">
+            <div class="flabel"></div>
+            <div class="red-hint">eWallet不支援自動出款</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 狀態二：有設定 -->
+      <div class="mock">
+        <div class="mock-bar">管理後台 › 充值配置 › 提款展示配置 › 編輯/新增彈窗（狀態二：勾選 Grabpay、Coins）</div>
+        <div class="form-frag">
+          <div class="frow">
+            <div class="flabel">自动出款渠道类型:</div>
+            <div class="fselect">202 - 出款 <span class="caret">▾</span></div>
+          </div>
+          <div class="frow">
+            <div class="flabel">自动出款商户:</div>
+            <div class="fselect">FortunePay代付instapay <span class="caret">▾</span></div>
+          </div>
+          <div class="frow">
+            <div class="flabel"></div>
+            <div class="red-hint">eWallet仅支援Grabpay、Coins</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <p class="caption">▲ 僅提示文字內容變動；設定與綁定行為不受限制，未列於提示中的 eWallet 出款走人工出款模式。</p>
+  </div>
+
+</div>
+
+<div class="toast" id="toast">保存成功</div>
+
+<script>
+const WALLET_OPTIONS = ["GCash", "Grabpay", "Coins"];
+
+let platforms = [
+  { id: 46, code: "spplat_new",   name: "新平台（上線後新增示意）", wallets: [] },
+  { id: 45, code: "spplat6",      name: "平台6",        wallets: ["GCash"] },
+  { id: 36, code: "spplat_bruce", name: "測試平台6",    wallets: ["GCash", "Grabpay", "Coins"] },
+  { id: 35, code: "spplat5",      name: "平台5",        wallets: ["GCash", "Grabpay", "Coins"] },
+  { id: 29, code: "bruceA",       name: "平台A",        wallets: ["GCash", "Grabpay", "Coins"] },
+  { id: 28, code: "p_bruce",      name: "多平台測試",   wallets: ["Grabpay", "Coins"] },
+  { id: 23, code: "aler",         name: "aler",         wallets: ["GCash", "Grabpay", "Coins"] },
+  { id: 22, code: "mars",         name: "mars",         wallets: ["GCash", "Grabpay", "Coins"] },
+  { id: 21, code: "sp3t",         name: "體育三方平台", wallets: ["GCash", "Grabpay", "Coins"] },
+];
+
+let editingId = null;
+let draft = [];
+let keyword = "";
+
+function render() {
+  const tbody = document.getElementById("tbody");
+  tbody.innerHTML = "";
+  platforms
+    .filter(p => !keyword || p.name.includes(keyword) || p.code.includes(keyword))
+    .forEach(p => {
+      const tr = document.createElement("tr");
+      const isEditing = editingId === p.id;
+
+      const walletCell = isEditing
+        ? renderMultiselect()
+        : (p.wallets.length
+            ? `<span>${p.wallets.join(",")}</span>`
+            : `<span class="empty-dash">-</span>`);
+
+      const opCell = isEditing
+        ? `<span class="op-link" onclick="save(${p.id})">保存</span><span class="op-link cancel" onclick="cancelEdit()">取消</span>`
+        : `<span class="op-link" onclick="startEdit(${p.id})">編輯</span>`;
+
+      tr.innerHTML = `
+        <td>${p.id}</td>
+        <td>${p.code}</td>
+        <td>${p.name}</td>
+        <td class="wallet-cell">${walletCell}</td>
+        <td>${opCell}</td>`;
+      tbody.appendChild(tr);
+    });
+}
+
+function renderMultiselect() {
+  const tags = draft.length
+    ? draft.map(w => `<span class="ms-tag">${w} <i class="x" onclick="event.stopPropagation();removeTag('${w}')">✕</i></span>`).join("")
+    : `<span class="placeholder">請選擇 eWallet</span>`;
+  const options = WALLET_OPTIONS.map(w => {
+    const checked = draft.includes(w);
+    return `<label class="ms-option ${checked ? "checked" : ""}">
+      <input type="checkbox" ${checked ? "checked" : ""} onchange="toggleWallet('${w}')"> ${w}
+    </label>`;
+  }).join("");
+  return `<div class="multiselect" id="ms">
+    <div class="ms-control" onclick="toggleDropdown(event)">${tags}</div>
+    <div class="ms-dropdown">${options}</div>
+  </div>`;
+}
+
+function startEdit(id) {
+  const p = platforms.find(x => x.id === id);
+  editingId = id;
+  draft = [...p.wallets];
+  render();
+  const ms = document.getElementById("ms");
+  if (ms) ms.classList.add("open");
+}
+
+function cancelEdit() { editingId = null; draft = []; render(); }
+
+function save(id) {
+  const p = platforms.find(x => x.id === id);
+  p.wallets = [...draft];
+  editingId = null; draft = [];
+  render();
+  showToast();
+}
+
+function toggleWallet(w) {
+  draft.includes(w) ? draft = draft.filter(x => x !== w) : draft.push(w);
+  draft.sort((a, b) => WALLET_OPTIONS.indexOf(a) - WALLET_OPTIONS.indexOf(b));
+  refreshEditingCell();
+}
+
+function removeTag(w) { draft = draft.filter(x => x !== w); refreshEditingCell(); }
+
+function refreshEditingCell() {
+  const ms = document.getElementById("ms");
+  const wasOpen = ms && ms.classList.contains("open");
+  render();
+  const ms2 = document.getElementById("ms");
+  if (ms2 && wasOpen) ms2.classList.add("open");
+}
+
+function toggleDropdown(e) {
+  e.stopPropagation();
+  document.getElementById("ms").classList.toggle("open");
+}
+
+document.addEventListener("click", (e) => {
+  const ms = document.getElementById("ms");
+  if (ms && !ms.contains(e.target)) ms.classList.remove("open");
+});
+
+function doSearch() {
+  keyword = document.getElementById("kw").value.trim();
+  render();
+}
+
+function showToast() {
+  const t = document.getElementById("toast");
+  t.style.display = "block";
+  setTimeout(() => (t.style.display = "none"), 1800);
+}
+
+render();
+</script>
+</body>
+</html>
