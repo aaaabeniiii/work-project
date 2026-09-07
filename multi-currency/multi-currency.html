@@ -2110,7 +2110,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
     <h3 class="plan-h">各期 DEV 進度</h3>
     <table class="rec-table">
       <tr><th>期數</th><th>名稱</th><th>範圍</th><th>盤點</th><th>開發中</th><th>上 DEV</th><th>DEV 驗收通過</th><th>備註</th></tr>
-      <tr><td class="rec-no">1</td><td>基礎工程</td><td class="plan-scope">5 頁 15 張｜交付項 4</td><td class="ph-cell ph-done">8/28 已完成</td><td class="ph-cell ph-now">開發中</td><td class="ph-cell"></td><td class="ph-cell"></td><td></td></tr>
+      <tr><td class="rec-no">1</td><td>基礎工程</td><td class="plan-scope">5 頁 15 張｜交付項 4</td><td class="ph-cell ph-done">8/28 已完成</td><td class="ph-cell ph-now">開發中</td><td class="ph-cell"></td><td class="ph-cell"></td><td>開發中發現技術問題，上 DEV 延至 9/10(四)</td></tr>
       <tr><td class="rec-no">—</td><td>充值提款匹配邏輯優化（<a class="x-jump" href="https://okbetokbet.atlassian.net/browse/OKF-2074" target="_blank">OKF-2074</a>）</td><td class="plan-scope">期 2 前置</td><td class="ph-cell ph-done">8/28 已完成</td><td class="ph-cell"></td><td class="ph-cell"></td><td class="ph-cell"></td><td>需先完成才可進行期 2；不影響期 3、期 4（可先帶假資料）</td></tr>
       <tr><td class="rec-no">2</td><td>金流</td><td class="plan-scope">11 頁 44 張｜交付項 2</td><td class="ph-cell"></td><td class="ph-cell"></td><td class="ph-cell"></td><td class="ph-cell"></td><td></td></tr>
       <tr><td class="rec-no">3</td><td>代理線</td><td class="plan-scope">5 頁 37 張</td><td class="ph-cell ph-done">8/28 已完成</td><td class="ph-cell"></td><td class="ph-cell"></td><td class="ph-cell"></td><td></td></tr>
@@ -2135,13 +2135,16 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
         <strong>Cyril：</strong>
         <ul class="rec-ol">
           <li>渠道優化（<a href="https://okbetokbet.atlassian.net/browse/OKF-2074" target="_blank">OKF-2074</a>）文件製作中。</li>
+          <li>後端改動方式預計 9/8(二) 與 Zack 敲定。</li>
+          <li>待確認後端做法後，後續需製作前端文件與 UI 元件。</li>
         </ul>
         <strong>Evan：</strong>
         <ul class="rec-ol">
-          <li>期 1 已進入開發。</li>
-          <li>開發過程中發現部分內容有問題，討論後正回頭修改該部分。</li>
+          <li>期 1 開發中，目前有兩個問題需調整</li>
+          <li>問題一：上週討論期 1 的開發範圍界定，已開發的內容需配合調整，預計 9/7(一) 完成。</li>
+          <li>問題二：期 1 涉及範圍大，AI 開發時大量 context 壓縮導致卡死，AI 還會自動改動已確認好的程式。（即使縮小範圍開發，因期 1 耦合性較高，整合時仍會遇到相同問題）解決方式：規劃以較複雜的 graph engineer 處理，暫定 9/10(四) 完成並推ＤＥＶ。</li>
         </ul>
-      </td><td>期 1 涉及範圍清單由 Evan 整理，預計 9/7 下班前提供。</td></tr>
+      </td><td>期 1 涉及範圍清單由 Evan 整理，預計 9/7(一) 下班前提供。</td></tr>
       <tr><td class="rec-date">8/28</td><td>全案盤點＋期 1</td><td>
         <strong>Cyril：</strong>
         <ul class="rec-ol">
