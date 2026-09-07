@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>後台多幣種改動規格書 V3.6</title>
+<title>後台多幣種改動規格書 V4</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,BlinkMacSystemFont,'PingFang TC','Microsoft JhengHei',sans-serif;background:#f0f2f5;color:#333;font-size:14px}
@@ -430,7 +430,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
 .mk-detail-pop .mk-pop-hd{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;font-weight:700;color:#1a2942;margin-bottom:8px}
 .mk-detail-pop .mk-pop-x{cursor:pointer;color:#9ca3af;font-size:14px;padding:0 4px}
 .mk-tbl-tag{text-align:right;margin-bottom:4px}
-.mk-tbl-wrap{overflow-x:auto}
+.mk-tbl-wrap{overflow-x:auto}.gmv-img{display:inline-flex;align-items:center;justify-content:center;width:40px;height:26px;border:1px solid #e0e6ed;border-radius:3px;background:#f8fafc;color:#9ca3af;font-size:9px;white-space:nowrap}.gmv-uprow{display:flex;align-items:flex-start;gap:10px;margin-bottom:14px}.gmv-uplbl{width:170px;text-align:right;font-size:12.5px;color:#374151;padding-top:6px;flex:none}.gmv-upbtn{display:inline-block;background:#409eff;color:#fff;border-radius:4px;padding:6px 12px;font-size:12px;white-space:nowrap}.gmv-upbody{flex:1;display:flex;flex-wrap:wrap;gap:8px;align-items:flex-start}.gmv-upin{border:1px solid #d5dce6;border-radius:4px;padding:6px 10px;font-size:12px;color:#9ca3af;background:#f5f7fa;min-width:240px}.gmv-uphint{flex-basis:100%;font-size:11px;color:#9ca3af;margin-top:2px}.gmv-note{font-size:11.5px;color:#9ca3af;margin-bottom:10px}.gmv-upft{display:flex;gap:10px;justify-content:center;margin-top:8px}.sysp-modal.gmv-modal-xl{width:min(1240px,96%);max-width:none}.gmv-inline{border:1px solid #d5dce6;border-radius:8px;background:#fff}
 .mk-banner{background:#fdf6ec;border:1px solid #f5dab1;color:#b8860b;border-radius:4px;padding:8px 12px;font-size:12.5px;margin-bottom:12px}
 /* 本期不做／隱藏頁：卡片內文與改動目標內容整頁刪除線（編號、麵包屑、區塊標題不受影響） */
 .pg-dep .spec-row, .pg-dep .ov-dir, .card-dep .spec-row{text-decoration:line-through;text-decoration-thickness:2px;text-decoration-color:#7d8794;color:#9aa4b2}
@@ -747,7 +747,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
 <body>
 
 <div class="doc-header">
-  <h1>後台多幣種改動規格書 V3.6</h1>
+  <h1>後台多幣種改動規格書 V4</h1>
   
 </div>
 
@@ -1110,10 +1110,10 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
         <td><span class="rec-item-tt">新遊戲入口設置＋廠商設置——素材多語系模式</span>
           <ol class="rec-ol">
             <li>比照多語系做法：初始設置上傳的圖為「全部＝預設」；不同國家＋幣種需顯示不同圖時，圖片欄位提供「＋」，選定國家＋幣種後上傳指定圖。</li>
-            <li>屬前台顯示問題，待 Cyril 確認可否放後期處理、不在本期。</li>
+            <li>屬前台顯示問題，<span class="rec-del">待 Cyril 確認可否放後期處理、不在本期</span>。<span class="rec-adj"><span class="rec-adj-tag">已確認：</span>無法延後，需於本期處理。（Cyril）</span></li>
           </ol>
         </td>
-        <td class="rec-upd"></td>
+        <td class="rec-upd"><span class="x-jump" onclick="showPg('adm-game-mgmt-gm-vendor')">9/8已更新</span></td>
       </tr>
       <tr id="rec-26">
         <td class="rec-no">26</td>
@@ -1297,6 +1297,11 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
         <table class="rec-table">
       <tr><th>版本</th><th>日期</th><th>更新內容／原因</th></tr>
       <tr>
+          <td class="rec-date">V4</td>
+          <td class="rec-date">9/8</td>
+          <td>依照討論紀錄調整<br><br>新增：<br>1. <span class="x-jump" onclick="showPg('adm-game-mgmt-gm-vendor')">廠商設置列表操作欄新增「国际化图片设置」，圖片素材依國家＋幣種組合設置，未設置組合沿用預設圖（卡 581）</span><br><br>調整：<br>1. <span class="x-jump" onclick="showPg('adm-game-mgmt-gm-vendor')">廠商設置搜尋欄改為國家＋幣種篩選、列表幣種欄改為「國家/幣種」組合（卡 199、200）</span></td>
+        </tr>
+        <tr>
         <td class="rec-date">V3.6</td>
         <td class="rec-date">9/3</td>
         <td>依照討論紀錄調整<br><br>新增：<br>1. <span class="x-jump" onclick="showPg('adm-sys-mgmt-admin-sys-config2')">系統參數管理頁依定案版本 1 重建——通用設定／國家設定分區、混合區塊整組移入國家區、「＋」依國家＋幣種設置（無新開卡，規格收於各分頁本頁改動目標）</span><br><br>刪除：<br>1. <span class="x-jump" onclick="showPg('adm-sys-mgmt-admin-sys-config')">系統參數管理頁整頁（卡 549~555）</span>（畫面版本定案變更設計、劃線保留備查）</td>
@@ -2105,7 +2110,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
     <h3 class="plan-h">各期 DEV 進度</h3>
     <table class="rec-table">
       <tr><th>期數</th><th>名稱</th><th>範圍</th><th>盤點</th><th>開發中</th><th>上 DEV</th><th>DEV 驗收通過</th><th>備註</th></tr>
-      <tr><td class="rec-no">1</td><td>基礎工程</td><td class="plan-scope">5 頁 15 張｜交付項 4</td><td class="ph-cell ph-done">8/28 已完成</td><td class="ph-cell ph-now">開發文件撰寫中</td><td class="ph-cell"></td><td class="ph-cell"></td><td></td></tr>
+      <tr><td class="rec-no">1</td><td>基礎工程</td><td class="plan-scope">5 頁 15 張｜交付項 4</td><td class="ph-cell ph-done">8/28 已完成</td><td class="ph-cell ph-now">開發中</td><td class="ph-cell"></td><td class="ph-cell"></td><td></td></tr>
       <tr><td class="rec-no">—</td><td>充值提款匹配邏輯優化（<a class="x-jump" href="https://okbetokbet.atlassian.net/browse/OKF-2074" target="_blank">OKF-2074</a>）</td><td class="plan-scope">期 2 前置</td><td class="ph-cell ph-done">8/28 已完成</td><td class="ph-cell"></td><td class="ph-cell"></td><td class="ph-cell"></td><td>需先完成才可進行期 2；不影響期 3、期 4（可先帶假資料）</td></tr>
       <tr><td class="rec-no">2</td><td>金流</td><td class="plan-scope">11 頁 44 張｜交付項 2</td><td class="ph-cell"></td><td class="ph-cell"></td><td class="ph-cell"></td><td class="ph-cell"></td><td></td></tr>
       <tr><td class="rec-no">3</td><td>代理線</td><td class="plan-scope">5 頁 37 張</td><td class="ph-cell ph-done">8/28 已完成</td><td class="ph-cell"></td><td class="ph-cell"></td><td class="ph-cell"></td><td></td></tr>
@@ -2126,6 +2131,17 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
     <h3 class="plan-h">開發進度紀錄（每週一更新上週進度，日期為該週週五）</h3>
     <table class="rec-table">
       <tr><th>日期</th><th>範圍</th><th>本週進度</th><th>備註</th></tr>
+      <tr><td class="rec-date">9/4</td><td>期 1＋OKF-2074</td><td>
+        <strong>Cyril：</strong>
+        <ul class="rec-ol">
+          <li>渠道優化（<a href="https://okbetokbet.atlassian.net/browse/OKF-2074" target="_blank">OKF-2074</a>）文件製作中。</li>
+        </ul>
+        <strong>Evan：</strong>
+        <ul class="rec-ol">
+          <li>期 1 已進入開發。</li>
+          <li>開發過程中發現部分內容有問題，討論後正回頭修改該部分。</li>
+        </ul>
+      </td><td>期 1 涉及範圍清單由 Evan 整理，預計 9/7 下班前提供。</td></tr>
       <tr><td class="rec-date">8/28</td><td>全案盤點＋期 1</td><td>
         <strong>Cyril：</strong>
         <ul class="rec-ol">
@@ -7027,44 +7043,52 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
 
 <div class="pg" id="pg-adm-game-mgmt-gm-vendor">
   <div class="pg-crumb">管理後台 &gt; 遊戲管理 &gt; 廠商設置</div>
+  <p class="rec-adj"><span class="rec-adj-tag">9/8 調整：</span>依照 <span class="x-jump" onclick="showPg('spec-discussion');goTo('rec-27')">8/18 第二次週會（項次 27）</span>，列表操作欄新增「国际化图片设置」，廠商圖片素材改依國家＋幣種組合設置，未設置組合沿用預設圖（卡 581）；搜尋欄與列表欄位同步改為國家＋幣種維度（卡 199、200）。</p>
   <div class="pg-overview">
     <h4>本頁改動目標</h4>
-    <div class="ov-dir"><div class="ov-dir-lbl">管理後台：</div><ul class="ov-dir-list"><li>上方搜尋欄新增幣種篩選（單選、預設全部幣種）</li><li>列表新增幣種(<code>currency</code>)欄位顯示廠商支援的所有幣種</li><li>查看遊戲費率彈窗新增幣種下拉（預設系統幣），依幣種顯示費率</li></ul></div>
-    <div class="ov-dir"><div class="ov-dir-lbl">控制後台：</div><ul class="ov-dir-list"><li>幣種／國家下拉的選項範圍由控制後台的國家與幣種設定向下供給，前端不寫死</li></ul></div>
-    <div class="ov-dir"><div class="ov-dir-lbl">前台影響：</div><ul class="ov-dir-list"><li>廠商幣種決定該廠商在前台的顯示範圍：僅有支援該幣種的版面會顯示該廠商，且僅該幣種的會員看得到該廠商的分頁</li></ul></div>
+    <div class="ov-dir"><div class="ov-dir-lbl">管理後台：</div><ul class="ov-dir-list"><li>上方搜尋欄新增國家＋幣種篩選（均單選、雙向連動，預設全部國家＋全部幣種）</li><li>列表新增「國家/幣種」欄位，列出廠商支援的所有國家(<code>nation_code</code>)＋幣種(<code>currency</code>)組合</li><li>查看遊戲費率彈窗新增幣種下拉（預設系統幣），依幣種顯示費率</li><li>列表操作欄新增「国际化图片设置」，廠商圖片素材改依國家＋幣種組合設置</li><li>未設置圖片的組合沿用預設圖</li><li>列表圖片欄位一律顯示預設圖</li></ul></div>
+    <div class="ov-dir"><div class="ov-dir-lbl">控制後台：</div><ul class="ov-dir-list"><li>幣種／國家下拉的選項範圍由控制後台的國家與幣種設定向下供給，前端不寫死</li><li>「国际化图片设置」彈窗的國家＋幣種組合來源由控制後台的國家與幣種設定向下供給，前端不寫死</li></ul></div>
+    <div class="ov-dir"><div class="ov-dir-lbl">前台影響：</div><ul class="ov-dir-list"><li>廠商幣種決定該廠商在前台的顯示範圍：僅有支援該幣種的版面會顯示該廠商，且僅該幣種的會員看得到該廠商的分頁</li><li>廠商圖片素材依會員的國家(<code>nation_code</code>)＋幣種(<code>currency</code>)載入對應組合的圖片，未設置的組合顯示預設圖</li></ul></div>
+  </div>
+
+  <div class="mk-screen">
+    <h4>後台畫面</h4>
+    <div id="tpl-gmvendor-screen"></div>
   </div>
 
   <div class="spec-card">
-    <div class="spec-card-hd"><span class="spec-card-num">199</span></div>
+    <div class="spec-card-hd"><span class="spec-card-num">199</span><span class="spec-card-adj">9/8調整</span></div>
     <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">遊戲管理 &gt; 廠商設置 &gt; 上方搜尋欄</div></div>
     <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge new">新增</span></div></div>
-    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">廠商設置列表上方搜尋欄無幣種篩選條件，無法依幣種過濾廠商。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">廠商設置列表上方搜尋欄無國家與幣種篩選條件，無法依國家＋幣種過濾廠商。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
       <ol>
-        <li>在「查看遊戲費率」按鈕左側新增「幣種」(<code>currency</code>)下拉選單，排列為「幣種｜查看遊戲費率」</li>
-        <li>僅單選，預設為「全部幣種」</li>
-        <li>依所選幣種篩選列表資料；廠商支援多個幣種時，只要其中任一幣種符合篩選條件即顯示</li>
+        <li>在「查看遊戲費率」按鈕左側新增「國家」(<code>nation_code</code>)＋「幣種」(<code>currency</code>)下拉選單，排列為「國家｜幣種｜查看遊戲費率」</li>
+        <li>均為單選，預設「全部國家」＋「全部幣種」</li>
+        <li>國家與幣種雙向連動：選定一方後，另一方選單僅列出支援的選項</li>
+        <li>依所選國家＋幣種篩選列表資料；廠商支援多個組合時，只要其中任一組合符合篩選條件即顯示</li>
       </ol>
     </div></div>
-    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">新增幣種(<code>currency</code>)單選下拉元件，切換後依所選幣種重新查詢列表。</div></div>
-    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">廠商列表 API 支援幣種(<code>currency</code>)查詢參數；廠商支援多幣種時採任一幣種符合即回傳該筆資料。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">新增國家(<code>nation_code</code>)＋幣種(<code>currency</code>)單選下拉元件（雙向連動），切換後依所選條件重新查詢列表。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">廠商列表 API 支援國家(<code>nation_code</code>)＋幣種(<code>currency</code>)查詢參數；廠商支援多個組合時採任一組合符合即回傳該筆資料。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（此為管理後台列表篩選功能，不影響前台會員端）</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-gm-vendor-000"></div></div></div>
   </div>
 
   <div class="spec-card">
-    <div class="spec-card-hd"><span class="spec-card-num">200</span></div>
+    <div class="spec-card-hd"><span class="spec-card-num">200</span><span class="spec-card-adj">9/8調整</span></div>
     <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">遊戲管理 &gt; 廠商設置 &gt; 列表 &gt; 欄位</div></div>
     <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge new">新增</span></div></div>
-    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">廠商列表無幣種欄位，看不出各廠商支援哪些幣種。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">廠商列表無國家與幣種欄位，看不出各廠商支援哪些國家＋幣種組合。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
       <ol>
-        <li>在「所屬公司類型」與「試玩支持狀態」之間新增「幣種」(<code>currency</code>)欄位，排列為「所屬公司類型｜幣種｜試玩支持狀態」</li>
-        <li>顯示該廠商支援的所有幣種</li>
-        <li>統一使用半形大寫英文，多幣種以逗號分隔（如 VND,PHP）</li>
+        <li>在「所屬公司類型」與「試玩支持狀態」之間新增「國家/幣種」欄位，排列為「所屬公司類型｜國家/幣種｜試玩支持狀態」</li>
+        <li>列出該廠商支援的所有國家(<code>nation_code</code>)＋幣種(<code>currency</code>)組合，每組以「國家-幣種」表示</li>
+        <li>組合依該廠商支援的幣種對應出支援的國家自動列出</li>
+        <li>幣種統一使用半形大寫英文，多組以逗號分隔（如 菲律賓-PHP,菲律賓-USDT,越南-VND）</li>
       </ol>
     </div></div>
-    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">新增欄位渲染，從後端回傳資料讀取幣種(<code>currency</code>)清單，以逗號分隔顯示，統一大寫。</div></div>
-    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">廠商列表 API 回傳資料需包含幣種(<code>currency</code>)清單欄位。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">新增欄位渲染，從後端回傳資料讀取國家(<code>nation_code</code>)＋幣種(<code>currency</code>)組合清單，以逗號分隔顯示。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">廠商列表 API 回傳資料需包含國家(<code>nation_code</code>)＋幣種(<code>currency</code>)組合清單欄位。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">廠商幣種決定該廠商在前台的顯示範圍：以版面而言，僅有支援該幣種的版面才會顯示該廠商；以會員而言，僅該幣種的會員看得到該廠商的分頁。</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-gm-vendor-001"></div></div></div>
   </div>
 
@@ -7084,6 +7108,27 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
     <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">查看遊戲費率 API 支援幣種(<code>currency</code>)參數，依幣種(<code>currency</code>)回傳對應費率。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（此為後台費率查看顯示，不影響前台會員端）</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-gm-vendor-002"></div></div></div>
   </div>
+
+  <div class="spec-card">
+    <div class="spec-card-hd"><span class="spec-card-num">581</span><span class="spec-card-adj">9/8新增</span></div>
+    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">遊戲管理 &gt; 廠商設置 &gt; 列表 &gt; 操作欄 &gt; 国际化图片设置 &gt; 彈窗</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge new">新增</span></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">列表的八個圖片欄位（PC封面图、移动端封面图、移动端首页图、厂商PC封面图新版日间(新)、厂商PC封面图新版夜间(新)、厂商移动端封面图新版日间(新)、厂商移动端封面图新版夜间(新)、任务中心限定游戏）僅能於編輯彈窗上傳單一一套圖，所有國家＋幣種的前台版面共用同一套素材。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
+      <ol>
+        <li>列表操作欄新增「国际化图片设置」，點擊開啟設置彈窗</li>
+        <li>彈窗列依該廠商支援的幣種對應出支援的國家，自動生成「國家＋幣種」組合列，無需手動新增</li>
+        <li>彈窗欄位排列為「國家｜幣種｜八個圖片欄位｜操作」，一列即可檢視該組合全部圖片的設置狀態</li>
+        <li>逐列「编辑」設置：開啟與既有編輯相同的上傳畫面（PC配置｜移动端配置｜任务中心配置 三分頁，共八個圖片欄位），設置該組合的圖片</li>
+        <li>各圖片欄位預設空白；空白＝沿用編輯彈窗上傳的預設圖</li>
+        <li>列表圖片欄位一律顯示預設圖，不隨組合變動</li>
+      </ol>
+    </div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">操作欄新增「国际化图片设置」入口與組合設置彈窗，組合列由後端回傳資料渲染；上傳畫面沿用既有編輯彈窗的上傳元件。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">廠商圖片素材新增國家(<code>nation_code</code>)＋幣種(<code>currency</code>)維度儲存；未設置的組合回傳預設圖；前台素材 API 依會員的國家＋幣種回傳對應組合的圖片。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">前台依會員的國家(<code>nation_code</code>)＋幣種(<code>currency</code>)載入對應組合的廠商圖片素材；未設置的組合顯示預設圖。</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-gm-vendor-581"></div></div></div>
+  </div>
+
 </div>
 <div class="pg" id="pg-adm-game-mgmt-gm-trade">
   <div class="pg-crumb">管理後台 &gt; 遊戲管理 &gt; 交易設置</div>
@@ -16774,12 +16819,83 @@ function render_gm_rebate_Demos(){
 // 遊戲管理>廠商設置：套用統一模板庫，逐卡填入
 function render_gm_vendor_Demos(){
   const set = (elId, html) => { const el = document.getElementById(elId); if(el) el.innerHTML = html; };
-  // gm-vendor-000 上方搜尋欄幣種單選（預設全部幣種）＋查看遊戲費率按鈕位置示意
-  set('tpl-gm-vendor-000', `<div class="demo-inline-group">${tplSearchCtxFrontCurrencySingle('gm-vendor-000')}<button class="demo-sync-btn primary" style="min-width:96px;">查看遊戲費率</button></div>`);
-  // gm-vendor-001 列表新增幣種欄位（前後欄夾幣種，多幣種逗號分隔示例）
-  set('tpl-gm-vendor-001', tplColCurrencyText('所屬公司類型', '試玩支持狀態', 'VND,PHP'));
+  // gm-vendor-000 上方搜尋欄國家＋幣種雙向連動單選（預設全部國家＋全部幣種）＋查看遊戲費率按鈕位置示意（9/8 項次27）
+  set('tpl-gm-vendor-000', '<div class="demo-inline-group">' + tpl_TMP_dualLinkedSelect({prefix:'gm-vendor-000', map:GMV_MAP}) + '<button class="demo-sync-btn primary" style="min-width:96px;">查看遊戲費率</button></div>');
+  // gm-vendor-001 列表新增「國家/幣種」欄位（每組國家-幣種、逗號分隔）（9/8 項次27）
+  set('tpl-gm-vendor-001', tplColThreeField('所屬公司類型', '國家/幣種', '菲律賓-PHP,菲律賓-USDT,越南-VND', '試玩支持狀態'));
   // gm-vendor-002 查看遊戲費率彈窗內幣種單選下拉（cur-tab，預設 PHP）
   set('tpl-gm-vendor-002', `<div class="demo-select-wrap"><span class="demo-select-lbl">第三方收費設置(抽點比例)</span>${tplCurTab('gm-vendor-002', 'PHP')}</div>`);
+  // gm-vendor-581 操作欄「国际化图片设置」入口＋組合彈窗＋沿用既有上傳畫面（9/8 項次27）
+  set('tpl-gm-vendor-581', '<div class="gmv-inline"><div class="mk-pop-hd">国际化图片设置</div><div class="sysp-frz">' + gmvImgBody('card') + '</div></div>');
+}
+
+// ===== 廠商設置：国际化图片设置（9/8 項次27）＝國家＋幣種組合彈窗，逐列编辑開啟既有樣式上傳畫面 =====
+var GMVIMG = { scr: {open:false, edit:-1, tab:0}, card: {open:true, edit:-1, tab:0} };
+var GMVRATE = false;
+var GMV_MAP = {'菲律賓':['PHP','USDT'],'越南':['VND']};
+var GMVIMG_ROWS = [ {nation:'菲律宾', cur:'PHP', has:true}, {nation:'菲律宾', cur:'USDT', has:false}, {nation:'越南', cur:'VND', has:false} ];
+var GMVIMG_COLS = ['PC封面图','移动端封面图','移动端首页图','厂商PC封面图新版日间(新)','厂商PC封面图新版夜间(新)','厂商移动端封面图新版日间(新)','厂商移动端封面图新版夜间(新)','任务中心限定游戏'];
+var GMVIMG_TABS = [
+  { t:'PC配置', fields:[ ['PC封面图','150*74 透明底'], ['厂商PC封面图新版日间(新)','150*74 透明底'], ['厂商PC封面图新版夜间(新)','150*74 透明底'] ] },
+  { t:'移动端配置', fields:[ ['移动端封面图','78*30 透明底'], ['厂商移动端封面图新版日间(新)','78*30 透明底'], ['厂商移动端封面图新版夜间(新)','78*30 透明底'], ['移动端首页图','78*30 透明底'] ] },
+  { t:'任务中心配置', fields:[ ['限定游戏图','86*86'] ] }
+];
+function gmvRerender(){ render_gm_vendor_Demos(); render_gmvendor_screen(); }
+function gmvImgOpen(k){ GMVIMG[k].open = true; GMVIMG[k].edit = -1; gmvRerender(); }
+function gmvImgClose(k){ GMVIMG[k].open = false; GMVIMG[k].edit = -1; gmvRerender(); }
+function gmvImgEdit(k, i){ GMVIMG[k].edit = i; GMVIMG[k].tab = 0; gmvRerender(); }
+function gmvImgBack(k){ GMVIMG[k].edit = -1; gmvRerender(); }
+function gmvImgTab(k, n){ GMVIMG[k].tab = n; gmvRerender(); }
+function gmvRateToggle(){ GMVRATE = !GMVRATE; gmvRerender(); }
+function gmvImgBody(k){
+  var st = GMVIMG[k];
+  if(st.edit < 0){
+    var imgTh = GMVIMG_COLS.map(function(c){ return '<th>' + c + '</th>'; }).join('');
+    var body = GMVIMG_ROWS.map(function(r, i){
+      var cells = GMVIMG_COLS.map(function(){ return '<td>' + (r.has ? '<span class="gmv-img">图</span>' : '\u2014') + '</td>'; }).join('');
+      return '<tr><td>' + r.nation + '</td><td>' + r.cur + '</td>' + cells + '<td><span class="mk-link" onclick="gmvImgEdit(\'' + k + '\',' + i + ')">编辑</span></td></tr>';
+    }).join('');
+    return '<div class="gmv-note">列依該廠商支援的幣種對應出支援的國家，自動生成、無需手動新增；未設置的組合沿用預設圖。</div>'
+      + '<div class="mk-tbl-wrap"><table class="mk-table"><tr><th>国家</th><th>币种</th>' + imgTh + '<th>操作</th></tr>' + body + '</table></div>';
+  }
+  var row = GMVIMG_ROWS[st.edit];
+  var tabs = '<div class="mk-tabs">' + GMVIMG_TABS.map(function(tb, n){
+    return '<div class="mk-tab' + (n === st.tab ? ' active' : '') + '" onclick="gmvImgTab(\'' + k + '\',' + n + ')">* ' + tb.t + '</div>';
+  }).join('') + '</div>';
+  var rows = GMVIMG_TABS[st.tab].fields.map(function(f){
+    return '<div class="gmv-uprow"><div class="gmv-uplbl">' + f[0] + ':</div><div class="gmv-upbody"><span class="gmv-upbtn">选择文件</span><input class="gmv-upin" value="" readonly><div class="gmv-uphint">只能上传jpg/png/gif文件，且不超过2MB,尺寸: ' + f[1] + '</div></div></div>';
+  }).join('');
+  return '<div class="gmv-note">' + row.nation + '＋' + row.cur + '</div>' + tabs + rows
+    + '<div class="gmv-upft"><span class="mk-btn" onclick="gmvImgBack(\'' + k + '\')">取 消</span><span class="mk-btn" onclick="gmvImgBack(\'' + k + '\')">确 定</span></div>';
+}
+function gmvImgModal(k){
+  if(!GMVIMG[k].open) return '';
+  return '<div class="sysp-modal gmv-modal-xl"><div class="mk-pop-hd">国际化图片设置<span class="mk-pop-x" onclick="gmvImgClose(\'' + k + '\')">\u00d7</span></div>'
+    + '<div class="sysp-frz">' + gmvImgBody(k) + '</div></div>';
+}
+
+// ===== 廠商設置後台畫面（9/8 項次27）：tab 列＋搜尋列＋完整列表＋国际化图片设置／查看游戏费率彈窗 =====
+function render_gmvendor_screen(){
+  var el = document.getElementById('tpl-gmvendor-screen'); if(!el) return;
+  var tabs = '<div class="mk-tabs"><div class="mk-tab active">第三方厂商设置</div><div class="mk-tab">游戏黑名单列表</div></div>';
+  var bar = '<div class="syspcfg-bar"><span class="mk-select mk-new"><span>全部国家</span><span class="mk-arr">\u25be</span></span><span class="mk-select mk-new"><span>全部币种</span><span class="mk-arr">\u25be</span></span><span class="mk-tag">199</span><span class="mk-btn" onclick="gmvRateToggle()">查看游戏费率</span><span class="mk-tag">201</span></div>';
+  var img = '<span class="gmv-img">图</span>';
+  var imgs8 = new Array(8).fill('<td>' + img + '</td>').join('');
+  var ops = '<span class="mk-link">开启维护</span><br><span class="mk-link">平台禁用</span><br><span class="mk-link">黑名单设置</span><br><span class="mk-link">编辑</span><br><span class="mk-link mk-new" onclick="gmvImgOpen(\'scr\')">国际化图片设置</span><span class="mk-tag">581</span>';
+  var head = '<tr><th>厂商ID</th><th>厂商编码</th><th>厂商全称</th><th>所属公司类型</th><th class="mk-new">国家/币种<span class="mk-tag">200</span></th><th>试玩支持状态</th><th>是否开启累积奖池</th><th>排序</th><th>PC封面图</th><th>移动端封面图</th><th>移动端首页图</th><th>厂商PC封面图新版日间(新)</th><th>厂商PC封面图新版夜间(新)</th><th>厂商移动端封面图新版日间(新)</th><th>厂商移动端封面图新版夜间(新)</th><th>任务中心限定游戏</th><th>描述</th><th>平台启用状态</th><th>三方维护状态</th><th>系统启用状态</th><th>数据隐藏状态</th><th>费率计算关闭状态</th><th>注单数据隐藏状态</th><th>注单费率计算状态</th><th>操作</th></tr>';
+  function tr(id, code, full, comp, cur, jackpot, sort){
+    return '<tr><td>' + id + '</td><td>' + code + '</td><td>' + full + '</td><td>' + comp + '</td><td class="mk-new">' + cur + '</td><td>不支持</td><td>' + jackpot + '</td><td>' + sort + '</td>' + imgs8
+      + '<td>\uff0b</td><td>启用</td><td>正常</td><td>启用</td><td>' + syspSw(false) + '</td><td>' + syspSw(false) + '</td><td>' + syspSw(false) + '</td><td>' + syspSw(false) + '</td><td>' + ops + '</td></tr>';
+  }
+  var r1 = tr('229', 'SGG_S', 'Fantasy Sports', 'SGG_S', '菲律宾-PHP,菲律宾-USDT,越南-VND', '关闭', '4000');
+  var r2 = tr('95', 'JILIFISH', 'JILI', 'JILI', '菲律宾-PHP,菲律宾-USDT', '开启', '1800');
+  var r3 = tr('336', 'JB_S', 'OMNIPLAY', 'JB_S', '越南-VND', '开启', '401');
+  var html = tabs + bar + '<div class="mk-tbl-wrap"><table class="mk-table">' + head + r1 + r2 + r3 + '</table></div>';
+  if(GMVRATE) html += '<div class="sysp-modal"><div class="mk-pop-hd">查看游戏费率<span class="mk-pop-x" onclick="gmvRateToggle()">\u00d7</span></div>'
+    + '<div class="sysp-frz"><div class="syspcfg-bar"><span>第三方收费设置(抽点比例)</span><span class="mk-select mk-new"><span>USDT</span><span class="mk-arr">\u25be</span></span><span class="mk-tag">201</span></div>'
+    + '<div class="mk-tbl-wrap"><table class="mk-table"><tr><th>厂商</th><th>抽点比例</th></tr><tr><td>JILI</td><td>8%</td></tr><tr><td>OMNIPLAY</td><td>10%</td></tr></table></div></div></div>';
+  html += gmvImgModal('scr');
+  el.innerHTML = html;
 }
 
 // 遊戲管理>投注紀錄>歷史注單：套用統一模板庫，逐卡填入
@@ -18669,6 +18785,7 @@ render_pc_finance_Demos();
 render_gm_trade_Demos();
 render_gm_rebate_Demos();
 render_gm_vendor_Demos();
+render_gmvendor_screen();
 render_gm_bet_old_Demos();
 render_gm_bet_new_Demos();
 render_gm_event_Demos();
