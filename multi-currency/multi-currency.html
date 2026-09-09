@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>後台多幣種改動規格書 V4</title>
+<title>後台多幣種改動規格書 V4.1</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,BlinkMacSystemFont,'PingFang TC','Microsoft JhengHei',sans-serif;background:#f0f2f5;color:#333;font-size:14px}
@@ -747,7 +747,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
 <body>
 
 <div class="doc-header">
-  <h1>後台多幣種改動規格書 V4</h1>
+  <h1>後台多幣種改動規格書 V4.1</h1>
   
 </div>
 
@@ -820,7 +820,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
 <div class="nav-m-hd" onclick="toggleGroup('adm-user-mgmt')" data-group="adm-user-mgmt"><span class="arr">▸</span><span>用戶管理</span></div>
 <div class="nav-sub" id="grp-adm-user-mgmt">
 <a class="nav-si" data-page="adm-user-mgmt-station" onclick="showPg('adm-user-mgmt-station')">投注站</a>
-        <a class="nav-si" data-page="adm-user-mgmt-headoffice" onclick="showPg('adm-user-mgmt-headoffice')">總公司</a>
+        <a class="nav-si" data-page="adm-user-mgmt-headoffice" onclick="showPg('adm-user-mgmt-headoffice')">總代</a>
 <a class="nav-si" data-page="adm-user-mgmt-super-agent" onclick="showPg('adm-user-mgmt-super-agent')">大代理</a>
 <a class="nav-si" data-page="adm-user-mgmt-agent" onclick="showPg('adm-user-mgmt-agent')">代理</a>
 <a class="nav-si" data-page="adm-user-mgmt-member" onclick="showPg('adm-user-mgmt-member')">會員</a>
@@ -853,7 +853,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
 <div class="nav-sub" id="grp-adm-data-report">
 <a class="nav-si" data-page="adm-data-report-dr-bet" onclick="showPg('adm-data-report-dr-bet')">平台報表</a>
 <a class="nav-si" data-page="adm-data-report-dr-station" onclick="showPg('adm-data-report-dr-station')">投注站報表</a>
-        <a class="nav-si" data-page="adm-data-report-dr-headoffice" onclick="showPg('adm-data-report-dr-headoffice')">總公司報表</a>
+        <a class="nav-si" data-page="adm-data-report-dr-headoffice" onclick="showPg('adm-data-report-dr-headoffice')">總代報表</a>
 <a class="nav-si" data-page="adm-data-report-dr-agent" onclick="showPg('adm-data-report-dr-agent')">代理報表</a>
 <a class="nav-si" data-page="adm-data-report-dr-member" onclick="showPg('adm-data-report-dr-member')">會員報表</a>
 <a class="nav-si" data-page="adm-data-report-dr-ball" onclick="showPg('adm-data-report-dr-ball')">球類報表</a>
@@ -980,6 +980,13 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
     <p class="rec-sub">記錄各次會議與討論的決議內容。新的紀錄由上往下疊加（項次由下往上遞增）；決議內容若後續被調整，原文以刪除線標示並於下方註記調整內容與確認人。</p>
     <table class="rec-table">
       <tr><th>日期</th><th>項次</th><th>內容</th><th>規格書更新</th><th>參與人</th></tr>
+      <tr id="rec-49">
+        <td class="rec-date">9/8</td>
+        <td class="rec-no">49</td>
+        <td><span class="rec-item-tt">總公司更名總代</span>：「總公司」角色與相關頁面全書更名為「總代」，總代頁、總代報表、層級選項、分期上線範圍同步改名。</td>
+        <td class="rec-upd"><span class="x-jump" onclick="showPg('adm-user-mgmt-headoffice')">9/8已更新</span></td>
+        <td>Zaken</td>
+      </tr>
       <tr id="rec-48">
         <td class="rec-date">9/8</td>
         <td class="rec-no">48</td>
@@ -1305,6 +1312,11 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
     <h1>版本更新紀錄</h1>
         <table class="rec-table">
       <tr><th>版本</th><th>日期</th><th>更新內容／原因</th></tr>
+      <tr>
+          <td class="rec-date">V4.1</td>
+          <td class="rec-date">9/8</td>
+          <td>1. 「總公司」全書更名為「總代」<br>　　1. 共改 82 處——總代頁（頁面路徑、卡 564~568、本頁改動目標）、總代報表頁、投注站／代理報表內文、免費旋轉層級選項（含畫面渲染 16 處）、分期上線範圍期 1、側欄選單 2 項<br>　　2. 保留 3 處史料：既往版本紀錄條目的「總公司頁新增」「總公司報表頁新增」維持原文<br>　　3. 既有 32 處「總代」用語與本次改名一致，「總代理」1 處不受影響<br>2. 新增小卡搜尋浮窗於規格書右上角，可直接跳轉至對應卡號</td>
+        </tr>
       <tr>
           <td class="rec-date">V4</td>
           <td class="rec-date">9/8</td>
@@ -1801,7 +1813,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
         <tr><td class="id">038<br>044</td><td>用戶管理 &gt; 會員（新增彈窗 國家／幣種上級帶出唯讀、變更代理）</td></tr>
         <tr><td class="id">556–559</td><td>用戶管理 &gt; 會員代理標籤配置（國家搜尋、列表國家欄、新增選國家、可修改國家；僅國家維度，不綁幣種）</td></tr>
         <tr><td class="id">560–563</td><td>用戶管理 &gt; 大代理／代理／會員（編輯標籤僅同國家候選、列表僅顯示有效同國家標籤，失效保留關聯、切回恢復）</td></tr>
-        <tr><td class="id">564–568</td><td>用戶管理 &gt; 總公司（國家幣種連動搜尋、列表國家/幣種欄、新增登入密碼、新增選國家幣種——排除投注站適用國家且保存後不可修改、編輯入口）</td></tr>
+        <tr><td class="id">564–568</td><td>用戶管理 &gt; 總代（國家幣種連動搜尋、列表國家/幣種欄、新增登入密碼、新增選國家幣種——排除投注站適用國家且保存後不可修改、編輯入口）</td></tr>
       </tbody>
     </table>
 
@@ -1824,9 +1836,9 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
         <tr><td class="d-id">D-12</td><td class="nm">總代依國家＋幣種各生一個<span class="tag">無畫面</span></td>
           <td>觸發點在<b>控制中心</b>——新增平台、或修改平台支援幣種時，自動確保每個國家＋幣種組合各產生一個總代。<b>管理後台看不到</b>（總代在投注站啟用時本來就隱藏），也不新增任何畫面。測試區要建出第二條幣種線的前提。</td></tr>
         <tr><td class="d-id">D-26</td><td class="nm">一致資料供給<span class="tag">無畫面</span></td>
-          <td>提供一致的平台可用國家、國家幣種、投注站／總公司適用範圍，供本期畫面與驗證使用。</td></tr>
-        <tr><td class="d-id">§2.4.1</td><td class="nm">總公司頁固定顯示</td>
-          <td>總公司頁固定顯示，保留現有 OKBET 例外；不因第二輪曾暫停就漏掉本期畫面。</td></tr>
+          <td>提供一致的平台可用國家、國家幣種、投注站／總代適用範圍，供本期畫面與驗證使用。</td></tr>
+        <tr><td class="d-id">§2.4.1</td><td class="nm">總代頁固定顯示</td>
+          <td>總代頁固定顯示，保留現有 OKBET 例外；不因第二輪曾暫停就漏掉本期畫面。</td></tr>
         <tr><td class="d-id">D-27</td><td class="nm">sys_currency 缺省改 PHP<span class="tag">RD 自測</span></td>
           <td><code>sys_currency</code> 缺省由 RMB 改為 PHP，已有明確設定不覆蓋；RD 自測、無指定畫面，依既有決議不另列 QA 畫面驗收。不擴成全專案 RMB／USD 替換。（與 D-17 的正式來源由 RD 對照）</td></tr>
       </tbody>
@@ -2085,7 +2097,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
       <tr><td>合計</td><td class="r">86 頁＋新頁 5</td><td class="r">546 張</td><td class="r">交付項 9</td></tr>
     </tbody>
   </table>
-  <div class="foot">用戶管理的投注站、大代理、代理、會員<b>四頁由期 1 與期 3 分工</b>——期 1 做國家幣種的寫入與轉線＋標籤部分（013、026），期 3 做顯示與查詢。這四頁在兩期各出現一列，故各期列數相加為 48，實際唯一頁數為 44。<b>新頁 5</b>＝標籤配置、總公司、控制後台操作日誌／幣種管理／平台管理；系統參數以新版頁（項次 38）交付，頁數承接計於期 1 的 5 頁內。（9/8 依 RD Phase 1 盤點 v0.6 更新）</div>
+  <div class="foot">用戶管理的投注站、大代理、代理、會員<b>四頁由期 1 與期 3 分工</b>——期 1 做國家幣種的寫入與轉線＋標籤部分（013、026），期 3 做顯示與查詢。這四頁在兩期各出現一列，故各期列數相加為 48，實際唯一頁數為 44。<b>新頁 5</b>＝標籤配置、總代、控制後台操作日誌／幣種管理／平台管理；系統參數以新版頁（項次 38）交付，頁數承接計於期 1 的 5 頁內。（9/8 依 RD Phase 1 盤點 v0.6 更新）</div>
 </div>
 
 
@@ -2617,13 +2629,13 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
 
 </div>
     <div class="pg" id="pg-adm-user-mgmt-headoffice">
-  <div class="pg-crumb">管理後台 &gt; 用戶管理 &gt; 總公司</div>
-  <p class="rec-adj"><span class="rec-adj-tag">8/27 新增：</span>依照 <span class="x-jump" onclick="showPg('spec-discussion');goTo('rec-22')">8/18 第二次週會（項次 22）</span>與 <span class="x-jump" onclick="showPg('spec-discussion');goTo('rec-34')">8/20 討論（項次 34）</span>，新增總公司頁——綁定國家＋幣種，並新增與編輯登入密碼（卡 564~568）。</p>
+  <div class="pg-crumb">管理後台 &gt; 用戶管理 &gt; 總代</div>
+  <p class="rec-adj"><span class="rec-adj-tag">8/27 新增：</span>依照 <span class="x-jump" onclick="showPg('spec-discussion');goTo('rec-22')">8/18 第二次週會（項次 22）</span>與 <span class="x-jump" onclick="showPg('spec-discussion');goTo('rec-34')">8/20 討論（項次 34）</span>，新增總代頁——綁定國家＋幣種，並新增與編輯登入密碼（卡 564~568）。</p>
   <div class="pg-overview">
     <h4>本頁改動目標</h4>
-    <div class="ov-dir"><div class="ov-dir-lbl">管理後台：</div><ul class="ov-dir-list"><li>新增總公司時需綁定國家(<code>nation_code</code>)＋幣種(<code>currency</code>)，幣種依所選國家聯動，儲存後鎖定不可修改</li><li>新增總公司彈窗於「總公司賬號」下方新增「登入密碼」欄位，比照原有投注站密碼功能</li><li>列表上方可依國家(<code>nation_code</code>)＋幣種(<code>currency</code>)篩選總公司（兩者連動）</li><li>列表新增「國家/幣種」欄位，顯示各總公司綁定的國家＋幣種</li><li>操作欄新增「編輯」，可修改該總公司帳號的登入密碼</li></ul></div>
-    <div class="ov-dir"><div class="ov-dir-lbl">控制後台：</div><ul class="ov-dir-list"><li>總公司可選的國家(<code>nation_code</code>)為平台啟用國家中排除「投注站適用國家」後的清單；幣種(<code>currency</code>)依國家聯動供給，前端不寫死</li></ul></div>
-    <div class="ov-dir"><div class="ov-dir-lbl">前台影響：</div><ul class="ov-dir-list"><li>總公司無直接對應的前台頁面；但其綁定的國家(<code>nation_code</code>)＋幣種(<code>currency</code>)會向下決定底下大代理、代理、會員的歸屬，最終影響這些會員在前台看到的活動、VIP、幣種顯示等內容。</li></ul></div>
+    <div class="ov-dir"><div class="ov-dir-lbl">管理後台：</div><ul class="ov-dir-list"><li>新增總代時需綁定國家(<code>nation_code</code>)＋幣種(<code>currency</code>)，幣種依所選國家聯動，儲存後鎖定不可修改</li><li>新增總代彈窗於「總代賬號」下方新增「登入密碼」欄位，比照原有投注站密碼功能</li><li>列表上方可依國家(<code>nation_code</code>)＋幣種(<code>currency</code>)篩選總代（兩者連動）</li><li>列表新增「國家/幣種」欄位，顯示各總代綁定的國家＋幣種</li><li>操作欄新增「編輯」，可修改該總代帳號的登入密碼</li></ul></div>
+    <div class="ov-dir"><div class="ov-dir-lbl">控制後台：</div><ul class="ov-dir-list"><li>總代可選的國家(<code>nation_code</code>)為平台啟用國家中排除「投注站適用國家」後的清單；幣種(<code>currency</code>)依國家聯動供給，前端不寫死</li></ul></div>
+    <div class="ov-dir"><div class="ov-dir-lbl">前台影響：</div><ul class="ov-dir-list"><li>總代無直接對應的前台頁面；但其綁定的國家(<code>nation_code</code>)＋幣種(<code>currency</code>)會向下決定底下大代理、代理、會員的歸屬，最終影響這些會員在前台看到的活動、VIP、幣種顯示等內容。</li></ul></div>
   </div>
 
   <div class="mk-screen">
@@ -2633,61 +2645,61 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
 
   <div class="spec-card">
     <div class="spec-card-hd"><span class="spec-card-num">564</span><span class="spec-card-adj">8/27新增</span></div>
-    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">用戶管理 &gt; 總公司 &gt; 上方搜尋欄</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">用戶管理 &gt; 總代 &gt; 上方搜尋欄</div></div>
     <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge new">新增</span></div></div>
     <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">上方搜尋欄目前無國家、幣種篩選功能。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val"><ol><li>在「篩選」下拉左側新增「國家」(<code>nation_code</code>)與「幣種」(<code>currency</code>)單選下拉，排列為「國家｜幣種｜篩選｜搜索帳號」</li><li>國家、幣種皆為單選下拉，清單第一項為「全部國家」／「全部幣種」並設為預設</li><li>國家與幣種無先後選擇限制，可任一先選</li><li>先選國家、幣種仍停在「全部幣種」時，幣種維持「全部幣種」（即該國家所有幣種）；再選特定幣種時，幣種選單僅列出所選國家支援的幣種</li><li>先選幣種、國家仍停在「全部國家」時，國家維持「全部國家」（即該幣種支援的所有國家）；再選特定國家時，國家選單僅列出支援所選幣種的國家</li></ol></div></div>
     <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">於搜尋欄依序渲染國家(<code>nation_code</code>)、幣種(<code>currency</code>)兩個單選下拉（位於「篩選」左側）；兩下拉互為連動，選定一側特定值後，另一側選單依對應關係縮小可選範圍，另一側若仍停在「全部」則維持全部；選項來源為後端回傳的國家與其對應幣種，不可寫死。</div></div>
-    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">提供 API 回傳總公司適用的國家(<code>nation_code</code>)清單（平台啟用國家排除「投注站適用國家」，與新增總公司可選國家一致）及各國家對應可使用幣種(<code>currency</code>)的映射供連動使用；總公司列表查詢 API 需支援依國家、幣種篩選參數（未帶即不限）。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">提供 API 回傳總代適用的國家(<code>nation_code</code>)清單（平台啟用國家排除「投注站適用國家」，與新增總代可選國家一致）及各國家對應可使用幣種(<code>currency</code>)的映射供連動使用；總代列表查詢 API 需支援依國家、幣種篩選參數（未帶即不限）。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（此為管理後台內部篩選功能，不影響前台會員端呈現）</div></div>
     <div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-hq-564"></div></div></div>
   </div>
 
   <div class="spec-card">
     <div class="spec-card-hd"><span class="spec-card-num">565</span><span class="spec-card-adj">8/27新增</span></div>
-    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">用戶管理 &gt; 總公司 &gt; 列表 &gt; 欄位</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">用戶管理 &gt; 總代 &gt; 列表 &gt; 欄位</div></div>
     <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge new">新增</span></div></div>
     <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">在「名」跟「用戶數量」欄位中間，目前無國家/幣種相關欄位。</div></div>
-    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val"><ol><li>在「名」與「用戶數量」欄位之間新增「國家/幣種」(<code>nation_code</code>/<code>currency</code>)欄位，排列為「名｜國家/幣種｜用戶數量」</li><li>國家/幣種依總公司帳號綁定的國家(<code>nation_code</code>)＋幣種(<code>currency</code>)帶入，內容為：国家：菲律賓／币种：PHP</li></ol></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val"><ol><li>在「名」與「用戶數量」欄位之間新增「國家/幣種」(<code>nation_code</code>/<code>currency</code>)欄位，排列為「名｜國家/幣種｜用戶數量」</li><li>國家/幣種依總代帳號綁定的國家(<code>nation_code</code>)＋幣種(<code>currency</code>)帶入，內容為：国家：菲律賓／币种：PHP</li></ol></div></div>
     <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">渲染列表時，於名跟用戶數量欄位中間新增「國家(<code>nation_code</code>)/幣種(<code>currency</code>)」欄位，讀取後端回傳資料顯示。</div></div>
-    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">總公司列表 API 回傳資料需包含該帳號綁定的國家(<code>nation_code</code>)與幣種(<code>currency</code>)欄位。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">總代列表 API 回傳資料需包含該帳號綁定的國家(<code>nation_code</code>)與幣種(<code>currency</code>)欄位。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（此為管理後台列表顯示，不影響前台會員端）</div></div>
     <div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-hq-565"></div></div></div>
   </div>
 
   <div class="spec-card">
     <div class="spec-card-hd"><span class="spec-card-num">566</span><span class="spec-card-adj">8/27新增</span></div>
-    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">用戶管理 &gt; 總公司 &gt; 新增總公司按鈕 &gt; 新增總公司彈窗 &gt; 登入密碼</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">用戶管理 &gt; 總代 &gt; 新增總代按鈕 &gt; 新增總代彈窗 &gt; 登入密碼</div></div>
     <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge new">新增</span></div></div>
-    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">新增總公司彈窗僅有總公司賬號、總公司名稱、備註欄位，無登入密碼欄位。</div></div>
-    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val"><ol><li>在「總公司賬號」下方新增「登入密碼」輸入欄</li><li>密碼規則與功能比照原有投注站密碼功能</li></ol></div></div>
-    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">於「總公司賬號」下方渲染「登入密碼」輸入欄，輸入驗證規則比照原有投注站密碼功能。</div></div>
-    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">新增總公司 API 增加登入密碼欄位，儲存與加密方式比照原有投注站密碼功能。</div></div>
-    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（總公司為後台帳號，登入密碼不涉及前台會員端）</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">新增總代彈窗僅有總代賬號、總代名稱、備註欄位，無登入密碼欄位。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val"><ol><li>在「總代賬號」下方新增「登入密碼」輸入欄</li><li>密碼規則與功能比照原有投注站密碼功能</li></ol></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">於「總代賬號」下方渲染「登入密碼」輸入欄，輸入驗證規則比照原有投注站密碼功能。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">新增總代 API 增加登入密碼欄位，儲存與加密方式比照原有投注站密碼功能。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（總代為後台帳號，登入密碼不涉及前台會員端）</div></div>
     <div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-hq-566"></div></div></div>
   </div>
 
   <div class="spec-card">
     <div class="spec-card-hd"><span class="spec-card-num">567</span><span class="spec-card-adj">8/27新增</span></div>
-    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">用戶管理 &gt; 總公司 &gt; 新增總公司按鈕 &gt; 新增總公司彈窗 &gt; 國家、幣種</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">用戶管理 &gt; 總代 &gt; 新增總代按鈕 &gt; 新增總代彈窗 &gt; 國家、幣種</div></div>
     <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge new">新增</span></div></div>
-    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">新增總公司彈窗沒有「國家」「幣種」欄位，無法綁定國家＋幣種。</div></div>
-    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val"><ol><li>在「總公司名稱」下方（備註上方）新增「國家」(<code>nation_code</code>)與「幣種」(<code>currency</code>)下拉選單</li><li>國家：單選，選項為平台啟用國家中排除「投注站適用國家」後的清單（投注站僅渲染適用國家，總公司則排除這些國家）</li><li>依選擇的國家，自動帶入可選擇的幣種範圍，選定國家後幣種下拉的選項依該國家對應帶出，仍需手動點選，不會自動代入</li><li>未選擇國家時，幣種下拉顯示「No data」，不可點擊</li><li>保存後無法修改</li></ol></div></div>
-    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">於「總公司名稱」下方渲染國家(<code>nation_code</code>)與幣種(<code>currency</code>)下拉；國家選項讀取後端回傳的總公司適用國家清單、不寫死；國家選定後幣種依國家更新可選範圍並改為可點擊，未選國家時幣種下拉顯示「No data」；送出後鎖定不可修改。</div></div>
-    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">提供總公司適用國家(<code>nation_code</code>)清單（平台啟用國家排除「投注站適用國家」）與國家對應幣種(<code>currency</code>)的映射關係 API；新增總公司 API 需儲存國家與幣種，保存後不可異動。</div></div>
-    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">此設定決定該總公司底下所有帳號（含前台會員）歸屬的國家＋幣種，直接影響這些會員最終看到的前台內容（活動、VIP、幣種顯示等）。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">新增總代彈窗沒有「國家」「幣種」欄位，無法綁定國家＋幣種。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val"><ol><li>在「總代名稱」下方（備註上方）新增「國家」(<code>nation_code</code>)與「幣種」(<code>currency</code>)下拉選單</li><li>國家：單選，選項為平台啟用國家中排除「投注站適用國家」後的清單（投注站僅渲染適用國家，總代則排除這些國家）</li><li>依選擇的國家，自動帶入可選擇的幣種範圍，選定國家後幣種下拉的選項依該國家對應帶出，仍需手動點選，不會自動代入</li><li>未選擇國家時，幣種下拉顯示「No data」，不可點擊</li><li>保存後無法修改</li></ol></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">於「總代名稱」下方渲染國家(<code>nation_code</code>)與幣種(<code>currency</code>)下拉；國家選項讀取後端回傳的總代適用國家清單、不寫死；國家選定後幣種依國家更新可選範圍並改為可點擊，未選國家時幣種下拉顯示「No data」；送出後鎖定不可修改。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">提供總代適用國家(<code>nation_code</code>)清單（平台啟用國家排除「投注站適用國家」）與國家對應幣種(<code>currency</code>)的映射關係 API；新增總代 API 需儲存國家與幣種，保存後不可異動。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">此設定決定該總代底下所有帳號（含前台會員）歸屬的國家＋幣種，直接影響這些會員最終看到的前台內容（活動、VIP、幣種顯示等）。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-hq-567"></div></div></div>
   </div>
 
   <div class="spec-card">
     <div class="spec-card-hd"><span class="spec-card-num">568</span><span class="spec-card-adj">8/27新增</span></div>
-    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">用戶管理 &gt; 總公司 &gt; 列表 &gt; 操作欄位 &gt; 編輯</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">用戶管理 &gt; 總代 &gt; 列表 &gt; 操作欄位 &gt; 編輯</div></div>
     <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge new">新增</span></div></div>
     <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">操作欄目前無修改登入密碼的功能。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val"><ol><li>操作欄新增「編輯」，點擊開啟編輯彈窗</li><li>彈窗內容：「帳號」為純文字顯示、「登入密碼」為輸入欄</li><li>密碼修改規則與功能比照原有投注站密碼功能</li></ol></div></div>
     <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">操作欄渲染「編輯」入口與編輯彈窗；帳號為唯讀文字、登入密碼為輸入欄，輸入驗證規則比照原有投注站密碼功能。</div></div>
-    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">提供總公司修改登入密碼 API，儲存與加密方式比照原有投注站密碼功能。</div></div>
-    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（總公司為後台帳號，登入密碼不涉及前台會員端）</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">提供總代修改登入密碼 API，儲存與加密方式比照原有投注站密碼功能。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（總代為後台帳號，登入密碼不涉及前台會員端）</div></div>
     <div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-hq-568"></div></div></div>
   </div>
 </div>
@@ -5524,7 +5536,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
     <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">上方搜尋欄目前無國家與幣種篩選條件。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
       <ol>
-        <li>在「搜尋欄最」前方新增「國家」(<code>nation_code</code>)、「幣種」(<code>currency</code>)兩個單選下拉，排列為「國家｜幣種｜總公司帳號」</li>
+        <li>在「搜尋欄最」前方新增「國家」(<code>nation_code</code>)、「幣種」(<code>currency</code>)兩個單選下拉，排列為「國家｜幣種｜總代帳號」</li>
         <li>國家(<code>nation_code</code>)：單選，預設「全部國家」</li>
         <li>幣種(<code>currency</code>)：單選，預設「全部幣種」</li>
         <li>國家與幣種無先後順序限制，可任一先選</li>
@@ -5651,7 +5663,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
     <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">上方搜尋欄目前無國家與幣種篩選條件。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
       <ol>
-        <li>在「搜尋欄最」前方新增「國家」(<code>nation_code</code>)、「幣種」(<code>currency</code>)兩個單選下拉，排列為「國家｜幣種｜總公司帳號」</li>
+        <li>在「搜尋欄最」前方新增「國家」(<code>nation_code</code>)、「幣種」(<code>currency</code>)兩個單選下拉，排列為「國家｜幣種｜總代帳號」</li>
         <li>國家(<code>nation_code</code>)：單選，預設「全部國家」</li>
         <li>幣種(<code>currency</code>)：單選，預設「全部幣種」</li>
         <li>國家與幣種無先後順序限制，可任一先選</li>
@@ -5702,23 +5714,23 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
 </div>
 
 <div class="pg" id="pg-adm-data-report-dr-headoffice">
-  <div class="pg-crumb">管理後台 &gt; 數據報表 &gt; 總公司報表</div>
-  <p class="rec-adj"><span class="rec-adj-tag">8/27 新增：</span>依照 <span class="x-jump" onclick="showPg('spec-discussion');goTo('rec-33')">8/20 討論（項次 33）</span>，新增總公司報表頁——版面、功能與資料統計方式與投注站報表相同，僅統計維度改為總公司（卡 569）。</p>
+  <div class="pg-crumb">管理後台 &gt; 數據報表 &gt; 總代報表</div>
+  <p class="rec-adj"><span class="rec-adj-tag">8/27 新增：</span>依照 <span class="x-jump" onclick="showPg('spec-discussion');goTo('rec-33')">8/20 討論（項次 33）</span>，新增總代報表頁——版面、功能與資料統計方式與投注站報表相同，僅統計維度改為總代（卡 569）。</p>
   <div class="pg-overview">
     <h4>本頁改動目標</h4>
-    <div class="ov-dir"><div class="ov-dir-lbl">管理後台：</div><ul class="ov-dir-list"><li>新增「總公司報表」頁面，含體育報表、第三方遊戲報表、資金報表三個分頁</li><li>版面、功能與資料統計方式與投注站報表相同，僅統計維度改為總公司</li><li>投注站報表的多幣種調整與後續規格調整同步適用</li><li>賓果遊戲報告已無使用，不做進本頁</li></ul></div>
+    <div class="ov-dir"><div class="ov-dir-lbl">管理後台：</div><ul class="ov-dir-list"><li>新增「總代報表」頁面，含體育報表、第三方遊戲報表、資金報表三個分頁</li><li>版面、功能與資料統計方式與投注站報表相同，僅統計維度改為總代</li><li>投注站報表的多幣種調整與後續規格調整同步適用</li><li>賓果遊戲報告已無使用，不做進本頁</li></ul></div>
     <div class="ov-dir"><div class="ov-dir-lbl">控制後台：</div><ul class="ov-dir-list"><li>同投注站報表——國家(<code>nation_code</code>)與幣種(<code>currency</code>)選項、匯率(<code>sys_rate</code>)由控制後台向下供給，前端不寫死</li></ul></div>
     <div class="ov-dir"><div class="ov-dir-lbl">前台影響：</div><ul class="ov-dir-list"><li>無（此為後台報表功能，不影響前台會員端）</li></ul></div>
   </div>
 
   <div class="spec-card">
     <div class="spec-card-hd"><span class="spec-card-num">569</span><span class="spec-card-adj">8/27新增</span></div>
-    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">數據報表 &gt; 總公司報表</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">數據報表 &gt; 總代報表</div></div>
     <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge new">新增</span></div></div>
-    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">目前無總公司報表頁面，總公司維度無對應報表可查。</div></div>
-    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val"><ol><li>在「投注站報表」下方新增「總公司報表」頁面</li><li>版面與功能與投注站報表相同，含三個 tab 分頁：體育報表、第三方遊戲報表、資金報表</li><li>各資料統計方式與投注站報表相同，僅統計維度改為總公司</li><li>各分頁的搜尋欄、列表欄位、金額顯示比照投注站報表對應分頁，本次投注站報表的多幣種調整（國家＋幣種雙連動篩選、列表國家幣種欄位、金額改系統幣顯示）同步適用</li><li>投注站報表各分頁後續若有規格調整，總公司報表同步適用</li><li>賓果遊戲報告已無使用，不做進總公司報表</li></ol></div></div>
-    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">比照投注站報表三分頁實作版面與互動，資料維度改為總公司。</div></div>
-    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">各分頁報表查詢 API 比照投注站報表，資料統計方式相同，僅統計維度改依總公司彙總。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">目前無總代報表頁面，總代維度無對應報表可查。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val"><ol><li>在「投注站報表」下方新增「總代報表」頁面</li><li>版面與功能與投注站報表相同，含三個 tab 分頁：體育報表、第三方遊戲報表、資金報表</li><li>各資料統計方式與投注站報表相同，僅統計維度改為總代</li><li>各分頁的搜尋欄、列表欄位、金額顯示比照投注站報表對應分頁，本次投注站報表的多幣種調整（國家＋幣種雙連動篩選、列表國家幣種欄位、金額改系統幣顯示）同步適用</li><li>投注站報表各分頁後續若有規格調整，總代報表同步適用</li><li>賓果遊戲報告已無使用，不做進總代報表</li></ol></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">比照投注站報表三分頁實作版面與互動，資料維度改為總代。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">各分頁報表查詢 API 比照投注站報表，資料統計方式相同，僅統計維度改依總代彙總。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（此為後台報表功能，不影響前台會員端）</div></div>
     <div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-drhq-569"></div></div></div>
   </div>
@@ -5744,7 +5756,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
     <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">搜尋欄沒有國家、幣種篩選條件，多國家多幣種的代理資料無法依國家、幣種過濾。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
       <ol>
-        <li>在「搜尋欄最」前方新增「國家」(<code>nation_code</code>)、「幣種」(<code>currency</code>)兩個單選下拉，排列為「國家｜幣種｜總公司帳號」</li>
+        <li>在「搜尋欄最」前方新增「國家」(<code>nation_code</code>)、「幣種」(<code>currency</code>)兩個單選下拉，排列為「國家｜幣種｜總代帳號」</li>
         <li>國家(<code>nation_code</code>)：單選，預設「全部國家」</li>
         <li>幣種(<code>currency</code>)：單選，預設「全部幣種」，依所選幣種顯示對應的代理帳號</li>
         <li>國家與幣種無先後順序限制，可任一先選</li>
@@ -5871,7 +5883,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
     <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">搜尋欄沒有國家、幣種篩選條件，多國家多幣種的代理資料無法依國家、幣種過濾。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
       <ol>
-        <li>在「搜尋欄最」前方新增「國家」(<code>nation_code</code>)、「幣種」(<code>currency</code>)兩個單選下拉，排列為「國家｜幣種｜總公司帳號」</li>
+        <li>在「搜尋欄最」前方新增「國家」(<code>nation_code</code>)、「幣種」(<code>currency</code>)兩個單選下拉，排列為「國家｜幣種｜總代帳號」</li>
         <li>國家(<code>nation_code</code>)：單選，預設「全部國家」</li>
         <li>幣種(<code>currency</code>)：單選，預設「全部幣種」，依所選幣種顯示對應的代理帳號</li>
         <li>國家與幣種無先後順序限制，可任一先選</li>
@@ -16720,9 +16732,9 @@ function render_dr_station_Demos(){
   // dr-station-003 資金報表列表金額欄位改系統幣（示意假設系統幣為 USDT）
   set('tpl-dr-station-003', tplColAmountUsdt(['充值金额','后台加钱','提款金额','后台扣钱','活动金额','充值优惠/手续费']));
   // 101/103/105 各分頁搜尋欄：國家＋幣種雙向聯動（臨時模板 tpl_TMP_dualLinkedSelect）
-  set('tpl-dr-station-101', tpl_TMP_dualLinkedSelect({prefix:'dr-station-101', map:{'菲律賓':['PHP'],'越南':['VND']}, after:{type:'input',name:'總公司帳號'}}));
+  set('tpl-dr-station-101', tpl_TMP_dualLinkedSelect({prefix:'dr-station-101', map:{'菲律賓':['PHP'],'越南':['VND']}, after:{type:'input',name:'總代帳號'}}));
   set('tpl-dr-station-103', tpl_TMP_dualLinkedSelect({prefix:'dr-station-103', map:{'菲律賓':['PHP'],'越南':['VND']}, after:'分類選擇'}));
-  set('tpl-dr-station-105', tpl_TMP_dualLinkedSelect({prefix:'dr-station-105', map:{'菲律賓':['PHP'],'越南':['VND']}, after:{type:'input',name:'總公司帳號'}}));
+  set('tpl-dr-station-105', tpl_TMP_dualLinkedSelect({prefix:'dr-station-105', map:{'菲律賓':['PHP'],'越南':['VND']}, after:{type:'input',name:'總代帳號'}}));
   // 102/104/106 各分頁列表幣種欄位
   set('tpl-dr-station-102', tplColField([{hd:'帳號',lines:['']},{hd:'國家',lines:['菲律賓']},{hd:'幣種',lines:['PHP']},{hd:'下注會員數',lines:['']}]));
   set('tpl-dr-station-104', tplColField([{hd:'帳號',lines:['']},{hd:'國家',lines:['菲律賓']},{hd:'幣種',lines:['PHP']},{hd:'用戶數量',lines:['']}]));
@@ -16732,8 +16744,8 @@ function render_dr_station_Demos(){
 // 數據報表 > 代理報表：套用統一模板庫，逐卡填入
 function render_dr_agent_Demos(){
   const set = (elId, html) => { const el = document.getElementById(elId); if(el) el.innerHTML = html; };
-  // dr-agent-001 體育報表搜尋欄新增幣種多選下拉（後接總公司帳號輸入欄）
-  set('tpl-dr-agent-001', tpl_TMP_dualLinkedSelect({prefix:'dr-agent-001', map:{'菲律賓':['PHP'],'越南':['VND']}, after:{type:'input',name:'總公司帳號'}}));
+  // dr-agent-001 體育報表搜尋欄新增幣種多選下拉（後接總代帳號輸入欄）
+  set('tpl-dr-agent-001', tpl_TMP_dualLinkedSelect({prefix:'dr-agent-001', map:{'菲律賓':['PHP'],'越南':['VND']}, after:{type:'input',name:'總代帳號'}}));
   // dr-agent-002 體育報表列表新增幣種欄位（上級代理後方）
   set('tpl-dr-agent-002', tplColField([{hd:'上級代理',lines:['']},{hd:'國家',lines:['菲律賓']},{hd:'幣種',lines:['PHP']},{hd:'投注區',lines:['']}]));
   // dr-agent-003 體育報表列表金額欄位改系統幣（示意假設系統幣為 USDT）
@@ -16744,8 +16756,8 @@ function render_dr_agent_Demos(){
   set('tpl-dr-agent-005', tplColField([{hd:'上級代理',lines:['']},{hd:'國家',lines:['菲律賓']},{hd:'幣種',lines:['PHP']},{hd:'名',lines:['']}]));
   // dr-agent-006 第三方遊戲報表列表金額欄位改系統幣（示意假設系統幣為 USDT）
   set('tpl-dr-agent-006', tplColAmountUsdt(['投注金额','有效投注金额','第三方Jackpot预抽金额','第三方Jackpot派彩金额','输赢金额','第三方游戏返水']));
-  // dr-agent-007 資金報表搜尋欄新增幣種多選下拉（後接總公司帳號輸入欄）
-  set('tpl-dr-agent-007', tpl_TMP_dualLinkedSelect({prefix:'dr-agent-007', map:{'菲律賓':['PHP'],'越南':['VND']}, after:{type:'input',name:'總公司帳號'}}));
+  // dr-agent-007 資金報表搜尋欄新增幣種多選下拉（後接總代帳號輸入欄）
+  set('tpl-dr-agent-007', tpl_TMP_dualLinkedSelect({prefix:'dr-agent-007', map:{'菲律賓':['PHP'],'越南':['VND']}, after:{type:'input',name:'總代帳號'}}));
   // dr-agent-008 資金報表列表新增幣種欄位（帳號後方）
   set('tpl-dr-agent-008', tplColField([{hd:'帳號',lines:['']},{hd:'國家',lines:['菲律賓']},{hd:'幣種',lines:['PHP']},{hd:'充值金額',lines:['']}]));
   // dr-agent-009 資金報表列表金額欄位改系統幣（示意假設系統幣為 USDT）
@@ -19428,7 +19440,7 @@ function render_tagcfg_Demos(){
 render_tagcfg_Demos();
 render_tagcfg_screen();
 
-// ===== 總公司（8/27 項次22-4/34）：搜尋欄國家幣種連動＋列表＋新增/編輯彈窗真互動 =====
+// ===== 總代（8/27 項次22-4/34）：搜尋欄國家幣種連動＋列表＋新增/編輯彈窗真互動 =====
 var HQ = { natF: '全部国家', curF: '全部币种', open: null, acct: '', addNat: null, addCur: null };
 var HQMAP = {'菲律宾':['PHP'],'越南':['VND']};
 function hqSel(id, val, opts, pickFn, isNew, ph){
@@ -19504,21 +19516,21 @@ function render_hq_screen(){
   }
   el.innerHTML = html;
 }
-// 總公司卡片示意：套用統一模板庫，逐卡填入
+// 總代卡片示意：套用統一模板庫，逐卡填入
 function render_hq_Demos(){
   const set = (elId, html) => { const el = document.getElementById(elId); if(el) el.innerHTML = html; };
   // hq-564 上方搜尋欄>國家幣種雙向連動（篩選下拉為情境元件）
   set('tpl-hq-564', `<div class="demo-inline-group">${tpl_TMP_dualLinkedSelect({prefix:'hq-564', map:{'菲律賓':['PHP'],'越南':['VND']}})}<div class="demo-select"><div class="demo-select-box"><span class="txt placeholder">篩選</span><span class="arr">▼</span></div></div></div>`);
   // hq-565 列表>名｜國家/幣種｜用戶數量
   set('tpl-hq-565', tplColThreeField('名', '國家/幣種', '国家：菲律賓<br>币种：PHP', '用戶數量'));
-  // hq-566 新增總公司彈窗>總公司賬號下方新增登入密碼（賬號、名稱為上下文）
+  // hq-566 新增總代彈窗>總代賬號下方新增登入密碼（賬號、名稱為上下文）
   set('tpl-hq-566', tplModalRow('hq566', [
-    {label:'總公司賬號', val:''},
+    {label:'總代賬號', val:''},
     {label:'登入密碼', val:'input:請輸入登入密碼'},
-    {label:'總公司名稱', val:''}
+    {label:'總代名稱', val:''}
   ]));
-  // hq-567 新增總公司彈窗>總公司名稱下方新增國家、幣種（連動）
-  set('tpl-hq-567', tplLinkedSelectFormRow('hq-567', '國家', '請選擇國家', ['菲律賓','越南'], '幣種', '請選擇幣種', '總公司名稱'));
+  // hq-567 新增總代彈窗>總代名稱下方新增國家、幣種（連動）
+  set('tpl-hq-567', tplLinkedSelectFormRow('hq-567', '國家', '請選擇國家', ['菲律賓','越南'], '幣種', '請選擇幣種', '總代名稱'));
   // hq-568 操作欄>編輯彈窗（帳號純文字＋登入密碼輸入欄）
   set('tpl-hq-568', tplModalRow('hq568', [
     {label:'帳號', val:'readonly:wadest01'},
@@ -19528,7 +19540,7 @@ function render_hq_Demos(){
 render_hq_Demos();
 render_hq_screen();
 
-// ===== 總公司報表（8/27 項次33）：單卡，示意為靜態三分頁 tab 列 =====
+// ===== 總代報表（8/27 項次33）：單卡，示意為靜態三分頁 tab 列 =====
 function render_drhq_Demos(){
   const set = (elId, html) => { const el = document.getElementById(elId); if(el) el.innerHTML = html; };
   set('tpl-drhq-569', '<div class="pg-tabs"><div class="pg-tab active">體育報表</div><div class="pg-tab">第三方遊戲報表</div><div class="pg-tab">資金報表</div></div>');
