@@ -92,8 +92,9 @@ img{max-width:100%;}
 .badge--new{background:var(--color-new-bg);color:var(--color-new);}
 .badge--keep{background:#f1f5f9;color:#475569;}
 .badge--logic{background:#fef3c7;color:#b45309;}
+.badge--rename{background:#dbeafe;color:#1d4ed8;}
 
-/* status pills (mimic admin UI) */
+/* status pills */
 .pill{display:inline-block;font-size:.68rem;padding:1px 9px;border-radius:4px;border:1px solid transparent;white-space:nowrap;}
 .pill--ok{color:var(--color-ok);background:var(--color-ok-bg);border-color:#bbf7d0;}
 .pill--maint{color:var(--color-maint);background:var(--color-maint-bg);border-color:#fde68a;}
@@ -123,15 +124,26 @@ img{max-width:100%;}
 .compare__col--old .compare__head{background:#f8fafc;color:#64748b;border-bottom:1px solid var(--color-line);}
 .compare__body{padding:var(--space-3);}
 .compare__body ul{padding-left:1.3em;}
-.problem{color:var(--color-off);font-size:.72rem;background:var(--color-off-bg);border-left:3px solid #fca5a5;padding:6px 10px;border-radius:0 var(--radius-sm) var(--radius-sm) 0;margin-top:var(--space-2);}
-.reason{background:var(--color-primary-soft);border-radius:var(--radius-sm);padding:8px 12px;font-size:.74rem;margin-top:var(--space-2);}
-.reason strong{color:var(--color-primary);}
 
 /* callouts */
 .callout{border-radius:var(--radius-sm);padding:10px 14px;font-size:.76rem;margin:var(--space-2) 0;}
 .callout--warn{background:var(--color-warn-bg);border:1px solid var(--color-warn-line);}
 .callout--info{background:var(--color-primary-soft);border:1px solid #bfdbfe;}
 .callout--rule{background:#f0fdf4;border:1px solid #bbf7d0;}
+
+/* === Menu structure diagram === */
+.menu-diagram{display:grid;grid-template-columns:1fr auto 1fr;gap:var(--space-3);align-items:start;}
+@media (max-width:900px){.menu-diagram{grid-template-columns:1fr;}}
+.menu-diagram__arrow{align-self:center;font-size:1.6rem;color:var(--color-primary);text-align:center;}
+.menu-box{border:1px solid var(--color-line);border-radius:var(--radius);overflow:hidden;}
+.menu-box__head{padding:8px 14px;font-weight:700;font-size:.78rem;background:#f8fafc;border-bottom:1px solid var(--color-line);}
+.menu-box--new .menu-box__head{background:var(--color-ok-bg);color:#15803d;}
+.menu-box ul{list-style:none;padding:6px 0;}
+.menu-box li{padding:6px 14px;font-size:.74rem;border-bottom:1px dashed #f1f5f9;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.menu-box li:last-child{border-bottom:0;}
+.menu-box .old-name{color:#9ca3af;font-size:.66rem;}
+.menu-box li.hidden-item{color:#b0b7c0;text-decoration:line-through;}
+.menu-box .seq{display:inline-flex;width:1.2rem;height:1.2rem;border-radius:50%;background:#eef2f7;color:#475569;font-size:.62rem;align-items:center;justify-content:center;font-weight:700;flex-shrink:0;}
 
 /* === Backend mockup === */
 .mock{border:1px solid #cbd5e1;border-radius:var(--radius);overflow:hidden;margin:var(--space-2) 0 var(--space-3);background:#fff;position:relative;}
@@ -152,13 +164,19 @@ img{max-width:100%;}
 .mock--modal .mock__body{max-width:720px;}
 .mock .frow{display:flex;align-items:flex-start;gap:12px;margin-bottom:10px;font-size:.73rem;}
 .mock .frow label{width:8.5em;text-align:right;color:#475569;flex-shrink:0;padding-top:2px;}
-.mock .frow .req{color:#dc2626;margin-right:2px;}
+.mock .req{color:#dc2626;margin-right:2px;}
 .mock .fbox{border:1px solid #d1d5db;border-radius:4px;padding:3px 10px;color:#9ca3af;flex:1;max-width:320px;}
 .mock .fnote{font-size:.66rem;color:#9ca3af;}
-.mock .ellip{max-width:11em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:inline-block;vertical-align:bottom;}
 .mock .fradio{display:inline-flex;align-items:center;gap:4px;margin-right:14px;}
 .mock .dot{width:.7rem;height:.7rem;border-radius:50%;border:1px solid #9ca3af;display:inline-block;flex-shrink:0;}
 .mock .dot.on{border:4px solid var(--color-primary);}
+
+/* 預約維護欄 chips */
+.mw-wrap{display:flex;flex-direction:column;align-items:center;gap:3px;}
+.mw-line{display:flex;align-items:center;gap:6px;white-space:nowrap;}
+.mw{display:inline-block;border:1px solid #d1d5db;background:#f8fafc;border-radius:4px;padding:2px 8px;font-size:.62rem;color:#334155;white-space:nowrap;}
+.mw-del{flex-shrink:0;}
+.mw-add{display:inline-flex;align-items:center;justify-content:center;min-width:1.6rem;height:1.25rem;border:1px dashed #93c5fd;border-radius:4px;color:var(--color-primary);font-weight:700;background:#eff6ff;font-size:.75rem;}
 
 /* sub-channel list widgets */
 .up-add{display:inline-flex;align-items:center;justify-content:center;min-width:2.4rem;height:1.35rem;border:1px dashed #94a3b8;border-radius:4px;color:#64748b;font-weight:700;background:#f8fafc;font-size:.8rem;}
@@ -177,6 +195,18 @@ img{max-width:100%;}
 .time-badge--on{background:var(--color-maint-bg);color:var(--color-maint);border:1px solid #fde68a;}
 .time-badge--wait{background:#eef2f7;color:#64748b;border:1px solid #e2e8f0;}
 .time-badge--end{background:#f3f4f6;color:#9ca3af;border:1px solid #e5e7eb;}
+
+/* calendar mock */
+.calwrap{border:1px solid #d1d5db;border-radius:8px;box-shadow:0 4px 14px rgba(15,23,42,.10);background:#fff;display:inline-block;padding:10px 14px;}
+.cal-inputs{display:flex;align-items:center;gap:8px;margin-bottom:10px;font-size:.66rem;color:#9ca3af;}
+.cal-inputs .cbox{border:1px solid #d1d5db;border-radius:4px;padding:2px 10px;min-width:6.5em;text-align:center;}
+.cal-cols{display:flex;gap:26px;}
+.cal{display:grid;grid-template-columns:repeat(7,1.7em);gap:2px 4px;font-size:.6rem;text-align:center;color:#334155;}
+.cal .ttl{grid-column:1/-1;font-weight:700;font-size:.7rem;margin-bottom:4px;}
+.cal .hd{color:#64748b;font-weight:700;}
+.cal .dm{color:#c2c8d0;}
+.cal .td{color:var(--color-primary);font-weight:700;}
+.cal-foot{text-align:right;font-size:.66rem;color:var(--color-primary);margin-top:8px;}
 
 /* === Frontend mockup === */
 .fe-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-3);}
@@ -231,22 +261,20 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
 <body>
 <div class="layout">
 <nav class="sidebar" aria-label="文件導覽">
-  <div class="nav__brand">OKF-2269 充值/提款新增預約維護功能<small>v1.0 ｜ 2026-09-07 ｜ 子渠道三態＋預約維護</small></div>
+  <div class="nav__brand">OKF-2269 充值/提款新增預約維護功能<small>v2.0 ｜ 2026-09-09</small></div>
 
   <div class="nav__group">
     <button class="nav__group-title" data-page-btn="spec">📋 規格書</button>
-    <button class="nav__item nav__item--sub" data-page-btn="spec" data-anchor="s-info">1. 文檔資訊</button>
-    <button class="nav__item nav__item--sub" data-page-btn="spec" data-anchor="s-goal">2. 需求目的</button>
-    <button class="nav__item nav__item--sub" data-page-btn="spec" data-anchor="s-status">3. 充值子渠道三態與層級判斷</button>
-    <button class="nav__item nav__item--sub" data-page-btn="spec" data-anchor="s-reserve">4. 預約維護時間規則</button>
-    <button class="nav__item nav__item--sub" data-page-btn="spec" data-anchor="s-rd">5. 預約維護生效機制</button>
+    <button class="nav__item nav__item--sub" data-page-btn="spec" data-anchor="s-goal">1. 需求目的</button>
+    <button class="nav__item nav__item--sub" data-page-btn="spec" data-anchor="s-status">2. 充值子渠道三態與層級判斷</button>
+    <button class="nav__item nav__item--sub" data-page-btn="spec" data-anchor="s-reserve">3. 預約維護規則</button>
+    <button class="nav__item nav__item--sub" data-page-btn="spec" data-anchor="s-rd">4. 生效機制（後端判斷）</button>
   </div>
 
   <div class="nav__group">
     <button class="nav__group-title" data-page-btn="p1">⚙️ 改動頁面</button>
-    <button class="nav__item" data-page-btn="p1">在線支付展示配置<span class="nav__badge nav__badge--logic">異動</span></button>
-    <button class="nav__item" data-page-btn="p2">預約維護時間<span class="nav__badge nav__badge--new">新頁籤</span></button>
-    <button class="nav__item" data-page-btn="p3">提款展示配置<span class="nav__badge nav__badge--new">新頁籤</span></button>
+    <button class="nav__item" data-page-btn="p1">在線商戶配置<span class="nav__badge nav__badge--new">合併新頁</span></button>
+    <button class="nav__item" data-page-btn="p2">在線支付展示配置<span class="nav__badge nav__badge--logic">異動</span></button>
   </div>
 </nav>
 
@@ -256,57 +284,25 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
 <article class="page is-visible" id="page-spec">
   <header class="doc-header">
     <h1>OKF-2269 充值/提款新增預約維護功能</h1>
-    <p class="doc-header__meta">充值側子渠道補三態、編輯彈窗子渠道列表化，並新增「預約維護時間」頁籤</p>
+    <p class="doc-header__meta">在線商戶配置（合併＋預約維護欄）、充值子渠道三態與列表化</p>
   </header>
 
-  <!-- 1. 文檔資訊 -->
-  <section class="section" id="s-info">
-    <h2>1. 文檔資訊</h2>
-    <table class="tbl">
-      <tbody>
-        <tr><th style="width:9em;">需求單號</th><td>OKF-2269</td></tr>
-        <tr><th>文件版本</th><td>v1.0（新需求單）</td></tr>
-        <tr><th>日期</th><td>2026-09-07</td></tr>
-        <tr><th>適用平台</th><td>WOWGame、OKBET（共用同一管理後台）</td></tr>
-        <tr><th>關聯文件</th><td>《充值提款配置統一優化規格書 v1.1A》——本單於其「在線支付展示配置」（頁 4）基礎上追加，狀態三態的定義沿用該文件第 4 章。</td></tr>
-        <tr>
-          <th>本次新增</th>
-          <td><ul style="margin:0;padding-left:1.3em;">
-            <li>充值展示配置編輯／新增彈窗內，子渠道新增「<strong>狀態</strong>」欄（正常／維護／停用，可自行設定）。</li>
-            <li>「在線支付展示配置」新增第三個頁籤「<strong>預約維護時間</strong>」：可對主渠道或子渠道預約多個維護時段，每筆含啟用／停用；僅「維護時間」與「啟用狀態」可編輯，主渠道／子渠道設定後不可修改。</li>
-            <li>「提款展示配置」改為 TAB 結構（原頁面內容放「提款展示配置」TAB）並新增「<strong>預約維護時間</strong>」TAB：維護對象分兩種——<strong>提款銀行</strong>（前台顯示的銀行）與<strong>第三方代付商戶</strong>（自動出款）。</li>
-          </ul></td>
-        </tr>
-        <tr>
-          <th>本次修改</th>
-          <td>充值展示配置編輯／新增彈窗的子渠道配置區，由直式區塊排版改為<strong>列表（表格）呈現</strong>；圖片改於列表格內以「＋」上傳並直接顯示於列表內。</td>
-        </tr>
-        <tr><th>本次刪除</th><td>無。</td></tr>
-      </tbody>
-    </table>
-  </section>
-
-  <!-- 2. 需求目的 -->
+  <!-- 1. 需求目的 -->
   <section class="section" id="s-goal">
-    <h2>2. 需求目的</h2>
+    <h2>1. 需求目的</h2>
     <ol>
-      <li><strong>子渠道三態</strong>：現行充值側子渠道無狀態可設定。本次於充值展示配置為子渠道加上「正常／維護／停用」三態，可自行設定：維護＝前台顯示維護，停用＝前台不展示。</li>
-      <li><strong>子渠道列表化</strong>：現行編輯彈窗的子渠道配置區為直式排版，子渠道多個時不容易看。本次改為列表呈現：一列一個子渠道，圖片於列表內以「＋」上傳並顯示於列表內。</li>
-      <li><strong>預約維護時間</strong>：現行無預約維護功能。本次新增「預約維護時間」頁籤，到點生效、結束回復，分兩側：
-        <ul>
-          <li><strong>充值側</strong>（在線支付展示配置）：可對主渠道或子渠道預先設定維護時段（可多筆）。</li>
-          <li><strong>提款側</strong>（提款展示配置）：維護對象分兩種——提款銀行（前台顯示哪些銀行，與商戶無關）、第三方代付商戶（銀行的自動出款走哪個商戶）。</li>
-        </ul>
-      </li>
+      <li><strong>在線商戶配置</strong>：將「在線支付商戶配置」與「在線提款商戶配置」合併為一頁「在線商戶配置」，內分「充值商戶」「提款商戶」兩個 TAB，並移至「支付層級配置」下方。</li>
+      <li><strong>商戶預約維護</strong>：於在線商戶配置兩個 TAB 列表的狀態欄後新增「預約維護」欄：點「＋」新增維護時段（每個商戶最多 10 筆）、時段後方紅色刪除 icon（🗑）可刪除，到點生效、結束回復。<strong>預約維護僅針對商戶</strong>。</li>
+      <li><strong>充值子渠道三態＋列表化</strong>：於充值展示配置為子渠道加上「正常／維護／停用」三態（維護＝前台顯示維護、停用＝前台不展示）；子渠道配置區改為列表呈現，圖片於列表內以「＋」上傳並顯示於列表內。</li>
     </ol>
   </section>
 
-  <!-- 3. 子渠道三態與層級判斷 -->
+  <!-- 2. 充值子渠道三態與層級判斷 -->
   <section class="section" id="s-status">
-    <h2>3. 充值子渠道三態與層級判斷</h2>
+    <h2>2. 充值子渠道三態與層級判斷</h2>
     <p>本章全部針對<strong>充值側</strong>：在線支付展示配置 &gt; 充值展示配置頁籤內的子渠道。</p>
 
-    <h3>3.1 充值子渠道狀態定義</h3>
+    <h3>2.1 充值子渠道狀態定義</h3>
     <p>沿用全站統一三態，套用到充值子渠道的口徑如下。維護樣式沿用前台既有樣式，不另行定義：</p>
     <table class="tbl tbl--center">
       <thead>
@@ -318,14 +314,11 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
         <tr><td><span class="pill pill--off">停用</span></td><td>不展示</td><td>不可使用</td></tr>
       </tbody>
     </table>
-
     <ul>
-      <li>子渠道清單由<strong>金流後台回傳</strong>，後台不可新增／刪除子渠道，只能對回傳的子渠道設定圖示、分頁歸屬與狀態。</li>
-      <li>僅有 1 個子渠道的渠道類型：編輯內依既有規則<strong>不出現</strong>子渠道列表，維持現行（無子渠道狀態可設，點入口直接進入）。</li>
       <li>既有資料轉換：上線時所有已配置子渠道的狀態一律預設為「正常」。</li>
     </ul>
 
-    <h3>3.2 判斷流程圖</h3>
+    <h3>2.2 判斷流程圖</h3>
     <p>前台呈現依 <strong>渠道 → 方式（入口）→ 子渠道</strong> 三層由上而下判斷；第一、二層判斷不變，本次加上第三層子渠道判斷：</p>
     <div class="flow" role="img" aria-label="充值判斷流程：先判斷渠道狀態，再判斷方式狀態，最後判斷子渠道狀態">
       <div class="flow__lane" style="min-width:900px;">
@@ -339,7 +332,7 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
             <span class="flow__state"><span class="pill pill--maint">維護</span></span>
             <div class="flow__next">
               <div class="flow__lane" style="min-width:0;">
-                <div class="flow__q" style="background:#1d4ed8;">方式狀態？<br><span style="font-weight:400;font-size:.66rem;">在線支付商戶配置</span></div>
+                <div class="flow__q" style="background:#1d4ed8;">方式狀態？<br><span style="font-weight:400;font-size:.66rem;">在線商戶配置（承接商戶）</span></div>
                 <div class="flow__branches">
                   <div class="flow__branch"><span class="flow__state"><span class="pill pill--off">停用</span></span><div class="flow__result flow__result--stop">前台不顯示該方式（入口）</div></div>
                   <div class="flow__branch"><span class="flow__state"><span class="pill pill--maint">維護</span></span><div class="flow__result flow__result--maint">該方式（入口）顯示維護，子渠道不顯示</div></div>
@@ -352,7 +345,7 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
             <span class="flow__state"><span class="pill pill--ok">正常</span></span>
             <div class="flow__next">
               <div class="flow__lane" style="min-width:0;">
-                <div class="flow__q" style="background:#1d4ed8;">方式狀態？<br><span style="font-weight:400;font-size:.66rem;">在線支付商戶配置</span></div>
+                <div class="flow__q" style="background:#1d4ed8;">方式狀態？<br><span style="font-weight:400;font-size:.66rem;">在線商戶配置（承接商戶）</span></div>
                 <div class="flow__branches">
                   <div class="flow__branch"><span class="flow__state"><span class="pill pill--off">停用</span></span><div class="flow__result flow__result--stop">前台不顯示該方式（入口）</div></div>
                   <div class="flow__branch"><span class="flow__state"><span class="pill pill--maint">維護</span></span><div class="flow__result flow__result--maint">該方式（入口）顯示維護，子渠道不顯示</div></div>
@@ -377,7 +370,9 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
       </div>
     </div>
 
-    <h3>3.3 情境窮舉表</h3>
+    <p style="font-size:.72rem;color:var(--color-text-soft);">上圖第二層的「方式狀態」＝承接商戶的<strong>最終生效狀態</strong>：商戶狀態與預約維護取較嚴格者（見 3.3、4）。</p>
+
+    <h3>2.3 情境窮舉表</h3>
     <table class="tbl tbl--center">
       <thead>
         <tr><th>第一層<br>渠道</th><th>是否判斷下一層</th><th>第二層<br>方式（入口）</th><th>是否判斷下一層</th><th>第三層<br>子渠道（本單新增）</th><th style="text-align:left;">最終結果</th></tr>
@@ -395,7 +390,7 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
       </tbody>
     </table>
 
-    <h3>3.4 邊界情境</h3>
+    <h3>2.4 邊界情境</h3>
     <ul>
       <li><strong>子渠道全部設為「停用」</strong>時，該方式（入口）前台<strong>自動不顯示</strong>。</li>
       <li>除上述外<strong>無反推判斷</strong>：子渠道全部為「維護」或其他組合時，入口照自身狀態顯示，底下子渠道各自依狀態呈現。</li>
@@ -404,123 +399,363 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
     </ul>
   </section>
 
-  <!-- 4. 預約維護時間規則 -->
+  <!-- 3. 預約維護規則 -->
   <section class="section" id="s-reserve">
-    <h2>4. 預約維護時間規則</h2>
+    <h2>3. 預約維護規則</h2>
 
-    <h3>4.1 功能定義</h3>
+    <h3>3.1 功能定義</h3>
     <ul>
-      <li>「在線支付展示配置」與「提款展示配置」各新增頁籤「<strong>預約維護時間</strong>」：
+      <li>預約維護<strong>僅針對商戶</strong>（在線商戶配置的兩個 TAB：充值商戶｜提款商戶）。渠道、子渠道、展示層皆不做預約維護。</li>
+      <li>設定位置＝在線商戶配置兩個 TAB 列表中、狀態欄後方的「<strong>預約維護</strong>」欄：
         <ul>
-          <li>在線支付展示配置（充值側）：可對<strong>主渠道</strong>（渠道類型，即前台入口）或<strong>子渠道</strong>預先設定維護時段。</li>
-          <li>提款展示配置（提款側）：可對<strong>提款銀行</strong>或<strong>第三方代付商戶</strong>預先設定維護時段（見 4.4）。</li>
+          <li>點欄內「＋」→ 欄內直接展開時間輸入框；點擊輸入框展開日期＋時間選單，可點選或直接輸入，選定開始～結束（精確到分）即新增一筆。時間設定樣式沿用「活動配置（新）＞新增活動」的進行時間元件。</li>
+          <li>每個商戶最多 <strong>10 筆</strong>；已達 10 筆時「＋」<strong>不顯示</strong>，刪除任一筆後重新顯示。</li>
+          <li>已設定的時段一筆一行顯示於欄內，格式「yyyy-mm-dd hh:mm ～ yyyy-mm-dd hh:mm」，完整顯示、不換行不截斷；<strong>紅色刪除 icon（🗑）在時間框外</strong>、緊接每筆後方；「＋」為<strong>藍色</strong>、固定於最後一筆時段下方、置中；未設定時僅顯示置中的「＋」。</li>
+          <li><strong>不可編輯</strong>：要調整時段時，刪除後重新新增。</li>
         </ul>
       </li>
-      <li>同一目標可設定<strong>多筆</strong>時段（一筆＝一個「開始時間～結束時間」），同目標的時段<strong>可重疊</strong>；因時段可能多筆，不放在充值展示配置的編輯彈窗內，改以獨立頁籤集中管理。</li>
-      <li>每筆預約含「<strong>啟用狀態</strong>」（啟用／停用，單選）：啟用＝該筆維護設置生效；停用＝該筆不生效，時段內亦不套用維護。新增時默認「啟用」；於編輯彈窗修改，<strong>保存後即生效</strong>。</li>
-      <li>編輯：<strong>僅可修改「維護時間」與「啟用狀態」</strong>（例如臨時拉長維護、暫停該筆預約）；目標（主渠道、子渠道，提款側含維護對象）設定後不可修改，需更換目標時刪除後重新新增。</li>
-      <li>充值側可設定的目標來源＝「充值展示配置」頁籤已建立的資料：
-        <ul>
-          <li>主渠道下拉＝已建立展示配置的渠道類型（格式「渠道類型 - 渠道名稱 - 顯示名」）。</li>
-          <li>子渠道下拉＝該主渠道的子渠道清單（子渠道名稱）。</li>
-        </ul>
-      </li>
+      <li>同一商戶的時段<strong>可重疊</strong>（臨時拉長維護＝再新增一筆涵蓋新時段）。</li>
+      <li>開始時間<strong>不限制</strong>（可早於當前時間）。</li>
+      <li>時段結束後該筆仍保留於欄內，<strong>不會自動刪除</strong>、需人工刪除；仍計入 10 筆上限。</li>
+      <li>商戶的新增／編輯彈窗<strong>不含</strong>預約維護欄位，預約維護僅於列表的預約維護欄管理。</li>
+      <li><strong>刪除商戶</strong>時，該商戶的預約維護一併刪除。</li>
+      <li><strong>复制商戶</strong>時，預約維護不複製（新商戶預約維護為空）。</li>
     </ul>
 
-    <h3>4.2 生效結果（時段內）</h3>
-    <p>統一原則：預約維護時段內＝該目標<strong>視同狀態被設為「維護」</strong>。四種目標的「維護」效果如下：</p>
+    <h3>3.2 生效結果（時段內）</h3>
+    <p>統一原則：時段內＝該商戶視同狀態「維護」。</p>
+    <ul>
+      <li><strong>充值商戶</strong>：僅該商戶是<strong>承接商戶</strong>時，預約維護會影響前台入口。</li>
+      <li><strong>提款商戶</strong>：一律不影響前台，僅影響自動出款流程。</li>
+    </ul>
     <table class="tbl">
-      <thead><tr><th style="width:12em;">預約目標</th><th>時段內效果（＝該目標「維護」的效果）</th></tr></thead>
+      <thead><tr><th style="width:13em;">預約目標</th><th>時段內效果（＝該商戶「維護」的效果）</th></tr></thead>
       <tbody>
-        <tr><td>充值·主渠道<br><span class="dim">（子渠道欄＝「-」）</span></td><td>主渠道＝商戶＝前台入口。<strong>入口顯示維護</strong>、不可點選，子渠道整批不顯示。</td></tr>
-        <tr><td>充值·子渠道</td><td>子渠道＝商戶底下的子渠道，等同入口下展示的選項。入口照常，<strong>僅該子渠道顯示維護</strong>、不可點選，其他子渠道不受影響。</td></tr>
-        <tr><td>提款·提款銀行</td><td>該銀行<strong>標示維護</strong>、不能用它提款；仍可綁定該銀行的新帳戶；其他銀行照常顯示。與商戶無關。</td></tr>
-        <tr><td>提款·代付商戶</td><td><strong>不走自動出款、回人工出款</strong>；前台顯示不受影響。</td></tr>
+        <tr>
+          <td>充值商戶·<strong>為承接商戶</strong><br><span class="dim">（在線支付展示配置綁定的顯示商戶）</span></td>
+          <td>該渠道類型的前台<strong>入口顯示維護</strong>、不可點選，子渠道不顯示。</td>
+        </tr>
+        <tr>
+          <td>充值商戶·<strong>非承接商戶</strong></td>
+          <td>前台不受影響（入口狀態只吃承接商戶那一筆，同渠道類型下其他商戶的狀態不影響入口）。</td>
+        </tr>
+        <tr>
+          <td>提款商戶</td>
+          <td>前台顯示不受影響（商戶狀態不參與前台顯示判斷）；綁定該商戶為自動出款商戶的銀行<strong>不走自動出款、回人工出款</strong>。</td>
+        </tr>
       </tbody>
     </table>
     <ul>
-      <li>僅「<strong>啟用</strong>」中的預約會生效；啟用狀態為「停用」的預約，不論是否在時段內皆不生效。</li>
-      <li>時段結束後，前台<strong>自動回復</strong>依當下後台狀態欄判斷，無需人工操作。</li>
-      <li>時段結束後，該筆於列表標示「<strong>已結束</strong>」並保留，<strong>不會自動刪除</strong>、也不會自動變更啟用狀態——刪除與啟用／停用皆為人工調整。</li>
-      <li>刪除，或將一筆<strong>進行中</strong>的預約改為停用（保存後）＝立即失效，前台立即回復依當下狀態欄判斷；改回啟用且仍在時段內，保存後立即生效。</li>
-      <li>同目標多筆時段重疊時，生效結果一致（維護），不重複疊加。</li>
+      <li>時段結束後，<strong>自動回復</strong>依該商戶當下的狀態欄判斷，無需人工操作。</li>
+      <li>時段刪除後即失效；後端僅依當下現存的預約維護時段判斷。</li>
+      <li>顯示商戶、自動出款商戶的下拉與綁定<strong>不因預約維護過濾、不提醒</strong>（不做系統判斷）；綁定到時段內的商戶，綁定後即依本表生效。</li>
+      <li>同商戶多筆時段重疊時，生效結果一致（維護），不重複疊加。</li>
     </ul>
 
-    <h3>4.3 與手動狀態的優先序</h3>
-    <p>預約維護與手動設定的狀態同時存在時，取<strong>較嚴格者</strong>生效。</p>
+    <h3>3.3 狀態與預約維護的優先序</h3>
+    <p>商戶狀態與預約維護同時存在時，取<strong>較嚴格者</strong>生效。</p>
     <ul>
-      <li>各目標的「手動狀態欄」位置：
-        <ul>
-          <li>充值·主渠道＝「在線支付商戶配置」承接商戶的狀態。</li>
-          <li>充值·子渠道＝充值展示配置子渠道列表的狀態（本單新增）。</li>
-          <li>提款·提款銀行＝「提款展示配置」該銀行的狀態。</li>
-          <li>提款·代付商戶＝「在線提款商戶配置」該商戶的狀態。</li>
-        </ul>
-      </li>
       <li>層級判斷（渠道→方式→子渠道）優先於下表：上層停用／維護時，下層照層級規則處理。</li>
     </ul>
     <table class="tbl tbl--center" style="max-width:640px;">
-      <thead><tr><th>手動狀態欄</th><th>是否於「啟用」中的預約維護時段內</th><th>前台最終呈現</th></tr></thead>
+      <thead><tr><th>狀態</th><th>是否於預約維護時段內</th><th>最終生效</th></tr></thead>
       <tbody>
-        <tr><td><span class="pill pill--ok">正常</span></td><td>否</td><td>正常顯示</td></tr>
+        <tr><td><span class="pill pill--ok">正常</span></td><td>否</td><td>正常</td></tr>
         <tr><td><span class="pill pill--ok">正常</span></td><td>是</td><td><span class="pill pill--maint">維護</span>（預約生效）</td></tr>
         <tr><td><span class="pill pill--maint">維護</span></td><td>是／否</td><td><span class="pill pill--maint">維護</span></td></tr>
-        <tr><td><span class="pill pill--off">停用</span></td><td>是／否</td><td>不展示（<span class="pill pill--off">停用</span>優先，時段內亦不因預約而顯示維護）</td></tr>
+        <tr><td><span class="pill pill--off">停用</span></td><td>是／否</td><td><span class="pill pill--off">停用</span>（停用優先，時段內亦不因預約而變為維護）</td></tr>
       </tbody>
     </table>
-    <h3>4.4 提款側預約維護（提款展示配置）</h3>
-    <ul>
-      <li>「提款展示配置」原本<strong>沒有 TAB 分頁</strong>，本次改為 TAB 結構：原頁面內容放在「提款展示配置」TAB，並新增「<strong>預約維護時間</strong>」TAB。</li>
-      <li>預約規則同 4.1（多筆、可重疊、啟用狀態、僅可編輯維護時間與啟用狀態、已結束標示與人工刪除）；時段內效果依 4.2 總表。</li>
-      <li>維護對象分兩種，新增時先選其一：
-        <ul>
-          <li><strong>第三方代付商戶</strong>：主渠道＝在線提款商戶配置已建立的商戶；子渠道反灰顯示「-」。</li>
-          <li><strong>提款銀行</strong>：主渠道＝銀行種類（一般銀行｜eWallet）；子渠道＝「編號 - 銀行名稱」。</li>
-        </ul>
-      </li>
-      <li>彈窗刻版見改動頁面「提款展示配置」。</li>
-    </ul>
   </section>
 
-  <!-- 5. 預約維護生效機制 -->
+  <!-- 4. 生效機制 -->
   <section class="section" id="s-rd">
-    <h2>5. 預約維護生效機制（5.1／5.2 擇一）</h2>
-    <p>預約維護「到點生效、到點回復」有以下兩種做法，功能結果相同：啟用中的預約進入時段，前台呈現維護；時段結束（或該筆被停用／刪除），前台回復依當下狀態欄判斷。</p>
-
-    <h3>5.1 方案 A：排程直接修改狀態欄</h3>
+    <h2>4. 生效機制（後端判斷）</h2>
     <ul>
-      <li>到達開始時間：排程自動把目標的狀態欄改為「維護」（主渠道＝「在線支付商戶配置」承接商戶那一筆的狀態；子渠道＝充值展示配置子渠道列表該列的狀態；提款銀行＝「提款展示配置」該銀行的狀態；代付商戶＝「在線提款商戶配置」該商戶的狀態）。</li>
-      <li>到達結束時間：排程自動把狀態欄改回「正常」。</li>
-      <li>時段內，後台列表的狀態欄同步顯示「維護」。</li>
-      <li>人工修改防呆：時段內操作人手動修改該目標的狀態時，跳出提示「該子渠道／商戶目前在預約維護時段內，若修改狀態，預約維護將自動失效」。確認修改後，該筆預約維護的啟用狀態自動改為「<strong>停用</strong>」，結束排程不再執行、不會覆蓋人工設定；取消則不修改。</li>
+      <li>預約維護設定後，<strong>不會影響該商戶的狀態</strong>：狀態欄維持操作人所設定的值，列表與編輯彈窗的狀態不因預約維護變動，全站狀態仍只有三態。</li>
+      <li>後端需<strong>多一個判斷</strong>：於判斷商戶生效狀態時（充值側＝前台請求入口顯示時，判斷承接商戶；提款側＝提款申請走自動出款判斷時，判斷綁定的自動出款商戶），判斷該商戶當下是否落在任一預約維護時段內——是＝該商戶視同「維護」（效果依 3.2）；否＝依狀態欄。</li>
+      <li>時段結束自然回復：下一次判斷即不再命中，無需排程、無需回寫狀態。</li>
+      <li>修改商戶狀態與預約維護<strong>互不影響</strong>：修改狀態不會刪除或變更預約維護（不跳提示），設定預約維護也不改狀態欄；同時存在時取較嚴格者生效（3.3 優先序表）。</li>
     </ul>
-
-    <h3>5.2 方案 B：狀態欄不調整，回傳時判斷</h3>
-    <ul>
-      <li>狀態欄維持操作人所設定的值，全站狀態仍只有三態，不因預約維護產生額外變化。</li>
-      <li>前台請求時，後端判斷當下是否落在該目標「啟用」中的維護時段內：是＝該目標回傳維護；否＝依狀態欄回傳。</li>
-      <li>時段結束自然回復，無恢復排程；手動狀態與預約維護各自獨立，取較嚴格者生效（同 4.3 優先序表）。</li>
-    </ul>
-
-    <div class="callout callout--info"><strong>備注：請 RD 確認採用 5.1 或 5.2 的做法。</strong>不論採用何者，驗收口徑一致＝啟用中的預約於時段內前台呈現維護、時段結束自動回復。</div>
   </section>
 
-  <footer class="doc-footer">OKF-2269 充值/提款新增預約維護功能 v1.0 ｜ 2026-09-07 ｜ 對應原型：本文件「改動頁面」各頁刻版</footer>
+  <footer class="doc-footer">OKF-2269 充值/提款新增預約維護功能 v2.0 ｜ 2026-09-09 ｜ 對應原型：本文件「改動頁面」各頁刻版</footer>
 </article>
 
-<!-- ============ 頁 1 充值展示配置：子渠道列表＋三態 ============ -->
+<!-- ============ 頁 1 在線商戶配置 ============ -->
 <article class="page" id="page-p1">
   <header class="doc-header">
+    <h1>在線商戶配置 <span class="badge badge--new">合併新頁</span> <span class="badge badge--logic">新增預約維護欄</span></h1>
+    <p class="doc-header__meta">充值配置 &gt; 在線商戶配置（菜單順序 2，支付層級配置下方） ｜ 原：在線支付商戶配置＋在線提款商戶配置 ｜ 對應規格書 3、4</p>
+  </header>
+
+  <section class="section">
+    <h2>頁面定位</h2>
+    <ul>
+      <li>原「在線支付商戶配置」與「在線提款商戶配置」合併為一頁「<strong>在線商戶配置</strong>」，移至「支付層級配置」下方；頁內兩個 TAB：<strong>充值商戶</strong>｜<strong>提款商戶</strong>。</li>
+      <li>兩 TAB 的列表欄位、新增／編輯彈窗與所有既有規則沿用原兩頁，不因合併而異動。</li>
+      <li>本次新增：兩 TAB 列表的狀態欄後方新增「<strong>預約維護</strong>」欄（規則見規格書 3）。</li>
+    </ul>
+  
+    <h3>名稱連動調整</h3>
+    <p>現行後台文案引用舊頁名之處，合併後同步改為「在線商戶配置」：</p>
+    <ul>
+      <li>在線支付展示配置——「未配置提醒條」文案中的頁名「在線支付商戶配置」→「在線商戶配置」。</li>
+      <li>其他後台文案凡引用「在線支付商戶配置」「在線提款商戶配置」者，一律同步改名。</li>
+    </ul>
+
+  </section>
+
+  <section class="section">
+    <h2>① 後台畫面（調整後預期）</h2>
+
+    <h3>充值商戶 TAB</h3>
+    <div class="mock">
+      <div class="mock__bar"><span class="mock__crumb">充值配置 &gt; 在線商戶配置</span></div>
+      <div class="mock__body">
+        <div class="mock__tabs">
+          <span class="mock__tab is-on">充值商戶 <span class="mk">A</span></span>
+          <span class="mock__tab">提款商戶</span>
+        </div>
+        <span class="mock__btn">新增</span>
+        <table style="margin-top:10px;">
+          <thead>
+            <tr><th>#</th><th>支付名稱</th><th>支付類型</th><th>渠道類型</th><th>商戶號</th><th>支付層級</th><th>狀態</th><th>預約維護 <span class="mk">B</span></th><th>幣種</th><th>操作</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1035</td><td>PayCools支付 - GCASH</td><td>PayCools支付 - GCASH</td><td>204 - Gcash（充值）</td><td>92d08d4acd5e43e698c</td><td class="dim">默认层；第二层⋯</td>
+              <td><span class="pill pill--ok">正常</span></td>
+              <td style="white-space:normal;">
+                <div class="mw-wrap">
+                  <div class="mw-line"><span class="mw">2026-09-10 02:00 ～ 2026-09-10 06:00</span><svg class="mw-del" viewBox="0 0 24 24" width="13" height="13" fill="#dc2626" aria-label="刪除"><path d="M9 3v1H4v2h16V4h-5V3H9zM6 8v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V8H6zm3 2h2v9H9v-9zm4 0h2v9h-2v-9z"/></svg></div>
+                  <div class="mw-line"><span class="mw">2026-09-17 02:00 ～ 2026-09-17 06:00</span><svg class="mw-del" viewBox="0 0 24 24" width="13" height="13" fill="#dc2626" aria-label="刪除"><path d="M9 3v1H4v2h16V4h-5V3H9zM6 8v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V8H6zm3 2h2v9H9v-9zm4 0h2v9h-2v-9z"/></svg></div>
+                  <span class="mw-add">＋</span>
+                </div>
+              </td>
+              <td>菲律宾比索</td><td><span class="op">编辑 停用 删除 复制</span></td>
+            </tr>
+            <tr>
+              <td>779</td><td>PayMaya--OKFUN</td><td>Maya(Maya)</td><td>206 - PayMaya（充值）</td><td>OKFunDirectPayPHP01</td><td class="dim">默认层；QASL⋯</td>
+              <td><span class="pill pill--ok">正常</span></td>
+              <td style="white-space:normal;">
+                <div class="mw-wrap">
+                  <div class="mw-line"><span class="mw">2026-09-09 01:00 ～ 2026-09-09 03:00</span><svg class="mw-del" viewBox="0 0 24 24" width="13" height="13" fill="#dc2626" aria-label="刪除"><path d="M9 3v1H4v2h16V4h-5V3H9zM6 8v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V8H6zm3 2h2v9H9v-9zm4 0h2v9h-2v-9z"/></svg></div>
+                  <span class="mw-add">＋</span>
+                </div>
+              </td>
+              <td>菲律宾比索</td><td><span class="op">编辑 停用 删除 复制</span></td>
+            </tr>
+            <tr>
+              <td>772</td><td>coins-qrph</td><td>Coins_QRPH</td><td>326 - dragonpay_qrph（充值）</td><td>ZTR3Z2swxAFr2BEqMr</td><td class="dim">第二层；默认层⋯</td>
+              <td><span class="pill pill--off">停用</span></td>
+              <td style="white-space:normal;">
+                <div class="mw-wrap">
+                  <span class="mw-add">＋</span>
+                </div>
+              </td>
+              <td>菲律宾比索</td><td><span class="op">编辑 启用 删除 复制</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="mock__note">
+        <ul style="margin:0;padding-left:1.3em;">
+          <li><span class="mk">A</span> 兩個 TAB：充值商戶（僅渠道類型「（充值）」記錄）｜提款商戶（僅「（代付）」記錄）；列表欄位與新增／編輯彈窗沿用原兩頁現行規則。「新增」鈕位於 TAB 內。商戶的新增／編輯彈窗<strong>不含</strong>預約維護欄位，預約維護僅於列表的預約維護欄管理。</li>
+          <li><span class="mk">B</span> 預約維護欄（新增，位於狀態欄後方）：已設定的時段<strong>一筆一行</strong>、依開始時間排序，格式「<strong>yyyy-mm-dd hh:mm ～ yyyy-mm-dd hh:mm</strong>」，完整顯示、不換行不截斷；<strong>紅色刪除 icon（🗑）在時間框外</strong>、緊接每筆後方；「<strong>＋</strong>」為<strong>藍色</strong>、固定顯示於最後一筆時段下方、<strong>置中</strong>；未設定任何時段時僅顯示置中的「＋」。每個商戶最多 10 筆，已達 10 筆時「＋」不顯示，刪除任一筆後重新顯示。</li>
+          <li>時段結束後該筆仍保留於欄內、不自動刪除，需人工刪除，仍計入 10 筆上限。</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>提款商戶 TAB</h3>
+    <div class="mock">
+      <div class="mock__bar"><span class="mock__crumb">充值配置 &gt; 在線商戶配置</span></div>
+      <div class="mock__body">
+        <div class="mock__tabs">
+          <span class="mock__tab">充值商戶</span>
+          <span class="mock__tab is-on">提款商戶</span>
+        </div>
+        <span class="mock__btn">新增</span>
+        <table style="margin-top:10px;">
+          <thead>
+            <tr><th>#</th><th>支付名稱</th><th>支付類型</th><th>渠道類型</th><th>商戶號</th><th>支付層級</th><th>狀態</th><th>預約維護 <span class="mk">B</span></th><th>幣種</th><th>操作</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>777</td><td>coins-instapay</td><td>coins代付</td><td>202（代付）</td><td>ZTR3Z2swxAFr2BEqMr</td><td class="dim">默认层；第二层⋯</td>
+              <td><span class="pill pill--ok">正常</span></td>
+              <td style="white-space:normal;">
+                <div class="mw-wrap">
+                  <div class="mw-line"><span class="mw">2026-09-12 00:00 ～ 2026-09-12 08:00</span><svg class="mw-del" viewBox="0 0 24 24" width="13" height="13" fill="#dc2626" aria-label="刪除"><path d="M9 3v1H4v2h16V4h-5V3H9zM6 8v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V8H6zm3 2h2v9H9v-9zm4 0h2v9h-2v-9z"/></svg></div>
+                  <span class="mw-add">＋</span>
+                </div>
+              </td>
+              <td>菲律宾比索</td><td><span class="op">编辑 停用 删除 复制</span></td>
+            </tr>
+            <tr>
+              <td>1037</td><td>PayCools代付 - GCASH</td><td>PayCools代付 - GCASH</td><td>202（代付）</td><td>92d08d4acd5e43e698c</td><td class="dim">默认层；第二层⋯</td>
+              <td><span class="pill pill--off">停用</span></td>
+              <td style="white-space:normal;">
+                <div class="mw-wrap">
+                  <span class="mw-add">＋</span>
+                </div>
+              </td>
+              <td>菲律宾比索</td><td><span class="op">编辑 启用 删除 复制</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="mock__note">預約維護欄規則兩 TAB 完全相同；差異僅在生效效果（規格書 3.2：充值商戶＝承接商戶入口顯示維護；代付商戶＝不走自動出款、前台不受影響）。</div>
+    </div>
+
+    <h3>新增預約維護（點「＋」）</h3>
+    <div class="mock mock--modal">
+      <div class="mock__bar"><span class="mock__crumb">預約維護欄——點「＋」後（欄內直接展開，無彈窗）</span></div>
+      <div class="mock__body">
+        <div class="mw-wrap">
+          <div class="mw-line"><span class="mw">2026-09-10 02:00 ～ 2026-09-10 06:00</span><svg class="mw-del" viewBox="0 0 24 24" width="13" height="13" fill="#dc2626" aria-label="刪除"><path d="M9 3v1H4v2h16V4h-5V3H9zM6 8v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V8H6zm3 2h2v9H9v-9zm4 0h2v9h-2v-9z"/></svg></div>
+          <div class="mw-line"><span class="mw" style="color:#9ca3af;min-width:16em;">🕐 開始時間 ～ 結束時間 <span class="mk" style="float:right;">C</span></span></div>
+        </div>
+      </div>
+      <div class="mock__note">
+        <ul style="margin:0;padding-left:1.3em;">
+          <li><span class="mk">C</span> 點「＋」後於欄內直接展開時間輸入框（無彈窗）；點擊輸入框展開日期＋時間選單，可點選或直接輸入，選定開始～結束後即新增一筆、顯示於欄內。</li>
+          <li>時間設定樣式沿用「<strong>活動配置（新）＞新增活動</strong>」的進行時間元件（Start Date／Start Time ～ End Date／End Time＋雙月曆選單）。</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>時間選單（點擊輸入框後展開，樣式沿用「活動配置（新）」）</h3>
+    <div class="mock mock--modal">
+      <div class="mock__bar"><span class="mock__crumb">預約維護欄——時間輸入框展開時間選單</span></div>
+      <div class="mock__body">
+        <div class="calwrap">
+          <div class="cal-inputs">
+            <span class="cbox">Start Date</span><span class="cbox">Start Time</span>
+            <span style="color:#64748b;">＞</span>
+            <span class="cbox">End Date</span><span class="cbox">End Time</span>
+          </div>
+          <div class="cal-cols">
+            <div class="cal"><span class="ttl">2026 September</span><span class="hd">Sun</span><span class="hd">Mon</span><span class="hd">Tue</span><span class="hd">Wed</span><span class="hd">Thu</span><span class="hd">Fri</span><span class="hd">Sat</span><span class="dm">30</span><span class="dm">31</span><span class="">1</span><span class="">2</span><span class="">3</span><span class="">4</span><span class="">5</span><span class="">6</span><span class="">7</span><span class="">8</span><span class="td">9</span><span class="">10</span><span class="">11</span><span class="">12</span><span class="">13</span><span class="">14</span><span class="">15</span><span class="">16</span><span class="">17</span><span class="">18</span><span class="">19</span><span class="">20</span><span class="">21</span><span class="">22</span><span class="">23</span><span class="">24</span><span class="">25</span><span class="">26</span><span class="">27</span><span class="">28</span><span class="">29</span><span class="">30</span><span class="dm">1</span><span class="dm">2</span><span class="dm">3</span><span class="dm">4</span><span class="dm">5</span><span class="dm">6</span><span class="dm">7</span><span class="dm">8</span><span class="dm">9</span><span class="dm">10</span></div>
+            <div class="cal"><span class="ttl">2026 October</span><span class="hd">Sun</span><span class="hd">Mon</span><span class="hd">Tue</span><span class="hd">Wed</span><span class="hd">Thu</span><span class="hd">Fri</span><span class="hd">Sat</span><span class="dm">27</span><span class="dm">28</span><span class="dm">29</span><span class="dm">30</span><span class="">1</span><span class="">2</span><span class="">3</span><span class="">4</span><span class="">5</span><span class="">6</span><span class="">7</span><span class="">8</span><span class="">9</span><span class="">10</span><span class="">11</span><span class="">12</span><span class="">13</span><span class="">14</span><span class="">15</span><span class="">16</span><span class="">17</span><span class="">18</span><span class="">19</span><span class="">20</span><span class="">21</span><span class="">22</span><span class="">23</span><span class="">24</span><span class="">25</span><span class="">26</span><span class="">27</span><span class="">28</span><span class="">29</span><span class="">30</span><span class="">31</span><span class="dm">1</span><span class="dm">2</span><span class="dm">3</span><span class="dm">4</span><span class="dm">5</span><span class="dm">6</span><span class="dm">7</span></div>
+          </div>
+          <div class="cal-foot">Clear　　OK</div>
+        </div>
+      </div>
+      <div class="mock__note">點擊時間輸入框後展開日期＋時間選單：上方 Start Date／Start Time ～ End Date／End Time 可直接輸入，下方雙月曆可點選日期；選定後按 OK 即新增一筆。樣式沿用「活動配置（新）＞新增活動」的進行時間元件。</div>
+    </div>
+
+    <h3>輸入限制與提示文案</h3>
+    <table class="tbl">
+      <thead><tr><th style="width:16em;">情境</th><th>行為與提示文案</th></tr></thead>
+      <tbody>
+        <tr><td>起訖時間未選擇完整</td><td>不新增；收起輸入框即不產生資料。</td></tr>
+        <tr><td>結束時間 ≤ 開始時間</td><td>不保存，toast「結束時間須晚於開始時間」。</td></tr>
+        <tr><td>開始時間早於當前時間</td><td><strong>不限制</strong>，可保存。</td></tr>
+        <tr><td>同一商戶時段重疊</td><td><strong>允許</strong>；重疊期間生效結果一致，不重複疊加。</td></tr>
+        <tr><td>該商戶已達 10 筆</td><td>「＋」<strong>不顯示</strong>；刪除任一筆後「＋」重新顯示。</td></tr>
+        <tr><td>選定起訖時間</td><td>即新增一筆並顯示於欄內，刷新該列。</td></tr>
+        <tr><td>點擊刪除 icon——正在維護時段內</td><td>確認彈窗「正在維護時段內，刪除後若無其他進行中的時段，將立即恢復當前狀態，確定刪除？」確定→toast「刪除成功」並刷新該列；取消→不動作。</td></tr>
+        <tr><td>點擊刪除 icon——不在維護時段內</td><td>確認彈窗「确认删除吗？」確定→toast「刪除成功」並刷新該列；取消→不動作。</td></tr>
+      </tbody>
+    </table>
+
+    <h3>名稱連動——未配置提醒條（在線支付展示配置）</h3>
+    <div class="mock">
+      <div class="mock__bar"><span class="mock__crumb">充值配置 &gt; 在線支付展示配置 &gt; 充值展示配置</span></div>
+      <div class="mock__body">
+        <div style="background:var(--color-warn-bg);border:1px solid var(--color-warn-line);border-radius:6px;padding:8px 12px;font-size:.7rem;position:relative;">
+          <span class="mk mk--float" style="left:-10px;top:-10px;">H</span>
+          ⚠ 有 1 個已啟用<strong style="color:var(--color-primary);">「在線商戶配置」</strong>對應的渠道類型尚未建立充值展示配置，請及時配置：<br>
+          渠道類型 320 - fortunepayFourth（<strong style="color:var(--color-primary);">「在線商戶配置」</strong>(按排序)：FortunePay四方支付【排序最前·默认显示】）
+        </div>
+      </div>
+      <div class="mock__note"><span class="mk">H</span> 提醒條文案中的頁名改為「在線商戶配置」；提醒條機制本身不變。</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>② 前台畫面（調整後預期）</h2>
+    <ul>
+      <li>時段內＝該商戶視同「維護」；時段外依當下狀態欄判斷，前台無任何預約痕跡。兩平台呈現邏輯相同，以下以 WOWGame 示意，維護樣式沿用前台既有樣式。</li>
+    </ul>
+
+    <h3>充值商戶預約維護（該商戶為 FortunePay 渠道類型的承接商戶）</h3>
+    <div class="fe-grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));">
+      <div class="fe">
+        <div class="fe__head"><span class="pill pill--maint">時段內</span></div>
+        <div class="fe__body">
+          <div class="fe__card">
+            <div class="fe__label">充值方式</div>
+            <div class="fe__tiles" style="grid-template-columns:repeat(2,1fr);">
+              <div class="tile">GCash</div>
+              <div class="tile tile--maint"><span>FortunePay</span></div>
+            </div>
+          </div>
+          <p style="font-size:.68rem;color:var(--color-text-soft);margin:0;">入口顯示維護、不可點選；子渠道（支付銀行）區塊不顯示。非承接商戶的預約維護不影響前台。</p>
+        </div>
+      </div>
+      <div class="fe">
+        <div class="fe__head"><span class="pill pill--ok">時段外</span></div>
+        <div class="fe__body">
+          <div class="fe__card">
+            <div class="fe__label">充值方式</div>
+            <div class="fe__tiles" style="grid-template-columns:repeat(2,1fr);">
+              <div class="tile">GCash</div>
+              <div class="tile is-sel">FortunePay</div>
+            </div>
+          </div>
+          <div class="fe__card">
+            <div class="fe__label">支付银行（子渠道）</div>
+            <div class="fe__tiles">
+              <div class="tile">BDO</div><div class="tile">BOC</div><div class="tile">ChinaBank</div>
+            </div>
+          </div>
+          <p style="font-size:.68rem;color:var(--color-text-soft);margin:0;">自動回復，依當下狀態欄判斷（示意為正常）。</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>提款商戶預約維護（不影響前台）</h3>
+    <div class="fe-grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));">
+      <div class="fe">
+        <div class="fe__head"><span class="pill pill--maint">時段內</span>＝<span class="pill pill--ok">時段外</span>（前台不變）</div>
+        <div class="fe__body">
+          <div class="fe__card">
+            <div class="fe__label">提款方式</div>
+            <div class="fe__tiles" style="grid-template-columns:repeat(2,1fr);">
+              <div class="tile">GCash</div>
+              <div class="tile is-sel">E-Wallet</div>
+            </div>
+          </div>
+          <div class="fe__card">
+            <div class="fe__label">选择账户</div>
+            <div class="fe__row"><span style="font-weight:700;">GrabPay</span><span class="acct">(******1234)</span></div>
+            <div class="fe__row"><span style="font-weight:700;">JuanCash</span><span class="acct">(******5655)</span></div>
+            <div class="fe__none">＋ 关联一个新账户</div>
+          </div>
+          <p style="font-size:.68rem;color:var(--color-text-soft);margin:0;"><strong>不影響前台顯示</strong>。時段內差異只在提款流程：綁定該商戶為自動出款商戶的銀行，不走自動出款、回人工出款（提款紀錄呈現同商戶維護／停用時的既有規則）；時段外依當下狀態欄判斷。</p>
+        </div>
+      </div>
+    </div>
+    <div class="rel-links"><strong>關聯頁面</strong>：上游——充值渠道管理（第一層）；下游——在線支付展示配置（顯示商戶綁定來源）、提款展示配置（自動出款商戶選項來源）；生效機制——規格書 4（後端判斷；預約維護不影響商戶狀態欄）。</div>
+  </section>
+</article>
+
+<!-- ============ 頁 2 在線支付展示配置：子渠道列表＋三態 ============ -->
+<article class="page" id="page-p2">
+  <header class="doc-header">
     <h1>在線支付展示配置 <span class="badge badge--logic">邏輯異動</span></h1>
-    <p class="doc-header__meta">充值配置 &gt; 在線支付展示配置 &gt; 充值展示配置頁籤 ｜ 改動範圍：新增／編輯彈窗的子渠道配置區（列表化＋三態） ｜ 對應規格書 3</p>
+    <p class="doc-header__meta">充值配置 &gt; 在線支付展示配置 &gt; 充值展示配置頁籤 ｜ 改動範圍：新增／編輯彈窗的子渠道配置區（列表化＋三態） ｜ 對應規格書 2</p>
   </header>
 
   <section class="section">
     <h2>頁面定位</h2>
     <ul>
       <li>改動僅在「充值展示配置」的<strong>新增／編輯彈窗內的子渠道配置區</strong>；彈窗上半部（渠道類型、顯示名、入口渠道圖示、分頁歸屬、排序、顯示商戶）與列表頁均不異動。</li>
-      <li>子渠道配置區改為<strong>列表（表格）呈現</strong>：一列＝一個子渠道，欄位為「名稱｜渠道圖示（日間）｜渠道圖示（夜間）｜分頁歸屬｜狀態」。</li>
-      <li>子渠道新增「<strong>狀態</strong>」欄（三態），為充值側第三層前台判斷的來源（見規格書 3.2）。</li>
+      <li>子渠道配置區改為<strong>列表（表格）呈現</strong>：一列＝一個子渠道，欄位為「名稱｜子渠道圖示（日間）｜子渠道圖示（夜間）｜分頁歸屬｜狀態」。</li>
+      <li>子渠道新增「<strong>狀態</strong>」欄（三態），為充值側第三層前台判斷的來源（規格書 2.2）。</li>
     </ul>
   </section>
 
@@ -531,16 +766,17 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
     <div class="mock mock--modal">
       <div class="mock__bar"><span class="mock__crumb">充值配置 &gt; 在線支付展示配置 &gt; 充值展示配置 ｜ 編輯彈窗——子渠道區</span></div>
       <div class="mock__body">
-        <p style="font-size:.68rem;color:#9ca3af;margin-bottom:8px;">（彈窗上半部：渠道類型／顯示名／渠道圖示（日間・夜間）／分頁歸屬／排序／顯示商戶——均不異動，略）</p>
+        <p style="font-size:.68rem;color:#9ca3af;margin-bottom:8px;">（彈窗上半部：渠道類型／顯示名／渠道圖示（日間・夜間）／分頁歸屬／排序——顯示商戶以上欄位均不異動，略）</p>
+        <div class="frow"><label><span class="req">*</span>顯示商戶:</label><span class="fbox">【排序最前·默认显示】FortunePay支付 / 在線支付（正常）</span></div>
         <div class="frow" style="margin-bottom:6px;"><label><span class="req">*</span>子渠道列表:</label><span class="fnote" style="position:relative;"><span class="mk">A</span></span></div>
         <table>
           <thead>
             <tr>
               <th style="text-align:left;">名稱 <span class="mk">E</span></th>
-              <th>渠道圖示（日間） <span class="mk">B</span><br><span style="font-weight:400;font-size:.6rem;color:#9ca3af;">建議尺寸：232 × 76</span></th>
-              <th>渠道圖示（夜間）<br><span style="font-weight:400;font-size:.6rem;color:#9ca3af;">建議尺寸：232 × 76</span></th>
+              <th><span class="req">*</span>子渠道圖示（日間） <span class="mk">B</span><br><span style="font-weight:400;font-size:.6rem;color:#9ca3af;">建議尺寸：232 × 76</span></th>
+              <th><span class="req">*</span>子渠道圖示（夜間）<br><span style="font-weight:400;font-size:.6rem;color:#9ca3af;">建議尺寸：232 × 76</span></th>
               <th>分頁歸屬 <span class="mk">C</span></th>
-              <th>狀態 <span class="mk">D</span></th>
+              <th><span class="req">*</span>狀態 <span class="mk">D</span></th>
             </tr>
           </thead>
           <tbody>
@@ -579,7 +815,7 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
       <div class="mock__note">
         <ul style="margin:0;padding-left:1.3em;">
           <li><span class="mk">A</span> 子渠道配置區改為列表：一列＝一個子渠道，取代現行直式區塊排版；列表出現條件與清單來源不變（該渠道類型有 2 個含以上子渠道、由金流後台回傳）。</li>
-          <li><span class="mk">B</span> 圖片欄：未上傳顯示「＋」，點擊開啟選擇檔案；已上傳顯示縮圖於格內，縮圖右上角🗑可刪除，刪除後恢復「＋」；點縮圖可預覽原圖。建議尺寸文案放在欄位名稱下方換行顯示。必填檢核維持現行規則（本次僅改排版，不改必填與格式限制）。</li>
+          <li><span class="mk">B</span> 圖片欄：未上傳顯示「＋」，點擊開啟選擇檔案；已上傳顯示縮圖於格內，縮圖右上角🗑可刪除，刪除後恢復「＋」；點縮圖可預覽原圖。建議尺寸文案放在欄位名稱下方換行顯示。</li>
           <li><span class="mk">C</span> 分頁歸屬：多選下拉，選項來源＝「分頁類型設定」頁籤（同現行勾選項）；<strong>默認全勾</strong>。下拉框寬度自適應，已勾選項以逗號並列<strong>完整顯示</strong>、不截斷。</li>
           <li><span class="mk">D</span> 狀態：單選下拉，選項固定為 正常／維護／停用；<strong>默認「正常」</strong>（新增、以及既有資料上線轉換皆同）。</li>
           <li><span class="mk">E</span> 名稱欄：帶出金流後台回傳之子渠道名稱（不可編輯）；一行無法完整呈現時<strong>自動換行</strong>，完整顯示名稱。</li>
@@ -618,17 +854,17 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
       <div class="mock__bar"><span class="mock__crumb">充值配置 &gt; 在線支付展示配置 &gt; 充值展示配置 ｜ 新增彈窗</span></div>
       <div class="mock__body">
         <div class="frow"><label><span class="req">*</span>渠道類型:</label><span class="fbox">212 - FortunePay</span></div>
-        <p style="font-size:.68rem;color:#9ca3af;margin:0 0 8px;">（顯示名、渠道圖示（日間・夜間）、分頁歸屬、排序等欄位——均不異動，略）</p>
+        <p style="font-size:.68rem;color:#9ca3af;margin:0 0 8px;">（顯示名、渠道圖示（日間・夜間）、分頁歸屬、排序等欄位——均不異動，略；渠道類型下拉維持現行規則：僅列出底下至少一筆商戶為正常或維護的渠道類型）</p>
         <div class="frow"><label><span class="req">*</span>顯示商戶:</label><span class="fbox">【排序最前·默认显示】FortunePay支付 / 在線支付（正常） <span class="mk" style="float:right;">F</span></span></div>
         <div class="frow" style="margin-bottom:6px;"><label><span class="req">*</span>子渠道列表:</label><span class="fnote" style="position:relative;"><span class="mk">G</span></span></div>
         <table>
           <thead>
             <tr>
               <th style="text-align:left;">名稱</th>
-              <th>渠道圖示（日間）<br><span style="font-weight:400;font-size:.6rem;color:#9ca3af;">建議尺寸：232 × 76</span></th>
-              <th>渠道圖示（夜間）<br><span style="font-weight:400;font-size:.6rem;color:#9ca3af;">建議尺寸：232 × 76</span></th>
+              <th><span class="req">*</span>子渠道圖示（日間）<br><span style="font-weight:400;font-size:.6rem;color:#9ca3af;">建議尺寸：232 × 76</span></th>
+              <th><span class="req">*</span>子渠道圖示（夜間）<br><span style="font-weight:400;font-size:.6rem;color:#9ca3af;">建議尺寸：232 × 76</span></th>
               <th>分頁歸屬</th>
-              <th>狀態</th>
+              <th><span class="req">*</span>狀態</th>
             </tr>
           </thead>
           <tbody>
@@ -700,16 +936,16 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
             <li><span class="mk">A</span> 子渠道配置區列表化：一列一個子渠道，一屏可同時檢視多筆的圖片、分頁歸屬與狀態。</li>
             <li><span class="mk">B</span> 圖片於列表格內「＋」上傳、縮圖直接顯示於列表內。</li>
             <li><span class="mk">C</span> 分頁歸屬改為多選下拉（原為橫排 checkbox），默認全勾。</li>
-            <li><span class="mk">D</span> 新增「狀態」欄三態，默認正常；前台第三層依此判斷（規格書 3.2、3.3）。</li>
+            <li><span class="mk">D</span> 新增「狀態」欄三態，默認正常；前台第三層依此判斷（規格書 2.2、2.3）。</li>
           </ul>
         </div>
       </div>
       <div class="compare__col compare__col--old">
-        <div class="compare__head">原邏輯與問題</div>
+        <div class="compare__head">原邏輯</div>
         <div class="compare__body">
           <ul>
             <li>子渠道為直式區塊排版：每個子渠道依序堆疊「名稱→日間圖上傳→圖→夜間圖上傳→圖→分頁歸屬」，子渠道多個時不容易看。</li>
-            <li>子渠道無「狀態」欄位可設定。</li>
+            <li>子渠道無「狀態」欄位可設定（充值側不做子通道狀態判斷）。</li>
           </ul>
         </div>
       </div>
@@ -777,543 +1013,11 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
               <div class="tile">BDO</div><div class="tile">BOC</div>
             </div>
           </div>
-          <p style="font-size:.68rem;color:var(--color-text-soft);margin:0;">ChinaBank 不顯示，僅剩其他子渠道。</p>
+          <p style="font-size:.68rem;color:var(--color-text-soft);margin:0;">ChinaBank 不顯示，僅剩其他子渠道；全部子渠道皆停用時，該入口自動不顯示。</p>
         </div>
       </div>
     </div>
-    <div class="rel-links"><strong>關聯頁面</strong>：上游——充值渠道管理（第一層）、在線支付商戶配置（第二層，入口狀態）；同頁新頁籤——預約維護時間（時段內呈現同「維護」，見規格書 4）。</div>
-  </section>
-</article>
-
-<!-- ============ 頁 2 預約維護時間 ============ -->
-<article class="page" id="page-p2">
-  <header class="doc-header">
-    <h1>預約維護時間 <span class="badge badge--new">新增頁籤</span></h1>
-    <p class="doc-header__meta">充值配置 &gt; 在線支付展示配置 &gt; 預約維護時間頁籤（新增） ｜ 對應規格書 4、5</p>
-  </header>
-
-  <section class="section">
-    <h2>頁面定位</h2>
-    <ul>
-      <li>「在線支付展示配置」原有兩個頁籤（充值展示配置、分頁類型設定），本次新增第三個頁籤「<strong>預約維護時間</strong>」。</li>
-      <li>集中管理主渠道／子渠道的預約維護時段：因同一目標可能有<strong>多個時段</strong>，不放進充值展示配置的編輯彈窗，改以獨立頁籤逐筆管理。</li>
-      <li>每筆＝一個目標＋一個時段，含「啟用狀態」（啟用／停用）；<strong>僅「維護時間」與「啟用狀態」可編輯</strong>（臨時拉長維護、暫停該筆預約），主渠道／子渠道設定後不可修改，需更換目標時刪除重建。</li>
-    </ul>
-  </section>
-
-  <section class="section">
-    <h2>① 後台畫面（調整後預期）</h2>
-
-    <h3>列表</h3>
-    <div class="mock">
-      <div class="mock__bar"><span class="mock__crumb">充值配置 &gt; 在線支付展示配置</span></div>
-      <div class="mock__body">
-        <div class="mock__tabs">
-          <span class="mock__tab">充值展示配置</span>
-          <span class="mock__tab">分頁類型設定</span>
-          <span class="mock__tab is-on">預約維護時間 <span class="mk">A</span></span>
-        </div>
-        <span class="mock__btn">新增</span>
-        <table style="margin-top:10px;">
-          <thead>
-            <tr><th>主渠道 <span class="mk">B</span></th><th>子渠道 <span class="mk">C</span></th><th>維護時間 <span class="mk">D</span></th><th>啟用狀態 <span class="mk">E</span></th><th>操作 <span class="mk">F</span></th></tr>
-          </thead>
-          <tbody>
-            <tr><td>212 - FortunePay（充值） - FortunePay-ZH</td><td>Banco De Oro Unibank;BDO</td><td>2026-09-10 02:00 ～ 2026-09-10 06:00 <span class="time-badge time-badge--wait">未開始</span></td><td><span class="pill pill--ok">啟用</span></td><td><span class="op">编辑 删除</span></td></tr>
-            <tr><td>212 - FortunePay（充值） - FortunePay-ZH</td><td>Banco De Oro Unibank;BDO</td><td>2026-09-10 04:00 ～ 2026-09-10 09:00 <span class="time-badge time-badge--wait">未開始</span></td><td><span class="pill pill--ok">啟用</span></td><td><span class="op">编辑 删除</span></td></tr>
-            <tr><td>212 - FortunePay（充值） - FortunePay-ZH</td><td class="dim">-</td><td>2026-09-08 01:00 ～ 2026-09-08 03:00 <span class="time-badge time-badge--on">進行中</span></td><td><span class="pill pill--ok">啟用</span></td><td><span class="op">编辑 删除</span></td></tr>
-            <tr><td>333 - CoinPH-支付（充值） - Wow-CoinPH-webPay</td><td class="dim">-</td><td>2026-09-12 00:00 ～ 2026-09-12 08:00 <span class="time-badge time-badge--wait">未開始</span></td><td><span class="pill pill--off">停用</span></td><td><span class="op">编辑 删除</span></td></tr>
-            <tr><td>212 - FortunePay（充值） - FortunePay-ZH</td><td>Maybank</td><td>2026-09-03 02:00 ～ 2026-09-03 06:00 <span class="time-badge time-badge--end">已結束</span></td><td><span class="pill pill--ok">啟用</span></td><td><span class="op">编辑 删除</span></td></tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="mock__note">
-        <ul style="margin:0;padding-left:1.3em;">
-          <li><span class="mk">A</span> 新增頁籤，排於「分頁類型設定」之後。</li>
-          <li><span class="mk">B</span> 主渠道欄：顯示「渠道類型 - 渠道名稱 - 顯示名」。</li>
-          <li><span class="mk">C</span> 子渠道欄：預約目標為子渠道時顯示子渠道名稱（渠道名稱）；為主渠道（或該主渠道無子渠道）時顯示「-」。同一主渠道可同時存在「主渠道」與「子渠道」的預約，各自獨立生效。</li>
-          <li><span class="mk">D</span> 維護時間：開始 ～ 結束（精確到分）；「未開始／進行中／已結束」標記依當下時間顯示。同一目標的時段<strong>可重疊</strong>（示意第 1、2 筆）。時段結束後該筆標示「<strong>已結束</strong>」並保留於列表，<strong>不會自動刪除</strong>，需人工刪除。</li>
-          <li><span class="mk">E</span> 啟用狀態：啟用／停用，<strong>皆為人工調整</strong>，系統不會自動變更（時段結束也不會自動變停用）。停用＝該筆維護設置不生效（時段內亦不套用維護）。新增時默認「啟用」；於編輯彈窗修改，<strong>保存後即生效</strong>——進行中的預約改為停用，前台立即回復；改回啟用且仍在時段內，立即生效。</li>
-          <li><span class="mk">F</span> 操作欄＝「編輯」「刪除」：編輯僅可修改維護時間與啟用狀態（見編輯彈窗）；排序、篩選等其餘功能本次不做。</li>
-        </ul>
-      </div>
-    </div>
-
-    <h3>新增彈窗</h3>
-    <div class="mock mock--modal">
-      <div class="mock__bar"><span class="mock__crumb">新增預約維護時間（彈窗）</span></div>
-      <div class="mock__body">
-        <div class="frow"><label><span class="req">*</span>主渠道:</label>
-          <span style="flex:1;max-width:340px;">
-            <span class="fbox" style="display:block;max-width:none;">Select <span class="mk" style="float:right;">G</span></span>
-            <span style="display:block;border:1px solid #d1d5db;border-top:0;border-radius:0 0 4px 4px;font-size:.7rem;background:#fff;">
-              <span style="display:block;padding:3px 10px;">203 - 網銀（充值） - ARX</span>
-              <span style="display:block;padding:3px 10px;background:#f0f7ff;color:var(--color-primary);font-weight:700;">212 - FortunePay（充值） - FortunePay-ZH</span>
-              <span style="display:block;padding:3px 10px;">315 - BankTransfer（充值） - BankTransfer</span>
-              <span style="display:block;padding:3px 10px;">333 - CoinPH-支付（充值） - Wow-CoinPH-webPay</span>
-            </span>
-          </span>
-        </div>
-        <div class="frow"><label><span class="req">*</span>子渠道:</label>
-          <span style="flex:1;max-width:340px;">
-            <span class="fbox" style="display:block;max-width:none;">Select <span class="mk" style="float:right;">H</span></span>
-            <span style="display:block;border:1px solid #d1d5db;border-top:0;border-radius:0 0 4px 4px;font-size:.7rem;background:#fff;">
-              <span style="display:block;padding:3px 10px;background:#f0f7ff;color:var(--color-primary);font-weight:700;">-（整個主渠道）</span>
-              <span style="display:block;padding:3px 10px;">Banco De Oro Unibank;BDO</span>
-              <span style="display:block;padding:3px 10px;">Bank of Commerce;BOC</span>
-              <span style="display:block;padding:3px 10px;">ChinaBank;CB;China Bank;CHBK</span>
-              <span style="display:block;padding:3px 10px;">Maybank</span>
-            </span>
-          </span>
-        </div>
-        <div class="frow"><label><span class="req">*</span>維護時間:</label>
-          <span><span class="fbox" style="max-width:180px;display:inline-block;">開始時間（日期＋時分）</span> ～ <span class="fbox" style="max-width:180px;display:inline-block;">結束時間（日期＋時分）</span> <span class="mk">I</span></span>
-        </div>
-        <div class="frow"><label><span class="req">*</span>啟用狀態:</label>
-          <span><span class="fradio"><span class="dot on"></span>啟用</span><span class="fradio"><span class="dot"></span>停用</span> <span class="mk">J</span></span>
-        </div>
-        <p style="text-align:right;margin:10px 0 0;"><span class="mock__btn mock__btn--ghost">取 消</span>　<span class="mock__btn">确 定</span></p>
-      </div>
-      <div class="mock__note">
-        <ul style="margin:0;padding-left:1.3em;">
-          <li><span class="mk">G</span> 主渠道下拉（單選、必填）：來源＝「充值展示配置」頁籤<strong>已建立</strong>的渠道類型清單，格式「<strong>渠道類型 - 渠道名稱 - 顯示名</strong>」；未建立展示配置的渠道類型不出現。</li>
-          <li><span class="mk">H</span> 子渠道下拉（單選、必填）：來源＝所選主渠道的子渠道清單（同充值展示配置編輯內的子渠道列表），首項固定為「-（整個主渠道）」且為默認值。<strong>主渠道無子渠道（或僅 1 個子渠道、無子渠道列表）時，本欄鎖定顯示「-」不可選</strong>。未選主渠道前，本欄鎖定不可選。切換主渠道時，本欄重置回「-」。</li>
-          <li><span class="mk">I</span> 維護時間（必填）：開始／結束皆為日期＋時間（精確到分）。</li>
-          <li><span class="mk">J</span> 啟用狀態（單選、必填）：啟用／停用，<strong>默認「啟用」</strong>。</li>
-        </ul>
-      </div>
-    </div>
-
-    <h3>編輯彈窗（僅可修改維護時間與啟用狀態）</h3>
-    <div class="mock mock--modal">
-      <div class="mock__bar"><span class="mock__crumb">編輯預約維護時間（彈窗）</span></div>
-      <div class="mock__body">
-        <div class="frow"><label>主渠道:</label><span class="fbox" style="background:#f3f4f6;">212 - FortunePay（充值） - FortunePay-ZH（鎖定）</span></div>
-        <div class="frow"><label>子渠道:</label><span class="fbox" style="background:#f3f4f6;">Banco De Oro Unibank;BDO（鎖定）</span></div>
-        <div class="frow"><label><span class="req">*</span>維護時間:</label>
-          <span><span class="fbox" style="max-width:180px;display:inline-block;">2026-09-10 02:00</span> ～ <span class="fbox" style="max-width:180px;display:inline-block;">2026-09-10 06:00</span> <span class="mk">K</span></span>
-        </div>
-        <div class="frow"><label><span class="req">*</span>啟用狀態:</label>
-          <span><span class="fradio"><span class="dot on"></span>啟用</span><span class="fradio"><span class="dot"></span>停用</span></span>
-        </div>
-        <p style="text-align:right;margin:10px 0 0;"><span class="mock__btn mock__btn--ghost">取 消</span>　<span class="mock__btn">确 定</span></p>
-      </div>
-      <div class="mock__note"><span class="mk">K</span> 編輯僅開放「維護時間」與「啟用狀態」（例如臨時拉長維護、暫停該筆預約）；主渠道、子渠道鎖定不可修改。編輯<strong>不分預約狀態</strong>（未開始／進行中／已結束規則相同），保存後即生效。</div>
-    </div>
-
-    <h3>輸入限制與提示文案</h3>
-    <table class="tbl">
-      <thead><tr><th style="width:16em;">情境</th><th>行為與提示文案</th></tr></thead>
-      <tbody>
-        <tr><td>任一必填未填即按確定</td><td>不保存，未填欄位標紅，toast「請完成必填項後再保存」。</td></tr>
-        <tr><td>結束時間 ≤ 開始時間</td><td>不保存，toast「結束時間須晚於開始時間」。</td></tr>
-        <tr><td>開始時間早於當前時間</td><td><strong>不限制</strong>，可保存（新增與編輯皆同）。</td></tr>
-        <tr><td>同一目標時段重疊</td><td><strong>允許</strong>（臨時拉長維護可直接編輯該筆維護時間，或另新增一筆）；重疊期間生效結果一致，不重複疊加。</td></tr>
-        <tr><td>啟用狀態變更</td><td><strong>保存後即生效</strong>。</td></tr>
-        <tr><td>新增／編輯保存成功</td><td>toast「保存成功」，關閉彈窗並刷新列表（新增的啟用狀態默認「啟用」）。</td></tr>
-        <tr><td>點擊「删除」——正在維護時段內</td><td>確認彈窗「正在維護時段內，刪除後將立即恢復當前狀態，確定刪除？」確定→toast「刪除成功」並刷新列表；取消→不動作。</td></tr>
-        <tr><td>點擊「删除」——不在維護時段內</td><td>確認彈窗「确认删除吗？」確定→toast「刪除成功」並刷新列表；取消→不動作。</td></tr>
-      </tbody>
-    </table>
-  </section>
-
-  <section class="section">
-    <h2>② 邏輯對照</h2>
-    <div class="compare">
-      <div class="compare__col compare__col--new">
-        <div class="compare__head">新邏輯</div>
-        <div class="compare__body">
-          <ul>
-            <li><span class="mk">A</span> 獨立頁籤集中管理預約維護，同一目標可設多筆時段、時段可重疊。</li>
-            <li>到點自動生效：時段內主渠道＝入口顯示維護；子渠道＝僅該子渠道顯示維護（規格書 4.2）。時段結束自動回復，無需人工。</li>
-            <li>與手動狀態並存時取較嚴格者（規格書 4.3 優先序表）。</li>
-            <li><span class="mk">E</span> 每筆含啟用／停用；<span class="mk">F</span> 編輯僅可修改維護時間與啟用狀態；刪除或停用進行中的預約＝立即失效。</li>
-          </ul>
-        </div>
-      </div>
-      <div class="compare__col compare__col--old">
-        <div class="compare__head">原邏輯</div>
-        <div class="compare__body">
-          <ul>
-            <li>無預約維護功能：維護到點須人工把狀態改為「維護」，結束再人工改回。</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <h2>③ 前台畫面（調整後預期）</h2>
-    <ul>
-      <li>時段內的前台呈現<strong>完全等同</strong>對應層級的「維護」狀態；時段外依當下後台狀態欄正常判斷，前台無任何預約痕跡。</li>
-      <li>兩平台呈現邏輯相同。以下以 WOWGame 示意，維護樣式沿用前台既有樣式。</li>
-    </ul>
-
-    <h3>主渠道預約維護（以 FortunePay 為例）</h3>
-    <div class="fe-grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));">
-      <div class="fe">
-        <div class="fe__head"><span class="pill pill--maint">時段內</span></div>
-        <div class="fe__body">
-          <div class="fe__card">
-            <div class="fe__label">充值方式</div>
-            <div class="fe__tiles" style="grid-template-columns:repeat(2,1fr);">
-              <div class="tile">GCash</div>
-              <div class="tile tile--maint"><span>FortunePay</span></div>
-            </div>
-          </div>
-          <p style="font-size:.68rem;color:var(--color-text-soft);margin:0;">入口顯示維護、不可點選；子渠道（支付銀行）區塊不顯示。</p>
-        </div>
-      </div>
-      <div class="fe">
-        <div class="fe__head"><span class="pill pill--ok">時段外</span></div>
-        <div class="fe__body">
-          <div class="fe__card">
-            <div class="fe__label">充值方式</div>
-            <div class="fe__tiles" style="grid-template-columns:repeat(2,1fr);">
-              <div class="tile">GCash</div>
-              <div class="tile is-sel">FortunePay</div>
-            </div>
-          </div>
-          <div class="fe__card">
-            <div class="fe__label">支付银行（子渠道）</div>
-            <div class="fe__tiles">
-              <div class="tile">BDO</div><div class="tile">BOC</div><div class="tile">ChinaBank</div>
-            </div>
-          </div>
-          <p style="font-size:.68rem;color:var(--color-text-soft);margin:0;">自動回復，依當下狀態欄判斷（示意為正常）。</p>
-        </div>
-      </div>
-    </div>
-
-    <h3>子渠道預約維護（以 ChinaBank 為例）</h3>
-    <div class="fe-grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));">
-      <div class="fe">
-        <div class="fe__head"><span class="pill pill--maint">時段內</span></div>
-        <div class="fe__body">
-          <div class="fe__card">
-            <div class="fe__label">充值方式</div>
-            <div class="fe__tiles" style="grid-template-columns:repeat(2,1fr);">
-              <div class="tile">GCash</div>
-              <div class="tile is-sel">FortunePay</div>
-            </div>
-          </div>
-          <div class="fe__card">
-            <div class="fe__label">支付银行（子渠道）</div>
-            <div class="fe__tiles">
-              <div class="tile">BDO</div><div class="tile">BOC</div><div class="tile tile--maint"><span>ChinaBank</span></div>
-            </div>
-          </div>
-          <p style="font-size:.68rem;color:var(--color-text-soft);margin:0;">入口照常；僅 ChinaBank 顯示維護、不可點選，其他子渠道不受影響。</p>
-        </div>
-      </div>
-      <div class="fe">
-        <div class="fe__head"><span class="pill pill--ok">時段外</span></div>
-        <div class="fe__body">
-          <div class="fe__card">
-            <div class="fe__label">充值方式</div>
-            <div class="fe__tiles" style="grid-template-columns:repeat(2,1fr);">
-              <div class="tile">GCash</div>
-              <div class="tile is-sel">FortunePay</div>
-            </div>
-          </div>
-          <div class="fe__card">
-            <div class="fe__label">支付银行（子渠道）</div>
-            <div class="fe__tiles">
-              <div class="tile">BDO</div><div class="tile">BOC</div><div class="tile">ChinaBank</div>
-            </div>
-          </div>
-          <p style="font-size:.68rem;color:var(--color-text-soft);margin:0;">自動回復，依當下狀態欄判斷（示意為正常）。</p>
-        </div>
-      </div>
-    </div>
-    <div class="rel-links"><strong>關聯頁面</strong>：下拉來源——充值展示配置頁籤（主渠道＝已建立的渠道類型；子渠道＝其子渠道列表）；生效機制——規格書 5（5.1 排程直接改狀態欄／5.2 狀態欄不動、回傳時判斷，請 RD 確認擇一）。</div>
-  </section>
-</article>
-
-<!-- ============ 頁 3 提款展示配置：預約維護時間 ============ -->
-<article class="page" id="page-p3">
-  <header class="doc-header">
-    <h1>提款展示配置 <span class="badge badge--new">新增頁籤</span></h1>
-    <p class="doc-header__meta">充值配置 &gt; 提款展示配置 &gt; 預約維護時間頁籤（新增） ｜ 對應規格書 4.4、5</p>
-  </header>
-
-  <section class="section">
-    <h2>頁面定位</h2>
-    <ul>
-      <li>「提款展示配置」原本<strong>沒有 TAB 分頁</strong>，本次改為 TAB 結構：原頁面內容放在「<strong>提款展示配置</strong>」TAB，並新增「<strong>預約維護時間</strong>」TAB。</li>
-      <li>預約維護規則：
-        <ul>
-          <li>同一目標可設<strong>多筆</strong>時段、同目標時段<strong>可重疊</strong>。</li>
-          <li>每筆含「啟用狀態」（啟用／停用，皆人工調整，系統不自動變更）；修改後<strong>保存即生效</strong>。</li>
-          <li><strong>僅可編輯「維護時間」與「啟用狀態」</strong>，維護對象與目標選定後不可修改，需更換時刪除重建。</li>
-          <li>時段結束標示「已結束」並保留於列表，需人工刪除。</li>
-        </ul>
-      </li>
-      <li>維護對象分兩種，新增時<strong>先選其一</strong>：<strong>第三方代付商戶</strong>｜<strong>提款銀行</strong>。
-        <ul>
-          <li><strong>提款銀行</strong>：提款展示配置只管前台顯示哪些銀行，維護針對已設定的銀行、與商戶無關。</li>
-          <li><strong>第三方代付商戶</strong>：因銀行可設定自動出款走哪個商戶，商戶的預約維護也在本頁籤設定。</li>
-        </ul>
-      </li>
-    </ul>
-  </section>
-
-  <section class="section">
-    <h2>① 後台畫面（調整後預期）</h2>
-
-    <h3>列表</h3>
-    <div class="mock">
-      <div class="mock__bar"><span class="mock__crumb">充值配置 &gt; 提款展示配置</span></div>
-      <div class="mock__body">
-        <div class="mock__tabs">
-          <span class="mock__tab">提款展示配置</span>
-          <span class="mock__tab is-on">預約維護時間 <span class="mk">A</span></span>
-        </div>
-        <span class="mock__btn">新增</span>
-        <table style="margin-top:10px;">
-          <thead>
-            <tr><th>維護對象 <span class="mk">B</span></th><th>主渠道 <span class="mk">C</span></th><th>子渠道 <span class="mk">D</span></th><th>維護時間</th><th>啟用狀態</th><th>操作</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>提款銀行</td><td>一般銀行</td><td>4136 - BPI</td><td>2026-09-10 02:00 ～ 2026-09-10 06:00 <span class="time-badge time-badge--wait">未開始</span></td><td><span class="pill pill--ok">啟用</span></td><td><span class="op">编辑 删除</span></td></tr>
-            <tr><td>提款銀行</td><td>eWallet</td><td>98 - JuanCash</td><td>2026-09-08 01:00 ～ 2026-09-08 03:00 <span class="time-badge time-badge--on">進行中</span></td><td><span class="pill pill--ok">啟用</span></td><td><span class="op">编辑 删除</span></td></tr>
-            <tr><td>第三方代付商戶</td><td>202（代付） - FortunePay代付</td><td class="dim">-</td><td>2026-09-12 00:00 ～ 2026-09-12 08:00 <span class="time-badge time-badge--wait">未開始</span></td><td><span class="pill pill--off">停用</span></td><td><span class="op">编辑 删除</span></td></tr>
-            <tr><td>第三方代付商戶</td><td>202（代付） - coins-instapay</td><td class="dim">-</td><td>2026-09-03 02:00 ～ 2026-09-03 06:00 <span class="time-badge time-badge--end">已結束</span></td><td><span class="pill pill--ok">啟用</span></td><td><span class="op">编辑 删除</span></td></tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="mock__note">
-        <ul style="margin:0;padding-left:1.3em;">
-          <li><span class="mk">A</span> 原頁面改為 TAB 結構：原內容放「提款展示配置」TAB，新增「預約維護時間」TAB。「未開始／進行中／已結束」標記依當下時間顯示；同目標時段可重疊；時段結束標示「已結束」並保留、不自動刪除，需人工刪除；啟用／停用皆人工調整，系統不自動變更。</li>
-          <li><span class="mk">B</span> 維護對象欄：顯示「第三方代付商戶」或「提款銀行」，兩種預約共用同一列表。</li>
-          <li><span class="mk">C</span> 主渠道欄：提款銀行＝銀行種類（一般銀行｜eWallet）；第三方代付商戶＝「渠道類型 - 支付名稱」。</li>
-          <li><span class="mk">D</span> 子渠道欄：提款銀行＝「編號 - 銀行名稱」；第三方代付商戶＝顯示「-」。</li>
-        </ul>
-      </div>
-    </div>
-
-    <h3>新增彈窗——維護對象選「第三方代付商戶」</h3>
-    <div class="mock mock--modal">
-      <div class="mock__bar"><span class="mock__crumb">新增預約維護時間（彈窗）</span></div>
-      <div class="mock__body">
-        <div class="frow"><label><span class="req">*</span>維護對象:</label>
-          <span><span class="fradio"><span class="dot on"></span>第三方代付商戶</span><span class="fradio"><span class="dot"></span>提款銀行</span> <span class="mk">E</span></span>
-        </div>
-        <div class="frow"><label><span class="req">*</span>主渠道:</label>
-          <span style="flex:1;max-width:340px;">
-            <span class="fbox" style="display:block;max-width:none;">Select <span class="mk" style="float:right;">F</span></span>
-            <span style="display:block;border:1px solid #d1d5db;border-top:0;border-radius:0 0 4px 4px;font-size:.7rem;background:#fff;">
-              <span style="display:block;padding:3px 10px;">202（代付） - PayCools代付 - GCASH</span>
-              <span style="display:block;padding:3px 10px;background:#f0f7ff;color:var(--color-primary);font-weight:700;">202（代付） - FortunePay代付</span>
-              <span style="display:block;padding:3px 10px;">202（代付） - coins-instapay</span>
-            </span>
-          </span>
-        </div>
-        <div class="frow"><label>子渠道:</label><span class="fbox" style="background:#f3f4f6;">- <span class="mk" style="float:right;">G</span></span></div>
-        <div class="frow"><label><span class="req">*</span>維護時間:</label>
-          <span><span class="fbox" style="max-width:180px;display:inline-block;">開始時間（日期＋時分）</span> ～ <span class="fbox" style="max-width:180px;display:inline-block;">結束時間（日期＋時分）</span></span>
-        </div>
-        <div class="frow"><label><span class="req">*</span>啟用狀態:</label>
-          <span><span class="fradio"><span class="dot on"></span>啟用</span><span class="fradio"><span class="dot"></span>停用</span> <span class="mk">J</span></span>
-        </div>
-        <p style="text-align:right;margin:10px 0 0;"><span class="mock__btn mock__btn--ghost">取 消</span>　<span class="mock__btn">确 定</span></p>
-      </div>
-      <div class="mock__note">
-        <ul style="margin:0;padding-left:1.3em;">
-          <li><span class="mk">E</span> 維護對象（單選、必填）：進入彈窗先選維護對象；未選前，主渠道與子渠道下拉顯示 <strong>No Data</strong>、不可選；切換維護對象時，下方欄位重置。</li>
-          <li><span class="mk">F</span> 主渠道下拉（單選、必填）：來源＝「在線提款商戶配置」已建立的商戶，格式「渠道類型 - 支付名稱」。</li>
-          <li><span class="mk">G</span> 子渠道：<strong>反灰不可選</strong>，固定顯示「-」。</li>
-          <li><span class="mk">J</span> 啟用狀態（單選、必填）：啟用／停用，<strong>默認「啟用」</strong>。</li>
-        </ul>
-      </div>
-    </div>
-
-    <h3>新增彈窗——維護對象選「提款銀行」</h3>
-    <div class="mock mock--modal">
-      <div class="mock__bar"><span class="mock__crumb">新增預約維護時間（彈窗）</span></div>
-      <div class="mock__body">
-        <div class="frow"><label><span class="req">*</span>維護對象:</label>
-          <span><span class="fradio"><span class="dot"></span>第三方代付商戶</span><span class="fradio"><span class="dot on"></span>提款銀行</span></span>
-        </div>
-        <div class="frow"><label><span class="req">*</span>主渠道:</label>
-          <span style="flex:1;max-width:340px;">
-            <span class="fbox" style="display:block;max-width:none;">Select <span class="mk" style="float:right;">H</span></span>
-            <span style="display:block;border:1px solid #d1d5db;border-top:0;border-radius:0 0 4px 4px;font-size:.7rem;background:#fff;">
-              <span style="display:block;padding:3px 10px;background:#f0f7ff;color:var(--color-primary);font-weight:700;">一般銀行</span>
-              <span style="display:block;padding:3px 10px;">eWallet</span>
-            </span>
-          </span>
-        </div>
-        <div class="frow"><label><span class="req">*</span>子渠道:</label>
-          <span style="flex:1;max-width:340px;">
-            <span class="fbox" style="display:block;max-width:none;">Select <span class="mk" style="float:right;">I</span></span>
-            <span style="display:block;border:1px solid #d1d5db;border-top:0;border-radius:0 0 4px 4px;font-size:.7rem;background:#fff;">
-              <span style="display:block;padding:3px 10px;background:#f0f7ff;color:var(--color-primary);font-weight:700;">4136 - BPI</span>
-              <span style="display:block;padding:3px 10px;">4137 - BDO</span>
-              <span style="display:block;padding:3px 10px;">4139 - RCBC</span>
-            </span>
-          </span>
-        </div>
-        <div class="frow"><label><span class="req">*</span>維護時間:</label>
-          <span><span class="fbox" style="max-width:180px;display:inline-block;">開始時間（日期＋時分）</span> ～ <span class="fbox" style="max-width:180px;display:inline-block;">結束時間（日期＋時分）</span></span>
-        </div>
-        <div class="frow"><label><span class="req">*</span>啟用狀態:</label>
-          <span><span class="fradio"><span class="dot on"></span>啟用</span><span class="fradio"><span class="dot"></span>停用</span></span>
-        </div>
-        <p style="text-align:right;margin:10px 0 0;"><span class="mock__btn mock__btn--ghost">取 消</span>　<span class="mock__btn">确 定</span></p>
-      </div>
-      <div class="mock__note">
-        <ul style="margin:0;padding-left:1.3em;">
-          <li><span class="mk">H</span> 主渠道下拉（單選、必填）：銀行種類，選項固定為 一般銀行｜eWallet。</li>
-          <li><span class="mk">I</span> 子渠道下拉（單選、必填）：來源＝「提款展示配置」中該銀行種類底下已建立的銀行，格式「<strong>編號 - 銀行名稱</strong>」；未選主渠道前鎖定不可選，切換主渠道時重置。</li>
-          <li>啟用狀態（單選、必填）：啟用／停用，<strong>默認「啟用」</strong>。</li>
-        </ul>
-      </div>
-    </div>
-
-    <h3>編輯彈窗與輸入限制</h3>
-    <ul>
-      <li>編輯僅可修改「<strong>維護時間</strong>」與「<strong>啟用狀態</strong>」（啟用／停用單選）：維護對象、主渠道、子渠道鎖定不可改；編輯<strong>不分預約狀態</strong>（未開始／進行中／已結束規則相同），保存後即生效。</li>
-    </ul>
-    <table class="tbl">
-      <thead><tr><th style="width:16em;">情境</th><th>行為與提示文案</th></tr></thead>
-      <tbody>
-        <tr><td>任一必填未填即按確定</td><td>不保存，未填欄位標紅，toast「請完成必填項後再保存」。</td></tr>
-        <tr><td>結束時間 ≤ 開始時間</td><td>不保存，toast「結束時間須晚於開始時間」。</td></tr>
-        <tr><td>開始時間早於當前時間</td><td><strong>不限制</strong>，可保存（新增與編輯皆同）。</td></tr>
-        <tr><td>同一目標時段重疊</td><td><strong>允許</strong>（臨時拉長維護可直接編輯該筆維護時間，或另新增一筆）；重疊期間生效結果一致，不重複疊加。</td></tr>
-        <tr><td>啟用狀態變更</td><td><strong>保存後即生效</strong>。</td></tr>
-        <tr><td>新增／編輯保存成功</td><td>toast「保存成功」，關閉彈窗並刷新列表（新增的啟用狀態默認「啟用」）。</td></tr>
-        <tr><td>點擊「删除」——正在維護時段內</td><td>確認彈窗「正在維護時段內，刪除後將立即恢復當前狀態，確定刪除？」確定→toast「刪除成功」並刷新列表；取消→不動作。</td></tr>
-        <tr><td>點擊「删除」——不在維護時段內</td><td>確認彈窗「确认删除吗？」確定→toast「刪除成功」並刷新列表；取消→不動作。</td></tr>
-      </tbody>
-    </table>
-  </section>
-
-  <section class="section">
-    <h2>② 邏輯對照</h2>
-    <div class="compare">
-      <div class="compare__col compare__col--new">
-        <div class="compare__head">新邏輯</div>
-        <div class="compare__body">
-          <ul>
-            <li><span class="mk">A</span> 提款展示配置新增預約維護時間頁籤，維護對象兩種：<span class="mk">B</span> 提款銀行（前台顯示層，與商戶無關）、第三方代付商戶（自動出款層）。</li>
-            <li>提款銀行：時段內該銀行前台顯示維護、不可選擇提款，不影響綁定。</li>
-            <li>第三方代付商戶：時段內該商戶不走自動出款、回人工出款，前台顯示不受影響。</li>
-            <li>同一目標可設多筆時段、時段可重疊；每筆含啟用狀態（人工調整）；編輯僅可修改維護時間與啟用狀態；時段結束標示「已結束」、需人工刪除。</li>
-          </ul>
-        </div>
-      </div>
-      <div class="compare__col compare__col--old">
-        <div class="compare__head">原邏輯</div>
-        <div class="compare__body">
-          <ul>
-            <li>無預約維護功能：銀行或代付商戶要維護，須人工到點把狀態改為「維護」，結束再人工改回。</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <h2>③ 前台畫面（調整後預期）</h2>
-    <ul>
-      <li>時段內的前台呈現<strong>完全等同</strong>對應層級的「維護」狀態；時段外依當下後台狀態欄正常判斷，前台無任何預約痕跡。</li>
-      <li>兩平台呈現邏輯相同。以下以 WOWGame 示意，維護樣式沿用前台既有樣式。</li>
-    </ul>
-
-    <h3>提款銀行預約維護（以 JuanCash 為例）</h3>
-    <h4>情境一：已綁定該銀行帳戶（提款頁）</h4>
-    <div class="fe-grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));">
-      <div class="fe">
-        <div class="fe__head"><span class="pill pill--maint">時段內</span></div>
-        <div class="fe__body">
-          <div class="fe__card">
-            <div class="fe__label">提款方式</div>
-            <div class="fe__tiles" style="grid-template-columns:repeat(2,1fr);">
-              <div class="tile">GCash</div>
-              <div class="tile is-sel">E-Wallet</div>
-            </div>
-          </div>
-          <div class="fe__card">
-            <div class="fe__label">选择账户</div>
-            <div class="fe__row"><span style="font-weight:700;">GrabPay</span><span class="acct">(******1234)</span></div>
-            <div class="fe__row fe__row--maint"><span style="font-weight:700;">JuanCash</span><span class="acct">(******5655)</span><span style="margin-left:auto;font-size:.62rem;">🛠 維護中</span></div>
-            <div class="fe__none">＋ 关联一个新账户</div>
-          </div>
-          <p style="font-size:.68rem;color:var(--color-text-soft);margin:0;">JuanCash 標示維護、不能用它提款；仍可綁定該銀行的新帳戶；其他銀行照常顯示。</p>
-        </div>
-      </div>
-      <div class="fe">
-        <div class="fe__head"><span class="pill pill--ok">時段外</span></div>
-        <div class="fe__body">
-          <div class="fe__card">
-            <div class="fe__label">提款方式</div>
-            <div class="fe__tiles" style="grid-template-columns:repeat(2,1fr);">
-              <div class="tile">GCash</div>
-              <div class="tile is-sel">E-Wallet</div>
-            </div>
-          </div>
-          <div class="fe__card">
-            <div class="fe__label">选择账户</div>
-            <div class="fe__row"><span style="font-weight:700;">GrabPay</span><span class="acct">(******1234)</span></div>
-            <div class="fe__row"><span style="font-weight:700;">JuanCash</span><span class="acct">(******5655)</span></div>
-            <div class="fe__none">＋ 关联一个新账户</div>
-          </div>
-          <p style="font-size:.68rem;color:var(--color-text-soft);margin:0;">自動回復，依「提款展示配置」當下狀態欄判斷（示意為正常）。</p>
-        </div>
-      </div>
-    </div>
-
-    <h4>情境二：正要綁定該銀行帳戶（點擊「＋关联一个新账户」後）</h4>
-    <div class="fe-grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));">
-      <div class="fe">
-        <div class="fe__head"><span class="pill pill--maint">時段內</span></div>
-        <div class="fe__body">
-          <div class="fe__card">
-            <div class="fe__label">选择您的账户</div>
-            <div class="fe__row"><span style="font-weight:700;">GrabPay</span></div>
-            <div class="fe__row"><span style="font-weight:700;">JuanCash</span></div>
-          </div>
-          <p style="font-size:.68rem;color:var(--color-text-soft);margin:0;">維護不影響綁定：JuanCash 仍可綁定，綁定後於選擇賬戶顯示維護。</p>
-        </div>
-      </div>
-      <div class="fe">
-        <div class="fe__head"><span class="pill pill--ok">時段外</span></div>
-        <div class="fe__body">
-          <div class="fe__card">
-            <div class="fe__label">选择您的账户</div>
-            <div class="fe__row"><span style="font-weight:700;">GrabPay</span></div>
-            <div class="fe__row"><span style="font-weight:700;">JuanCash</span></div>
-          </div>
-          <p style="font-size:.68rem;color:var(--color-text-soft);margin:0;">照常可綁定，依當下狀態欄判斷。</p>
-        </div>
-      </div>
-    </div>
-
-    <h3>第三方代付商戶預約維護（不影響前台）</h3>
-    <div class="fe-grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));">
-      <div class="fe">
-        <div class="fe__head"><span class="pill pill--maint">時段內</span>＝<span class="pill pill--ok">時段外</span>（前台不變）</div>
-        <div class="fe__body">
-          <div class="fe__card">
-            <div class="fe__label">提款方式</div>
-            <div class="fe__tiles" style="grid-template-columns:repeat(2,1fr);">
-              <div class="tile">GCash</div>
-              <div class="tile is-sel">E-Wallet</div>
-            </div>
-          </div>
-          <div class="fe__card">
-            <div class="fe__label">选择账户</div>
-            <div class="fe__row"><span style="font-weight:700;">GrabPay</span><span class="acct">(******1234)</span></div>
-            <div class="fe__row"><span style="font-weight:700;">JuanCash</span><span class="acct">(******5655)</span></div>
-            <div class="fe__none">＋ 关联一个新账户</div>
-          </div>
-          <p style="font-size:.68rem;color:var(--color-text-soft);margin:0;"><strong>不影響前台顯示</strong>。時段內差異只在提款流程：綁定該商戶為自動出款商戶的銀行，不走自動出款、回人工出款；時段外依「在線提款商戶配置」當下狀態欄判斷。</p>
-        </div>
-      </div>
-    </div>
-    <div class="rel-links"><strong>關聯頁面</strong>：下拉來源——提款展示配置（銀行清單）、在線提款商戶配置（代付商戶）；生效機制——規格書 5（5.1 排程直接改狀態欄／5.2 狀態欄不動、回傳時判斷，請 RD 確認擇一）。</div>
+    <div class="rel-links"><strong>關聯頁面</strong>：上游——充值渠道管理（第一層）、在線商戶配置（第二層，入口狀態＝承接商戶）。</div>
   </section>
 </article>
 
