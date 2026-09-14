@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>後台多幣種改動規格書 V4.1</title>
+<title>後台多幣種改動規格書 V4.2</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,BlinkMacSystemFont,'PingFang TC','Microsoft JhengHei',sans-serif;background:#f0f2f5;color:#333;font-size:14px}
@@ -747,7 +747,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
 <body>
 
 <div class="doc-header">
-  <h1>後台多幣種改動規格書 V4.1</h1>
+  <h1>後台多幣種改動規格書 V4.2</h1>
   
 </div>
 
@@ -980,6 +980,23 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
     <p class="rec-sub">記錄各次會議與討論的決議內容。新的紀錄由上往下疊加（項次由下往上遞增）；決議內容若後續被調整，原文以刪除線標示並於下方註記調整內容與確認人。</p>
     <table class="rec-table">
       <tr><th>日期</th><th>項次</th><th>內容</th><th>規格書更新</th><th>參與人</th></tr>
+      <tr id="rec-52">
+        <td class="rec-date" rowspan="3">9/11</td>
+        <td class="rec-no">52</td>
+        <td><span class="rec-item-tt">會員代理標籤配置欄位名稱</span>（用戶管理 &gt; 會員代理標籤配置）：<br>1. 列表欄位「創建時間」修改為「變更時間」<br><span class="rec-adj"><span class="rec-adj-tag">9/14 更新：</span>原功能即為每次保存時記錄最後更新時間，故僅需修改欄位名稱，邏輯不變。</span></td>
+        <td class="rec-upd"><span class="x-jump" onclick="showPg('adm-user-mgmt-tag-config')">9/14已更新</span></td>
+        <td class="rec-who" rowspan="3"></td>
+      </tr>
+      <tr id="rec-51">
+        <td class="rec-no">51</td>
+        <td><span class="rec-item-tt">變更代理線限制</span>（用戶管理 &gt; 大代理／代理 &gt; 列表 &gt; 操作 &gt; 變更代理線）：<br>1. 變更代理線依該代理原上級所屬類型（總代或投注站）限制，僅能於同國家＋同幣種下選擇同類型的上級（例：原上級為總代，變更時僅能改選其他總代）<br>2. 變更代理線彈窗的「所屬投注站」詞條應跟隨該代理原上級所屬類型顯示（例：原上級類型為總代，詞條顯示「所屬總代」）<br><span class="rec-adj"><span class="rec-adj-tag">9/14 更新：</span>確認總代與投注站的代理線不可互相切換。</span></td>
+        <td class="rec-upd">1. <span class="x-jump" onclick="showPg('spec-content');goTo('s2-4')">9/14已更新</span><br>2. <span class="x-jump" onclick="showPg('adm-user-mgmt-super-agent')">9/14已更新（大代理）</span><br>　<span class="x-jump" onclick="showPg('adm-user-mgmt-agent')">9/14已更新（代理）</span></td>
+      </tr>
+      <tr id="rec-50">
+        <td class="rec-no">50</td>
+        <td><span class="rec-item-tt">系統參數管理版面配置</span>（系統管理 &gt; 系統參數管理，所有 tab 分頁）：<br><span class="rec-del">1. 配置內無依國家區分的參數＝通用設定，於畫面最上方依序排列</span><br><span class="rec-del">2. 配置內有依國家區分的參數＝國家設定，於配置框內再左右區分通用與國家</span><br>3. 功能名稱旁的小字說明不需要<br><span class="rec-adj"><span class="rec-adj-tag">9/14 更新：</span>確認依規格書現行樣式開發，區塊內的設定集中呈現、非整個畫面統一區分，功能類項目也一併依國家區分。（Zack、Abeni、Cyril、Din）</span></td>
+        <td class="rec-upd">－</td>
+      </tr>
       <tr id="rec-49">
         <td class="rec-date">9/8</td>
         <td class="rec-no">49</td>
@@ -1313,6 +1330,11 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
         <table class="rec-table">
       <tr><th>版本</th><th>日期</th><th>更新內容／原因</th></tr>
       <tr>
+          <td class="rec-date">V4.2</td>
+          <td class="rec-date">9/14</td>
+          <td>依照討論紀錄調整<br><br>調整：<br>1. <span class="x-jump" onclick="showPg('spec-content');goTo('s2-4')">憲法 2.4.4 轉線規則補充換線同類型限制——新上級（總代／大代理／代理）須屬同類型代理線，總代線與投注站線不可互相切換（項次 51 第 1 點）</span><br>2. <span class="x-jump" onclick="showPg('adm-user-mgmt-tag-config')">會員代理標籤配置列表「創建時間」欄更名為「變更時間」（卡 586，項次 52）</span><br>3. <span class="x-jump" onclick="showPg('adm-user-mgmt-super-agent')">大代理變更代理線彈窗依代理線類型帶出對應候選資料，詞條與提示文字為變量（卡 016、587，項次 51 第 2 點）</span><br>4. <span class="x-jump" onclick="showPg('adm-user-mgmt-agent')">代理變更代理線彈窗依代理線類型帶出對應候選資料，詞條與提示文字為變量（卡 029、588，項次 51 第 2 點）</span></td>
+        </tr>
+      <tr>
           <td class="rec-date">V4.1</td>
           <td class="rec-date">9/8</td>
           <td>1. 「總公司」全書更名為「總代」<br>　　1. 共改 82 處——總代頁（頁面路徑、卡 564~568、本頁改動目標）、總代報表頁、投注站／代理報表內文、免費旋轉層級選項（含畫面渲染 16 處）、分期上線範圍期 1、側欄選單 2 項<br>　　2. 保留 3 處史料：既往版本紀錄條目的「總公司頁新增」「總公司報表頁新增」維持原文<br>　　3. 既有 32 處「總代」用語與本次改名一致，「總代理」1 處不受影響<br>2. 新增小卡搜尋浮窗於規格書右上角，可直接跳轉至對應卡號</td>
@@ -1376,6 +1398,13 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
     <h1>待確認內容</h1>
     <table class="rec-table">
       <tr><th>日期</th><th>項次</th><th>內容</th><th>討論人</th><th>預計討論時間</th></tr>
+      <tr>
+        <td class="rec-date">9/10</td>
+        <td class="rec-no">1</td>
+        <td><span class="rec-item-tt">投注站適用國家檢核</span>（平台管理 &gt; 平台列表 &gt; 新增平台 &gt; 投注站適用國家，卡 541）：此設定原為會議提出之需求，目的為避免營運在未開放投注站的國家下選到投注站。RD 端現規劃不檢核國家、僅檢核投注站系統是否啟用，並先依此方向實作。是否取消國家檢核、原需求如何滿足，待討論確認。</td>
+        <td></td>
+        <td>9/15 週會</td>
+      </tr>
     </table>
   </div>
 </div>
@@ -1570,6 +1599,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
 
       <h4>2.4.4 轉線規則</h4>
       <p>換線僅能在<strong>相同國家＋相同幣種</strong>之間進行，不得跨國家或跨幣種互轉。</p>
+      <p class="rec-adj"><span class="rec-adj-tag">9/14 更新：</span>依照 <span class="x-jump" onclick="showPg('spec-discussion');goTo('rec-51')">9/11 討論（項次 51）</span>，換線僅能在<strong>同類型的代理線</strong>內進行：帳號創建時屬總代線者，換線後所選的新上級（總代／大代理／代理）仍須屬於總代線；屬投注站線者同理。總代線與投注站線不可互相切換。</p>
 
       <h4>2.4.5 推薦碼優先邏輯</h4>
       <p>會員進站時，國家與幣種的判斷順序如下：</p>
@@ -2706,9 +2736,10 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
     <div class="pg" id="pg-adm-user-mgmt-super-agent">
   <div class="pg-crumb">管理後台 &gt; 用戶管理 &gt; 大代理</div>
   <p class="rec-adj"><span class="rec-adj-tag">8/27 調整：</span>依照 <span class="x-jump" onclick="showPg('spec-discussion');goTo('rec-37')">8/21 討論（項次 37）</span>，標籤依國家分類——新增／編輯彈窗的標籤下拉僅列同國家標籤，列表代理標籤與帳號國家不匹配即失效（關聯保留，切回恢復）（卡 012、013、560）。</p>
+  <p class="rec-adj"><span class="rec-adj-tag">9/14 調整：</span>依照 <span class="x-jump" onclick="showPg('spec-discussion');goTo('rec-51')">9/11 討論（項次 51）</span>，變更代理線彈窗依代理線類型（總代線／投注站線）帶出對應候選資料，詞條與提示文字為變量（卡 016、587）。</p>
   <div class="pg-overview">
     <h4>本頁改動目標</h4>
-    <div class="ov-dir"><div class="ov-dir-lbl">管理後台：</div><ul class="ov-dir-list"><li>新增大代理時上級代理→國家(<code>nation_code</code>)→幣種(<code>currency</code>)三層連動，設定後鎖定不可改</li><li>搜尋欄可依國家篩選</li><li>列表帳號、餘額、佣金餘額等依帳號綁定的國家與法幣顯示</li><li>變更代理線、直屬會員轉移僅能選同國家＋幣種的帳號</li><li>資金明細交易金額改法幣＋系統幣兩行顯示，統計總額改以系統幣(<code>sys_currency</code>)統計</li><li>新增／編輯彈窗的標籤下拉僅顯示與該大代理相同國家的標籤</li><li>標籤切換綁定國家後，該帳號原標注失效不顯示（關聯保留不刪除，切回原國家自動恢復生效）</li></ul></div>
+    <div class="ov-dir"><div class="ov-dir-lbl">管理後台：</div><ul class="ov-dir-list"><li>新增大代理時上級代理→國家(<code>nation_code</code>)→幣種(<code>currency</code>)三層連動，設定後鎖定不可改</li><li>搜尋欄可依國家篩選</li><li>列表帳號、餘額、佣金餘額等依帳號綁定的國家與法幣顯示</li><li>變更代理線、直屬會員轉移僅能選同國家＋幣種的帳號</li><li>變更代理線彈窗依該帳號代理線類型（總代線／投注站線）帶出對應候選資料</li><li>變更代理線彈窗詞條與提示文字依代理線類型變量顯示（「所屬總代」／「所屬投注站」）</li><li>資金明細交易金額改法幣＋系統幣兩行顯示，統計總額改以系統幣(<code>sys_currency</code>)統計</li><li>新增／編輯彈窗的標籤下拉僅顯示與該大代理相同國家的標籤</li><li>標籤切換綁定國家後，該帳號原標注失效不顯示（關聯保留不刪除，切回原國家自動恢復生效）</li></ul></div>
     <div class="ov-dir"><div class="ov-dir-lbl">控制後台：</div><ul class="ov-dir-list"><li>幣種／國家下拉的選項範圍由控制後台的國家與幣種設定向下供給，前端不寫死</li></ul></div>
     <div class="ov-dir"><div class="ov-dir-lbl">前台影響：</div><ul class="ov-dir-list"><li>大代理綁定的國家＋幣種向下決定底下代理、會員的歸屬，間接影響前台會員看到的活動、VIP、幣種顯示等內容</li></ul></div>
   </div>
@@ -2948,7 +2979,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
 
   <div class="spec-card">
     <div class="spec-card-hd">
-      <span class="spec-card-num">016</span>
+      <span class="spec-card-num">016</span><span class="spec-card-adj">9/14調整</span>
     </div>
     <div class="spec-row">
       <div class="spec-row-lbl">位置</div>
@@ -2970,16 +3001,18 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
           <li>維持原邏輯：不強制先選投注站；若先選投注站，所屬大代理下拉只顯示該投注站底下的大代理</li>
           <li>若先選所屬大代理，上方「投注站」下拉選項縮成該大代理所屬的投注站，仍需手動點選，不自動帶入</li>
           <li>下方「國家」「幣種」唯讀欄位，於選定投注站後依該投注站帶出；未選定投注站前顯示「－」</li>
+          <li>後端判斷該大代理所屬代理線類型（總代線／投注站線），帶出對應類型的候選資料</li>
+          <li>彈窗第一欄詞條為變量，依代理線類型顯示：投注站線顯示「所屬投注站」、總代線顯示「所屬總代」</li>
         </ol>
       </div>
     </div>
     <div class="spec-row">
       <div class="spec-row-lbl">前端</div>
-      <div class="spec-row-val">投注站與所屬大代理選項皆依該大代理帳號的國家(<code>nation_code</code>)＋幣種(<code>currency</code>)過濾。建立雙向連動：先選投注站→所屬大代理只顯示該投注站底下的大代理；先選所屬大代理→上方投注站選項縮成該大代理所屬的投注站，仍需手動點選、不自動填入。下方國家、幣種唯讀欄位於投注站選定後才依該投注站帶出，未選投注站前顯示「－」。</div>
+      <div class="spec-row-val">投注站與所屬大代理選項皆依該大代理帳號的國家(<code>nation_code</code>)＋幣種(<code>currency</code>)過濾。建立雙向連動：先選投注站→所屬大代理只顯示該投注站底下的大代理；先選所屬大代理→上方投注站選項縮成該大代理所屬的投注站，仍需手動點選、不自動填入。下方國家、幣種唯讀欄位於投注站選定後才依該投注站帶出，未選投注站前顯示「－」。彈窗第一欄詞條依代理線類型渲染「所屬投注站」或「所屬總代」。</div>
     </div>
     <div class="spec-row">
       <div class="spec-row-lbl">後端</div>
-      <div class="spec-row-val">提供依國家(<code>nation_code</code>)＋幣種(<code>currency</code>)過濾的投注站與大代理清單 API；提供投注站與其底下大代理的對應關係、以及大代理所屬投注站的反向對應；查詢回傳需包含該投注站綁定的國家與幣種欄位。</div>
+      <div class="spec-row-val">提供依國家(<code>nation_code</code>)＋幣種(<code>currency</code>)過濾的投注站與大代理清單 API；提供投注站與其底下大代理的對應關係、以及大代理所屬投注站的反向對應；查詢回傳需包含該投注站綁定的國家與幣種欄位，並包含該帳號所屬代理線類型（總代線／投注站線），候選清單依該類型回傳對應帳號。</div>
     </div>
     <div class="spec-row">
       <div class="spec-row-lbl">前台影響</div>
@@ -2989,6 +3022,18 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
       <div class="spec-row-lbl">示意</div>
       <div class="spec-row-val"><div id="tpl-agent-016"></div></div>
     </div>
+  </div>
+
+  <div class="spec-card">
+    <div class="spec-card-hd"><span class="spec-card-num">587</span><span class="spec-card-adj">9/14新增</span></div>
+    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">用戶管理 &gt; 大代理 &gt; 列表 &gt; 操作 &gt; 變更代理線 &gt; 彈窗 &gt; 溫馨提示</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge mod">調整</span></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">彈窗內固定顯示紅字提示「温馨提示：如果不选择大代理，该代理将成为所选投注站的直属大代理。」，「投注站」字樣為寫死文字。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val"><ol><li>提示文字內的「投注站」字樣改為變量，依該大代理所屬代理線類型顯示：投注站線顯示「投注站」、總代線顯示「總代」</li><li>總代線顯示範例：「温馨提示：如果不选择大代理，该代理将成为所选总代的直属大代理。」</li></ol></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">提示文字依代理線類型（總代線／投注站線）渲染對應詞。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">無（代理線類型由變更代理線彈窗查詢回傳，前端據此渲染）。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（此為管理後台彈窗提示文字，不影響前台會員端）。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-agent-587"></div></div></div>
   </div>
 
   <div class="spec-card">
@@ -3310,9 +3355,10 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
 <div class="pg" id="pg-adm-user-mgmt-agent">
   <div class="pg-crumb">管理後台 &gt; 用戶管理 &gt; 代理</div>
   <p class="rec-adj"><span class="rec-adj-tag">8/27 調整：</span>依照 <span class="x-jump" onclick="showPg('spec-discussion');goTo('rec-37')">8/21 討論（項次 37）</span>，標籤依國家分類——新增／編輯彈窗的標籤下拉僅列同國家標籤，列表代理標籤與帳號國家不匹配即失效（關聯保留，切回恢復）（卡 025、026、561）。</p>
+  <p class="rec-adj"><span class="rec-adj-tag">9/14 調整：</span>依照 <span class="x-jump" onclick="showPg('spec-discussion');goTo('rec-51')">9/11 討論（項次 51）</span>，變更代理線彈窗依代理線類型（總代線／投注站線）帶出對應候選資料，詞條與提示文字為變量（卡 029、588）。</p>
   <div class="pg-overview">
     <h4>本頁改動目標</h4>
-    <div class="ov-dir"><div class="ov-dir-lbl">管理後台：</div><ul class="ov-dir-list"><li>新增代理時上級大代理連動國家(<code>nation_code</code>)與幣種(<code>currency</code>)，設定後鎖定不可改</li><li>搜尋欄可依國家(<code>nation_code</code>)＋幣種(<code>currency</code>)篩選（兩者連動）</li><li>列表帳號、餘額、佣金餘額依帳號綁定的國家(<code>nation_code</code>)與法幣(<code>currency</code>)顯示</li><li>變更代理線、直屬會員轉移僅能選同國家(<code>nation_code</code>)＋幣種(<code>currency</code>)的帳號</li><li>資金明細交易金額改法幣(<code>currency</code>)＋系統幣(<code>sys_currency</code>)兩行顯示，統計總額改以系統幣(<code>sys_currency</code>)統計</li><li>新增／編輯彈窗的標籤下拉僅顯示與該代理相同國家的標籤</li><li>標籤切換綁定國家後，該帳號原標注失效不顯示（關聯保留不刪除，切回原國家自動恢復生效）</li></ul></div>
+    <div class="ov-dir"><div class="ov-dir-lbl">管理後台：</div><ul class="ov-dir-list"><li>新增代理時上級大代理連動國家(<code>nation_code</code>)與幣種(<code>currency</code>)，設定後鎖定不可改</li><li>搜尋欄可依國家(<code>nation_code</code>)＋幣種(<code>currency</code>)篩選（兩者連動）</li><li>列表帳號、餘額、佣金餘額依帳號綁定的國家(<code>nation_code</code>)與法幣(<code>currency</code>)顯示</li><li>變更代理線、直屬會員轉移僅能選同國家(<code>nation_code</code>)＋幣種(<code>currency</code>)的帳號</li><li>變更代理線彈窗依該帳號代理線類型（總代線／投注站線）帶出對應候選資料</li><li>變更代理線彈窗詞條與提示文字依代理線類型變量顯示（「所屬總代」／「所屬投注站」）</li><li>資金明細交易金額改法幣(<code>currency</code>)＋系統幣(<code>sys_currency</code>)兩行顯示，統計總額改以系統幣(<code>sys_currency</code>)統計</li><li>新增／編輯彈窗的標籤下拉僅顯示與該代理相同國家的標籤</li><li>標籤切換綁定國家後，該帳號原標注失效不顯示（關聯保留不刪除，切回原國家自動恢復生效）</li></ul></div>
     <div class="ov-dir"><div class="ov-dir-lbl">控制後台：</div><ul class="ov-dir-list"><li>幣種(<code>currency</code>)／國家(<code>nation_code</code>)下拉的選項範圍由控制後台的國家與幣種設定向下供給，前端不寫死</li></ul></div>
     <div class="ov-dir"><div class="ov-dir-lbl">前台影響：</div><ul class="ov-dir-list"><li>代理綁定的國家(<code>nation_code</code>)＋幣種(<code>currency</code>)向下決定底下會員的歸屬，間接影響前台會員看到的內容</li></ul></div>
   </div>
@@ -3404,7 +3450,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
   </div>
 
   <div class="spec-card">
-    <div class="spec-card-hd"><span class="spec-card-num">029</span></div>
+    <div class="spec-card-hd"><span class="spec-card-num">029</span><span class="spec-card-adj">9/14調整</span></div>
     <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">用戶管理 &gt; 代理 &gt; 列表 &gt; 操作 &gt; 變更代理線 &gt; 彈窗</div></div>
     <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge mod">調整</span></div></div>
     <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">投注站與大代理下拉目前皆無篩選限制；先選大代理時，上方投注站不會自動帶出；下方「國家」「幣種」為唯讀欄位。</div></div>
@@ -3414,12 +3460,26 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
         <li>維持原邏輯：不強制先選投注站；若先選投注站，大代理下拉只顯示該投注站底下的大代理</li>
         <li>若先選大代理，上方「投注站」下拉選項縮成該大代理所屬的投注站，仍需手動點選，不自動帶入</li>
         <li>下方「國家」「幣種」唯讀欄位，於選定投注站後依該投注站帶出；未選定投注站前顯示「－」</li>
+        <li>後端判斷該代理所屬代理線類型（總代線／投注站線），帶出對應類型的候選資料</li>
+        <li>彈窗第一欄詞條為變量，依代理線類型顯示：投注站線顯示「所屬投注站」、總代線顯示「所屬總代」</li>
       </ol>
     </div></div>
-    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">「投注站」「大代理」下拉選項僅渲染與該代理帳號同國家(<code>nation_code</code>)＋幣種(<code>currency</code>)的帳號；先選投注站→大代理下拉只顯示該投注站底下的大代理；先選大代理→上方投注站選項縮成該大代理所屬的投注站，仍需手動點選、不自動填入；下方國家、幣種唯讀欄位於投注站選定後才依該投注站帶出，未選投注站前顯示「－」，選項來源由後端回傳，不可寫死。</div></div>
-    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">變更代理線的候選帳號查詢 API 需依該代理帳號的國家(<code>nation_code</code>)＋幣種(<code>currency</code>)過濾；提供投注站與其底下大代理的對應、以及大代理所屬投注站的反向對應供選項縮減；查詢回傳需包含該投注站綁定的國家與幣種欄位。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">「投注站」「大代理」下拉選項僅渲染與該代理帳號同國家(<code>nation_code</code>)＋幣種(<code>currency</code>)的帳號；先選投注站→大代理下拉只顯示該投注站底下的大代理；先選大代理→上方投注站選項縮成該大代理所屬的投注站，仍需手動點選、不自動填入；下方國家、幣種唯讀欄位於投注站選定後才依該投注站帶出，未選投注站前顯示「－」，選項來源由後端回傳，不可寫死。彈窗第一欄詞條依代理線類型渲染「所屬投注站」或「所屬總代」。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">變更代理線的候選帳號查詢 API 需依該代理帳號的國家(<code>nation_code</code>)＋幣種(<code>currency</code>)過濾；提供投注站與其底下大代理的對應、以及大代理所屬投注站的反向對應供選項縮減；查詢回傳需包含該投注站綁定的國家與幣種欄位，並包含該帳號所屬代理線類型（總代線／投注站線），候選清單依該類型回傳對應帳號。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（此為管理後台代理線調整操作，轉移限制僅確保代理歸屬的國家＋幣種一致，不改變前台會員看到的內容）</div></div>
     <div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-agent2-036"></div></div></div>
+  </div>
+
+  <div class="spec-card">
+    <div class="spec-card-hd"><span class="spec-card-num">588</span><span class="spec-card-adj">9/14新增</span></div>
+    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">用戶管理 &gt; 代理 &gt; 列表 &gt; 操作 &gt; 變更代理線 &gt; 彈窗 &gt; 溫馨提示</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge mod">調整</span></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">彈窗內固定顯示紅字提示「温馨提示：如果不选择大代理，该代理将成为所选投注站的直属大代理。」，「投注站」字樣為寫死文字。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val"><ol><li>提示文字內的「投注站」字樣改為變量，依該代理所屬代理線類型顯示：投注站線顯示「投注站」、總代線顯示「總代」</li><li>總代線顯示範例：「温馨提示：如果不选择大代理，该代理将成为所选总代的直属大代理。」</li></ol></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">提示文字依代理線類型（總代線／投注站線）渲染對應詞。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">無（代理線類型由變更代理線彈窗查詢回傳，前端據此渲染）。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（此為管理後台彈窗提示文字，不影響前台會員端）。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-agent2-588"></div></div></div>
   </div>
 
   <div class="spec-card">
@@ -3808,9 +3868,10 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
 <div class="pg" id="pg-adm-user-mgmt-tag-config">
   <div class="pg-crumb">管理後台 &gt; 用戶管理 &gt; 會員代理標籤配置</div>
   <p class="rec-adj"><span class="rec-adj-tag">8/27 新增：</span>依照 <span class="x-jump" onclick="showPg('spec-discussion');goTo('rec-37')">8/21 討論（項次 37）</span>，本頁重建，標籤依國家分類——搜尋欄、列表與新增／編輯彈窗新增國家維度（卡 556~559）。</p>
+  <p class="rec-adj"><span class="rec-adj-tag">9/14 調整：</span>依照 <span class="x-jump" onclick="showPg('spec-discussion');goTo('rec-52')">9/11 討論（項次 52）</span>，列表欄位「創建時間」更名為「變更時間」（卡 586）。</p>
   <div class="pg-overview">
     <h4>本頁改動目標</h4>
-    <div class="ov-dir"><div class="ov-dir-lbl">管理後台：</div><ul class="ov-dir-list"><li>上方搜尋欄新增國家(<code>nation_code</code>)單選下拉，預設「全部國家」，依國家篩選標籤</li><li>列表新增「國家」欄位，顯示各標籤綁定的國家</li><li>新增／編輯標籤彈窗新增國家單選欄位，標籤依國家分類，無全國家通用標籤</li><li>給會員／代理設定標籤時，僅顯示與該帳號相同國家的標籤</li><li>標籤切換綁定國家後，原國家帳號上的該標籤標注失效（關聯保留不刪除，切回原國家自動恢復生效）</li></ul></div>
+    <div class="ov-dir"><div class="ov-dir-lbl">管理後台：</div><ul class="ov-dir-list"><li>上方搜尋欄新增國家(<code>nation_code</code>)單選下拉，預設「全部國家」，依國家篩選標籤</li><li>列表新增「國家」欄位，顯示各標籤綁定的國家</li><li>列表「創建時間」欄更名為「變更時間」（僅改名稱，時間邏輯不變）</li><li>新增／編輯標籤彈窗新增國家單選欄位，標籤依國家分類，無全國家通用標籤</li><li>給會員／代理設定標籤時，僅顯示與該帳號相同國家的標籤</li><li>標籤切換綁定國家後，原國家帳號上的該標籤標注失效（關聯保留不刪除，切回原國家自動恢復生效）</li></ul></div>
     <div class="ov-dir"><div class="ov-dir-lbl">控制後台：</div><ul class="ov-dir-list"><li>國家選項來源由控制後台的國家設定向下供給，前端不寫死</li></ul></div>
     <div class="ov-dir"><div class="ov-dir-lbl">前台影響：</div><ul class="ov-dir-list"><li>無（標籤為後台內部標記功能，不影響前台會員端呈現）</li></ul></div>
   </div>
@@ -3832,11 +3893,11 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
   </div>
 
   <div class="spec-card">
-    <div class="spec-card-hd"><span class="spec-card-num">557</span><span class="spec-card-adj">8/27新增</span></div>
+    <div class="spec-card-hd"><span class="spec-card-num">557</span><span class="spec-card-adj">8/27新增</span><span class="spec-card-adj">9/14調整</span></div>
     <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">用戶管理 &gt; 會員代理標籤配置 &gt; 列表 &gt; 欄位</div></div>
     <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge new">新增</span></div></div>
     <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">列表欄位為「類型｜標籤名稱｜關聯數量｜創建時間｜操作」，無國家欄位，看不出各標籤所屬的國家。</div></div>
-    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val"><ol><li>在「關聯數量」與「創建時間」之間新增「國家」(<code>nation_code</code>)欄位，排列為「關聯數量｜國家｜創建時間」</li><li>顯示該標籤綁定的國家</li></ol></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val"><ol><li>在「關聯數量」與「變更時間」之間新增「國家」(<code>nation_code</code>)欄位，排列為「關聯數量｜國家｜變更時間」</li><li>顯示該標籤綁定的國家</li></ol></div></div>
     <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">新增欄位渲染，顯示該筆標籤綁定的國家(<code>nation_code</code>)。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">標籤列表 API 回傳資料需包含國家(<code>nation_code</code>)欄位。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（標籤為後台內部標記功能，不影響前台會員端呈現）。</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-tagcfg-557"></div></div></div>
@@ -3862,6 +3923,18 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
     <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">新增國家(<code>nation_code</code>)單選下拉元件，切換國家後可直接保存。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">編輯標籤 API 支援修改國家(<code>nation_code</code>)；標籤與帳號的關聯紀錄保留、不刪除，標注是否生效依「帳號國家與標籤國家是否匹配」判斷——不匹配即失效，標籤切回原國家自動恢復生效。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（標籤為後台內部標記功能，不影響前台會員端呈現）。</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-tagcfg-559"></div></div></div>
+  </div>
+
+  <div class="spec-card">
+    <div class="spec-card-hd"><span class="spec-card-num">586</span><span class="spec-card-adj">9/14新增</span></div>
+    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">用戶管理 &gt; 會員代理標籤配置 &gt; 列表 &gt; 欄位</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge mod">調整</span></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">列表欄位「創建時間」實際記錄的是該標籤每次保存時的最後更新時間，欄位名稱與內容語意不符。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val"><ol><li>欄位名稱由「創建時間」改為「變更時間」</li><li>時間寫入邏輯維持現況（每次保存記錄最後更新時間），僅變更欄位名稱</li></ol></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">欄位標題文字改為「變更時間」。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">無（僅前端顯示名稱調整，資料寫入邏輯不變）。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（標籤為後台內部標記功能，不影響前台會員端呈現）。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-tagcfg-586"></div></div></div>
   </div>
 </div>
 
@@ -16101,7 +16174,7 @@ function renderAgent2Demos(){
     {caption:'越南帳號', label:'首次充值最小金額限制', cur:'VND', hint:'0視為沒有限制'}
   ]));
   // 036 變更代理線彈窗（投注站/大代理同國家幣種過濾＋先選大代理自動帶出投注站）
-  set('tpl-agent2-036', tplStationAgentModal({
+  set('tpl-agent2-036', '<div class="demo-fieldcard-caption">原上級為投注站線</div>' + tplStationAgentModal({
     prefix:'agent2-036',
     stationLabel:'投注站', stationPlaceholder:'請選擇投注站', stations:['越南VND投注站','菲律賓PHP投注站'],
     agentLabel:'大代理', agentPlaceholder:'請選擇大代理', agents:['越南VND大代理','菲律賓PHP大代理'],
@@ -16109,7 +16182,17 @@ function renderAgent2Demos(){
     stationToAgents:{'越南VND投注站':['越南VND大代理'], '菲律賓PHP投注站':['菲律賓PHP大代理']},
     agentToStations:{'越南VND大代理':['越南VND投注站'], '菲律賓PHP大代理':['菲律賓PHP投注站']},
     stationDerive:{'越南VND投注站':['越南','VND'], '菲律賓PHP投注站':['菲律賓','PHP']}
+  }) + '<div class="demo-fieldcard-caption">原上級為總代線（詞條為變量）</div>' + tplStationAgentModal({
+    prefix:'agent2-036hq',
+    stationLabel:'總代', stationPlaceholder:'請選擇總代', stations:['越南VND總代','菲律賓PHP總代'],
+    agentLabel:'大代理', agentPlaceholder:'請選擇大代理', agents:['越南VND大代理','菲律賓PHP大代理'],
+    fields:[{label:'國家'},{label:'幣種'}],
+    stationToAgents:{'越南VND總代':['越南VND大代理'], '菲律賓PHP總代':['菲律賓PHP大代理']},
+    agentToStations:{'越南VND大代理':['越南VND總代'], '菲律賓PHP大代理':['菲律賓PHP總代']},
+    stationDerive:{'越南VND總代':['越南','VND'], '菲律賓PHP總代':['菲律賓','PHP']}
   }));
+  // 588 變更代理線彈窗溫馨提示（變量：投注站線／總代線）
+  set('tpl-agent2-588', '<div class="demo-fieldcard-caption">投注站線</div><div><span class="rec-adj-tag">温馨提示：如果不选择大代理，该代理将成为所选投注站的直属大代理。</span></div><div class="demo-fieldcard-caption">總代線</div><div><span class="rec-adj-tag">温馨提示：如果不选择大代理，该代理将成为所选总代的直属大代理。</span></div>');
 }
 
 function renderAgentDemos(){
@@ -16138,7 +16221,7 @@ function renderAgentDemos(){
   // 015 佣金餘額欄位（單張，純數字）
   set('tpl-agent-015', tplFieldCard({hd:'佣金餘額', main:'100.00'}));
   // 016 變更代理線彈窗（投注站↔大代理雙向連動 + 帶出唯讀國家/幣種，單組）
-  set('tpl-agent-016', tplStationAgentModal({
+  set('tpl-agent-016', '<div class="demo-fieldcard-caption">原上級為投注站線</div>' + tplStationAgentModal({
     prefix:'agent-016',
     stationLabel:'投注站', stationPlaceholder:'請選擇投注站', stations:['越南VND投注站','菲律賓PHP投注站'],
     agentLabel:'所屬大代理', agentPlaceholder:'請選擇大代理', agents:['越南VND大代理','菲律賓PHP大代理'],
@@ -16146,7 +16229,17 @@ function renderAgentDemos(){
     stationToAgents:{'越南VND投注站':['越南VND大代理'], '菲律賓PHP投注站':['菲律賓PHP大代理']},
     agentToStations:{'越南VND大代理':['越南VND投注站'], '菲律賓PHP大代理':['菲律賓PHP投注站']},
     stationDerive:{'越南VND投注站':['越南','VND'], '菲律賓PHP投注站':['菲律賓','PHP']}
+  }) + '<div class="demo-fieldcard-caption">原上級為總代線（詞條為變量）</div>' + tplStationAgentModal({
+    prefix:'agent-016hq',
+    stationLabel:'總代', stationPlaceholder:'請選擇總代', stations:['越南VND總代','菲律賓PHP總代'],
+    agentLabel:'所屬大代理', agentPlaceholder:'請選擇大代理', agents:['越南VND大代理','菲律賓PHP大代理'],
+    fields:[{label:'國家'},{label:'幣種'}],
+    stationToAgents:{'越南VND總代':['越南VND大代理'], '菲律賓PHP總代':['菲律賓PHP大代理']},
+    agentToStations:{'越南VND大代理':['越南VND總代'], '菲律賓PHP大代理':['菲律賓PHP總代']},
+    stationDerive:{'越南VND總代':['越南','VND'], '菲律賓PHP總代':['菲律賓','PHP']}
   }));
+  // 587 變更代理線彈窗溫馨提示（變量：投注站線／總代線）
+  set('tpl-agent-587', '<div class="demo-fieldcard-caption">投注站線</div><div><span class="rec-adj-tag">温馨提示：如果不选择大代理，该代理将成为所选投注站的直属大代理。</span></div><div class="demo-fieldcard-caption">總代線</div><div><span class="rec-adj-tag">温馨提示：如果不选择大代理，该代理将成为所选总代的直属大代理。</span></div>');
   // 017 直屬會員轉移彈窗（新代理下拉限縮同國家幣種→帶出唯讀國家/幣種，並排兩組示意）
   set('tpl-agent-017', `<div class="demo-fieldcard-group">
     <div class="demo-fieldcard-item">
@@ -19391,7 +19484,7 @@ function render_tagcfg_screen(){
     ['\u4ee3\u7406','jasmine_agent','0','\u83f2\u5f8b\u5bbe','2025-12-26 11:39:11',true]
   ];
   var shown = rows.filter(function(r){ return TAGCFG.nation === '\u5168\u90e8\u56fd\u5bb6' || r[3] === TAGCFG.nation; });
-  var head = '<tr><th>\u7c7b\u578b</th><th>\u6807\u7b7e\u540d\u79f0</th><th>\u5173\u8054\u6570\u91cf</th><th class="mk-new">\u56fd\u5bb6<span class="mk-tag">557</span></th><th>\u521b\u5efa\u65f6\u95f4</th><th>\u64cd\u4f5c</th></tr>';
+  var head = '<tr><th>\u7c7b\u578b</th><th>\u6807\u7b7e\u540d\u79f0</th><th>\u5173\u8054\u6570\u91cf</th><th class="mk-new">\u56fd\u5bb6<span class="mk-tag">557</span></th><th>\u53d8\u66f4\u65f6\u95f4<span class="mk-tag">586</span></th><th>\u64cd\u4f5c</th></tr>';
   var body = shown.map(function(r){
     var op = '<span class="mk-link" onclick="tagcfgOpen(\'edit\',\'' + r[1] + '\')">\u7f16\u8f91</span><span class="mk-tag">559</span>' + (r[5] ? '\u3000<span class="mk-link">\u5220\u9664</span>' : '');
     return '<tr><td>' + r[0] + '</td><td>' + r[1] + '</td><td>' + r[2] + '</td><td class="mk-new">' + r[3] + '</td><td>' + r[4] + '</td><td>' + op + '</td></tr>';
@@ -19422,8 +19515,10 @@ function render_tagcfg_Demos(){
   const set = (elId, html) => { const el = document.getElementById(elId); if(el) el.innerHTML = html; };
   // 556 搜尋欄：類型（靜態上下文）＋國家單選（預設全部國家）
   set('tpl-tagcfg-556', '<div class="demo-inline-group"><div class="demo-static-ctx"><span>\u985e\u578b</span><span class="arr">\u25bc</span></div>' + tplSingleSelect('tagcfg556', '\u5168\u90e8\u570b\u5bb6', ['\u5168\u90e8\u570b\u5bb6','\u83f2\u5f8b\u8cd3','\u8d8a\u5357'], '\u5168\u90e8\u570b\u5bb6') + '</div>');
-  // 557 列表欄位：關聯數量｜國家｜創建時間
-  set('tpl-tagcfg-557', tplColThreeField('\u95dc\u806f\u6578\u91cf', '\u570b\u5bb6', '\u83f2\u5f8b\u8cd3', '\u5275\u5efa\u6642\u9593'));
+  // 557 列表欄位：關聯數量｜國家｜變更時間
+  set('tpl-tagcfg-557', tplColThreeField('\u95dc\u806f\u6578\u91cf', '\u570b\u5bb6', '\u83f2\u5f8b\u8cd3', '\u8b8a\u66f4\u6642\u9593'));
+  // 586 列表欄位更名：變更時間（原創建時間）
+  set('tpl-tagcfg-586', tplFieldCard({hd:'\u8b8a\u66f4\u6642\u9593', main:'2026-07-28 21:32:30'}));
   // 558 新增彈窗：類型（上下文）｜名｜國家（單選必選、未選佔位）
   set('tpl-tagcfg-558', tplModalRow('tagcfg558', [
     {label:'\u985e\u578b', val:''},
@@ -19808,7 +19903,7 @@ render_vip_screens();
 
 
 // ===== 大代理後台畫面（8/27 項次37 連帶）：整頁卡號標注、七個操作彈窗/子頁全互動 =====
-var BAG = { natF: '全部国家', curF: '全部币种', open: null, acct: '', nat: '', addSup: null, addNat: null, addCur: null, addTag: null, editTag: null, lineSta: null, transAg: null };
+var BAG = { natF: '全部国家', curF: '全部币种', open: null, acct: '', nat: '', addSup: null, addNat: null, addCur: null, addTag: null, editTag: null, lineType: '投注站', lineSta: null, transAg: null };
 function bagOpen(mode, acct, nat){ BAG.open = mode; BAG.acct = acct || ''; BAG.nat = nat || ''; if(mode === 'add'){ BAG.addSup = null; BAG.addNat = null; BAG.addCur = null; BAG.addTag = null; } if(mode === 'edit'){ BAG.editTag = null; } if(mode === 'line'){ BAG.lineSta = null; } if(mode === 'transfer'){ BAG.transAg = null; } render_bag_screen(); }
 function bagClose(){ BAG.open = null; render_bag_screen(); }
 function bagNatFPick(v){ BAG.natF = v; if(v === '菲律賓' && BAG.curF === 'VND') BAG.curF = '全部币种'; if(v === '越南' && BAG.curF === 'PHP') BAG.curF = '全部币种'; render_bag_screen(); }
@@ -19819,6 +19914,7 @@ function bagAddCurPick(v){ BAG.addCur = v; render_bag_screen(); }
 function bagAddTagPick(v){ BAG.addTag = v; render_bag_screen(); }
 function bagEditTagPick(v){ BAG.editTag = v; render_bag_screen(); }
 function bagLineStaPick(v){ BAG.lineSta = v; render_bag_screen(); }
+function bagLineTypePick(t){ BAG.lineType = t; BAG.lineSta = null; render_bag_screen(); }
 function bagTransAgPick(v){ BAG.transAg = v; render_bag_screen(); }
 function bagTagsFor(nat){ return nat === '菲律賓' ? ['AAagent'] : []; }
 function bagTagSel(id, val, nat, pickFn, chip){
@@ -19931,11 +20027,14 @@ function render_bag_screen(){
     ]);
   }
   if(BAG.open === 'line'){
+    var bagHq = (BAG.lineType === '总代');
+    var bagRadio = '<span class="mk-link" onclick="bagLineTypePick(\'投注站\')">' + (bagHq ? '○' : '◉') + ' 投注站线</span>　<span class="mk-link" onclick="bagLineTypePick(\'总代\')">' + (bagHq ? '◉' : '○') + ' 总代线</span>';
     html += bagModal('变更代理线', [
+      ['代理线类型（示意切换）：', bagRadio],
       ['当前代理：', '<span class="demo-readonly">' + BAG.acct + '</span>'],
-      ['新代理线：\u3000\uff0a所属投注站', tagcfgSel('dsel-baglinesta', BAG.lineSta, ['dinclaude_st'], 'bagLineStaPick', false, '请选择投注站') + '<span class="mk-tag">016</span>'],
+      ['新代理线：\u3000\uff0a' + (bagHq ? '所属总代' : '所属投注站'), tagcfgSel('dsel-baglinesta', BAG.lineSta, [bagHq ? 'dinclaude_hq' : 'dinclaude_st'], 'bagLineStaPick', false, bagHq ? '请选择总代' : '请选择投注站') + '<span class="mk-tag">016</span>'],
       ['所属大代理', '<span class="mk-select"><span>请选大代理</span><span class="mk-arr">\u25be</span></span><span class="mk-tag">016</span>'],
-      ['', '<span class="rec-adj-tag">温馨提示：如果不选择大代理，该代理将成为所选投注站的直属大代理。</span>'],
+      ['', '<span class="rec-adj-tag">温馨提示：如果不选择大代理，该代理将成为所选' + (bagHq ? '总代' : '投注站') + '的直属大代理。</span><span class="mk-tag">587</span>'],
       ['国家：', (BAG.lineSta ? '菲律賓' : '\uff0d') + '<span class="mk-tag">016</span>'],
       ['币种：', BAG.lineSta ? 'PHP' : '\uff0d']
     ]);
@@ -19986,7 +20085,7 @@ render_bag_Demos();
 render_bag_screen();
 
 // ===== 代理後台畫面（8/27 項次37 連帶）：整頁卡號標注、操作彈窗/子頁全互動 =====
-var AGP = { natF: '全部国家', curF: '全部币种', open: null, acct: '', nat: '', addSup: null, addNat: null, addCur: null, addTag: null, editTag: null, lineSta: null, transAg: null };
+var AGP = { natF: '全部国家', curF: '全部币种', open: null, acct: '', nat: '', addSup: null, addNat: null, addCur: null, addTag: null, editTag: null, lineType: '投注站', lineSta: null, transAg: null };
 function agpOpen(mode, acct, nat){ AGP.open = mode; AGP.acct = acct || ''; AGP.nat = nat || ''; if(mode === 'add'){ AGP.addSup = null; AGP.addNat = null; AGP.addCur = null; AGP.addTag = null; } if(mode === 'edit'){ AGP.editTag = null; } if(mode === 'line'){ AGP.lineSta = null; } if(mode === 'transfer'){ AGP.transAg = null; } render_agp_screen(); }
 function agpClose(){ AGP.open = null; render_agp_screen(); }
 function agpNatFPick(v){ AGP.natF = v; if(v === '菲律賓' && AGP.curF === 'VND') AGP.curF = '全部币种'; if(v === '越南' && AGP.curF === 'PHP') AGP.curF = '全部币种'; render_agp_screen(); }
@@ -19997,6 +20096,7 @@ function agpAddCurPick(v){ AGP.addCur = v; render_agp_screen(); }
 function agpAddTagPick(v){ AGP.addTag = v; render_agp_screen(); }
 function agpEditTagPick(v){ AGP.editTag = v; render_agp_screen(); }
 function agpLineStaPick(v){ AGP.lineSta = v; render_agp_screen(); }
+function agpLineTypePick(t){ AGP.lineType = t; AGP.lineSta = null; render_agp_screen(); }
 function agpTransAgPick(v){ AGP.transAg = v; render_agp_screen(); }
 function agpTagsFor(nat){ return nat === '菲律賓' ? ['AAagency','jasmine_agent'] : []; }
 function agpTagSel(id, val, nat, pickFn, chip){
@@ -20105,11 +20205,14 @@ function render_agp_screen(){
     ]);
   }
   if(AGP.open === 'line'){
+    var agpHq = (AGP.lineType === '总代');
+    var agpRadio = '<span class="mk-link" onclick="agpLineTypePick(\'投注站\')">' + (agpHq ? '○' : '◉') + ' 投注站线</span>　<span class="mk-link" onclick="agpLineTypePick(\'总代\')">' + (agpHq ? '◉' : '○') + ' 总代线</span>';
     html += agpModal('变更代理线', [
+      ['代理线类型（示意切换）：', agpRadio],
       ['当前代理：', '<span class="demo-readonly">' + AGP.acct + '</span>'],
-      ['新代理线：\u3000\uff0a所属投注站', tagcfgSel('dsel-agplinesta', AGP.lineSta, ['dinclaude_st'], 'agpLineStaPick', false, '请选择投注站') + '<span class="mk-tag">029</span>'],
+      ['新代理线：\u3000\uff0a' + (agpHq ? '所属总代' : '所属投注站'), tagcfgSel('dsel-agplinesta', AGP.lineSta, [agpHq ? 'dinclaude_hq' : 'dinclaude_st'], 'agpLineStaPick', false, agpHq ? '请选择总代' : '请选择投注站') + '<span class="mk-tag">029</span>'],
       ['所属大代理', '<span class="mk-select"><span>请选大代理</span><span class="mk-arr">\u25be</span></span><span class="mk-tag">029</span>'],
-      ['', '<span class="rec-adj-tag">温馨提示：如果不选择大代理，该代理将成为所选投注站的直属大代理。</span>'],
+      ['', '<span class="rec-adj-tag">温馨提示：如果不选择大代理，该代理将成为所选' + (agpHq ? '总代' : '投注站') + '的直属大代理。</span><span class="mk-tag">588</span>'],
       ['国家：', (AGP.lineSta ? '菲律賓' : '\uff0d') + '<span class="mk-tag">029</span>'],
       ['币种：', AGP.lineSta ? 'PHP' : '\uff0d']
     ]);
