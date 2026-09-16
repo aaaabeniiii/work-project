@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>後台多幣種改動規格書 V4.2</title>
+<title>後台多幣種改動規格書 V4.3</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,BlinkMacSystemFont,'PingFang TC','Microsoft JhengHei',sans-serif;background:#f0f2f5;color:#333;font-size:14px}
@@ -418,6 +418,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
 .rec-del strong,.rec-del b,.rec-del code,.rec-del span,.rec-del em,.rec-del li{color:#9aa4b2}
 .pg-dep .spec-row strong,.pg-dep .spec-row b,.pg-dep .ov-dir strong,.pg-dep .ov-dir b,.card-dep .spec-row strong,.card-dep .spec-row b{color:#9aa4b2}
 .rec-adj{display:block;margin-top:6px}
+span.rec-adj-in{display:inline;margin:0;padding:0}
 .rec-adj-tag{color:#c0392b;font-weight:700}
 .rec-mini{font-size:11px;color:#8fa8c8}
 .x-jump{color:#1a6fb5;cursor:pointer;text-decoration:underline}
@@ -430,7 +431,8 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
 .mk-detail-pop .mk-pop-hd{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;font-weight:700;color:#1a2942;margin-bottom:8px}
 .mk-detail-pop .mk-pop-x{cursor:pointer;color:#9ca3af;font-size:14px;padding:0 4px}
 .mk-tbl-tag{text-align:right;margin-bottom:4px}
-.mk-tbl-wrap{overflow-x:auto}.gmv-img{display:inline-flex;align-items:center;justify-content:center;width:40px;height:26px;border:1px solid #e0e6ed;border-radius:3px;background:#f8fafc;color:#9ca3af;font-size:9px;white-space:nowrap}.gmv-uprow{display:flex;align-items:flex-start;gap:10px;margin-bottom:14px}.gmv-uplbl{width:170px;text-align:right;font-size:12.5px;color:#374151;padding-top:6px;flex:none}.gmv-upbtn{display:inline-block;background:#409eff;color:#fff;border-radius:4px;padding:6px 12px;font-size:12px;white-space:nowrap}.gmv-upbody{flex:1;display:flex;flex-wrap:wrap;gap:8px;align-items:flex-start}.gmv-upin{border:1px solid #d5dce6;border-radius:4px;padding:6px 10px;font-size:12px;color:#9ca3af;background:#f5f7fa;min-width:240px}.gmv-uphint{flex-basis:100%;font-size:11px;color:#9ca3af;margin-top:2px}.gmv-note{font-size:11.5px;color:#9ca3af;margin-bottom:10px}.gmv-upft{display:flex;gap:10px;justify-content:center;margin-top:8px}.gmdct-chip{display:inline-block;border:1px solid #d5dce6;border-radius:4px;padding:4px 10px;font-size:12px;color:#374151;margin:0 6px 6px 0;cursor:pointer;background:#fff}.gmdct-chip.on{border-color:#409eff;color:#409eff;background:#ecf5ff}.gmdct-nodata{display:inline-block;border:1px dashed #d5dce6;border-radius:4px;padding:6px 16px;font-size:12px;color:#9ca3af}.tmp-dd-wrap{position:relative;display:inline-block}.tmp-dd-list{position:absolute;left:0;top:100%;margin-top:4px;background:#fff;border:1px solid #d5dce6;border-radius:6px;box-shadow:0 6px 18px rgba(26,41,66,.14);z-index:99;min-width:160px}.tmp-dd-item{padding:7px 12px;font-size:12.5px;color:#374151;cursor:pointer;white-space:nowrap}.tmp-dd-item:hover{background:#f5f7fa}.tmp-dd-item.on{color:#409eff;background:#ecf5ff}.tmp-dd-item.gmdct-off{color:#9ca3af;cursor:default}.gmdct-selval{color:#374151}.rec26-pop-wrap{position:relative}.rec26-modal{top:0}.card-search{position:fixed;right:16px;top:64px;z-index:210;display:flex;align-items:center;gap:6px;background:#fff;border:1px solid #d5dce6;border-radius:10px;padding:8px 10px;box-shadow:0 4px 14px rgba(26,41,66,.12)}.card-search input{width:72px;border:1px solid #d5dce6;border-radius:6px;padding:6px 10px;font-size:13px;color:#374151;outline:none}.card-search input:focus{border-color:#409eff}.card-search-btn{background:#409eff;color:#fff;border-radius:6px;padding:6px 12px;font-size:12.5px;cursor:pointer;user-select:none;white-space:nowrap}.card-search-btn:hover{background:#337ecc}.card-search-hint{color:#e5533d;font-size:12px;white-space:nowrap}.card-hit{outline:2px solid #409eff;outline-offset:2px;border-radius:8px;transition:outline-color .3s}.rec26-modal .mk-tbl-wrap{overflow-x:visible}table.mk-table.rec26-tbl{table-layout:fixed;width:100%}table.mk-table.rec26-tbl th{white-space:normal;word-break:break-word}table.mk-table.rec26-tbl td{font-size:12.5px;vertical-align:top;white-space:normal;word-break:break-word;overflow-wrap:anywhere;line-height:1.7;text-align:left}table.mk-table.rec26-tbl td:first-child,table.mk-table.rec26-tbl th:first-child{width:40px;text-align:center}table.mk-table.rec26-tbl td:nth-child(2),table.mk-table.rec26-tbl th:nth-child(2){width:28%}table.mk-table.rec26-tbl td:nth-child(3),table.mk-table.rec26-tbl th:nth-child(3){width:88px;text-align:center}.rec26-sec{font-weight:600;color:#1f2d3d;margin:10px 14px 4px;font-size:13px}.rec26-note{color:#8a94a6;font-size:12px;margin:8px 14px 2px}.sysp-modal.gmv-modal-xl{width:min(1240px,96%);max-width:none}.gmv-inline{border:1px solid #d5dce6;border-radius:8px;background:#fff}
+.mk-tbl-wrap{overflow-x:auto}.gmv-img{display:inline-flex;align-items:center;justify-content:center;width:40px;height:26px;border:1px solid #e0e6ed;border-radius:3px;background:#f8fafc;color:#9ca3af;font-size:9px;white-space:nowrap}.gmv-uprow{display:flex;align-items:flex-start;gap:10px;margin-bottom:14px}.gmv-uplbl{width:170px;text-align:right;font-size:12.5px;color:#374151;padding-top:6px;flex:none}.gmv-upbtn{display:inline-block;background:#409eff;color:#fff;border-radius:4px;padding:6px 12px;font-size:12px;white-space:nowrap}.gmv-upbody{flex:1;display:flex;flex-wrap:wrap;gap:8px;align-items:flex-start}.gmv-upin{border:1px solid #d5dce6;border-radius:4px;padding:6px 10px;font-size:12px;color:#9ca3af;background:#f5f7fa;min-width:240px}.gmv-uphint{flex-basis:100%;font-size:11px;color:#9ca3af;margin-top:2px}.gmv-note{font-size:11.5px;color:#9ca3af;margin-bottom:10px}.gmv-upft{display:flex;gap:10px;justify-content:center;margin-top:8px}.gmdct-chip{display:inline-block;border:1px solid #d5dce6;border-radius:4px;padding:4px 10px;font-size:12px;color:#374151;margin:0 6px 6px 0;cursor:pointer;background:#fff}.gmdct-chip.on{border-color:#409eff;color:#409eff;background:#ecf5ff}.gmdct-nodata{display:inline-block;border:1px dashed #d5dce6;border-radius:4px;padding:6px 16px;font-size:12px;color:#9ca3af}.tmp-dd-wrap{position:relative;display:inline-block}.tmp-dd-list{position:absolute;left:0;top:100%;margin-top:4px;background:#fff;border:1px solid #d5dce6;border-radius:6px;box-shadow:0 6px 18px rgba(26,41,66,.14);z-index:99;min-width:160px}.tmp-dd-item{padding:7px 12px;font-size:12.5px;color:#374151;cursor:pointer;white-space:nowrap}.tmp-dd-item:hover{background:#f5f7fa}.tmp-dd-item.on{color:#409eff;background:#ecf5ff}.tmp-dd-item.gmdct-off{color:#9ca3af;cursor:default}.gmdct-selval{color:#374151}.rec26-pop-wrap{position:relative}.rec26-modal{top:0}.card-search{position:fixed;right:16px;top:64px;z-index:210;display:flex;align-items:center;gap:6px;background:#fff;border:1px solid #d5dce6;border-radius:10px;padding:8px 10px;box-shadow:0 4px 14px rgba(26,41,66,.12)}.card-search input{width:72px;border:1px solid #d5dce6;border-radius:6px;padding:6px 10px;font-size:13px;color:#374151;outline:none}.card-search input:focus{border-color:#409eff}.card-search-btn{background:#409eff;color:#fff;border-radius:6px;padding:6px 12px;font-size:12.5px;cursor:pointer;user-select:none;white-space:nowrap}.card-search-btn:hover{background:#337ecc}.card-search-hint{color:#e5533d;font-size:12px;white-space:nowrap}.card-hit{outline:2px solid #409eff;outline-offset:2px;border-radius:8px;transition:outline-color .3s}
+.phx-hit{background:#fdeaa0;border-radius:3px;padding:0 3px;outline:2px solid #e5a400}.rec26-modal .mk-tbl-wrap{overflow-x:visible}table.mk-table.rec26-tbl{table-layout:fixed;width:100%}table.mk-table.rec26-tbl th{white-space:normal;word-break:break-word}table.mk-table.rec26-tbl td{font-size:12.5px;vertical-align:top;white-space:normal;word-break:break-word;overflow-wrap:anywhere;line-height:1.7;text-align:left}table.mk-table.rec26-tbl td:first-child,table.mk-table.rec26-tbl th:first-child{width:40px;text-align:center}table.mk-table.rec26-tbl td:nth-child(2),table.mk-table.rec26-tbl th:nth-child(2){width:28%}table.mk-table.rec26-tbl td:nth-child(3),table.mk-table.rec26-tbl th:nth-child(3){width:88px;text-align:center}.rec26-sec{font-weight:600;color:#1f2d3d;margin:10px 14px 4px;font-size:13px}.rec26-note{color:#8a94a6;font-size:12px;margin:8px 14px 2px}.sysp-modal.gmv-modal-xl{width:min(1240px,96%);max-width:none}.gmv-inline{border:1px solid #d5dce6;border-radius:8px;background:#fff}
 .mk-banner{background:#fdf6ec;border:1px solid #f5dab1;color:#b8860b;border-radius:4px;padding:8px 12px;font-size:12.5px;margin-bottom:12px}
 /* 本期不做／隱藏頁：卡片內文與改動目標內容整頁刪除線（編號、麵包屑、區塊標題不受影響） */
 .pg-dep .spec-row, .pg-dep .ov-dir, .card-dep .spec-row{text-decoration:line-through;text-decoration-thickness:2px;text-decoration-color:#7d8794;color:#9aa4b2}
@@ -747,7 +749,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
 <body>
 
 <div class="doc-header">
-  <h1>後台多幣種改動規格書 V4.2</h1>
+  <h1>後台多幣種改動規格書 V4.3</h1>
   
 </div>
 
@@ -980,6 +982,45 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
     <p class="rec-sub">記錄各次會議與討論的決議內容。新的紀錄由上往下疊加（項次由下往上遞增）；決議內容若後續被調整，原文以刪除線標示並於下方註記調整內容與確認人。</p>
     <table class="rec-table">
       <tr><th>日期</th><th>項次</th><th>內容</th><th>規格書更新</th><th>參與人</th></tr>
+      <tr id="rec-59">
+        <td class="rec-date" rowspan="6">9/16</td>
+        <td class="rec-no">59</td>
+        <td><span class="rec-item-tt">多幣種整體時程</span>：<br>1. 期 1（Evan）：9/16 系統參數頁面修復完成、9/17 登錄註冊修復完成、9/18 修復其餘 bug<br>2. 期 3（Evan）：9/21 開始開發，並持續修復期 1 bug<br>3. 期 2（Cyril）：<a class="x-jump" href="https://okbetokbet.atlassian.net/browse/OKF-2074" target="_blank">OKF-2074</a> 完成後，接續開發期 2<br>4. 整體時程改為：12/10 UAT、12/28 生產<br>5. 期 4：Evan 完成期 3 開發後接續開發；Ody 完成 <a class="x-jump" href="https://okbetokbet.atlassian.net/browse/OKF-2074" target="_blank">OKF-2074</a> 後加入期 4 開發</td>
+        <td class="rec-upd"><span class="x-jump" onclick="showPg('phase-plan');goTo('rd-sched')">9/16已更新</span></td>
+        <td rowspan="6">9/16 第五次週會（Zack、Cyril、Evan、Ody、Wade、Din、Shawn、Zaken、Abeni）</td>
+      </tr>
+      <tr id="rec-58">
+        <td class="rec-no">58</td>
+        <td><span class="rec-item-tt">充值提款匹配邏輯優化（<a class="x-jump" href="https://okbetokbet.atlassian.net/browse/OKF-2074" target="_blank">OKF-2074</a>）</span>：<br>1. 充值邏輯做法已完成；開發需改動的後台畫面與欄位名稱，預計週四提供 PM 再次確認<br>2. 預計時程：9/18 開始開發，10/2 推 DEV<br>3. 分工：充值 Ody、提款 Cyril<br>4. 層設置：<br>　(1) 代付商戶不使用層設置與 VIP 等級設置，畫面上移除<br>　(2) 提款限制上移至渠道層級（提款渠道管理）設定<br>　(3) 支付層級做在三態內：原狀態即為預設值，另有指定設置者以指定值優先，不看預設值狀態</td>
+        <td class="rec-upd"><span class="x-jump" onclick="showPg('phase-plan');goTo('rd-sched')">9/16已更新（時程）</span></td>
+      </tr>
+      <tr id="rec-57">
+        <td class="rec-no">57</td>
+        <td><span class="rec-item-tt">幣種匯率更新與每月匯率紀錄</span>（控制後台 &gt; 系統管理 &gt; 幣種管理）：<br>1. 匯率更新維持現行，每月固定只跑一次（每月 1 號）<br>2. 幣種開啟或新增需要調整匯率時，以人工手動寫入或執行 job 處理<br>3. 每月 1 號全幣種各記一筆當月匯率（不分開啟／關閉、不分有無變動），確定執行</td>
+        <td class="rec-upd"></td>
+      </tr>
+      <tr id="rec-56">
+        <td class="rec-no">56</td>
+        <td><span class="rec-item-tt">投注站適用國家檢核取消</span>（平台管理 &gt; 平台列表 &gt; 新增平台，卡 541）：<br>1. 取消「投注站適用國家」檢核，所有渲染一律抓「可使用國家」<br>2. 管理後台新增投注站或總代時，不檢核該國家屬於投注站還是總代模式，由營運人員自行把關</td>
+        <td class="rec-upd"></td>
+      </tr>
+      <tr id="rec-55">
+        <td class="rec-no">55</td>
+        <td><span class="rec-item-tt">規格補充方式</span>：<br>1. 實作後發現部分細節操作邏輯當初未寫入，將陸續補進規格書<br>2. 小卡有修改時，於版本更新紀錄備注屬於期幾的內容</td>
+        <td class="rec-upd">－</td>
+      </tr>
+      <tr id="rec-54">
+        <td class="rec-no">54</td>
+        <td><span class="rec-item-tt">系統參數推版問題</span>：<br>主因：系統參數推版多次仍有錯誤，原因與處理如下：<br>1. 畫面不正確：自測畫面問題已有處理方式，推版前需自測畫面<br>2. UI 不正確：規格書畫面僅為示意，實際 UI 以後台原有元件為準<br>3. 規格書更版頻繁，開發內容與規格書產生版本落差：RD 交付時會告知對應的規格書版本</td>
+        <td class="rec-upd">－</td>
+      </tr>
+      <tr id="rec-53">
+        <td class="rec-date">9/14</td>
+        <td class="rec-no">53</td>
+        <td><span class="rec-item-tt">支付層級配置</span>（充值配置 &gt; 支付层级配置）：<br>自充值提款匹配邏輯優化（<a class="x-jump" href="https://okbetokbet.atlassian.net/browse/OKF-2074" target="_blank">OKF-2074</a>）拉回多幣種專案，改於期 3 開發，含後台畫面（卡 274～278）。</td>
+        <td class="rec-upd"><span class="x-jump" onclick="showPg('phase-scope');goTo('phx-3')">9/16已更新</span></td>
+        <td class="rec-who">Cyril</td>
+      </tr>
       <tr id="rec-52">
         <td class="rec-date" rowspan="3">9/11</td>
         <td class="rec-no">52</td>
@@ -1330,13 +1371,18 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
         <table class="rec-table">
       <tr><th>版本</th><th>日期</th><th>更新內容／原因</th></tr>
       <tr>
+          <td class="rec-date">V4.3</td>
+          <td class="rec-date">9/16</td>
+          <td>依照討論紀錄調整<br><br>新增：<br>1. <span class="x-jump" onclick="showPg('phase-scope')">分期上線範圍頁共用小卡搜尋浮窗——於該頁搜尋卡號改查所屬期別：命中之編號或區段整段高亮、自動捲動並提示期別，跨期同卡全部列出</span><br><br>調整：<br>1. <span class="x-jump" onclick="showPg('spec-content');goTo('s2-8')">憲法 2.8 依項次 27 調整——遊戲綁定改「國家＋幣種」組合、首頁分類與遊戲類別改於国际化设置依組合維護、會員可見遊戲與圖片依組合決定（2.8.2～2.8.5，舊規則劃線、現行內容接於後方）</span><br>2. <span class="x-jump" onclick="showPg('adm-user-mgmt-agent')">補邏輯——代理新增彈窗上級大代理與國家、幣種雙向連動過濾、幣種與標籤欄位未選擇前顯示「請選擇」提示且未選國家時選單顯示 No data（卡 025，QA 檢核 Q-11）</span><br>3. <span class="x-jump" onclick="showPg('adm-user-mgmt-super-agent')">補邏輯——大代理新增彈窗上級代理與國家、幣種雙向連動過濾、幣種與標籤欄位未選擇前顯示「請選擇」提示且未選國家時選單顯示 No data（卡 012，比照卡 025，QA 檢核 Q-11）</span><br>4. <span class="x-jump" onclick="showPg('phase-scope');goTo('phx-3')">支付層級配置自 OKF-2074 拉回多幣種期 3——分期上線範圍自期 2 移列期 3（卡 274～278，項次 53）</span><br>5. <span class="x-jump" onclick="showPg('phase-scope')">分期上線範圍剔除作廢卡——期 2 除卡 096、期 4 除卡 204~207（反水設定整列）與 215、216、244、245、期 5 除卡 180</span><br>6. <span class="x-jump" onclick="showPg('phase-scope')">分期上線範圍排除區補列後續作廢卡 18 張（096、180、204~207、215~216、244~245、275、549~555）並同步頁尾統計小計</span><br>7. <span class="x-jump" onclick="showPg('phase-scope')">35 張新卡預估期數經 RD 確認寫入分期上線範圍——期 1：586~588、期 2：531~540、548、期 3：570~575、577~580、期 4：581~585、期 5：544~547、569、期 7：576</span><br>8. <span class="x-jump" onclick="showPg('phase-plan');goTo('rd-sched')">上線計劃與進度依項次 58、59 改版——RD 預計時程升 V2（9/16 排定，時長不變、日期順移，OKF-2074 9/18～10/2），期 1 進度改修復 bug 中、上 DEV 填 9/10，整體時程 12/10 UAT、12/28 生產</span></td>
+        </tr>
+      <tr>
           <td class="rec-date">V4.2</td>
           <td class="rec-date">9/14</td>
           <td>依照討論紀錄調整<br><br>調整：<br>1. <span class="x-jump" onclick="showPg('spec-content');goTo('s2-4')">憲法 2.4.4 轉線規則補充換線同類型限制——新上級（總代／大代理／代理）須屬同類型代理線，總代線與投注站線不可互相切換（項次 51 第 1 點）</span><br>2. <span class="x-jump" onclick="showPg('adm-user-mgmt-tag-config')">會員代理標籤配置列表「創建時間」欄更名為「變更時間」（卡 586，項次 52）</span><br>3. <span class="x-jump" onclick="showPg('adm-user-mgmt-super-agent')">大代理變更代理線彈窗依代理線類型帶出對應候選資料，詞條與提示文字為變量（卡 016、587，項次 51 第 2 點）</span><br>4. <span class="x-jump" onclick="showPg('adm-user-mgmt-agent')">代理變更代理線彈窗依代理線類型帶出對應候選資料，詞條與提示文字為變量（卡 029、588，項次 51 第 2 點）</span></td>
         </tr>
       <tr>
           <td class="rec-date">V4.1</td>
-          <td class="rec-date">9/8</td>
+          <td class="rec-date">9/9</td>
           <td>1. 「總公司」全書更名為「總代」<br>　　1. 共改 82 處——總代頁（頁面路徑、卡 564~568、本頁改動目標）、總代報表頁、投注站／代理報表內文、免費旋轉層級選項（含畫面渲染 16 處）、分期上線範圍期 1、側欄選單 2 項<br>　　2. 保留 3 處史料：既往版本紀錄條目的「總公司頁新增」「總公司報表頁新增」維持原文<br>　　3. 既有 32 處「總代」用語與本次改名一致，「總代理」1 處不受影響<br>2. 新增小卡搜尋浮窗於規格書右上角，可直接跳轉至對應卡號</td>
         </tr>
       <tr>
@@ -1398,14 +1444,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
     <h1>待確認內容</h1>
     <table class="rec-table">
       <tr><th>日期</th><th>項次</th><th>內容</th><th>討論人</th><th>預計討論時間</th></tr>
-      <tr>
-        <td class="rec-date">9/10</td>
-        <td class="rec-no">1</td>
-        <td><span class="rec-item-tt">投注站適用國家檢核</span>（平台管理 &gt; 平台列表 &gt; 新增平台 &gt; 投注站適用國家，卡 541）：此設定原為會議提出之需求，目的為避免營運在未開放投注站的國家下選到投注站。RD 端現規劃不檢核國家、僅檢核投注站系統是否啟用，並先依此方向實作。是否取消國家檢核、原需求如何滿足，待討論確認。</td>
-        <td></td>
-        <td>9/15 週會</td>
-      </tr>
-    </table>
+      </table>
   </div>
 </div>
     <div class="pg" id="pg-spec-content">
@@ -1681,11 +1720,19 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
         <li>廠商幣種決定該廠商在前台的顯示範圍：僅在有支援該幣種的版面，才會顯示該廠商。</li>
       </ul>
 
-      <h4>2.8.2 遊戲幣種</h4>
+      <p class="rec-adj"><span class="rec-adj-tag">9/16 更新：</span>依照 <span class="x-jump" onclick="showPg('spec-discussion');goTo('rec-27')">8/18 第二次週會（項次 27）</span>，遊戲改以「國家＋幣種」組合綁定，首頁分類、遊戲類別與圖片改於「国际化设置」依組合維護；2.8.2～2.8.5 內被推翻的舊規則劃線，現行內容接於劃線後方。</p>
+
+      <h4>2.8.2 <span class="rec-del">遊戲幣種</span> <span class="rec-adj-in">遊戲國家＋幣種</span></h4>
+      <div class="rec-del">
       <p>廠商內各遊戲另有各自的幣種，於管理後台配置時由操作人員自行勾選／維護。管理後台支援的全部幣種皆會列出供操作人員勾選，不受第三方廠商已設定的幣種限制。</p>
-      <p>路徑：管理後台 &gt; 遊戲管理 &gt; 新遊戲入口設置 &gt; 遊戲字典配置 tab</p>
       <ul>
         <li>遊戲幣種決定該遊戲在前台的顯示範圍：僅在支援該遊戲幣種的版面顯示，且因遊戲依附於廠商，須該廠商也在該版面顯示，遊戲才會一併出現。</li>
+      </ul>
+      </div>
+      <p>廠商內各遊戲於配置時綁定「國家＋幣種」組合（多選且必選），由操作人員自行勾選／維護；可選組合以所選廠商支援的國家＋幣種組合為限。</p>
+      <p>路徑：管理後台 &gt; 遊戲管理 &gt; 新遊戲入口設置 &gt; 遊戲字典配置 tab</p>
+      <ul>
+        <li>遊戲綁定的國家＋幣種組合決定該遊戲在前台的顯示範圍：僅在綁定組合的版面顯示，且因遊戲依附於廠商，須該廠商也在該版面顯示，遊戲才會一併出現。</li>
       </ul>
 
       <h4>2.8.3 分類與國家的連動</h4>
@@ -1694,18 +1741,21 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
       <p>路徑：管理後台 &gt; 遊戲管理 &gt; 新遊戲入口設置 &gt; 首頁分類管理</p>
       <p><strong>2. 遊戲類別（區塊）</strong>：依各國家的首頁分類，再設置該分類頁面內的區塊名稱。</p>
       <p>路徑：管理後台 &gt; 遊戲管理 &gt; 新遊戲入口設置 &gt; 遊戲類別管理</p>
-      <p><strong>3. 遊戲管理配置</strong>：將遊戲新增／編輯時，需指定首頁分類與遊戲類別，才會在前台顯示。</p>
+      <p><strong>3. 遊戲管理配置</strong>：<span class="rec-del">將遊戲新增／編輯時，需指定首頁分類與遊戲類別，才會在前台顯示。</span><span class="rec-adj-in">遊戲的首頁分類與遊戲類別於「国际化设置」依國家＋幣種組合維護；組合未設置首頁分類時，該組合的版面不顯示此遊戲。</span></p>
       <p>路徑：管理後台 &gt; 遊戲管理 &gt; 新遊戲入口設置 &gt; 遊戲管理配置 tab</p>
+      <div class="rec-del">
       <p><strong>其中關鍵連動：</strong>遊戲管理配置的首頁分類下拉，會依「該遊戲支援幣種所支援的國家」過濾，僅列出這些國家的首頁分類。</p>
       <ul>
         <li>即先取得該遊戲支援的幣種 → 再由這些幣種對應出所支援的國家 → 最後僅顯示這些國家底下已設定的首頁分類。</li>
       </ul>
+      </div>
+      <p><strong>其中關鍵連動：</strong>国际化设置內各組合列的首頁分類與遊戲類別下拉，依該列國家過濾，僅列出該國家已設定的選項。</p>
 
       <h4>2.8.4 前台會員的呈現</h4>
       <p>上述設定最終決定前台會員看到的內容，依會員自身的國家與幣種分別作用：</p>
       <ul>
         <li><strong>會員的國家</strong>決定：在該版面能看到的<strong>遊戲分類名稱與排序</strong>，以及<strong>分類內區塊的名稱與排序</strong>。</li>
-        <li><strong>會員的幣種</strong>決定：在該版面的分類／區塊內，能看到<strong>哪些廠商分頁</strong>，以及<strong>分頁內／區塊內的哪些遊戲</strong>。</li>
+        <li><strong>會員的幣種</strong>決定：在該版面的分類／區塊內，能看到<strong>哪些廠商分頁</strong><span class="rec-del">，以及<strong>分頁內／區塊內的哪些遊戲</strong></span>。<span class="rec-adj-in">分頁內／區塊內可見的遊戲由「會員的國家＋幣種」組合決定：僅顯示綁定該組合、且該組合已設置首頁分類的遊戲。</span></li>
       </ul>
 
       <h4>2.8.5 不受幣種設置影響的項目</h4>
@@ -1713,16 +1763,16 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
       <ul>
         <li>第三方廠商排序</li>
         <li>第三方廠商名稱</li>
-        <li>第三方廠商圖片</li>
+        <li><span class="rec-del">第三方廠商圖片</span><span class="rec-adj-in">：改依「國家＋幣種」組合設置（国际化图片设置），未設置的組合沿用預設圖</span></li>
         <li>廠商內各遊戲排序</li>
         <li>廠商內各遊戲展示名稱</li>
-        <li>廠商內各遊戲圖片</li>
+        <li><span class="rec-del">廠商內各遊戲圖片</span><span class="rec-adj-in">：改依「國家＋幣種」組合設置（国际化设置），未設置的組合沿用預設圖</span></li>
       </ul>
       <div class="callout">
         <span class="callout-label">範圍說明</span>
         <p>本節 2.8.5 與 2.9 節「活動素材」的差別在於：</p>
         <ul>
-          <li>廠商／遊戲的名稱、圖片、排序依國家（版面）區分，但不受幣種影響</li>
+          <li>廠商／遊戲的名稱、<span class="rec-del">圖片、</span>排序依國家（版面）區分，但不受幣種影響</li>
           <li>活動素材則需依<strong>三個維度（國家＋幣種＋語系）</strong>分別呈現</li>
           <li>兩者判斷依據不同，請留意界線</li>
         </ul>
@@ -1826,7 +1876,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
 
 <!-- ══════════ 期 1 ══════════ -->
 <div class="phase">
-  <div class="ph-head" id="phx-1"><span class="n">期 1</span><span class="t">基礎工程</span><span class="c">小卡 31 張＋013、026 標籤部分 ｜ 交付項 7</span></div>
+  <div class="ph-head" id="phx-1"><span class="n">期 1</span><span class="t">基礎工程</span><span class="c">小卡 34 張＋013、026 標籤部分 ｜ 交付項 7</span></div>
   <div class="ph-body">
 
     <div class="cap">有小卡對應功能</div>
@@ -1836,12 +1886,12 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
         <tr><td class="id">526–530</td><td>控制後台 &gt; 操作日誌／幣種管理（消息類型加「匯率」、匯率調整明細、每月匯率紀錄分頁／搜尋／列表；保留原匯率生效規則）</td></tr>
         <tr><td class="id">541–543</td><td>控制後台 &gt; 平台管理（新增／修改平台的投注站適用國家、平台列表投注站欄；需驗舊版修改平台後新設定與原 PH 操作維持）</td></tr>
         <tr><td class="id">004<br>009</td><td>用戶管理 &gt; 投注站（新增頁 地區／幣種——幣種手動選擇、保存後不可修改，用戶轉移限定同國家＋幣種）</td></tr>
-        <tr><td class="id">012<br>016–017</td><td>用戶管理 &gt; 大代理（新增彈窗 國家／幣種、變更代理線、直屬會員轉移）</td></tr>
+        <tr><td class="id">012<br>016–017<br>587</td><td>用戶管理 &gt; 大代理（新增彈窗 國家／幣種、變更代理線、直屬會員轉移）</td></tr>
         <tr><td class="id">013<span class="tag">部分</span></td><td>用戶管理 &gt; 大代理——僅列表標籤依帳號國家生效（不匹配不顯示、保留關聯、切回後恢復）；其餘列表國幣呈現留期 3</td></tr>
-        <tr><td class="id">025<br>029–030</td><td>用戶管理 &gt; 代理（新增彈窗 國家／幣種、變更代理線、直屬會員轉移）</td></tr>
+        <tr><td class="id">025<br>029–030<br>588</td><td>用戶管理 &gt; 代理（新增彈窗 國家／幣種、變更代理線、直屬會員轉移）</td></tr>
         <tr><td class="id">026<span class="tag">部分</span></td><td>用戶管理 &gt; 代理——僅列表標籤依帳號國家生效、失效及恢復；其餘列表國幣呈現留期 3</td></tr>
         <tr><td class="id">038<br>044</td><td>用戶管理 &gt; 會員（新增彈窗 國家／幣種上級帶出唯讀、變更代理）</td></tr>
-        <tr><td class="id">556–559</td><td>用戶管理 &gt; 會員代理標籤配置（國家搜尋、列表國家欄、新增選國家、可修改國家；僅國家維度，不綁幣種）</td></tr>
+        <tr><td class="id">556–559<br>586</td><td>用戶管理 &gt; 會員代理標籤配置（國家搜尋、列表國家欄、新增選國家、可修改國家；僅國家維度，不綁幣種）</td></tr>
         <tr><td class="id">560–563</td><td>用戶管理 &gt; 大代理／代理／會員（編輯標籤僅同國家候選、列表僅顯示有效同國家標籤，失效保留關聯、切回恢復）</td></tr>
         <tr><td class="id">564–568</td><td>用戶管理 &gt; 總代（國家幣種連動搜尋、列表國家/幣種欄、新增登入密碼、新增選國家幣種——排除投注站適用國家且保存後不可修改、編輯入口）</td></tr>
       </tbody>
@@ -1883,7 +1933,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
 
 <!-- ══════════ 期 2 ══════════ -->
 <div class="phase">
-  <div class="ph-head" id="phx-2"><span class="n">期 2</span><span class="t">金流</span><span class="c">V3 44 張 ｜ 交付項 2</span></div>
+  <div class="ph-head" id="phx-2"><span class="n">期 2</span><span class="t">金流</span><span class="c">49 張（V3 38＋新卡 11） ｜ 交付項 2</span></div>
   <div class="ph-body">
 
     <div class="cap">有 V3 對應功能</div>
@@ -1895,12 +1945,12 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
         <tr><td class="id">080–084</td><td>財務管理 &gt; 資金明細</td></tr>
         <tr><td class="id">085–086</td><td>財務管理 &gt; 兌換紀錄</td></tr>
         <tr><td class="id">092–094</td><td>財務管理 &gt; 資金明細(新)</td></tr>
-        <tr><td class="id">095–096</td><td>提現管理 &gt; 提現出款設置</td></tr>
+        <tr><td class="id">095<br>548</td><td>提現管理 &gt; 提現出款設置</td></tr>
         <tr><td class="id">266–269</td><td>充值配置 &gt; 在線支付配置</td></tr>
-        <tr><td class="id">274–278</td><td>充值配置 &gt; 支付層級配置</td></tr>
         <tr><td class="id">279–282</td><td>充值配置 &gt; 綁定銀行配置</td></tr>
-        <tr><td class="id">283–284</td><td>充值配置 &gt; 充值方式配置</td></tr>
-        <tr><td class="id">285–286</td><td>充值配置 &gt; 提款方式配置</td></tr>
+        <tr><td class="id">283–284<br>539</td><td>充值配置 &gt; 充值方式配置</td></tr>
+        <tr><td class="id">285–286<br>540</td><td>充值配置 &gt; 提款方式配置</td></tr>
+        <tr><td class="id">531–538</td><td>充值配置 &gt; 在線支付展示配置</td></tr>
       </tbody>
     </table>
 
@@ -1909,7 +1959,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
       <thead><tr><th>功能編號</th><th>功能項目</th><th>要做的內容</th></tr></thead>
       <tbody>
         <tr><td class="d-id">D-07</td><td class="nm">同步配置共用元件</td>
-          <td>把來源設定的數值帶到目標的編輯頁面，<b>直接複製不做匯率換算、不立即落庫</b>，使用者按保存才寫入；目標原有值在畫面上被覆蓋，由使用者自行判斷是否保存。維度須先依 BLOCK-77 統一，且只允許同維度之間同步。共 3 頁 8 張卡：提現出款設置、支付層級（本期）＋ VIP 特權（期 7 沿用），<b>一處實作、期 7 直接用</b>。</td></tr>
+          <td>把來源設定的數值帶到目標的編輯頁面，<b>直接複製不做匯率換算、不立即落庫</b>，使用者按保存才寫入；目標原有值在畫面上被覆蓋，由使用者自行判斷是否保存。維度須先依 BLOCK-77 統一，且只允許同維度之間同步。共 3 頁 8 張卡：提現出款設置（本期）、支付層級（期 3）＋ VIP 特權（期 7 沿用），<b>一處實作、期 7 直接用</b>。</td></tr>
         <tr><td class="d-id">D-14</td><td class="nm">在線支付展示配置<span class="tag">會議結論·無文件</span></td>
           <td>該頁由 OKF-1522 新增（<code>rech_channel_meta</code>），<b>晚於 V3 基準</b>，所以 V3 小卡與 86 頁清單都沒有它。但它決定玩家前台看到哪些入口、用哪個商戶，現況不按多幣種設計。決議納入本次並補多幣種。</td></tr>
       </tbody>
@@ -1921,7 +1971,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
 
 <!-- ══════════ 期 3 ══════════ -->
 <div class="phase">
-  <div class="ph-head" id="phx-3"><span class="n">期 3</span><span class="t">代理線（投注站＋會員）</span><span class="c">V3 37 張</span></div>
+  <div class="ph-head" id="phx-3"><span class="n">期 3</span><span class="t">代理線（投注站＋會員）</span><span class="c">52 張（V3 42＋新卡 10）</span></div>
   <div class="ph-body">
 
     <div class="cap">有 V3 對應功能</div>
@@ -1931,8 +1981,10 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
         <tr><td class="id">001–002<br>005–008<br>010</td><td>用戶管理 &gt; 投注站（列表、押金與額度彈窗、詳情）</td></tr>
         <tr><td class="id">011<br>013–015<br>018–023</td><td>用戶管理 &gt; 大代理（搜尋、列表、資金明細、額度、直屬會員配置）</td></tr>
         <tr><td class="id">024<br>026–028<br>031–036</td><td>用戶管理 &gt; 代理（搜尋、列表、資金明細、額度、直屬會員配置）</td></tr>
-        <tr><td class="id">037<br>039–043<br>045–046</td><td>用戶管理 &gt; 會員（搜尋、列表、資金明細、額度、信用與存提款欄）</td></tr>
+        <tr><td class="id">037<br>039–043<br>045–046<br>577–580</td><td>用戶管理 &gt; 會員（搜尋、列表、資金明細、額度、信用與存提款欄）</td></tr>
         <tr><td class="id">087–088</td><td>財務管理 &gt; 投注站兌換記錄</td></tr>
+        <tr><td class="id">274<br>276–278</td><td>充值配置 &gt; 支付層級配置</td></tr>
+        <tr><td class="id">570–575</td><td>系統管理 &gt; 綁定郵箱設置</td></tr>
       </tbody>
     </table>
     <div class="note">013、026 的<b>標籤部分</b>（列表標籤依帳號國家生效）已提前至期 1；本期承接其餘列表國幣呈現。</div>
@@ -1943,7 +1995,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
 
 <!-- ══════════ 期 4 ══════════ -->
 <div class="phase">
-  <div class="ph-head" id="phx-4"><span class="n">期 4</span><span class="t">三方 GAME ＋ 體育</span><span class="c">V3 63 張</span></div>
+  <div class="ph-head" id="phx-4"><span class="n">期 4</span><span class="t">三方 GAME ＋ 體育</span><span class="c">60 張（V3 55＋新卡 5）</span></div>
   <div class="ph-body">
     <div class="cap">有 V3 對應功能</div>
     <table>
@@ -1953,15 +2005,14 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
         <tr><td class="id">119–122</td><td>數據 &gt; 三方報表</td></tr>
         <tr><td class="id">124–127</td><td>數據 &gt; 三方遊戲報表(稅收分類)</td></tr>
         <tr><td class="id">159–161</td><td>數據報表 &gt; 球類報表</td></tr>
-        <tr><td class="id">199–201</td><td>遊戲管理 &gt; 廠商設置</td></tr>
+        <tr><td class="id">199–201<br>581</td><td>遊戲管理 &gt; 廠商設置</td></tr>
         <tr><td class="id">202–203</td><td>遊戲管理 &gt; 交易設置</td></tr>
-        <tr><td class="id">204–207</td><td>遊戲管理 &gt; 反水設定</td></tr>
         <tr><td class="id">208–214</td><td>遊戲管理 &gt; 投注紀錄</td></tr>
-        <tr><td class="id">215–217</td><td>遊戲管理 &gt; 賽事管理</td></tr>
+        <tr><td class="id">217</td><td>遊戲管理 &gt; 賽事管理</td></tr>
         <tr><td class="id">218–221</td><td>遊戲管理 &gt; 第三方對局查詢</td></tr>
         <tr><td class="id">222–225</td><td>遊戲管理 &gt; 第三方對局查詢(首頁分類)</td></tr>
         <tr><td class="id">226–229</td><td>遊戲管理 &gt; 第三方其他費用</td></tr>
-        <tr><td class="id">230–246</td><td>遊戲管理 &gt; 新遊戲入口設置</td></tr>
+        <tr><td class="id">230–243<br>246<br>582–585</td><td>遊戲管理 &gt; 新遊戲入口設置</td></tr>
       </tbody>
     </table>
   </div>
@@ -1970,7 +2021,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
 
 <!-- ══════════ 期 5 ══════════ -->
 <div class="phase">
-  <div class="ph-head" id="phx-5"><span class="n">期 5</span><span class="t">匯總報表</span><span class="c">V3 69 張</span></div>
+  <div class="ph-head" id="phx-5"><span class="n">期 5</span><span class="t">匯總報表</span><span class="c">73 張（V3 68＋新卡 5）</span></div>
   <div class="ph-body">
     <div class="cap">有 V3 對應功能</div>
     <table>
@@ -1983,10 +2034,11 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
         <tr><td class="id">147–158</td><td>數據報表 &gt; 會員報表</td></tr>
         <tr><td class="id">162–173</td><td>數據報表 &gt; 三方游戏报表(新)</td></tr>
         <tr><td class="id">174–177</td><td>數據報表 &gt; 三方游戏报表(汇总)</td></tr>
-        <tr><td class="id">178–180</td><td>數據報表 &gt; 投注站统计</td></tr>
-        <tr><td class="id">181–184</td><td>數據報表 &gt; 大額存取款報表</td></tr>
+        <tr><td class="id">178–179</td><td>數據報表 &gt; 投注站统计</td></tr>
+        <tr><td class="id">181–184<br>544–547</td><td>數據報表 &gt; 大額存取款報表</td></tr>
         <tr><td class="id">185–188</td><td>數據報表 &gt; 存取款统计</td></tr>
         <tr><td class="id">189–198</td><td>平台概況 &gt; 財務數據</td></tr>
+        <tr><td class="id">569</td><td>數據報表 &gt; 總代報表</td></tr>
       </tbody>
     </table>
   </div>
@@ -2011,13 +2063,13 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
 
 <!-- ══════════ 期 7 ══════════ -->
 <div class="phase">
-  <div class="ph-head" id="phx-7"><span class="n">期 7</span><span class="t">VIP</span><span class="c">V3 18 張</span></div>
+  <div class="ph-head" id="phx-7"><span class="n">期 7</span><span class="t">VIP</span><span class="c">19 張（V3 18＋新卡 1）</span></div>
   <div class="ph-body">
     <div class="cap">有 V3 對應功能</div>
     <table>
       <thead><tr><th>功能編號</th><th>功能項目</th></tr></thead>
       <tbody>
-        <tr><td class="id">047–064</td><td>用戶管理 &gt; VIP特權</td></tr>
+        <tr><td class="id">047–064<br>576</td><td>用戶管理 &gt; VIP特權</td></tr>
       </tbody>
     </table>
   </div>
@@ -2090,7 +2142,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
 
 <!-- ══════════ 排除 ══════════ -->
 <div class="phase out">
-  <div class="ph-head" id="phx-ex"><span class="n">排除</span><span class="t">不列入任何期／作廢卡文</span><span class="c">V3 33 張</span></div>
+  <div class="ph-head" id="phx-ex"><span class="n">排除</span><span class="t">不列入任何期／作廢卡文</span><span class="c">51 張（V3 33＋後續 18）</span></div>
   <div class="ph-body">
     <table>
       <thead><tr><th>功能編號</th><th>功能項目</th><th>處置</th></tr></thead>
@@ -2104,6 +2156,13 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
         <tr><td class="id">460–463</td><td>系統管理 &gt; 國家地區定製IP白名單</td><td>排除</td></tr>
         <tr><td class="id">003</td><td>用戶管理 &gt; 投注站（作廢卡文）</td><td rowspan="2">依作廢卡文不交付（9/8 依 RD 盤點）；有效替代需求分別由卡 004 寫入端與系統參數新版頁（項次 38）承接</td></tr>
         <tr><td class="id">456–459</td><td>系統管理 &gt; 系統參數管理（作廢卡文）</td></tr>
+        <tr><td class="id">096</td><td>提現管理 &gt; 提現出款設置（同步配置）</td><td>作廢卡文、劃線保留備查</td></tr>
+        <tr><td class="id">180</td><td>數據報表 &gt; 投注站统计（列表欄位）</td><td>作廢卡文、劃線保留備查</td></tr>
+        <tr><td class="id">204–207</td><td>遊戲管理 &gt; 反水設定</td><td>整頁作廢（項次 31）、劃線保留備查</td></tr>
+        <tr><td class="id">215–216</td><td>遊戲管理 &gt; 賽事管理（舊幣種設計）</td><td>決議變更設計（項次 32）、劃線保留備查</td></tr>
+        <tr><td class="id">244–245</td><td>遊戲管理 &gt; 新遊戲入口設置（首頁分類與類別三層連動）</td><td>決議變更設計（改由国际化设置維護，項次 27）、劃線保留備查</td></tr>
+        <tr><td class="id">275</td><td>充值配置 &gt; 支付層級配置（同步配置）</td><td>決議不做同步配置（項次 13）、劃線保留備查</td></tr>
+        <tr><td class="id">549–555</td><td>系統管理 &gt; 系統參數管理（8/24 版新頁）</td><td>畫面版本定案變更設計、依定案版本重建（項次 38、50）、劃線保留備查</td></tr>
       </tbody>
     </table>
   </div>
@@ -2113,18 +2172,18 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
 <div class="tot">
   <table>
     <tbody>
-      <tr><td>期 1　基礎工程</td><td class="r">5 頁＋新頁 5</td><td class="r">31 張</td><td class="r">交付項 7</td></tr>
-      <tr><td>期 2　金流</td><td class="r">11 頁</td><td class="r">44 張</td><td class="r">交付項 2</td></tr>
-      <tr><td>期 3　代理線</td><td class="r">5 頁</td><td class="r">37 張</td><td class="r">—</td></tr>
-      <tr><td>期 4　三方 GAME ＋ 體育</td><td class="r">13 頁</td><td class="r">63 張</td><td class="r">—</td></tr>
-      <tr><td>期 5　匯總報表</td><td class="r">11 頁</td><td class="r">69 張</td><td class="r">—</td></tr>
+      <tr><td>期 1　基礎工程</td><td class="r">5 頁＋新頁 5</td><td class="r">34 張</td><td class="r">交付項 7</td></tr>
+      <tr><td>期 2　金流</td><td class="r">10 頁＋新頁 1</td><td class="r">49 張</td><td class="r">交付項 2</td></tr>
+      <tr><td>期 3　代理線</td><td class="r">6 頁＋新頁 1</td><td class="r">52 張</td><td class="r">—</td></tr>
+      <tr><td>期 4　三方 GAME ＋ 體育</td><td class="r">12 頁</td><td class="r">60 張</td><td class="r">—</td></tr>
+      <tr><td>期 5　匯總報表</td><td class="r">11 頁＋新頁 1</td><td class="r">73 張</td><td class="r">—</td></tr>
       <tr><td>期 6　金流風控</td><td class="r">2 頁</td><td class="r">21 張</td><td class="r">—</td></tr>
-      <tr><td>期 7　VIP</td><td class="r">1 頁</td><td class="r">18 張</td><td class="r">—</td></tr>
-      <tr class="mid"><td>期 1–7 小計（UAT 範圍）</td><td class="r">44 頁 <span class="hint">（列 48，扣同頁分工 4）＋新頁 5</span></td><td class="r">283 張</td><td class="r">交付項 9</td></tr>
+      <tr><td>期 7　VIP</td><td class="r">1 頁</td><td class="r">19 張</td><td class="r">—</td></tr>
+      <tr class="mid"><td>期 1–7 小計（UAT 範圍）</td><td class="r">43 頁 <span class="hint">（列 47，扣同頁分工 4）＋新頁 8</span></td><td class="r">308 張</td><td class="r">交付項 9</td></tr>
       <tr><td>期 8　活動（UAT 範圍外）</td><td class="r">30 頁</td><td class="r">202 張</td><td class="r">—</td></tr>
       <tr><td>期 9　代理傭金（UAT 範圍外）</td><td class="r">5 頁</td><td class="r">28 張</td><td class="r">—</td></tr>
-      <tr><td>排除／作廢卡文</td><td class="r">7 頁 <span class="hint">（003、456–459 之頁已計於期 1／期 3）</span></td><td class="r">33 張</td><td class="r">—</td></tr>
-      <tr><td>合計</td><td class="r">86 頁＋新頁 5</td><td class="r">546 張</td><td class="r">交付項 9</td></tr>
+      <tr><td>排除／作廢卡文</td><td class="r">8 頁 <span class="hint">（散卡 003、096、180、215–216、244–245、275、456–459、549–555 之頁已計於各期）</span></td><td class="r">51 張</td><td class="r">—</td></tr>
+      <tr><td>合計</td><td class="r">86 頁＋新頁 8</td><td class="r">589 張</td><td class="r">交付項 9</td></tr>
     </tbody>
   </table>
   <div class="foot">用戶管理的投注站、大代理、代理、會員<b>四頁由期 1 與期 3 分工</b>——期 1 做國家幣種的寫入與轉線＋標籤部分（013、026），期 3 做顯示與查詢。這四頁在兩期各出現一列，故各期列數相加為 48，實際唯一頁數為 44。<b>新頁 5</b>＝標籤配置、總代、控制後台操作日誌／幣種管理／平台管理；系統參數以新版頁（項次 38）交付，頁數承接計於期 1 的 5 頁內。（9/8 依 RD Phase 1 盤點 v0.6 更新）</div>
@@ -2145,28 +2204,28 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
       <li>開發採<strong>分批分期</strong>進行：每一期完成即上 DEV 交 QA 測試</li>
       <li>全部分期須待 DEV 都驗證 OK 後，<strong>整包一起上 UAT</strong>；UAT 通過後上生產</li>
       <li>第一批上線<strong>不包含</strong>「活動」（期 8）與「代理佣金」（期 9）兩期——非自專案移除，僅不在第一批上線範圍內</li>
-      <li>時程：<strong>11 月底</strong>全部開發完成、上 UAT；11～12 月修復＋測試；<strong>1 月底</strong>上生產</li>
+      <li>時程：<strong>11 月初</strong>全部開發完成；<strong>12/10</strong> 上 UAT；<strong>12/28</strong> 上生產</li>
     </ul>
 
-    <h3 class="plan-h" id="rd-sched">RD 預計時程 V1（8/20 排定）</h3>
-    <p class="plan-note">前提：兩名完整人力投入。本表為預估、將隨情況改版；改版時本區僅保留最新版（版本號遞增），歷史沿革見<span class="x-jump" onclick="showPg('spec-discussion');goTo('rec-30')">討論紀錄（項次 30）</span>。另因多頭平行開發，其他新開發／調整可能影響本案，需安排人力定期回頭確認並修正已完成項目，此人力配置亦為時程變因。</p>
+    <h3 class="plan-h" id="rd-sched">預計時程 V2（9/16 排定）</h3>
+    <p class="plan-note">驗收時程待 QA 提供。</p>
     <table class="rec-table">
-      <tr><th>期數</th><th>內容</th><th>開發開始</th><th>進 QA</th><th>時長</th><th>備註</th></tr>
-      <tr><td class="rec-no">1</td><td>基礎工程</td><td>8/24</td><td>9/5</td><td>2 週</td><td>時程受系統參數管理實作範圍影響</td></tr>
-      <tr><td class="rec-no">-</td><td>充值提款匹配邏輯優化（<a href="https://okbetokbet.atlassian.net/browse/OKF-2074" target="_blank">OKF-2074</a>）</td><td></td><td></td><td></td><td>資料整理尚需約一週；實作人力未定</td></tr>
-      <tr><td class="rec-no">2</td><td>金流</td><td>9/7</td><td>9/11</td><td>1 週</td><td>須待 OKF-2074 完成後才可開始</td></tr>
-      <tr><td class="rec-no">3</td><td>代理線（投注站＋會員）</td><td>9/14</td><td>9/18</td><td>1 週</td><td>期 1 完成即可開始，可與期 4 平行、不需等期 2（可先帶假資料）</td></tr>
-      <tr><td class="rec-no">4</td><td>三方 GAME ＋ 體育</td><td>9/21</td><td>10/8</td><td>3 週</td><td>期 1 完成即可開始，可與期 3 平行、不需等期 2（可先帶假資料）；兩項內容各 2 週、兩人分工整體 3 週；時程受「商戶與遊戲是否要做」影響</td></tr>
-      <tr><td class="rec-no">5</td><td>匯總報表</td><td>10/12</td><td>10/16</td><td>1 週</td><td>唯一必須等期 1～4 全部完成後才能開工</td></tr>
-      <tr><td class="rec-no">6</td><td>金流風控</td><td>10/19</td><td>10/23</td><td>1 週</td><td>期 1 完成後可隨時做、可平行，重要性較低，原則上待期 5 完成後才開始</td></tr>
-      <tr><td class="rec-no">7</td><td>VIP</td><td>10/26</td><td>10/30</td><td>1 週</td><td>期 1 完成後可隨時做、可平行，重要性較低，原則上待期 5 完成後才開始</td></tr>
-      <tr><td colspan="6">里程碑：11/2 全部開發完成（約 10 週）→ 11 月底全上 UAT（11/26）→ 1 月底上正式（1/25，過年 2/4～2/10 前）</td></tr>
+      <tr><th>期數</th><th>內容</th><th>開發開始</th><th>進 QA</th><th>驗收完成</th><th>開發時長</th><th>驗收時長</th><th>備註</th></tr>
+      <tr><td class="rec-no">1</td><td>基礎工程</td><td>8/24<br>（一）</td><td>9/10<br>（四）</td><td>－</td><td>2 週</td><td>－</td><td>時程受系統參數管理實作範圍影響</td></tr>
+      <tr><td class="rec-no">-</td><td>充值提款匹配邏輯優化（<a href="https://okbetokbet.atlassian.net/browse/OKF-2074" target="_blank">OKF-2074</a>）</td><td>9/18<br>（五）</td><td>10/2<br>（五）</td><td>－</td><td>2 週</td><td>－</td><td>9/17 提供調整後的後台畫面與欄位名稱予 PM 確認<br>9/16~9/18 調整週會討論內容後進入開發<br>充值：Ody ／ 提款：Cyril</td></tr>
+      <tr><td class="rec-no">2</td><td>金流</td><td>10/5<br>（一）</td><td>10/9<br>（五）</td><td>－</td><td>1 週</td><td>－</td><td>須待 OKF-2074 完成後由 Cyril 接續開發</td></tr>
+      <tr><td class="rec-no">3</td><td>代理線（投注站＋會員）</td><td>9/21<br>（一）</td><td>9/25<br>（五）</td><td>－</td><td>1 週</td><td>－</td><td>期 1 完成後由 Evan 接續開發</td></tr>
+      <tr><td class="rec-no">4</td><td>三方 GAME ＋ 體育</td><td>9/28<br>（一）</td><td>10/16<br>（五）</td><td>－</td><td>3 週</td><td>－</td><td>期 3 完成後由 Evan 接續開發<br>後續 <a class="x-jump" href="https://okbetokbet.atlassian.net/browse/OKF-2074" target="_blank">OKF-2074</a> 完成後 Ody 加入協力開發</td></tr>
+      <tr><td class="rec-no">5</td><td>匯總報表</td><td>10/19<br>（一）</td><td>10/23<br>（五）</td><td>－</td><td>1 週</td><td>－</td><td>唯一必須等期 1～4 全部完成後才能開工</td></tr>
+      <tr><td class="rec-no">6</td><td>金流風控</td><td>10/26<br>（一）</td><td>10/30<br>（五）</td><td>－</td><td>1 週</td><td>－</td><td>期 1 完成後可隨時做、可平行，重要性較低，原則上待期 5 完成後才開始</td></tr>
+      <tr><td class="rec-no">7</td><td>VIP</td><td>11/2<br>（一）</td><td>11/6<br>（五）</td><td>－</td><td>1 週</td><td>－</td><td>期 1 完成後可隨時做、可平行，重要性較低，原則上待期 5 完成後才開始</td></tr>
+      <tr><td colspan="8">里程碑：11/6(五) 全部開發完成 → 12/10(四) 全上 UAT → 12/28(一) 上生產</td></tr>
     </table>
 
     <h3 class="plan-h">各期 DEV 進度</h3>
     <table class="rec-table">
       <tr><th>期數</th><th>名稱</th><th>範圍</th><th>盤點</th><th>開發中</th><th>上 DEV</th><th>DEV 驗收通過</th><th>備註</th></tr>
-      <tr><td class="rec-no">1</td><td>基礎工程</td><td class="plan-scope">5 頁 15 張｜交付項 4</td><td class="ph-cell ph-done">8/28 已完成</td><td class="ph-cell ph-now">開發中</td><td class="ph-cell"></td><td class="ph-cell"></td><td>開發中發現技術問題，上 DEV 延至 9/10(四)</td></tr>
+      <tr><td class="rec-no">1</td><td>基礎工程</td><td class="plan-scope">5 頁 15 張｜交付項 4</td><td class="ph-cell ph-done">8/28 已完成</td><td class="ph-cell ph-now">修復 bug 中</td><td class="ph-cell ph-done">9/10</td><td class="ph-cell"></td><td>開發中發現技術問題，上 DEV 延至 9/10(四)</td></tr>
       <tr><td class="rec-no">—</td><td>充值提款匹配邏輯優化（<a class="x-jump" href="https://okbetokbet.atlassian.net/browse/OKF-2074" target="_blank">OKF-2074</a>）</td><td class="plan-scope">期 2 前置</td><td class="ph-cell ph-done">8/28 已完成</td><td class="ph-cell"></td><td class="ph-cell"></td><td class="ph-cell"></td><td>需先完成才可進行期 2；不影響期 3、期 4（可先帶假資料）</td></tr>
       <tr><td class="rec-no">2</td><td>金流</td><td class="plan-scope">11 頁 44 張｜交付項 2</td><td class="ph-cell"></td><td class="ph-cell"></td><td class="ph-cell"></td><td class="ph-cell"></td><td></td></tr>
       <tr><td class="rec-no">3</td><td>代理線</td><td class="plan-scope">5 頁 37 張</td><td class="ph-cell ph-done">8/28 已完成</td><td class="ph-cell"></td><td class="ph-cell"></td><td class="ph-cell"></td><td></td></tr>
@@ -2181,7 +2240,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
     <h3 class="plan-h">整包上線階段（期 1～7 全部 DEV 驗收通過後啟動）</h3>
     <table class="rec-table">
       <tr><th>上 UAT</th><th>UAT 驗收通過</th><th>上正式環境</th><th>正式環境驗收通過</th></tr>
-      <tr><td class="ph-cell">目標 11 月底</td><td class="ph-cell"></td><td class="ph-cell">目標 1 月底</td><td class="ph-cell"></td></tr>
+      <tr><td class="ph-cell">12/10(四)</td><td class="ph-cell"></td><td class="ph-cell">12/28(一)</td><td class="ph-cell"></td></tr>
     </table>
 
     <h3 class="plan-h">開發進度紀錄（每週一更新上週進度，日期為該週週五）</h3>
@@ -2737,9 +2796,10 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
   <div class="pg-crumb">管理後台 &gt; 用戶管理 &gt; 大代理</div>
   <p class="rec-adj"><span class="rec-adj-tag">8/27 調整：</span>依照 <span class="x-jump" onclick="showPg('spec-discussion');goTo('rec-37')">8/21 討論（項次 37）</span>，標籤依國家分類——新增／編輯彈窗的標籤下拉僅列同國家標籤，列表代理標籤與帳號國家不匹配即失效（關聯保留，切回恢復）（卡 012、013、560）。</p>
   <p class="rec-adj"><span class="rec-adj-tag">9/14 調整：</span>依照 <span class="x-jump" onclick="showPg('spec-discussion');goTo('rec-51')">9/11 討論（項次 51）</span>，變更代理線彈窗依代理線類型（總代線／投注站線）帶出對應候選資料，詞條與提示文字為變量（卡 016、587）。</p>
+  <p class="rec-adj"><span class="rec-adj-tag">9/16 調整：</span>比照卡 025（QA 檢核 Q-11），新增大代理彈窗的上級代理與國家、幣種改為雙向連動過濾，幣種與標籤欄位未選擇前顯示「請選擇」提示、未選國家時選單展開顯示 No data（卡 012）。</p>
   <div class="pg-overview">
     <h4>本頁改動目標</h4>
-    <div class="ov-dir"><div class="ov-dir-lbl">管理後台：</div><ul class="ov-dir-list"><li>新增大代理時上級代理→國家(<code>nation_code</code>)→幣種(<code>currency</code>)三層連動，設定後鎖定不可改</li><li>搜尋欄可依國家篩選</li><li>列表帳號、餘額、佣金餘額等依帳號綁定的國家與法幣顯示</li><li>變更代理線、直屬會員轉移僅能選同國家＋幣種的帳號</li><li>變更代理線彈窗依該帳號代理線類型（總代線／投注站線）帶出對應候選資料</li><li>變更代理線彈窗詞條與提示文字依代理線類型變量顯示（「所屬總代」／「所屬投注站」）</li><li>資金明細交易金額改法幣＋系統幣兩行顯示，統計總額改以系統幣(<code>sys_currency</code>)統計</li><li>新增／編輯彈窗的標籤下拉僅顯示與該大代理相同國家的標籤</li><li>標籤切換綁定國家後，該帳號原標注失效不顯示（關聯保留不刪除，切回原國家自動恢復生效）</li></ul></div>
+    <div class="ov-dir"><div class="ov-dir-lbl">管理後台：</div><ul class="ov-dir-list"><li>新增大代理時上級代理與國家(<code>nation_code</code>)、幣種(<code>currency</code>)雙向連動過濾，設定後鎖定不可改</li><li>搜尋欄可依國家篩選</li><li>列表帳號、餘額、佣金餘額等依帳號綁定的國家與法幣顯示</li><li>變更代理線、直屬會員轉移僅能選同國家＋幣種的帳號</li><li>變更代理線彈窗依該帳號代理線類型（總代線／投注站線）帶出對應候選資料</li><li>變更代理線彈窗詞條與提示文字依代理線類型變量顯示（「所屬總代」／「所屬投注站」）</li><li>資金明細交易金額改法幣＋系統幣兩行顯示，統計總額改以系統幣(<code>sys_currency</code>)統計</li><li>新增／編輯彈窗的標籤下拉僅顯示與該大代理相同國家的標籤</li><li>標籤切換綁定國家後，該帳號原標注失效不顯示（關聯保留不刪除，切回原國家自動恢復生效）</li></ul></div>
     <div class="ov-dir"><div class="ov-dir-lbl">控制後台：</div><ul class="ov-dir-list"><li>幣種／國家下拉的選項範圍由控制後台的國家與幣種設定向下供給，前端不寫死</li></ul></div>
     <div class="ov-dir"><div class="ov-dir-lbl">前台影響：</div><ul class="ov-dir-list"><li>大代理綁定的國家＋幣種向下決定底下代理、會員的歸屬，間接影響前台會員看到的活動、VIP、幣種顯示等內容</li></ul></div>
   </div>
@@ -2799,7 +2859,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
 
   <div class="spec-card">
     <div class="spec-card-hd">
-      <span class="spec-card-num">012</span><span class="spec-card-adj">8/27調整</span>
+      <span class="spec-card-num">012</span><span class="spec-card-adj">9/16調整</span>
     </div>
     <div class="spec-row">
       <div class="spec-row-lbl">位置</div>
@@ -2817,24 +2877,26 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
       <div class="spec-row-lbl">調整後</div>
       <div class="spec-row-val">
         <ol>
-          <li>上級代理、國家(<code>nation_code</code>)、幣種(<code>currency</code>)三個下拉改為由上而下三層連動</li>
-          <li>未選擇上級代理前，國家與幣種下拉皆顯示「No data」，不可點擊</li>
-          <li>選定上級代理後，國家下拉才可點選，其可選內容即為該上級的國家；幣種此時仍為「No data」</li>
-          <li>選定國家後，幣種下拉才可點選，其可選內容即為該上級的幣種</li>
-          <li>國家、幣種不會自動帶入，仍需手動點選，但可選內容即為該上級的國家與幣種</li>
-          <li>三者皆為單選必填，送出前需驗證皆不可為空；一經設定後不可更改</li>
-          <li>「標籤」下拉僅顯示與已選國家(<code>nation_code</code>)相同國家的標籤</li>
-          <li>未選擇國家前，標籤下拉無可選標籤</li>
-        </ol>
+      <li>國家(<code>nation_code</code>)下拉改為讀取後端動態回傳清單，不寫死</li>
+      <li>幣種(<code>currency</code>)下拉依所選國家對應帶出可選內容</li>
+      <li>幣種欄位未選擇前顯示「請選擇幣種」</li>
+      <li>未選國家時，幣種下拉選單展開顯示「No data」</li>
+      <li>三者皆單選必填，送出前需驗證皆不可為空；一經設定後不可更改</li>
+      <li>上級代理與國家、幣種雙向連動：先選上級代理時，「國家」(<code>nation_code</code>)與「幣種」(<code>currency</code>)下拉僅顯示該上級的國家與幣種；不會主動帶出，仍需自行點選</li>
+      <li>先選國家或幣種時，上級代理下拉依所選條件反推過濾可選上級；選定國家＋幣種時，僅顯示符合該組合的上級代理</li>
+      <li>「標籤」下拉僅顯示與已選國家(<code>nation_code</code>)相同國家的標籤</li>
+      <li>標籤欄位未選擇前顯示「請選擇標籤」</li>
+      <li>未選國家時，標籤下拉選單展開顯示「No data」</li>
+      </ol>
       </div>
     </div>
     <div class="spec-row">
       <div class="spec-row-lbl">前端</div>
-      <div class="spec-row-val">建立三層連動：選上級代理後依其範圍更新國家(<code>nation_code</code>)下拉並改為可點擊，選國家後依其範圍更新幣種(<code>currency</code>)下拉並改為可點擊；未選上級代理時國家、幣種皆顯示「No data」，未選國家時幣種顯示「No data」；送出前驗證三者皆不可為空。標籤下拉選項依已選國家過濾，未選擇國家前無可選標籤。</div>
+      <div class="spec-row-val">調整國家(<code>nation_code</code>)與幣種(<code>currency</code>)下拉資料來源；欄位未選擇前顯示「請選擇幣種」，未選國家時幣種選單展開顯示「No data」，選定國家後依對應更新選單；上級代理與國家、幣種下拉雙向連動過濾；送出前驗證三者皆不可為空。標籤下拉選項依已選國家過濾；欄位未選擇前顯示「請選擇標籤」，未選國家時選單展開顯示「No data」。</div>
     </div>
     <div class="spec-row">
       <div class="spec-row-lbl">後端</div>
-      <div class="spec-row-val">提供上級代理（總代／投注站）清單 API；提供上級代理對應的國家(<code>nation_code</code>)清單、以及國家對應法幣(<code>currency</code>)的映射關係，供三層連動使用。標籤選項查詢依國家(<code>nation_code</code>)過濾。</div>
+      <div class="spec-row-val">提供上級代理（總代／投注站）清單 API；提供國家(<code>nation_code</code>)清單與國家對應法幣(<code>currency</code>)的映射關係；提供依國家(<code>nation_code</code>)＋幣種(<code>currency</code>)反推可選上級代理的查詢。標籤選項查詢依國家(<code>nation_code</code>)過濾。</div>
     </div>
     <div class="spec-row">
       <div class="spec-row-lbl">前台影響</div>
@@ -3356,9 +3418,10 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
   <div class="pg-crumb">管理後台 &gt; 用戶管理 &gt; 代理</div>
   <p class="rec-adj"><span class="rec-adj-tag">8/27 調整：</span>依照 <span class="x-jump" onclick="showPg('spec-discussion');goTo('rec-37')">8/21 討論（項次 37）</span>，標籤依國家分類——新增／編輯彈窗的標籤下拉僅列同國家標籤，列表代理標籤與帳號國家不匹配即失效（關聯保留，切回恢復）（卡 025、026、561）。</p>
   <p class="rec-adj"><span class="rec-adj-tag">9/14 調整：</span>依照 <span class="x-jump" onclick="showPg('spec-discussion');goTo('rec-51')">9/11 討論（項次 51）</span>，變更代理線彈窗依代理線類型（總代線／投注站線）帶出對應候選資料，詞條與提示文字為變量（卡 029、588）。</p>
+  <p class="rec-adj"><span class="rec-adj-tag">9/16 調整：</span>依 QA 檢核（Q-11）補充邏輯，新增代理彈窗的上級大代理與國家、幣種改為雙向連動過濾，幣種與標籤欄位未選擇前顯示「請選擇」提示、未選國家時選單展開顯示 No data（卡 025）。</p>
   <div class="pg-overview">
     <h4>本頁改動目標</h4>
-    <div class="ov-dir"><div class="ov-dir-lbl">管理後台：</div><ul class="ov-dir-list"><li>新增代理時上級大代理連動國家(<code>nation_code</code>)與幣種(<code>currency</code>)，設定後鎖定不可改</li><li>搜尋欄可依國家(<code>nation_code</code>)＋幣種(<code>currency</code>)篩選（兩者連動）</li><li>列表帳號、餘額、佣金餘額依帳號綁定的國家(<code>nation_code</code>)與法幣(<code>currency</code>)顯示</li><li>變更代理線、直屬會員轉移僅能選同國家(<code>nation_code</code>)＋幣種(<code>currency</code>)的帳號</li><li>變更代理線彈窗依該帳號代理線類型（總代線／投注站線）帶出對應候選資料</li><li>變更代理線彈窗詞條與提示文字依代理線類型變量顯示（「所屬總代」／「所屬投注站」）</li><li>資金明細交易金額改法幣(<code>currency</code>)＋系統幣(<code>sys_currency</code>)兩行顯示，統計總額改以系統幣(<code>sys_currency</code>)統計</li><li>新增／編輯彈窗的標籤下拉僅顯示與該代理相同國家的標籤</li><li>標籤切換綁定國家後，該帳號原標注失效不顯示（關聯保留不刪除，切回原國家自動恢復生效）</li></ul></div>
+    <div class="ov-dir"><div class="ov-dir-lbl">管理後台：</div><ul class="ov-dir-list"><li>新增代理時上級大代理與國家(<code>nation_code</code>)、幣種(<code>currency</code>)雙向連動過濾，設定後鎖定不可改</li><li>搜尋欄可依國家(<code>nation_code</code>)＋幣種(<code>currency</code>)篩選（兩者連動）</li><li>列表帳號、餘額、佣金餘額依帳號綁定的國家(<code>nation_code</code>)與法幣(<code>currency</code>)顯示</li><li>變更代理線、直屬會員轉移僅能選同國家(<code>nation_code</code>)＋幣種(<code>currency</code>)的帳號</li><li>變更代理線彈窗依該帳號代理線類型（總代線／投注站線）帶出對應候選資料</li><li>變更代理線彈窗詞條與提示文字依代理線類型變量顯示（「所屬總代」／「所屬投注站」）</li><li>資金明細交易金額改法幣(<code>currency</code>)＋系統幣(<code>sys_currency</code>)兩行顯示，統計總額改以系統幣(<code>sys_currency</code>)統計</li><li>新增／編輯彈窗的標籤下拉僅顯示與該代理相同國家的標籤</li><li>標籤切換綁定國家後，該帳號原標注失效不顯示（關聯保留不刪除，切回原國家自動恢復生效）</li></ul></div>
     <div class="ov-dir"><div class="ov-dir-lbl">控制後台：</div><ul class="ov-dir-list"><li>幣種(<code>currency</code>)／國家(<code>nation_code</code>)下拉的選項範圍由控制後台的國家與幣種設定向下供給，前端不寫死</li></ul></div>
     <div class="ov-dir"><div class="ov-dir-lbl">前台影響：</div><ul class="ov-dir-list"><li>代理綁定的國家(<code>nation_code</code>)＋幣種(<code>currency</code>)向下決定底下會員的歸屬，間接影響前台會員看到的內容</li></ul></div>
   </div>
@@ -3389,19 +3452,24 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
   </div>
 
   <div class="spec-card">
-    <div class="spec-card-hd"><span class="spec-card-num">025</span><span class="spec-card-adj">8/27調整</span></div>
+    <div class="spec-card-hd"><span class="spec-card-num">025</span><span class="spec-card-adj">9/16調整</span></div>
     <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">用戶管理 &gt; 代理 &gt; 新增代理 &gt; 彈窗 &gt; 國家 / 幣種 / 標籤</div></div>
     <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge mod">調整</span></div></div>
     <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">新增代理彈窗有國家與幣種兩個下拉，皆單選必填；國家為寫死清單，幣種與國家之間無連動。彈窗另有「標籤」下拉，選項為全部代理類標籤、不分國家。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val"><ol>
       <li>國家(<code>nation_code</code>)下拉改為讀取後端動態回傳清單，不寫死</li>
       <li>幣種(<code>currency</code>)下拉依所選國家對應帶出可選內容</li>
-      <li>未選國家時，幣種下拉顯示「No data」，不可點擊</li>
+      <li>幣種欄位未選擇前顯示「請選擇幣種」</li>
+      <li>未選國家時，幣種下拉選單展開顯示「No data」</li>
       <li>兩者皆單選必填，送出前需驗證不可為空；一經設定後不可更改</li>
-      <li>新增上級代理連動：選擇上級大代理後，下方「國家」(<code>nation_code</code>)與「幣種」(<code>currency</code>)下拉的選項只能顯示該上級的國家幣種；不會主動帶出，仍需自行點選，但可選內容即為上級的國家與幣種</li><li>「標籤」下拉僅顯示與已選國家(<code>nation_code</code>)相同國家的標籤</li><li>未選擇國家前，標籤下拉無可選標籤</li>
+      <li>上級大代理與國家、幣種雙向連動：先選上級大代理時，「國家」(<code>nation_code</code>)與「幣種」(<code>currency</code>)下拉僅顯示該上級的國家與幣種；不會主動帶出，仍需自行點選</li>
+      <li>先選國家或幣種時，上級大代理下拉依所選條件反推過濾可選代理；選定國家＋幣種時，僅顯示符合該組合的上級大代理</li>
+      <li>「標籤」下拉僅顯示與已選國家(<code>nation_code</code>)相同國家的標籤</li>
+      <li>標籤欄位未選擇前顯示「請選擇標籤」</li>
+      <li>未選國家時，標籤下拉選單展開顯示「No data」</li>
       </ol></div></div>
-    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">調整國家(<code>nation_code</code>)與幣種(<code>currency</code>)下拉資料來源；選定國家後依對應更新幣種下拉並改為可點擊，未選國家時幣種顯示「No data」；送出前驗證兩者不可為空。標籤下拉選項依已選國家過濾，未選擇國家前無可選標籤。</div></div>
-    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">提供國家(<code>nation_code</code>)清單 API；提供國家對應法幣(<code>currency</code>)的映射關係。標籤選項查詢依國家(<code>nation_code</code>)過濾。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">調整國家(<code>nation_code</code>)與幣種(<code>currency</code>)下拉資料來源；欄位未選擇前顯示「請選擇幣種」，未選國家時幣種選單展開顯示「No data」，選定國家後依對應更新選單；上級大代理與國家、幣種下拉雙向連動過濾；送出前驗證兩者不可為空。標籤下拉選項依已選國家過濾；欄位未選擇前顯示「請選擇標籤」，未選國家時選單展開顯示「No data」。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">提供國家(<code>nation_code</code>)清單 API；提供國家對應法幣(<code>currency</code>)的映射關係；提供依國家(<code>nation_code</code>)＋幣種(<code>currency</code>)反推可選上級大代理的查詢。標籤選項查詢依國家(<code>nation_code</code>)過濾。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">此代理綁定的國家＋幣種，將決定其底下會員的國家＋幣種歸屬，間接影響前台會員可見內容。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-agent2-025"></div></div></div>
   </div>
@@ -15484,10 +15552,10 @@ function tplLinkedModal(cfg){
       <div class="demo-modal-val">
         <div class="demo-select" id="dsel-${cfg.prefix}-tag">
           <div class="demo-select-box" onclick="toggleDemoSelect('dsel-${cfg.prefix}-tag')">
-            <span class="txt placeholder" id="dsel-${cfg.prefix}-tag-txt" data-placeholder="${cfg.tag.placeholder||'選擇'}">${cfg.tag.placeholder||'選擇'}</span>
+            <span class="txt placeholder" id="dsel-${cfg.prefix}-tag-txt" data-placeholder="${cfg.tag.placeholder||'選擇'}">${cfg.tag.initial||cfg.tag.placeholder||'選擇'}</span>
             <span class="arr">▼</span>
           </div>
-          <div class="demo-select-menu" id="dsel-${cfg.prefix}-tag-menu"><div class="demo-select-opt-nodata">（請先選擇國家）</div></div>
+          <div class="demo-select-menu" id="dsel-${cfg.prefix}-tag-menu"><div class="demo-select-opt-nodata">${cfg.tag.initialMenu||'（請先選擇國家）'}</div></div>
         </div>
       </div>
     </div>` : ''}
@@ -16140,7 +16208,7 @@ function renderAgent2Demos(){
     aLabel:'國家', aPlaceholder:'請選擇國家', aOptions:['菲律賓','越南'],
     bLabel:'幣種', bPlaceholder:'請選擇幣種',
     map:{'菲律賓':['PHP'], '越南':['VND']},
-    tag:{ label:'標籤', placeholder:'選擇', byA:{'菲律賓':['AAagency','jasmine_agent'], '越南':[]} }
+    tag:{ label:'標籤', placeholder:'請選擇標籤', initialMenu:'No data', byA:{'菲律賓':['AAagency','jasmine_agent'], '越南':[]} }
   }));
   // 026 帳號欄位（兩張並排：菲律賓 / 越南）
   set('tpl-agent2-026', tplFieldCard([
@@ -19029,6 +19097,51 @@ function renderAppB(){
 // 小卡自動編號：依 .spec-card 在文件中實際出現的順序，依序填入編號
 // 不管頁面順序如何調整、插入或刪除卡片，重新整理後都會自動重新計算，不需手動維護數字
 // 通用頁面 tab 切換：以 data-tabgroup 圈範圍、data-tab 配對，不用 index，通用所有 tab 頁
+function phaseCardLookup(v){
+  var hint = document.getElementById('card-search-hint');
+  var pg = document.getElementById('pg-phase-scope');
+  if(!pg) return;
+  var n = parseInt(v, 10);
+  // 還原前次高亮
+  pg.querySelectorAll('td.id[data-orig]').forEach(function(td){
+    td.innerHTML = td.getAttribute('data-orig');
+    td.removeAttribute('data-orig');
+  });
+  var hits = [];       // {td, html} 命中後的重組結果
+  var phases = [];     // 命中期別（去重、保序）
+  pg.querySelectorAll('td.id').forEach(function(td){
+    var orig = td.innerHTML;
+    var changed = false;
+    var html = orig.split(/<br\s*\/?>/i).map(function(seg){
+      var m = seg.replace(/<[^>]*>/g, '').match(/(\d{3})\s*[–—－~～-]\s*(\d{3})|(\d{3})/);
+      if(!m) return seg;
+      var hit = false;
+      if(m[1] && m[2]){ hit = n >= parseInt(m[1],10) && n <= parseInt(m[2],10); }
+      else if(m[3]){ hit = n === parseInt(m[3],10); }
+      if(!hit) return seg;
+      changed = true;
+      return '<span class="phx-hit">' + seg + '</span>';
+    }).join('<br>');
+    if(changed){
+      td.setAttribute('data-orig', orig);
+      td.innerHTML = html;
+      hits.push(td);
+      var ph = td.closest('.phase');
+      var nEl = ph ? ph.querySelector('.ph-head .n') : null;
+      var label = nEl ? nEl.textContent.trim() : '';
+      if(label && phases.indexOf(label) < 0) phases.push(label);
+    }
+  });
+  if(!hits.length){ hint.textContent = '分期範圍查無卡 ' + v; return; }
+  hint.textContent = '卡 ' + v + '：' + phases.join('、');
+  setTimeout(function(){ hits[0].scrollIntoView({block: 'center'}); }, 0);
+  setTimeout(function(){
+    pg.querySelectorAll('td.id[data-orig]').forEach(function(td){
+      td.innerHTML = td.getAttribute('data-orig');
+      td.removeAttribute('data-orig');
+    });
+  }, 3000);
+}
 function cardJump(){
   var inp = document.getElementById('card-search-in');
   var hint = document.getElementById('card-search-hint');
@@ -19037,6 +19150,8 @@ function cardJump(){
   if(!v){ hint.textContent = '請輸入卡號'; return; }
   v = ('000' + v).slice(-3);
   inp.value = v;
+  var phasePg = document.getElementById('pg-phase-scope');
+  if(phasePg && phasePg.classList.contains('active')){ phaseCardLookup(v); return; }
   var target = null;
   var nums = document.querySelectorAll('.spec-card-num');
   for(var i = 0; i < nums.length; i++){
@@ -19908,7 +20023,7 @@ function bagOpen(mode, acct, nat){ BAG.open = mode; BAG.acct = acct || ''; BAG.n
 function bagClose(){ BAG.open = null; render_bag_screen(); }
 function bagNatFPick(v){ BAG.natF = v; if(v === '菲律賓' && BAG.curF === 'VND') BAG.curF = '全部币种'; if(v === '越南' && BAG.curF === 'PHP') BAG.curF = '全部币种'; render_bag_screen(); }
 function bagCurFPick(v){ BAG.curF = v; if(v === 'PHP' && BAG.natF === '越南') BAG.natF = '全部国家'; if(v === 'VND' && BAG.natF === '菲律賓') BAG.natF = '全部国家'; render_bag_screen(); }
-function bagAddSupPick(v){ BAG.addSup = v; BAG.addNat = null; BAG.addCur = null; BAG.addTag = null; render_bag_screen(); }
+function bagAddSupPick(v){ BAG.addSup = v; render_bag_screen(); }
 function bagAddNatPick(v){ BAG.addNat = v; BAG.addCur = null; BAG.addTag = null; render_bag_screen(); }
 function bagAddCurPick(v){ BAG.addCur = v; render_bag_screen(); }
 function bagAddTagPick(v){ BAG.addTag = v; render_bag_screen(); }
@@ -19916,15 +20031,28 @@ function bagEditTagPick(v){ BAG.editTag = v; render_bag_screen(); }
 function bagLineStaPick(v){ BAG.lineSta = v; render_bag_screen(); }
 function bagLineTypePick(t){ BAG.lineType = t; BAG.lineSta = null; render_bag_screen(); }
 function bagTransAgPick(v){ BAG.transAg = v; render_bag_screen(); }
+var BAG_SUPS = [
+  {acct:'dinclaude_st', nat:'菲律賓', cur:'PHP'},
+  {acct:'aastationout', nat:'越南', cur:'VND'}
+];
+function bagSupsFor(nat, cur){
+  return BAG_SUPS.filter(function(s){
+    return (!nat || s.nat === nat) && (!cur || s.cur === cur);
+  }).map(function(s){ return s.acct; });
+}
+function bagSupOf(acct){
+  for(var i=0;i<BAG_SUPS.length;i++){ if(BAG_SUPS[i].acct === acct) return BAG_SUPS[i]; }
+  return null;
+}
 function bagTagsFor(nat){ return nat === '菲律賓' ? ['AAagent'] : []; }
 function bagTagSel(id, val, nat, pickFn, chip){
   var opts = bagTagsFor(nat);
   var has = !!val;
-  var txt = has ? val : '标签';
+  var txt = has ? val : '请选择标签';
   var cls = has ? 'txt value' : 'txt placeholder';
   var menu = opts.length
     ? opts.map(function(o){ return '<div class="demo-select-opt" onclick="' + pickFn + "('" + o + "')\">" + o + '</div>'; }).join('')
-    : '<div class="demo-select-opt">' + (nat ? '（暂无该国家标签）' : '（请先选择国家）') + '</div>';
+    : '<div class="demo-select-opt">' + (nat ? '（暂无该国家标签）' : 'No data') + '</div>';
   return '<div class="demo-select" id="' + id + '"><div class="demo-select-box" onclick="toggleDemoSelect(\'' + id + '\')"><span class="' + cls + '" id="' + id + '-txt">' + txt + '</span><span class="arr">\u25be</span></div><div class="demo-select-menu" id="' + id + '-menu">' + menu + '</div></div><span class="mk-tag">' + chip + '</span>';
 }
 function bagModal(title, rows){
@@ -19990,14 +20118,14 @@ function render_bag_screen(){
   }
   var html = search + '<div class="mk-tbl-wrap"><table class="mk-table">' + head + body + '</table></div>';
   if(BAG.open === 'add'){
-    var natCell = BAG.addSup
-      ? tagcfgSel('dsel-bagaddnat', BAG.addNat, ['菲律賓'], 'bagAddNatPick', false, 'Select')
-      : '<span class="mk-select"><span class="txt placeholder">No data</span><span class="mk-arr">\u25be</span></span>';
-    var curCell = BAG.addNat
-      ? tagcfgSel('dsel-bagaddcur', BAG.addCur, ['PHP'], 'bagAddCurPick', false, 'Select')
-      : '<span class="mk-select"><span class="txt placeholder">No data</span><span class="mk-arr">\u25be</span></span>';
+    var bagSupObj = BAG.addSup ? bagSupOf(BAG.addSup) : null;
+    var bagNatBase = bagSupObj ? [bagSupObj.nat] : ['菲律賓','越南'];
+    var bagNatOpts = BAG.addCur ? bagNatBase.filter(function(n){ return (n === '菲律賓' && BAG.addCur === 'PHP') || (n === '越南' && BAG.addCur === 'VND'); }) : bagNatBase;
+    var natCell = agpSelNodata('dsel-bagaddnat', BAG.addNat, bagNatOpts, 'bagAddNatPick', '\u8bf7\u9009\u62e9\u56fd\u5bb6');
+    var bagCurOpts = BAG.addNat ? (bagSupObj ? [bagSupObj.cur] : (BAG.addNat === '菲律賓' ? ['PHP'] : ['VND'])) : [];
+    var curCell = agpSelNodata('dsel-bagaddcur', BAG.addCur, bagCurOpts, 'bagAddCurPick', '\u8bf7\u9009\u62e9\u5e01\u79cd');
     html += bagModal('新增大代理', [
-      ['上级代理：', tagcfgSel('dsel-bagaddsup', BAG.addSup, ['dinclaude_st','aastationout'], 'bagAddSupPick', false, '选择') + '<span class="mk-tag">012</span>'],
+      ['上级代理：', agpSelNodata('dsel-bagaddsup', BAG.addSup, bagSupsFor(BAG.addNat, BAG.addCur), 'bagAddSupPick', '\u9009\u62e9') + '<span class="mk-tag">012</span>'],
       ['代理账号：', '<input class="sysp-input">'],
       ['登录密码：', '<input class="sysp-input">'],
       ['代理名称：', '<input class="sysp-input">'],
@@ -20090,7 +20218,7 @@ function agpOpen(mode, acct, nat){ AGP.open = mode; AGP.acct = acct || ''; AGP.n
 function agpClose(){ AGP.open = null; render_agp_screen(); }
 function agpNatFPick(v){ AGP.natF = v; if(v === '菲律賓' && AGP.curF === 'VND') AGP.curF = '全部币种'; if(v === '越南' && AGP.curF === 'PHP') AGP.curF = '全部币种'; render_agp_screen(); }
 function agpCurFPick(v){ AGP.curF = v; if(v === 'PHP' && AGP.natF === '越南') AGP.natF = '全部国家'; if(v === 'VND' && AGP.natF === '菲律賓') AGP.natF = '全部国家'; render_agp_screen(); }
-function agpAddSupPick(v){ AGP.addSup = v; AGP.addNat = null; AGP.addCur = null; AGP.addTag = null; render_agp_screen(); }
+function agpAddSupPick(v){ AGP.addSup = v; render_agp_screen(); }
 function agpAddNatPick(v){ AGP.addNat = v; AGP.addCur = null; AGP.addTag = null; render_agp_screen(); }
 function agpAddCurPick(v){ AGP.addCur = v; render_agp_screen(); }
 function agpAddTagPick(v){ AGP.addTag = v; render_agp_screen(); }
@@ -20098,15 +20226,37 @@ function agpEditTagPick(v){ AGP.editTag = v; render_agp_screen(); }
 function agpLineStaPick(v){ AGP.lineSta = v; render_agp_screen(); }
 function agpLineTypePick(t){ AGP.lineType = t; AGP.lineSta = null; render_agp_screen(); }
 function agpTransAgPick(v){ AGP.transAg = v; render_agp_screen(); }
+var AGP_SUPS = [
+  {acct:'dinclaude_ag', nat:'菲律賓', cur:'PHP'},
+  {acct:'vn_agent01', nat:'越南', cur:'VND'}
+];
+function agpSupsFor(nat, cur){
+  return AGP_SUPS.filter(function(s){
+    return (!nat || s.nat === nat) && (!cur || s.cur === cur);
+  }).map(function(s){ return s.acct; });
+}
+function agpSupOf(acct){
+  for(var i=0;i<AGP_SUPS.length;i++){ if(AGP_SUPS[i].acct === acct) return AGP_SUPS[i]; }
+  return null;
+}
+function agpSelNodata(id, val, opts, pickFn, ph){
+  var has = !!val;
+  var txt = has ? val : (ph || '\u9009\u62e9');
+  var cls = has ? 'txt value' : 'txt placeholder';
+  var menu = opts.length
+    ? opts.map(function(o){ return '<div class="demo-select-opt" onclick="' + pickFn + '(\'' + o + '\')">' + o + '</div>'; }).join('')
+    : '<div class="demo-select-opt">No data</div>';
+  return '<div class="demo-select" id="' + id + '"><div class="demo-select-box" onclick="toggleDemoSelect(\'' + id + '\')"><span class="' + cls + '" id="' + id + '-txt">' + txt + '</span><span class="arr">\u25be</span></div><div class="demo-select-menu" id="' + id + '-menu">' + menu + '</div></div>';
+}
 function agpTagsFor(nat){ return nat === '菲律賓' ? ['AAagency','jasmine_agent'] : []; }
 function agpTagSel(id, val, nat, pickFn, chip){
   var opts = agpTagsFor(nat);
   var has = !!val;
-  var txt = has ? val : '标签';
+  var txt = has ? val : '请选择标签';
   var cls = has ? 'txt value' : 'txt placeholder';
   var menu = opts.length
     ? opts.map(function(o){ return '<div class="demo-select-opt" onclick="' + pickFn + "('" + o + "')\">" + o + '</div>'; }).join('')
-    : '<div class="demo-select-opt">' + (nat ? '（暂无该国家标签）' : '（请先选择国家）') + '</div>';
+    : '<div class="demo-select-opt">' + (nat ? '（暂无该国家标签）' : 'No data') + '</div>';
   return '<div class="demo-select" id="' + id + '"><div class="demo-select-box" onclick="toggleDemoSelect(\'' + id + '\')"><span class="' + cls + '" id="' + id + '-txt">' + txt + '</span><span class="arr">\u25be</span></div><div class="demo-select-menu" id="' + id + '-menu">' + menu + '</div></div><span class="mk-tag">' + chip + '</span>';
 }
 function agpModal(title, rows, okTxt){
@@ -20171,14 +20321,14 @@ function render_agp_screen(){
   }
   var html = search + '<div class="mk-tbl-wrap"><table class="mk-table">' + head + body + '</table></div>';
   if(AGP.open === 'add'){
-    var natCell = AGP.addSup
-      ? tagcfgSel('dsel-agpaddnat', AGP.addNat, ['菲律賓'], 'agpAddNatPick', false, 'Select')
-      : '<span class="mk-select"><span class="txt placeholder">No data</span><span class="mk-arr">\u25be</span></span>';
-    var curCell = AGP.addNat
-      ? tagcfgSel('dsel-agpaddcur', AGP.addCur, ['PHP'], 'agpAddCurPick', false, 'Select')
-      : '<span class="mk-select"><span class="txt placeholder">No data</span><span class="mk-arr">\u25be</span></span>';
+    var supObj = AGP.addSup ? agpSupOf(AGP.addSup) : null;
+    var natBase = supObj ? [supObj.nat] : ['菲律賓','越南'];
+    var natOptsAdd = AGP.addCur ? natBase.filter(function(n){ return (n === '菲律賓' && AGP.addCur === 'PHP') || (n === '越南' && AGP.addCur === 'VND'); }) : natBase;
+    var natCell = agpSelNodata('dsel-agpaddnat', AGP.addNat, natOptsAdd, 'agpAddNatPick', '\u8bf7\u9009\u62e9\u56fd\u5bb6');
+    var curOptsAdd = AGP.addNat ? (supObj ? [supObj.cur] : (AGP.addNat === '菲律賓' ? ['PHP'] : ['VND'])) : [];
+    var curCell = agpSelNodata('dsel-agpaddcur', AGP.addCur, curOptsAdd, 'agpAddCurPick', '\u8bf7\u9009\u62e9\u5e01\u79cd');
     html += agpModal('新增代理', [
-      ['\uff0a上级代理：', tagcfgSel('dsel-agpaddsup', AGP.addSup, ['dinclaude_ag'], 'agpAddSupPick', false, '选择') + '<span class="mk-tag">025</span>'],
+      ['\uff0a上级代理：', agpSelNodata('dsel-agpaddsup', AGP.addSup, agpSupsFor(AGP.addNat, AGP.addCur), 'agpAddSupPick', '\u9009\u62e9') + '<span class="mk-tag">025</span>'],
       ['\uff0a代理账号：', '<input class="sysp-input">'],
       ['\uff0a登录密码：', '<input class="sysp-input">'],
       ['\uff0a代理名称：', '<input class="sysp-input">'],
