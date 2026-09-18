@@ -294,6 +294,7 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
       <li><strong>在線商戶配置</strong>：將「在線支付商戶配置」與「在線提款商戶配置」合併為一頁「在線商戶配置」，內分「充值商戶」「提款商戶」兩個 TAB，並移至「支付層級配置」下方。</li>
       <li><strong>商戶預約維護</strong>：於在線商戶配置兩個 TAB 列表的狀態欄後新增「預約維護」欄：點「＋」新增維護時段（每個商戶最多 10 筆）、時段後方紅色刪除 icon（🗑）可刪除，到點生效、結束回復。<strong>預約維護僅針對商戶</strong>。</li>
       <li><strong>充值子渠道三態＋列表化</strong>：於充值展示配置為子渠道加上「正常／維護／停用」三態（維護＝前台顯示維護、停用＝前台不展示）；子渠道配置區改為列表呈現，圖片於列表內以「＋」上傳並顯示於列表內。</li>
+      <li><strong>前台是否顯示開關</strong>：於充值展示配置新增「前台是否顯示」開關（是＝前台展示此入口、否＝前台不展示）。</li>
     </ol>
   </section>
 
@@ -319,7 +320,7 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
     </ul>
 
     <h3>2.2 判斷流程圖</h3>
-    <p>前台呈現依 <strong>渠道 → 方式（入口）→ 子渠道</strong> 三層由上而下判斷；第一、二層判斷不變，本次加上第三層子渠道判斷：</p>
+    <p>前台呈現依 <strong>渠道 → 方式（入口）→ 子渠道</strong> 三層由上而下判斷；渠道與方式的判斷不變，本次加上第三層子渠道判斷；三層判斷完成後，<strong>最後判斷「前台是否顯示」開關</strong>（本單新增）：</p>
     <div class="flow" role="img" aria-label="充值判斷流程：先判斷渠道狀態，再判斷方式狀態，最後判斷子渠道狀態">
       <div class="flow__lane" style="min-width:900px;">
         <div class="flow__q">渠道狀態？<br><span style="font-weight:400;font-size:.66rem;">充值渠道管理</span></div>
@@ -355,7 +356,7 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
                       <div class="flow__lane" style="min-width:0;">
                         <div class="flow__q" style="background:#3b82f6;">子渠道狀態？<br><span style="font-weight:400;font-size:.66rem;">充值展示配置（本單新增）</span></div>
                         <div class="flow__branches">
-                          <div class="flow__branch"><span class="flow__state"><span class="pill pill--off">停用</span></span><div class="flow__result flow__result--stop">該子渠道不顯示；全部子渠道皆停用時，該方式（入口）自動不顯示</div></div>
+                          <div class="flow__branch"><span class="flow__state"><span class="pill pill--off">停用</span></span><div class="flow__result flow__result--stop">該子渠道不顯示</div></div>
                           <div class="flow__branch"><span class="flow__state"><span class="pill pill--maint">維護</span></span><div class="flow__result flow__result--maint">入口正常顯示；該子渠道顯示維護、不可點選</div></div>
                           <div class="flow__branch"><span class="flow__state"><span class="pill pill--ok">正常</span></span><div class="flow__result flow__result--pass">入口正常顯示；該子渠道正常顯示</div></div>
                         </div>
@@ -370,30 +371,54 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
       </div>
     </div>
 
+    <div class="flow" role="img" aria-label="最後判斷前台是否顯示">
+      <div class="flow__lane" style="min-width:720px;">
+        <div class="flow__q" style="background:#0f172a;">前台是否顯示？<br><span style="font-weight:400;font-size:.66rem;">充值展示配置（本單新增，最後判斷）</span></div>
+        <div class="flow__branches">
+          <div class="flow__branch">
+            <span class="flow__state"><span class="pill pill--off">否</span></span>
+            <div class="flow__result flow__result--stop">該入口與子渠道一律不展示（後端多一個判斷）</div>
+          </div>
+          <div class="flow__branch">
+            <span class="flow__state"><span class="pill pill--ok">是</span></span>
+            <div class="flow__result flow__result--pass">依上方三層判斷的結果呈現</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <p style="font-size:.72rem;color:var(--color-text-soft);">上圖第二層的「方式狀態」＝承接商戶的<strong>最終生效狀態</strong>：商戶狀態與預約維護取較嚴格者（見 3.3、4）。</p>
 
     <h3>2.3 情境窮舉表</h3>
     <table class="tbl tbl--center">
       <thead>
-        <tr><th>第一層<br>渠道</th><th>是否判斷下一層</th><th>第二層<br>方式（入口）</th><th>是否判斷下一層</th><th>第三層<br>子渠道（本單新增）</th><th style="text-align:left;">最終結果</th></tr>
+        <tr><th>第一層<br>渠道</th><th>是否判斷下一層</th><th>第二層<br>方式（入口）</th><th>是否判斷下一層</th><th>第三層<br>子渠道（本單新增）</th><th>最後判斷<br>前台是否顯示（本單新增）</th><th style="text-align:left;">最終結果</th></tr>
       </thead>
       <tbody>
-        <tr><td><span class="pill pill--off">停用</span></td><td>不用</td><td class="dim">停用／維護／正常</td><td>不用</td><td class="dim">停用／維護／正常</td><td style="text-align:left;">前台不顯示該渠道下各方式（入口）與子渠道</td></tr>
+        <tr><td><span class="pill pill--off">停用</span></td><td>不用</td><td class="dim">停用／維護／正常</td><td>不用</td><td class="dim">停用／維護／正常</td><td rowspan="9"><span class="pill pill--ok">是</span></td><td style="text-align:left;">前台不顯示該渠道下各方式（入口）與子渠道</td></tr>
         <tr><td rowspan="3"><span class="pill pill--maint">維護</span></td><td rowspan="3">要</td><td><span class="pill pill--off">停用</span></td><td>不用</td><td class="dim" rowspan="3" style="vertical-align:middle;">停用／維護／正常</td><td style="text-align:left;">前台不顯示該方式（入口）</td></tr>
         <tr><td><span class="pill pill--maint">維護</span></td><td>不用</td><td style="text-align:left;">該方式（入口）顯示維護，子渠道不顯示</td></tr>
         <tr><td><span class="pill pill--ok">正常</span></td><td>不用</td><td style="text-align:left;">該方式（入口）顯示維護，子渠道不顯示</td></tr>
         <tr><td rowspan="5"><span class="pill pill--ok">正常</span></td><td rowspan="5">要</td><td><span class="pill pill--off">停用</span></td><td>不用</td><td class="dim">停用／維護／正常</td><td style="text-align:left;">前台不顯示該方式（入口）</td></tr>
         <tr><td><span class="pill pill--maint">維護</span></td><td>不用</td><td class="dim">停用／維護／正常</td><td style="text-align:left;">該方式（入口）顯示維護，子渠道不顯示</td></tr>
-        <tr><td rowspan="3"><span class="pill pill--ok">正常</span></td><td rowspan="3">要</td><td><span class="pill pill--off">停用</span></td><td style="text-align:left;">該子渠道不顯示；全部子渠道皆停用時，該方式（入口）自動不顯示</td></tr>
+        <tr><td rowspan="3"><span class="pill pill--ok">正常</span></td><td rowspan="3">要</td><td><span class="pill pill--off">停用</span></td><td style="text-align:left;">該子渠道不顯示</td></tr>
         <tr><td><span class="pill pill--maint">維護</span></td><td style="text-align:left;">入口正常顯示；該子渠道顯示維護、不可點選</td></tr>
         <tr><td><span class="pill pill--ok">正常</span></td><td style="text-align:left;">入口正常顯示；該子渠道正常顯示</td></tr>
+        <tr><td class="dim">停用／維護／正常</td><td class="dim">—</td><td class="dim">停用／維護／正常</td><td class="dim">—</td><td class="dim">停用／維護／正常</td><td><span class="pill pill--off">否</span></td><td style="text-align:left;">不論三層判斷結果，前台一律不展示該入口與子渠道</td></tr>
       </tbody>
     </table>
 
     <h3>2.4 邊界情境</h3>
     <ul>
-      <li><strong>子渠道全部設為「停用」</strong>時，該方式（入口）前台<strong>自動不顯示</strong>。</li>
-      <li>除上述外<strong>無反推判斷</strong>：子渠道全部為「維護」或其他組合時，入口照自身狀態顯示，底下子渠道各自依狀態呈現。</li>
+      <li><strong>無反推判斷</strong>：子渠道狀態不影響入口——入口顯示與否只看「前台是否顯示」開關，入口狀態只看承接商戶。</li>
+      <li>「前台是否顯示」為<strong>最後判斷</strong>：三層判斷完成後才判斷此開關：
+        <ul>
+          <li>＝否 → 不論三層判斷結果，前台一律不展示該入口（後端多一個判斷）。</li>
+          <li>＝是 → 依三層判斷的結果呈現。</li>
+        </ul>
+      </li>
+      <li>編輯／新增<strong>保存時子渠道全部為停用</strong>：跳提醒，確定後保存、「前台是否顯示」自動改為「否」，此時該筆子渠道狀態皆為停用；若後續將任一子渠道狀態調整為非停用（正常／維護），「前台是否顯示」仍維持「否」、<strong>不會</strong>自動改回「是」，需人工開啟。</li>
+      <li>若「前台是否顯示」＝是、但子渠道全部為停用（例如未經保存提醒的既有資料）：入口照常顯示，點入後子渠道區為空。</li>
       <li>子渠道狀態僅作用於前台展示層：金流後台仍回傳該子渠道時，後台子渠道列表照常顯示該列供設定（含停用中的子渠道）。</li>
       <li>兩平台（WOWGame／OKBET）子渠道三態判斷邏輯相同；分頁歸屬僅 WOWGame 生效（既有規則不變）。</li>
     </ul>
@@ -753,7 +778,8 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
   <section class="section">
     <h2>頁面定位</h2>
     <ul>
-      <li>改動僅在「充值展示配置」的<strong>新增／編輯彈窗內的子渠道配置區</strong>；彈窗上半部（渠道類型、顯示名、入口渠道圖示、分頁歸屬、排序、顯示商戶）與列表頁均不異動。</li>
+      <li>改動範圍：新增／編輯彈窗的<strong>子渠道配置區</strong>與新增的「<strong>前台是否顯示</strong>」欄位；彈窗其餘欄位（渠道類型、顯示名、入口渠道圖示、分頁歸屬、排序、顯示商戶）與列表頁其餘欄位均不異動。</li>
+      <li>每筆設置新增「<strong>前台是否顯示</strong>」開關（是｜否，單選）：是＝前台展示此入口；否＝前台不展示此入口（後端多一個判斷）。新增時默認「是」；列表頁同步新增「前台是否顯示」欄（顯示商戶與操作之間）。</li>
       <li>子渠道配置區改為<strong>列表（表格）呈現</strong>：一列＝一個子渠道，欄位為「名稱｜子渠道圖示（日間）｜子渠道圖示（夜間）｜分頁歸屬｜狀態」。</li>
       <li>子渠道新增「<strong>狀態</strong>」欄（三態），為充值側第三層前台判斷的來源（規格書 2.2）。</li>
     </ul>
@@ -762,12 +788,31 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
   <section class="section">
     <h2>① 後台畫面（調整後預期）</h2>
 
+    <h3>列表——新增「前台是否顯示」欄</h3>
+    <div class="mock">
+      <div class="mock__bar"><span class="mock__crumb">充值配置 &gt; 在線支付展示配置 &gt; 充值展示配置</span></div>
+      <div class="mock__body">
+        <table>
+          <thead>
+            <tr><th>渠道類型</th><th>類型名稱</th><th>顯示名</th><th>渠道圖示</th><th>分頁歸屬</th><th>排序</th><th>顯示商戶</th><th>前台是否顯示 <span class="mk">J</span></th><th>操作</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>204</td><td>Gcash（充值）</td><td>Gcash-中文</td><td><span class="icon-chip" style="background:#2f6fdd;">GCash</span></td><td>all,ewallet</td><td>100</td><td>V5Pay充值 - GCash</td><td>是</td><td><span class="op">编辑 删除</span></td></tr>
+            <tr><td>206</td><td>PayMaya（充值）</td><td>maya-中文</td><td><span class="icon-chip" style="background:#19b56e;">maya</span></td><td>all,ewallet</td><td>99</td><td>PayMaya(PayMaya)-QATest</td><td>是</td><td><span class="op">编辑 删除</span></td></tr>
+            <tr><td>212</td><td>FortunePay（充值）</td><td>FortunePay-ZH</td><td><span class="icon-chip" style="background:#f59e0b;">FP</span></td><td>all,ewallet,bank</td><td>95</td><td>FortunePay支付</td><td>否</td><td><span class="op">编辑 删除</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="mock__note"><span class="mk">J</span> 「前台是否顯示」欄（本單新增）：位於顯示商戶與操作之間，顯示該筆開關值（是／否）；其餘欄位不異動。</div>
+    </div>
+
     <h3>編輯彈窗——子渠道列表（以 212 - FortunePay 為例）</h3>
     <div class="mock mock--modal">
       <div class="mock__bar"><span class="mock__crumb">充值配置 &gt; 在線支付展示配置 &gt; 充值展示配置 ｜ 編輯彈窗——子渠道區</span></div>
       <div class="mock__body">
         <p style="font-size:.68rem;color:#9ca3af;margin-bottom:8px;">（彈窗上半部：渠道類型／顯示名／渠道圖示（日間・夜間）／分頁歸屬／排序——顯示商戶以上欄位均不異動，略）</p>
         <div class="frow"><label><span class="req">*</span>顯示商戶:</label><span class="fbox">【排序最前·默认显示】FortunePay支付 / 在線支付（正常）</span></div>
+        <div class="frow"><label><span class="req">*</span>前台是否顯示:</label><span><span class="fradio"><span class="dot on"></span>是</span><span class="fradio"><span class="dot"></span>否</span> <span class="mk">I</span></span></div>
         <div class="frow" style="margin-bottom:6px;"><label><span class="req">*</span>子渠道列表:</label><span class="fnote" style="position:relative;"><span class="mk">A</span></span></div>
         <table>
           <thead>
@@ -819,6 +864,7 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
           <li><span class="mk">C</span> 分頁歸屬：多選下拉，選項來源＝「分頁類型設定」頁籤（同現行勾選項）；<strong>默認全勾</strong>。下拉框寬度自適應，已勾選項以逗號並列<strong>完整顯示</strong>、不截斷。</li>
           <li><span class="mk">D</span> 狀態：單選下拉，選項固定為 正常／維護／停用；<strong>默認「正常」</strong>（新增、以及既有資料上線轉換皆同）。</li>
           <li><span class="mk">E</span> 名稱欄：帶出金流後台回傳之子渠道名稱（不可編輯）；一行無法完整呈現時<strong>自動換行</strong>，完整顯示名稱。</li>
+          <li><span class="mk">I</span> 前台是否顯示（單選、必填，本單新增）：是＝前台展示此入口；否＝前台不展示此入口。新增時默認「是」。</li>
         </ul>
       </div>
     </div>
@@ -856,6 +902,7 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
         <div class="frow"><label><span class="req">*</span>渠道類型:</label><span class="fbox">212 - FortunePay</span></div>
         <p style="font-size:.68rem;color:#9ca3af;margin:0 0 8px;">（顯示名、渠道圖示（日間・夜間）、分頁歸屬、排序等欄位——均不異動，略；渠道類型下拉維持現行規則：僅列出底下至少一筆商戶為正常或維護的渠道類型）</p>
         <div class="frow"><label><span class="req">*</span>顯示商戶:</label><span class="fbox">【排序最前·默认显示】FortunePay支付 / 在線支付（正常） <span class="mk" style="float:right;">F</span></span></div>
+        <div class="frow"><label><span class="req">*</span>前台是否顯示:</label><span><span class="fradio"><span class="dot on"></span>是</span><span class="fradio"><span class="dot"></span>否</span></span></div>
         <div class="frow" style="margin-bottom:6px;"><label><span class="req">*</span>子渠道列表:</label><span class="fnote" style="position:relative;"><span class="mk">G</span></span></div>
         <table>
           <thead>
@@ -917,6 +964,24 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
         <tr><td>新增彈窗尚未選擇渠道類型／顯示商戶</td><td>子渠道列表不顯示。</td></tr>
       </tbody>
     </table>
+
+
+    <h3>子渠道全部停用——保存提醒</h3>
+    <div class="mock mock--modal">
+      <div class="mock__bar"><span class="mock__crumb">提示（彈窗）</span></div>
+      <div class="mock__body" style="max-width:460px;">
+        <p style="font-size:.8rem;font-weight:700;margin-bottom:8px;">提示 <span class="mk">K</span></p>
+        <p style="font-size:.74rem;">⚠ 子渠道已全部停用，前台將不展示此入口，前台展示開關將關閉。確定保存？</p>
+        <p style="text-align:right;margin:10px 0 0;"><span class="mock__btn mock__btn--ghost">取 消</span>　<span class="mock__btn">确 定</span></p>
+      </div>
+      <div class="mock__note">
+        <ul style="margin:0;padding-left:1.3em;">
+          <li><span class="mk">K</span> 觸發：新增／編輯彈窗按保存時，該筆子渠道<strong>全部為「停用」</strong>。</li>
+          <li>確定＝保存，並將該筆「前台是否顯示」自動改為「<strong>否</strong>」；取消＝留在彈窗、不保存。</li>
+          <li>若後續將任一子渠道狀態調整為非停用（正常／維護），「前台是否顯示」仍維持「否」、<strong>不會</strong>自動改回「是」，需人工開啟。</li>
+        </ul>
+      </div>
+    </div>
 
     <h3>操作提示文案</h3>
     <ul>
@@ -1013,7 +1078,19 @@ footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(-
               <div class="tile">BDO</div><div class="tile">BOC</div>
             </div>
           </div>
-          <p style="font-size:.68rem;color:var(--color-text-soft);margin:0;">ChinaBank 不顯示，僅剩其他子渠道；全部子渠道皆停用時，該入口自動不顯示。</p>
+          <p style="font-size:.68rem;color:var(--color-text-soft);margin:0;">ChinaBank 不顯示，僅剩其他子渠道。</p>
+        </div>
+      </div>
+      <div class="fe">
+        <div class="fe__head"><span class="pill pill--off">前台是否顯示＝否</span></div>
+        <div class="fe__body">
+          <div class="fe__card">
+            <div class="fe__label">充值方式</div>
+            <div class="fe__tiles" style="grid-template-columns:repeat(2,1fr);">
+              <div class="tile">GCash</div>
+            </div>
+          </div>
+          <p style="font-size:.68rem;color:var(--color-text-soft);margin:0;">「前台是否顯示」＝否：FortunePay 入口不展示，與子渠道狀態無關。</p>
         </div>
       </div>
     </div>
