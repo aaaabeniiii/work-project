@@ -1357,17 +1357,17 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
       <tr>
           <td class="rec-date">V5.0</td>
           <td class="rec-date">9/17</td>
-          <td>依照討論紀錄調整<br><br>調整：<br>1. <span class="x-jump" onclick="showPg('ctl-sys-mgmt-currency')">補充每月匯率紀錄產生規則——每月 1 號全幣種各記一筆當月匯率（不分開啟／關閉、不分有無變動），匯率更新維持每月一次、幣種開啟或新增需調整時以人工寫入或執行 job（卡 528，項次 57，期 1）</span><br>2. <span class="x-jump" onclick="showPg('spec-content');goTo('s2-4-1')">憲法 2.4.1 依項次 56 調整——取消「投注站適用國家」，投注站與總代的國家渲染一律抓「可使用國家」，新增投注站或總代不檢核國家所屬模式（舊規則劃線、現行內容接於後方）</span><br>3. <span class="x-jump" onclick="showPg('ctl-plat-mgmt-plat-list')">卡 541 改寫——投注站系統啟用狀態決定管理後台投注站相關頁面與內容顯示，總代頁面固定顯示不受影響（卡 541，項次 56，期 1）</span><br>4. <span class="x-jump" onclick="showPg('adm-user-mgmt-station')">新增投注站的國家選項改為控制後台「可使用國家」清單，不檢核國家所屬模式（卡 004，項次 56，期 1）</span><br>5. <span class="x-jump" onclick="showPg('adm-user-mgmt-headoffice')">總代的國家選項改為控制後台「可使用國家」清單、不再排除投注站適用國家，搜尋連動來源同步（卡 564、567，項次 56，期 5）</span><br>6. <span class="x-jump" onclick="showPg('phase-scope')">分期上線範圍同步——期 1 改列 541、542 並改寫 QA 驗收前提句、期 5 總代描述句同步、排除區補列 543、期別張數與頁尾統計同步</span><br>7. <span class="x-jump" onclick="showPg('spec-content');goTo('s2-6')">憲法 2.6.1 依項次 26 補充查詢條件統一原則——國家＋幣種兩維度單選預設全部、雙向連動且選項後端回傳、注單類依下注會員／資金類依交易所屬會員過濾、金額搜尋單位僅依幣種（紅字補充、不劃原文）</span><br>8. <span class="x-jump" onclick="showPg('adm-finance-mgmt-deposit-record')">充值紀錄搜尋欄改國家＋幣種雙向連動，依充值會員所屬的國家＋幣種過濾（卡 065，項次 26，期 2）</span><br>9. <span class="x-jump" onclick="showPg('adm-finance-mgmt-withdraw-record')">提款紀錄待處理訂單與出款歷史搜尋欄改國家＋幣種雙向連動，依提款會員所屬的國家＋幣種過濾（卡 069、075，項次 26，期 2）</span><br>10. <span class="x-jump" onclick="showPg('adm-finance-mgmt-fund-detail')">資金明細與代理佣金明細搜尋欄改國家＋幣種雙向連動，分別依交易所屬會員／所屬代理的國家＋幣種過濾（卡 080、083，項次 26，期 2）</span><br>11. <span class="x-jump" onclick="showPg('adm-finance-mgmt-balance-adjust-audit')">修改餘額審批搜尋欄改國家＋幣種雙向連動，依調整對象會員所屬的國家＋幣種過濾（卡 089，項次 26，期 6）</span><br>12. <span class="x-jump" onclick="showPg('adm-finance-mgmt-fund-detail-new')">資金明細(新)搜尋欄改國家＋幣種雙向連動，依交易所屬會員的國家＋幣種過濾（卡 092，項次 26，期 2）</span><br>13. <span class="x-jump" onclick="showPg('adm-withdraw-mgmt-withdraw-risk-audit')">提現風控審核待處理訂單與出款歷史搜尋欄改國家＋幣種雙向連動，依提款會員所屬的國家＋幣種過濾（卡 097、106，項次 26，期 6）</span><br>14. <span class="x-jump" onclick="showPg('spec-content');goTo('s2-8')">憲法 2.8.1 依項次 26、27 調整——廠商升為「國家＋幣種」維度，SQL 寫入帶入國家＋幣種、顯示範圍依組合決定（舊規則劃線、現行內容接於後方）</span><br>15. <span class="x-jump" onclick="showPg('phase-scope');goTo('phx-7')">交付項 D-07 同步配置共用元件由期 2 移至期 7——提現出款設置與支付層級的同步配置已作廢，適用範圍改為 VIP 特權 1 頁 5 張卡（卡 048、050、052、054、056），期 2／期 7 交付項計數與頁尾統計同步</span><br>16. <span class="x-jump" onclick="showPg('phase-scope');goTo('phx-ex')">分期上線範圍「排除」區改版為「刪除紀錄」——表頭改「刪除原因」、逐列登記刪除依據（096 補項次 28、180 補項次 23），區內所列 52 張卡文自文件刪除，頁尾統計同步</span><br>17. 文件整理——憲法與各頁面的歷史劃線、紅字註記清除（現行規則融合入正文），作廢卡 9 張與作廢頁 10 頁自文件刪除<br>18. <span class="x-jump" onclick="showPg('phase-plan');goTo('rd-sched')">RD 預計時程升 V3（9/17 排定，QA 提供驗收時程）——期 3 開發加一週、期 4~7 順延，開發時長改工作天計（扣週末與國定假日），補驗收完成日與驗收時長，優化 10/8 上 UAT、10/19 上生產，里程碑補全部驗收完成 11/18 與整體回歸 10 天</span><br><br>刪除：<br>1. <span class="x-jump" onclick="showPg('ctl-plat-mgmt-plat-list')">修改平台彈窗投注站適用國家規劃作廢（決議取消，劃線保留備查）（卡 543，項次 56）</span></td>
+          <td>依照討論紀錄調整<br><br>調整：<br>1. <span class="x-jump" onclick="showPg('ctl-sys-mgmt-currency')">補充每月匯率紀錄產生規則——每月 1 號全幣種各記一筆當月匯率（不分開啟／關閉、不分有無變動），匯率更新維持每月一次、幣種開啟或新增需調整時以人工寫入或執行 job（卡 528，項次 57，期 1）</span><br>2. <span class="x-jump" onclick="showPg('spec-content');goTo('s2-4-1')">規格書 2.4.1 依項次 56 調整——取消「投注站適用國家」，投注站與總代的國家渲染一律抓「可使用國家」，新增投注站或總代不檢核國家所屬模式（舊規則劃線、現行內容接於後方）</span><br>3. <span class="x-jump" onclick="showPg('ctl-plat-mgmt-plat-list')">卡 541 改寫——投注站系統啟用狀態決定管理後台投注站相關頁面與內容顯示，總代頁面固定顯示不受影響（卡 541，項次 56，期 1）</span><br>4. <span class="x-jump" onclick="showPg('adm-user-mgmt-station')">新增投注站的國家選項改為控制後台「可使用國家」清單，不檢核國家所屬模式（卡 004，項次 56，期 1）</span><br>5. <span class="x-jump" onclick="showPg('adm-user-mgmt-headoffice')">總代的國家選項改為控制後台「可使用國家」清單、不再排除投注站適用國家，搜尋連動來源同步（卡 564、567，項次 56，期 5）</span><br>6. <span class="x-jump" onclick="showPg('phase-scope')">分期上線範圍同步——期 1 改列 541、542 並改寫 QA 驗收前提句、期 5 總代描述句同步、排除區補列 543、期別張數與頁尾統計同步</span><br>7. <span class="x-jump" onclick="showPg('spec-content');goTo('s2-6')">規格書 2.6.1 依項次 26 補充查詢條件統一原則——國家＋幣種兩維度單選預設全部、雙向連動且選項後端回傳、注單類依下注會員／資金類依交易所屬會員過濾、金額搜尋單位僅依幣種（紅字補充、不劃原文）</span><br>8. <span class="x-jump" onclick="showPg('adm-finance-mgmt-deposit-record')">充值紀錄搜尋欄改國家＋幣種雙向連動，依充值會員所屬的國家＋幣種過濾（卡 065，項次 26，期 2）</span><br>9. <span class="x-jump" onclick="showPg('adm-finance-mgmt-withdraw-record')">提款紀錄待處理訂單與出款歷史搜尋欄改國家＋幣種雙向連動，依提款會員所屬的國家＋幣種過濾（卡 069、075，項次 26，期 2）</span><br>10. <span class="x-jump" onclick="showPg('adm-finance-mgmt-fund-detail')">資金明細與代理佣金明細搜尋欄改國家＋幣種雙向連動，分別依交易所屬會員／所屬代理的國家＋幣種過濾（卡 080、083，項次 26，期 2）</span><br>11. <span class="x-jump" onclick="showPg('adm-finance-mgmt-balance-adjust-audit')">修改餘額審批搜尋欄改國家＋幣種雙向連動，依調整對象會員所屬的國家＋幣種過濾（卡 089，項次 26，期 6）</span><br>12. <span class="x-jump" onclick="showPg('adm-finance-mgmt-fund-detail-new')">資金明細(新)搜尋欄改國家＋幣種雙向連動，依交易所屬會員的國家＋幣種過濾（卡 092，項次 26，期 2）</span><br>13. <span class="x-jump" onclick="showPg('adm-withdraw-mgmt-withdraw-risk-audit')">提現風控審核待處理訂單與出款歷史搜尋欄改國家＋幣種雙向連動，依提款會員所屬的國家＋幣種過濾（卡 097、106，項次 26，期 6）</span><br>14. <span class="x-jump" onclick="showPg('spec-content');goTo('s2-8')">規格書 2.8.1 依項次 26、27 調整——廠商升為「國家＋幣種」維度，SQL 寫入帶入國家＋幣種、顯示範圍依組合決定（舊規則劃線、現行內容接於後方）</span><br>15. <span class="x-jump" onclick="showPg('phase-scope');goTo('phx-7')">交付項 D-07 同步配置共用元件由期 2 移至期 7——提現出款設置與支付層級的同步配置已作廢，適用範圍改為 VIP 特權 1 頁 5 張卡（卡 048、050、052、054、056），期 2／期 7 交付項計數與頁尾統計同步</span><br>16. <span class="x-jump" onclick="showPg('phase-scope');goTo('phx-ex')">分期上線範圍「排除」區改版為「刪除紀錄」——表頭改「刪除原因」、逐列登記刪除依據（096 補項次 28、180 補項次 23），區內所列 52 張卡文自文件刪除，頁尾統計同步</span><br>17. 文件整理——規格書與各頁面的歷史劃線、紅字註記清除（現行規則融合入正文），作廢卡 9 張與作廢頁 10 頁自文件刪除<br>18. <span class="x-jump" onclick="showPg('phase-plan');goTo('rd-sched')">RD 預計時程升 V3（9/17 排定，QA 提供驗收時程）——期 3 開發加一週、期 4~7 順延，開發時長改工作天計（扣週末與國定假日），補驗收完成日與驗收時長，優化 10/8 上 UAT、10/19 上生產，里程碑補全部驗收完成 11/18 與整體回歸 10 天</span><br><br>刪除：<br>1. <span class="x-jump" onclick="showPg('ctl-plat-mgmt-plat-list')">修改平台彈窗投注站適用國家規劃作廢（決議取消，劃線保留備查）（卡 543，項次 56）</span></td>
         </tr>
       <tr>
           <td class="rec-date">V4.3</td>
           <td class="rec-date">9/16</td>
-          <td>依照討論紀錄調整<br><br>新增：<br>1. <span class="x-jump" onclick="showPg('phase-scope')">分期上線範圍頁共用小卡搜尋浮窗——於該頁搜尋卡號改查所屬期別：命中之編號或區段整段高亮、自動捲動並提示期別，跨期同卡全部列出</span><br><br>調整：<br>1. <span class="x-jump" onclick="showPg('spec-content');goTo('s2-8')">憲法 2.8 依項次 27 調整——遊戲綁定改「國家＋幣種」組合、首頁分類與遊戲類別改於国际化设置依組合維護、會員可見遊戲與圖片依組合決定（2.8.2～2.8.5，舊規則劃線、現行內容接於後方）</span><br>2. <span class="x-jump" onclick="showPg('adm-user-mgmt-agent')">補邏輯——代理新增彈窗上級大代理與國家、幣種雙向連動過濾、幣種與標籤欄位未選擇前顯示「請選擇」提示且未選國家時選單顯示 No data（卡 025，QA 檢核 Q-11）</span><br>3. <span class="x-jump" onclick="showPg('adm-user-mgmt-super-agent')">補邏輯——大代理新增彈窗上級代理與國家、幣種雙向連動過濾、幣種與標籤欄位未選擇前顯示「請選擇」提示且未選國家時選單顯示 No data（卡 012，比照卡 025，QA 檢核 Q-11）</span><br>4. <span class="x-jump" onclick="showPg('phase-scope');goTo('phx-3')">支付層級配置自 OKF-2074 拉回多幣種期 3——分期上線範圍自期 2 移列期 3（卡 274～278，項次 53）</span><br>5. <span class="x-jump" onclick="showPg('phase-scope')">分期上線範圍剔除作廢卡——期 2 除卡 096、期 4 除卡 204~207（反水設定整列）與 215、216、244、245、期 5 除卡 180</span><br>6. <span class="x-jump" onclick="showPg('phase-scope')">分期上線範圍排除區補列後續作廢卡 18 張（096、180、204~207、215~216、244~245、275、549~555）並同步頁尾統計小計</span><br>7. <span class="x-jump" onclick="showPg('phase-scope')">35 張新卡預估期數經 RD 確認寫入分期上線範圍——期 1：586~588、期 2：531~540、548、期 3：570~575、577~580、期 4：581~585、期 5：544~547、569、期 7：576</span><br>8. <span class="x-jump" onclick="showPg('phase-plan');goTo('rd-sched')">上線計劃與進度依項次 58、59 改版——RD 預計時程升 V2（9/16 排定，時長不變、日期順移，OKF-2074 9/18～10/2），期 1 進度改修復 bug 中、上 DEV 填 9/10，整體時程 12/10 UAT、12/28 生產</span></td>
+          <td>依照討論紀錄調整<br><br>新增：<br>1. <span class="x-jump" onclick="showPg('phase-scope')">分期上線範圍頁共用小卡搜尋浮窗——於該頁搜尋卡號改查所屬期別：命中之編號或區段整段高亮、自動捲動並提示期別，跨期同卡全部列出</span><br><br>調整：<br>1. <span class="x-jump" onclick="showPg('spec-content');goTo('s2-8')">規格書 2.8 依項次 27 調整——遊戲綁定改「國家＋幣種」組合、首頁分類與遊戲類別改於国际化设置依組合維護、會員可見遊戲與圖片依組合決定（2.8.2～2.8.5，舊規則劃線、現行內容接於後方）</span><br>2. <span class="x-jump" onclick="showPg('adm-user-mgmt-agent')">補邏輯——代理新增彈窗上級大代理與國家、幣種雙向連動過濾、幣種與標籤欄位未選擇前顯示「請選擇」提示且未選國家時選單顯示 No data（卡 025，QA 檢核 Q-11）</span><br>3. <span class="x-jump" onclick="showPg('adm-user-mgmt-super-agent')">補邏輯——大代理新增彈窗上級代理與國家、幣種雙向連動過濾、幣種與標籤欄位未選擇前顯示「請選擇」提示且未選國家時選單顯示 No data（卡 012，比照卡 025，QA 檢核 Q-11）</span><br>4. <span class="x-jump" onclick="showPg('phase-scope');goTo('phx-3')">支付層級配置自 OKF-2074 拉回多幣種期 3——分期上線範圍自期 2 移列期 3（卡 274～278，項次 53）</span><br>5. <span class="x-jump" onclick="showPg('phase-scope')">分期上線範圍剔除作廢卡——期 2 除卡 096、期 4 除卡 204~207（反水設定整列）與 215、216、244、245、期 5 除卡 180</span><br>6. <span class="x-jump" onclick="showPg('phase-scope')">分期上線範圍排除區補列後續作廢卡 18 張（096、180、204~207、215~216、244~245、275、549~555）並同步頁尾統計小計</span><br>7. <span class="x-jump" onclick="showPg('phase-scope')">35 張新卡預估期數經 RD 確認寫入分期上線範圍——期 1：586~588、期 2：531~540、548、期 3：570~575、577~580、期 4：581~585、期 5：544~547、569、期 7：576</span><br>8. <span class="x-jump" onclick="showPg('phase-plan');goTo('rd-sched')">上線計劃與進度依項次 58、59 改版——RD 預計時程升 V2（9/16 排定，時長不變、日期順移，OKF-2074 9/18～10/2），期 1 進度改修復 bug 中、上 DEV 填 9/10，整體時程 12/10 UAT、12/28 生產</span></td>
         </tr>
       <tr>
           <td class="rec-date">V4.2</td>
           <td class="rec-date">9/14</td>
-          <td>依照討論紀錄調整<br><br>調整：<br>1. <span class="x-jump" onclick="showPg('spec-content');goTo('s2-4')">憲法 2.4.4 轉線規則補充換線同類型限制——新上級（總代／大代理／代理）須屬同類型代理線，總代線與投注站線不可互相切換（項次 51 第 1 點）</span><br>2. <span class="x-jump" onclick="showPg('adm-user-mgmt-tag-config')">會員代理標籤配置列表「創建時間」欄更名為「變更時間」（卡 586，項次 52）</span><br>3. <span class="x-jump" onclick="showPg('adm-user-mgmt-super-agent')">大代理變更代理線彈窗依代理線類型帶出對應候選資料，詞條與提示文字為變量（卡 016、587，項次 51 第 2 點）</span><br>4. <span class="x-jump" onclick="showPg('adm-user-mgmt-agent')">代理變更代理線彈窗依代理線類型帶出對應候選資料，詞條與提示文字為變量（卡 029、588，項次 51 第 2 點）</span></td>
+          <td>依照討論紀錄調整<br><br>調整：<br>1. <span class="x-jump" onclick="showPg('spec-content');goTo('s2-4')">規格書 2.4.4 轉線規則補充換線同類型限制——新上級（總代／大代理／代理）須屬同類型代理線，總代線與投注站線不可互相切換（項次 51 第 1 點）</span><br>2. <span class="x-jump" onclick="showPg('adm-user-mgmt-tag-config')">會員代理標籤配置列表「創建時間」欄更名為「變更時間」（卡 586，項次 52）</span><br>3. <span class="x-jump" onclick="showPg('adm-user-mgmt-super-agent')">大代理變更代理線彈窗依代理線類型帶出對應候選資料，詞條與提示文字為變量（卡 016、587，項次 51 第 2 點）</span><br>4. <span class="x-jump" onclick="showPg('adm-user-mgmt-agent')">代理變更代理線彈窗依代理線類型帶出對應候選資料，詞條與提示文字為變量（卡 029、588，項次 51 第 2 點）</span></td>
         </tr>
       <tr>
           <td class="rec-date">V4.1</td>
@@ -1387,7 +1387,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
       <tr>
         <td class="rec-date">V3.5</td>
         <td class="rec-date">8/27</td>
-        <td>依照討論紀錄調整<br><br>新增：<br>1. <span class="x-jump" onclick="showPg('adm-user-mgmt-tag-config')">會員代理標籤配置頁重建、標籤依國家分類新增國家維度（卡 556~559）</span><br>2. <span class="x-jump" onclick="showPg('adm-user-mgmt-headoffice')">總公司頁新增——綁定國家＋幣種、新增與編輯登入密碼、後台畫面（卡 564~568）</span><br>3. <span class="x-jump" onclick="showPg('adm-data-report-dr-headoffice')">總公司報表頁新增——版面功能與統計方式同投注站報表、僅維度改為總公司（卡 569）</span><br>4. <span class="x-jump" onclick="showPg('adm-sys-mgmt-email-setting')">綁定郵箱設置頁新增——三分頁均增加國家維度、後台畫面（卡 570~575）</span><br><br>調整：<br>1. <span class="x-jump" onclick="showPg('adm-game-mgmt-gm-event')">賽事管理－遊戲最大投注額加「＋」依國家＋幣種設置、新增後台畫面（卡 217）</span><br>2. <span class="x-jump" onclick="showPg('spec-content');goTo('s2-3-2')">憲法 2.3.2 補充一國一法幣原則（一個國家僅有一個法幣，第二幣種必為虛擬幣）</span><br>3. <span class="x-jump" onclick="showPg('adm-user-mgmt-super-agent')">大代理－標籤依國家過濾與標注失效規則、新增後台畫面（卡 012、013、560）</span><br>4. <span class="x-jump" onclick="showPg('adm-user-mgmt-agent')">代理－標籤依國家過濾與標注失效規則、新增後台畫面（卡 025、026、561）</span><br>5. <span class="x-jump" onclick="showPg('adm-user-mgmt-member')">會員－標籤依國家過濾與標注失效規則、新增後台畫面（卡 562、563）</span><br>6. <span class="x-jump" onclick="showPg('spec-content');goTo('s2-3-3')">憲法 2.3.3 補充匯率取值時點（充值＝訂單完成時、提款與修改餘額審批＝建單時）</span><br>7. <span class="x-jump" onclick="showPg('spec-content');goTo('s2-3-2')">憲法 2.3.2 補充取消勾選國家的處理（含可使用國家與投注站適用國家，後端僅改為不渲染）</span><br>8. <span class="x-jump" onclick="showPg('adm-user-mgmt-vip')">VIP特權－會員福利紀錄國家幣種移至會員名後方並改讀會員綁定值、金额/积分拆為獎勵類型＋獎勵金額/內容、三分頁後台畫面（卡 063、064、576）</span><br>9. <span class="x-jump" onclick="showPg('adm-finance-mgmt-balance-adjust-audit')">修改餘額審批－搜尋欄移除無功能的既有最小/最大金額查詢、僅新增幣種篩選（卡 089）</span><br>10. <span class="x-jump" onclick="showPg('adm-user-mgmt-member')">會員－批量操作限同國家＋幣種：四個批量彈窗新增帳號檢查（不符反紅）、國家幣種顯示與依基準組合渲染的下拉（卡 577~580）</span><br><br>刪除：<br>1. <span class="x-jump" onclick="showPg('adm-game-mgmt-gm-event')">賽事管理－幣種下拉與列表幣種欄（卡 215、216）</span>（決議變更設計、劃線保留備查）</td>
+        <td>依照討論紀錄調整<br><br>新增：<br>1. <span class="x-jump" onclick="showPg('adm-user-mgmt-tag-config')">會員代理標籤配置頁重建、標籤依國家分類新增國家維度（卡 556~559）</span><br>2. <span class="x-jump" onclick="showPg('adm-user-mgmt-headoffice')">總公司頁新增——綁定國家＋幣種、新增與編輯登入密碼、後台畫面（卡 564~568）</span><br>3. <span class="x-jump" onclick="showPg('adm-data-report-dr-headoffice')">總公司報表頁新增——版面功能與統計方式同投注站報表、僅維度改為總公司（卡 569）</span><br>4. <span class="x-jump" onclick="showPg('adm-sys-mgmt-email-setting')">綁定郵箱設置頁新增——三分頁均增加國家維度、後台畫面（卡 570~575）</span><br><br>調整：<br>1. <span class="x-jump" onclick="showPg('adm-game-mgmt-gm-event')">賽事管理－遊戲最大投注額加「＋」依國家＋幣種設置、新增後台畫面（卡 217）</span><br>2. <span class="x-jump" onclick="showPg('spec-content');goTo('s2-3-2')">規格書 2.3.2 補充一國一法幣原則（一個國家僅有一個法幣，第二幣種必為虛擬幣）</span><br>3. <span class="x-jump" onclick="showPg('adm-user-mgmt-super-agent')">大代理－標籤依國家過濾與標注失效規則、新增後台畫面（卡 012、013、560）</span><br>4. <span class="x-jump" onclick="showPg('adm-user-mgmt-agent')">代理－標籤依國家過濾與標注失效規則、新增後台畫面（卡 025、026、561）</span><br>5. <span class="x-jump" onclick="showPg('adm-user-mgmt-member')">會員－標籤依國家過濾與標注失效規則、新增後台畫面（卡 562、563）</span><br>6. <span class="x-jump" onclick="showPg('spec-content');goTo('s2-3-3')">規格書 2.3.3 補充匯率取值時點（充值＝訂單完成時、提款與修改餘額審批＝建單時）</span><br>7. <span class="x-jump" onclick="showPg('spec-content');goTo('s2-3-2')">規格書 2.3.2 補充取消勾選國家的處理（含可使用國家與投注站適用國家，後端僅改為不渲染）</span><br>8. <span class="x-jump" onclick="showPg('adm-user-mgmt-vip')">VIP特權－會員福利紀錄國家幣種移至會員名後方並改讀會員綁定值、金额/积分拆為獎勵類型＋獎勵金額/內容、三分頁後台畫面（卡 063、064、576）</span><br>9. <span class="x-jump" onclick="showPg('adm-finance-mgmt-balance-adjust-audit')">修改餘額審批－搜尋欄移除無功能的既有最小/最大金額查詢、僅新增幣種篩選（卡 089）</span><br>10. <span class="x-jump" onclick="showPg('adm-user-mgmt-member')">會員－批量操作限同國家＋幣種：四個批量彈窗新增帳號檢查（不符反紅）、國家幣種顯示與依基準組合渲染的下拉（卡 577~580）</span><br><br>刪除：<br>1. <span class="x-jump" onclick="showPg('adm-game-mgmt-gm-event')">賽事管理－幣種下拉與列表幣種欄（卡 215、216）</span>（決議變更設計、劃線保留備查）</td>
       </tr>
       <tr>
         <td class="rec-date">V3.4</td>
@@ -2197,7 +2197,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
     <table class="rec-table">
       <tr><th>期數</th><th>名稱</th><th>範圍</th><th>盤點</th><th>開發中</th><th>上 DEV</th><th>DEV 驗收通過</th><th>備註</th></tr>
       <tr><td class="rec-no">1</td><td>基礎工程</td><td class="plan-scope">5 頁 15 張｜交付項 4</td><td class="ph-cell ph-done">8/28 已完成</td><td class="ph-cell ph-now">修復 bug 中</td><td class="ph-cell ph-done">9/10</td><td class="ph-cell"></td><td>開發中發現技術問題，上 DEV 延至 9/10(四)</td></tr>
-      <tr><td class="rec-no">—</td><td>充值提款匹配邏輯優化（<a class="x-jump" href="https://okbetokbet.atlassian.net/browse/OKF-2074" target="_blank">OKF-2074</a>）</td><td class="plan-scope">期 2 前置</td><td class="ph-cell ph-done">8/28 已完成</td><td class="ph-cell"></td><td class="ph-cell"></td><td class="ph-cell"></td><td>需先完成才可進行期 2；不影響期 3、期 4（可先帶假資料）</td></tr>
+      <tr><td class="rec-no">—</td><td>充值提款匹配邏輯優化（<a class="x-jump" href="https://okbetokbet.atlassian.net/browse/OKF-2074" target="_blank">OKF-2074</a>）</td><td class="plan-scope">期 2 前置</td><td class="ph-cell ph-done">8/28 已完成</td><td class="ph-cell ph-now">提款：開發中<br>充值：確認實作方式</td><td class="ph-cell"></td><td class="ph-cell"></td><td>需先完成才可進行期 2；不影響期 3、期 4（可先帶假資料）</td></tr>
       <tr><td class="rec-no">2</td><td>金流</td><td class="plan-scope">11 頁 44 張｜交付項 2</td><td class="ph-cell"></td><td class="ph-cell"></td><td class="ph-cell"></td><td class="ph-cell"></td><td></td></tr>
       <tr><td class="rec-no">3</td><td>代理線</td><td class="plan-scope">5 頁 37 張</td><td class="ph-cell ph-done">8/28 已完成</td><td class="ph-cell"></td><td class="ph-cell"></td><td class="ph-cell"></td><td></td></tr>
       <tr><td class="rec-no">4</td><td>三方 GAME ＋ 體育</td><td class="plan-scope">13 頁 63 張</td><td class="ph-cell ph-done">8/21 已完成</td><td class="ph-cell"></td><td class="ph-cell"></td><td class="ph-cell"></td><td></td></tr>
@@ -2217,6 +2217,39 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
     <h3 class="plan-h">開發進度紀錄（每週一更新上週進度，日期為該週週五）</h3>
     <table class="rec-table">
       <tr><th>日期</th><th>範圍</th><th>本週進度</th><th>備註</th></tr>
+      <tr><td class="rec-date">9/18</td><td>期 1＋期 3＋OKF-2074</td><td>
+        <strong>Evan：</strong>
+        <ul class="rec-ol">
+          <li>期 1 已上 V4.3 版本；並修正測試討論項目：建立平台時會建立對應數量的總代，一個總代對應一個幣種。</li>
+        </ul>
+        <strong>Cyril：</strong>
+        <ul class="rec-ol">
+          <li>充值提款匹配邏輯優化（<a href="https://okbetokbet.atlassian.net/browse/OKF-2074" target="_blank">OKF-2074</a>）：新表結構已定，需討論事項基本討論完畢，進入開發階段。</li>
+          <li>共用分支已建立，目前 DEBUG 中。</li>
+        </ul>
+        <strong>Ody：</strong>
+        <ul class="rec-ol">
+          <li>需求釐清完成：OKF-2328（充值側新配置）、OKF-2269（預約維護、子渠道三態）、OKF-2230（VIP 等級限制）三張單整合為一份規格，並與規格書「充值配置」段落逐項比對，列出缺漏與需 PM 裁決的問題。</li>
+          <li>現況調查完成：讀完現行充值配置自渠道、商戶至前台呈現的程式流程，整理出新舊版對照與改善目標說明文件。</li>
+          <li>新版設計盤點完成：確認新表結構、後台頁面、前台 API 契約與回調端點的改動範圍，找出與 Cyril 主單設計衝突的 5 個點，列入待決清單；產出物已進版控。</li>
+        </ul>
+        <strong>9/21~9/24 預計進度：</strong><br>
+        <strong>Evan：</strong>
+        <ul class="rec-ol">
+          <li>期 1：9/22（二）程式碼更新至規格書 V5.0 版本，並修復剩餘 bug。</li>
+          <li>期 3 開工，目標本週做完進 QA。</li>
+        </ul>
+        <strong>Cyril：</strong>充值提款匹配邏輯優化（<a href="https://okbetokbet.atlassian.net/browse/OKF-2074" target="_blank">OKF-2074</a>）
+        <ul class="rec-ol">
+          <li>提款側開發完成 70%（不含 DEV 自測）。</li>
+        </ul>
+        <strong>Ody：</strong>充值提款匹配邏輯優化（<a href="https://okbetokbet.atlassian.net/browse/OKF-2074" target="_blank">OKF-2074</a>）
+        <ul class="rec-ol">
+          <li>與 PM、Cyril 對齊待決問題（主單／子單分工、多幣種多筆商戶主鍵、分頁類型是否綁國家幣種、會員國家欄位來源、規格書改為新菜單）。</li>
+          <li>完成實作計畫與測試計畫並取得確認。</li>
+          <li>待主單共用基礎（資料表、共用頁、選單骨架）推上分支後，切出本單分支開始開發，順序為充值渠道與商戶設定 → 展示配置與子渠道 → 預約維護。</li>
+        </ul>
+      </td><td></td></tr>
       <tr><td class="rec-date">9/4</td><td>期 1＋OKF-2074</td><td>
         <strong>Cyril：</strong>
         <ul class="rec-ol">
@@ -17822,6 +17855,28 @@ function phaseCardLookup(v){
     });
   }, 3000);
 }
+function cardPhaseOf(n){
+  var pg = document.getElementById('pg-phase-scope');
+  if(!pg) return [];
+  var phases = [];
+  pg.querySelectorAll('td.id').forEach(function(td){
+    var found = false;
+    td.innerHTML.split(/<br\s*\/?>/i).forEach(function(seg){
+      if(found) return;
+      var m = seg.replace(/<[^>]*>/g, '').match(/(\d{3})\s*[–—－~～-]\s*(\d{3})|(\d{3})/);
+      if(!m) return;
+      if(m[1] && m[2]){ if(n >= parseInt(m[1],10) && n <= parseInt(m[2],10)) found = true; }
+      else if(m[3]){ if(n === parseInt(m[3],10)) found = true; }
+    });
+    if(found){
+      var ph = td.closest('.phase');
+      var nEl = ph ? ph.querySelector('.ph-head .n') : null;
+      var label = nEl ? nEl.textContent.trim() : '';
+      if(label && phases.indexOf(label) < 0) phases.push(label);
+    }
+  });
+  return phases;
+}
 function cardJump(){
   var inp = document.getElementById('card-search-in');
   var hint = document.getElementById('card-search-hint');
@@ -17837,13 +17892,19 @@ function cardJump(){
   for(var i = 0; i < nums.length; i++){
     if(nums[i].textContent.trim() === v){ target = nums[i]; break; }
   }
-  if(!target){ hint.textContent = '卡 ' + v + ' 不存在'; return; }
+  if(!target){
+    var phsDel = cardPhaseOf(parseInt(v, 10));
+    if(phsDel.length){ showPg('phase-scope'); phaseCardLookup(v); return; }
+    hint.textContent = '卡 ' + v + ' 不存在'; return;
+  }
   var card = target.closest('.spec-card');
   var pg = target.closest('.pg');
   if(!card || !pg) return;
   showPg(pg.id.replace(/^pg-/, ''));
   var pane = target.closest('.pg-tabpane');
   if(pane) showPgTab(pane.dataset.tabgroup, pane.dataset.tab);
+  var phs = cardPhaseOf(parseInt(v, 10));
+  if(phs.length) hint.textContent = '卡 ' + v + '：' + phs.join('、');
   document.querySelectorAll('.card-hit').forEach(function(el){ el.classList.remove('card-hit'); });
   card.classList.add('card-hit');
   setTimeout(function(){ card.scrollIntoView({block: 'start'}); }, 0);
