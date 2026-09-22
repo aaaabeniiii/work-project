@@ -966,7 +966,41 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
     <p class="rec-sub">記錄各次會議與討論的決議內容。新的紀錄由上往下疊加（項次由下往上遞增）；決議內容若後續被調整，原文以刪除線標示並於下方註記調整內容與確認人。</p>
     <table class="rec-table">
       <tr><th>日期</th><th>項次</th><th>內容</th><th>規格書更新</th><th>參與人</th></tr>
-      <tr id="rec-59">
+      <tr id="rec-65">
+            <td class="rec-date">9/22</td>
+            <td class="rec-no">65</td>
+            <td><span class="rec-item-tt">總代操作欄位</span>：<br>1. 需將 GA 驗證的操作與功能修復 - 期 3<br>2. 列表欄位需補回信用額度、剩餘額度、GA 欄位 - 期 3<br>3. 總代功能完善放於後續優化，不在本次開發範圍</td>
+            <td class="rec-upd"></td>
+            <td>Zack、Evan、Din、Abeni</td>
+          </tr>
+          <tr id="rec-64">
+            <td class="rec-date" rowspan="5">9/22</td>
+            <td class="rec-no">64</td>
+            <td><span class="rec-item-tt">已知 bug／後續優化紀錄</span>：<br>對舊有程式碼的 bug 或可放後期優化的問題，現有兩筆：<br>　(1) 國家下拉選單取消勾選適用國家後，後台仍應可查得到<br>　(2) 取消勾選的國家因查表問題，國家會顯示為英文 <span class="rec-adj"><span class="rec-adj-tag">9/22 補充：</span>此類問題 bug 單照開，由 QA 開一個「後續優化」分類，將 BUG 單歸入；規格書同步新增「後續優化紀錄」區，將此類 BUG 單同步收錄。</span></td>
+            <td class="rec-upd"></td>
+            <td rowspan="5">9/22 第六次週會（Mark、Zack、Cyril、Evan、Ody、Wade、Din、Shawn、Zaken、Abeni）</td>
+          </tr>
+          <tr id="rec-63">
+            <td class="rec-no">63</td>
+            <td><span class="rec-item-tt">總代 full name 欄位</span>：<span class="rec-del">系統自動新增總代時，full name 與帳號一致。</span>總代的 full name 欄位刪除，此修改放到期 3 一併處理。</td>
+            <td class="rec-upd"></td>
+          </tr>
+          <tr id="rec-62">
+            <td class="rec-no">62</td>
+            <td><span class="rec-item-tt">充值提款匹配邏輯優化（<a class="x-jump" href="https://okbetokbet.atlassian.net/browse/OKF-2074" target="_blank">OKF-2074</a>）</span>：<br>1. 充值/提款新增預約維護功能（<a class="x-jump" href="https://okbetokbet.atlassian.net/browse/OKF-2269" target="_blank">OKF-2269</a>）暫緩：OKF-2074 開發需要更多時間，為不影響 OKF-2074，OKF-2269 先暫緩<br>2. 待 OKF-2074 上 UAT 後 OKF-2269 即可開始，屆時 OKF-2269 同時開發新版與舊版 API；OKF-2074 完成後即為新版 API <span class="rec-adj"><span class="rec-adj-tag">9/22 補充：</span>開發由 Zack 通知，已確認通知 Will；PM 由 Abeni 通知，已通知 Sid。</span><br>3. 支付廠商回調開發需有可回調的支付廠商配合測試，由開發自行拉群組與廠商確認</td>
+            <td class="rec-upd"></td>
+          </tr>
+          <tr id="rec-61">
+            <td class="rec-no">61</td>
+            <td><span class="rec-item-tt">平台新增幣種的 VIP 資料</span>：平台新增幣種時因尚無 VIP 資料，建立會員會有問題；由 RD 手動塞 SQL 補 VIP 資料即可，不另做功能。</td>
+            <td class="rec-upd"></td>
+          </tr>
+          <tr id="rec-60">
+            <td class="rec-no">60</td>
+            <td><span class="rec-item-tt">預設代理層級</span>：開新國家＋幣種時，系統自動新增的預設代理掛一般代理，不得掛大代理。</td>
+            <td class="rec-upd"></td>
+          </tr>
+          <tr id="rec-59">
         <td class="rec-date" rowspan="6">9/16</td>
         <td class="rec-no">59</td>
         <td><span class="rec-item-tt">多幣種整體時程</span>：<br>1. 期 1（Evan）：9/16 系統參數頁面修復完成、9/17 登錄註冊修復完成、9/18 修復其餘 bug<br>2. 期 3（Evan）：9/21 開始開發，並持續修復期 1 bug<br>3. 期 2（Cyril）：<a class="x-jump" href="https://okbetokbet.atlassian.net/browse/OKF-2074" target="_blank">OKF-2074</a> 完成後，接續開發期 2<br>4. 整體時程改為：12/10 UAT、12/28 生產<br>5. 期 4：Evan 完成期 3 開發後接續開發；Ody 完成 <a class="x-jump" href="https://okbetokbet.atlassian.net/browse/OKF-2074" target="_blank">OKF-2074</a> 後加入期 4 開發</td>
