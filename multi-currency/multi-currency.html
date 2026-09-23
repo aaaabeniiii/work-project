@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>後台多幣種改動規格書 V5.0</title>
+<title>後台多幣種改動規格書 V5.01</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,BlinkMacSystemFont,'PingFang TC','Microsoft JhengHei',sans-serif;background:#f0f2f5;color:#333;font-size:14px}
@@ -738,12 +738,16 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
   #pg-adm-sys-mgmt-admin-sys-config2 .sp2-chk { display:inline-flex; align-items:center; gap:6px; font-size:13px; color:#666; margin:10px 2px 2px; cursor:pointer; user-select:none; }
   #pg-adm-sys-mgmt-admin-sys-config2 .sp2screen { background:#fff; border:1px solid #e5e7eb; border-radius:6px; margin-top:10px; }
     #pg-adm-sys-mgmt-admin-sys-config2 .pmodal-note { color:#909399; font-size:13px; margin:4px 0 8px; }
+
+/* 正文新增句標記：綠色底線＋句首上方懸浮小角標（絕對定位，不影響排版流） */
+.v-new{position:relative;text-decoration:underline;text-decoration-color:#10b981;text-decoration-thickness:2px;text-underline-offset:3px}
+.v-new::before{content:attr(data-v);position:absolute;top:-13px;left:0;font-size:9px;line-height:1;padding:1px 5px;border-radius:6px;background:#ecfdf5;color:#059669;border:1px solid #a7f3d0;white-space:nowrap;font-weight:400}
 </style>
 </head>
 <body>
 
 <div class="doc-header">
-  <h1>後台多幣種改動規格書 V5.0</h1>
+  <h1>後台多幣種改動規格書 V5.01</h1>
   
 </div>
 
@@ -969,8 +973,8 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
       <tr id="rec-65">
             <td class="rec-date">9/22</td>
             <td class="rec-no">65</td>
-            <td><span class="rec-item-tt">總代操作欄位</span>：<br>1. 需將 GA 驗證的操作與功能修復 - 期 3<br>2. 列表欄位需補回信用額度、剩餘額度、GA 欄位 - 期 3<br>3. 總代功能完善放於後續優化，不在本次開發範圍</td>
-            <td class="rec-upd"></td>
+            <td><span class="rec-item-tt">總代操作欄位</span>：<br>1. 需將 GA 驗證的操作與功能修復 - 期 3<br>2. 列表欄位需補回信用額度、剩餘額度、GA 欄位 - 期 3<br>3. 總代功能完善放於後續優化，不在本次開發範圍 <span class="rec-adj"><span class="rec-adj-tag">9/23 補充：</span>GA 驗證與信用額度、剩餘額度為原有功能遺失，屬修復不進規格書；總代操作欄位僅保留「編輯」「Google 驗證碼」兩項。</span></td>
+            <td class="rec-upd"><span class="x-jump" onclick="showPg('adm-user-mgmt-headoffice')">9/23已更新</span></td>
             <td>Zack、Evan、Din、Abeni</td>
           </tr>
           <tr id="rec-64">
@@ -983,22 +987,22 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
           <tr id="rec-63">
             <td class="rec-no">63</td>
             <td><span class="rec-item-tt">總代 full name 欄位</span>：<span class="rec-del">系統自動新增總代時，full name 與帳號一致。</span>總代的 full name 欄位刪除，此修改放到期 3 一併處理。</td>
-            <td class="rec-upd"></td>
+            <td class="rec-upd"><span class="x-jump" onclick="showPg('adm-user-mgmt-headoffice')">9/23已更新</span></td>
           </tr>
           <tr id="rec-62">
             <td class="rec-no">62</td>
             <td><span class="rec-item-tt">充值提款匹配邏輯優化（<a class="x-jump" href="https://okbetokbet.atlassian.net/browse/OKF-2074" target="_blank">OKF-2074</a>）</span>：<br>1. 充值/提款新增預約維護功能（<a class="x-jump" href="https://okbetokbet.atlassian.net/browse/OKF-2269" target="_blank">OKF-2269</a>）暫緩：OKF-2074 開發需要更多時間，為不影響 OKF-2074，OKF-2269 先暫緩<br>2. 待 OKF-2074 上 UAT 後 OKF-2269 即可開始，屆時 OKF-2269 同時開發新版與舊版 API；OKF-2074 完成後即為新版 API <span class="rec-adj"><span class="rec-adj-tag">9/22 補充：</span>開發由 Zack 通知，已確認通知 Will；PM 由 Abeni 通知，已通知 Sid。</span><br>3. 支付廠商回調開發需有可回調的支付廠商配合測試，由開發自行拉群組與廠商確認</td>
-            <td class="rec-upd"></td>
+            <td class="rec-upd">－</td>
           </tr>
           <tr id="rec-61">
             <td class="rec-no">61</td>
             <td><span class="rec-item-tt">平台新增幣種的 VIP 資料</span>：平台新增幣種時因尚無 VIP 資料，建立會員會有問題；由 RD 手動塞 SQL 補 VIP 資料即可，不另做功能。</td>
-            <td class="rec-upd"></td>
+            <td class="rec-upd">－</td>
           </tr>
           <tr id="rec-60">
             <td class="rec-no">60</td>
             <td><span class="rec-item-tt">預設代理層級</span>：開新國家＋幣種時，系統自動新增的預設代理掛一般代理，不得掛大代理。</td>
-            <td class="rec-upd"></td>
+            <td class="rec-upd"><span class="x-jump" onclick="showPg('spec-content');goTo('s2-4-5')">9/23已更新</span></td>
           </tr>
           <tr id="rec-59">
         <td class="rec-date" rowspan="6">9/16</td>
@@ -1389,6 +1393,11 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
         <table class="rec-table">
       <tr><th>版本</th><th>日期</th><th>更新內容／原因</th></tr>
       <tr>
+          <td class="rec-date">V5.01</td>
+          <td class="rec-date">9/23</td>
+          <td>依照討論紀錄調整<br><br>補充：<br>1. <span class="x-jump" onclick="showPg('spec-content');goTo('s2-4-5')">規格書 2.4.5 依項次 60 補充——系統自動新增的預設代理為一般代理層級，不得為大代理（項次 60，期 1）</span><br>2. <span class="x-jump" onclick="showPg('adm-user-mgmt-headoffice')">總代頁改動目標補充——列表「名」（full name）欄位刪除（項次 63，期 3）</span><br>3. <span class="x-jump" onclick="showPg('adm-user-mgmt-headoffice')">總代頁改動目標補充——操作欄位僅保留「編輯」「Google 驗證碼」兩項（項次 65，期 3）</span><br><br>調整：<br>1. <span class="x-jump" onclick="showPg('adm-user-mgmt-headoffice')">卡 565 調整——「國家/幣種」欄位落點改「帳號」與「用戶數量」之間、「名」（full name）欄位期 3 刪除（卡 565，項次 63，期 3）</span><br>2. <span class="x-jump" onclick="showPg('adm-user-mgmt-headoffice')">卡 567 調整後補充——新增總代彈窗刪除「總代名稱」欄位（卡 567，項次 63，期 3）</span><br>3. <span class="x-jump" onclick="showPg('adm-user-mgmt-headoffice')">卡 568 調整後補充——編輯彈窗刪除「總代名稱」欄位（卡 568，項次 63，期 3）</span><br>4. <span class="x-jump" onclick="showPg('adm-user-mgmt-headoffice')">總代頁後台畫面——「总公司」用語改「总代」，補 9/9 全書改名之逸出碼漏網 4 處（項次 49，期 1）</span><br>5. <span class="x-jump" onclick="showPg('adm-user-mgmt-headoffice')">總代頁後台畫面——操作欄改僅保留「編輯」「Google 驗證碼」（項次 65，期 3）</span></td>
+        </tr>
+        <tr>
           <td class="rec-date">V5.0</td>
           <td class="rec-date">9/17</td>
           <td>依照討論紀錄調整<br><br>調整：<br>1. <span class="x-jump" onclick="showPg('ctl-sys-mgmt-currency')">補充每月匯率紀錄產生規則——每月 1 號全幣種各記一筆當月匯率（不分開啟／關閉、不分有無變動），匯率更新維持每月一次、幣種開啟或新增需調整時以人工寫入或執行 job（卡 528，項次 57，期 1）</span><br>2. <span class="x-jump" onclick="showPg('spec-content');goTo('s2-4-1')">規格書 2.4.1 依項次 56 調整——取消「投注站適用國家」，投注站與總代的國家渲染一律抓「可使用國家」，新增投注站或總代不檢核國家所屬模式（舊規則劃線、現行內容接於後方）</span><br>3. <span class="x-jump" onclick="showPg('ctl-plat-mgmt-plat-list')">卡 541 改寫——投注站系統啟用狀態決定管理後台投注站相關頁面與內容顯示，總代頁面固定顯示不受影響（卡 541，項次 56，期 1）</span><br>4. <span class="x-jump" onclick="showPg('adm-user-mgmt-station')">新增投注站的國家選項改為控制後台「可使用國家」清單，不檢核國家所屬模式（卡 004，項次 56，期 1）</span><br>5. <span class="x-jump" onclick="showPg('adm-user-mgmt-headoffice')">總代的國家選項改為控制後台「可使用國家」清單、不再排除投注站適用國家，搜尋連動來源同步（卡 564、567，項次 56，期 5）</span><br>6. <span class="x-jump" onclick="showPg('phase-scope')">分期上線範圍同步——期 1 改列 541、542 並改寫 QA 驗收前提句、期 5 總代描述句同步、排除區補列 543、期別張數與頁尾統計同步</span><br>7. <span class="x-jump" onclick="showPg('spec-content');goTo('s2-6')">規格書 2.6.1 依項次 26 補充查詢條件統一原則——國家＋幣種兩維度單選預設全部、雙向連動且選項後端回傳、注單類依下注會員／資金類依交易所屬會員過濾、金額搜尋單位僅依幣種（紅字補充、不劃原文）</span><br>8. <span class="x-jump" onclick="showPg('adm-finance-mgmt-deposit-record')">充值紀錄搜尋欄改國家＋幣種雙向連動，依充值會員所屬的國家＋幣種過濾（卡 065，項次 26，期 2）</span><br>9. <span class="x-jump" onclick="showPg('adm-finance-mgmt-withdraw-record')">提款紀錄待處理訂單與出款歷史搜尋欄改國家＋幣種雙向連動，依提款會員所屬的國家＋幣種過濾（卡 069、075，項次 26，期 2）</span><br>10. <span class="x-jump" onclick="showPg('adm-finance-mgmt-fund-detail')">資金明細與代理佣金明細搜尋欄改國家＋幣種雙向連動，分別依交易所屬會員／所屬代理的國家＋幣種過濾（卡 080、083，項次 26，期 2）</span><br>11. <span class="x-jump" onclick="showPg('adm-finance-mgmt-balance-adjust-audit')">修改餘額審批搜尋欄改國家＋幣種雙向連動，依調整對象會員所屬的國家＋幣種過濾（卡 089，項次 26，期 6）</span><br>12. <span class="x-jump" onclick="showPg('adm-finance-mgmt-fund-detail-new')">資金明細(新)搜尋欄改國家＋幣種雙向連動，依交易所屬會員的國家＋幣種過濾（卡 092，項次 26，期 2）</span><br>13. <span class="x-jump" onclick="showPg('adm-withdraw-mgmt-withdraw-risk-audit')">提現風控審核待處理訂單與出款歷史搜尋欄改國家＋幣種雙向連動，依提款會員所屬的國家＋幣種過濾（卡 097、106，項次 26，期 6）</span><br>14. <span class="x-jump" onclick="showPg('spec-content');goTo('s2-8')">規格書 2.8.1 依項次 26、27 調整——廠商升為「國家＋幣種」維度，SQL 寫入帶入國家＋幣種、顯示範圍依組合決定（舊規則劃線、現行內容接於後方）</span><br>15. <span class="x-jump" onclick="showPg('phase-scope');goTo('phx-7')">交付項 D-07 同步配置共用元件由期 2 移至期 7——提現出款設置與支付層級的同步配置已作廢，適用範圍改為 VIP 特權 1 頁 5 張卡（卡 048、050、052、054、056），期 2／期 7 交付項計數與頁尾統計同步</span><br>16. <span class="x-jump" onclick="showPg('phase-scope');goTo('phx-ex')">分期上線範圍「排除」區改版為「刪除紀錄」——表頭改「刪除原因」、逐列登記刪除依據（096 補項次 28、180 補項次 23），區內所列 52 張卡文自文件刪除，頁尾統計同步</span><br>17. 文件整理——規格書與各頁面的歷史劃線、紅字註記清除（現行規則融合入正文），作廢卡 9 張與作廢頁 10 頁自文件刪除<br>18. <span class="x-jump" onclick="showPg('phase-plan');goTo('rd-sched')">RD 預計時程升 V3（9/17 排定，QA 提供驗收時程）——期 3 開發加一週、期 4~7 順延，開發時長改工作天計（扣週末與國定假日），補驗收完成日與驗收時長，優化 10/8 上 UAT、10/19 上生產，里程碑補全部驗收完成 11/18 與整體回歸 10 天</span><br><br>刪除：<br>1. <span class="x-jump" onclick="showPg('ctl-plat-mgmt-plat-list')">修改平台彈窗投注站適用國家規劃作廢（決議取消，劃線保留備查）（卡 543，項次 56）</span></td>
@@ -1652,10 +1661,10 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
       <p>換線僅能在<strong>相同國家＋相同幣種</strong>之間進行，不得跨國家或跨幣種互轉。</p>
       <p>換線僅能在<strong>同類型的代理線</strong>內進行：帳號創建時屬總代線者，換線後所選的新上級（總代／大代理／代理）仍須屬於總代線；屬投注站線者同理。總代線與投注站線不可互相切換。</p>
 
-      <h4>2.4.5 推薦碼優先邏輯</h4>
+      <h4 id="s2-4-5">2.4.5 推薦碼優先邏輯</h4>
       <p>會員進站時，國家與幣種的判斷順序如下：</p>
       <ol>
-        <li><strong>有推薦碼</strong>：一個平台預設僅有一個地區推薦碼（即預設代理）。若會員透過推薦碼進站註冊，<strong>不顯示</strong>國家／幣種選擇，直接綁定該推薦碼對應預設代理的國家＋幣種</li>
+        <li><strong>有推薦碼</strong>：一個平台預設僅有一個地區推薦碼（即預設代理）。<span class="v-new" data-v="9/23新增" title="V5.01（9/23）新增">系統自動新增的預設代理為<strong>一般代理</strong>層級，不得為大代理。</span>若會員透過推薦碼進站註冊，<strong>不顯示</strong>國家／幣種選擇，直接綁定該推薦碼對應預設代理的國家＋幣種</li>
         <li><strong>無推薦碼</strong>：依域名／IP／版面判斷對應的國家＋幣種</li>
       </ol>
       <p>此為基礎判斷邏輯，不論未來是否開放「一國多幣種、會員自選」，推薦碼優先規則皆不受影響。</p>
@@ -2726,7 +2735,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
   <div class="pg-crumb">管理後台 &gt; 用戶管理 &gt; 總代</div>
   <div class="pg-overview">
     <h4>本頁改動目標</h4>
-    <div class="ov-dir"><div class="ov-dir-lbl">管理後台：</div><ul class="ov-dir-list"><li>新增總代時需綁定國家(<code>nation_code</code>)＋幣種(<code>currency</code>)，幣種依所選國家聯動，儲存後鎖定不可修改</li><li>新增總代彈窗於「總代賬號」下方新增「登入密碼」欄位，比照原有投注站密碼功能</li><li>列表上方可依國家(<code>nation_code</code>)＋幣種(<code>currency</code>)篩選總代（兩者連動）</li><li>列表新增「國家/幣種」欄位，顯示各總代綁定的國家＋幣種</li><li>操作欄新增「編輯」，可修改該總代帳號的登入密碼</li></ul></div>
+    <div class="ov-dir"><div class="ov-dir-lbl">管理後台：</div><ul class="ov-dir-list"><li>新增總代時需綁定國家(<code>nation_code</code>)＋幣種(<code>currency</code>)，幣種依所選國家聯動，儲存後鎖定不可修改</li><li>新增總代彈窗於「總代賬號」下方新增「登入密碼」欄位，比照原有投注站密碼功能</li><li>列表上方可依國家(<code>nation_code</code>)＋幣種(<code>currency</code>)篩選總代（兩者連動）</li><li>列表新增「國家/幣種」欄位，顯示各總代綁定的國家＋幣種</li><li>操作欄新增「編輯」，可修改該總代帳號的登入密碼</li><li><span class="v-new" data-v="9/23新增">列表「名」（full name）欄位刪除——期 3</span></li><li><span class="v-new" data-v="9/23新增">操作欄位僅保留「編輯」「Google 驗證碼」兩項——期 3</span></li></ul></div>
     <div class="ov-dir"><div class="ov-dir-lbl">控制後台：</div><ul class="ov-dir-list"><li>總代可選的國家(<code>nation_code</code>)為控制後台「可使用國家」清單；幣種(<code>currency</code>)依國家聯動供給，前端不寫死</li></ul></div>
     <div class="ov-dir"><div class="ov-dir-lbl">前台影響：</div><ul class="ov-dir-list"><li>總代無直接對應的前台頁面；但其綁定的國家(<code>nation_code</code>)＋幣種(<code>currency</code>)會向下決定底下大代理、代理、會員的歸屬，最終影響這些會員在前台看到的活動、VIP、幣種顯示等內容。</li></ul></div>
   </div>
@@ -2749,12 +2758,12 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
   </div>
 
   <div class="spec-card">
-    <div class="spec-card-hd"><span class="spec-card-num">565</span><span class="spec-card-adj">8/27新增</span></div>
+    <div class="spec-card-hd"><span class="spec-card-num">565</span><span class="spec-card-adj">8/27新增</span><span class="spec-card-adj">9/23調整</span></div>
     <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">用戶管理 &gt; 總代 &gt; 列表 &gt; 欄位</div></div>
     <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge new">新增</span></div></div>
     <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">在「名」跟「用戶數量」欄位中間，目前無國家/幣種相關欄位。</div></div>
-    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val"><ol><li>在「名」與「用戶數量」欄位之間新增「國家/幣種」(<code>nation_code</code>/<code>currency</code>)欄位，排列為「名｜國家/幣種｜用戶數量」</li><li>國家/幣種依總代帳號綁定的國家(<code>nation_code</code>)＋幣種(<code>currency</code>)帶入，內容為：国家：菲律賓／币种：PHP</li></ol></div></div>
-    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">渲染列表時，於名跟用戶數量欄位中間新增「國家(<code>nation_code</code>)/幣種(<code>currency</code>)」欄位，讀取後端回傳資料顯示。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val"><ol><li>在「帳號」與「用戶數量」欄位之間新增「國家/幣種」(<code>nation_code</code>/<code>currency</code>)欄位，排列為「帳號｜國家/幣種｜用戶數量」</li><li>國家/幣種依總代帳號綁定的國家(<code>nation_code</code>)＋幣種(<code>currency</code>)帶入，內容為：国家：菲律賓／币种：PHP</li><li>刪除「名」（full name）欄位</li></ol></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">渲染列表時，於帳號跟用戶數量欄位中間新增「國家(<code>nation_code</code>)/幣種(<code>currency</code>)」欄位，讀取後端回傳資料顯示。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">總代列表 API 回傳資料需包含該帳號綁定的國家(<code>nation_code</code>)與幣種(<code>currency</code>)欄位。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（此為管理後台列表顯示，不影響前台會員端）</div></div>
     <div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-hq-565"></div></div></div>
@@ -2773,11 +2782,11 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
   </div>
 
   <div class="spec-card">
-    <div class="spec-card-hd"><span class="spec-card-num">567</span><span class="spec-card-adj">8/27新增</span><span class="spec-card-adj">9/17調整</span></div>
+    <div class="spec-card-hd"><span class="spec-card-num">567</span><span class="spec-card-adj">8/27新增</span><span class="spec-card-adj">9/17調整</span><span class="spec-card-adj">9/23調整</span></div>
     <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">用戶管理 &gt; 總代 &gt; 新增總代按鈕 &gt; 新增總代彈窗 &gt; 國家、幣種</div></div>
     <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge new">新增</span></div></div>
     <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">新增總代彈窗沒有「國家」「幣種」欄位，無法綁定國家＋幣種。</div></div>
-    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val"><ol><li>在「總代名稱」下方（備註上方）新增「國家」(<code>nation_code</code>)與「幣種」(<code>currency</code>)下拉選單</li><li>國家：單選，選項為控制後台「可使用國家」清單</li><li>不檢核該國家屬於投注站還是總代模式，由營運人員自行把關</li><li>依選擇的國家，自動帶入可選擇的幣種範圍，選定國家後幣種下拉的選項依該國家對應帶出，仍需手動點選，不會自動代入</li><li>未選擇國家時，幣種下拉顯示「No data」，不可點擊</li><li>保存後無法修改</li></ol></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val"><ol><li>在「總代名稱」下方（備註上方）新增「國家」(<code>nation_code</code>)與「幣種」(<code>currency</code>)下拉選單</li><li>國家：單選，選項為控制後台「可使用國家」清單</li><li>不檢核該國家屬於投注站還是總代模式，由營運人員自行把關</li><li>依選擇的國家，自動帶入可選擇的幣種範圍，選定國家後幣種下拉的選項依該國家對應帶出，仍需手動點選，不會自動代入</li><li>未選擇國家時，幣種下拉顯示「No data」，不可點擊</li><li>保存後無法修改</li><li>刪除「總代名稱」（full name）欄位</li></ol></div></div>
     <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">於「總代名稱」下方渲染國家(<code>nation_code</code>)與幣種(<code>currency</code>)下拉；國家選項讀取後端回傳的「可使用國家」清單、不寫死；國家選定後幣種依國家更新可選範圍並改為可點擊，未選國家時幣種下拉顯示「No data」；送出後鎖定不可修改。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">提供「可使用國家」(<code>nation_code</code>)清單與國家對應幣種(<code>currency</code>)的映射關係 API；新增總代 API 需儲存國家與幣種，保存後不可異動。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">此設定決定該總代底下所有帳號（含前台會員）歸屬的國家＋幣種，直接影響這些會員最終看到的前台內容（活動、VIP、幣種顯示等）。</div></div>
@@ -2785,11 +2794,11 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
   </div>
 
   <div class="spec-card">
-    <div class="spec-card-hd"><span class="spec-card-num">568</span><span class="spec-card-adj">8/27新增</span></div>
+    <div class="spec-card-hd"><span class="spec-card-num">568</span><span class="spec-card-adj">8/27新增</span><span class="spec-card-adj">9/23調整</span></div>
     <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">用戶管理 &gt; 總代 &gt; 列表 &gt; 操作欄位 &gt; 編輯</div></div>
     <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge new">新增</span></div></div>
     <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">操作欄目前無修改登入密碼的功能。</div></div>
-    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val"><ol><li>操作欄新增「編輯」，點擊開啟編輯彈窗</li><li>彈窗內容：「帳號」為純文字顯示、「登入密碼」為輸入欄</li><li>密碼修改規則與功能比照原有投注站密碼功能</li></ol></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val"><ol><li>操作欄新增「編輯」，點擊開啟編輯彈窗</li><li>彈窗內容：「帳號」為純文字顯示、「登入密碼」為輸入欄</li><li>密碼修改規則與功能比照原有投注站密碼功能</li><li>編輯彈窗刪除「總代名稱」（full name）欄位</li></ol></div></div>
     <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">操作欄渲染「編輯」入口與編輯彈窗；帳號為唯讀文字、登入密碼為輸入欄，輸入驗證規則比照原有投注站密碼功能。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">提供總代修改登入密碼 API，儲存與加密方式比照原有投注站密碼功能。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（總代為後台帳號，登入密碼不涉及前台會員端）</div></div>
@@ -18441,7 +18450,7 @@ function render_hq_screen(){
     + '<span class="mk-select"><span>Google\u9a8c\u8bc1\u7801\uff1a\u5168\u90e8</span><span class="mk-arr">\u25be</span></span>'
     + '<span class="mk-select"><span>\u7cfb\u7edf\u7c7b\u578b\uff1a\u5168\u90e8</span><span class="mk-arr">\u25be</span></span>'
     + '<span class="mk-btn">\u641c\u7d22</span>'
-    + '<span class="mk-btn" onclick="hqOpen(\'add\')">\uff0b \u65b0\u589e\u603b\u516c\u53f8</span><span class="mk-tag">566</span><span class="mk-tag">567</span></div>';
+    + '<span class="mk-btn" onclick="hqOpen(\'add\')">\uff0b \u65b0\u589e\u603b\u4ee3</span><span class="mk-tag">566</span><span class="mk-tag">567</span></div>';
   var rows = [
     ['wadest01','wadest01','\u83f2\u5f8b\u5bbe','PHP','0','0','0','(PHP)','(PHP)','\u6b63\u5e38','2026-06-01 10:24','\u5f00\u542f',''],
     ['zdl_plat2','zdl_plat2','\u83f2\u5f8b\u5bbe','PHP','0','5','48','(PHP)','(PHP)','\u6b63\u5e38','2026-05-21 16:54','\u5f00\u542f','']
@@ -18451,14 +18460,14 @@ function render_hq_screen(){
     var okC = (HQ.curF === '全部币种' || r[3] === HQ.curF);
     return okN && okC;
   });
-  var head = '<tr><th>\u8d26\u53f7</th><th>\u540d</th><th class="mk-new">\u56fd\u5bb6/\u5e01\u79cd<span class="mk-tag">565</span></th><th>\u7528\u6237\u6570\u91cf</th><th>\u4ee3\u7406\u6570</th><th>\u76f4\u5c5e\u4ee3\u7406/\u76f4\u5c5e\u4f1a\u5458/\u56e2\u961f\u6570</th><th>\u4fe1\u7528\u989d\u5ea6</th><th>\u5269\u4f59\u989d\u5ea6</th><th>\u72b6\u6001</th><th>\u65b0\u589e\u65f6\u95f4</th><th>Google\u9a8c\u8bc1\u7801</th><th>\u5907\u6ce8</th><th>\u64cd\u4f5c</th></tr>';
-  var oldOps = ['\u5206\u914d\u989d\u5ea6','\u8fd4\u70b9\u914d\u7f6e','\u4e09\u65b9\u914d\u7f6e','\u4ea4\u6613\u8bbe\u5b9a','\u4ee3\u7406\u8f6c\u8d26','Google\u9a8c\u8bc1\u7801','\u8bbe\u7f6e\u57fa\u51c6\u989d\u5ea6','\u6dfb\u52a0IP','\u6e38\u620f\u7c7b\u522b\u7ba1\u7406','\u76d8\u53e3\u8bbe\u5b9a'];
+  var head = '<tr><th>\u8d26\u53f7</th><th class="mk-new">\u56fd\u5bb6/\u5e01\u79cd<span class="mk-tag">565</span></th><th>\u7528\u6237\u6570\u91cf</th><th>\u4ee3\u7406\u6570</th><th>\u76f4\u5c5e\u4ee3\u7406/\u76f4\u5c5e\u4f1a\u5458/\u56e2\u961f\u6570</th><th>\u4fe1\u7528\u989d\u5ea6</th><th>\u5269\u4f59\u989d\u5ea6</th><th>\u72b6\u6001</th><th>\u65b0\u589e\u65f6\u95f4</th><th>Google\u9a8c\u8bc1\u7801</th><th>\u5907\u6ce8</th><th>\u64cd\u4f5c</th></tr>';
+  var oldOps = ['Google\u9a8c\u8bc1\u7801'];
   var body = shown.map(function(r){
     var op = '<span class="mk-link mk-new" onclick="hqOpen(\'edit\',\'' + r[0] + '\')">\u7f16\u8f91</span><span class="mk-tag">568</span>\u3000'
       + oldOps.map(function(o){ return '<span class="mk-link">' + o + '</span>'; }).join('\u3000');
-    return '<tr><td>' + r[0] + '</td><td>' + r[1] + '</td><td class="mk-new">\u56fd\u5bb6\uff1a' + r[2] + '<br>\u5e01\u79cd\uff1a' + r[3] + '</td><td>' + r[4] + '</td><td>' + r[5] + '</td><td>' + r[6] + '</td><td>' + r[7] + '</td><td>' + r[8] + '</td><td>' + r[9] + '</td><td>' + r[10] + '</td><td>' + r[11] + '</td><td>' + r[12] + '</td><td>' + op + '</td></tr>';
+    return '<tr><td>' + r[0] + '</td><td class="mk-new">\u56fd\u5bb6\uff1a' + r[2] + '<br>\u5e01\u79cd\uff1a' + r[3] + '</td><td>' + r[4] + '</td><td>' + r[5] + '</td><td>' + r[6] + '</td><td>' + r[7] + '</td><td>' + r[8] + '</td><td>' + r[9] + '</td><td>' + r[10] + '</td><td>' + r[11] + '</td><td>' + r[12] + '</td><td>' + op + '</td></tr>';
   }).join('');
-  if(!shown.length) body = '<tr><td colspan="13">\u6682\u65e0\u6570\u636e</td></tr>';
+  if(!shown.length) body = '<tr><td colspan="12">\u6682\u65e0\u6570\u636e</td></tr>';
   var html = search + '<div class="mk-tbl-wrap"><table class="mk-table">' + head + body + '</table></div>';
   if(HQ.open === 'add'){
     var curCell;
@@ -18467,11 +18476,10 @@ function render_hq_screen(){
     } else {
       curCell = '<span class="mk-select mk-new"><span>No data</span><span class="mk-arr">\u25be</span></span><span class="mk-tag">567</span>';
     }
-    html += '<div class="sysp-modal"><div class="mk-pop-hd">\u65b0\u589e\u603b\u516c\u53f8<span class="mk-pop-x" onclick="hqClose()">\u00d7</span></div>'
+    html += '<div class="sysp-modal"><div class="mk-pop-hd">\u65b0\u589e\u603b\u4ee3<span class="mk-pop-x" onclick="hqClose()">\u00d7</span></div>'
       + '<div class="sysp-frz">'
-      + '<div class="demo-modal-row"><div class="demo-modal-lbl">\u603b\u516c\u53f8\u8d26\u53f7\uff1a</div><div class="demo-modal-val"><input class="sysp-input"></div></div>'
+      + '<div class="demo-modal-row"><div class="demo-modal-lbl">\u603b\u4ee3\u8d26\u53f7\uff1a</div><div class="demo-modal-val"><input class="sysp-input"></div></div>'
       + '<div class="demo-modal-row"><div class="demo-modal-lbl">\u767b\u5165\u5bc6\u7801\uff1a</div><div class="demo-modal-val"><input class="sysp-input mk-new" placeholder="\u8bf7\u8f93\u5165\u767b\u5165\u5bc6\u7801"><span class="mk-tag">566</span></div></div>'
-      + '<div class="demo-modal-row"><div class="demo-modal-lbl">\u603b\u516c\u53f8\u540d\u79f0\uff1a</div><div class="demo-modal-val"><input class="sysp-input"></div></div>'
       + '<div class="demo-modal-row"><div class="demo-modal-lbl">\u56fd\u5bb6\uff1a</div><div class="demo-modal-val">' + hqSel('dsel-hqaddnat', HQ.addNat, ['\u83f2\u5f8b\u5bbe','\u8d8a\u5357'], 'hqAddNatPick', true, '\u8bf7\u9009\u62e9') + '<span class="mk-tag">567</span></div></div>'
       + '<div class="demo-modal-row"><div class="demo-modal-lbl">\u5e01\u79cd\uff1a</div><div class="demo-modal-val">' + curCell + '</div></div>'
       + '<div class="demo-modal-row"><div class="demo-modal-lbl">\u5907\u6ce8\uff1a</div><div class="demo-modal-val"><input class="sysp-input"></div></div>'
@@ -18494,7 +18502,7 @@ function render_hq_Demos(){
   // hq-564 上方搜尋欄>國家幣種雙向連動（篩選下拉為情境元件）
   set('tpl-hq-564', `<div class="demo-inline-group">${tpl_TMP_dualLinkedSelect({prefix:'hq-564', map:{'菲律賓':['PHP'],'越南':['VND']}})}<div class="demo-select"><div class="demo-select-box"><span class="txt placeholder">篩選</span><span class="arr">▼</span></div></div></div>`);
   // hq-565 列表>名｜國家/幣種｜用戶數量
-  set('tpl-hq-565', tplColThreeField('名', '國家/幣種', '国家：菲律賓<br>币种：PHP', '用戶數量'));
+  set('tpl-hq-565', tplColThreeField('帳號', '國家/幣種', '国家：菲律賓<br>币种：PHP', '用戶數量'));
   // hq-566 新增總代彈窗>總代賬號下方新增登入密碼（賬號、名稱為上下文）
   set('tpl-hq-566', tplModalRow('hq566', [
     {label:'總代賬號', val:''},
@@ -18502,7 +18510,7 @@ function render_hq_Demos(){
     {label:'總代名稱', val:''}
   ]));
   // hq-567 新增總代彈窗>總代名稱下方新增國家、幣種（連動）
-  set('tpl-hq-567', tplLinkedSelectFormRow('hq-567', '國家', '請選擇國家', ['菲律賓','越南'], '幣種', '請選擇幣種', '總代名稱'));
+  set('tpl-hq-567', withRowBefore(tplLinkedModal({prefix:'hq-567', aLabel:'國家', aPlaceholder:'請選擇國家', aOptions:['菲律賓','越南'], bLabel:'幣種', bPlaceholder:'請選擇幣種', map:{'菲律賓':['PHP'],'越南':['VND']}}), '總代名稱'));
   // hq-568 操作欄>編輯彈窗（帳號純文字＋登入密碼輸入欄）
   set('tpl-hq-568', tplModalRow('hq568', [
     {label:'帳號', val:'readonly:wadest01'},
