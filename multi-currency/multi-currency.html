@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>後台多幣種改動規格書 V5.01</title>
+<title>後台多幣種改動規格書 V5.02</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,BlinkMacSystemFont,'PingFang TC','Microsoft JhengHei',sans-serif;background:#f0f2f5;color:#333;font-size:14px}
@@ -747,7 +747,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
 <body>
 
 <div class="doc-header">
-  <h1>後台多幣種改動規格書 V5.01</h1>
+  <h1>後台多幣種改動規格書 V5.02</h1>
   
 </div>
 
@@ -760,7 +760,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
 <div class="nav-sub open" id="grp-update-record">
   <a class="nav-si" data-page="spec-discussion" onclick="showPg('spec-discussion')">討論紀錄</a>
   <a class="nav-si" data-page="spec-changelog" onclick="showPg('spec-changelog')">版本更新紀錄</a>
-  <a class="nav-si" data-page="spec-pending" onclick="showPg('spec-pending')">待確認內容</a>
+  <a class="nav-si" data-page="spec-pending" onclick="showPg('spec-pending')">後續優化</a>
 </div>
 
 <div class="nav-g-hd nav-g-label label-spec nav-toggl open" onclick="toggleGroup('spec-book')" data-group="spec-book"><span class="arr">▸</span><span class="tag-chip">📘 規格書</span></div>
@@ -1008,8 +1008,8 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
           </tr>
           <tr id="rec-60">
             <td class="rec-no">60</td>
-            <td><span class="rec-item-tt">預設代理層級</span>：開新國家＋幣種時，系統自動新增的預設代理掛一般代理，不得掛大代理。</td>
-            <td class="rec-upd"><span class="x-jump" onclick="showPg('spec-content');goTo('s2-4-5')">9/23已更新</span></td>
+            <td><span class="rec-item-tt">預設代理層級</span>：<span class="rec-del">開新國家＋幣種時，系統自動新增的預設代理掛一般代理，不得掛大代理。</span> <span class="rec-adj"><span class="rec-adj-tag">9/29 更新：</span>改為系統自動新增的預設代理掛大代理層級。（Mark、Zack、Abeni、Din）</span></td>
+            <td class="rec-upd"><span class="x-jump" onclick="showPg('spec-content');goTo('s2-4-5')">9/29已更新</span></td>
           </tr>
           <tr id="rec-59">
         <td class="rec-date" rowspan="6">9/16</td>
@@ -1400,6 +1400,11 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
         <table class="rec-table">
       <tr><th>版本</th><th>日期</th><th>更新內容／原因</th></tr>
       <tr>
+          <td class="rec-date">V5.02</td>
+          <td class="rec-date">9/29</td>
+          <td>依照討論紀錄調整<br><br>調整：<br>1. <span class="x-jump" onclick="showPg('spec-content');goTo('s2-4-5')">規格書 2.4.5 調整——系統自動新增的預設代理由一般代理層級改為大代理層級（項次 60，期 1）</span></td>
+        </tr>
+      <tr>
           <td class="rec-date">V5.01</td>
           <td class="rec-date">9/23</td>
           <td>依照討論紀錄調整<br><br>補充：<br>1. <span class="x-jump" onclick="showPg('spec-content');goTo('s2-4-5')">規格書 2.4.5 依項次 60 補充——系統自動新增的預設代理為一般代理層級，不得為大代理（項次 60，期 1）</span><br>2. <span class="x-jump" onclick="showPg('adm-user-mgmt-headoffice')">總代頁改動目標補充——列表「名」（full name）欄位刪除（項次 63，期 3）</span><br>3. <span class="x-jump" onclick="showPg('adm-user-mgmt-headoffice')">總代頁改動目標補充——操作欄位僅保留「編輯」「Google 驗證碼」兩項（項次 65，期 3）</span><br><br>調整：<br>1. <span class="x-jump" onclick="showPg('adm-user-mgmt-headoffice')">卡 565 調整——「國家/幣種」欄位落點改「帳號」與「用戶數量」之間、「名」（full name）欄位期 3 刪除（卡 565，項次 63，期 3）</span><br>2. <span class="x-jump" onclick="showPg('adm-user-mgmt-headoffice')">卡 567 調整後補充——新增總代彈窗刪除「總代名稱」欄位（卡 567，項次 63，期 3）</span><br>3. <span class="x-jump" onclick="showPg('adm-user-mgmt-headoffice')">卡 568 調整後補充——編輯彈窗刪除「總代名稱」欄位（卡 568，項次 63，期 3）</span><br>4. <span class="x-jump" onclick="showPg('adm-user-mgmt-headoffice')">總代頁後台畫面——「总公司」用語改「总代」，補 9/9 全書改名之逸出碼漏網 4 處（項次 49，期 1）</span><br>5. <span class="x-jump" onclick="showPg('adm-user-mgmt-headoffice')">總代頁後台畫面——操作欄改僅保留「編輯」「Google 驗證碼」（項次 65，期 3）</span></td>
@@ -1478,12 +1483,25 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
   </div>
 </div>
     <div class="pg" id="pg-spec-pending">
-  <div class="pg-crumb">更新紀錄 &gt; 待確認內容</div>
+  <div class="pg-crumb">更新紀錄 &gt; 後續優化</div>
   <div class="rec-wrap">
-    <h1>待確認內容</h1>
+    <h1>後續優化</h1>
+    <div class="pg-sub2">此區收錄不屬於多幣種改動範圍、但由多幣種延伸或於開發過程中發現的問題，統一留待後續優化處理。</div>
     <table class="rec-table">
-      <tr><th>日期</th><th>項次</th><th>內容</th><th>討論人</th><th>預計討論時間</th></tr>
-      </table>
+      <tr><th>日期</th><th>項次</th><th>內容</th><th>備註</th></tr>
+      <tr>
+        <td class="rec-date">9/29</td>
+        <td class="rec-no">1</td>
+        <td><span class="rec-item-tt">國家下拉選單取消勾選後，既有資料無法以搜尋篩選查到</span><br><strong>問題</strong>：控制後台取消勾選適用國家後，該國家的既有資料在管理後台無法使用搜尋篩選查到。<br><strong>現有邏輯</strong>：取消勾選後，管理後台的國家下拉選單即不再出現該國家，僅在查詢條件支援「全部國家」或「全部幣種」時才查得到該國家資料。<br><strong>預期結果</strong>：凡曾有資料紀錄的國家，下拉選單仍應保留可選、資料仍應可查。控制後台取消勾選僅代表關閉該國家功能，不代表隱藏歷史資料。</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="rec-date">9/29</td>
+        <td class="rec-no">2</td>
+        <td><span class="rec-item-tt">取消勾選的國家名稱顯示為英文</span><br><strong>問題</strong>：取消勾選的國家，後台的國家名稱顯示為英文。<br><strong>現有邏輯</strong>：因查詢資料表的問題，取消勾選後國家名稱改顯示英文。<br><strong>預期結果</strong>：不論國家是否勾選，國家名稱固定顯示中文。</td>
+        <td></td>
+      </tr>
+    </table>
   </div>
 </div>
     <div class="pg" id="pg-spec-content">
@@ -1671,7 +1689,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
       <h4 id="s2-4-5">2.4.5 推薦碼優先邏輯</h4>
       <p>會員進站時，國家與幣種的判斷順序如下：</p>
       <ol>
-        <li><strong>有推薦碼</strong>：一個平台預設僅有一個地區推薦碼（即預設代理）。<span class="v-new" data-v="9/23新增" title="V5.01（9/23）新增">系統自動新增的預設代理為<strong>一般代理</strong>層級，不得為大代理。</span>若會員透過推薦碼進站註冊，<strong>不顯示</strong>國家／幣種選擇，直接綁定該推薦碼對應預設代理的國家＋幣種</li>
+        <li><strong>有推薦碼</strong>：一個平台預設僅有一個地區推薦碼（即預設代理）。<span class="v-new" data-v="9/29調整" title="V5.02（9/29）調整">系統自動新增的預設代理為<strong>大代理</strong>層級。</span>若會員透過推薦碼進站註冊，<strong>不顯示</strong>國家／幣種選擇，直接綁定該推薦碼對應預設代理的國家＋幣種</li>
         <li><strong>無推薦碼</strong>：依域名／IP／版面判斷對應的國家＋幣種</li>
       </ol>
       <p>此為基礎判斷邏輯，不論未來是否開放「一國多幣種、會員自選」，推薦碼優先規則皆不受影響。</p>
