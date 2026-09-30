@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OKF-2402_Okbet前台充值頁面套用分頁功能</title>
+<style>
+/* === Design Tokens === */
+:root{
+  --color-text:#1f2937;
+  --color-text-soft:#6b7280;
+  --color-bg:#f5f7fa;
+  --color-panel:#ffffff;
+  --color-line:#e5e7eb;
+  --color-primary:#2563eb;
+  --color-primary-soft:#eff6ff;
+  --color-ok:#16a34a;   --color-ok-bg:#ecfdf3;
+  --color-off:#dc2626;  --color-off-bg:#fdf0ef;
+  --color-new:#7c3aed;  --color-new-bg:#f3eefe;
+  --color-warn-bg:#fff7ed; --color-warn-line:#fdba74;
+  --space-1:4px; --space-2:8px; --space-3:16px; --space-4:24px; --space-5:40px;
+  --radius:8px; --radius-sm:5px;
+  --sidebar-w:248px;
+}
+html{font-size:18px;scroll-behavior:smooth;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:"PingFang TC","Microsoft JhengHei","Noto Sans TC",system-ui,sans-serif;
+  font-size:.83rem;line-height:1.65;color:var(--color-text);background:var(--color-bg);
+}
+h1,h2,h3,h4{line-height:1.35;}
+table{border-collapse:collapse;width:100%;}
+a{color:var(--color-primary);}
+
+/* === Layout === */
+.layout{display:flex;min-height:100vh;}
+.sidebar{
+  width:var(--sidebar-w);flex-shrink:0;background:#1e293b;color:#cbd5e1;
+  position:sticky;top:0;height:100vh;overflow-y:auto;padding:var(--space-3) 0;
+}
+.main{flex:1;min-width:0;padding:var(--space-4) var(--space-5);max-width:1200px;}
+@media (max-width:1024px){
+  .sidebar{width:200px;}
+  .main{padding:var(--space-3);}
+}
+
+/* === Sidebar nav === */
+.nav__brand{padding:0 var(--space-3) var(--space-3);font-size:.9rem;font-weight:700;color:#fff;border-bottom:1px solid #334155;margin-bottom:var(--space-2);}
+.nav__brand small{display:block;font-weight:400;color:#94a3b8;font-size:.68rem;margin-top:2px;}
+.nav__item{
+  display:block;width:100%;text-align:left;border:0;cursor:pointer;background:transparent;
+  color:#cbd5e1;font-size:.76rem;padding:9px var(--space-3);border-left:3px solid transparent;
+}
+.nav__item:hover{background:#334155;color:#fff;}
+.nav__item:focus-visible{outline:2px solid #93c5fd;outline-offset:-2px;}
+.nav__item.is-active{background:#0f2f6d;color:#fff;border-left-color:#60a5fa;font-weight:600;}
+
+/* === Common blocks === */
+.doc-header{margin-bottom:var(--space-4);}
+.doc-header h1{font-size:1.35rem;}
+.doc-header .doc-header__meta{color:var(--color-text-soft);font-size:.74rem;margin-top:4px;}
+.section{background:var(--color-panel);border:1px solid var(--color-line);border-radius:var(--radius);padding:var(--space-4);margin-bottom:var(--space-4);}
+.section h2{font-size:1.05rem;margin-bottom:var(--space-3);padding-bottom:var(--space-2);border-bottom:2px solid var(--color-primary-soft);}
+.section h3{font-size:.92rem;margin:var(--space-4) 0 var(--space-2);}
+.section h3:first-of-type{margin-top:0;}
+.section h4{font-size:.84rem;margin:var(--space-3) 0 var(--space-2);color:#374151;}
+.section p{margin-bottom:var(--space-2);}
+.section ul,.section ol{padding-left:1.4em;margin-bottom:var(--space-2);}
+.section li{margin-bottom:4px;}
+
+/* badges */
+.badge{display:inline-block;font-size:.68rem;font-weight:700;padding:2px 10px;border-radius:99px;vertical-align:middle;}
+.badge--new{background:var(--color-new-bg);color:var(--color-new);}
+.badge--keep{background:#f1f5f9;color:#475569;}
+
+/* status pills */
+.pill{display:inline-block;font-size:.68rem;padding:1px 9px;border-radius:4px;border:1px solid transparent;white-space:nowrap;}
+.pill--ok{color:var(--color-ok);background:var(--color-ok-bg);border-color:#bbf7d0;}
+
+/* markers */
+.mk{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:1.15rem;height:1.15rem;border-radius:50%;font-size:.62rem;font-weight:700;
+  background:#1d4ed8;color:#fff;vertical-align:middle;flex-shrink:0;
+}
+.mk--float{position:absolute;z-index:3;box-shadow:0 0 0 2px #fff;}
+
+/* data tables */
+.tbl{font-size:.74rem;margin-bottom:var(--space-2);}
+.tbl th,.tbl td{border:1px solid var(--color-line);padding:7px 10px;text-align:left;vertical-align:top;}
+.tbl thead th{background:#f8fafc;font-weight:700;}
+.tbl--center td,.tbl--center th{text-align:center;}
+.tbl .dim{color:#9ca3af;}
+
+/* compare grid */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-3);margin-bottom:var(--space-3);}
+@media (max-width:900px){.compare{grid-template-columns:1fr;}}
+.compare__col{border:1px solid var(--color-line);border-radius:var(--radius);overflow:hidden;background:#fff;}
+.compare__head{padding:8px 14px;font-weight:700;font-size:.78rem;}
+.compare__col--new .compare__head{background:var(--color-ok-bg);color:#15803d;border-bottom:1px solid #bbf7d0;}
+.compare__col--old .compare__head{background:#f8fafc;color:#64748b;border-bottom:1px solid var(--color-line);}
+.compare__body{padding:var(--space-3);}
+.compare__body ul{padding-left:1.3em;}
+
+/* callouts */
+.callout{border-radius:var(--radius-sm);padding:10px 14px;font-size:.76rem;margin:var(--space-2) 0;}
+.callout--warn{background:var(--color-warn-bg);border:1px solid var(--color-warn-line);}
+.callout--info{background:var(--color-primary-soft);border:1px solid #bfdbfe;}
+
+/* === Backend mockup === */
+.mock{border:1px solid #cbd5e1;border-radius:var(--radius);overflow:hidden;margin:var(--space-2) 0 var(--space-3);background:#fff;position:relative;}
+.mock__bar{background:#f1f5f9;border-bottom:1px solid #e2e8f0;padding:8px 14px;font-size:.72rem;color:#475569;display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+.mock__crumb{color:#334155;font-weight:600;}
+.mock__body{padding:var(--space-3);overflow-x:auto;}
+.mock__btn{display:inline-block;background:var(--color-primary);color:#fff;font-size:.7rem;border-radius:4px;padding:3px 14px;}
+.mock__tabs{display:flex;gap:0;border-bottom:1px solid var(--color-line);margin-bottom:var(--space-3);}
+.mock__tab{padding:7px 18px;font-size:.74rem;color:#64748b;border:1px solid transparent;border-bottom:0;position:relative;}
+.mock__tab.is-on{color:var(--color-primary);font-weight:700;background:#fff;border-color:var(--color-line);border-radius:6px 6px 0 0;top:1px;}
+.mock table{font-size:.71rem;}
+.mock th,.mock td{border:1px solid #eef1f5;padding:6px 9px;text-align:center;white-space:nowrap;}
+.mock thead th{background:#f8fafc;color:#475569;}
+.mock .op{color:var(--color-primary);}
+.mock__note{font-size:.68rem;color:#9ca3af;padding:6px 14px 10px;}
+.mock--modal .mock__body{max-width:720px;}
+.mock .frow{display:flex;align-items:flex-start;gap:12px;margin-bottom:10px;font-size:.73rem;}
+.mock .frow label{width:7.5em;text-align:right;color:#475569;flex-shrink:0;padding-top:2px;}
+.cbx{width:.72rem;height:.72rem;border:1px solid #9ca3af;border-radius:3px;display:inline-block;flex-shrink:0;position:relative;background:#fff;}
+.cbx.on{background:var(--color-primary);border-color:var(--color-primary);}
+.cbx.on::after{content:"✓";position:absolute;inset:0;color:#fff;font-size:.55rem;line-height:.72rem;text-align:center;}
+.ck{display:inline-flex;align-items:center;gap:5px;margin-right:16px;}
+
+/* === Frontend mockup === */
+.fe-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-3);}
+@media (max-width:900px){.fe-grid{grid-template-columns:1fr;}}
+.fe{border:1px solid #cbd5e1;border-radius:14px;overflow:hidden;background:#fff;position:relative;}
+.fe__head{padding:9px 14px;font-weight:700;text-align:center;font-size:.8rem;border-bottom:1px solid var(--color-line);background:#fff;position:relative;}
+.fe__body{padding:var(--space-3);background:#f2f5f9;}
+.fe__card{background:#fff;border-radius:10px;padding:10px 12px;margin-bottom:10px;position:relative;}
+.fe__label{font-size:.72rem;font-weight:700;margin-bottom:8px;}
+.fe__tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.tile{border:1px solid #e2e8f0;border-radius:8px;min-height:2.4rem;display:flex;align-items:center;justify-content:center;font-size:.66rem;font-weight:700;background:#fff;position:relative;color:#334155;}
+.tile.is-sel{border-color:var(--color-primary);background:var(--color-primary-soft);}
+/* 前台分頁頁籤 */
+.fe__ptabs{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;position:relative;}
+.ptab{border:1px solid #dbe2ea;border-radius:99px;padding:2px 14px;font-size:.66rem;color:#64748b;background:#fff;}
+.ptab.is-on{background:var(--color-primary);border-color:var(--color-primary);color:#fff;font-weight:700;}
+
+/* misc */
+.rel-links{font-size:.74rem;color:var(--color-text-soft);border-top:1px dashed var(--color-line);padding-top:var(--space-2);margin-top:var(--space-3);}
+footer.doc-footer{color:#9ca3af;font-size:.68rem;text-align:center;padding:var(--space-4) 0;}
+:focus-visible{outline:2px solid var(--color-primary);outline-offset:2px;}
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="sidebar" aria-label="文件導覽">
+  <div class="nav__brand">OKF-2402 Okbet_前台充值頁面套用分頁功能<small>v1.0 ｜ 2026-09-30</small></div>
+  <button class="nav__item is-active" data-anchor="s-goal">1. 需求說明</button>
+  <button class="nav__item" data-anchor="s-fe">2. 前台畫面（調整後預期）</button>
+  <button class="nav__item" data-anchor="s-be">3. 後台畫面（現行，不異動）</button>
+  <button class="nav__item" data-anchor="s-rule">4. 補充說明（現行邏輯）</button>
+  <button class="nav__item" data-anchor="s-op">5. 操作說明</button>
+</nav>
+
+<main class="main">
+<article class="page is-visible">
+  <header class="doc-header">
+    <h1>OKF-2402 Okbet_前台充值頁面套用分頁功能</h1>
+    <p class="doc-header__meta">v1.0 ｜ 2026-09-30 ｜ 範圍：OKBET 前台充值頁（支付方式區塊）｜ 後台功能不異動</p>
+  </header>
+
+  <!-- 1. 需求說明 -->
+  <section class="section" id="s-goal">
+    <h2>1. 需求說明 <span class="badge badge--new">前端實裝</span></h2>
+    <ol>
+      <li>OKBET 前台充值頁的「支付方式」區塊<strong>實裝分頁功能</strong>：於支付方式標題下方新增分頁頁籤列，依後台「分頁類型設定」與各入口／子通道的「分頁歸屬」勾選結果分類展示，行為<strong>比照 WOWGame 現行前台</strong>。</li>
+      <li>後台功能（分頁類型設定頁籤、充值展示配置的分頁歸屬勾選）<strong>已上線、本單不異動</strong>；現況為 OKBET 前台未接分頁設定、一頁展示全部入口，本單為<strong>前端實裝</strong>。</li>
+      <li>上線安排：上線前由運營先於後台配置好分頁與各筆分頁歸屬（後台可先行配置，不影響現行前台）；前端接上後，前台即直接依已配置內容展示。</li>
+    </ol>
+    <div class="callout callout--info">分頁頁籤的 UI 視覺以設計稿為準，本文件內前台刻版僅為<strong>邏輯示意</strong>。</div>
+  </section>
+
+  <!-- 2. 前台畫面 -->
+  <section class="section" id="s-fe">
+    <h2>2. 前台畫面（調整後預期）</h2>
+    <p>以 OKBET 錢包 · 充值頁為底，「支付方式」標題下方新增分頁頁籤列 <span class="mk">A</span>。以下示意以分頁配置為 All／E-Wallets／Banks（排序 0／1／2）為例，實際頁籤內容與順序依後台配置。</p>
+
+    <div class="fe-grid">
+      <div class="fe">
+        <div class="fe__head" style="font-size:.95rem;background:#0f172a;color:#fff;">OKBET <span style="font-weight:400;font-size:.68rem;color:#cbd5e1;">錢包 · 充值 ｜ 進入頁面（停在排序最小分頁）</span></div>
+        <div class="fe__body">
+          <div class="fe__card">
+            <div class="fe__label">支付方式</div>
+            <div class="fe__ptabs">
+              <span class="ptab is-on">All</span>
+              <span class="ptab">E-Wallets</span>
+              <span class="ptab">Banks</span>
+              <span class="mk mk--float" style="right:-6px;top:-10px;">A</span>
+            </div>
+            <div class="fe__tiles">
+              <div class="tile is-sel">GCash</div>
+              <div class="tile">maya</div>
+              <div class="tile">GrabPay</div>
+              <div class="tile">V5pay</div>
+              <div class="tile">FortunePay</div>
+              <div class="tile">Bank Transfer</div>
+            </div>
+          </div>
+          <p style="font-size:.68rem;color:var(--color-text-soft);margin:0;">「All」分頁下顯示所有分頁歸屬有勾「All」的入口。</p>
+        </div>
+      </div>
+      <div class="fe">
+        <div class="fe__head" style="font-size:.95rem;background:#0f172a;color:#fff;">OKBET <span style="font-weight:400;font-size:.68rem;color:#cbd5e1;">錢包 · 充值 ｜ 切換分頁（例：Banks）</span></div>
+        <div class="fe__body">
+          <div class="fe__card">
+            <div class="fe__label">支付方式</div>
+            <div class="fe__ptabs">
+              <span class="ptab">All</span>
+              <span class="ptab">E-Wallets</span>
+              <span class="ptab is-on">Banks</span>
+            </div>
+            <div class="fe__tiles">
+              <div class="tile">FortunePay</div>
+              <div class="tile">Bank Transfer</div>
+            </div>
+          </div>
+          <p style="font-size:.68rem;color:var(--color-text-soft);margin:0;">切換分頁＝過濾入口：僅顯示分頁歸屬有勾「Banks」的入口。</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>交互行為</h3>
+    <ul>
+      <li><span class="mk">A</span> 分頁頁籤列：頁籤內容＝後台「分頁類型設定」中狀態為正常的分頁，依排序由小到大排列（排序數字越小越前面，0 最小）；頁籤顯示名依會員語系取分頁的對應顯示名。</li>
+      <li>進入充值頁時，<strong>預設停在排序最小的分頁</strong>。無系統寫死的預設頁籤——「All」只是運營配置出來的一般分頁，與其他分頁無異。</li>
+      <li>點擊頁籤即切換分頁，僅顯示分頁歸屬有勾選該分頁的入口（與子通道，子通道判斷見 4. 補充說明）。</li>
+      <li>入口磁貼樣式、點擊入口後的展開／跳轉行為均<strong>不異動</strong>，僅新增分頁過濾這一層。</li>
+    </ul>
+
+    <h3>邏輯對照</h3>
+    <div class="compare">
+      <div class="compare__col compare__col--new">
+        <div class="compare__head">新邏輯（本單）</div>
+        <div class="compare__body">
+          <ul>
+            <li>OKBET 前台充值頁吃「分頁類型設定」＋「分頁歸屬」，依分頁分類展示入口，與 WOWGame 行為一致。</li>
+            <li>分頁歸屬全未勾選的入口，不出現在任何分頁（前台看不到）。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="compare__col compare__col--old">
+        <div class="compare__head">原邏輯</div>
+        <div class="compare__body">
+          <ul>
+            <li>OKBET 前台充值頁不吃分頁設定，一頁展示所有入口；分頁歸屬勾選對其無作用。</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. 後台畫面 -->
+  <section class="section" id="s-be">
+    <h2>3. 後台畫面（現行，不異動，僅供對照） <span class="badge badge--keep">不異動</span></h2>
+    <p>以下為後台既有功能刻版，本單不做任何後台改動，僅標示前台實裝後各設定對應的作用。</p>
+
+    <h3>分頁類型設定（分頁的來源）</h3>
+    <div class="mock">
+      <div class="mock__bar"><span class="mock__crumb">位置 &gt; 在線支付展示配置 ｜ 分頁類型設定頁籤</span></div>
+      <div class="mock__body">
+        <div class="mock__tabs">
+          <span class="mock__tab">充值展示配置</span>
+          <span class="mock__tab is-on">分頁類型設定 <span class="mk">B</span></span>
+        </div>
+        <p style="margin-bottom:10px;"><span class="mock__btn">新增</span></p>
+        <table>
+          <thead><tr><th>分頁Key</th><th>顯示名</th><th>排序 <span class="mk">C</span></th><th>狀態 <span class="mk">D</span></th><th>操作人</th></tr></thead>
+          <tbody>
+            <tr><td>test</td><td>test</td><td>0</td><td><span class="pill pill--ok">正常</span></td><td><span class="op">编辑 删除</span></td></tr>
+            <tr><td>all</td><td>All</td><td>1</td><td><span class="pill pill--ok">正常</span></td><td><span class="op">编辑 删除</span></td></tr>
+            <tr><td>ewallet</td><td>E-Wallets</td><td>2</td><td><span class="pill pill--ok">正常</span></td><td><span class="op">编辑 删除</span></td></tr>
+            <tr><td>bank</td><td>Banks</td><td>3</td><td><span class="pill pill--ok">正常</span></td><td><span class="op">编辑 删除</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="mock__note">
+        <ul style="margin:0;padding-left:1.3em;">
+          <li><span class="mk">B</span> 前台分頁頁籤的來源；本單上線後 OKBET 前台依此展示分類頁籤。</li>
+          <li><span class="mk">C</span> 排序＝前台頁籤順序，數字越小越前面，0 最小；進入充值頁預設停在排序最小的分頁。</li>
+          <li><span class="mk">D</span> 狀態＝該分頁的啟用開關：停用＝前台不顯示該頁籤，且該分頁於充值展示配置的分頁歸屬勾選區<strong>隱藏、無法勾選</strong>；停用後重新啟用，各筆先前的勾選<strong>保留</strong>（停用僅隱藏、不清除勾選）。</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>充值展示配置——分頁歸屬勾選（入口與子通道）</h3>
+    <div class="mock mock--modal">
+      <div class="mock__bar"><span class="mock__crumb">位置 &gt; 在線支付展示配置 &gt; 充值展示配置 ｜ 新增／編輯彈窗——分頁歸屬</span></div>
+      <div class="mock__body">
+        <p style="font-size:.68rem;color:#9ca3af;margin-bottom:10px;">（彈窗其餘欄位：渠道類型／顯示名／渠道圖示／排序／顯示商戶等，均與本單無關，略）</p>
+        <div class="frow"><label>分页归属:</label>
+          <span>
+            <span class="ck"><span class="cbx"></span>test</span>
+            <span class="ck"><span class="cbx on"></span>All</span>
+            <span class="ck"><span class="cbx on"></span>E-Wallets</span>
+            <span class="ck"><span class="cbx"></span>Banks</span>
+            <span class="mk">E</span>
+          </span>
+        </div>
+      </div>
+      <div class="mock__note"><span class="mk">E</span> 勾選項來源＝分頁類型設定頁籤（僅列狀態正常者）；可多選、可全不勾。入口與各子通道的分頁歸屬各自獨立勾選（子通道配置區內同樣有此欄）。本欄功能與現行完全相同，本單上線後 OKBET 前台開始吃此設定。</div>
+    </div>
+  </section>
+
+  <!-- 4. 補充說明 -->
+  <section class="section" id="s-rule">
+    <h2>4. 補充說明（現行邏輯，非本次異動）</h2>
+    <div class="callout callout--info">本節為<strong>既有邏輯</strong>的完整說明（現行 WOWGame 前台即為此行為），非本次新增規則；本單上線後 OKBET 前台適用同一套判斷，供開發與驗收對照。</div>
+
+    <h3>4.1 分頁與勾選的基本規則</h3>
+    <ul>
+      <li>分頁選項來源＝「分頁類型設定」頁籤；排序數字越小越前面，0 最小。</li>
+      <li>分頁歸屬可<strong>多選</strong>，也可<strong>全不勾</strong>：全不勾＝該入口不歸屬任何分頁，前台任何分頁下都不顯示。</li>
+      <li>方式（入口）與各子通道的分頁歸屬<strong>各自獨立勾選</strong>，互不連動。</li>
+      <li>顯示判斷：子通道要在某分頁底下顯示，前提是<strong>方式（入口）也勾選了該分頁</strong>——入口未勾選的分頁，整組（入口＋子通道）皆不可見。</li>
+      <li>分頁「停用」＝前台不顯示該頁籤、後台勾選區隱藏該選項無法勾選；重新啟用後先前勾選保留（僅隱藏、不清除）。</li>
+    </ul>
+
+    <h3>4.2 入口 × 子通道勾選組合的顯示結果</h3>
+    <h4>情境示例（分頁為 分頁Ａ／分頁Ｂ／分頁Ｃ；方式底下有子通道1、子通道2）</h4>
+    <table class="tbl tbl--center">
+      <thead><tr><th style="width:9em;">方式（入口）勾選</th><th style="width:12em;">子通道勾選</th><th>前台「分頁Ａ」顯示</th><th>前台「分頁Ｂ」顯示</th><th>前台「分頁Ｃ」顯示</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>分頁Ａ</td>
+          <td>子通道1：分頁Ａ<br>子通道2：分頁Ａ</td>
+          <td>入口＋子通道1＋子通道2</td>
+          <td class="dim">—</td>
+          <td class="dim">—</td>
+        </tr>
+        <tr>
+          <td>分頁Ａ</td>
+          <td>子通道1：分頁Ａ<br>子通道2：分頁Ｂ</td>
+          <td>入口＋子通道1<br>（子通道2 不顯示）</td>
+          <td>無入口，看不到入口＋子通道</td>
+          <td class="dim">—</td>
+        </tr>
+        <tr>
+          <td>分頁Ａ</td>
+          <td>子通道1：分頁Ｂ<br>子通道2：分頁Ｃ</td>
+          <td>看得到入口，底下<strong>無</strong>子通道</td>
+          <td>無入口，看不到入口＋子通道</td>
+          <td>無入口，看不到入口＋子通道</td>
+        </tr>
+        <tr>
+          <td>分頁Ａ、分頁Ｂ</td>
+          <td>子通道1：分頁Ａ<br>子通道2：分頁Ｂ</td>
+          <td>入口＋子通道1</td>
+          <td>入口＋子通道2</td>
+          <td class="dim">—</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </section>
+
+  <!-- 5. 操作說明 -->
+  <section class="section" id="s-op">
+    <h2>5. 操作說明（後台配置流程）</h2>
+    <ol>
+      <li><strong>建立／確認分頁</strong>：至「在線支付展示配置 &gt; 分頁類型設定」確認分頁清單、顯示名、排序（前台頁籤順序）與狀態（正常＝前台顯示該頁籤）。</li>
+      <li><strong>逐筆勾選分頁歸屬</strong>：至「充值展示配置」逐筆編輯，勾選入口的分頁歸屬；該方式有 2 個（含）以上子通道者，同時於子通道配置區勾選各子通道的分頁歸屬。注意：入口未勾選的分頁，其底下子通道即使有勾也不會顯示（見 4.2）。</li>
+      <li><strong>前台呈現</strong>：本單前端功能上線後，OKBET 前台充值頁即依上述配置展示分頁頁籤與分類後的入口。</li>
+    </ol>
+    <div class="callout callout--warn">上線前請運營先完成上述配置（後台可先行配置，不影響現行前台）；前端接上當下即依配置展示，<strong>分頁歸屬全未勾選的入口將不出現在前台任何分頁</strong>，請特別確認每筆入口至少已勾選一個分頁。</div>
+    <div class="rel-links"><strong>關聯頁面</strong>：在線支付展示配置（充值展示配置頁籤——分頁歸屬）、在線支付展示配置（分頁類型設定頁籤——分頁來源）。均為既有功能，本單不異動。</div>
+  </section>
+
+  <footer class="doc-footer">OKF-2402 Okbet_前台充值頁面套用分頁功能 ｜ v1.0 ｜ 2026-09-30</footer>
+</article>
+</main>
+</div>
+<script>
+(function(){
+  var buttons = document.querySelectorAll('[data-anchor]');
+  buttons.forEach(function(b){
+    b.addEventListener('click', function(){
+      var el = document.getElementById(b.getAttribute('data-anchor'));
+      if (el) { el.scrollIntoView({behavior:'smooth', block:'start'}); }
+    });
+  });
+  /* scrollspy */
+  var sections = Array.prototype.slice.call(document.querySelectorAll('.section[id]'));
+  function onScroll(){
+    var pos = window.scrollY + 120, current = sections[0] ? sections[0].id : null;
+    sections.forEach(function(s){ if (s.offsetTop <= pos) current = s.id; });
+    buttons.forEach(function(b){ b.classList.toggle('is-active', b.getAttribute('data-anchor') === current); });
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+})();
+</script>
+</body>
+</html>
