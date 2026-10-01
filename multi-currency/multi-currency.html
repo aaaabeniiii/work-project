@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>後台多幣種改動規格書 V5.02</title>
+<title>後台多幣種改動規格書 V5.03</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,BlinkMacSystemFont,'PingFang TC','Microsoft JhengHei',sans-serif;background:#f0f2f5;color:#333;font-size:14px}
@@ -747,7 +747,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
 <body>
 
 <div class="doc-header">
-  <h1>後台多幣種改動規格書 V5.02</h1>
+  <h1>後台多幣種改動規格書 V5.03</h1>
   
 </div>
 
@@ -970,6 +970,13 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
     <p class="rec-sub">記錄各次會議與討論的決議內容。新的紀錄由上往下疊加（項次由下往上遞增）；決議內容若後續被調整，原文以刪除線標示並於下方註記調整內容與確認人。</p>
     <table class="rec-table">
       <tr><th>日期</th><th>項次</th><th>內容</th><th>規格書更新</th><th>參與人</th></tr>
+      <tr id="rec-67">
+            <td class="rec-date">9/29</td>
+            <td class="rec-no">67</td>
+            <td><span class="rec-item-tt">會員資金明細彈窗詞條變量</span>：<br>1. 總代會員：列表「所屬投注站」欄位變量顯示為「所屬總代」（Abeni）<br>2. 總代會員：搜尋欄「所有投注站」下拉變量顯示為「所有總代」（預設值），下拉選項僅列總代（Abeni）<br>3. 投注站會員維持現行顯示（Abeni）</td>
+            <td class="rec-upd"><span class="x-jump" onclick="showPg('adm-user-mgmt-member')">9/29已更新</span></td>
+            <td>Abeni、Din</td>
+          </tr>
       <tr id="rec-66">
             <td class="rec-date">9/29</td>
             <td class="rec-no">66</td>
@@ -1399,6 +1406,11 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
     <h1>版本更新紀錄</h1>
         <table class="rec-table">
       <tr><th>版本</th><th>日期</th><th>更新內容／原因</th></tr>
+      <tr>
+          <td class="rec-date">V5.03</td>
+          <td class="rec-date">9/29</td>
+          <td>依照討論紀錄調整<br><br>新增：<br>1. <span class="x-jump" onclick="showPg('adm-user-mgmt-member')">用戶管理 &gt; 會員新增卡 589——資金明細彈窗詞條依會員代理線類型變量顯示：總代會員列表欄「所屬投注站」變量為「所屬總代」、搜尋欄「所有投注站」下拉變量為「所有總代」（預設值）且選項僅列總代（項次 67，期 3）</span></td>
+        </tr>
       <tr>
           <td class="rec-date">V5.02</td>
           <td class="rec-date">9/29</td>
@@ -3855,6 +3867,24 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
     <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">交易金額欄位回傳資料需同時包含法幣金額(<code>currency_amount</code>)（含幣種代碼）與換算後的系統幣金額(<code>sys_amount</code>)。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（此為管理後台資金明細顯示，不影響前台會員端）</div></div>
     <div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-member-008"></div></div></div>
+  </div>
+
+  <div class="spec-card">
+    <div class="spec-card-hd"><span class="spec-card-num">589</span><span class="spec-card-adj">9/29新增</span></div>
+    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">用戶管理 &gt; 會員 &gt; 列表 &gt; 操作 &gt; 資金明細 &gt; 資金明細彈窗</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge mod">調整</span></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">彈窗搜尋欄固定顯示「所有投注站」下拉、列表欄位固定顯示「所屬投注站」，不分會員所屬代理線類型。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
+      <ol>
+        <li>總代會員：列表「所屬投注站」欄位變量顯示為「所屬總代」</li>
+        <li>總代會員：搜尋欄「所有投注站」下拉變量顯示為「所有總代」（預設值），下拉選項僅列總代</li>
+        <li>投注站會員：維持現行「所有投注站」下拉與「所屬投注站」欄位顯示</li>
+      </ol>
+    </div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">依會員所屬代理線類型變量渲染詞條（所屬總代／所屬投注站）與下拉選單資料來源。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">彈窗下拉選項 API 依會員代理線類型回傳總代或投注站清單；列表欄位依類型回傳對應所屬對象名稱。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（此為管理後台彈窗顯示與搜尋，不影響前台會員端）</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-member-015"></div></div></div>
   </div>
 
   <div class="spec-card">
@@ -15387,6 +15417,17 @@ function renderMemberDemos(){
   set('tpl-member-013', tplColStackedLines('信用 & 额度', ['余额：13.97','余额宝：0.00','欠款：0.00','余额宝利息：0.00','锁定额度：1,000.00','会员积分：212.00']));
   // 014 存提款欄位（法幣統計）
   set('tpl-member-014', tplColStackedLines('存提款', ['存款总额：0.00','提款总额：0.00','存款次数：0','提款次数：0','活动领取金额：0','累计有效投注：0']));
+  // member-015 資金明細彈窗詞條依代理線類型變量顯示（投注站會員／總代會員對照）：搜尋下拉＋列表欄位
+  set('tpl-member-015', `<div class="demo-ba-group">
+    <div class="demo-ba-item"><div class="demo-ba-tag">投注站會員（現行）</div>
+      ${tplSingleSelect('member-015-a','所有投注站',['所有投注站','投注站A','投注站B'],'所有投注站')}
+      ${tplMockTable(['交易時間','所屬投注站','交易類型'], [['2026-10-01 11:17','投注站A','充值']])}
+    </div>
+    <div class="demo-ba-item"><div class="demo-ba-tag">總代會員（調整後）</div>
+      ${tplSingleSelect('member-015-b','所有總代',['所有總代','總代A','總代B'],'所有總代')}
+      ${tplMockTable(['交易時間','所屬總代','交易類型'], [['2026-10-01 11:17','總代A','充值']])}
+    </div>
+  </div>`);
 }
 
 
