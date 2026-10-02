@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>後台多幣種改動規格書 V5.03</title>
+<title>後台多幣種改動規格書 V5.04</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,BlinkMacSystemFont,'PingFang TC','Microsoft JhengHei',sans-serif;background:#f0f2f5;color:#333;font-size:14px}
@@ -747,7 +747,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
 <body>
 
 <div class="doc-header">
-  <h1>後台多幣種改動規格書 V5.03</h1>
+  <h1>後台多幣種改動規格書 V5.04</h1>
   
 </div>
 
@@ -970,6 +970,13 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
     <p class="rec-sub">記錄各次會議與討論的決議內容。新的紀錄由上往下疊加（項次由下往上遞增）；決議內容若後續被調整，原文以刪除線標示並於下方註記調整內容與確認人。</p>
     <table class="rec-table">
       <tr><th>日期</th><th>項次</th><th>內容</th><th>規格書更新</th><th>參與人</th></tr>
+      <tr id="rec-68">
+            <td class="rec-date">10/1</td>
+            <td class="rec-no">68</td>
+            <td><span class="rec-item-tt">會員層級下拉依國家幣種篩選</span>：<br>1. 補邏輯——大代理、代理、會員編輯彈窗的會員層級下拉，依該帳號的國家＋幣種篩選，僅顯示對應國家幣種下的層級選項</td>
+            <td class="rec-upd"><span class="x-jump" onclick="showPg('adm-user-mgmt-member')">10/2已更新</span></td>
+            <td>Abeni、Din</td>
+          </tr>
       <tr id="rec-67">
             <td class="rec-date">9/29</td>
             <td class="rec-no">67</td>
@@ -1406,6 +1413,11 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
     <h1>版本更新紀錄</h1>
         <table class="rec-table">
       <tr><th>版本</th><th>日期</th><th>更新內容／原因</th></tr>
+      <tr>
+          <td class="rec-date">V5.04</td>
+          <td class="rec-date">10/2</td>
+          <td>依照討論紀錄調整<br><br>新增：<br>1. <span class="x-jump" onclick="showPg('adm-user-mgmt-super-agent')">補邏輯——大代理編輯彈窗會員層級下拉依帳號國家＋幣種篩選顯示（卡 590，項次 68，期 3）</span><br>2. <span class="x-jump" onclick="showPg('adm-user-mgmt-agent')">補邏輯——代理編輯彈窗會員層級下拉依帳號國家＋幣種篩選顯示（卡 591，項次 68，期 3）</span><br>3. <span class="x-jump" onclick="showPg('adm-user-mgmt-member')">補邏輯——會員編輯用戶彈窗會員層級下拉依帳號國家＋幣種篩選顯示（卡 592，項次 68，期 3）</span></td>
+        </tr>
       <tr>
           <td class="rec-date">V5.03</td>
           <td class="rec-date">9/29</td>
@@ -3491,6 +3503,21 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
     <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">標籤選項查詢依該帳號國家(<code>nation_code</code>)過濾。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（標籤為後台內部標記功能，不影響前台會員端呈現）。</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-bag-560"></div></div></div>
   </div>
+  <div class="spec-card">
+    <div class="spec-card-hd"><span class="spec-card-num">590</span><span class="spec-card-adj">10/2新增</span></div>
+    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">用戶管理 &gt; 大代理 &gt; 列表 &gt; 操作 &gt; 編輯 &gt; 編輯彈窗 &gt; 會員層級</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge mod">調整</span></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">會員層級下拉列出平台全部層級選項（默認層、第二～五層、內部充值、QASL 等混列），不分帳號的國家與幣種。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
+      <ol>
+        <li>會員層級下拉依該帳號的國家＋幣種篩選，僅顯示對應國家幣種下的層級選項</li>
+      </ol>
+    </div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">會員層級下拉選項依帳號國家＋幣種過濾後渲染。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">層級選項 API 依帳號國家＋幣種回傳對應層級清單。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（此為管理後台編輯彈窗設定，不影響前台會員端）</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-bag-590"></div></div></div>
+  </div>
 </div>
 <div class="pg" id="pg-adm-user-mgmt-agent">
   <div class="pg-crumb">管理後台 &gt; 用戶管理 &gt; 代理</div>
@@ -3742,6 +3769,21 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
     <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">標籤下拉選項依該帳號綁定的國家(<code>nation_code</code>)過濾。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">標籤選項查詢依該帳號國家(<code>nation_code</code>)過濾。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（標籤為後台內部標記功能，不影響前台會員端呈現）。</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-agp-561"></div></div></div>
+  </div>
+  <div class="spec-card">
+    <div class="spec-card-hd"><span class="spec-card-num">591</span><span class="spec-card-adj">10/2新增</span></div>
+    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">用戶管理 &gt; 代理 &gt; 列表 &gt; 操作 &gt; 編輯 &gt; 編輯彈窗 &gt; 會員層級</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge mod">調整</span></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">會員層級下拉列出平台全部層級選項（默認層、第二～五層、內部充值、QASL 等混列），不分帳號的國家與幣種。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
+      <ol>
+        <li>會員層級下拉依該帳號的國家＋幣種篩選，僅顯示對應國家幣種下的層級選項</li>
+      </ol>
+    </div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">會員層級下拉選項依帳號國家＋幣種過濾後渲染。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">層級選項 API 依帳號國家＋幣種回傳對應層級清單。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（此為管理後台編輯彈窗設定，不影響前台會員端）</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-agp-591"></div></div></div>
   </div>
 </div>
 <div class="pg" id="pg-adm-user-mgmt-member">
@@ -4022,6 +4064,21 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
     <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">提供帳號批次檢驗 API，回傳各帳號的國家(<code>nation_code</code>)＋幣種(<code>currency</code>)與是否符合基準；批量额度修改 API 拒絕含不符基準帳號的提交。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（本次僅新增同國家＋幣種檢查與顯示，不改變批量操作本身對前台的既有作用）</div></div>
     <div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-mem-580"></div></div></div>
+  </div>
+  <div class="spec-card">
+    <div class="spec-card-hd"><span class="spec-card-num">592</span><span class="spec-card-adj">10/2新增</span></div>
+    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">用戶管理 &gt; 會員 &gt; 列表 &gt; 操作 &gt; 編輯用戶 &gt; 編輯用戶彈窗 &gt; 會員層級</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge mod">調整</span></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">會員層級下拉列出平台全部層級選項（默認層、第二～五層、內部充值、QASL 等混列），不分帳號的國家與幣種。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
+      <ol>
+        <li>會員層級下拉依該帳號的國家＋幣種篩選，僅顯示對應國家幣種下的層級選項</li>
+      </ol>
+    </div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">會員層級下拉選項依帳號國家＋幣種過濾後渲染。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">層級選項 API 依帳號國家＋幣種回傳對應層級清單。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（此為管理後台編輯彈窗設定，不影響前台會員端）</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-mem-592"></div></div></div>
   </div>
 </div>
 <div class="pg" id="pg-adm-user-mgmt-tag-config">
@@ -15417,6 +15474,8 @@ function renderMemberDemos(){
   set('tpl-member-013', tplColStackedLines('信用 & 额度', ['余额：13.97','余额宝：0.00','欠款：0.00','余额宝利息：0.00','锁定额度：1,000.00','会员积分：212.00']));
   // 014 存提款欄位（法幣統計）
   set('tpl-member-014', tplColStackedLines('存提款', ['存款总额：0.00','提款总额：0.00','存款次数：0','提款次数：0','活动领取金额：0','累计有效投注：0']));
+  // member-016(卡592) 編輯用戶彈窗會員層級下拉依國家＋幣種篩選
+  set('tpl-mem-592', tplSingleSelect('mem-592','Select',['默認層','第二層','第三層'],'默認層') + '<div class=\'demo-fieldcard-caption\'>選項已依帳號國家＋幣種（菲律賓／PHP）篩選</div>');
   // member-015 資金明細彈窗詞條依代理線類型變量顯示（投注站會員／總代會員對照）：搜尋下拉＋列表欄位
   set('tpl-member-015', `<div class="demo-ba-group">
     <div class="demo-ba-item"><div class="demo-ba-tag">投注站會員（現行）</div>
@@ -19075,6 +19134,8 @@ function render_bag_Demos(){
     {label:'國家', val:'readonly:菲律賓'},
     {label:'標籤', val:{type:'single', placeholder:'選擇', options:['AAagent'], def:null}}
   ]);
+  const el590 = document.getElementById('tpl-bag-590');
+  if(el590) el590.innerHTML = tplSingleSelect('bag-590','Select',['默認層','第二層','第三層'],null) + '<div class="demo-fieldcard-caption">選項已依帳號國家＋幣種（菲律賓／PHP）篩選</div>';
 }
 render_bag_Demos();
 render_bag_screen();
@@ -19275,6 +19336,8 @@ function render_agp_Demos(){
     {label:'國家', val:'readonly:菲律賓'},
     {label:'標籤', val:{type:'single', placeholder:'選擇', options:['AAagency','jasmine_agent'], def:null}}
   ]);
+  const el591 = document.getElementById('tpl-agp-591');
+  if(el591) el591.innerHTML = tplSingleSelect('agp-591','Select',['默認層','第二層','第三層'],null) + '<div class=\'demo-fieldcard-caption\'>選項已依帳號國家＋幣種（菲律賓／PHP）篩選</div>';
 }
 render_agp_Demos();
 render_agp_screen();
