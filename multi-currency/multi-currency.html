@@ -792,7 +792,8 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
   <a class="nav-si3" onclick="showPg('phase-scope');goTo('phx-1')">期 1 基礎工程</a>
   <a class="nav-si3" onclick="showPg('phase-scope');goTo('phx-2')">期 2 金流</a>
   <a class="nav-si3" onclick="showPg('phase-scope');goTo('phx-3')">期 3 代理線（投注站＋會員）</a>
-  <a class="nav-si3" onclick="showPg('phase-scope');goTo('phx-4')">期 4 三方 GAME ＋ 體育</a>
+  <a class="nav-si3" onclick="showPg('phase-scope');goTo('phx-4')">期 4 三方 GAME</a>
+  <a class="nav-si3" onclick="showPg('phase-scope');goTo('phx-4s')">期 4 體育</a>
   <a class="nav-si3" onclick="showPg('phase-scope');goTo('phx-5')">期 5 匯總報表</a>
   <a class="nav-si3" onclick="showPg('phase-scope');goTo('phx-6')">期 6 金流風控</a>
   <a class="nav-si3" onclick="showPg('phase-scope');goTo('phx-7')">期 7 VIP</a>
@@ -2047,7 +2048,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
 
 <!-- ══════════ 期 4 ══════════ -->
 <div class="phase">
-  <div class="ph-head" id="phx-4"><span class="n">期 4</span><span class="t">三方 GAME ＋ 體育</span><span class="c">60 張（V3 55＋新卡 5）</span></div>
+  <div class="ph-head" id="phx-4"><span class="n">期 4</span><span class="t">三方 GAME</span><span class="c">47 張（V3 42＋新卡 5）</span></div>
   <div class="ph-body">
     <div class="cap">有 V3 對應功能</div>
     <table>
@@ -2056,11 +2057,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
         <tr><td class="id">115–118</td><td>數據 &gt; 三方注單</td></tr>
         <tr><td class="id">119–122</td><td>數據 &gt; 三方報表</td></tr>
         <tr><td class="id">124–127</td><td>數據 &gt; 三方遊戲報表(稅收分類)</td></tr>
-        <tr><td class="id">159–161</td><td>數據報表 &gt; 球類報表</td></tr>
         <tr><td class="id">199–201<br>581</td><td>遊戲管理 &gt; 廠商設置</td></tr>
-        <tr><td class="id">202–203</td><td>遊戲管理 &gt; 交易設置</td></tr>
-        <tr><td class="id">208–214</td><td>遊戲管理 &gt; 投注紀錄</td></tr>
-        <tr><td class="id">217</td><td>遊戲管理 &gt; 賽事管理</td></tr>
         <tr><td class="id">218–221</td><td>遊戲管理 &gt; 第三方對局查詢</td></tr>
         <tr><td class="id">222–225</td><td>遊戲管理 &gt; 第三方對局查詢(首頁分類)</td></tr>
         <tr><td class="id">226–229</td><td>遊戲管理 &gt; 第三方其他費用</td></tr>
@@ -2070,6 +2067,22 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
   </div>
 </div>
 
+<!-- ══════════ 期 4 體育 ══════════ -->
+<div class="phase">
+  <div class="ph-head" id="phx-4s"><span class="n">期 4</span><span class="t">體育</span><span class="c">13 張（V3 13）</span></div>
+  <div class="ph-body">
+    <div class="cap">有 V3 對應功能</div>
+    <table>
+      <thead><tr><th>功能編號</th><th>功能項目</th></tr></thead>
+      <tbody>
+        <tr><td class="id">159–161</td><td>數據報表 &gt; 球類報表</td></tr>
+        <tr><td class="id">202–203</td><td>遊戲管理 &gt; 交易設置</td></tr>
+        <tr><td class="id">208–214</td><td>遊戲管理 &gt; 投注紀錄</td></tr>
+        <tr><td class="id">217</td><td>遊戲管理 &gt; 賽事管理</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 
 <!-- ══════════ 期 5 ══════════ -->
 <div class="phase">
@@ -2289,7 +2302,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
     <table class="rec-table">
       <tr><th>期數</th><th>名稱</th><th>範圍</th><th>盤點</th><th>開發中</th><th>上 DEV</th><th>DEV 驗收通過</th><th>備註</th></tr>
       <tr><td class="rec-no">1</td><td>基礎工程</td><td class="plan-scope">5 頁 15 張｜交付項 4</td><td class="ph-cell ph-done">8/28 已完成</td><td class="ph-cell ph-done">已完成</td><td class="ph-cell ph-done">9/10</td><td class="ph-cell ph-done">9/25 已 Pass</td><td>開發中發現技術問題，上 DEV 延至 9/10(四)</td></tr>
-      <tr><td class="rec-no">—</td><td>充值提款匹配邏輯優化（<a class="x-jump" href="https://okbetokbet.atlassian.net/browse/OKF-2074" target="_blank">OKF-2074</a>）</td><td class="plan-scope">期 2 前置</td><td class="ph-cell ph-done">8/28 已完成</td><td class="ph-cell ph-now">提款：開發完成，RD 自測中<br>充值：開發完成，RD 自測中</td><td class="ph-cell"></td><td class="ph-cell"></td><td>需先完成才可進行期 2；不影響期 3、期 4（可先帶假資料）</td></tr>
+      <tr><td class="rec-no">—</td><td>充值提款匹配邏輯優化（<a class="x-jump" href="https://okbetokbet.atlassian.net/browse/OKF-2074" target="_blank">OKF-2074</a>）</td><td class="plan-scope">期 2 前置</td><td class="ph-cell ph-done">8/28 已完成</td><td class="ph-cell ph-now">提款：開發完成，RD 自測中<br>充值：已完成</td><td class="ph-cell ph-now" style="white-space:nowrap">充值：9/29</td><td class="ph-cell"></td><td>需先完成才可進行期 2；不影響期 3、期 4（可先帶假資料）</td></tr>
       <tr><td class="rec-no">2</td><td>金流</td><td class="plan-scope">11 頁 44 張｜交付項 2</td><td class="ph-cell"></td><td class="ph-cell"></td><td class="ph-cell"></td><td class="ph-cell"></td><td></td></tr>
       <tr><td class="rec-no">3</td><td>代理線</td><td class="plan-scope">5 頁 37 張</td><td class="ph-cell ph-done">8/28 已完成</td><td class="ph-cell ph-now">開發中</td><td class="ph-cell"></td><td class="ph-cell"></td><td></td></tr>
       <tr><td class="rec-no">4</td><td>三方 GAME ＋ 體育</td><td class="plan-scope">13 頁 63 張</td><td class="ph-cell ph-done">8/21 已完成</td><td class="ph-cell"></td><td class="ph-cell"></td><td class="ph-cell"></td><td></td></tr>
@@ -2309,6 +2322,34 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
     <h3 class="plan-h">開發進度紀錄（每週一更新上週進度，日期為該週週五）</h3>
     <table class="rec-table">
       <tr><th>日期</th><th>範圍</th><th>本週進度</th><th>備註</th></tr>
+      <tr><td class="rec-date">10/2</td><td>期 3＋OKF-2074</td><td>
+        <strong>Cyril：</strong>
+        <ul class="rec-ol">
+          <li>未提供。</li>
+        </ul>
+        <strong>Ody：</strong>
+        <ul class="rec-ol">
+          <li>完成充值（<a href="https://okbetokbet.atlassian.net/browse/OKF-2328" target="_blank">OKF-2328</a>），並修復 OKF-2328 相關 bug。</li>
+        </ul>
+        <strong>Evan：</strong>
+        <ul class="rec-ol">
+          <li>期 3 開發完成。</li>
+        </ul>
+        <strong>10/5~10/9 預計進度：</strong><br>
+        <strong>Cyril：</strong>
+        <ul class="rec-ol">
+          <li>資安優先，本週無多幣種排程。</li>
+        </ul>
+        <strong>Ody：</strong>
+        <ul class="rec-ol">
+          <li>資安優先，本週無多幣種排程。</li>
+        </ul>
+        <strong>Evan：</strong>
+        <ul class="rec-ol">
+          <li>期 3 debug（與 QA 測試同步處理）。</li>
+          <li>期 4 體育開發（隔週進三方開發）。</li>
+        </ul>
+      </td><td></td></tr>
       <tr><td class="rec-date">9/25</td><td>期 1＋OKF-2074</td><td>
         <strong>Cyril：</strong>
         <ul class="rec-ol">
