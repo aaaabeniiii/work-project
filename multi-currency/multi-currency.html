@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>後台多幣種改動規格書 V5.05</title>
+<title>後台多幣種改動規格書 V5.06</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,BlinkMacSystemFont,'PingFang TC','Microsoft JhengHei',sans-serif;background:#f0f2f5;color:#333;font-size:14px}
@@ -184,6 +184,9 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
 .demo-sync-ft{display:flex;justify-content:center;gap:12px;padding:14px 16px;border-top:1px solid #e0e6ed}
 .demo-sync-btn{min-width:80px;padding:6px 0;border-radius:4px;font-size:13px;cursor:default;border:1px solid #d1d5db;background:#fff;color:#6b7280;text-align:center}
 .demo-sync-btn.primary{background:#2f5fd9;border-color:#2f5fd9;color:#fff}
+.nc-btn{width:28px;height:28px;border:none;background:transparent;border-radius:50%;font-size:18px;line-height:1;cursor:pointer;color:#2f5fd9;padding:0}
+.nc-btn.minus{color:#9ca3af}
+.nc-btn:hover{background:#f3f4f6}
 
 /* ===== 地基: 統計數據（單行文字 / 多項並排 / 帶提示可展開） ===== */
 .demo-stat{display:inline-flex;align-items:center;gap:20px;flex-wrap:wrap;font-size:13px;color:#374151}
@@ -750,7 +753,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
 <body>
 
 <div class="doc-header">
-  <h1>後台多幣種改動規格書 V5.05</h1>
+  <h1>後台多幣種改動規格書 V5.06</h1>
   
 </div>
 
@@ -978,12 +981,17 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
     <p class="rec-sub">記錄各次會議與討論的決議內容。新的紀錄由上往下疊加（項次由下往上遞增）；決議內容若後續被調整，原文以刪除線標示並於下方註記調整內容與確認人。</p>
     <table class="rec-table">
       <tr><th>日期</th><th>項次</th><th>內容</th><th>規格書更新</th><th>參與人</th></tr>
-      <tr id="rec-75">
-            <td class="rec-date" rowspan="7">10/6</td>
+      <tr id="rec-76">
+            <td class="rec-date" rowspan="8">10/6</td>
+            <td class="rec-no">76</td>
+            <td><span class="rec-item-tt">總代／投注站共用查詢與顯示通則</span>：<br>1. 搜尋欄「所有投注站」下拉改為「所有總代/投注站」，選項依序「所有總代/投注站」「所有總代」「所有投注站」，其後列出全部總代與投注站帳號，直接顯示帳號；預設為「所有總代/投注站」<br>2. 下拉選單含總代與投注站帳號時，對應列表中原帶「投注站」字樣的欄位（如投注站代碼、投注站ID、所屬投注站）改為「總代/投注站」字樣（總代/投注站代碼、總代/投注站ID、所屬總代/投注站），顯示該會員所屬上級帳號</td>
+            <td class="rec-upd"><span class="x-jump" onclick="showPg('adm-data-mgmt-third-bet')">10/13已更新</span></td>
+            <td rowspan="8">10/6 第八次週會（Mark、Zack、Cyril、Ody、Evan、Wade、Din、Shawn、Abeni）</td>
+          </tr>
+          <tr id="rec-75">
             <td class="rec-no">75</td>
             <td><span class="rec-item-tt">國家／幣種下拉選單通則</span>：<br>1. 選項順序：有「全部國家／全部幣種」選項時，「全部」放第一位、預設國家／幣種放第二位；無「全部」選項時，預設國家／幣種放第一位<br>2. 搜尋欄位置：搜尋欄內有國家與幣種時，一律置於最前方，順序為國家在前、幣種在後；僅有其中一項時亦置於最前方</td>
             <td class="rec-upd"><span class="x-jump" onclick="showPg('spec-content');goTo('s2-6')">10/12已更新</span></td>
-            <td rowspan="7">10/6 第八次週會（Mark、Zack、Cyril、Ody、Evan、Wade、Din、Shawn、Abeni）</td>
           </tr>
           <tr id="rec-74">
             <td class="rec-no">74</td>
@@ -1458,6 +1466,11 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
     <h1>版本更新紀錄</h1>
         <table class="rec-table">
       <tr><th>版本</th><th>日期</th><th>更新內容／原因</th></tr>
+      <tr>
+          <td class="rec-date">V5.06</td>
+          <td class="rec-date">10/13</td>
+          <td>依照討論紀錄與補邏輯調整<br><br>新增：<br>1. <span class="x-jump" onclick="showPg('adm-game-mgmt-gm-newgame')">補邏輯——新遊戲入口設置 &gt; 遊戲管理配置分頁 投注站顯示配置彈窗標題下方新增國家＋幣種單選下拉（預設菲律賓＋PHP、無「全部」），勾選狀態依國家＋幣種組合分別儲存，遊戲清單依字典綁定組合過濾（卡 625，期 4）</span><br>2. <span class="x-jump" onclick="showPg('adm-data-mgmt-third-bet')">三方注單搜尋欄「所有投注站」下拉改「所有總代/投注站」：固定「所有總代/投注站（預設）／所有總代／所有投注站」三選項後列全部總代與投注站帳號（直接顯示帳號），查詢依所選類型或帳號篩選（卡 626，項次 76，期 4）</span><br>3. <span class="x-jump" onclick="showPg('adm-data-mgmt-third-bet')">三方注單列表「投注站ID」欄改「總代/投注站ID」，顯示會員所屬上級（總代或投注站）帳號的 ID（卡 627，項次 76，期 4）</span><br>4. <span class="x-jump" onclick="showPg('adm-game-mgmt-gm-bet')">投注紀錄 &gt; 歷史注單分頁搜尋欄「所有投注站」下拉改「所有總代/投注站」（固定三選項後列全部總代與投注站帳號，查詢依所選類型或帳號篩選）、列表「投注站代碼」欄改「總代/投注站代碼」顯示會員所屬上級帳號的代碼（卡 628、629，項次 76，期 4）</span><br>5. <span class="x-jump" onclick="showPg('adm-game-mgmt-gm-bet')">投注紀錄 &gt; 历史注单(New)分頁搜尋欄「所有投注站」下拉改「所有總代/投注站」（固定三選項後列全部總代與投注站帳號，查詢依所選類型或帳號篩選）、列表「投注站代碼」「所屬投注站」欄改「總代/投注站代碼」「所屬總代/投注站」顯示會員所屬上級帳號（卡 630、631，項次 76，期 4）</span><br>6. <span class="x-jump" onclick="showPg('adm-data-mgmt-third-game-tax-report')">三方遊戲報表(稅收分類)搜尋欄「所有投注站」下拉改「所有總代/投注站」（固定三選項後列全部總代與投注站帳號，統計依所選類型或帳號篩選）、列表「投注站ID」欄改「總代/投注站ID」顯示該列統計所歸屬的總代或投注站 ID（卡 632、633，項次 76，期 4）</span><br>7. <span class="x-jump" onclick="showPg('adm-game-mgmt-gm-3p')">第三方对局查询搜尋欄「所有投注站」下拉改「所有總代/投注站」（固定三選項後列全部總代與投注站帳號，查詢依所選類型或帳號篩選）、列表「投注站代碼」「所屬投注站」欄改「總代/投注站代碼」「所屬總代/投注站」顯示會員所屬的總代或投注站（卡 634、635，項次 76，期 4）</span><br>8. <span class="x-jump" onclick="showPg('adm-game-mgmt-gm-3pfp')">第三方对局查询(首页分类)搜尋欄「所有投注站」下拉改「所有總代/投注站」（固定三選項後列全部總代與投注站帳號，查詢依所選類型或帳號篩選）、列表「投注站代碼」「所屬投注站」欄改「總代/投注站代碼」「所屬總代/投注站」顯示會員所屬的總代或投注站（卡 636、637，項次 76，期 4）</span><br>9. <span class="x-jump" onclick="showPg('adm-data-report-dr-new3')">三方游戏报表(新)搜尋欄「所有投注站」下拉改「所有總代/投注站」（固定三選項後列全部總代與投注站帳號，統計依所選類型或帳號篩選）（卡 638，項次 76，期 5）</span><br>10. <span class="x-jump" onclick="showPg('adm-user-mgmt-member')">會員搜尋欄「所有投注站」下拉改「所有總代/投注站」（固定三選項後列全部總代與投注站帳號，查詢依所選類型或帳號篩選）、會員信息欄位「投注站代碼」依會員所屬代理線類型變量顯示「總代代碼」／「投注站代碼」、內容為所屬的總代或投注站代碼，含後台畫面（卡 639、640，項次 76，期 3）</span><br>11. <span class="x-jump" onclick="showPg('adm-finance-mgmt-fund-detail')">資金明細 &gt; 資金明細分頁搜尋欄「所有投注站」下拉改「所有總代/投注站」（固定三選項後列全部總代與投注站帳號，查詢依所選類型或帳號篩選）、列表「所屬投注站」欄改「所屬總代/投注站」顯示會員所屬的總代或投注站帳號（卡 641、642，項次 76，期 2）</span><br>12. <span class="x-jump" onclick="showPg('adm-game-mgmt-gm-vendor')">補邏輯——廠商設置 &gt; 第三方廠商設置分頁 編輯彈窗新增「國家/幣種」連動列組（每列國家｜幣種單選、＋新增一列、−刪除該列、至少一列），後台可維護廠商支援的國家＋幣種組合，列表、搜尋、国际化图片设置與遊戲字典可選組合均以此為準（卡 643，期 4）</span><br>13. <span class="x-jump" onclick="showPg('adm-game-mgmt-gm-newgame')">補邏輯——新遊戲入口設置 &gt; 首页分类管理分頁 編輯彈窗「類型code」上方新增「國家」欄位，唯讀反灰顯示該首頁分類所屬國家（卡 644，期 4）</span><br>14. <span class="x-jump" onclick="showPg('adm-user-mgmt-member')">補邏輯——會員 &gt; 編輯用戶彈窗「投注站名稱」依會員所屬代理線類型變量顯示「總代名稱」／「投注站名稱」，內容為所屬的總代或投注站帳號（卡 645，期 3）</span><br>15. <span class="x-jump" onclick="showPg('adm-user-mgmt-super-agent')">補邏輯——大代理 &gt; 詳情彈窗「投注站名稱」依帳號所屬代理線類型變量顯示「總代名稱」／「投注站名稱」（卡 646，期 3）</span><br>16. <span class="x-jump" onclick="showPg('adm-user-mgmt-agent')">補邏輯——代理 &gt; 詳情彈窗「投注站名稱」依帳號所屬代理線類型變量顯示「總代名稱」／「投注站名稱」（卡 647，期 3）</span><br>17. <span class="x-jump" onclick="showPg('adm-act-old-act-carousel')">規格書隨後台更新——輪播圖素材管理後台新增「Jackpot轮播V2」「新版首页轮播图（新）V2」兩個分頁（結構與原分頁相同），比照原分頁補卡（卡 648～655，期 8）</span><br>18. <span class="x-jump" onclick="showPg('adm-point-mall-point-exchange')">規格書隨後台更新——商品兌換紀錄後台新增「Ichiban Kuji 抽獎紀錄」分頁，比照盲盒抽獎紀錄分頁補搜尋欄與列表國家／幣種卡（卡 656、657，期 8）</span><br><br>調整：<br>1. <span class="x-jump" onclick="showPg('adm-game-mgmt-gm-newgame')">畫面修正——新遊戲入口設置 &gt; 遊戲管理配置分頁 後台畫面搜尋欄國家／幣種下拉移至最前方（國家在前、幣種在後），補齊項次 75 漏改的畫面（卡 240，期 4）</span><br>2. 規格書隨後台更新——三方注單、第三方对局查询、第三方对局查询(首页分类) 三頁列表的「三方遊戲名」欄後台已更新為「三方遊戲用戶名」，規格書國家＋幣種欄的位置句與排列句同步更新欄名，功能內容不變（卡 <span class="x-jump" onclick="goCard(116)">116</span>、<span class="x-jump" onclick="goCard(219)">219</span>、<span class="x-jump" onclick="goCard(223)">223</span>）<br>3. <span class="x-jump" onclick="showPg('adm-game-mgmt-gm-newgame')">規格書隨後台更新——新遊戲入口設置 &gt; 遊戲管理配置分頁 国际化设置彈窗圖片欄位依後台添加／編輯彈窗更新為 9 張（新增 PC端Jackpot Banner游戏图片、移动端Jackpot Banner游戏图片），PC配置（4 張）｜移动端配置（5 張），含示意與後台畫面（卡 585，期 4）</span><br>4. <span class="x-jump" onclick="showPg('adm-data-report-dr-bet')">規格書隨後台更新——平台報表改系統幣的金額欄位清單補列後台既有的「首充金额」（卡 128，期 5）</span><br>5. <span class="x-jump" onclick="showPg('adm-data-report-dr-stationtotal')">規格書隨後台更新——投注站統計國家、幣種欄位置改為「帳號｜國家｜幣種｜站點押金」，鄰欄「全名」更正為後台實際欄位「站點押金」（卡 179，期 5）</span><br>6. <span class="x-jump" onclick="showPg('adm-finance-mgmt-balance-adjust-audit')">補邏輯——修改餘額審批列表「稽核金額」欄依該筆調整的幣種帶出顯示、金額後方顯示幣種代碼（卡 090，期 6）</span><br>7. <span class="x-jump" onclick="showPg('adm-user-mgmt-member')">補邏輯——會員 &gt; 新增會員彈窗「投注站名稱」改為「總代/投注站名稱」，下拉列出全部總代與投注站帳號並與上級代理雙向連動（卡 038，期 1）</span></td>
+        </tr>
       <tr>
           <td class="rec-date">V5.05</td>
           <td class="rec-date">10/12</td>
@@ -2045,7 +2058,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
 
 <!-- ══════════ 期 2 ══════════ -->
 <div class="phase">
-  <div class="ph-head" id="phx-2"><span class="n">期 2</span><span class="t">金流</span><span class="c">59 張（V3 26＋新卡 33） ｜ 交付項 1</span></div>
+  <div class="ph-head" id="phx-2"><span class="n">期 2</span><span class="t">金流</span><span class="c">61 張（V3 26＋新卡 35） ｜ 交付項 1</span></div>
   <div class="ph-body">
 
     <div class="cap">有 V3 對應功能</div>
@@ -2054,7 +2067,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
       <tbody>
         <tr><td class="id">065–068</td><td>財務管理 &gt; 充值紀錄</td></tr>
         <tr><td class="id">069–079</td><td>財務管理 &gt; 提款紀錄</td></tr>
-        <tr><td class="id">080–084</td><td>財務管理 &gt; 資金明細</td></tr>
+        <tr><td class="id">080–084<br>641、642</td><td>財務管理 &gt; 資金明細</td></tr>
         <tr><td class="id">085–086</td><td>財務管理 &gt; 兌換紀錄</td></tr>
         <tr><td class="id">092–094</td><td>財務管理 &gt; 資金明細(新)</td></tr>
         <tr><td class="id">095<br>548</td><td>提現管理 &gt; 提現出款設置</td></tr>
@@ -2082,7 +2095,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
 
 <!-- ══════════ 期 3 ══════════ -->
 <div class="phase">
-  <div class="ph-head" id="phx-3"><span class="n">期 3</span><span class="t">代理線（投注站＋會員）</span><span class="c">52 張（V3 42＋新卡 10）</span></div>
+  <div class="ph-head" id="phx-3"><span class="n">期 3</span><span class="t">代理線（投注站＋會員）</span><span class="c">60 張（V3 42＋新卡 18）</span></div>
   <div class="ph-body">
 
     <div class="cap">有 V3 對應功能</div>
@@ -2090,9 +2103,9 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
       <thead><tr><th>功能編號</th><th>功能項目</th></tr></thead>
       <tbody>
         <tr><td class="id">001–002<br>005–008<br>010</td><td>用戶管理 &gt; 投注站（列表、押金與額度彈窗、詳情）</td></tr>
-        <tr><td class="id">011<br>013–015<br>018–023</td><td>用戶管理 &gt; 大代理（搜尋、列表、資金明細、額度、直屬會員配置）</td></tr>
-        <tr><td class="id">024<br>026–028<br>031–036</td><td>用戶管理 &gt; 代理（搜尋、列表、資金明細、額度、直屬會員配置）</td></tr>
-        <tr><td class="id">037<br>039–043<br>045–046<br>577–580</td><td>用戶管理 &gt; 會員（搜尋、列表、資金明細、額度、信用與存提款欄）</td></tr>
+        <tr><td class="id">011<br>013–015<br>018–023<br>590<br>646</td><td>用戶管理 &gt; 大代理（搜尋、列表、資金明細、額度、直屬會員配置、詳情）</td></tr>
+        <tr><td class="id">024<br>026–028<br>031–036<br>591<br>647</td><td>用戶管理 &gt; 代理（搜尋、列表、資金明細、額度、直屬會員配置、詳情）</td></tr>
+        <tr><td class="id">037<br>039–043<br>045–046<br>577–580<br>589、592<br>639、640<br>645</td><td>用戶管理 &gt; 會員（搜尋、列表、資金明細、額度、信用與存提款欄）</td></tr>
         <tr><td class="id">087–088</td><td>財務管理 &gt; 投注站兌換記錄</td></tr>
         <tr><td class="id">274<br>276–278</td><td>充值配置 &gt; 支付層級配置</td></tr>
         <tr><td class="id">570–575</td><td>系統管理 &gt; 綁定郵箱設置</td></tr>
@@ -2106,20 +2119,20 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
 
 <!-- ══════════ 期 4 ══════════ -->
 <div class="phase">
-  <div class="ph-head" id="phx-4"><span class="n">期 4</span><span class="t">三方 GAME</span><span class="c">47 張（V3 42＋新卡 5）</span></div>
+  <div class="ph-head" id="phx-4"><span class="n">期 4</span><span class="t">三方 GAME</span><span class="c">58 張（V3 42＋新卡 16）</span></div>
   <div class="ph-body">
     <div class="cap">有 V3 對應功能</div>
     <table>
       <thead><tr><th>功能編號</th><th>功能項目</th></tr></thead>
       <tbody>
-        <tr><td class="id">115–118</td><td>數據 &gt; 三方注單</td></tr>
+        <tr><td class="id">115–118<br>626、627</td><td>數據 &gt; 三方注單</td></tr>
         <tr><td class="id">119–122</td><td>數據 &gt; 三方報表</td></tr>
-        <tr><td class="id">124–127</td><td>數據 &gt; 三方遊戲報表(稅收分類)</td></tr>
-        <tr><td class="id">199–201<br>581</td><td>遊戲管理 &gt; 廠商設置</td></tr>
-        <tr><td class="id">218–221</td><td>遊戲管理 &gt; 第三方對局查詢</td></tr>
-        <tr><td class="id">222–225</td><td>遊戲管理 &gt; 第三方對局查詢(首頁分類)</td></tr>
+        <tr><td class="id">124–127<br>632、633</td><td>數據 &gt; 三方遊戲報表(稅收分類)</td></tr>
+        <tr><td class="id">199–201<br>581<br>643</td><td>遊戲管理 &gt; 廠商設置</td></tr>
+        <tr><td class="id">218–221<br>634、635</td><td>遊戲管理 &gt; 第三方對局查詢</td></tr>
+        <tr><td class="id">222–225<br>636、637</td><td>遊戲管理 &gt; 第三方對局查詢(首頁分類)</td></tr>
         <tr><td class="id">226–229</td><td>遊戲管理 &gt; 第三方其他費用</td></tr>
-        <tr><td class="id">230–243<br>246<br>582–585</td><td>遊戲管理 &gt; 新遊戲入口設置</td></tr>
+        <tr><td class="id">230–243<br>246<br>582–585<br>625、644</td><td>遊戲管理 &gt; 新遊戲入口設置</td></tr>
       </tbody>
     </table>
   </div>
@@ -2127,7 +2140,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
 
 <!-- ══════════ 期 4 體育 ══════════ -->
 <div class="phase">
-  <div class="ph-head" id="phx-4s"><span class="n">期 4</span><span class="t">體育</span><span class="c">13 張（V3 13）</span></div>
+  <div class="ph-head" id="phx-4s"><span class="n">期 4</span><span class="t">體育</span><span class="c">17 張（V3 13＋新卡 4）</span></div>
   <div class="ph-body">
     <div class="cap">有 V3 對應功能</div>
     <table>
@@ -2135,7 +2148,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
       <tbody>
         <tr><td class="id">159–161</td><td>數據報表 &gt; 球類報表</td></tr>
         <tr><td class="id">202–203</td><td>遊戲管理 &gt; 交易設置</td></tr>
-        <tr><td class="id">208–214</td><td>遊戲管理 &gt; 投注紀錄</td></tr>
+        <tr><td class="id">208–214<br>628–631</td><td>遊戲管理 &gt; 投注紀錄</td></tr>
         <tr><td class="id">217</td><td>遊戲管理 &gt; 賽事管理</td></tr>
       </tbody>
     </table>
@@ -2144,7 +2157,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
 
 <!-- ══════════ 期 5 ══════════ -->
 <div class="phase">
-  <div class="ph-head" id="phx-5"><span class="n">期 5</span><span class="t">匯總報表</span><span class="c">73 張（V3 68＋新卡 5）</span></div>
+  <div class="ph-head" id="phx-5"><span class="n">期 5</span><span class="t">匯總報表</span><span class="c">74 張（V3 68＋新卡 6）</span></div>
   <div class="ph-body">
     <div class="cap">有 V3 對應功能</div>
     <table>
@@ -2155,7 +2168,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
         <tr><td class="id">129–137</td><td>數據報表 &gt; 投注站報表</td></tr>
         <tr><td class="id">138–146</td><td>數據報表 &gt; 代理報表</td></tr>
         <tr><td class="id">147–158</td><td>數據報表 &gt; 會員報表</td></tr>
-        <tr><td class="id">162–173</td><td>數據報表 &gt; 三方游戏报表(新)</td></tr>
+        <tr><td class="id">162–173<br>638</td><td>數據報表 &gt; 三方游戏报表(新)</td></tr>
         <tr><td class="id">174–177</td><td>數據報表 &gt; 三方游戏报表(汇总)</td></tr>
         <tr><td class="id">178–179</td><td>數據報表 &gt; 投注站统计</td></tr>
         <tr><td class="id">181–184<br>544–547</td><td>數據報表 &gt; 大額存取款報表</td></tr>
@@ -2210,7 +2223,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
 
 <!-- ══════════ 期 8 ══════════ -->
 <div class="phase later">
-  <div class="ph-head" id="phx-8"><span class="n">期 8</span><span class="t">活動</span><span class="c">UAT 範圍外 ｜ V3 202 張</span></div>
+  <div class="ph-head" id="phx-8"><span class="n">期 8</span><span class="t">活動</span><span class="c">UAT 範圍外 ｜ 212 張（V3 202＋新卡 10）</span></div>
   <div class="ph-body">
     <div class="cap">有 V3 對應功能</div>
     <table>
@@ -2222,7 +2235,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
         <tr><td class="id">311–314</td><td>活動配置 &gt; 活动类别管理</td></tr>
         <tr><td class="id">315–317</td><td>活動配置 &gt; 派獎審核</td></tr>
         <tr><td class="id">318–352</td><td>活動配置 &gt; 活動圖素材管理</td></tr>
-        <tr><td class="id">353–384</td><td>活動配置 &gt; 輪播圖素材管理</td></tr>
+        <tr><td class="id">353–384<br>648–655</td><td>活動配置 &gt; 輪播圖素材管理</td></tr>
         <tr><td class="id">385–388</td><td>活動配置 &gt; 獎勵中心活動管理</td></tr>
         <tr><td class="id">389–400</td><td>活動配置 &gt; 任務中心管理</td></tr>
         <tr><td class="id">401–404</td><td>活動配置(新) &gt; 活動列表</td></tr>
@@ -2242,7 +2255,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
         <tr><td class="id">488–491</td><td>積分商城 &gt; 商品類別管理</td></tr>
         <tr><td class="id">492–493</td><td>積分商城 &gt; 用戶積分紀錄</td></tr>
         <tr><td class="id">494–497</td><td>積分商城 &gt; 商品管理</td></tr>
-        <tr><td class="id">498–501</td><td>積分商城 &gt; 商品兌換紀錄</td></tr>
+        <tr><td class="id">498–501<br>656、657</td><td>積分商城 &gt; 商品兌換紀錄</td></tr>
         <tr><td class="id">502–505</td><td>積分商城 &gt; 發卷審核</td></tr>
         <tr><td class="id">506–514</td><td>積分商城 &gt; 優惠卷管理</td></tr>
         <tr><td class="id">515–525</td><td>積分商城 &gt; 免費旋轉管理</td></tr>
@@ -2993,7 +3006,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
   <div class="pg-crumb">管理後台 &gt; 用戶管理 &gt; 大代理</div>
   <div class="pg-overview">
     <h4>本頁改動目標</h4>
-    <div class="ov-dir"><div class="ov-dir-lbl">管理後台：</div><ul class="ov-dir-list"><li>新增大代理時上級代理與國家(<code>nation_code</code>)、幣種(<code>currency</code>)雙向連動過濾，設定後鎖定不可改</li><li>搜尋欄可依國家篩選</li><li>列表帳號、餘額、佣金餘額等依帳號綁定的國家與法幣顯示</li><li>變更代理線、直屬會員轉移僅能選同國家＋幣種的帳號</li><li>變更代理線彈窗依該帳號代理線類型（總代線／投注站線）帶出對應候選資料</li><li>變更代理線彈窗詞條與提示文字依代理線類型變量顯示（「所屬總代」／「所屬投注站」）</li><li>資金明細交易金額改法幣＋系統幣兩行顯示，統計總額改以系統幣(<code>sys_currency</code>)統計</li><li>新增／編輯彈窗的標籤下拉僅顯示與該大代理相同國家的標籤</li><li>標籤切換綁定國家後，該帳號原標注失效不顯示（關聯保留不刪除，切回原國家自動恢復生效）</li></ul></div>
+    <div class="ov-dir"><div class="ov-dir-lbl">管理後台：</div><ul class="ov-dir-list"><li>新增大代理時上級代理與國家(<code>nation_code</code>)、幣種(<code>currency</code>)雙向連動過濾，設定後鎖定不可改</li><li>搜尋欄可依國家篩選</li><li>列表帳號、餘額、佣金餘額等依帳號綁定的國家與法幣顯示</li><li>變更代理線、直屬會員轉移僅能選同國家＋幣種的帳號</li><li>變更代理線彈窗依該帳號代理線類型（總代線／投注站線）帶出對應候選資料</li><li>變更代理線彈窗詞條與提示文字依代理線類型變量顯示（「所屬總代」／「所屬投注站」）</li><li>資金明細交易金額改法幣＋系統幣兩行顯示，統計總額改以系統幣(<code>sys_currency</code>)統計</li><li>新增／編輯彈窗的標籤下拉僅顯示與該大代理相同國家的標籤</li><li>標籤切換綁定國家後，該帳號原標注失效不顯示（關聯保留不刪除，切回原國家自動恢復生效）</li><li>詳情彈窗「投注站名稱」依帳號所屬代理線類型變量顯示「總代名稱」／「投注站名稱」</li></ul></div>
     <div class="ov-dir"><div class="ov-dir-lbl">控制後台：</div><ul class="ov-dir-list"><li>幣種／國家下拉的選項範圍由控制後台的國家與幣種設定向下供給，前端不寫死</li></ul></div>
     <div class="ov-dir"><div class="ov-dir-lbl">前台影響：</div><ul class="ov-dir-list"><li>大代理綁定的國家＋幣種向下決定底下代理、會員的歸屬，間接影響前台會員看到的活動、VIP、幣種顯示等內容</li></ul></div>
   </div>
@@ -3622,12 +3635,28 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
     <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（此為管理後台編輯彈窗設定，不影響前台會員端）</div></div>
     <div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-bag-590"></div></div></div>
   </div>
+
+  <div class="spec-card">
+    <div class="spec-card-hd"><span class="spec-card-num">646</span><span class="spec-card-adj">10/13新增</span></div>
+    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">用戶管理 &gt; 大代理 &gt; 列表 &gt; 操作 &gt; 詳情 &gt; 詳情彈窗 &gt; 總代名稱／投注站名稱</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge mod">調整</span></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">欄位名稱固定為「投注站名稱」，總代線帳號的上級是總代，仍顯示為投注站。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
+      <ol>
+        <li>欄位名稱依該帳號所屬代理線類型變量顯示：總代線顯示「總代名稱」，投注站線顯示「投注站名稱」；位置不變（真實姓名下方）</li>
+        <li>內容顯示該帳號所屬的總代或投注站帳號</li>
+      </ol>
+    </div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">依後端回傳的代理線類型切換欄位名稱「總代名稱」／「投注站名稱」，內容顯示後端回傳的上級帳號。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">詳情 API 回傳該帳號所屬代理線類型（總代／投注站）與所屬上級帳號。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（此為管理後台彈窗顯示，不影響前台會員端）</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-bag-646"></div></div></div>
+  </div>
 </div>
 <div class="pg" id="pg-adm-user-mgmt-agent">
   <div class="pg-crumb">管理後台 &gt; 用戶管理 &gt; 代理</div>
   <div class="pg-overview">
     <h4>本頁改動目標</h4>
-    <div class="ov-dir"><div class="ov-dir-lbl">管理後台：</div><ul class="ov-dir-list"><li>新增代理時上級大代理與國家(<code>nation_code</code>)、幣種(<code>currency</code>)雙向連動過濾，設定後鎖定不可改</li><li>搜尋欄可依國家(<code>nation_code</code>)＋幣種(<code>currency</code>)篩選（兩者連動）</li><li>列表帳號、餘額、佣金餘額依帳號綁定的國家(<code>nation_code</code>)與法幣(<code>currency</code>)顯示</li><li>變更代理線、直屬會員轉移僅能選同國家(<code>nation_code</code>)＋幣種(<code>currency</code>)的帳號</li><li>變更代理線彈窗依該帳號代理線類型（總代線／投注站線）帶出對應候選資料</li><li>變更代理線彈窗詞條與提示文字依代理線類型變量顯示（「所屬總代」／「所屬投注站」）</li><li>資金明細交易金額改法幣(<code>currency</code>)＋系統幣(<code>sys_currency</code>)兩行顯示，統計總額改以系統幣(<code>sys_currency</code>)統計</li><li>新增／編輯彈窗的標籤下拉僅顯示與該代理相同國家的標籤</li><li>標籤切換綁定國家後，該帳號原標注失效不顯示（關聯保留不刪除，切回原國家自動恢復生效）</li></ul></div>
+    <div class="ov-dir"><div class="ov-dir-lbl">管理後台：</div><ul class="ov-dir-list"><li>新增代理時上級大代理與國家(<code>nation_code</code>)、幣種(<code>currency</code>)雙向連動過濾，設定後鎖定不可改</li><li>搜尋欄可依國家(<code>nation_code</code>)＋幣種(<code>currency</code>)篩選（兩者連動）</li><li>列表帳號、餘額、佣金餘額依帳號綁定的國家(<code>nation_code</code>)與法幣(<code>currency</code>)顯示</li><li>變更代理線、直屬會員轉移僅能選同國家(<code>nation_code</code>)＋幣種(<code>currency</code>)的帳號</li><li>變更代理線彈窗依該帳號代理線類型（總代線／投注站線）帶出對應候選資料</li><li>變更代理線彈窗詞條與提示文字依代理線類型變量顯示（「所屬總代」／「所屬投注站」）</li><li>資金明細交易金額改法幣(<code>currency</code>)＋系統幣(<code>sys_currency</code>)兩行顯示，統計總額改以系統幣(<code>sys_currency</code>)統計</li><li>新增／編輯彈窗的標籤下拉僅顯示與該代理相同國家的標籤</li><li>標籤切換綁定國家後，該帳號原標注失效不顯示（關聯保留不刪除，切回原國家自動恢復生效）</li><li>詳情彈窗「投注站名稱」依帳號所屬代理線類型變量顯示「總代名稱」／「投注站名稱」</li></ul></div>
     <div class="ov-dir"><div class="ov-dir-lbl">控制後台：</div><ul class="ov-dir-list"><li>幣種(<code>currency</code>)／國家(<code>nation_code</code>)下拉的選項範圍由控制後台的國家與幣種設定向下供給，前端不寫死</li></ul></div>
     <div class="ov-dir"><div class="ov-dir-lbl">前台影響：</div><ul class="ov-dir-list"><li>代理綁定的國家(<code>nation_code</code>)＋幣種(<code>currency</code>)向下決定底下會員的歸屬，間接影響前台會員看到的內容</li></ul></div>
   </div>
@@ -3889,12 +3918,28 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
     <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（此為管理後台編輯彈窗設定，不影響前台會員端）</div></div>
     <div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-agp-591"></div></div></div>
   </div>
+
+  <div class="spec-card">
+    <div class="spec-card-hd"><span class="spec-card-num">647</span><span class="spec-card-adj">10/13新增</span></div>
+    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">用戶管理 &gt; 代理 &gt; 列表 &gt; 操作 &gt; 詳情 &gt; 詳情彈窗 &gt; 總代名稱／投注站名稱</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge mod">調整</span></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">欄位名稱固定為「投注站名稱」，總代線帳號的上級是總代，仍顯示為投注站。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
+      <ol>
+        <li>欄位名稱依該帳號所屬代理線類型變量顯示：總代線顯示「總代名稱」，投注站線顯示「投注站名稱」；位置不變（真實姓名下方）</li>
+        <li>內容顯示該帳號所屬的總代或投注站帳號</li>
+      </ol>
+    </div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">依後端回傳的代理線類型切換欄位名稱「總代名稱」／「投注站名稱」，內容顯示後端回傳的上級帳號。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">詳情 API 回傳該帳號所屬代理線類型（總代／投注站）與所屬上級帳號。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（此為管理後台彈窗顯示，不影響前台會員端）</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-agp-647"></div></div></div>
+  </div>
 </div>
 <div class="pg" id="pg-adm-user-mgmt-member">
   <div class="pg-crumb">管理後台 &gt; 用戶管理 &gt; 會員</div>
   <div class="pg-overview">
     <h4>本頁改動目標</h4>
-    <div class="ov-dir"><div class="ov-dir-lbl">管理後台：</div><ul class="ov-dir-list"><li>搜尋欄新增幣種(<code>currency</code>)篩選（與國家(<code>nation_code</code>)連動）</li><li>最小／最大金額查詢依幣種——未指定幣種以系統幣(<code>sys_currency</code>)、指定幣種以該幣種(<code>currency</code>)</li><li>新增會員時，國家(<code>nation_code</code>)、幣種(<code>currency</code>)依上級代理連動帶出，設定後鎖定不可改</li><li>上級代理與投注站名稱雙向連動篩選</li><li>列表會員信息欄位、信用 &amp; 额度、存提款依該會員綁定的國家(<code>nation_code</code>)與法幣(<code>currency</code>)顯示</li><li>資金明細彈窗交易金額改法幣(<code>currency_amount</code>)＋系統幣(<code>sys_amount</code>)兩行、統計總額改系統幣(<code>sys_currency</code>)</li><li>金額搜尋以該會員法幣為單位</li><li>編輯用戶彈窗的會員標籤僅顯示與該會員相同國家的標籤</li><li>標籤切換綁定國家後，該會員原標注失效不顯示（關聯保留不刪除，切回原國家自動恢復生效）</li><li>批量操作（更新用户资讯／余额／积分／额度修改）限同國家(<code>nation_code</code>)＋幣種(<code>currency</code>)：以第一個帳號為基準，不符帳號反紅、由操作人員手動刪除</li><li>各批量彈窗帳號下方新增國家、幣種顯示（帶入基準組合）</li><li>批量更新用户资讯的用户等级、会员层级、會員標籤下拉依基準組合渲染對應名稱</li></ul></div>
+    <div class="ov-dir"><div class="ov-dir-lbl">管理後台：</div><ul class="ov-dir-list"><li>搜尋欄新增幣種(<code>currency</code>)篩選（與國家(<code>nation_code</code>)連動）</li><li>最小／最大金額查詢依幣種——未指定幣種以系統幣(<code>sys_currency</code>)、指定幣種以該幣種(<code>currency</code>)</li><li>新增會員時，國家(<code>nation_code</code>)、幣種(<code>currency</code>)依上級代理連動帶出，設定後鎖定不可改</li><li>上級代理與總代/投注站名稱雙向連動篩選</li><li>列表會員信息欄位、信用 &amp; 额度、存提款依該會員綁定的國家(<code>nation_code</code>)與法幣(<code>currency</code>)顯示</li><li>資金明細彈窗交易金額改法幣(<code>currency_amount</code>)＋系統幣(<code>sys_amount</code>)兩行、統計總額改系統幣(<code>sys_currency</code>)</li><li>金額搜尋以該會員法幣為單位</li><li>編輯用戶彈窗的會員標籤僅顯示與該會員相同國家的標籤</li><li>標籤切換綁定國家後，該會員原標注失效不顯示（關聯保留不刪除，切回原國家自動恢復生效）</li><li>批量操作（更新用户资讯／余额／积分／额度修改）限同國家(<code>nation_code</code>)＋幣種(<code>currency</code>)：以第一個帳號為基準，不符帳號反紅、由操作人員手動刪除</li><li>各批量彈窗帳號下方新增國家、幣種顯示（帶入基準組合）</li><li>批量更新用户资讯的用户等级、会员层级、會員標籤下拉依基準組合渲染對應名稱</li><li>搜尋欄「所有投注站」下拉改為「所有總代/投注站」（固定三選項後列全部總代與投注站帳號）；會員信息欄位「投注站代碼」依會員所屬代理線類型變量顯示「總代代碼」／「投注站代碼」，內容為所屬的總代或投注站代碼</li><li>新增會員彈窗「投注站名稱」改為「總代/投注站名稱」，列出全部總代與投注站帳號並與上級代理雙向連動；編輯用戶彈窗「投注站名稱」依會員所屬代理線類型變量顯示「總代名稱」／「投注站名稱」</li></ul></div>
     <div class="ov-dir"><div class="ov-dir-lbl">控制後台：</div><ul class="ov-dir-list"><li>幣種(<code>currency</code>)／國家(<code>nation_code</code>)下拉的選項範圍由控制後台的國家與幣種設定向下供給，前端不寫死</li></ul></div>
     <div class="ov-dir"><div class="ov-dir-lbl">前台影響：</div><ul class="ov-dir-list"><li>會員綁定的國家(<code>nation_code</code>)＋幣種(<code>currency</code>)直接決定其在前台看到的活動、VIP、幣種顯示等內容</li></ul></div>
   </div>
@@ -3929,21 +3974,22 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
 
 
   <div class="spec-card">
-    <div class="spec-card-hd"><span class="spec-card-num">038</span></div>
+    <div class="spec-card-hd"><span class="spec-card-num">038</span><span class="spec-card-adj">10/13調整</span></div>
     <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">用戶管理 &gt; 會員 &gt; 新增會員 &gt; 彈窗</div></div>
     <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge mod">調整</span></div></div>
-    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">新增會員彈窗現有國家、幣種為下拉選單（國家寫死、幣種需手動挑選）；投注站下拉不依上級代理連動，仍顯示所有投注站，即使選了與上級代理不符的投注站，系統仍自動帶入上級代理的投注站。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">新增會員彈窗現有國家、幣種為下拉選單（國家寫死、幣種需手動挑選）；投注站下拉不依上級代理連動，仍顯示所有投注站，即使選了與上級代理不符的投注站，系統仍自動帶入上級代理的投注站；欄位名稱固定為「投注站名稱」，無法選擇總代。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
       <ol>
-        <li>彈窗欄位由上而下為 上級代理｜國家｜幣種｜投注站名稱</li>
-        <li>上級代理、投注站名稱為下拉選單；國家(<code>nation_code</code>)、幣種(<code>currency</code>)改為純文字唯讀（不再是下拉）</li>
+        <li>彈窗欄位由上而下為 上級代理｜國家｜幣種｜總代/投注站名稱</li>
+        <li>上級代理、總代/投注站名稱為下拉選單；國家(<code>nation_code</code>)、幣種(<code>currency</code>)改為純文字唯讀（不再是下拉）</li>
         <li>國家、幣種於選定上級代理後，自動帶出該上級代理綁定的國家與幣種；未選上級代理前顯示「－」</li>
-        <li>上級代理與投注站名稱雙向連動：先選上級代理→投注站名稱下拉選項縮成該上級代理的投注站（仍需手動點選、不自動選好）；先選投注站→上級代理下拉選項縮成該投注站內的大代理與代理帳號</li>
+        <li>「總代/投注站名稱」下拉列出全部總代與投注站帳號，直接顯示帳號</li>
+        <li>上級代理與總代/投注站名稱雙向連動：先選上級代理→總代/投注站名稱下拉選項縮成該上級代理所屬的總代或投注站（仍需手動點選、不自動選好）；先選總代或投注站→上級代理下拉選項縮成該總代或投注站底下的大代理與代理帳號</li>
         <li>國家、幣種一經設定後不可更改</li>
       </ol>
     </div></div>
-    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">上級代理、投注站名稱為連動下拉（選項互相縮減、皆需手動點選）；國家(<code>nation_code</code>)、幣種(<code>currency</code>)為唯讀純文字，於上級代理選定後帶出、未選前顯示「－」；送出前驗證上級代理與投注站名稱不可為空。</div></div>
-    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">提供上級代理（大代理／代理／投注站）與投注站清單 API 及其相互對應關係；提供上級代理對應綁定的國家(<code>nation_code</code>)與幣種(<code>currency</code>)供帶出。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">上級代理、總代/投注站名稱為連動下拉（選項互相縮減、皆需手動點選）；國家(<code>nation_code</code>)、幣種(<code>currency</code>)為唯讀純文字，於上級代理選定後帶出、未選前顯示「－」；送出前驗證上級代理與總代/投注站名稱不可為空。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">提供上級代理（大代理／代理）與總代、投注站帳號清單 API 及其相互對應關係；提供上級代理對應綁定的國家(<code>nation_code</code>)與幣種(<code>currency</code>)供帶出。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">會員綁定的國家＋幣種決定其前台可見內容（活動、VIP、幣種顯示等），一經設定不可更改。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-member-004"></div></div></div>
   </div>
@@ -4185,6 +4231,55 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
     <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">層級選項 API 依帳號國家＋幣種回傳對應層級清單。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（此為管理後台編輯彈窗設定，不影響前台會員端）</div></div>
     <div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-mem-592"></div></div></div>
+  </div>
+
+  <div class="spec-card">
+    <div class="spec-card-hd"><span class="spec-card-num">639</span><span class="spec-card-adj">10/13新增</span></div>
+    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">用戶管理 &gt; 會員 &gt; 上方搜尋欄 &gt; 所有總代/投注站</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge mod">調整</span></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">搜尋欄「所有投注站」下拉第一個選項為「所有投注站」，其後僅列出投注站帳號，無法選擇總代。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
+      <ol>
+        <li>下拉名稱改為「所有總代/投注站」</li>
+        <li>選項順序固定：「所有總代/投注站」第一位並設為預設，「所有總代」第二位，「所有投注站」第三位，其後列出全部總代與投注站帳號，直接顯示帳號</li>
+        <li>查詢依所選項目篩選：「所有總代/投注站」查全部會員；「所有總代」僅查總代線會員；「所有投注站」僅查投注站線會員；選單一帳號僅查該帳號底下的會員</li>
+      </ol>
+    </div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">下拉名稱與三個固定選項調整；帳號選項由後端回傳，不寫死。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">帳號選項 API 回傳全部總代與投注站帳號及其類型（總代／投注站）；會員列表查詢 API 支援依類型（總代／投注站）或單一上級帳號篩選。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（此為管理後台查詢與列表顯示，不影響前台會員端）</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-mem-639"></div></div></div>
+  </div>
+
+  <div class="spec-card">
+    <div class="spec-card-hd"><span class="spec-card-num">640</span><span class="spec-card-adj">10/13新增</span></div>
+    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">用戶管理 &gt; 會員 &gt; 列表 &gt; 會員信息欄位 &gt; 總代代碼／投注站代碼</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge mod">調整</span></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">會員信息欄位內固定顯示「投注站代碼」一行，不分會員所屬代理線類型，總代線會員無法顯示所屬上級。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
+      <ol>
+        <li>名稱依該會員所屬代理線類型變量顯示：總代線會員顯示「總代代碼」，投注站線會員顯示「投注站代碼」；位置不變（設備類型與國家之間）</li>
+        <li>內容顯示該會員所屬的總代或投注站代碼</li>
+      </ol>
+    </div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">依後端回傳的代理線類型切換名稱「總代代碼」／「投注站代碼」，內容顯示後端回傳的上級帳號代碼。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">會員列表 API 回傳該會員所屬代理線類型（總代／投注站）與所屬上級帳號的代碼。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（此為管理後台列表顯示，不影響前台會員端）</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-mem-640"></div></div></div>
+  </div>
+
+  <div class="spec-card">
+    <div class="spec-card-hd"><span class="spec-card-num">645</span><span class="spec-card-adj">10/13新增</span></div>
+    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">用戶管理 &gt; 會員 &gt; 列表 &gt; 操作 &gt; 編輯用戶 &gt; 編輯用戶彈窗 &gt; 總代名稱／投注站名稱</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge mod">調整</span></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">欄位名稱固定為「投注站名稱」，總代線會員的上級是總代，仍顯示為投注站。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
+      <ol>
+        <li>欄位名稱依該會員所屬代理線類型變量顯示：總代線會員顯示「總代名稱」，投注站線會員顯示「投注站名稱」；位置不變（會員層級下方）</li>
+        <li>內容顯示該會員所屬的總代或投注站帳號</li>
+      </ol>
+    </div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">依後端回傳的代理線類型切換欄位名稱「總代名稱」／「投注站名稱」，內容顯示後端回傳的上級帳號。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">編輯用戶資料 API 回傳該會員所屬代理線類型（總代／投注站）與所屬上級帳號。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（此為管理後台彈窗顯示，不影響前台會員端）</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-mem-645"></div></div></div>
   </div>
 </div>
 <div class="pg" id="pg-adm-user-mgmt-tag-config">
@@ -4937,7 +5032,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
   <div class="pg-tabpane" data-tabgroup="funddetail" data-tab="fd">
   <div class="pg-overview">
     <h4>本頁改動目標</h4>
-    <div class="ov-dir"><div class="ov-dir-lbl">管理後台：</div><ul class="ov-dir-list"><li>搜尋欄新增國家(<code>nation_code</code>)＋幣種(<code>currency</code>)單選下拉（雙向連動）</li><li>查詢依交易所屬會員的國家(<code>nation_code</code>)＋幣種(<code>currency</code>)過濾</li><li>最小／最大金額查詢（既有）改為依幣種區別單位（全部幣種以系統幣(<code>sys_currency</code>)、指定幣種以該幣種）</li><li>交易金額、統計數據等欄位依所屬幣種呈現</li></ul></div>
+    <div class="ov-dir"><div class="ov-dir-lbl">管理後台：</div><ul class="ov-dir-list"><li>搜尋欄新增國家(<code>nation_code</code>)＋幣種(<code>currency</code>)單選下拉（雙向連動）</li><li>查詢依交易所屬會員的國家(<code>nation_code</code>)＋幣種(<code>currency</code>)過濾</li><li>最小／最大金額查詢（既有）改為依幣種區別單位（全部幣種以系統幣(<code>sys_currency</code>)、指定幣種以該幣種）</li><li>交易金額、統計數據等欄位依所屬幣種呈現</li><li>搜尋欄「所有投注站」下拉改為「所有總代/投注站」（固定三選項後列全部總代與投注站帳號）；列表「所屬投注站」欄改為「所屬總代/投注站」，顯示會員所屬的總代或投注站帳號</li></ul></div>
     <div class="ov-dir"><div class="ov-dir-lbl">控制後台：</div><ul class="ov-dir-list"><li>國家(<code>nation_code</code>)／幣種(<code>currency</code>)下拉的選項範圍由控制後台的國家與幣種設定向下供給，前端不寫死</li></ul></div>
     <div class="ov-dir"><div class="ov-dir-lbl">前台影響：</div><ul class="ov-dir-list"><li>無（此為管理後台資金明細查詢與顯示，不影響前台會員端）</li></ul></div>
   </div>
@@ -4986,6 +5081,39 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
     <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">渲染統計數據時，幣種代碼固定顯示系統幣代碼，數值顯示後端回傳的系統幣統計金額。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">統計數據改以 <code>sys_amount</code> 計算並回傳。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（系統幣數值係後台依匯率換算後之顯示，會員端不涉及系統幣、僅以法幣呈現，不影響前台）</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-ff-005"></div></div></div>
+  </div>
+
+  <div class="spec-card">
+    <div class="spec-card-hd"><span class="spec-card-num">641</span><span class="spec-card-adj">10/13新增</span></div>
+    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">財務管理 &gt; 資金明細 &gt; 資金明細分頁 &gt; 上方搜尋欄 &gt; 所有總代/投注站</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge mod">調整</span></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">搜尋欄「所有投注站」下拉第一個選項為「所有投注站」，其後僅列出投注站帳號，無法選擇總代。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
+      <ol>
+        <li>下拉名稱改為「所有總代/投注站」</li>
+        <li>選項順序固定：「所有總代/投注站」第一位並設為預設，「所有總代」第二位，「所有投注站」第三位，其後列出全部總代與投注站帳號，直接顯示帳號</li>
+        <li>查詢依所選項目篩選：「所有總代/投注站」查全部交易；「所有總代」僅查總代線會員的交易；「所有投注站」僅查投注站線會員的交易；選單一帳號僅查該帳號底下會員的交易</li>
+      </ol>
+    </div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">下拉名稱與三個固定選項調整；帳號選項由後端回傳，不寫死。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">帳號選項 API 回傳全部總代與投注站帳號及其類型（總代／投注站）；資金明細查詢 API 支援依類型（總代／投注站）或單一上級帳號篩選。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（此為管理後台查詢篩選功能，不影響前台會員端）</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-ff-641"></div></div></div>
+  </div>
+
+  <div class="spec-card">
+    <div class="spec-card-hd"><span class="spec-card-num">642</span><span class="spec-card-adj">10/13新增</span></div>
+    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">財務管理 &gt; 資金明細 &gt; 資金明細分頁 &gt; 列表 &gt; 所屬總代/投注站</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge mod">調整</span></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">列表「所屬投注站」欄僅顯示投注站帳號，總代線會員的交易無法顯示所屬上級。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
+      <ol>
+        <li>欄名改為「所屬總代/投注站」，位置不變（交易時間與所屬代理之間）</li>
+        <li>顯示該筆交易會員所屬的總代或投注站帳號</li>
+      </ol>
+    </div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">欄名調整，讀取後端回傳的總代或投注站帳號顯示。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">列表 API 回傳該會員所屬的總代或投注站帳號。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（此為管理後台列表顯示，不影響前台會員端）</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-ff-642"></div></div></div>
   </div>
 </div>
 
@@ -5135,18 +5263,19 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
   </div>
 
   <div class="spec-card">
-    <div class="spec-card-hd"><span class="spec-card-num">090</span></div>
-    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">財務管理 &gt; 修改餘額審批 &gt; 列表 &gt; 調整金額欄位</div></div>
+    <div class="spec-card-hd"><span class="spec-card-num">090</span><span class="spec-card-adj">10/13調整</span></div>
+    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">財務管理 &gt; 修改餘額審批 &gt; 列表 &gt; 調整金額、稽核金額欄位</div></div>
     <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge new">新增</span></div></div>
-    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">調整金額欄位未依該帳號綁定法幣顯示、金額後方未顯示幣種。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">調整金額、稽核金額欄位未依該帳號綁定法幣顯示、金額後方未顯示幣種。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
       <ol>
         <li>調整金額以法幣(<code>currency</code>)顯示，金額後方同時顯示幣種代碼（格式「數字(幣種代碼)」）</li>
+        <li>稽核金額依該筆調整的幣種帶出顯示，金額後方同時顯示幣種代碼（格式「數字(幣種代碼)」）</li>
         <li>導出內容同步套用相同規則</li>
       </ol>
     </div></div>
-    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">渲染調整金額欄位時依法幣(<code>currency</code>)顯示，格式為「數字(幣種代碼)」。</div></div>
-    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">調整金額欄位回傳資料需包含金額與對應法幣代碼(<code>currency</code>)。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">渲染調整金額、稽核金額欄位時依法幣(<code>currency</code>)顯示，格式為「數字(幣種代碼)」。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">調整金額、稽核金額欄位回傳資料需包含金額與對應法幣代碼(<code>currency</code>)。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（此為管理後台列表顯示，不影響前台會員端）</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-fba-003"></div></div></div>
   </div>
 
@@ -5605,7 +5734,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
   <div class="pg-crumb">管理後台 &gt; 數據 &gt; 三方注單</div>
   <div class="pg-overview">
     <h4>本頁改動目標</h4>
-    <div class="ov-dir"><div class="ov-dir-lbl">管理後台：</div><ul class="ov-dir-list"><li>搜尋欄新增國家＋幣種篩選（均單選、雙向連動，預設全部國家＋全部幣種，依下注會員所屬國家＋幣種過濾）</li><li>列表在三方遊戲名與下注金額間新增國家與幣種兩欄（顯示下注會員所屬）</li><li>列表各金額欄位改法幣＋系統幣兩行顯示</li><li>統計數據改以系統幣統計，統計區固定顯示「統計金額單位：系統幣（例：USDT）」</li></ul></div>
+    <div class="ov-dir"><div class="ov-dir-lbl">管理後台：</div><ul class="ov-dir-list"><li>搜尋欄新增國家＋幣種篩選（均單選、雙向連動，預設全部國家＋全部幣種，依下注會員所屬國家＋幣種過濾）</li><li>列表在三方遊戲用戶名與下注金額間新增國家與幣種兩欄（顯示下注會員所屬）</li><li>列表各金額欄位改法幣＋系統幣兩行顯示</li><li>統計數據改以系統幣統計，統計區固定顯示「統計金額單位：系統幣（例：USDT）」</li></ul></div>
     <div class="ov-dir"><div class="ov-dir-lbl">控制後台：</div><ul class="ov-dir-list"><li>系統幣換算所用匯率(<code>sys_rate</code>)由控制後台的匯率設定向下供給，前端不寫死</li></ul></div>
     <div class="ov-dir"><div class="ov-dir-lbl">前台影響：</div><ul class="ov-dir-list"><li>無（此為後台查詢／報表功能，不影響前台會員端）</li></ul></div>
   </div>
@@ -5630,13 +5759,13 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
   </div>
 
   <div class="spec-card">
-    <div class="spec-card-hd"><span class="spec-card-num">116</span><span class="spec-card-adj">9/8調整</span></div>
+    <div class="spec-card-hd"><span class="spec-card-num">116</span><span class="spec-card-adj">9/8調整</span><span class="spec-card-adj">10/13調整</span></div>
     <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">數據 &gt; 三方注單 &gt; 列表 &gt; 國家＋幣種</div></div>
     <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge new">新增</span></div></div>
     <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">列表沒有國家與幣種欄位。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
       <ol>
-        <li>在「三方遊戲名」與「下注金額」欄之間新增「國家」(<code>nation_code</code>)與「幣種」(<code>currency</code>)兩個欄位，排列為「三方遊戲名｜國家｜幣種｜下注金額」</li>
+        <li>在「三方遊戲用戶名」與「下注金額」欄之間新增「國家」(<code>nation_code</code>)與「幣種」(<code>currency</code>)兩個欄位，排列為「三方遊戲用戶名｜國家｜幣種｜下注金額」</li>
         <li>國家顯示下注會員所屬的國家</li>
         <li>幣種顯示該會員使用的幣種(<code>currency</code>)（即該筆注單的幣種）</li>
       </ol>
@@ -5678,6 +5807,39 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
     <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">提示文字「統計金額單位：系統幣（例：USDT）」與統計數據同步顯示，放在統計按鈕左側，提示文字在統計數據前方。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">統計數據改以系統幣 <code>sys_amount</code> 計算並回傳。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（系統幣數值係後台依匯率換算後之顯示，會員端不涉及系統幣、僅以法幣呈現，不影響前台）</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-db-002"></div></div></div>
+  </div>
+
+  <div class="spec-card">
+    <div class="spec-card-hd"><span class="spec-card-num">626</span><span class="spec-card-adj">10/13新增</span></div>
+    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">數據 &gt; 三方注單 &gt; 上方搜尋欄 &gt; 所有總代/投注站</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge mod">調整</span></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">搜尋欄「所有投注站」下拉第一個選項為「所有投注站」，其後僅列出投注站帳號，無法選擇總代。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
+      <ol>
+        <li>下拉名稱改為「所有總代/投注站」</li>
+        <li>選項順序固定：「所有總代/投注站」第一位並設為預設，「所有總代」第二位，「所有投注站」第三位，其後列出全部總代與投注站帳號，直接顯示帳號</li>
+        <li>查詢依所選項目篩選：「所有總代/投注站」查全部注單；「所有總代」僅查總代線會員的注單；「所有投注站」僅查投注站線會員的注單；選單一帳號僅查該帳號底下會員的注單</li>
+      </ol>
+    </div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">下拉名稱與三個固定選項調整；帳號選項由後端回傳，不寫死。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">帳號選項 API 回傳全部總代與投注站帳號及其類型（總代／投注站）；三方注單查詢 API 支援依類型（總代／投注站）或單一上級帳號篩選。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（此為後台查詢篩選功能，不影響前台會員端）</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-db-626"></div></div></div>
+  </div>
+
+  <div class="spec-card">
+    <div class="spec-card-hd"><span class="spec-card-num">627</span><span class="spec-card-adj">10/13新增</span></div>
+    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">數據 &gt; 三方注單 &gt; 列表 &gt; 總代/投注站ID</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge mod">調整</span></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">列表「投注站ID」欄僅顯示投注站帳號的 ID，總代線會員的注單無法顯示所屬上級。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
+      <ol>
+        <li>欄名改為「總代/投注站ID」，位置不變（渠道類型與稅收分類之間）</li>
+        <li>顯示該筆注單會員所屬上級帳號（總代或投注站）的 ID</li>
+      </ol>
+    </div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">欄名調整，讀取後端回傳的上級帳號 ID 顯示。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">列表 API 回傳該會員所屬上級帳號（總代或投注站）的 ID。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（此為後台列表顯示，不影響前台會員端）</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-db-627"></div></div></div>
   </div>
 </div>
 <div class="pg" id="pg-adm-data-mgmt-third-report">
@@ -5791,7 +5953,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
   <div class="pg-crumb">管理後台 &gt; 數據 &gt; 三方遊戲報表(稅收分類)</div>
   <div class="pg-overview">
     <h4>本頁改動目標</h4>
-    <div class="ov-dir"><div class="ov-dir-lbl">管理後台：</div><ul class="ov-dir-list"><li>搜尋欄新增國家＋幣種篩選（均單選、雙向連動，預設全部國家＋全部幣種，依下注會員所屬國家＋幣種過濾）</li><li>列表在廠商遊戲與渠道類型間新增國家與幣種兩欄（依下注會員的國家＋幣種歸屬統計，同遊戲各組合各產生一條數據）</li><li>欄位上方統計數據與列表金額欄位改以系統幣計算並顯示</li></ul></div>
+    <div class="ov-dir"><div class="ov-dir-lbl">管理後台：</div><ul class="ov-dir-list"><li>搜尋欄新增國家＋幣種篩選（均單選、雙向連動，預設全部國家＋全部幣種，依下注會員所屬國家＋幣種過濾）</li><li>列表在廠商遊戲與渠道類型間新增國家與幣種兩欄（依下注會員的國家＋幣種歸屬統計，同遊戲各組合各產生一條數據）</li><li>欄位上方統計數據與列表金額欄位改以系統幣計算並顯示</li><li>搜尋欄「所有投注站」下拉改為「所有總代/投注站」（固定三選項後列全部總代與投注站帳號）；列表「投注站ID」欄改為「總代/投注站ID」，顯示該列統計所歸屬的總代或投注站 ID</li></ul></div>
     <div class="ov-dir"><div class="ov-dir-lbl">控制後台：</div><ul class="ov-dir-list"><li>系統幣換算所用匯率(<code>sys_rate</code>)由控制後台的匯率設定向下供給，前端不寫死</li></ul></div>
     <div class="ov-dir"><div class="ov-dir-lbl">前台影響：</div><ul class="ov-dir-list"><li>無（此為後台查詢／報表功能，不影響前台會員端）</li></ul></div>
   </div>
@@ -5864,6 +6026,39 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
     <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">各金額欄位回傳資料需同時包含法幣金額(<code>currency_amount</code>)（含幣種代碼）與換算後的系統幣金額(<code>sys_amount</code>)。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（系統幣數值係後台依匯率換算後之顯示，會員端不涉及系統幣、僅以法幣呈現，不影響前台）</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-dg-002"></div></div></div>
   </div>
+
+  <div class="spec-card">
+    <div class="spec-card-hd"><span class="spec-card-num">632</span><span class="spec-card-adj">10/13新增</span></div>
+    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">數據 &gt; 三方遊戲報表(稅收分類) &gt; 上方搜尋欄 &gt; 所有總代/投注站</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge mod">調整</span></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">搜尋欄「所有投注站」下拉第一個選項為「所有投注站」，其後僅列出投注站帳號，無法選擇總代。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
+      <ol>
+        <li>下拉名稱改為「所有總代/投注站」</li>
+        <li>選項順序固定：「所有總代/投注站」第一位並設為預設，「所有總代」第二位，「所有投注站」第三位，其後列出全部總代與投注站帳號，直接顯示帳號</li>
+        <li>查詢依所選項目篩選：「所有總代/投注站」統計全部注單；「所有總代」僅統計總代線會員的注單；「所有投注站」僅統計投注站線會員的注單；選單一帳號僅統計該帳號底下會員的注單</li>
+      </ol>
+    </div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">下拉名稱與三個固定選項調整；帳號選項由後端回傳，不寫死。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">帳號選項 API 回傳全部總代與投注站帳號及其類型（總代／投注站）；報表查詢 API 支援依類型（總代／投注站）或單一上級帳號篩選。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（此為管理後台查詢與列表顯示，不影響前台會員端）</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-dg-632"></div></div></div>
+  </div>
+
+  <div class="spec-card">
+    <div class="spec-card-hd"><span class="spec-card-num">633</span><span class="spec-card-adj">10/13新增</span></div>
+    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">數據 &gt; 三方遊戲報表(稅收分類) &gt; 列表 &gt; 總代/投注站ID</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge mod">調整</span></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">列表「投注站ID」欄僅顯示投注站帳號的 ID，總代線會員的注單無法顯示所屬上級。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
+      <ol>
+        <li>欄名改為「總代/投注站ID」，位置不變（渠道類型與會員數之間）</li>
+        <li>顯示該列統計所歸屬的總代或投注站 ID</li>
+      </ol>
+    </div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">欄名調整，讀取後端回傳的總代或投注站 ID 顯示。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">列表 API 回傳該列統計所歸屬的總代或投注站 ID。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（此為管理後台查詢與列表顯示，不影響前台會員端）</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-dg-633"></div></div></div>
+  </div>
 </div>
 <div class="pg" id="pg-adm-data-report-dr-bet">
   <div class="pg-crumb">管理後台 &gt; 數據報表 &gt; 平台報表</div>
@@ -5875,13 +6070,13 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
   </div>
 
   <div class="spec-card">
-    <div class="spec-card-hd"><span class="spec-card-num">128</span></div>
+    <div class="spec-card-hd"><span class="spec-card-num">128</span><span class="spec-card-adj">10/13調整</span></div>
     <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">數據報表 &gt; 平台報表 &gt; 列表 &gt; 欄位</div></div>
     <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge mod">調整</span></div></div>
     <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">列表各金額欄位以法幣金額顯示，不同幣種帳號的數值混在同一份報表，無法直接比較與加總。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
       <ol>
-        <li>以下金額相關欄位統一改以系統幣顯示：用户总余额、存款、提款、淨存提、平台流水、平台有效流水、平台游戏盈利额、活动费用、活动费用/平台流水、活动费用VS游戏盈利额、游戏净盈利、Jackpot派彩、免费旋转输赢</li>
+        <li>以下金額相關欄位統一改以系統幣顯示：首充金额、用户总余额、存款、提款、淨存提、平台流水、平台有效流水、平台游戏盈利额、活动费用、活动费用/平台流水、活动费用VS游戏盈利额、游戏净盈利、Jackpot派彩、免费旋转输赢</li>
         <li>系統幣數值由後端依匯率(<code>sys_rate</code>)換算後回傳，前端直接顯示、不在前端換算</li>
         <li>列表調整後，導出內容須比照同步，各欄位依調整後的呈現方式輸出。</li>
       </ol>
@@ -6632,7 +6827,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
   <div class="pg-crumb">管理後台 &gt; 數據報表 &gt; 三方游戏报表(新)</div>
   <div class="pg-overview">
     <h4>本頁改動目標</h4>
-    <div class="ov-dir"><div class="ov-dir-lbl">管理後台：</div><ul class="ov-dir-list"><li>搜尋欄新增國家＋幣種篩選（均單選、雙向連動，預設全部國家＋全部幣種，依下注會員所屬國家＋幣種過濾）</li><li>列表新增國家與幣種兩欄，顯示下注會員所屬的國家＋幣種</li><li>統計數據改以系統幣統計</li><li>金額欄位與各跳轉明細頁改法幣＋系統幣兩行顯示（注單詳情彈窗依規格顯示法幣）</li><li>底部總計為純數值相加，全部幣種篩選時不顯示總計</li></ul></div>
+    <div class="ov-dir"><div class="ov-dir-lbl">管理後台：</div><ul class="ov-dir-list"><li>搜尋欄新增國家＋幣種篩選（均單選、雙向連動，預設全部國家＋全部幣種，依下注會員所屬國家＋幣種過濾）</li><li>列表新增國家與幣種兩欄，顯示下注會員所屬的國家＋幣種</li><li>統計數據改以系統幣統計</li><li>金額欄位與各跳轉明細頁改法幣＋系統幣兩行顯示（注單詳情彈窗依規格顯示法幣）</li><li>底部總計為純數值相加，全部幣種篩選時不顯示總計</li><li>搜尋欄「所有投注站」下拉改為「所有總代/投注站」（固定三選項後列全部總代與投注站帳號）</li></ul></div>
     <div class="ov-dir"><div class="ov-dir-lbl">控制後台：</div><ul class="ov-dir-list"><li>系統幣換算所用匯率(<code>sys_rate</code>)由控制後台的匯率設定向下供給，前端不寫死</li></ul></div>
     <div class="ov-dir"><div class="ov-dir-lbl">前台影響：</div><ul class="ov-dir-list"><li>無（此為後台查詢／報表功能，不影響前台會員端）</li></ul></div>
   </div>
@@ -6842,6 +7037,23 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
     <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">統計數據改以系統幣計算並回傳。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（系統幣數值係後台依匯率換算後之顯示，會員端不涉及系統幣、僅以法幣呈現，不影響前台）</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-dr-new3-009"></div></div></div>
   </div>
+
+  <div class="spec-card">
+    <div class="spec-card-hd"><span class="spec-card-num">638</span><span class="spec-card-adj">10/13新增</span></div>
+    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">數據報表 &gt; 三方游戏报表(新) &gt; 上方搜尋欄 &gt; 所有總代/投注站</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge mod">調整</span></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">搜尋欄「所有投注站」下拉第一個選項為「所有投注站」，其後僅列出投注站帳號，無法選擇總代。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
+      <ol>
+        <li>下拉名稱改為「所有總代/投注站」</li>
+        <li>選項順序固定：「所有總代/投注站」第一位並設為預設，「所有總代」第二位，「所有投注站」第三位，其後列出全部總代與投注站帳號，直接顯示帳號</li>
+        <li>查詢依所選項目篩選：「所有總代/投注站」統計全部注單；「所有總代」僅統計總代線會員的注單；「所有投注站」僅統計投注站線會員的注單；選單一帳號僅統計該帳號底下會員的注單</li>
+      </ol>
+    </div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">下拉名稱與三個固定選項調整；帳號選項由後端回傳，不寫死。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">帳號選項 API 回傳全部總代與投注站帳號及其類型（總代／投注站）；三方游戏报表(新)查詢 API 支援依類型（總代／投注站）或單一上級帳號篩選。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（此為管理後台查詢篩選功能，不影響前台會員端）</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-dr-new3-638"></div></div></div>
+  </div>
 </div>
 <div class="pg" id="pg-adm-data-report-dr-sum3">
   <div class="pg-crumb">管理後台 &gt; 數據報表 &gt; 三方游戏报表(汇总)</div>
@@ -6946,19 +7158,19 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
     <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（此為後台查詢／報表功能，不影響前台會員端）</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-dr-stationtotal-101"></div></div></div>
   </div>
   <div class="spec-card">
-    <div class="spec-card-hd"><span class="spec-card-num">179</span></div>
+    <div class="spec-card-hd"><span class="spec-card-num">179</span><span class="spec-card-adj">10/13調整</span></div>
     <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">數據報表 &gt; 投注站统计 &gt; 列表 &gt; 國家、幣種欄位</div></div>
     <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge new">新增</span></div></div>
     <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">列表未顯示各帳號綁定的國家與幣種，多國家多幣種環境下無法辨識各筆資料的國家與幣種。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
       <ol>
-        <li>在「帳號」與「全名」欄位之間新增「國家」(<code>nation_code</code>)「幣種」(<code>currency</code>)兩欄，排列為「帳號｜國家｜幣種｜全名」</li>
+        <li>在「帳號」與「站點押金」欄位之間新增「國家」(<code>nation_code</code>)「幣種」(<code>currency</code>)兩欄，排列為「帳號｜國家｜幣種｜站點押金」</li>
         <li>國家(<code>nation_code</code>)：顯示該帳號所屬國家</li>
         <li>幣種(<code>currency</code>)：顯示該帳號綁定幣種，統一半形大寫英文（如 PHP、VND）</li>
         <li>列表調整後，導出內容須比照同步，各欄位依調整後的呈現方式輸出。</li>
       </ol>
     </div></div>
-    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">於帳號與全名欄位中間新增國家(<code>nation_code</code>)、幣種(<code>currency</code>)兩欄渲染，讀取後端回傳資料顯示，幣種統一半形大寫英文；導出同步。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">於帳號與站點押金欄位中間新增國家(<code>nation_code</code>)、幣種(<code>currency</code>)兩欄渲染，讀取後端回傳資料顯示，幣種統一半形大寫英文；導出同步。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">投注站統計 API 回傳資料需包含該帳號綁定的國家(<code>nation_code</code>)與幣種(<code>currency</code>)欄位。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（此為後台報表顯示，不影響前台會員端）</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-dr-stationtotal-102"></div></div></div>
   </div>
@@ -7447,7 +7659,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
   <div class="pg-crumb">管理後台 &gt; 遊戲管理 &gt; 廠商設置</div>
   <div class="pg-overview">
     <h4>本頁改動目標</h4>
-    <div class="ov-dir"><div class="ov-dir-lbl">管理後台：</div><ul class="ov-dir-list"><li>上方搜尋欄新增國家＋幣種篩選（均單選、雙向連動，預設全部國家＋全部幣種）</li><li>列表新增「國家/幣種」欄位，列出廠商支援的所有國家(<code>nation_code</code>)＋幣種(<code>currency</code>)組合</li><li>查看遊戲費率彈窗新增幣種下拉（預設系統幣），依幣種顯示費率</li><li>列表操作欄新增「国际化图片设置」，廠商圖片素材改依國家＋幣種組合設置</li><li>未設置圖片的組合沿用預設圖</li><li>列表圖片欄位一律顯示預設圖</li></ul></div>
+    <div class="ov-dir"><div class="ov-dir-lbl">管理後台：</div><ul class="ov-dir-list"><li>上方搜尋欄新增國家＋幣種篩選（均單選、雙向連動，預設全部國家＋全部幣種）</li><li>列表新增「國家/幣種」欄位，列出廠商支援的所有國家(<code>nation_code</code>)＋幣種(<code>currency</code>)組合</li><li>查看遊戲費率彈窗新增幣種下拉（預設系統幣），依幣種顯示費率</li><li>列表操作欄新增「国际化图片设置」，廠商圖片素材改依國家＋幣種組合設置</li><li>未設置圖片的組合沿用預設圖</li><li>列表圖片欄位一律顯示預設圖</li><li>編輯彈窗新增「國家/幣種」連動列組（＋／−），後台可維護廠商支援的國家＋幣種組合</li></ul></div>
     <div class="ov-dir"><div class="ov-dir-lbl">控制後台：</div><ul class="ov-dir-list"><li>幣種／國家下拉的選項範圍由控制後台的國家與幣種設定向下供給，前端不寫死</li><li>「国际化图片设置」彈窗的國家＋幣種組合來源由控制後台的國家與幣種設定向下供給，前端不寫死</li></ul></div>
     <div class="ov-dir"><div class="ov-dir-lbl">前台影響：</div><ul class="ov-dir-list"><li>廠商幣種決定該廠商在前台的顯示範圍：僅有支援該幣種的版面會顯示該廠商，且僅該幣種的會員看得到該廠商的分頁</li><li>廠商圖片素材依會員的國家(<code>nation_code</code>)＋幣種(<code>currency</code>)載入對應組合的圖片，未設置的組合顯示預設圖</li></ul></div>
   </div>
@@ -7530,6 +7742,25 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
     <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">前台依會員的國家(<code>nation_code</code>)＋幣種(<code>currency</code>)載入對應組合的廠商圖片素材；未設置的組合顯示預設圖。</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-gm-vendor-581"></div></div></div>
   </div>
 
+  <div class="spec-card">
+    <div class="spec-card-hd"><span class="spec-card-num">643</span><span class="spec-card-adj">10/13新增</span></div>
+    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">遊戲管理 &gt; 廠商設置 &gt; 第三方廠商設置分頁 &gt; 列表 &gt; 操作欄 &gt; 編輯按鈕 &gt; 彈窗 &gt; 國家/幣種</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge new">新增</span></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">編輯彈窗無國家與幣種欄位，廠商支援的國家＋幣種僅由後端 SQL 寫入，後台無法維護。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
+      <ol>
+        <li>在「廠商全稱」與「遊戲排序」之間新增「國家/幣種」欄位，排列為「廠商編碼｜廠商全稱｜國家/幣種｜遊戲排序」</li>
+        <li>欄位內容為一列或多列「國家｜幣種」：每列左側「國家」(<code>nation_code</code>)單選下拉、右側「幣種」(<code>currency</code>)單選下拉，國家與幣種雙向連動，選定一方後另一方僅列出支援的選項；選項順序依控制後台國家與幣種設定順序</li>
+        <li>每列右側「＋」新增一列、「−」刪除該列；至少保留一列，列內國家與幣種均必選</li>
+        <li>開啟彈窗時帶入該廠商目前支援的組合，每組一列，可增減</li>
+        <li>儲存後，列表「國家/幣種」欄、搜尋欄國家＋幣種篩選、国际化图片设置彈窗的組合列、遊戲字典添加／編輯時可選的組合，均以此為準</li>
+      </ol>
+    </div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">新增國家／幣種連動列組元件（＋／−），選項由後端回傳，不寫死；開啟彈窗時依該廠商目前支援的組合預先生成列。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">廠商編輯 API 支援國家(<code>nation_code</code>)＋幣種(<code>currency</code>)組合多筆寫入；廠商支援組合資料改由後台維護，SQL 寫入僅作初始值。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">廠商支援的國家＋幣種組合決定該廠商在前台的顯示範圍：僅支援該幣種的版面才顯示該廠商，僅該幣種的會員看得到該廠商的分頁。</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-gm-vendor-643"></div></div></div>
+  </div>
+
 </div>
 <div class="pg" id="pg-adm-game-mgmt-gm-trade">
   <div class="pg-crumb">管理後台 &gt; 遊戲管理 &gt; 交易設置</div>
@@ -7587,7 +7818,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
   <div class="pg-tabpane" data-tabgroup="gm-bet" data-tab="old">
   <div class="pg-overview">
     <h4>本頁改動目標</h4>
-    <div class="ov-dir"><div class="ov-dir-lbl">管理後台：</div><ul class="ov-dir-list"><li>搜尋欄新增國家＋幣種篩選（均單選、雙向連動，預設全部國家＋全部幣種，依下注會員所屬國家＋幣種過濾），下注／輸贏金額輸入框仍依幣種決定搜尋單位與單位提示</li><li>列表金額欄位標題與內容改為兩行：「欄位名稱(法幣)」／「欄位名稱(系統幣)」</li><li>統計數據改以系統幣統計</li><li>底部總計為純數值相加，全部幣種篩選時不顯示總計</li></ul></div>
+    <div class="ov-dir"><div class="ov-dir-lbl">管理後台：</div><ul class="ov-dir-list"><li>搜尋欄新增國家＋幣種篩選（均單選、雙向連動，預設全部國家＋全部幣種，依下注會員所屬國家＋幣種過濾），下注／輸贏金額輸入框仍依幣種決定搜尋單位與單位提示</li><li>列表金額欄位標題與內容改為兩行：「欄位名稱(法幣)」／「欄位名稱(系統幣)」</li><li>統計數據改以系統幣統計</li><li>底部總計為純數值相加，全部幣種篩選時不顯示總計</li><li>搜尋欄「所有投注站」下拉改為「所有總代/投注站」（固定三選項後列全部總代與投注站帳號）；列表「投注站代碼」欄改為「總代/投注站代碼」，顯示會員所屬上級帳號的代碼</li></ul></div>
     <div class="ov-dir"><div class="ov-dir-lbl">控制後台：</div><ul class="ov-dir-list"><li>幣種下拉的選項來源由控制後台向下供給、前端不寫死</li><li>系統幣換算所用匯率(<code>sys_rate</code>)由控制後台的匯率設定向下供給，前端不寫死</li></ul></div>
     <div class="ov-dir"><div class="ov-dir-lbl">前台影響：</div><ul class="ov-dir-list"><li>無（此為後台查詢／報表功能，不影響前台會員端）</li></ul></div>
   </div>
@@ -7664,11 +7895,44 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
     <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">總計數值依查詢的幣種(<code>currency</code>)範圍純數值相加回傳；全部幣種查詢時不回傳總計。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（此為管理後台報表顯示，不影響前台會員端）</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-gm-bet-old-008"></div></div></div>
   </div>
+
+  <div class="spec-card">
+    <div class="spec-card-hd"><span class="spec-card-num">628</span><span class="spec-card-adj">10/13新增</span></div>
+    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">遊戲管理 &gt; 投注紀錄 &gt; 歷史注單分頁 &gt; 上方搜尋欄 &gt; 所有總代/投注站</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge mod">調整</span></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">搜尋欄「所有投注站」下拉第一個選項為「所有投注站」，其後僅列出投注站帳號，無法選擇總代。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
+      <ol>
+        <li>下拉名稱改為「所有總代/投注站」</li>
+        <li>選項順序固定：「所有總代/投注站」第一位並設為預設，「所有總代」第二位，「所有投注站」第三位，其後列出全部總代與投注站帳號，直接顯示帳號</li>
+        <li>查詢依所選項目篩選：「所有總代/投注站」查全部注單；「所有總代」僅查總代線會員的注單；「所有投注站」僅查投注站線會員的注單；選單一帳號僅查該帳號底下會員的注單</li>
+      </ol>
+    </div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">下拉名稱與三個固定選項調整；帳號選項由後端回傳，不寫死。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">帳號選項 API 回傳全部總代與投注站帳號及其類型（總代／投注站）；投注紀錄查詢 API 支援依類型（總代／投注站）或單一上級帳號篩選。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（此為管理後台查詢與列表顯示，不影響前台會員端）</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-gm-bet-old-628"></div></div></div>
+  </div>
+
+  <div class="spec-card">
+    <div class="spec-card-hd"><span class="spec-card-num">629</span><span class="spec-card-adj">10/13新增</span></div>
+    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">遊戲管理 &gt; 投注紀錄 &gt; 歷史注單分頁 &gt; 列表 &gt; 總代/投注站代碼</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge mod">調整</span></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">列表「投注站代碼」欄僅顯示投注站帳號的代碼，總代線會員的注單無法顯示所屬上級。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
+      <ol>
+        <li>欄名改為「總代/投注站代碼」，位置不變（渠道類型與投注設備之間）</li>
+        <li>顯示該筆注單會員所屬上級帳號（總代或投注站）的代碼</li>
+      </ol>
+    </div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">欄名調整，讀取後端回傳的上級帳號代碼顯示。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">列表 API 回傳該會員所屬上級帳號（總代或投注站）的代碼。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（此為管理後台查詢與列表顯示，不影響前台會員端）</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-gm-bet-old-629"></div></div></div>
+  </div>
   </div>
   <div class="pg-tabpane pg-tab-hidden" data-tabgroup="gm-bet" data-tab="new">
   <div class="pg-overview">
     <h4>本頁改動目標</h4>
-    <div class="ov-dir"><div class="ov-dir-lbl">管理後台：</div><ul class="ov-dir-list"><li>搜尋欄新增國家＋幣種篩選（均單選、雙向連動，預設全部國家＋全部幣種，依下注會員所屬國家＋幣種過濾），下注／輸贏金額輸入框仍依幣種決定搜尋單位與單位提示</li><li>列表金額欄位標題與內容改為兩行：「欄位名稱(法幣)」／「欄位名稱(系統幣)」</li><li>底部總計為純數值相加，全部幣種篩選時不顯示總計</li></ul></div>
+    <div class="ov-dir"><div class="ov-dir-lbl">管理後台：</div><ul class="ov-dir-list"><li>搜尋欄新增國家＋幣種篩選（均單選、雙向連動，預設全部國家＋全部幣種，依下注會員所屬國家＋幣種過濾），下注／輸贏金額輸入框仍依幣種決定搜尋單位與單位提示</li><li>列表金額欄位標題與內容改為兩行：「欄位名稱(法幣)」／「欄位名稱(系統幣)」</li><li>底部總計為純數值相加，全部幣種篩選時不顯示總計</li><li>搜尋欄「所有投注站」下拉改為「所有總代/投注站」（固定三選項後列全部總代與投注站帳號）；列表「投注站代碼」「所屬投注站」欄改為「總代/投注站代碼」「所屬總代/投注站」，顯示會員所屬上級帳號</li></ul></div>
     <div class="ov-dir"><div class="ov-dir-lbl">控制後台：</div><ul class="ov-dir-list"><li>幣種下拉的選項來源由控制後台向下供給、前端不寫死</li><li>系統幣換算所用匯率(<code>sys_rate</code>)由控制後台的匯率設定向下供給，前端不寫死</li></ul></div>
     <div class="ov-dir"><div class="ov-dir-lbl">前台影響：</div><ul class="ov-dir-list"><li>無（此為後台查詢／報表功能，不影響前台會員端）</li></ul></div>
   </div>
@@ -7729,6 +7993,40 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
     <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">總計數值依查詢的幣種(<code>currency</code>)範圍純數值相加回傳；全部幣種查詢時不回傳總計。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（此為管理後台報表顯示，不影響前台會員端）</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-gm-bet-new-008"></div></div></div>
   </div>
+
+  <div class="spec-card">
+    <div class="spec-card-hd"><span class="spec-card-num">630</span><span class="spec-card-adj">10/13新增</span></div>
+    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">遊戲管理 &gt; 投注紀錄 &gt; 历史注单(New)分頁 &gt; 上方搜尋欄 &gt; 所有總代/投注站</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge mod">調整</span></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">搜尋欄「所有投注站」下拉第一個選項為「所有投注站」，其後僅列出投注站帳號，無法選擇總代。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
+      <ol>
+        <li>下拉名稱改為「所有總代/投注站」</li>
+        <li>選項順序固定：「所有總代/投注站」第一位並設為預設，「所有總代」第二位，「所有投注站」第三位，其後列出全部總代與投注站帳號，直接顯示帳號</li>
+        <li>查詢依所選項目篩選：「所有總代/投注站」查全部注單；「所有總代」僅查總代線會員的注單；「所有投注站」僅查投注站線會員的注單；選單一帳號僅查該帳號底下會員的注單</li>
+      </ol>
+    </div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">下拉名稱與三個固定選項調整；帳號選項由後端回傳，不寫死。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">帳號選項 API 回傳全部總代與投注站帳號及其類型（總代／投注站）；投注紀錄查詢 API 支援依類型（總代／投注站）或單一上級帳號篩選。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（此為管理後台查詢與列表顯示，不影響前台會員端）</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-gm-bet-new-630"></div></div></div>
+  </div>
+
+  <div class="spec-card">
+    <div class="spec-card-hd"><span class="spec-card-num">631</span><span class="spec-card-adj">10/13新增</span></div>
+    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">遊戲管理 &gt; 投注紀錄 &gt; 历史注单(New)分頁 &gt; 列表 &gt; 總代/投注站代碼、所屬總代/投注站</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge mod">調整</span></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">列表「投注站代碼」「所屬投注站」兩欄僅顯示投注站帳號，總代線會員的注單無法顯示所屬上級。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
+      <ol>
+        <li>「投注站代碼」欄名改為「總代/投注站代碼」，顯示該筆注單會員所屬上級帳號（總代或投注站）的代碼</li>
+        <li>「所屬投注站」欄名改為「所屬總代/投注站」，顯示該會員所屬上級帳號</li>
+        <li>兩欄位置不變（渠道類型與投注設備之間）</li>
+      </ol>
+    </div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">兩欄欄名調整，讀取後端回傳的上級帳號代碼與帳號顯示。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">列表 API 回傳該會員所屬上級帳號（總代或投注站）的代碼與帳號。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（此為管理後台查詢與列表顯示，不影響前台會員端）</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-gm-bet-new-631"></div></div></div>
+  </div>
   </div>
 </div>
 
@@ -7769,7 +8067,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
   <div class="pg-crumb">管理後台 &gt; 遊戲管理 &gt; 第三方對局查詢</div>
   <div class="pg-overview">
     <h4>本頁改動目標</h4>
-    <div class="ov-dir"><div class="ov-dir-lbl">管理後台：</div><ul class="ov-dir-list"><li>上方搜尋欄新增國家＋幣種篩選（均單選、雙向連動，預設全部國家＋全部幣種，依下注會員所屬國家＋幣種過濾）</li><li>列表新增國家與幣種兩欄，顯示下注會員所屬的國家＋幣種</li><li>列表金額欄位標題與內容改法幣＋系統幣兩行顯示</li><li>統計數據改以系統幣統計並顯示</li></ul></div>
+    <div class="ov-dir"><div class="ov-dir-lbl">管理後台：</div><ul class="ov-dir-list"><li>上方搜尋欄新增國家＋幣種篩選（均單選、雙向連動，預設全部國家＋全部幣種，依下注會員所屬國家＋幣種過濾）</li><li>列表新增國家與幣種兩欄，顯示下注會員所屬的國家＋幣種</li><li>列表金額欄位標題與內容改法幣＋系統幣兩行顯示</li><li>統計數據改以系統幣統計並顯示</li><li>搜尋欄「所有投注站」下拉改為「所有總代/投注站」（固定三選項後列全部總代與投注站帳號）；列表「投注站代碼」「所屬投注站」欄改為「總代/投注站代碼」「所屬總代/投注站」，顯示會員所屬的總代或投注站</li></ul></div>
     <div class="ov-dir"><div class="ov-dir-lbl">控制後台：</div><ul class="ov-dir-list"><li>系統幣換算所用匯率(<code>sys_rate</code>)由控制後台的匯率設定向下供給，前端不寫死</li></ul></div>
     <div class="ov-dir"><div class="ov-dir-lbl">前台影響：</div><ul class="ov-dir-list"><li>無（此為後台查詢／報表功能，不影響前台會員端）</li></ul></div>
   </div>
@@ -7794,13 +8092,13 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
   </div>
 
   <div class="spec-card">
-    <div class="spec-card-hd"><span class="spec-card-num">219</span><span class="spec-card-adj">9/8調整</span></div>
+    <div class="spec-card-hd"><span class="spec-card-num">219</span><span class="spec-card-adj">9/8調整</span><span class="spec-card-adj">10/13調整</span></div>
     <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">遊戲管理 &gt; 第三方对局查询 &gt; 列表 &gt; 國家＋幣種欄位</div></div>
     <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge new">新增</span></div></div>
     <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">列表無國家與幣種欄位，看不出各筆對局所屬的國家與投注幣種。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
       <ol>
-        <li>在「三方遊戲名」與「下注金額」之間新增「國家」(<code>nation_code</code>)與「幣種」(<code>currency</code>)兩個欄位，排列為「三方遊戲名｜國家｜幣種｜下注金額」</li>
+        <li>在「三方遊戲用戶名」與「下注金額」之間新增「國家」(<code>nation_code</code>)與「幣種」(<code>currency</code>)兩個欄位，排列為「三方遊戲用戶名｜國家｜幣種｜下注金額」</li>
         <li>國家與幣種顯示下注會員所屬的國家＋幣種，即投注時使用的幣種</li>
       </ol>
     </div></div>
@@ -7844,12 +8142,46 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
     <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">統計數據改以系統幣(<code>sys_amount</code>)計算並回傳。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（系統幣數值係後台依匯率換算後之顯示，會員端不涉及系統幣、僅以法幣呈現，不影響前台）</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-gm-3p-002"></div></div></div>
   </div>
+
+  <div class="spec-card">
+    <div class="spec-card-hd"><span class="spec-card-num">634</span><span class="spec-card-adj">10/13新增</span></div>
+    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">遊戲管理 &gt; 第三方对局查询 &gt; 上方搜尋欄 &gt; 所有總代/投注站</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge mod">調整</span></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">搜尋欄「所有投注站」下拉第一個選項為「所有投注站」，其後僅列出投注站帳號，無法選擇總代。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
+      <ol>
+        <li>下拉名稱改為「所有總代/投注站」</li>
+        <li>選項順序固定：「所有總代/投注站」第一位並設為預設，「所有總代」第二位，「所有投注站」第三位，其後列出全部總代與投注站帳號，直接顯示帳號</li>
+        <li>查詢依所選項目篩選：「所有總代/投注站」查全部對局；「所有總代」僅查總代線會員的對局；「所有投注站」僅查投注站線會員的對局；選單一帳號僅查該帳號底下會員的對局</li>
+      </ol>
+    </div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">下拉名稱與三個固定選項調整；帳號選項由後端回傳，不寫死。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">帳號選項 API 回傳全部總代與投注站帳號及其類型（總代／投注站）；第三方对局查询查詢 API 支援依類型（總代／投注站）或單一上級帳號篩選。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（此為管理後台查詢與列表顯示，不影響前台會員端）</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-gm-3p-634"></div></div></div>
+  </div>
+
+  <div class="spec-card">
+    <div class="spec-card-hd"><span class="spec-card-num">635</span><span class="spec-card-adj">10/13新增</span></div>
+    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">遊戲管理 &gt; 第三方对局查询 &gt; 列表 &gt; 總代/投注站代碼、所屬總代/投注站</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge mod">調整</span></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">列表「投注站代碼」「所屬投注站」兩欄僅顯示投注站帳號，總代線會員的對局無法顯示所屬上級。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
+      <ol>
+        <li>「投注站代碼」欄名改為「總代/投注站代碼」，顯示該筆對局會員所屬的總代或投注站代碼</li>
+        <li>「所屬投注站」欄名改為「所屬總代/投注站」，顯示該會員所屬的總代或投注站帳號</li>
+        <li>兩欄位置不變（渠道類型與投注設備之間）</li>
+      </ol>
+    </div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">兩欄欄名調整，讀取後端回傳的總代或投注站代碼與帳號顯示。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">列表 API 回傳該會員所屬的總代或投注站代碼與帳號。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（此為管理後台查詢與列表顯示，不影響前台會員端）</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-gm-3p-635"></div></div></div>
+  </div>
 </div>
 <div class="pg" id="pg-adm-game-mgmt-gm-3pfp">
   <div class="pg-crumb">管理後台 &gt; 遊戲管理 &gt; 第三方對局查詢(首頁分類)</div>
   <div class="pg-overview">
     <h4>本頁改動目標</h4>
-    <div class="ov-dir"><div class="ov-dir-lbl">管理後台：</div><ul class="ov-dir-list"><li>上方搜尋欄新增國家＋幣種篩選（均單選、雙向連動，預設全部國家＋全部幣種，依下注會員所屬國家＋幣種過濾）</li><li>列表新增國家與幣種兩欄，顯示下注會員所屬的國家＋幣種</li><li>列表金額欄位標題與內容改法幣＋系統幣兩行顯示</li><li>統計數據改以系統幣統計並顯示</li></ul></div>
+    <div class="ov-dir"><div class="ov-dir-lbl">管理後台：</div><ul class="ov-dir-list"><li>上方搜尋欄新增國家＋幣種篩選（均單選、雙向連動，預設全部國家＋全部幣種，依下注會員所屬國家＋幣種過濾）</li><li>列表新增國家與幣種兩欄，顯示下注會員所屬的國家＋幣種</li><li>列表金額欄位標題與內容改法幣＋系統幣兩行顯示</li><li>統計數據改以系統幣統計並顯示</li><li>搜尋欄「所有投注站」下拉改為「所有總代/投注站」（固定三選項後列全部總代與投注站帳號）；列表「投注站代碼」「所屬投注站」欄改為「總代/投注站代碼」「所屬總代/投注站」，顯示會員所屬的總代或投注站</li></ul></div>
     <div class="ov-dir"><div class="ov-dir-lbl">控制後台：</div><ul class="ov-dir-list"><li>系統幣換算所用匯率(<code>sys_rate</code>)由控制後台的匯率設定向下供給，前端不寫死</li></ul></div>
     <div class="ov-dir"><div class="ov-dir-lbl">前台影響：</div><ul class="ov-dir-list"><li>無（此為後台查詢／報表功能，不影響前台會員端）</li></ul></div>
   </div>
@@ -7874,13 +8206,13 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
   </div>
 
   <div class="spec-card">
-    <div class="spec-card-hd"><span class="spec-card-num">223</span><span class="spec-card-adj">9/8調整</span></div>
+    <div class="spec-card-hd"><span class="spec-card-num">223</span><span class="spec-card-adj">9/8調整</span><span class="spec-card-adj">10/13調整</span></div>
     <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">遊戲管理 &gt; 第三方对局查询(首页分类) &gt; 列表 &gt; 國家＋幣種欄位</div></div>
     <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge new">新增</span></div></div>
     <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">列表無國家與幣種欄位，看不出各筆對局所屬的國家與投注幣種。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
       <ol>
-        <li>在「三方遊戲名」與「下注金額」之間新增「國家」(<code>nation_code</code>)與「幣種」(<code>currency</code>)兩個欄位，排列為「三方遊戲名｜國家｜幣種｜下注金額」</li>
+        <li>在「三方遊戲用戶名」與「下注金額」之間新增「國家」(<code>nation_code</code>)與「幣種」(<code>currency</code>)兩個欄位，排列為「三方遊戲用戶名｜國家｜幣種｜下注金額」</li>
         <li>國家與幣種顯示下注會員所屬的國家＋幣種，即投注時使用的幣種</li>
       </ol>
     </div></div>
@@ -7923,6 +8255,40 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
     <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">提示文字「統計金額單位：系統幣（例：USDT）」與統計數據同步顯示，放在統計按鈕左側。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">統計數據改以系統幣(<code>sys_amount</code>)計算並回傳。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（系統幣數值係後台依匯率換算後之顯示，會員端不涉及系統幣、僅以法幣呈現，不影響前台）</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-gm-3pfp-002"></div></div></div>
+  </div>
+
+  <div class="spec-card">
+    <div class="spec-card-hd"><span class="spec-card-num">636</span><span class="spec-card-adj">10/13新增</span></div>
+    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">遊戲管理 &gt; 第三方对局查询(首页分类) &gt; 上方搜尋欄 &gt; 所有總代/投注站</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge mod">調整</span></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">搜尋欄「所有投注站」下拉第一個選項為「所有投注站」，其後僅列出投注站帳號，無法選擇總代。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
+      <ol>
+        <li>下拉名稱改為「所有總代/投注站」</li>
+        <li>選項順序固定：「所有總代/投注站」第一位並設為預設，「所有總代」第二位，「所有投注站」第三位，其後列出全部總代與投注站帳號，直接顯示帳號</li>
+        <li>查詢依所選項目篩選：「所有總代/投注站」查全部對局；「所有總代」僅查總代線會員的對局；「所有投注站」僅查投注站線會員的對局；選單一帳號僅查該帳號底下會員的對局</li>
+      </ol>
+    </div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">下拉名稱與三個固定選項調整；帳號選項由後端回傳，不寫死。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">帳號選項 API 回傳全部總代與投注站帳號及其類型（總代／投注站）；第三方对局查询(首页分类)查詢 API 支援依類型（總代／投注站）或單一上級帳號篩選。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（此為管理後台查詢與列表顯示，不影響前台會員端）</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-gm-3pfp-636"></div></div></div>
+  </div>
+
+  <div class="spec-card">
+    <div class="spec-card-hd"><span class="spec-card-num">637</span><span class="spec-card-adj">10/13新增</span></div>
+    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">遊戲管理 &gt; 第三方对局查询(首页分类) &gt; 列表 &gt; 總代/投注站代碼、所屬總代/投注站</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge mod">調整</span></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">列表「投注站代碼」「所屬投注站」兩欄僅顯示投注站帳號，總代線會員的對局無法顯示所屬上級。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
+      <ol>
+        <li>「投注站代碼」欄名改為「總代/投注站代碼」，顯示該筆對局會員所屬的總代或投注站代碼</li>
+        <li>「所屬投注站」欄名改為「所屬總代/投注站」，顯示該會員所屬的總代或投注站帳號</li>
+        <li>兩欄位置不變（渠道類型與投注設備之間）</li>
+      </ol>
+    </div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">兩欄欄名調整，讀取後端回傳的總代或投注站代碼與帳號顯示。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">列表 API 回傳該會員所屬的總代或投注站代碼與帳號。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（此為管理後台查詢與列表顯示，不影響前台會員端）</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-gm-3pfp-637"></div></div></div>
   </div>
 </div>
 <div class="pg" id="pg-adm-game-mgmt-gm-3pother">
@@ -8011,7 +8377,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
   <div class="pg-tabpane" data-tabgroup="gm-newgame" data-tab="fp">
   <div class="pg-overview">
     <h4>本頁改動目標</h4>
-    <div class="ov-dir"><div class="ov-dir-lbl">管理後台：</div><ul class="ov-dir-list"><li>搜尋欄新增國家(<code>nation_code</code>)單選下拉（預設全部國家）</li><li>列表「ID」欄位左側新增國家欄位</li></ul></div>
+    <div class="ov-dir"><div class="ov-dir-lbl">管理後台：</div><ul class="ov-dir-list"><li>搜尋欄新增國家(<code>nation_code</code>)單選下拉（預設全部國家）</li><li>列表「ID」欄位左側新增國家欄位</li><li>編輯彈窗「類型code」上方新增國家欄位，唯讀反灰顯示該分類所屬國家</li></ul></div>
     <div class="ov-dir"><div class="ov-dir-lbl">控制後台：</div><ul class="ov-dir-list"><li>國家選項自動帶入控制後台開啟的國家</li></ul></div>
     <div class="ov-dir"><div class="ov-dir-lbl">前台影響：</div><ul class="ov-dir-list"><li>首页分类的名稱設定影響前台菜單（前台首頁分類頁面）顯示，該國家的會員看到對應的分類跟名稱</li></ul></div>
   </div>
@@ -8054,6 +8420,22 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
     <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">首页分类管理列表 API 回傳資料需包含該類型支援的國家(<code>nation_code</code>)欄位。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">首页分类的名稱設定會影響前台菜單（即前台首頁分類頁面）顯示的名稱，該國家的會員會看到對應的分類跟名稱。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-gm-newgame-102"></div></div></div>
+  </div>
+
+  <div class="spec-card">
+    <div class="spec-card-hd"><span class="spec-card-num">644</span><span class="spec-card-adj">10/13新增</span></div>
+    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">遊戲管理 &gt; 新遊戲入口設置 &gt; 首页分类管理分頁 &gt; 操作欄位 &gt; 編輯 &gt; 編輯彈窗 &gt; 國家</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge new">新增</span></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">編輯彈窗無國家欄位，看不出正在編輯的是哪個國家的首頁分類。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
+      <ol>
+        <li>在「類型code」上方新增「國家」(<code>nation_code</code>)欄位</li>
+        <li>顯示該筆首頁分類所屬的國家，唯讀反灰、不可修改</li>
+      </ol>
+    </div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">開啟彈窗時依後端回傳的國家(<code>nation_code</code>)顯示，欄位反灰不可操作。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">首页分类管理編輯資料 API 回傳該筆首頁分類所屬的國家(<code>nation_code</code>)。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（僅顯示所屬國家，不改變任何設定）</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-gm-newgame-644"></div></div></div>
   </div>
   </div>
   <div class="pg-tabpane pg-tab-hidden" data-tabgroup="gm-newgame" data-tab="cat">
@@ -8228,7 +8610,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
   <div class="pg-tabpane pg-tab-hidden" data-tabgroup="gm-newgame" data-tab="cfg">
   <div class="pg-overview">
     <h4>本頁改動目標</h4>
-    <div class="ov-dir"><div class="ov-dir-lbl">管理後台：</div><ul class="ov-dir-list"><li>搜尋欄新增國家＋幣種篩選（均單選、雙向連動，預設全部國家＋全部幣種）</li><li>列表新增「國家/幣種」欄位（遊戲ID與遊戲名稱中間）與「國家」欄位（ID與首頁分類中間，顯示已完成国际化设置的國家）</li><li>添加／編輯遊戲廠商彈窗顯示遊戲綁定的「國家/幣種」組合（唯讀）</li><li>添加／編輯彈窗移除「首頁分類」與「遊戲類別」欄位，改於「国际化设置」依國家＋幣種組合維護</li><li>列表「首頁分類」「遊戲類別」欄位改依國家視角渲染，未設置顯示「-」</li><li>列表操作欄新增「国际化设置」：依組合設置首頁分類、遊戲類別與七個圖片欄位，圖片空白＝沿用預設圖</li></ul></div>
+    <div class="ov-dir"><div class="ov-dir-lbl">管理後台：</div><ul class="ov-dir-list"><li>搜尋欄新增國家＋幣種篩選（均單選、雙向連動，預設全部國家＋全部幣種）</li><li>列表新增「國家/幣種」欄位（遊戲ID與遊戲名稱中間）與「國家」欄位（ID與首頁分類中間，顯示已完成国际化设置的國家）</li><li>添加／編輯遊戲廠商彈窗顯示遊戲綁定的「國家/幣種」組合（唯讀）</li><li>添加／編輯彈窗移除「首頁分類」與「遊戲類別」欄位，改於「国际化设置」依國家＋幣種組合維護</li><li>列表「首頁分類」「遊戲類別」欄位改依國家視角渲染，未設置顯示「-」</li><li>列表操作欄新增「国际化设置」：依組合設置首頁分類、遊戲類別與九個圖片欄位，圖片空白＝沿用預設圖</li></ul></div>
     <div class="ov-dir"><div class="ov-dir-lbl">控制後台：</div><ul class="ov-dir-list"><li>國家與幣種選項由控制後台設定向下供給，前端不寫死</li></ul></div>
     <div class="ov-dir"><div class="ov-dir-lbl">前台影響：</div><ul class="ov-dir-list"><li>遊戲依綁定的國家＋幣種組合決定前台顯示範圍</li><li>前台依會員的國家＋幣種載入對應組合的首頁分類、遊戲類別與圖片</li><li>組合未設置首頁分類時該版面不顯示此遊戲，圖片未設置顯示預設圖</li></ul></div>
   </div>
@@ -8383,17 +8765,17 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
   </div>
 
   <div class="spec-card">
-    <div class="spec-card-hd"><span class="spec-card-num">585</span><span class="spec-card-adj">9/8新增</span></div>
+    <div class="spec-card-hd"><span class="spec-card-num">585</span><span class="spec-card-adj">9/8新增</span><span class="spec-card-adj">10/13調整</span></div>
     <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">遊戲管理 &gt; 新遊戲入口設置 &gt; 遊戲管理配置分頁 &gt; 列表 &gt; 操作欄 &gt; 国际化设置 &gt; 彈窗</div></div>
     <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge new">新增</span></div></div>
-    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">遊戲的首頁分類、遊戲類別與七個圖片欄位（PC端游戏封面、PC端游戏封面大图、PC端主推游戏图片、移动端游戏封面、移动端游戏封面大图、移动端主推游戏图片、移动端POPULAR主推）僅能設定單一一套，所有國家＋幣種版面共用。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">遊戲的首頁分類、遊戲類別與九個圖片欄位（PC端游戏封面、PC端游戏封面大图、PC端主推游戏图片、PC端Jackpot Banner游戏图片、移动端游戏封面、移动端游戏封面大图、移动端主推游戏图片、移动端Jackpot Banner游戏图片、移动端POPULAR主推）僅能設定單一一套，所有國家＋幣種版面共用。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
       <ol>
         <li>列表操作欄新增「国际化设置」，點擊開啟設置彈窗</li>
         <li>彈窗列依該遊戲於遊戲字典綁定的國家＋幣種組合自動生成，無需手動新增</li>
-        <li>彈窗欄位排列為「國家｜幣種｜首頁分類｜遊戲類別｜七個圖片欄位｜操作」</li>
+        <li>彈窗欄位排列為「國家｜幣種｜首頁分類｜遊戲類別｜九個圖片欄位｜操作」</li>
         <li>首頁分類與遊戲類別為下拉選單，選項依該列國家過濾（來源分別為首页分类管理與游戏类别管理）</li>
-        <li>逐列「编辑」設置：開啟設置彈窗，含首頁分類、遊戲類別下拉與 PC配置（3 張）｜移动端配置（4 張）上傳分頁</li>
+        <li>逐列「编辑」設置：開啟設置彈窗，含首頁分類、遊戲類別下拉與 PC配置（4 張）｜移动端配置（5 張）上傳分頁</li>
         <li>各圖片欄位預設空白；空白＝沿用添加／編輯彈窗上傳的預設圖</li>
         <li>組合未設置首頁分類時，該組合的前台版面不顯示此遊戲</li>
       </ol>
@@ -8401,6 +8783,25 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
     <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">操作欄新增「国际化设置」入口與組合設置彈窗；分類下拉依該列國家連動；上傳畫面沿用既有編輯彈窗的上傳元件。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">遊戲的首頁分類、遊戲類別與圖片素材新增國家(<code>nation_code</code>)＋幣種(<code>currency</code>)維度儲存；未設置圖片的組合回傳預設圖；前台 API 依會員的國家＋幣種回傳對應組合的歸類與圖片。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">前台依會員的國家＋幣種載入對應組合的歸類與圖片；圖片未設置顯示預設圖；首頁分類未設置則該版面不顯示此遊戲。</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-gm-newgame-585"></div></div></div>
+  </div>
+
+  <div class="spec-card">
+    <div class="spec-card-hd"><span class="spec-card-num">625</span><span class="spec-card-adj">10/13新增</span></div>
+    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">遊戲管理 &gt; 新遊戲入口設置 &gt; 遊戲管理配置分頁 &gt; 投注站顯示配置按鈕 &gt; 投注站顯示配置彈窗 &gt; 國家＋幣種</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge new">新增</span></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">投注站顯示配置彈窗內依廠商名稱分組列出遊戲，每款遊戲一個勾選框，勾選後該遊戲顯示於投注站機台；勾選結果未區分國家與幣種，所有投注站共用同一份清單。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
+      <ol>
+        <li>在彈窗標題「投注站顯示配置」下方新增「國家」(<code>nation_code</code>)與「幣種」(<code>currency</code>)單選下拉，國家在前、幣種在後</li>
+        <li>均為單選；選項順序：預設國家（菲律賓）／預設幣種（PHP）第一位並設為預設，無「全部」選項，其餘依控制後台國家與幣種設定順序</li>
+        <li>國家與幣種雙向連動：選定一方後，另一方選單僅列出支援的選項</li>
+        <li>勾選狀態依國家＋幣種組合分別儲存，切換組合時載入該組合的勾選狀態</li>
+        <li>遊戲清單僅列出於遊戲字典綁定含所選國家＋幣種組合的遊戲</li>
+      </ol>
+    </div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">彈窗標題下方新增國家(<code>nation_code</code>)＋幣種(<code>currency</code>)單選下拉元件（雙向連動，預設菲律賓＋PHP）；切換組合時重新載入該組合的遊戲清單與勾選狀態；選項由後端回傳，不寫死。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">投注站顯示設定新增國家(<code>nation_code</code>)＋幣種(<code>currency</code>)維度儲存；查詢與保存 API 支援國家＋幣種參數；遊戲清單依遊戲字典綁定組合過濾；前台投注站 API 依該投注站所屬國家＋幣種回傳對應組合的勾選結果。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">投注站機台僅顯示該投注站所屬國家＋幣種組合下已勾選的遊戲。</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-gm-newgame-625"></div></div></div>
   </div>
   </div>
 </div>
@@ -10447,6 +10848,8 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
     <div class="pg-tab" data-tabgroup="actcar" data-tab="h5sport" onclick="showPgTab('actcar','h5sport')">H5體育首頁輪播圖</div>
     <div class="pg-tab" data-tabgroup="actcar" data-tab="jackpot" onclick="showPgTab('actcar','jackpot')">Jackpot轮播</div>
     <div class="pg-tab" data-tabgroup="actcar" data-tab="newhome2" onclick="showPgTab('actcar','newhome2')">新版首页轮播图（新）</div>
+    <div class="pg-tab" data-tabgroup="actcar" data-tab="jackpot2" onclick="showPgTab('actcar','jackpot2')">Jackpot轮播V2</div>
+    <div class="pg-tab" data-tabgroup="actcar" data-tab="newhome22" onclick="showPgTab('actcar','newhome22')">新版首页轮播图（新）V2</div>
   </div>
   <div class="pg-tabpane" data-tabgroup="actcar" data-tab="home">
   <div class="pg-overview">
@@ -11080,6 +11483,166 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
     <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">新增國家單選下拉，國家與幣種依上次保存資料帶出、可編輯。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">編輯素材 API 支援更新國家(<code>nation_code</code>)與幣種(<code>currency</code>)。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">修改後素材依最新保存的國家＋幣種決定前台顯示範圍。</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-act-carousel-032"></div></div></div>
+  </div>
+  </div>
+<div class="pg-tabpane pg-tab-hidden" data-tabgroup="actcar" data-tab="jackpot2">
+  <div class="pg-overview">
+    <h4>本頁改動目標</h4>
+    <div class="ov-dir"><div class="ov-dir-lbl">管理後台：</div><ul class="ov-dir-list"><li>搜尋欄新增國家單選、幣種改為預設空且必選連動（選定國家＋幣種後才顯示素材）</li>
+<li>列表於名前方新增國家、幣種欄位（舊有資料帶入菲律賓＋PHP）</li>
+<li>新增彈窗於輪播類型下方新增國家、幣種單選必選</li><li>編輯彈窗國家、幣種反灰不可修改</li></ul></div>
+    <div class="ov-dir"><div class="ov-dir-lbl">控制後台：</div><ul class="ov-dir-list"><li>國家與幣種選項來源由控制後台向下供給，前端不寫死</li></ul></div>
+    <div class="ov-dir"><div class="ov-dir-lbl">前台影響：</div><ul class="ov-dir-list"><li>素材依「國家＋幣種」呈現：該國家版面、該幣種會員才看到對應素材</li></ul></div>
+  </div>
+
+  <div class="spec-card">
+    <div class="spec-card-hd"><span class="spec-card-num">648</span><span class="spec-card-adj">10/13新增</span></div>
+    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">活動配置 &gt; 輪播圖素材管理 &gt; Jackpot轮播V2 &gt; 上方搜尋欄</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge new">新增</span></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">搜尋欄有幣種單選下拉（預設全部幣種），無國家篩選條件。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
+      <ol>
+        <li>在既有「幣種」下拉左側新增「國家」(<code>nation_code</code>)下拉，置於搜尋欄最前方，國家在前、幣種在後，排列為「國家｜幣種」</li>
+        <li>國家預設為空、顯示「請選擇國家」，單選；選項順序：預設國家（菲律賓）第一位，無「全部」選項，其餘依控制後台國家設定順序</li>
+        <li>幣種改為預設為空、顯示「請選擇幣種」，單選；未選國家前顯示 No data，選定國家後僅列出該國家支援的幣種</li>
+        <li>選定國家＋幣種後，才顯示素材</li>
+      </ol>
+    </div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">新增國家單選下拉，幣種預設值由全部幣種改為空、依所選國家連動過濾。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">素材列表 API 支援國家(<code>nation_code</code>)＋幣種(<code>currency</code>)查詢。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（此為管理後台篩選條件，不影響前台會員端）</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-act-carousel-648"></div></div></div>
+  </div>
+
+  <div class="spec-card">
+    <div class="spec-card-hd"><span class="spec-card-num">649</span><span class="spec-card-adj">10/13新增</span></div>
+    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">活動配置 &gt; 輪播圖素材管理 &gt; Jackpot轮播V2 &gt; 列表 &gt; 欄位</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge new">新增</span></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">列表無國家與幣種欄位。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
+      <ol>
+        <li>在「名」前方新增「國家」(<code>nation_code</code>)、「幣種」(<code>currency</code>)欄位，排列為「國家｜幣種」</li>
+        <li>國家與幣種依素材資料顯示；舊有資料帶入國家菲律賓＋幣種PHP</li>
+        <li>幣種代碼統一使用半形大寫英文</li>
+      </ol>
+    </div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">列表新增國家、幣種兩個顯示欄位。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">素材列表 API 回傳資料包含國家(<code>nation_code</code>)與幣種(<code>currency</code>)；舊有資料帶入菲律賓＋PHP。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">該素材顯示於該國家（版面），僅該幣種會員可看見。</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-act-carousel-649"></div></div></div>
+  </div>
+
+  <div class="spec-card">
+    <div class="spec-card-hd"><span class="spec-card-num">650</span><span class="spec-card-adj">10/13新增</span></div>
+    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">活動配置 &gt; 輪播圖素材管理 &gt; Jackpot轮播V2 &gt; 新增按鈕 &gt; 新增彈窗 &gt; 幣種</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge new">新增</span></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">新增彈窗有幣種單選下拉（位於選擇廠商上方），無國家選項；廠商清單依所選幣種連動。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
+      <ol>
+        <li>在「輪播類型」下方新增「國家」(<code>nation_code</code>)與「幣種」(<code>currency</code>)下拉，排列為「輪播類型｜國家｜幣種」</li>
+        <li>國家預設為空、顯示「請選擇國家」，單選必選</li>
+        <li>幣種預設為空、顯示「請選擇幣種」，單選必選；未選國家前顯示 No data，選定國家後僅列出該國家支援的幣種</li>
+        <li>選擇廠商維持依所選幣種連動（僅列出支援該幣種的廠商）</li>
+        <li>若先選擇廠商，國家與幣種下拉反向過濾，僅列出該廠商支援的國家與幣種</li>
+        <li>該素材顯示於該國家（版面），僅該幣種會員可看見</li>
+      </ol>
+    </div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">新增國家、幣種單選下拉（皆必選），幣種依所選國家連動過濾；國家／幣種與選擇廠商雙向連動過濾。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">新增素材 API 保存國家(<code>nation_code</code>)與幣種(<code>currency</code>)綁定。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">素材依所選國家＋幣種綁定：僅該國家（版面）、該幣種會員可看見該素材。</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-act-carousel-650"></div></div></div>
+  </div>
+
+  <div class="spec-card">
+    <div class="spec-card-hd"><span class="spec-card-num">651</span><span class="spec-card-adj">10/13新增</span></div>
+    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">活動配置 &gt; 輪播圖素材管理 &gt; Jackpot轮播V2 &gt; 列表 &gt; 操作欄位 &gt; 編輯 &gt; 編輯彈窗</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge new">新增</span></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">編輯彈窗無國家與幣種欄位。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
+      <ol>
+        <li>在「輪播類型」下方新增「國家」(<code>nation_code</code>)與「幣種」(<code>currency</code>)欄位，排列為「輪播類型｜國家｜幣種」</li>
+        <li>國家與幣種依上次保存資料帶出，不可編輯（反灰）</li>
+      </ol>
+    </div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">新增國家、幣種欄位，依上次保存資料帶出、反灰不可修改。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">編輯彈窗回傳資料包含國家(<code>nation_code</code>)與幣種(<code>currency</code>)（唯讀）。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（國家與幣種反灰不可修改，僅供檢視，不影響前台）。</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-act-carousel-651"></div></div></div>
+  </div>
+  </div>
+  <div class="pg-tabpane pg-tab-hidden" data-tabgroup="actcar" data-tab="newhome22">
+  <div class="pg-overview">
+    <h4>本頁改動目標</h4>
+    <div class="ov-dir"><div class="ov-dir-lbl">管理後台：</div><ul class="ov-dir-list"><li>搜尋欄新增國家(<code>nation_code</code>)單選並新增幣種連動邏輯（選定國家＋幣種後才顯示素材）</li>
+<li>列表新增國家、幣種欄位（舊有資料國家帶入菲律賓）</li>
+<li>新增／修改輪播圖彈窗新增國家單選必選，幣種依所選國家連動</li></ul></div>
+    <div class="ov-dir"><div class="ov-dir-lbl">控制後台：</div><ul class="ov-dir-list"><li>國家與幣種選項來源由控制後台向下供給，前端不寫死</li></ul></div>
+    <div class="ov-dir"><div class="ov-dir-lbl">前台影響：</div><ul class="ov-dir-list"><li>素材依「國家＋幣種＋語系」呈現：該國家版面、該幣種會員、對應語系才看到對應素材</li></ul></div>
+  </div>
+
+  <div class="spec-card">
+    <div class="spec-card-hd"><span class="spec-card-num">652</span><span class="spec-card-adj">10/13新增</span></div>
+    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">活動配置 &gt; 輪播圖素材管理 &gt; 新版首页轮播图（新）V2分頁 &gt; 上方搜尋欄</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge mod">調整</span></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">搜尋欄有幣種單選下拉（預設無選擇，選定幣種後才展示對應素材），無國家篩選條件。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
+      <ol>
+        <li>在既有「幣種」下拉左側新增「國家」(<code>nation_code</code>)下拉，置於搜尋欄最前方，國家在前、幣種在後，排列為「國家｜幣種」</li>
+        <li>國家預設為空、顯示「請選擇國家」，單選；選項順序：預設國家（菲律賓）第一位，無「全部」選項，其餘依控制後台國家設定順序</li>
+        <li>幣種新增邏輯：未選國家前顯示 No data；選定國家後，下拉僅列出該國家支援的幣種</li>
+        <li>選定國家＋幣種後，才顯示素材</li>
+      </ol>
+    </div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">新增國家單選下拉，幣種依所選國家連動過濾，選項來源為當前站點已啟用的國家與幣種清單。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">素材列表 API 支援國家(<code>nation_code</code>)＋幣種(<code>currency</code>)查詢。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（此為管理後台篩選條件，不影響前台會員端）</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-act-carousel-652"></div></div></div>
+  </div>
+
+  <div class="spec-card">
+    <div class="spec-card-hd"><span class="spec-card-num">653</span><span class="spec-card-adj">10/13新增</span></div>
+    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">活動配置 &gt; 輪播圖素材管理 &gt; 新版首页轮播图（新）V2分頁 &gt; OKGames pc版轮播图區塊／OKGames H5版轮播图區塊 &gt; 列表 &gt; 欄位</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge new">新增</span></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">列表無國家與幣種欄位。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
+      <ol>
+        <li>在「語系」前方新增「國家」(<code>nation_code</code>)、「幣種」(<code>currency</code>)欄位，排列為「國家｜幣種｜語系」（各區塊欄位一致）</li>
+        <li>國家與幣種依素材資料顯示；舊有資料國家帶入菲律賓、幣種與語系依原資料帶入</li>
+        <li>幣種代碼統一使用半形大寫英文</li>
+      </ol>
+    </div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">列表新增國家、幣種兩個顯示欄位。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">素材列表 API 回傳資料包含國家(<code>nation_code</code>)與幣種(<code>currency</code>)；舊有資料國家帶入菲律賓。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">該素材顯示於該國家（版面），僅該幣種會員可看見；語系依原邏輯，會員切換語系時依語系顯示。</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-act-carousel-653"></div></div></div>
+  </div>
+
+  <div class="spec-card">
+    <div class="spec-card-hd"><span class="spec-card-num">654</span><span class="spec-card-adj">10/13新增</span></div>
+    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">活動配置 &gt; 輪播圖素材管理 &gt; 新版首页轮播图（新）V2分頁 &gt; OKGames pc版轮播图區塊／OKGames H5版轮播图區塊 &gt; 新增按鈕 &gt; 新增OKGames PC版轮播图 V2彈窗／新增OKGames H5版轮播图 V2彈窗 &gt; 幣種</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge mod">調整</span></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">彈窗有幣種單選下拉（位於語系上方），無國家選項。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
+      <ol>
+        <li>在「幣種」上方新增「國家」(<code>nation_code</code>)下拉，排列為「國家｜幣種｜語系」</li>
+        <li>國家預設為空、顯示「請選擇國家」，單選必選</li>
+        <li>幣種新增邏輯：未選國家前顯示 No data；選定國家後，下拉僅列出該國家支援的幣種</li>
+        <li>語系維持原邏輯不動</li>
+      </ol>
+    </div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">新增國家單選下拉（必選），幣種依所選國家連動過濾。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">新增素材 API 保存國家(<code>nation_code</code>)與幣種(<code>currency</code>)綁定。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">素材依所選國家＋幣種綁定：僅該國家（版面）、該幣種會員可看見該素材；語系依原邏輯呈現。</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-act-carousel-654"></div></div></div>
+  </div>
+
+  <div class="spec-card">
+    <div class="spec-card-hd"><span class="spec-card-num">655</span><span class="spec-card-adj">10/13新增</span></div>
+    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">活動配置 &gt; 輪播圖素材管理 &gt; 新版首页轮播图（新）V2分頁 &gt; OKGames pc版轮播图區塊／OKGames H5版轮播图區塊 &gt; 列表 &gt; 操作欄位 &gt; 編輯 &gt; 修改OKGames PC版轮播图 V2彈窗／修改OKGames H5版轮播图 V2彈窗 &gt; 幣種</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge mod">調整</span></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">編輯彈窗的幣種下拉依上次保存帶出、可編輯，無國家欄位。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
+      <ol>
+        <li>在「幣種」上方新增「國家」(<code>nation_code</code>)下拉，排列為「國家｜幣種｜語系」</li>
+        <li>國家依上次保存資料帶出，可編輯，單選必選</li>
+      </ol>
+    </div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">新增國家單選下拉，國家與幣種依上次保存資料帶出、可編輯。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">編輯素材 API 支援更新國家(<code>nation_code</code>)與幣種(<code>currency</code>)。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">修改後素材依最新保存的國家＋幣種決定前台顯示範圍。</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-act-carousel-655"></div></div></div>
   </div>
   </div>
 </div>
@@ -13372,6 +13935,7 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
   <div class="pg-tabs">
     <div class="pg-tab active" data-tabgroup="pmexch" data-tab="rec" onclick="showPgTab('pmexch','rec')">商品兌換紀錄</div>
     <div class="pg-tab" data-tabgroup="pmexch" data-tab="blind" onclick="showPgTab('pmexch','blind')">盲盒抽獎紀錄</div>
+    <div class="pg-tab" data-tabgroup="pmexch" data-tab="ichiban" onclick="showPgTab('pmexch','ichiban')">Ichiban Kuji 抽獎紀錄</div>
   </div>
   <div class="pg-tabpane" data-tabgroup="pmexch" data-tab="rec">
   <div class="pg-overview">
@@ -13463,6 +14027,52 @@ code{background:#eef0f4;padding:2px 7px;border-radius:4px;font-size:12.5px;font-
     <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">列表新增國家欄位，讀取後端回傳的資料顯示；導出欄位同步更新。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">盲盒抽獎紀錄列表 API 回傳資料需包含國家(<code>nation_code</code>)欄位；導出 API 同步調整。</div></div>
     <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（此為管理後台列表顯示，不影響前台會員端）</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-point-exchange-004"></div></div></div>
+  </div>
+  </div>
+<div class="pg-tabpane pg-tab-hidden" data-tabgroup="pmexch" data-tab="ichiban">
+  <div class="pg-overview">
+    <h4>本頁改動目標</h4>
+    <div class="ov-dir"><div class="ov-dir-lbl">管理後台：</div><ul class="ov-dir-list"><li>Ichiban Kuji 抽獎紀錄搜尋欄改為國家(<code>nation_code</code>)＋幣種(<code>currency</code>)連動篩選</li><li>列表新增國家(<code>nation_code</code>)欄位（導出同步）</li></ul></div>
+    <div class="ov-dir"><div class="ov-dir-lbl">控制後台：</div><ul class="ov-dir-list"><li>國家(<code>nation_code</code>)與幣種(<code>currency</code>)選項來源由控制後台向下供給、前端不寫死</li></ul></div>
+    <div class="ov-dir"><div class="ov-dir-lbl">前台影響：</div><ul class="ov-dir-list"><li>無：本頁為管理後台紀錄列表顯示，不影響前台會員端</li></ul></div>
+  </div>
+
+  <div class="spec-card">
+    <div class="spec-card-hd"><span class="spec-card-num">656</span><span class="spec-card-adj">10/13新增</span></div>
+    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">積分商城 &gt; 商品兌換紀錄 &gt; Ichiban Kuji 抽獎紀錄分頁 &gt; 上方搜尋欄 &gt; 國家｜幣種</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge mod">調整</span></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">搜尋欄僅有幣種下拉（選項只有菲律賓披索一種），無國家篩選。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
+      <ol>
+        <li>在既有「幣種」下拉左側新增「國家」(<code>nation_code</code>)單選下拉，置於搜尋欄最前方，國家在前、幣種在後，排列為「國家｜幣種｜會員名」</li>
+        <li>國家預設全部國家、幣種預設全部幣種，均為單選；選項順序：「全部國家」／「全部幣種」第一位並設為預設，預設國家（菲律賓）／預設幣種（PHP）第二位，其餘依控制後台國家與幣種設定順序</li>
+        <li>幣種選項改為依後端回傳動態顯示</li>
+        <li>國家與幣種雙向連動：選定國家後，幣種選單僅列該國家支援的幣種；選定幣種後，國家選單僅列支援該幣種的國家</li>
+        <li>幣種代碼統一使用半形大寫英文（如 PHP、VND）</li>
+      </ol>
+    </div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">新增國家(<code>nation_code</code>)下拉並與幣種(<code>currency</code>)雙向連動。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">Ichiban Kuji 抽獎紀錄列表 API 支援國家(<code>nation_code</code>)與幣種(<code>currency</code>)篩選參數。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（此為管理後台篩選功能，不影響前台會員端）</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-point-exchange-656"></div></div></div>
+  </div>
+
+  <div class="spec-card">
+    <div class="spec-card-hd"><span class="spec-card-num">657</span><span class="spec-card-adj">10/13新增</span></div>
+    <div class="spec-row"><div class="spec-row-lbl">位置</div><div class="spec-row-val">積分商城 &gt; 商品兌換紀錄 &gt; Ichiban Kuji 抽獎紀錄分頁 &gt; 列表 &gt; 國家／幣種欄位</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">類型</div><div class="spec-row-val"><span class="spec-badge mod">調整</span></div></div>
+    <div class="spec-row"><div class="spec-row-lbl">現況</div><div class="spec-row-val">列表已有幣種欄位（位於創建時間與商品名稱中間），無國家欄位；導出檔格式相同。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">調整後</div><div class="spec-row-val">
+      <ol>
+        <li>在「創建時間」與「幣種」之間新增「國家」(<code>nation_code</code>)欄位，排列為「創建時間｜國家｜幣種｜商品名稱」</li>
+        <li>國家與幣種依該筆資料顯示</li>
+        <li>舊有資料國家帶入菲律賓，幣種依資料帶入</li>
+        <li>幣種代碼統一使用半形大寫英文（如 PHP、VND）</li>
+        <li>列表調整後，導出內容須比照同步，各欄位依調整後的呈現方式輸出。</li>
+      </ol>
+    </div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前端</div><div class="spec-row-val">列表新增國家欄位，讀取後端回傳的資料顯示；導出欄位同步更新。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">後端</div><div class="spec-row-val">Ichiban Kuji 抽獎紀錄列表 API 回傳資料需包含國家(<code>nation_code</code>)欄位；導出 API 同步調整。</div></div>
+    <div class="spec-row"><div class="spec-row-lbl">前台影響</div><div class="spec-row-val">無（此為管理後台列表顯示，不影響前台會員端）</div></div><div class="spec-row"><div class="spec-row-lbl">示意</div><div class="spec-row-val"><div id="tpl-point-exchange-657"></div></div></div>
   </div>
   </div>
 </div>
@@ -15713,7 +16323,7 @@ function renderMemberDemos(){
   set('tpl-member-004', tplSupAgentModal({
     prefix:'member-004',
     agentLabel:'上級代理', agentPlaceholder:'請選擇上級代理', agents:['菲律賓PHP上級代理','越南VND上級代理'],
-    stationLabel:'投注站名稱', stationPlaceholder:'請選擇投注站', stations:['菲律賓PHP投注站','越南VND投注站'],
+    stationLabel:'總代/投注站名稱', stationPlaceholder:'請選擇', stations:['菲律賓PHP投注站','越南VND投注站'],
     fields:[{label:'國家'},{label:'幣種'}],
     agentToStations:{'菲律賓PHP上級代理':['菲律賓PHP投注站'], '越南VND上級代理':['越南VND投注站']},
     stationToAgents:{'菲律賓PHP投注站':['菲律賓PHP上級代理'], '越南VND投注站':['越南VND上級代理']},
@@ -15745,6 +16355,15 @@ function renderMemberDemos(){
   set('tpl-member-014', tplColStackedLines('存提款', ['存款总额：0.00','提款总额：0.00','存款次数：0','提款次数：0','活动领取金额：0','累计有效投注：0']));
   // member-016(卡592) 編輯用戶彈窗會員層級下拉依國家＋幣種篩選
   set('tpl-mem-592', tplSingleSelect('mem-592','Select',['默認層','第二層','第三層'],'默認層') + '<div class=\'demo-fieldcard-caption\'>選項已依帳號國家＋幣種（菲律賓／PHP）篩選</div>');
+  // 639 搜尋欄「所有總代/投注站」單選下拉（10/13 項次76）
+  set('tpl-mem-639', tplSingleSelect('mem-639','所有總代/投注站',['所有總代/投注站','所有總代','所有投注站','gatest0924','PH_USDT_zdl','zdl','ak47'],'所有總代/投注站'));
+  // 640 會員信息欄位「總代/投注站代碼」（10/13 項次76）
+  set('tpl-mem-640', `<div class="demo-ba-group">
+    <div class="demo-ba-item"><div class="demo-ba-tag">總代線會員</div>${tplColField([{hd:'會員信息', lines:['設備類型：','總代代碼：gatest0924','國家：','幣種：']}])}</div>
+    <div class="demo-ba-item"><div class="demo-ba-tag">投注站線會員</div>${tplColField([{hd:'會員信息', lines:['設備類型：','投注站代碼：zdl','國家：','幣種：']}])}</div>
+  </div>`);
+  // 645 編輯用戶彈窗「總代名稱／投注站名稱」依代理線類型變量（10/13 補邏輯）
+  set('tpl-mem-645', `<div class="demo-ba-group"><div class="demo-ba-item"><div class="demo-ba-tag">總代線</div><div class="demo-rows-stack"><div class="demo-inline-group"><span class="demo-select-lbl">會員層級：</span></div><div class="demo-inline-group"><span class="demo-select-lbl">總代名稱：</span><span class="demo-readonly">PH_USDT_zdl</span></div></div></div><div class="demo-ba-item"><div class="demo-ba-tag">投注站線</div><div class="demo-rows-stack"><div class="demo-inline-group"><span class="demo-select-lbl">會員層級：</span></div><div class="demo-inline-group"><span class="demo-select-lbl">投注站名稱：</span><span class="demo-readonly">ak47tz</span></div></div></div></div>`);
   // member-015 資金明細彈窗詞條依代理線類型變量顯示（投注站會員／總代會員對照）：搜尋下拉＋列表欄位
   set('tpl-member-015', `<div class="demo-ba-group">
     <div class="demo-ba-item"><div class="demo-ba-tag">投注站會員（現行）</div>
@@ -16047,6 +16666,10 @@ function render_ff_Demos(){
   // ff-005 資金明細分頁>欄位上方統計數據（改前/改後對比）
   set('tpl-ff-005', tplStatUsdt('总投注额：535.20(PHP)', '总投注额：535.20(USDT)', '（假設系統幣為 USDT）'));
   // ff-006 代理佣金明細分頁>搜尋欄>國家＋幣種雙連動＋金額（項次 26 標準）
+  // 641 資金明細分頁搜尋欄「所有總代/投注站」單選下拉（10/13 項次76）
+  set('tpl-ff-641', tplSingleSelect('ff-641','所有總代/投注站',['所有總代/投注站','所有總代','所有投注站','gatest0924','PH_USDT_zdl','zdl','ak47'],'所有總代/投注站'));
+  // 642 資金明細分頁列表「所屬總代/投注站」欄（10/13 項次76）
+  set('tpl-ff-642', tplColThreeField('交易時間','所屬總代/投注站','zdl','所屬代理'));
   set('tpl-ff-006', tplSearchNatCurAmount('ff-006', 'USDT') + '<div class="demo-fieldcard-caption">最小金額、最大金額輸入框維持原位置不動，僅國家、幣種下拉置於搜尋欄最前方；此處並排僅為示意金額框幣種單位跟隨幣種下拉</div>');
   // ff-007 代理佣金明細分頁>搜尋欄>最小金額（單位依幣種選擇：法幣/系統幣）
   // ff-008 代理佣金明細分頁>搜尋欄>最大金額（同上）
@@ -16078,7 +16701,7 @@ function render_fba_Demos(){
   // fba-002 上方搜尋欄>國家＋幣種雙連動（項次 26 標準；金額欄已移除故不出金額框）
   set('tpl-fba-002', tplSearchNatCurAmount('fba-002', 'USDT', []));
   // fba-003 列表>調整金額欄位（左右兩欄純數字）
-  set('tpl-fba-003', tplColThreeField('調整類型', '調整金額', '100.00(PHP)', '金額類型'));
+  set('tpl-fba-003', tplColField([{hd:'調整類型',lines:['']},{hd:'調整金額',lines:['100.00(PHP)']},{hd:'金額類型',lines:['']},{hd:'所屬活動',lines:['']},{hd:'流水稽核倍數',lines:['']},{hd:'稽核金額',lines:['100.00(PHP)']}]));
   // fba-004 列表>用戶信息欄位（余额法幣 + 新增幣種）
   set('tpl-fba-004', tplUserInfoTriple('用戶信息', ['余额：10,680.01','幣種：PHP']));
 }
@@ -16192,11 +16815,15 @@ function render_db_Demos(){
   const set = (elId, html) => { const el = document.getElementById(elId); if(el) el.innerHTML = html; };
   // tpl-db-000a 搜尋欄國家＋幣種雙向連動單選（電子下拉左邊）（9/8 項次26）
   set('tpl-db-000a', tpl_TMP_dualLinkedSelect({prefix:'db-000a', map:GMV_MAP, after:'遊戲類型選擇'}));
-  // tpl-db-000b 列表國家＋幣種欄位（三方遊戲名與下注金額之間）（9/8 項次26）
-  set('tpl-db-000b', tplColField([{hd:'三方遊戲名', lines:['']}, {hd:'國家', lines:['菲律賓']}, {hd:'幣種', lines:['PHP']}, {hd:'下注金額', lines:['']}]));
+  // tpl-db-000b 列表國家＋幣種欄位（三方遊戲用戶名與下注金額之間）（9/8 項次26）
+  set('tpl-db-000b', tplColField([{hd:'三方遊戲用戶名', lines:['']}, {hd:'國家', lines:['菲律賓']}, {hd:'幣種', lines:['PHP']}, {hd:'下注金額', lines:['']}]));
   // tpl-db-001 列表金額相關欄位（多欄兩行：法幣/系統幣）
   set('tpl-db-001', tplColMultiTwoRow(['下注金額','有效投注額','總盈虧','派彩金額','派彩金額(含JP)','總持量','總毛利','Rake','獎池派彩','獎池起始金','獎池超額金']));
   // tpl-db-002 欄位上方統計數據（帶「統計金額單位：USDT」提示，點總計展開）
+  // tpl-db-626 搜尋欄「所有總代/投注站」單選下拉（三固定選項＋帳號，預設第一項）（10/13 補邏輯）
+  set('tpl-db-626', tplSingleSelect('db-626','所有總代/投注站',['所有總代/投注站','所有總代','所有投注站','gatest0924','PH_USDT_zdl','zdl','ak47'],'所有總代/投注站'));
+  // tpl-db-627 列表「總代/投注站ID」欄（渠道類型與稅收分類之間，純 ID）（10/13 補邏輯）
+  set('tpl-db-627', tplColThreeField('渠道類型','總代/投注站ID','10231','稅收分類'));
   set('tpl-db-002', tplStatHint('db-002', [
     '下注金额：617.00','累计有效投注金额：617.00','总派彩：732.20','总奖池奖励：0.00',
     '奖池贡献：0.00','总盈亏：115.20','总毛利：-115.20','Rake：0.00'
@@ -16234,13 +16861,17 @@ function render_dg_Demos(){
   set('tpl-dg-001', tplStatFiatMulti(['交易总额：652.50(USDT)','输赢总额：82.84(USDT)'], '假設系統幣為 USDT'));
   // tpl-dg-002 列表金額相關欄位（多欄兩行：法幣/USDT）
   set('tpl-dg-002', tplColMultiTwoRow(['下注總額','有效投注總額','總派彩','總派彩(含JP)','總獎池','總獎池貢獻','玩家輸贏','總毛利']));
+  // 632 搜尋欄「所有總代/投注站」單選下拉（10/13 項次76）
+  set('tpl-dg-632', tplSingleSelect('dg-632','所有總代/投注站',['所有總代/投注站','所有總代','所有投注站','gatest0924','PH_USDT_zdl','zdl','ak47'],'所有總代/投注站'));
+  // 633 列表「總代/投注站ID」欄（10/13 項次76）
+  set('tpl-dg-633', tplColThreeField('渠道類型','總代/投注站ID','10231','會員數'));
 }
 
 // 數據報表 > 平台報表：套用統一模板庫，逐卡填入
 function render_dr_plat_Demos(){
   const set = (elId, html) => { const el = document.getElementById(elId); if(el) el.innerHTML = html; };
   // dr-plat-001 平台報表列表金額欄位改系統幣（多欄一行純數字）
-  set('tpl-dr-plat-001', tplColAmountUsdt(['用户总余额','存款','提款','淨存提','平台流水','平台有效流水','平台游戏盈利额','活动费用','活动费用/平台流水','活动费用VS游戏盈利额','游戏净盈利','Jackpot派彩','免费旋转输赢']));
+  set('tpl-dr-plat-001', tplColAmountUsdt(['首充金额','用户总余额','存款','提款','淨存提','平台流水','平台有效流水','平台游戏盈利额','活动费用','活动费用/平台流水','活动费用VS游戏盈利额','游戏净盈利','Jackpot派彩','免费旋转输赢']));
 }
 
 // 數據報表 > 投注站報表：套用統一模板庫，逐卡填入
@@ -16353,6 +16984,8 @@ function render_dr_new3_Demos(){
   set('tpl-dr-new3-008', tplColMultiTwoRowTitled(['下注金额','獎池派彩']));
   // dr-new3-009 奖池中奖报告 欄位上方統計數據改 USDT（改前/改後對比）
   set('tpl-dr-new3-009', tplStatUsdt('投注总金额：0.00(PHP)　总奖池奖励：0.00(PHP)', '投注总金额：0.00(USDT)　总奖池奖励：0.00(USDT)', '（假設系統幣為 USDT）'));
+  // 638 搜尋欄「所有總代/投注站」單選下拉（10/13 項次76）
+  set('tpl-dr-new3-638', tplSingleSelect('dr-new3-638','所有總代/投注站',['所有總代/投注站','所有總代','所有投注站','gatest0924','PH_USDT_zdl','zdl','ak47'],'所有總代/投注站'));
   // 101 搜尋欄幣種單選（預設全部幣種）
   set('tpl-dr-new3-101', tpl_TMP_dualLinkedSelect({prefix:'dr-new3-101', map:GMV_MAP, after:'所有渠道'}));
   // 102 列表國家＋幣種欄位（9/8 項次26）
@@ -16379,7 +17012,7 @@ function render_dr_stationtotal_Demos(){
   const set = (elId, html) => { const el = document.getElementById(elId); if(el) el.innerHTML = html; };
   // dr-stationtotal-001 列表金額欄位改 USDT（15 欄）
   set('tpl-dr-stationtotal-101', tpl_TMP_dualLinkedSelect({prefix:'dr-stationtotal-101', map:{'菲律賓':['PHP'],'越南':['VND']}, after:{type:'input',name:'投注站帳號'}}));
-  set('tpl-dr-stationtotal-102', tplColField([{hd:'帳號',lines:['']},{hd:'國家',lines:['菲律賓']},{hd:'幣種',lines:['PHP']},{hd:'全名',lines:['']}]));
+  set('tpl-dr-stationtotal-102', tplColField([{hd:'帳號',lines:['']},{hd:'國家',lines:['菲律賓']},{hd:'幣種',lines:['PHP']},{hd:'站點押金',lines:['']}]));
 }
 
 // 數據報表 > 大額存取款報表：套用統一模板庫，逐卡填入
@@ -16551,6 +17184,8 @@ function render_gm_vendor_Demos(){
   set('tpl-gm-vendor-002', `<div class="demo-select-wrap"><span class="demo-select-lbl">第三方收費設置(抽點比例)</span>${tplCurTab('gm-vendor-002', 'PHP')}</div>`);
   // gm-vendor-581 操作欄「国际化图片设置」入口＋組合彈窗＋沿用既有上傳畫面（9/8 項次27）
   set('tpl-gm-vendor-581', '<div class="gmv-inline"><div class="mk-pop-hd">国际化图片设置</div><div class="sysp-frz">' + gmvImgBody('card') + '</div></div>');
+  // 643 編輯彈窗「國家/幣種」連動列組（＋／−），帶入該廠商目前支援的組合（10/13 補邏輯）
+  set('tpl-gm-vendor-643', `<div class="demo-rows-stack"><div class="demo-inline-group"><span class="demo-select-lbl">廠商全稱：</span></div>${tpl_TMP_natCurRows('gm-vendor-643', [{a:'菲律賓',b:'PHP'},{a:'越南',b:'VND'}])}<div class="demo-inline-group"><span class="demo-select-lbl">遊戲排序：</span></div></div>`);
 }
 
 // ===== 廠商設置：国际化图片设置（9/8 項次27）＝國家＋幣種組合彈窗，逐列编辑開啟既有樣式上傳畫面 =====
@@ -16629,10 +17264,10 @@ var GMNG_ROWS = [
   {n:'菲律宾', c:'USDT', cat:'', cls:'', has:false},
   {n:'越南', c:'VND', cat:'', cls:'', has:false}
 ];
-var GMNG_COLS = ['PC端游戏封面','PC端游戏封面大图','PC端主推游戏图片','移动端游戏封面','移动端游戏封面大图','移动端主推游戏图片','移动端POPULAR主推'];
+var GMNG_COLS = ['PC端游戏封面','PC端游戏封面大图','PC端主推游戏图片','PC端Jackpot Banner游戏图片','移动端游戏封面','移动端游戏封面大图','移动端主推游戏图片','移动端Jackpot Banner游戏图片','移动端POPULAR主推'];
 var GMNG_TABS = [
-  { t:'PC配置', fields:[ ['PC端游戏封面',''], ['PC端游戏封面大图',''], ['PC端主推游戏图片',''] ] },
-  { t:'移动端配置', fields:[ ['移动端游戏封面',''], ['移动端游戏封面大图',''], ['移动端主推游戏图片',''], ['移动端POPULAR主推',''] ] }
+  { t:'PC配置', fields:[ ['PC端游戏封面',''], ['PC端游戏封面大图',''], ['PC端主推游戏图片',''], ['PC端Jackpot Banner游戏图片',''] ] },
+  { t:'移动端配置', fields:[ ['移动端游戏封面',''], ['移动端游戏封面大图',''], ['移动端主推游戏图片',''], ['移动端Jackpot Banner游戏图片',''], ['移动端POPULAR主推',''] ] }
 ];
 function gmngRerender(){ render_gm_newgame_Demos(); render_gmng_cfg_screen(); }
 function gmngOpen(k){ GMNG[k].open = true; GMNG[k].edit = -1; gmngRerender(); }
@@ -16866,9 +17501,9 @@ function render_gmng_dict_screen(){
 }
 function render_gmng_cfg_screen(){
   var el = document.getElementById('tpl-gmng-cfg-screen'); if(!el) return;
-  var bar = '<div class="syspcfg-bar"><span class="mk-select"><span>首页分类</span><span class="mk-arr">\u25be</span></span><input class="gmv-upin" placeholder="支持厂商名称、游戏名称" readonly><span class="mk-select mk-new"><span>全部国家</span><span class="mk-arr">\u25be</span></span><span class="mk-select mk-new"><span>全部币种</span><span class="mk-arr">\u25be</span></span><span class="mk-tag">240</span><span class="mk-btn">搜索</span><span class="mk-btn" onclick="gmcfgmToggle()">添加游戏</span><span class="mk-tag">582</span></div>';
+  var bar = '<div class="syspcfg-bar"><span class="mk-select mk-new"><span>全部国家</span><span class="mk-arr">\u25be</span></span><span class="mk-select mk-new"><span>全部币种</span><span class="mk-arr">\u25be</span></span><span class="mk-tag">240</span><span class="mk-select"><span>首页分类</span><span class="mk-arr">\u25be</span></span><input class="gmv-upin" placeholder="支持厂商名称、游戏名称" readonly><span class="mk-btn">搜索</span><span class="mk-btn" onclick="gmcfgmToggle()">添加游戏</span><span class="mk-tag">582</span></div>';
   var img = '<span class="gmv-img">图</span>';
-  var imgs7 = new Array(7).fill('<td>' + img + '</td>').join('');
+  var imgs7 = new Array(GMNG_COLS.length).fill('<td>' + img + '</td>').join('');
   var imgTh = GMNG_COLS.map(function(c){ return '<th>' + c + '</th>'; }).join('');
   var ops = '<span class="mk-link">编辑</span><br><span class="mk-link">删除</span><br><span class="mk-link mk-new" onclick="gmngOpen(\'scr\')">国际化设置</span><span class="mk-tag">585</span>';
   var head = '<tr><th>游戏名称</th><th class="mk-new">首页分类<span class="mk-tag">584</span></th><th class="mk-new">游戏类别</th>' + imgTh + '<th>操作</th></tr>';
@@ -16916,6 +17551,10 @@ function render_gm_bet_old_Demos(){
   set('tpl-gm-bet-old-007', `<div class="demo-ba-vert">${tplStatUsdt('累计有效投注金额：1,191.43(PHP)　　注总金额：3,989.00(PHP)　　输赢总金额：808.63(PHP)', '累计有效投注金额：1,191.43(USDT)　　注总金额：3,989.00(USDT)　　输赢总金额：808.63(USDT)', '假設系統幣為 USDT')}</div>`);
   // gm-bet-old-008 底部總計（全部幣種時不顯示）
   set('tpl-gm-bet-old-008', tplColField([{hd:'總計', lines:['0.00']}], '純數值相加；僅單一幣種時顯示總計，「全部幣種」時不顯示（不同幣種不可相加）'));
+  // 628 搜尋欄「所有總代/投注站」單選下拉（10/13 項次76）
+  set('tpl-gm-bet-old-628', tplSingleSelect('gm-bet-old-628','所有總代/投注站',['所有總代/投注站','所有總代','所有投注站','gatest0924','PH_USDT_zdl','zdl','ak47'],'所有總代/投注站'));
+  // 629 列表「總代/投注站代碼」欄（10/13 項次76）
+  set('tpl-gm-bet-old-629', tplColThreeField('渠道類型','總代/投注站代碼','zdl','投注設備'));
 }
 
 // 遊戲管理>投注紀錄>历史注单(New)：套用統一模板庫，逐卡填入
@@ -16934,6 +17573,10 @@ function render_gm_bet_new_Demos(){
   ], '假設系統幣為 USDT'));
   // gm-bet-new-008 底部總計（全部幣種時不顯示）
   set('tpl-gm-bet-new-008', tplColField([{hd:'總計', lines:['0.00']}], '純數值相加；僅單一幣種時顯示總計，「全部幣種」時不顯示（不同幣種不可相加）'));
+  // 630 搜尋欄「所有總代/投注站」單選下拉（10/13 項次76）
+  set('tpl-gm-bet-new-630', tplSingleSelect('gm-bet-new-630','所有總代/投注站',['所有總代/投注站','所有總代','所有投注站','gatest0924','PH_USDT_zdl','zdl','ak47'],'所有總代/投注站'));
+  // 631 列表「總代/投注站代碼｜所屬總代/投注站」欄（10/13 項次76）
+  set('tpl-gm-bet-new-631', tplColField([{hd:'渠道類型', lines:['']}, {hd:'總代/投注站代碼', lines:['zdl']}, {hd:'所屬總代/投注站', lines:['zdl']}, {hd:'投注設備', lines:['']}]));
 }
 
 // 遊戲管理>賽事管理：套用統一模板庫，逐卡填入
@@ -16979,12 +17622,16 @@ function render_gm_3p_Demos(){
   const set = (elId, html) => { const el = document.getElementById(elId); if(el) el.innerHTML = html; };
   // gm-3p-003 上方搜尋欄幣種單選（預設全部幣種）＋全部設備下拉位置示意
   set('tpl-gm-3p-003', tpl_TMP_dualLinkedSelect({prefix:'gm-3p-003', map:GMV_MAP, after:{type:'input',name:'會員名'}}));
-  // gm-3p-004 列表欄位：三方遊戲名｜幣種｜下注金額
-  set('tpl-gm-3p-004', tplColField([{hd:'三方遊戲名', lines:['']}, {hd:'國家', lines:['菲律賓']}, {hd:'幣種', lines:['PHP']}, {hd:'下注金額', lines:['']}]));
+  // gm-3p-004 列表欄位：三方遊戲用戶名｜國家｜幣種｜下注金額
+  set('tpl-gm-3p-004', tplColField([{hd:'三方遊戲用戶名', lines:['']}, {hd:'國家', lines:['菲律賓']}, {hd:'幣種', lines:['PHP']}, {hd:'下注金額', lines:['']}]));
   // gm-3p-001 列表金額欄位兩行顯示（法幣/系統幣，多欄含導出）
   set('tpl-gm-3p-001', tplColMultiTwoRowTitled(['下注金額','有效投注額','總盈虧','派彩金額','派彩金額(含JP)','總持量','總毛利','獎池派彩','獎池貢獻']));
   // gm-3p-002 統計數據帶「統計金額單位：USDT」提示（點總計展開）
   set('tpl-gm-3p-002', tplStatHint('gm-3p-002', ['下注金额：249.00','累计有效投注金额：249.00','总派彩：25.70','总奖池奖励：0.00','奖池贡献：0.00','总盈亏：-223.30','总毛利：223.30']));
+  // 634 搜尋欄「所有總代/投注站」單選下拉（10/13 項次76）
+  set('tpl-gm-3p-634', tplSingleSelect('gm-3p-634','所有總代/投注站',['所有總代/投注站','所有總代','所有投注站','gatest0924','PH_USDT_zdl','zdl','ak47'],'所有總代/投注站'));
+  // 635 列表「總代/投注站代碼｜所屬總代/投注站」欄（10/13 項次76）
+  set('tpl-gm-3p-635', tplColField([{hd:'渠道類型', lines:['']}, {hd:'總代/投注站代碼', lines:['zdl']}, {hd:'所屬總代/投注站', lines:['zdl']}, {hd:'投注設備', lines:['']}]));
 }
 
 // 遊戲管理>第三方对局查询(首页分类)：套用統一模板庫，逐卡填入
@@ -16992,12 +17639,16 @@ function render_gm_3pfp_Demos(){
   const set = (elId, html) => { const el = document.getElementById(elId); if(el) el.innerHTML = html; };
   // gm-3pfp-003 上方搜尋欄幣種單選（預設全部幣種）＋全部設備下拉位置示意
   set('tpl-gm-3pfp-003', tpl_TMP_dualLinkedSelect({prefix:'gm-3pfp-003', map:GMV_MAP, after:{type:'input',name:'會員名'}}));
-  // gm-3pfp-004 列表欄位：三方遊戲名｜幣種｜下注金額
-  set('tpl-gm-3pfp-004', tplColField([{hd:'三方遊戲名', lines:['']}, {hd:'國家', lines:['菲律賓']}, {hd:'幣種', lines:['PHP']}, {hd:'下注金額', lines:['']}]));
+  // gm-3pfp-004 列表欄位：三方遊戲用戶名｜國家｜幣種｜下注金額
+  set('tpl-gm-3pfp-004', tplColField([{hd:'三方遊戲用戶名', lines:['']}, {hd:'國家', lines:['菲律賓']}, {hd:'幣種', lines:['PHP']}, {hd:'下注金額', lines:['']}]));
   // gm-3pfp-001 列表金額欄位兩行顯示（法幣/USDT，多欄含導出）
   set('tpl-gm-3pfp-001', tplColMultiTwoRowTitled(['下注金額','有效投注額','總盈虧','派彩金額','派彩金額(含JP)','總持量','總毛利','獎池派彩','獎池貢獻']));
   // gm-3pfp-002 統計數據帶「統計金額單位：USDT」提示（點總計展開）
   set('tpl-gm-3pfp-002', tplStatHint('gm-3pfp-002', ['下注金额：249.00','累计有效投注金额：249.00','总派彩：25.70','总奖池奖励：0.00','奖池贡献：0.00','总盈亏：-223.30','总毛利：223.30']));
+  // 636 搜尋欄「所有總代/投注站」單選下拉（10/13 項次76）
+  set('tpl-gm-3pfp-636', tplSingleSelect('gm-3pfp-636','所有總代/投注站',['所有總代/投注站','所有總代','所有投注站','gatest0924','PH_USDT_zdl','zdl','ak47'],'所有總代/投注站'));
+  // 637 列表「總代/投注站代碼｜所屬總代/投注站」欄（10/13 項次76）
+  set('tpl-gm-3pfp-637', tplColField([{hd:'渠道類型', lines:['']}, {hd:'總代/投注站代碼', lines:['zdl']}, {hd:'所屬總代/投注站', lines:['zdl']}, {hd:'投注設備', lines:['']}]));
 }
 
 // 遊戲管理>第三方其他费用：套用統一模板庫，逐卡填入
@@ -17127,6 +17778,34 @@ function gcRender(prefix){
     <div class="demo-inline-group"><span class="demo-select-lbl">首頁分類與類別：</span><div class="demo-rows-stack">${rows}</div></div>
   </div>`;
 }
+
+// ============================================================
+// 國家／幣種連動列組（每列：國家單選｜幣種單選｜＋｜−）——廠商設置編輯彈窗（卡 643）
+// 畫法沿用国际化设置列組（gcRender）：＋新增一列、−刪除該列、至少保留一列；資料來源 GMV_MAP
+// ============================================================
+var NC_STATE = {};
+function ncInit(prefix, rows){ NC_STATE[prefix] = { rows: rows && rows.length ? rows.map(r=>({a:r.a||null,b:r.b||null})) : [{a:null,b:null}] }; ncRender(prefix); }
+function ncPick(prefix,row,field,v){ const r=NC_STATE[prefix].rows[row]; if(field==='a'){ r.a=v; if(!(GMV_MAP[v]||[]).includes(r.b)) r.b=null; } else { r.b=v; if(!r.a){ r.a=Object.keys(GMV_MAP).find(k=>GMV_MAP[k].includes(v))||null; } } ncRender(prefix); }
+function ncAdd(prefix){ NC_STATE[prefix].rows.push({a:null,b:null}); ncRender(prefix); }
+function ncRemove(prefix,row){ if(NC_STATE[prefix].rows.length<=1) return; NC_STATE[prefix].rows.splice(row,1); ncRender(prefix); }
+function ncSel(prefix,row,field,placeholder,opts,val){
+  const id=`nc-${prefix}-${row}-${field}`; const cls = val ? 'txt value' : 'txt placeholder';
+  return `<div class="demo-select" id="dsel-${id}"><div class="demo-select-box" onclick="toggleDemoSelect('dsel-${id}')"><span class="${cls}">${val||placeholder}</span><span class="arr">▼</span></div><div class="demo-select-menu" id="dsel-${id}-menu">${opts.map(o=>`<div class="demo-select-opt" onclick="ncPick('${prefix}',${row},'${field}','${o}')">${o}</div>`).join('')}</div></div>`;
+}
+function ncRender(prefix){
+  const el=document.getElementById('nc-'+prefix); if(!el) return;
+  const st=NC_STATE[prefix];
+  const rows=st.rows.map((r,i)=>{
+    const aOpts = r.b ? Object.keys(GMV_MAP).filter(k=>GMV_MAP[k].includes(r.b)) : Object.keys(GMV_MAP);
+    const bOpts = r.a ? GMV_MAP[r.a] : [].concat(...Object.values(GMV_MAP));
+    const plus=`<button class="nc-btn" title="新增一列" onclick="ncAdd('${prefix}')">＋</button>`;
+    const minus = st.rows.length>1 ? `<button class="nc-btn minus" title="刪除此列" onclick="ncRemove('${prefix}',${i})">−</button>` : '';
+    return `<div class="demo-inline-group">${ncSel(prefix,i,'a','請選擇國家',aOpts,r.a)}${ncSel(prefix,i,'b','請選擇幣種',bOpts,r.b)}${plus}${minus}</div>`;
+  }).join('');
+  el.innerHTML = `<div class="demo-inline-group"><span class="demo-select-lbl">國家/幣種：</span><div class="demo-rows-stack">${rows}</div></div>`;
+}
+function tpl_TMP_natCurRows(prefix, rows){ setTimeout(()=>ncInit(prefix, rows), 0); return `<div id="nc-${prefix}"></div>`; }
+
 // 遊戲管理>新遊戲入口設置：套用統一模板庫，逐卡填入
 function render_gm_newgame_Demos(){
   const set = (elId, html) => { const el = document.getElementById(elId); if(el) el.innerHTML = html; };
@@ -17139,6 +17818,8 @@ function render_gm_newgame_Demos(){
   set('tpl-gm-newgame-103', `<div class="demo-inline-group">${tplSingleSelect('gm-newgame-103', '全部國家', ['全部國家','菲律賓','越南'], '全部國家')}<div class="demo-static-ctx"><span>首頁分類</span><span class="arr">▼</span></div></div>`);
   // 102/104 列表國家欄位（102：ID 左側；104：首頁分類左側）
   set('tpl-gm-newgame-102', tplColThreeField('', '國家', '菲律賓', 'ID'));
+  // 644 首页分类管理編輯彈窗最上方「國家」唯讀反灰；其餘列僅標題示意位置（10/13 補邏輯）
+  set('tpl-gm-newgame-644', `<div class="demo-rows-stack"><div class="demo-inline-group"><span class="demo-select-lbl">國家：</span><input class="demo-amount-input ro" value="菲律賓" disabled></div><div class="demo-inline-group"><span class="demo-select-lbl">類型code：</span></div></div>`);
   set('tpl-gm-newgame-104', tplColThreeField('', '國家', '菲律賓', '首頁分類'));
   // 105 添加遊戲彈窗國家下拉（必選，預設請選擇國家）
   set('tpl-gm-newgame-105', tplModalRow('modal-gm-newgame-105', [
@@ -17179,6 +17860,8 @@ function render_gm_newgame_Demos(){
   set('tpl-gm-newgame-584', '<div class="mk-tbl-wrap"><table class="mk-table"><tr><th>游戏名称</th><th>首页分类</th><th>游戏类别</th></tr><tr><td>Dragon Treasure</td><td>ARCADE</td><td>Fishing02</td></tr><tr><td>Ghost Fighter</td><td>SLOT</td><td>特色</td></tr><tr><td>Wild Ace</td><td>-</td><td>-</td></tr></table><div class="gmv-note">依預設國家（菲律賓）值渲染；預設國家無值吃其他已設置國家；皆未設置顯示「-」。</div></div>');
   // 585 国际化设置：內嵌彈窗內容（9/8 項次27）
   set('tpl-gm-newgame-585', '<div class="gmv-inline"><div class="mk-pop-hd">国际化设置</div><div class="sysp-frz">' + gmngBody('card') + '</div></div>');
+  // 625 投注站显示配置彈窗：標題下方國家＋幣種雙向連動單選（設定頁型，預設菲律賓/PHP、無全部）（10/13 補邏輯）
+  set('tpl-gm-newgame-625', '<div class="gmv-inline"><div class="mk-pop-hd">投注站显示配置</div><div class="sysp-frz">' + tpl_TMP_dualLinkedSelect({prefix:'gm-newgame-625', map:GMV_MAP, aDef:'菲律賓', bDef:'PHP', noAll:true}) + '</div></div>');
 }
 
 // ============================================================
@@ -17768,6 +18451,21 @@ function render_act_carousel_Demos(){
   set('tpl-act-carousel-030', listCF());
   set('tpl-act-carousel-031', withRowAfter(tplLinkedModal({prefix:'actcar-031', aLabel:'國家', aPlaceholder:'請選擇國家', aOptions:['菲律賓','越南'], bLabel:'幣種', bPlaceholder:'請選擇幣種', map:{'菲律賓':['PHP'],'越南':['VND']}}), '語系'));
   set('tpl-act-carousel-032', editCC('032'));
+  // Jackpot轮播V2 648~651（10/13 規格書隨後台更新，比照 377~380）
+  set('tpl-act-carousel-648', search('648'));
+  set('tpl-act-carousel-649', tplColField([{hd:'國家',lines:['菲律賓']},{hd:'幣種',lines:['PHP']},{hd:'名',lines:['']}]));
+  set('tpl-act-carousel-650', tplVendorLinkedModal({prefix:'actcar-650', typeLabel:'輪播類型', countries:['菲律賓','越南'], curMap:{'菲律賓':['PHP'],'越南':['VND']}, vendors:[{name:'PHP廠商',curs:['PHP']},{name:'VND廠商',curs:['VND']},{name:'VND/PHP廠商',curs:['PHP','VND']}]}));  // 342 輪播類型｜國家｜幣種｜選擇廠商 雙向連動
+  set('tpl-act-carousel-028', tplModalRow('modal-actcar-028', [{label:'輪播類型', val:''},{label:'國家', disabled:true, value:'菲律賓'},{label:'幣種', disabled:true, value:'PHP'}]));  // 編輯反灰
+  // ===== 新版首页轮播图（新） =====
+  set('tpl-act-carousel-029', search('029'));
+  set('tpl-act-carousel-651', tplModalRow('modal-actcar-651', [{label:'輪播類型', val:''},{label:'國家', disabled:true, value:'菲律賓'},{label:'幣種', disabled:true, value:'PHP'}]));  // 編輯反灰
+  // ===== 新版首页轮播图（新） =====
+  set('tpl-act-carousel-029', search('029'));
+  // 新版首页轮播图（新）V2 652~655（比照 381~384）
+  set('tpl-act-carousel-652', search('652'));
+  set('tpl-act-carousel-653', listCF());
+  set('tpl-act-carousel-654', withRowAfter(tplLinkedModal({prefix:'actcar-654', aLabel:'國家', aPlaceholder:'請選擇國家', aOptions:['菲律賓','越南'], bLabel:'幣種', bPlaceholder:'請選擇幣種', map:{'菲律賓':['PHP'],'越南':['VND']}}), '語系'));
+  set('tpl-act-carousel-655', editCC('655'));
 }
 
 // 獎勵中心活動管理區塊：套用統一模板庫，逐卡填入
@@ -18326,6 +19024,9 @@ function render_point_exchange_Demos(){
   set('tpl-point-exchange-003', tpl_TMP_dualLinkedSelect({prefix:'point-exchange-003', map:{'菲律賓':['PHP'],'越南':['VND']}, after:{type:'input', name:'會員名'}}));
   // 004 盲盒抽獎紀錄列表（創建時間｜國家｜幣種｜盲盒名稱）
   set('tpl-point-exchange-004', tplColField([{hd:'創建時間', lines:['']},{hd:'國家', lines:['菲律賓']},{hd:'幣種', lines:['PHP']},{hd:'盲盒名稱', lines:['']}]));
+  // Ichiban Kuji 抽獎紀錄 656/657（10/13 規格書隨後台更新，比照 500/501）
+  set('tpl-point-exchange-656', tpl_TMP_dualLinkedSelect({prefix:'point-exchange-656', map:{'菲律賓':['PHP'],'越南':['VND']}, after:{type:'input', name:'會員名'}}));
+  set('tpl-point-exchange-657', tplColField([{hd:'創建時間', lines:['']},{hd:'國家', lines:['菲律賓']},{hd:'幣種', lines:['PHP']},{hd:'商品名稱', lines:['']}]));
 }
 
 // 發卷審核（發卷審核 / 審核紀錄 兩分頁）：套用統一模板庫，逐卡填入
@@ -19549,6 +20250,9 @@ function render_bag_Demos(){
   ]);
   const el590 = document.getElementById('tpl-bag-590');
   if(el590) el590.innerHTML = tplSingleSelect('bag-590','Select',['默認層','第二層','第三層'],null) + '<div class="demo-fieldcard-caption">選項已依帳號國家＋幣種（菲律賓／PHP）篩選</div>';
+  // 646 大代理詳情彈窗「總代名稱／投注站名稱」依代理線類型變量（10/13 補邏輯）
+  const el646 = document.getElementById('tpl-bag-646');
+  if(el646) el646.innerHTML = `<div class="demo-ba-group"><div class="demo-ba-item"><div class="demo-ba-tag">總代線</div><div class="demo-rows-stack"><div class="demo-inline-group"><span class="demo-select-lbl">真實姓名：</span></div><div class="demo-inline-group"><span class="demo-select-lbl">總代名稱：</span><span class="demo-readonly">PH_USDT_zdl</span></div></div></div><div class="demo-ba-item"><div class="demo-ba-tag">投注站線</div><div class="demo-rows-stack"><div class="demo-inline-group"><span class="demo-select-lbl">真實姓名：</span></div><div class="demo-inline-group"><span class="demo-select-lbl">投注站名稱：</span><span class="demo-readonly">ak47tz</span></div></div></div></div>`;
 }
 render_bag_Demos();
 render_bag_screen();
@@ -19752,6 +20456,9 @@ function render_agp_Demos(){
   ]);
   const el591 = document.getElementById('tpl-agp-591');
   if(el591) el591.innerHTML = tplSingleSelect('agp-591','Select',['默認層','第二層','第三層'],null) + '<div class=\'demo-fieldcard-caption\'>選項已依帳號國家＋幣種（菲律賓／PHP）篩選</div>';
+  // 647 代理詳情彈窗「總代名稱／投注站名稱」依代理線類型變量（10/13 補邏輯）
+  const el647 = document.getElementById('tpl-agp-647');
+  if(el647) el647.innerHTML = `<div class="demo-ba-group"><div class="demo-ba-item"><div class="demo-ba-tag">總代線</div><div class="demo-rows-stack"><div class="demo-inline-group"><span class="demo-select-lbl">真實姓名：</span></div><div class="demo-inline-group"><span class="demo-select-lbl">總代名稱：</span><span class="demo-readonly">PH_USDT_zdl</span></div></div></div><div class="demo-ba-item"><div class="demo-ba-tag">投注站線</div><div class="demo-rows-stack"><div class="demo-inline-group"><span class="demo-select-lbl">真實姓名：</span></div><div class="demo-inline-group"><span class="demo-select-lbl">投注站名稱：</span><span class="demo-readonly">ak47tz</span></div></div></div></div>`;
 }
 render_agp_Demos();
 render_agp_screen();
@@ -19774,6 +20481,7 @@ function render_mem_screen(){
     + tagcfgSel('dsel-memcurf', MEM.curF === '币种' ? null : MEM.curF, curOpts, 'memCurFPick', true, '币种') + '<span class="mk-tag">037</span>'
     + '<span class="mk-select"><span>全部状态</span><span class="mk-arr">\u25be</span></span>'
     + '<span class="mk-select"><span>所有用户层级</span><span class="mk-arr">\u25be</span></span>'
+    + '<span class="mk-select mk-new"><span>所有总代/投注站</span><span class="mk-arr">\u25be</span></span><span class="mk-tag">639</span>'
     + '<input class="sysp-input sysp-in-m" placeholder="账号/名/邮箱/手机号/身分证字号">'
     + '<span class="mk-select"><span>全部标签</span><span class="mk-arr">\u25be</span></span>'
     + '<input class="sysp-input sysp-in-m" placeholder="最小金额"><span class="mk-tag">037</span><input class="sysp-input sysp-in-m" placeholder="最大金额"><span class="mk-tag">037</span>'
@@ -19786,7 +20494,7 @@ function render_mem_screen(){
   var head = '<tr><th>在线</th><th>头像</th><th>会员信息</th><th>层级&团队</th><th>信用 & 额度</th><th>存提款</th><th>状态</th><th>日期信息</th><th>KYC状态</th><th>会员标签<span class="mk-tag">563</span></th><th>用户标签</th><th>备注</th><th>操作</th></tr>';
   var body;
   if(show){
-    var info = '会员ID：1057316<br>会员名：<span class="mk-link">okbet5858945mv</span><br>真实姓名：<br>昵称：ok***mv<br>上级代理：PH_PHP_dl<br>信用值：0<br>设备类型：IOS<br>投注站代码：zdl<br>用户币别：PHP<span class="mk-tag">039</span><br>国家：菲律賓<span class="mk-tag">039</span><br>终身产品偏好：<br>三方游戏用户名：<br>spplat1___1057316';
+    var info = '会员ID：1057316<br>会员名：<span class="mk-link">okbet5858945mv</span><br>真实姓名：<br>昵称：ok***mv<br>上级代理：PH_PHP_dl<br>信用值：0<br>设备类型：IOS<br><span class="mk-new">投注站代码：zdl</span><span class="mk-tag">640</span><br>用户币别：PHP<span class="mk-tag">039</span><br>国家：菲律賓<span class="mk-tag">039</span><br>终身产品偏好：<br>三方游戏用户名：<br>spplat1___1057316';
     var lvl = '会员层级：默认层<br>成长值：0<br>等级：VIP0<br>账号类型：普通账号<br>会员类型：平台会员';
     var credit = '余额：0.00<br>余额宝：0.00<br>欠款：0.00<br>余额宝利息：0.00<br>锁定额度：1,000.00<br>会员积分：10.00<span class="mk-tag">045</span>';
     var dw = '存款总额：0.00<br>提款总额：0.00<br>存款次数：0<br>提款次数：0<br>活动领取金额：0<br>累计有效投注：0<span class="mk-tag">046</span>';
