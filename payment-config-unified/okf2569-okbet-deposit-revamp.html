@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>OKBet 充值改版 — 規格書_02（OKF-2569）</title>
+<title>OKBet 充值改版 — 規格書_04（OKF-2569）</title>
 <style>
 :root{
   --bd:#dcdfe6;--bd2:#ebeef5;--fg:#303133;--fg2:#606266;--fg3:#909399;
@@ -155,7 +155,7 @@ code{background:#f5f7fa;border:1px solid var(--bd2);border-radius:3px;padding:0 
 .tile.sub{height:40px;font-size:11px}
 .famt{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .famt span{height:30px;border:1px solid #e1e5ec;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px;color:#2d3748;background:#fff}
-.fsub{height:34px;border-radius:8px;background:#2f6fed;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:13px;margin-top:8px}
+.fsub{cursor:pointer;height:34px;border-radius:8px;background:#2f6fed;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:13px;margin-top:8px}
 .fnote{font-size:11.5px;color:var(--fg2);background:#fff7e6;border:1px solid #ffe3b0;border-radius:6px;padding:7px 10px;line-height:1.7;margin-top:8px}
 .fnote b{color:var(--new)}
 .fempty{color:#9aa3b2;font-size:12px;text-align:center;padding:14px 0}
@@ -186,7 +186,7 @@ code{background:#f5f7fa;border:1px solid var(--bd2);border-radius:3px;padding:0 
   </nav>
 
   <div class="main">
-    <div class="crumb"><span class="doc">OKF-2569｜okbet_充值改版｜規格書_02｜2026-10-22</span><b id="crumbName">需求目的與範圍</b></div>
+    <div class="crumb"><span class="doc">OKF-2569｜okbet_充值改版｜規格書_04｜2026-10-22</span><b id="crumbName">需求目的與範圍</b></div>
     <div class="lgd">紅圈數字 <span class="mk">1</span>＝本次調整項，對照各頁下方「本次調整」逐條說明。<span class="tagn">本次新增</span>＝本次新增的欄位、頁籤或畫面。橘色虛線框＝可互動示意，可直接點選操作看畫面變化。畫面未標記處維持現狀，不在本單範圍。</div>
 
     <!-- ══════════ 0 需求目的與範圍 ══════════ -->
@@ -207,11 +207,23 @@ code{background:#f5f7fa;border:1px solid var(--bd2);border-radius:3px;padding:0 
           <tr><td>GrabPay</td><td>選商戶</td></tr>
           <tr><td>QRPH</td><td>選商戶</td></tr>
           <tr><td>Bank</td><td>先選銀行，再選商戶</td><td class="l">銀行來源為「銀行字典表」充值 TAB；商戶為商戶回傳的銀行清單中含該銀行者。</td></tr>
-          <tr><td>Others</td><td>選商戶</td><td class="l">其他方式，例：PayCools-BankTrans。</td></tr>
+          <tr><td>Others</td><td>選商戶</td><td class="l">不屬於上列五種的付款方式，目前確定歸入的商戶：PayCools-BankTrans。</td></tr>
         </table>
-        <div class="hintG" style="margin-top:8px">充值方式清單不做後台頁面。既有商戶各自歸屬哪一種充值方式，由 RD 判斷後帶入。</div>
+        <div class="hintG" style="margin-top:8px">充值方式清單不做後台頁面。既有商戶各自歸屬哪一種充值方式，由 RD 依下方分類原則判斷後帶入。</div>
       </div>
-      <div class="card"><h3><em>③</em>範圍</h3>
+      <div class="card"><h3><em>③</em>充值方式分類原則</h3>
+        <div class="hintG" style="margin-bottom:8px">分類依據為「會員實際用什麼工具付款」，不看商戶名稱、不看第三方公司。</div>
+        <table class="st2" style="max-width:760px">
+          <tr><th style="width:90px">充值方式</th><th>歸入條件</th><th>例</th></tr>
+          <tr><td>GCash</td><td class="l">會員以 GCash 錢包付款的商戶，不分付款頁型態（QRPH、直連、小程序皆同）</td><td class="l">V5Pay充值 - GCash、wow_GCASH</td></tr>
+          <tr><td>Maya</td><td class="l">會員以 Maya 錢包付款的商戶</td><td class="l">PayCools支付 - PAYMAYA</td></tr>
+          <tr><td>GrabPay</td><td class="l">會員以 GrabPay 錢包付款的商戶</td><td class="l">GrabPaytest</td></tr>
+          <tr><td>Bank</td><td class="l">會員先選銀行、再以該銀行網銀付款的商戶；此類商戶會回傳銀行清單</td><td class="l">FortunePay支付、ARX-2143-储值</td></tr>
+          <tr><td>QRPH</td><td class="l">會員以 QRPH 掃碼付款、不限定特定錢包或銀行的商戶</td><td class="l">PayCools支付-QRPH、coins-qrph-okbet</td></tr>
+          <tr><td>Others</td><td class="l">不屬於上列五種的商戶，例如：會員自行轉帳到指定帳戶、送單後跳轉至第三方 APP 或頁面完成付款</td><td class="l">PayCools-BankTrans（確定）</td></tr>
+        </table>
+      </div>
+      <div class="card"><h3><em>④</em>範圍</h3>
         <table class="st2" style="max-width:720px">
           <tr><th style="width:90px">平台</th><th>範圍內</th><th>範圍外（維持現狀）</th></tr>
           <tr><td>OKBet</td><td class="l">管理後台：在線支付商戶配置（新）、在線支付展示配置（新）新頁籤<br>前台：PC、H5、APP 充值頁入口與子渠道展示</td><td class="l">在線支付展示配置（新）原頁籤「充值展示配置」「分頁類型設定」<br>充值頁其餘區塊（金額、優惠券、送單後流程）<br>提款側全部</td></tr>
@@ -372,7 +384,8 @@ code{background:#f5f7fa;border:1px solid var(--bd2);border-radius:3px;padding:0 
     <!-- ══════════ 3 前台充值頁 ══════════ -->
     <section class="pg" id="p3">
       <div class="card"><h3><em>①</em>後台設定 ↔ 前台畫面（可互動）</h3>
-        <div class="hintG" style="margin-bottom:10px">左側為「充值展示配置（新）」兩筆入口的設定（示意，只列與前台顯示有關的欄位），右側為 OKBet 前台充值頁。改左側任一設定，右側即時變化；點右側入口看 Payment Bank 區塊的出現規則。右上可切換 PC／H5 版型，兩版邏輯相同。</div>
+        <div class="hintG" style="margin-bottom:6px">左側為「充值展示配置（新）」三筆入口的設定（示意，只列與前台顯示有關的欄位），右側為 OKBet 前台充值頁。改左側任一設定，右側即時變化；點右側入口看 Payment Bank 區塊的出現規則，再點 Payment Bank 的磁貼看進入該商戶後的畫面。右上可切換 PC／H5 版型，兩版邏輯相同。</div>
+        <div class="hintG" style="margin-bottom:10px">示範資料：<b>GCash</b> 入口三個子渠道（GCash1／GCash2／GCash3，各綁一個 GCash 商戶）；<b>Bank</b> 入口三個子渠道（BDO／BPI／Metrobank）；<b>Others</b> 入口兩個子渠道：InstaPay（綁 PayCools-BankTrans，點後進入該商戶現行流程，示意圖不畫、比照現有方式呈現）、ABC Pay（假設的商戶，送出後跳轉至第三方頁面付款，用來示範跳轉類在前台的呈現）。Maya／GrabPay／QRPH 三顆為陪襯，不可點。</div>
         <div class="sync">
           <div id="cfgPanel"></div>
           <div>
@@ -397,6 +410,7 @@ code{background:#f5f7fa;border:1px solid var(--bd2);border-radius:3px;padding:0 
             <li>・該會員可見的子渠道為 1 個：不顯示 Payment Bank 區塊，直接進入該子渠道商戶的現行後續流程（金額區等）。</li>
             <li>・該會員可見的子渠道為 2 個以上：顯示 Payment Bank 區塊，一個子渠道一顆磁貼，磁貼圖片為子渠道图示，依子渠道排序排列；維護中的子渠道顯示維護遮罩、不可點。會員點選後才進入該子渠道商戶的現行後續流程。</li>
             <li>・Payment Bank 區塊標題與樣式沿用現行。</li>
+            <li>・Others 類入口的子渠道點選後同樣進入該商戶現行流程：PayCools-BankTrans 進入其現行畫面（InstaPay Transfer Guide、Transfer Details）；送出後才跳轉第三方頁面的商戶，依現行於送出後跳轉。</li>
           </ul>
         </li>
         <li><span class="mk">3</span><b>會員送單</b>：送單對象為會員選定子渠道所綁定的商戶；Bank 類子渠道帶該銀行，其餘類不帶銀行。金額上下限、手續費／返利、流水倍數等皆依該商戶現行設定。</li>
@@ -508,19 +522,22 @@ renderD();
 
 /* ── 後台 ↔ 前台 連動 ── */
 const ENT=[
-  {id:'gcash',name:'GCash',show:true,tabs:'all,ewallet',subs:[
+  {id:'gcash',name:'GCash',show:true,subs:[
     {label:'GCash1／V5Pay充值 - GCash',tile:'GCash1',st:'正常',mst:'正常',ok:true},
     {label:'GCash2／PayCools支付-GCash',tile:'GCash2',st:'正常',mst:'正常',ok:true},
     {label:'GCash3／wow_GCASH',tile:'GCash3',st:'正常',mst:'正常',ok:true}]},
-  {id:'bank',name:'Bank',show:true,tabs:'all,bank',subs:[
+  {id:'bank',name:'Bank',show:true,subs:[
     {label:'BDO／FortunePay支付',tile:'BDO',st:'正常',mst:'正常',ok:true},
     {label:'BPI／FortunePay支付',tile:'BPI',st:'正常',mst:'正常',ok:true},
-    {label:'Metrobank／ARX-2143-储值',tile:'Metrobank',st:'正常',mst:'正常',ok:true}]}
+    {label:'Metrobank／ARX-2143-储值',tile:'Metrobank',st:'正常',mst:'正常',ok:true}]},
+  {id:'others',name:'Others',show:true,subs:[
+    {label:'InstaPay／PayCools支付-BankTrans',tile:'InstaPay',type:'transfer',st:'正常',mst:'正常',ok:true},
+    {label:'ABC Pay／（假設）跳轉至第三方頁面付款的商戶',tile:'ABC Pay',type:'redirect',st:'正常',mst:'正常',ok:true}]}
 ];
-const STATIC=[{name:'Maya',cls:'g'},{name:'GrabPay',cls:'g'},{name:'QRPH',cls:'b'},{name:'Bank Transfer',cls:'k'}];
-let fView='pc', fSel=null;
+const STATIC=[{name:'Maya',cls:'g'},{name:'GrabPay',cls:'g'},{name:'QRPH',cls:'b'}];
+let fView='pc', fSel=null, fSub=null, fStep=null, fPrompt=false;
 function evalEnt(e){
-  const subs=e.subs.map(s=>{const vis=s.st!=='停用'&&s.mst!=='停用'&&s.ok;const mt=vis&&(s.st==='维护'||s.mst==='维护');return Object.assign({},s,{vis,mt});});
+  const subs=e.subs.map((s,i)=>{const vis=s.st!=='停用'&&s.mst!=='停用'&&s.ok;const mt=vis&&(s.st==='维护'||s.mst==='维护');return Object.assign({},s,{vis,mt,idx:i});});
   const vis=subs.filter(s=>s.vis);
   const state=!e.show?'hide':(vis.length===0?'hide':(vis.every(s=>s.mt)?'mt':'ok'));
   return {subs,vis,state};
@@ -543,7 +560,17 @@ function renderCfg(){
   document.querySelectorAll('#cfgPanel select[data-k]').forEach(s=>s.onchange=e=>{ENT[+e.target.dataset.e].subs[+e.target.dataset.s][e.target.dataset.k]=e.target.value;renderAll();});
   document.querySelectorAll('#cfgPanel i[data-k=ok]').forEach(x=>x.onclick=()=>{const s=ENT[+x.dataset.e].subs[+x.dataset.s];s.ok=!s.ok;renderAll();});
 }
-function tile(txt,cls,extra){return '<div class="tile '+(extra||'')+'"><span class="lg img '+(cls||'')+'"></span>'+txt+(extra&&extra.includes('mt')?'<span class="veil">✕ 维护中</span>':'')+'</div>';}
+function tile(txt,cls,extra,attr){return '<div class="tile '+(extra||'')+'" '+(attr||'')+'><span class="lg img '+(cls||'')+'"></span>'+txt+(extra&&extra.includes('mt')?'<span class="veil">✕ 维护中</span>':'')+'</div>';}
+const AMT='<div class="fbox"><div class="ft">Payment Amount</div><div class="famt"><span>+ 10</span><span>+ 50</span><span>+ 100</span><span>+ 500</span><span>+ 1000</span><span>+ 10000</span></div><div class="fsub" data-submit="1">Submit</div></div>';
+function subFlow(s){
+  if(s.type==='transfer'){
+    return '<div class="fempty" style="padding:14px 10px;line-height:1.8">（進入 PayCools-BankTrans 現行流程：InstaPay Transfer Guide、Transfer Details、How To Transfer<br>比照現有方式呈現，本單不動，示意圖不畫）</div>';
+  }
+  if(s.type==='redirect'){
+    return '<div class="fbox"><div class="fsub" data-submit="1" style="margin-top:0">Submit</div></div><div class="fempty" style="padding:4px 0">（假設的跳轉類商戶：按 Submit 後跳轉至第三方頁面）</div>';
+  }
+  return AMT+'<div class="fempty" style="padding:4px 0">（此區為該商戶現行後續流程，沿用現狀）</div>';
+}
 function renderFront(){
   const notes=[];
   let entries='';
@@ -551,37 +578,44 @@ function renderFront(){
     const r=evalEnt(e);
     if(r.state==='hide'){notes.push('<b>'+e.name+'</b> 入口不顯示：'+(!e.show?'前台是否显示為否':'該會員可見子渠道 0 個'));return;}
     const on=fSel===e.id?' on':'';
-    entries+='<div class="tile'+(r.state==='mt'?' mt':'')+on+'" data-ent="'+e.id+'"><span class="lg img '+(e.id==='bank'?'':'b')+'"></span>'+e.name+(r.state==='mt'?'<span class="veil">✕ 维护中</span>':'')+'</div>';
+    entries+='<div class="tile'+(r.state==='mt'?' mt':'')+on+'" data-ent="'+e.id+'"><span class="lg img '+(e.id==='bank'?'':(e.id==='others'?'g':'b'))+'"></span>'+e.name+(r.state==='mt'?'<span class="veil">✕ 维护中</span>':'')+'</div>';
     if(r.state==='mt') notes.push('<b>'+e.name+'</b> 入口維護：該會員可見子渠道全部維護');
   });
-  STATIC.forEach(s=>{entries+='<div class="tile" style="color:#9aa3b2"><span class="lg img '+(s.cls==='k'?'':s.cls)+'" style="'+(s.cls==='k'?'background:#222':'')+'"></span>'+s.name+'</div>';});
+  STATIC.forEach(s=>{entries+='<div class="tile" style="color:#9aa3b2"><span class="lg img '+s.cls+'"></span>'+s.name+'</div>';});
   let bank='';let after='';
   const se=ENT.find(e=>e.id===fSel);
   if(se){
     const r=evalEnt(se);
     if(r.state==='ok'){
       if(r.vis.length>=2){
-        bank='<div class="fbox"><div class="ft">Payment Bank</div><div class="fgrid">'+r.vis.map(s=>tile(s.tile,'b','sub'+(s.mt?' mt':''))).join('')+'</div></div>';
-        notes.push('<b>'+se.name+'</b>：可見子渠道 '+r.vis.length+' 個 → 顯示 Payment Bank，會員點選後才進入該商戶的現行後續流程');
-        after='<div class="fempty">（點選 Payment Bank 磁貼後才出現該商戶的現行後續流程）</div>';
+        bank='<div class="fbox"><div class="ft">Payment Bank</div><div class="fgrid">'+r.vis.map(s=>tile(s.tile,'b','sub'+(s.mt?' mt':'')+(fSub===s.idx?' on':''),s.mt?'':'data-sub="'+s.idx+'"')).join('')+'</div></div>';
+        const cur=r.vis.find(s=>s.idx===fSub);
+        if(cur){notes.push('<b>'+se.name+'</b>：可見子渠道 '+r.vis.length+' 個 → 顯示 Payment Bank；已點選 '+cur.tile+' → 進入該商戶現行後續流程');after=subFlow(cur);}
+        else{notes.push('<b>'+se.name+'</b>：可見子渠道 '+r.vis.length+' 個 → 顯示 Payment Bank，會員點選後才進入該商戶的現行後續流程');after='<div class="fempty">（點選 Payment Bank 磁貼後才出現該商戶的現行後續流程）</div>';}
       }else{
-        notes.push('<b>'+se.name+'</b>：可見子渠道 1 個（'+r.vis[0].tile+'）→ 不顯示 Payment Bank，直接進入該商戶的現行後續流程');
-        after='<div class="fbox"><div class="ft">Payment Amount</div><div class="famt"><span>+ 10</span><span>+ 50</span><span>+ 100</span><span>+ 500</span><span>+ 1000</span><span>+ 10000</span></div><div class="fsub">Submit</div></div><div class="fempty" style="padding:4px 0">（此區為該商戶現行後續流程，沿用現狀）</div>';
+        const cur=r.vis[0];
+        notes.push('<b>'+se.name+'</b>：可見子渠道 1 個（'+cur.tile+'）→ 不顯示 Payment Bank，直接進入該商戶的現行後續流程');
+        after=subFlow(cur);
       }
     }
   }else{after='<div class="fempty">（點上方入口）</div>';}
+  const prompt=fPrompt?'<div style="position:absolute;inset:0;background:rgba(30,40,60,.45);display:flex;align-items:center;justify-content:center;border-radius:12px"><div style="background:#fff;border-radius:12px;padding:16px 18px;width:260px;text-align:center"><div style="font-weight:700;font-size:14px;color:#1f2d3d;margin-bottom:8px">Payment Information</div><div style="font-size:12px;color:#4a5568;line-height:1.8">此時已跳轉至該支付的頁面<br><span style="color:#9aa3b2">（示意：實際為開啟第三方付款頁）</span></div><div class="fsub" data-prompt-close="1" style="margin-top:12px">OK</div></div></div>':'';
   const body='<div class="fbal">₱ 197,128.95<span>Fund Accounts</span></div><div class="fbox"><div class="ft">Payment Methods</div><div class="fgrid">'+entries+'</div></div>'+bank+after;
   let h='';
   if(fView==='pc'){
-    h='<div class="fe pc"><div class="fhead">Wallet<i>×</i></div><div class="fnav"><div class="on">Deposit</div><div>Withdraw</div></div><div>'+body+'</div></div>';
+    h='<div class="fe pc" style="position:relative"><div class="fhead">Wallet<i>×</i></div><div class="fnav"><div class="on">Deposit</div><div>Withdraw</div></div><div>'+body+'</div>'+prompt+'</div>';
   }else{
-    h='<div class="fe h5"><div class="fhead"><i>‹</i>Wallet<i>Record</i></div>'+body+'</div>';
+    h='<div class="fe h5" style="position:relative"><div class="fhead"><i>‹</i>Wallet<i>Record</i></div>'+body+prompt+'</div>';
   }
   document.getElementById('frontPanel').innerHTML=h;
-  document.getElementById('frontNote').innerHTML=notes.length?notes.join('<br>'):'目前兩個入口皆正常顯示。點入口看 Payment Bank 規則。';
-  document.querySelectorAll('#frontPanel [data-ent]').forEach(t=>t.onclick=()=>{if(t.classList.contains('mt'))return;fSel=t.dataset.ent;renderFront();});
+  document.getElementById('frontNote').innerHTML=notes.length?notes.join('<br>'):'目前三個入口皆正常顯示。點入口看 Payment Bank 規則。';
+  document.querySelectorAll('#frontPanel [data-ent]').forEach(t=>t.onclick=()=>{if(t.classList.contains('mt'))return;fSel=t.dataset.ent;fSub=null;fStep=null;renderFront();});
+  document.querySelectorAll('#frontPanel [data-sub]').forEach(t=>t.onclick=()=>{fSub=+t.dataset.sub;fStep=null;renderFront();});
+  document.querySelectorAll('#frontPanel [data-step]').forEach(t=>t.onclick=()=>{fStep=t.dataset.step;renderFront();});
+  document.querySelectorAll('#frontPanel [data-submit]').forEach(t=>t.onclick=()=>{const e=ENT.find(x=>x.id===fSel);if(!e)return;const r=evalEnt(e);const cur=r.vis.length>=2?r.vis.find(s=>s.idx===fSub):r.vis[0];if(cur&&cur.type==='redirect'){fPrompt=true;renderFront();}});
+  document.querySelectorAll('#frontPanel [data-prompt-close]').forEach(t=>t.onclick=()=>{fPrompt=false;renderFront();});
 }
-function renderAll(){renderCfg();if(fSel){const e=ENT.find(x=>x.id===fSel);if(!e||evalEnt(e).state!=='ok')fSel=null;}renderFront();}
+function renderAll(){renderCfg();if(fSel){const e=ENT.find(x=>x.id===fSel);if(!e||evalEnt(e).state!=='ok'){fSel=null;fSub=null;}else{const r=evalEnt(e);if(fSub!==null&&!r.vis.find(s=>s.idx===fSub&&!s.mt))fSub=null;}}fPrompt=false;renderFront();}
 document.querySelectorAll('.ftabs span').forEach(s=>s.onclick=()=>{document.querySelectorAll('.ftabs span').forEach(x=>x.classList.remove('on'));s.classList.add('on');fView=s.dataset.v;renderFront();});
 renderAll();
 </script>
