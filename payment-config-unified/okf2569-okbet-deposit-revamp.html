@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>OKBet 充值改版 — 規格書_02（OKF-2569）</title>
+<style>
+:root{
+  --bd:#dcdfe6;--bd2:#ebeef5;--fg:#303133;--fg2:#606266;--fg3:#909399;
+  --blue:#409eff;--bluebg:#ecf5ff;--ok:#67c23a;--okbg:#f0f9eb;
+  --warn:#e6a23c;--warnbg:#fdf6ec;--err:#f56c6c;--errbg:#fef0f0;
+  --mk:#d93b3b;--new:#ff7d1a;--newbg:#fff3e8;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+html,body{height:100%}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;font-family:"Helvetica Neue",Arial,"PingFang TC","Microsoft JhengHei",sans-serif;background:#eef1f5;color:var(--fg);font-size:13px}
+.wrap{display:flex;min-height:100%}
+.side{width:236px;flex:0 0 236px;background:#fff;border-right:1px solid var(--bd2);padding:10px 0 40px}
+.side .grp{font-size:13.5px;font-weight:600;padding:12px 16px;display:flex;align-items:center;gap:7px;color:var(--fg)}
+.side .grp::before{content:"▾";font-size:11px;color:var(--fg3)}
+.side a{display:flex;align-items:center;justify-content:space-between;gap:6px;padding:11px 14px 11px 30px;color:var(--fg2);text-decoration:none;font-size:13px;cursor:pointer}
+.side a::before{content:"▸";margin-right:6px;color:var(--fg3);font-size:11px}
+.side a:hover{background:#f5f7fa}
+.side a.on{background:var(--bluebg);color:var(--blue);font-weight:600}
+.side a .n{font-size:11px;background:var(--errbg);color:var(--mk);border-radius:9px;padding:1px 7px;font-weight:700}
+.main{flex:1;min-width:0;padding:16px 22px 60px}
+.crumb{font-size:13px;color:var(--fg2);margin:4px 0 12px}
+.crumb b{color:var(--fg)}
+.doc{float:right;font-size:12px;color:var(--fg3)}
+.lgd{background:#fff;border:1px solid var(--bd2);border-radius:6px;padding:8px 14px;font-size:12px;color:var(--fg2);margin-bottom:14px;line-height:1.8}
+.pg{display:none}
+.pg.on{display:block}
+.card{background:#fff;border:1px solid var(--bd2);border-radius:8px;padding:16px 18px;margin-bottom:16px;overflow-x:auto}
+.card h3{margin:0 0 12px;font-size:14px;display:flex;align-items:center;gap:8px}
+.card h3 em{font-style:normal;width:20px;height:20px;border-radius:50%;background:var(--fg);color:#fff;font-size:12px;display:inline-flex;align-items:center;justify-content:center}
+.mk{display:inline-flex;min-width:17px;height:17px;border-radius:50%;background:var(--mk);color:#fff;font-size:11px;font-weight:700;align-items:center;justify-content:center;vertical-align:2px;margin:0 2px;padding:0 3px}
+.tagn{display:inline-block;font-size:11px;background:var(--newbg);color:var(--new);border:1px solid var(--new);border-radius:3px;padding:0 6px;font-weight:600;margin-left:6px;vertical-align:1px}
+.lt{width:100%;border-collapse:collapse;font-size:12.5px;text-align:center}
+.lt th,.lt td{border:1px solid var(--bd2);padding:8px 9px;vertical-align:middle}
+.lt th{background:#f5f7fa;color:var(--fg2);font-weight:600;white-space:nowrap}
+.lt td{color:var(--fg2)}
+.lt th.nw{background:var(--newbg);color:var(--new)}
+.chip{display:inline-block;font-size:11.5px;border-radius:3px;padding:1px 8px;white-space:nowrap}
+.chip.ok{background:var(--okbg);color:var(--ok)}
+.chip.mt{background:var(--warnbg);color:var(--warn)}
+.chip.off{background:var(--errbg);color:var(--err)}
+.chip.gy{background:#f4f4f5;color:var(--fg3)}
+.lnk{color:var(--blue);cursor:pointer;margin:0 4px;white-space:nowrap}
+.lnk.red{color:var(--err)}
+.btn{display:inline-flex;align-items:center;height:30px;padding:0 15px;border-radius:4px;border:1px solid var(--bd);background:#fff;color:var(--fg2);font-size:12.5px;cursor:pointer;margin-right:8px;white-space:nowrap}
+.btn.pri{background:var(--blue);border-color:var(--blue);color:#fff}
+.btn.sm{height:26px;padding:0 10px;font-size:12px}
+.bar{display:flex;align-items:center;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.sel{display:inline-flex;align-items:center;justify-content:space-between;height:30px;min-width:130px;border:1px solid var(--bd);border-radius:4px;background:#fff;padding:0 9px;color:var(--fg2);font-size:12.5px;gap:8px;white-space:nowrap}
+.sel i{font-style:normal;color:#c0c4cc;font-size:11px}
+.sel.ro{background:#f5f7fa;color:var(--fg3)}
+select.sel{appearance:auto;cursor:pointer;color:var(--fg)}
+.img{display:inline-block;width:26px;height:26px;border-radius:5px;background:linear-gradient(135deg,#f3cf5c,#e2a33d);vertical-align:middle}
+.img.b{background:linear-gradient(135deg,#6aa9e9,#3c7bd9)}
+.img.g{background:linear-gradient(135deg,#7bd389,#2e9e4e)}
+.img.wide{width:52px;height:18px;border-radius:3px}
+.tabs{display:flex;border-bottom:2px solid var(--bd2);margin-bottom:14px}
+.tabs span{padding:8px 18px;font-size:13px;color:var(--fg2);cursor:pointer;margin-bottom:-2px;border-bottom:2px solid transparent}
+.tabs span.on{color:var(--blue);border-bottom-color:var(--blue);font-weight:600}
+.dlg{border:1px solid var(--bd2);border-radius:8px;max-width:820px;background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.dh{display:flex;justify-content:space-between;align-items:center;padding:12px 18px;border-bottom:1px solid var(--bd2);font-size:14.5px;font-weight:600}
+.dh span{color:var(--fg3);font-weight:400;cursor:pointer}
+.db{padding:16px 22px 8px}
+.df{display:flex;justify-content:flex-end;gap:10px;padding:12px 18px;border-top:1px solid var(--bd2)}
+.fr{display:grid;grid-template-columns:160px 1fr;gap:10px;align-items:center;padding:5px 0}
+.fr label{text-align:right;color:var(--fg2);font-size:13px}
+.fr label .req{color:var(--err);margin-right:2px}
+.fc{display:flex;align-items:center;gap:8px;flex-wrap:wrap;min-width:0}
+.in{height:30px;min-width:220px;max-width:420px;flex:1;border:1px solid var(--bd);border-radius:4px;background:#fff;padding:0 9px;font-size:12.5px;color:var(--fg);display:flex;align-items:center;justify-content:space-between}
+.in.ro{background:#f5f7fa;color:var(--fg3)}
+.in i{font-style:normal;color:#c0c4cc;font-size:11px}
+.rd{display:flex;gap:16px;align-items:center}
+.rd span{display:inline-flex;align-items:center;gap:5px;color:var(--fg2);font-size:12.5px;cursor:pointer}
+.rd b{width:13px;height:13px;border-radius:50%;border:1px solid #b9bfc9;background:#fff;font-weight:400}
+.rd b.on{border-color:var(--blue);box-shadow:inset 0 0 0 2.5px #fff,inset 0 0 0 8px var(--blue)}
+.rd span.sel2{color:var(--blue)}
+.up{display:inline-flex;align-items:center;height:28px;padding:0 12px;border-radius:4px;background:var(--blue);color:#fff;font-size:12px;cursor:pointer;white-space:nowrap}
+.up.sm{height:24px;padding:0 8px;font-size:11px}
+.thumb{position:relative;width:52px;height:52px;border-radius:8px;display:inline-block;vertical-align:middle}
+.thumb.wide{width:110px;height:36px;border-radius:5px}
+.thumb .del{position:absolute;top:-7px;right:-7px;width:16px;height:16px;border-radius:50%;background:var(--err);color:#fff;font-size:10px;display:flex;align-items:center;justify-content:center}
+.hintR{color:var(--err);font-size:11.5px;line-height:1.6;flex-basis:100%}
+.hintG{color:var(--fg3);font-size:11.5px;flex-basis:100%;line-height:1.7}
+.sep{font-size:12.5px;color:var(--fg2);font-weight:600;border-top:1px dashed var(--bd);padding-top:10px;margin-top:8px}
+.adj{border:1px solid var(--bd2);border-radius:8px;background:#fff;padding:14px 18px;margin-bottom:26px}
+.adj h4{margin:0 0 8px;font-size:13.5px}
+.adj li{margin:7px 0;line-height:1.8;color:var(--fg2)}
+.adj b{color:var(--fg)}
+.adj .sub{margin:4px 0 0 0;padding-left:0;list-style:none}
+.adj .sub li{margin:3px 0}
+.st2{width:100%;border-collapse:collapse;font-size:12px;text-align:center}
+.st2 th,.st2 td{border:1px solid var(--bd2);padding:6px 8px;vertical-align:middle}
+.st2 th{background:#f5f7fa;color:var(--fg2);white-space:nowrap}
+.st2 td.l{text-align:left}
+.ckl{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--fg2)}
+.ckl span{display:inline-flex;align-items:center;gap:4px;white-space:nowrap}
+.ckl i{font-style:normal;width:13px;height:13px;border:1px solid #b9bfc9;border-radius:2px;display:inline-block;background:#fff}
+.ckl i.on{background:var(--blue);border-color:var(--blue);position:relative}
+.ckl i.on::after{content:"✓";color:#fff;font-size:10px;position:absolute;left:1.5px;top:-1.5px}
+.alertbar{border:1px solid #f3d19e;background:var(--warnbg);color:var(--warn);border-radius:4px;padding:8px 12px;font-size:12.5px;margin-bottom:12px}
+.prompt{border:1px solid var(--bd2);border-radius:8px;max-width:420px;background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.1);padding:16px 20px}
+.prompt .t{font-size:15px;font-weight:600;margin-bottom:12px}
+.prompt .m{color:var(--fg2);line-height:1.9;display:flex;gap:8px}
+.prompt .m i{font-style:normal;color:var(--warn);font-size:16px}
+.prompt .f{display:flex;justify-content:flex-end;gap:8px;margin-top:14px}
+code{background:#f5f7fa;border:1px solid var(--bd2);border-radius:3px;padding:0 5px;font-size:12px}
+/* 可互動區 */
+.demo{border:1px dashed var(--new);border-radius:8px;padding:12px 14px;background:#fffdfa;margin-top:10px}
+.demo .dt{font-size:12px;color:var(--new);font-weight:600;margin-bottom:8px}
+.demo table.lt td{padding:6px 7px}
+.demo input[type=number]{width:60px;height:26px;border:1px solid var(--bd);border-radius:4px;padding:0 6px;font-size:12px}
+.demo select{height:26px;border:1px solid var(--bd);border-radius:4px;background:#fff;font-size:12px;padding:0 6px;color:var(--fg);max-width:190px}
+.demo .ckl i{cursor:pointer}
+/* 後台↔前台 連動 */
+.sync{display:grid;grid-template-columns:minmax(420px,1fr) minmax(360px,440px);gap:16px;align-items:start}
+.cfgbox{border:1px solid var(--bd2);border-radius:8px;background:#fff;padding:10px 12px;margin-bottom:10px}
+.cfgbox .ch{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;margin-bottom:6px;flex-wrap:wrap}
+.cfgbox .ch .sel{height:26px;min-width:0;font-size:12px}
+.sw{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--fg2);cursor:pointer}
+.sw i{width:34px;height:18px;border-radius:9px;background:#dcdfe6;position:relative;display:inline-block;transition:.15s}
+.sw i::after{content:"";position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:#fff;transition:.15s}
+.sw i.on{background:var(--blue)}
+.sw i.on::after{left:18px}
+/* 前台示意 */
+.ftabs{display:flex;gap:6px;margin-bottom:8px}
+.ftabs span{padding:5px 12px;border:1px solid var(--bd);border-radius:14px;font-size:12px;color:var(--fg2);cursor:pointer;background:#fff}
+.ftabs span.on{background:var(--blue);border-color:var(--blue);color:#fff}
+.fe{border:1px solid #d9dde5;border-radius:12px;background:#f3f5f9;padding:10px;font-family:"Helvetica Neue",Arial,sans-serif}
+.fe.pc{display:grid;grid-template-columns:118px 1fr;gap:10px}
+.fe.pc .fhead{grid-column:1/-1;text-align:center;font-weight:700;font-size:15px;color:#1f2d3d;padding:4px 0 6px;position:relative}
+.fe.pc .fhead i{position:absolute;right:4px;top:2px;font-style:normal;color:#9aa3b2}
+.fe.pc .fnav{background:#fff;border-radius:10px;padding:8px}
+.fe.pc .fnav div{padding:8px 10px;border-radius:7px;font-size:12.5px;color:#4a5568;margin-bottom:4px}
+.fe.pc .fnav div.on{background:#2f6fed;color:#fff;font-weight:600}
+.fe.h5{max-width:340px}
+.fe.h5 .fhead{display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:15px;color:#1f2d3d;padding:2px 4px 8px}
+.fe.h5 .fhead i{font-style:normal;color:#9aa3b2;font-size:12px;font-weight:400}
+.fbal{background:#e7f0ff;border-radius:10px;padding:10px 12px;display:flex;justify-content:space-between;align-items:center;font-weight:700;color:#2f6fed;font-size:14px;margin-bottom:8px}
+.fbal span{background:#2f6fed;color:#fff;font-size:10.5px;font-weight:600;border-radius:12px;padding:3px 9px}
+.fbox{background:#fff;border-radius:10px;padding:10px 12px;margin-bottom:8px}
+.fbox .ft{font-size:12.5px;font-weight:700;color:#1f2d3d;margin-bottom:8px}
+.fgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.tile{position:relative;height:44px;border:1px solid #e1e5ec;border-radius:8px;background:#fff;display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:700;color:#2d3748;cursor:pointer;text-align:center;padding:0 4px;overflow:hidden}
+.tile .lg{position:absolute;inset:0;opacity:.14}
+.tile.on{border:1.5px solid #2f6fed;background:#f1f6ff}
+.tile.mt{cursor:not-allowed;color:#8a93a3}
+.tile.mt .veil{position:absolute;inset:0;background:rgba(80,90,110,.72);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;gap:4px}
+.tile.sub{height:40px;font-size:11px}
+.famt{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.famt span{height:30px;border:1px solid #e1e5ec;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px;color:#2d3748;background:#fff}
+.fsub{height:34px;border-radius:8px;background:#2f6fed;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:13px;margin-top:8px}
+.fnote{font-size:11.5px;color:var(--fg2);background:#fff7e6;border:1px solid #ffe3b0;border-radius:6px;padding:7px 10px;line-height:1.7;margin-top:8px}
+.fnote b{color:var(--new)}
+.fempty{color:#9aa3b2;font-size:12px;text-align:center;padding:14px 0}
+/* 流程圖 */
+.flow{display:flex;flex-direction:column;align-items:stretch;gap:0;max-width:760px}
+.fl{display:grid;grid-template-columns:150px 1fr;gap:12px;align-items:start}
+.fl .lv{background:#f5f7fa;border:1px solid var(--bd2);border-radius:6px;padding:8px 10px;font-size:12.5px;font-weight:600;color:var(--fg2);text-align:center}
+.fl .lv small{display:block;font-weight:400;color:var(--fg3);font-size:11px;margin-top:2px}
+.fl .nd{border:1px solid var(--bd);border-radius:6px;background:#fff;padding:8px 12px;font-size:12.5px;line-height:1.8;color:var(--fg2)}
+.fl .nd.nw{border-color:var(--new);background:var(--newbg)}
+.fl .nd b{color:var(--fg)}
+.fl .nd .r{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+.fl .nd .r span{display:inline-flex;align-items:center;gap:4px;background:#fff;border:1px solid var(--bd2);border-radius:4px;padding:2px 8px;font-size:12px}
+.arrow{text-align:center;color:var(--fg3);font-size:16px;padding:2px 0;grid-column:1/-1}
+.arrow.off{margin-left:162px;text-align:left}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="side">
+    <div class="grp">OKF-2569 OKBet 充值改版</div>
+    <a data-p="p0" class="on">需求目的與範圍</a>
+    <a data-p="p1">後台｜在線支付商戶配置（新）<span class="n">3</span></a>
+    <a data-p="p2">後台｜充值展示配置（新）TAB<span class="n">6</span></a>
+    <a data-p="p3">前台｜充值頁（PC／H5）<span class="n">3</span></a>
+    <a data-p="p4">顯示判斷流程<span class="n">1</span></a>
+    <a data-p="p5">上線順序<span class="n">1</span></a>
+  </nav>
+
+  <div class="main">
+    <div class="crumb"><span class="doc">OKF-2569｜okbet_充值改版｜規格書_02｜2026-10-22</span><b id="crumbName">需求目的與範圍</b></div>
+    <div class="lgd">紅圈數字 <span class="mk">1</span>＝本次調整項，對照各頁下方「本次調整」逐條說明。<span class="tagn">本次新增</span>＝本次新增的欄位、頁籤或畫面。橘色虛線框＝可互動示意，可直接點選操作看畫面變化。畫面未標記處維持現狀，不在本單範圍。</div>
+
+    <!-- ══════════ 0 需求目的與範圍 ══════════ -->
+    <section class="pg on" id="p0">
+      <div class="card"><h3><em>①</em>需求目的</h3>
+        <ol style="margin:0;padding-left:20px;line-height:2;color:var(--fg2)">
+          <li>OKBet 前台充值入口改為依「充值方式」展示（GCash／Maya／GrabPay／Bank／QRPH／Others），會員點入口後選銀行或直接進入下一步，不再以商戶作為入口。</li>
+          <li>管理後台「在線支付商戶配置（新）」新增「充值方式」欄位，每個商戶歸屬一種充值方式。</li>
+          <li>管理後台「在線支付展示配置（新）」新增頁籤「充值展示配置（新）」，以充值方式為入口、以子渠道（銀行＋商戶，或僅商戶）為展示單位進行設定。</li>
+          <li>前台依「該會員可見的子渠道數」決定是否展示 Payment Bank 區塊：1 個直接進入下一步，2 個以上才展示 Payment Bank。</li>
+        </ol>
+      </div>
+      <div class="card"><h3><em>②</em>充值方式清單</h3>
+        <table class="st2" style="max-width:720px">
+          <tr><th>充值方式</th><th>子渠道選法</th><th>說明</th></tr>
+          <tr><td>GCash</td><td>選商戶</td><td class="l" rowspan="4">子渠道只選商戶，不選銀行。</td></tr>
+          <tr><td>Maya</td><td>選商戶</td></tr>
+          <tr><td>GrabPay</td><td>選商戶</td></tr>
+          <tr><td>QRPH</td><td>選商戶</td></tr>
+          <tr><td>Bank</td><td>先選銀行，再選商戶</td><td class="l">銀行來源為「銀行字典表」充值 TAB；商戶為商戶回傳的銀行清單中含該銀行者。</td></tr>
+          <tr><td>Others</td><td>選商戶</td><td class="l">其他方式，例：PayCools-BankTrans。</td></tr>
+        </table>
+        <div class="hintG" style="margin-top:8px">充值方式清單不做後台頁面。既有商戶各自歸屬哪一種充值方式，由 RD 判斷後帶入。</div>
+      </div>
+      <div class="card"><h3><em>③</em>範圍</h3>
+        <table class="st2" style="max-width:720px">
+          <tr><th style="width:90px">平台</th><th>範圍內</th><th>範圍外（維持現狀）</th></tr>
+          <tr><td>OKBet</td><td class="l">管理後台：在線支付商戶配置（新）、在線支付展示配置（新）新頁籤<br>前台：PC、H5、APP 充值頁入口與子渠道展示</td><td class="l">在線支付展示配置（新）原頁籤「充值展示配置」「分頁類型設定」<br>充值頁其餘區塊（金額、優惠券、送單後流程）<br>提款側全部</td></tr>
+          <tr><td>WOWGames</td><td class="l">—</td><td class="l">前後台全部維持現狀。新頁籤不顯示；商戶配置的「充值方式」欄位會顯示但不生效</td></tr>
+        </table>
+      </div>
+    </section>
+
+    <!-- ══════════ 1 在線支付商戶配置（新） ══════════ -->
+    <section class="pg" id="p1">
+      <div class="card"><h3><em>①</em>列表</h3>
+        <div class="bar"><span class="sel">All<i>▾</i></span><span class="sel">状态<i>▾</i></span><span class="btn pri">搜索</span><span class="btn pri">新增</span></div>
+        <table class="lt">
+          <tr><th>#</th><th>支付名称</th><th class="nw">充值方式<span class="mk">1</span></th><th>渠道类型</th><th>支付类型</th><th>商户号</th><th>国家</th><th>币种</th><th>支付层级</th><th>VIP 等级</th><th>状态</th><th>操作</th></tr>
+          <tr><td>652</td><td>FortunePay支付</td><td>Bank</td><td>212 - FortunePay（充值）</td><td>FortunePay</td><td>FP-8821</td><td>菲律宾</td><td>PHP</td><td>默认层,第二层</td><td>全部</td><td><span class="chip ok">正常</span></td><td><span class="lnk">编辑</span><span class="lnk">删除</span></td></tr>
+          <tr><td>1038</td><td>V5Pay充值 - GCash</td><td>GCash</td><td>204 - Gcash（充值）</td><td>V5Pay - GCash</td><td>V5-7731</td><td>菲律宾</td><td>PHP</td><td>全部</td><td>全部</td><td><span class="chip ok">正常</span></td><td><span class="lnk">编辑</span><span class="lnk">删除</span></td></tr>
+          <tr><td>1047</td><td>PayCools支付-BankTrans</td><td>Others</td><td>315 - BankTransfer（充值）</td><td>PayCools支付-BankTrans</td><td>92d0…4eb</td><td>菲律宾</td><td>PHP</td><td>全部</td><td>全部</td><td><span class="chip ok">正常</span></td><td><span class="lnk">编辑</span><span class="lnk red" id="btnDelDemo">删除</span></td></tr>
+        </table>
+      </div>
+
+      <div class="card"><h3><em>②</em>新增／編輯彈窗（僅畫有調整的區塊，其餘區塊不變）</h3>
+        <div class="dlg"><div class="dh">编辑在线支付商户<span>×</span></div><div class="db">
+          <div class="fr"><label><span class="req">*</span>商户 #:</label><div class="fc"><div class="in ro">1047（自旧分页引入）</div></div></div>
+          <div class="fr"><label><span class="req">*</span>渠道类型:</label><div class="fc"><div class="in ro">315 - BankTransfer（充值）<i>▾</i></div></div></div>
+          <div class="fr"><label>支付类型:</label><div class="fc"><div class="in ro">PayCools支付-BankTrans<i>▾</i></div></div></div>
+          <div class="fr"><label><span class="req">*</span>支付名称:</label><div class="fc"><div class="in">PayCools支付-BankTrans</div></div></div>
+          <div class="fr" style="background:var(--newbg);border-radius:6px"><label><span class="req">*</span>充值方式:<span class="mk">1</span></label><div class="fc"><div class="in" style="max-width:260px">Others<i>▾</i></div><span class="tagn">本次新增</span><div class="hintG">選項：GCash／Maya／GrabPay／Bank／QRPH／Others</div></div></div>
+          <div class="fr"><label><span class="req">*</span>国家:</label><div class="fc"><div class="in ro" style="max-width:220px">菲律宾<i>▾</i></div></div></div>
+          <div class="fr"><label><span class="req">*</span>币种:</label><div class="fc"><div class="in ro" style="max-width:220px">PHP<i>▾</i></div></div></div>
+          <div class="hintG" style="padding:6px 0 2px">以下區塊（状态、排序、請求／回調、行为、金额、文案、层级）維持現狀。</div>
+        </div><div class="df"><span class="btn">取 消</span><span class="btn pri">确 定</span></div></div>
+      </div>
+
+      <div class="card"><h3><em>③</em>刪除商戶提示（商戶已綁定充值子渠道時）</h3>
+        <div class="demo"><div class="dt">可互動：點上方列表 PayCools支付-BankTrans 那列的「删除」，或直接點下方按鈕</div>
+          <span class="btn sm" id="btnDelDemo2">示範：點「删除」</span>
+          <div id="delPrompt" style="display:none;margin-top:10px">
+            <div class="prompt"><div class="t">提示</div>
+              <div class="m"><i>!</i><div>此商戶已綁定充值子渠道<br>刪除後，綁定此商戶的子渠道會一併刪除<br>是否確認刪除？</div></div>
+              <div class="f"><span class="btn" id="btnDelCancel">取 消</span><span class="btn pri">确 定</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="adj"><h4>本次調整</h4><ol>
+        <li><span class="mk">1</span><b>新增「充值方式」</b>
+          <ul class="sub">
+            <li>・新增／編輯彈窗：必填下拉，位置在「支付名称」與「支付类型」之間。新增與編輯皆可修改。</li>
+            <li>・選項固定六種：GCash／Maya／GrabPay／Bank／QRPH／Others。</li>
+            <li>・列表：於「支付名称」後新增「充值方式」欄。</li>
+            <li>・既有商戶：上線時由 RD 判斷各商戶歸屬的充值方式後帶入。</li>
+            <li>・WOWGames 平台同樣顯示此欄位，但不生效。</li>
+          </ul>
+        </li>
+        <li><span class="mk">2</span><b>刪除商戶的連動提示</b>
+          <ul class="sub">
+            <li>・點「删除」時，若此商戶已綁定於「充值展示配置（新）」任一子渠道，先彈出提示，文案如上方畫面。</li>
+            <li>・確認刪除後，綁定此商戶的子渠道一併刪除；該入口本身保留。</li>
+            <li>・未綁定任何子渠道的商戶，刪除流程維持現狀。</li>
+          </ul>
+        </li>
+        <li><span class="mk">3</span><b>商戶可重複綁定</b>：同一個商戶可被「充值展示配置（新）」的多個子渠道綁定，不限次數。</li>
+      </ol></div>
+    </section>
+
+    <!-- ══════════ 2 充值展示配置（新）TAB ══════════ -->
+    <section class="pg" id="p2">
+      <div class="card"><h3><em>①</em>頁籤與列表</h3>
+        <div class="tabs"><span>充值展示配置</span><span class="on">充值展示配置（新）<span class="mk">1</span></span><span>分页类型设定</span></div>
+        <div class="alertbar">有 2 个状态正常的商户尚未绑定任何子渠道，请及时配置：V5Pay充值 - GCash、GrabPaytest<span class="mk">6</span></div>
+        <div class="bar"><span class="btn pri">新增</span></div>
+        <table class="lt">
+          <tr><th>充值方式</th><th>显示名</th><th>国家</th><th>币种</th><th>入口图示（日间）</th><th>入口图示（夜间）</th><th>分页归属</th><th>排序</th><th>子渠道数／商户数<span class="mk">5</span></th><th>前台是否显示<span class="mk">4</span></th><th>操作</th></tr>
+          <tr><td>GCash</td><td>GCash</td><td>菲律宾</td><td>PHP</td><td><span class="img b wide"></span></td><td><span class="img b wide"></span></td><td>all,ewallet</td><td>1</td><td><span class="lnk" id="btnPop">3／2</span></td><td><span class="chip ok">是</span></td><td><span class="lnk">编辑</span><span class="lnk">删除</span></td></tr>
+          <tr><td>Bank</td><td>Bank</td><td>菲律宾</td><td>PHP</td><td><span class="img wide"></span></td><td><span class="img wide"></span></td><td>all,bank</td><td>2</td><td><span class="lnk">5／2</span></td><td><span class="chip ok">是</span></td><td><span class="lnk">编辑</span><span class="lnk">删除</span></td></tr>
+          <tr><td>Maya</td><td>Maya</td><td>菲律宾</td><td>PHP</td><td><span class="img g wide"></span></td><td><span class="img g wide"></span></td><td>all,ewallet</td><td>3</td><td><span class="lnk">1／1</span></td><td><span class="chip ok">是</span></td><td><span class="lnk">编辑</span><span class="lnk">删除</span></td></tr>
+          <tr><td>Others</td><td>Bank Transfer</td><td>菲律宾</td><td>PHP</td><td><span class="img wide" style="background:#222"></span></td><td><span class="img wide" style="background:#222"></span></td><td>all,bank</td><td>9</td><td><span class="lnk">0／0</span></td><td><span class="chip gy">否</span></td><td><span class="lnk">编辑</span><span class="lnk">删除</span></td></tr>
+        </table>
+        <div class="demo" id="popWrap" style="display:none"><div class="dt">子渠道數／商戶數 唯讀彈窗（點列表 GCash 那列的「3／2」開啟）</div>
+          <div class="dlg" style="max-width:760px"><div class="dh">子渠道明细 — GCash<span id="btnPopClose">×</span></div><div class="db">
+            <table class="lt">
+              <tr><th>#</th><th>银行</th><th>商户</th><th>子渠道状态</th><th>商户状态</th><th>分页归属</th><th>排序</th></tr>
+              <tr><td>1</td><td>—</td><td>V5Pay充值 - GCash</td><td><span class="chip ok">正常</span></td><td><span class="chip ok">正常</span></td><td>all,ewallet</td><td>1</td></tr>
+              <tr><td>2</td><td>—</td><td>PayCools支付-GCash</td><td><span class="chip ok">正常</span></td><td><span class="chip mt">维护</span></td><td>all,ewallet</td><td>2</td></tr>
+              <tr><td>3</td><td>—</td><td>V5Pay充值 - GCash</td><td><span class="chip ok">正常</span></td><td><span class="chip ok">正常</span></td><td>all</td><td>3</td></tr>
+              <tr><td>4</td><td>—</td><td>wow_GCASH</td><td><span class="chip off">停用</span></td><td><span class="chip ok">正常</span></td><td>all,ewallet</td><td>4</td></tr>
+            </table>
+            <div class="hintG" style="margin-top:8px">純讀，不可編輯。列全部子渠道，不分狀態。</div>
+          </div><div class="df"><span class="btn" id="btnPopClose2">关 闭</span></div></div>
+        </div>
+      </div>
+
+      <div class="card"><h3><em>②</em>新增／編輯（獨立分頁）</h3>
+        <div class="bar"><span class="btn">返回列表</span></div>
+        <div class="dlg" style="max-width:none"><div class="db">
+          <div class="fr"><label><span class="req">*</span>充值方式:<span class="mk">2</span></label><div class="fc"><select class="sel" id="dMethod" style="min-width:200px"><option>Bank</option><option>GCash</option><option>Maya</option><option>GrabPay</option><option>QRPH</option><option>Others</option></select><div class="hintG">新增時選擇，編輯時不可修改。</div></div></div>
+          <div class="fr"><label>显示名(英文):</label><div class="fc"><div class="in">Bank</div></div></div>
+          <div class="fr"><label>显示名(中文):</label><div class="fc"><div class="in">银行</div></div></div>
+          <div class="fr"><label>显示名(越南文):</label><div class="fc"><div class="in"></div></div></div>
+          <div class="fr"><label>显示名(菲律宾语):</label><div class="fc"><div class="in"></div></div></div>
+          <div class="fr"><label>显示名(宿雾语):</label><div class="fc"><div class="in"></div></div></div>
+          <div class="fr"><label><span class="req">*</span>国家:</label><div class="fc"><div class="in" style="max-width:220px">菲律宾<i>▾</i></div></div></div>
+          <div class="fr"><label><span class="req">*</span>币种:</label><div class="fc"><div class="in" style="max-width:220px">PHP<i>▾</i></div></div></div>
+          <div class="fr"><label><span class="req">*</span>入口图示（日间）:</label><div class="fc"><span class="up">选择文件</span><span class="thumb wide img"></span><span class="hintG" style="flex-basis:auto">建議尺寸：232 × 76</span></div></div>
+          <div class="fr"><label><span class="req">*</span>入口图示（夜间）:</label><div class="fc"><span class="up">选择文件</span><span class="thumb wide img"></span><span class="hintG" style="flex-basis:auto">建議尺寸：232 × 76</span></div></div>
+          <div class="fr"><label>分页归属:</label><div class="fc"><div class="ckl"><span><i class="on"></i>All</span><span><i></i>E-Wallets</span><span><i class="on"></i>Banks</span></div></div></div>
+          <div class="fr"><label>排序:</label><div class="fc"><div class="in" style="max-width:120px">2</div></div></div>
+          <div class="fr"><label><span class="req">*</span>前台是否显示:<span class="mk">4</span></label><div class="fc"><div class="rd"><span class="sel2"><b class="on"></b>是</span><span><b></b>否</span></div></div></div>
+          <div class="sep">子渠道<span class="mk">3</span></div>
+          <div class="demo"><div class="dt">可互動：切換上方「充值方式」看銀行欄出現／消失；按「＋ 新增一列」看兩筆以上時圖示欄出現；「删除」可減列。</div>
+            <table class="lt" id="dTable"></table>
+            <div style="margin-top:8px"><span class="btn sm pri" id="dAdd">＋ 新增一列</span><span class="hintG" id="dHint" style="display:inline"></span></div>
+          </div>
+        </div><div class="df"><span class="btn">取 消</span><span class="btn pri">确 定</span></div></div>
+      </div>
+
+      <div class="adj"><h4>本次調整</h4><ol>
+        <li><span class="mk">1</span><b>新增頁籤「充值展示配置（新）」</b>
+          <ul class="sub">
+            <li>・位置：在線支付展示配置（新），於「充值展示配置」與「分页类型设定」之間。</li>
+            <li>・僅平台為 OKBet 時顯示，WOWGames 不顯示。</li>
+            <li>・新增、編輯為獨立分頁，操作方式同「充值展示配置」頁籤。</li>
+            <li>・列表欄位：充值方式／显示名／国家／币种／入口图示（日间）／入口图示（夜间）／分页归属／排序／子渠道数／商户数／前台是否显示／操作（编辑、删除）。</li>
+            <li>・分页归属沿用「分页类型设定」的分頁。</li>
+          </ul>
+        </li>
+        <li><span class="mk">2</span><b>入口欄位</b>
+          <ul class="sub">
+            <li>・充值方式：必填，單選六種之一。新增時選擇，編輯時不可修改。同一個充值方式可建立多筆入口。</li>
+            <li>・显示名（英文／中文／越南文／菲律宾语／宿雾语）、国家、币种、入口图示（日间）、入口图示（夜间）、分页归属、排序：同「充值展示配置」頁籤的對應欄位規則；两張入口图示必填；分页归属預設不勾選。</li>
+            <li>・入口图示固定用此處上傳的圖，不因子渠道數量改變。</li>
+          </ul>
+        </li>
+        <li><span class="mk">3</span><b>子渠道表</b>
+          <ul class="sub">
+            <li>・每一列為一個子渠道，用「＋ 新增一列」增加、「删除」移除，筆數不限，至少一筆才能保存。</li>
+            <li>・充值方式為 Bank：欄位＝银行／商户／子渠道图示（日间）／子渠道图示（夜间）／状态／分页归属／排序／操作。銀行下拉列出「銀行字典表」充值 TAB 全部銀行；選定銀行後，商戶下拉只列出：充值方式同為 Bank、國家與幣種與入口相同、狀態非停用、且商戶回傳的銀行清單中含該銀行的商戶。</li>
+            <li>・充值方式為 GCash／Maya／GrabPay／QRPH／Others：無银行欄，欄位＝商户／子渠道图示（日间）／子渠道图示（夜间）／状态／分页归属／排序／操作。商戶下拉列出：充值方式相同、國家與幣種與入口相同、狀態非停用的商戶。</li>
+            <li>・商戶下拉不排除已被綁定的商戶，同一個商戶可在同一入口或不同入口重複出現。</li>
+            <li>・子渠道图示（日间）（夜间）：子渠道只有一筆時不顯示這兩欄；兩筆以上時每一筆都顯示且必填，由一筆增加為兩筆時，原本那筆也要補上圖示才能保存。建議尺寸 232 × 76。</li>
+            <li>・状态：正常／维护／停用，預設正常。分页归属：預設不勾選。排序：數字。</li>
+            <li>・同商戶回傳的銀行清單中有多條對應到同一家銀行時，會員送單用哪一條由後端決定，後台不另外設定。</li>
+          </ul>
+        </li>
+        <li><span class="mk">4</span><b>前台是否显示</b>：新增／編輯單選是／否，預設是；列表同欄顯示。選否時此入口前台不顯示。</li>
+        <li><span class="mk">5</span><b>子渠道数／商户数</b>
+          <ul class="sub">
+            <li>・顯示格式「子渠道數／商戶數」，兩個數字都只計算子渠道狀態為正常者；商戶數為不重複商戶數。</li>
+            <li>・點擊開啟唯讀彈窗，列出此入口全部子渠道（不分狀態）：银行（僅商戶型態顯示「—」）／商户／子渠道状态／商户状态／分页归属／排序。</li>
+            <li>・商戶被刪除連動刪掉子渠道後，此欄依剩餘子渠道重新計算；全部刪光時顯示 0／0。</li>
+          </ul>
+        </li>
+        <li><span class="mk">6</span><b>未綁定商戶提示</b>：列表上方提示「有 N 个状态正常的商户尚未绑定任何子渠道，请及时配置：{支付名称}、…」。計算範圍為本平台、狀態正常、且未出現在此頁籤任何子渠道的商戶；全部已綁定時不顯示。</li>
+      </ol></div>
+    </section>
+
+    <!-- ══════════ 3 前台充值頁 ══════════ -->
+    <section class="pg" id="p3">
+      <div class="card"><h3><em>①</em>後台設定 ↔ 前台畫面（可互動）</h3>
+        <div class="hintG" style="margin-bottom:10px">左側為「充值展示配置（新）」兩筆入口的設定（示意，只列與前台顯示有關的欄位），右側為 OKBet 前台充值頁。改左側任一設定，右側即時變化；點右側入口看 Payment Bank 區塊的出現規則。右上可切換 PC／H5 版型，兩版邏輯相同。</div>
+        <div class="sync">
+          <div id="cfgPanel"></div>
+          <div>
+            <div class="ftabs"><span class="on" data-v="pc">PC</span><span data-v="h5">H5</span></div>
+            <div id="frontPanel"></div>
+            <div class="fnote" id="frontNote"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="adj"><h4>本次調整</h4><ol>
+        <li><span class="mk">1</span><b>Payment Methods 入口</b>
+          <ul class="sub">
+            <li>・入口來源改為「充值展示配置（新）」頁籤：一筆入口＝一顆磁貼，磁貼圖片為入口图示（日間／夜間依主題），依排序排列。</li>
+            <li>・入口要顯示的條件：前台是否显示為是、且該會員可見的子渠道至少一個。可見的定義在「顯示判斷流程」頁。</li>
+            <li>・該會員可見的子渠道全部為維護時，入口顯示維護遮罩、不可點。</li>
+            <li>・PC、H5、APP 三端相同。</li>
+          </ul>
+        </li>
+        <li><span class="mk">2</span><b>點入口後</b>
+          <ul class="sub">
+            <li>・該會員可見的子渠道為 1 個：不顯示 Payment Bank 區塊，直接進入該子渠道商戶的現行後續流程（金額區等）。</li>
+            <li>・該會員可見的子渠道為 2 個以上：顯示 Payment Bank 區塊，一個子渠道一顆磁貼，磁貼圖片為子渠道图示，依子渠道排序排列；維護中的子渠道顯示維護遮罩、不可點。會員點選後才進入該子渠道商戶的現行後續流程。</li>
+            <li>・Payment Bank 區塊標題與樣式沿用現行。</li>
+          </ul>
+        </li>
+        <li><span class="mk">3</span><b>會員送單</b>：送單對象為會員選定子渠道所綁定的商戶；Bank 類子渠道帶該銀行，其餘類不帶銀行。金額上下限、手續費／返利、流水倍數等皆依該商戶現行設定。</li>
+      </ol></div>
+    </section>
+
+    <!-- ══════════ 4 顯示判斷流程 ══════════ -->
+    <section class="pg" id="p4">
+      <div class="card"><h3><em>①</em>OKBet 前台充值入口與子渠道顯示判斷（四層全列，橘框＝本次）</h3>
+        <div class="flow">
+          <div class="fl"><div class="lv">第一層<small>充值渠道管理（新）</small></div><div class="nd"><b>在线支付（onlinePayment）渠道狀態</b><div class="r"><span>停用 → 充值全部不顯示</span><span>维护 → 全部入口維護</span><span>正常 → 往下</span></div></div></div>
+          <div class="arrow">↓</div>
+          <div class="fl"><div class="lv">第二層<small>充值展示配置（新）入口</small></div><div class="nd nw"><b>前台是否显示</b><div class="r"><span>否 → 入口不顯示</span><span>是 → 往下看子渠道</span></div></div></div>
+          <div class="arrow">↓</div>
+          <div class="fl"><div class="lv">第三層<small>子渠道</small></div><div class="nd nw"><b>子渠道状态</b>（充值展示配置（新）設定）<div class="r"><span>停用 → 此子渠道不可見</span><span>维护 → 此子渠道維護</span><span>正常 → 往下</span></div></div></div>
+          <div class="arrow">↓</div>
+          <div class="fl"><div class="lv">第四層<small>商戶</small></div><div class="nd"><b>子渠道綁定的商戶</b>（在線支付商戶配置（新）設定，依該會員判斷）<div class="r"><span>商戶状态 停用 → 不可見</span><span>商戶状态 维护 → 維護</span><span>支付层级不符 → 不可見</span><span>VIP 等级不符 → 不可見</span><span>GLife 門檻規則不符 → 不可見</span><span>皆符合 → 可見且正常</span></div></div></div>
+          <div class="arrow">↓</div>
+          <div class="fl"><div class="lv">結果<small>該會員</small></div><div class="nd nw"><b>子渠道可見與維護</b>：第三層與第四層取嚴格者。任一停用或不符 → 不可見；任一維護 → 可見但維護；其餘 → 可見且正常。<br>
+            <b>入口顯示</b>：
+            <div class="r"><span>可見子渠道 0 個 → 入口不顯示</span><span>可見子渠道全部維護 → 入口維護遮罩</span><span>可見子渠道至少一個正常 → 入口正常</span></div>
+            <b>點入口後</b>：
+            <div class="r"><span>可見 1 個 → 直接進入該商戶後續流程</span><span>可見 2 個以上 → 顯示 Payment Bank，點選後進入</span></div>
+          </div></div>
+        </div>
+      </div>
+      <div class="adj"><h4>本次調整</h4><ol>
+        <li><span class="mk">1</span><b>判斷順序</b>：第一層與第四層維持現行規則；第二層、第三層與「結果」為本次新增。可見數以該會員實際可見的子渠道計算，非後台設定筆數。</li>
+      </ol></div>
+    </section>
+
+    <!-- ══════════ 5 上線順序 ══════════ -->
+    <section class="pg" id="p5">
+      <div class="card"><h3><em>①</em>上線順序</h3>
+        <table class="st2" style="max-width:760px">
+          <tr><th style="width:60px">順序</th><th>動作</th><th>前台讀取來源</th></tr>
+          <tr><td>1</td><td class="l">後端與管理後台先上線：商戶配置「充值方式」欄位帶入、新頁籤「充值展示配置（新）」開放營運設定</td><td class="l">舊頁籤「充值展示配置」</td></tr>
+          <tr><td>2</td><td class="l">營運於新頁籤完成全部入口與子渠道設定</td><td class="l">舊頁籤「充值展示配置」</td></tr>
+          <tr><td>3</td><td class="l">OKBet 前台（PC／H5／APP）切換上線</td><td class="l">新頁籤「充值展示配置（新）」</td></tr>
+        </table>
+      </div>
+      <div class="adj"><h4>本次調整</h4><ol>
+        <li><span class="mk">1</span><b>不做資料轉移</b>：舊頁籤的 OKBet 資料不轉入新頁籤，新頁籤由營運自行建立。前台切換後舊頁籤保留不動，WOWGames 繼續讀取舊頁籤。</li>
+      </ol></div>
+    </section>
+  </div>
+</div>
+
+<script>
+/* ── 分頁切換 ── */
+document.querySelectorAll('.side a').forEach(a=>{
+  a.addEventListener('click',()=>{
+    document.querySelectorAll('.side a').forEach(x=>x.classList.remove('on'));
+    document.querySelectorAll('.pg').forEach(x=>x.classList.remove('on'));
+    a.classList.add('on');
+    document.getElementById(a.dataset.p).classList.add('on');
+    document.getElementById('crumbName').textContent=a.textContent.replace(/\d+$/,'').trim();
+    window.scrollTo(0,0);
+  });
+});
+
+/* ── 刪除提示 ── */
+const showDel=()=>{document.getElementById('delPrompt').style.display='block';};
+document.getElementById('btnDelDemo').onclick=showDel;
+document.getElementById('btnDelDemo2').onclick=showDel;
+document.getElementById('btnDelCancel').onclick=()=>{document.getElementById('delPrompt').style.display='none';};
+
+/* ── 唯讀彈窗 ── */
+document.getElementById('btnPop').onclick=()=>{document.getElementById('popWrap').style.display='block';};
+document.getElementById('btnPopClose').onclick=document.getElementById('btnPopClose2').onclick=()=>{document.getElementById('popWrap').style.display='none';};
+
+/* ── 子渠道表 可互動 ── */
+const BANKS=['BDO','BPI','Metrobank','UnionBank','RCBC'];
+const MERCH={
+  Bank:[{n:'FortunePay支付',b:['BDO','BPI','Metrobank','UnionBank']},{n:'ARX-2143-储值',b:['BDO','RCBC','Metrobank']},{n:'V5PAY充值',b:['BPI']}],
+  GCash:[{n:'V5Pay充值 - GCash'},{n:'PayCools支付-GCash'},{n:'wow_GCASH'}],
+  Maya:[{n:'PayCools支付 - PAYMAYA'},{n:'maya-英文'}],
+  GrabPay:[{n:'GrabPaytest'}],
+  QRPH:[{n:'PayCools支付-QRPH'},{n:'coins-qrph-okbet'}],
+  Others:[{n:'PayCools支付-BankTrans'}]
+};
+let dRows=[{bank:'BDO',merch:'FortunePay支付',st:'正常',sort:1},{bank:'BPI',merch:'FortunePay支付',st:'正常',sort:2}];
+const dMethod=document.getElementById('dMethod');
+function merchOptions(m,bank){const list=MERCH[m]||[];return m==='Bank'?(bank?list.filter(x=>x.b.includes(bank)):[]):list;}
+function renderD(){
+  const m=dMethod.value, isBank=m==='Bank', many=dRows.length>=2;
+  let h='<tr>'+(isBank?'<th>银行</th>':'')+'<th>商户</th>'+(many?'<th>子渠道图示（日间）</th><th>子渠道图示（夜间）</th>':'')+'<th>状态</th><th>分页归属</th><th>排序</th><th>操作</th></tr>';
+  dRows.forEach((r,i)=>{
+    const opts=merchOptions(m,r.bank);
+    if(opts.length && !opts.find(o=>o.n===r.merch)) r.merch=opts[0].n;
+    if(!opts.length) r.merch='';
+    h+='<tr>';
+    if(isBank) h+='<td><select data-i="'+i+'" data-k="bank">'+BANKS.map(b=>'<option'+(b===r.bank?' selected':'')+'>'+b+'</option>').join('')+'</select></td>';
+    h+='<td><select data-i="'+i+'" data-k="merch">'+(opts.length?opts.map(o=>'<option'+(o.n===r.merch?' selected':'')+'>'+o.n+'</option>').join(''):'<option>（無可選商戶）</option>')+'</select></td>';
+    if(many) h+='<td><span class="up sm">选择文件</span><div class="hintR" style="font-size:10.5px">必填</div></td><td><span class="up sm">选择文件</span><div class="hintR" style="font-size:10.5px">必填</div></td>';
+    h+='<td><select data-i="'+i+'" data-k="st">'+['正常','维护','停用'].map(s=>'<option'+(s===r.st?' selected':'')+'>'+s+'</option>').join('')+'</select></td>';
+    h+='<td><div class="ckl" style="justify-content:center"><span><i></i>All</span><span><i></i>E-Wallets</span><span><i></i>Banks</span></div></td>';
+    h+='<td><input type="number" value="'+r.sort+'"></td>';
+    h+='<td><span class="lnk red" data-del="'+i+'">删除</span></td></tr>';
+  });
+  document.getElementById('dTable').innerHTML=h;
+  document.getElementById('dHint').textContent=dRows.length===0?'　至少一筆子渠道才能保存。':(many?'　兩筆以上：每筆子渠道圖示必填。':'　一筆：不顯示子渠道圖示欄。');
+  document.querySelectorAll('#dTable select[data-k]').forEach(s=>s.onchange=e=>{dRows[e.target.dataset.i][e.target.dataset.k]=e.target.value;renderD();});
+  document.querySelectorAll('#dTable [data-del]').forEach(x=>x.onclick=()=>{dRows.splice(+x.dataset.del,1);renderD();});
+}
+dMethod.onchange=()=>{const m=dMethod.value;dRows=dRows.map(r=>({bank:m==='Bank'?(r.bank||'BDO'):'',merch:'',st:r.st,sort:r.sort}));renderD();};
+document.getElementById('dAdd').onclick=()=>{dRows.push({bank:dMethod.value==='Bank'?'BDO':'',merch:'',st:'正常',sort:dRows.length+1});renderD();};
+renderD();
+
+/* ── 後台 ↔ 前台 連動 ── */
+const ENT=[
+  {id:'gcash',name:'GCash',show:true,tabs:'all,ewallet',subs:[
+    {label:'GCash1／V5Pay充值 - GCash',tile:'GCash1',st:'正常',mst:'正常',ok:true},
+    {label:'GCash2／PayCools支付-GCash',tile:'GCash2',st:'正常',mst:'正常',ok:true},
+    {label:'GCash3／wow_GCASH',tile:'GCash3',st:'正常',mst:'正常',ok:true}]},
+  {id:'bank',name:'Bank',show:true,tabs:'all,bank',subs:[
+    {label:'BDO／FortunePay支付',tile:'BDO',st:'正常',mst:'正常',ok:true},
+    {label:'BPI／FortunePay支付',tile:'BPI',st:'正常',mst:'正常',ok:true},
+    {label:'Metrobank／ARX-2143-储值',tile:'Metrobank',st:'正常',mst:'正常',ok:true}]}
+];
+const STATIC=[{name:'Maya',cls:'g'},{name:'GrabPay',cls:'g'},{name:'QRPH',cls:'b'},{name:'Bank Transfer',cls:'k'}];
+let fView='pc', fSel=null;
+function evalEnt(e){
+  const subs=e.subs.map(s=>{const vis=s.st!=='停用'&&s.mst!=='停用'&&s.ok;const mt=vis&&(s.st==='维护'||s.mst==='维护');return Object.assign({},s,{vis,mt});});
+  const vis=subs.filter(s=>s.vis);
+  const state=!e.show?'hide':(vis.length===0?'hide':(vis.every(s=>s.mt)?'mt':'ok'));
+  return {subs,vis,state};
+}
+function renderCfg(){
+  let h='';
+  ENT.forEach((e,ei)=>{
+    h+='<div class="cfgbox"><div class="ch">入口：'+e.name+'　<label class="sw" title="前台是否显示">前台是否显示 <i class="'+(e.show?'on':'')+'" data-sw="'+ei+'"></i> '+(e.show?'是':'否')+'</label></div>';
+    h+='<table class="lt"><tr><th style="width:36%">子渠道（圖示／商戶）</th><th>子渠道状态</th><th>商户状态</th><th>會員符合層級／VIP／GLife</th></tr>';
+    e.subs.forEach((s,si)=>{
+      h+='<tr><td style="text-align:left">'+s.label+'</td>';
+      h+='<td><select data-e="'+ei+'" data-s="'+si+'" data-k="st">'+['正常','维护','停用'].map(x=>'<option'+(x===s.st?' selected':'')+'>'+x+'</option>').join('')+'</select></td>';
+      h+='<td><select data-e="'+ei+'" data-s="'+si+'" data-k="mst">'+['正常','维护','停用'].map(x=>'<option'+(x===s.mst?' selected':'')+'>'+x+'</option>').join('')+'</select></td>';
+      h+='<td><div class="ckl" style="justify-content:center"><span><i class="'+(s.ok?'on':'')+'" data-e="'+ei+'" data-s="'+si+'" data-k="ok"></i>'+(s.ok?'符合':'不符合')+'</span></div></td></tr>';
+    });
+    h+='</table></div>';
+  });
+  document.getElementById('cfgPanel').innerHTML=h;
+  document.querySelectorAll('#cfgPanel [data-sw]').forEach(x=>x.onclick=()=>{ENT[+x.dataset.sw].show=!ENT[+x.dataset.sw].show;renderAll();});
+  document.querySelectorAll('#cfgPanel select[data-k]').forEach(s=>s.onchange=e=>{ENT[+e.target.dataset.e].subs[+e.target.dataset.s][e.target.dataset.k]=e.target.value;renderAll();});
+  document.querySelectorAll('#cfgPanel i[data-k=ok]').forEach(x=>x.onclick=()=>{const s=ENT[+x.dataset.e].subs[+x.dataset.s];s.ok=!s.ok;renderAll();});
+}
+function tile(txt,cls,extra){return '<div class="tile '+(extra||'')+'"><span class="lg img '+(cls||'')+'"></span>'+txt+(extra&&extra.includes('mt')?'<span class="veil">✕ 维护中</span>':'')+'</div>';}
+function renderFront(){
+  const notes=[];
+  let entries='';
+  ENT.forEach(e=>{
+    const r=evalEnt(e);
+    if(r.state==='hide'){notes.push('<b>'+e.name+'</b> 入口不顯示：'+(!e.show?'前台是否显示為否':'該會員可見子渠道 0 個'));return;}
+    const on=fSel===e.id?' on':'';
+    entries+='<div class="tile'+(r.state==='mt'?' mt':'')+on+'" data-ent="'+e.id+'"><span class="lg img '+(e.id==='bank'?'':'b')+'"></span>'+e.name+(r.state==='mt'?'<span class="veil">✕ 维护中</span>':'')+'</div>';
+    if(r.state==='mt') notes.push('<b>'+e.name+'</b> 入口維護：該會員可見子渠道全部維護');
+  });
+  STATIC.forEach(s=>{entries+='<div class="tile" style="color:#9aa3b2"><span class="lg img '+(s.cls==='k'?'':s.cls)+'" style="'+(s.cls==='k'?'background:#222':'')+'"></span>'+s.name+'</div>';});
+  let bank='';let after='';
+  const se=ENT.find(e=>e.id===fSel);
+  if(se){
+    const r=evalEnt(se);
+    if(r.state==='ok'){
+      if(r.vis.length>=2){
+        bank='<div class="fbox"><div class="ft">Payment Bank</div><div class="fgrid">'+r.vis.map(s=>tile(s.tile,'b','sub'+(s.mt?' mt':''))).join('')+'</div></div>';
+        notes.push('<b>'+se.name+'</b>：可見子渠道 '+r.vis.length+' 個 → 顯示 Payment Bank，會員點選後才進入該商戶的現行後續流程');
+        after='<div class="fempty">（點選 Payment Bank 磁貼後才出現該商戶的現行後續流程）</div>';
+      }else{
+        notes.push('<b>'+se.name+'</b>：可見子渠道 1 個（'+r.vis[0].tile+'）→ 不顯示 Payment Bank，直接進入該商戶的現行後續流程');
+        after='<div class="fbox"><div class="ft">Payment Amount</div><div class="famt"><span>+ 10</span><span>+ 50</span><span>+ 100</span><span>+ 500</span><span>+ 1000</span><span>+ 10000</span></div><div class="fsub">Submit</div></div><div class="fempty" style="padding:4px 0">（此區為該商戶現行後續流程，沿用現狀）</div>';
+      }
+    }
+  }else{after='<div class="fempty">（點上方入口）</div>';}
+  const body='<div class="fbal">₱ 197,128.95<span>Fund Accounts</span></div><div class="fbox"><div class="ft">Payment Methods</div><div class="fgrid">'+entries+'</div></div>'+bank+after;
+  let h='';
+  if(fView==='pc'){
+    h='<div class="fe pc"><div class="fhead">Wallet<i>×</i></div><div class="fnav"><div class="on">Deposit</div><div>Withdraw</div></div><div>'+body+'</div></div>';
+  }else{
+    h='<div class="fe h5"><div class="fhead"><i>‹</i>Wallet<i>Record</i></div>'+body+'</div>';
+  }
+  document.getElementById('frontPanel').innerHTML=h;
+  document.getElementById('frontNote').innerHTML=notes.length?notes.join('<br>'):'目前兩個入口皆正常顯示。點入口看 Payment Bank 規則。';
+  document.querySelectorAll('#frontPanel [data-ent]').forEach(t=>t.onclick=()=>{if(t.classList.contains('mt'))return;fSel=t.dataset.ent;renderFront();});
+}
+function renderAll(){renderCfg();if(fSel){const e=ENT.find(x=>x.id===fSel);if(!e||evalEnt(e).state!=='ok')fSel=null;}renderFront();}
+document.querySelectorAll('.ftabs span').forEach(s=>s.onclick=()=>{document.querySelectorAll('.ftabs span').forEach(x=>x.classList.remove('on'));s.classList.add('on');fView=s.dataset.v;renderFront();});
+renderAll();
+</script>
+</body>
+</html>
