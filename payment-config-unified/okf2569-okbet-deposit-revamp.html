@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>OKBet 充值改版 — 規格書_04（OKF-2569）</title>
+<title>OKBet 充值改版 — 規格書_32（OKF-2569）</title>
 <style>
 :root{
   --bd:#dcdfe6;--bd2:#ebeef5;--fg:#303133;--fg2:#606266;--fg3:#909399;
@@ -110,6 +110,30 @@ select.sel{appearance:auto;cursor:pointer;color:var(--fg)}
 .prompt .m{color:var(--fg2);line-height:1.9;display:flex;gap:8px}
 .prompt .m i{font-style:normal;color:var(--warn);font-size:16px}
 .prompt .f{display:flex;justify-content:flex-end;gap:8px;margin-top:14px}
+
+.q{display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;border-radius:50%;background:var(--blue);color:#fff;font-size:10px;font-weight:700;margin-left:4px;cursor:help;position:relative;vertical-align:1px}
+.q .tip{display:none;position:absolute;left:50%;bottom:22px;transform:translateX(-50%);background:#303133;color:#fff;font-size:12px;line-height:1.8;padding:8px 10px;border-radius:4px;white-space:nowrap;z-index:5;text-align:left;font-weight:400}
+.q.lft .tip{left:-6px;transform:none}
+.q.lft .tip::after{left:12px;transform:none}
+.q .tip::after{content:"";position:absolute;left:50%;bottom:-6px;transform:translateX(-50%);border:6px solid transparent;border-top-color:#303133;border-bottom:0}
+.q:hover .tip{display:block}
+.ft{margin:8px 0;overflow-x:auto}
+.ft__lane{display:flex;align-items:stretch;min-width:760px}
+.ft__q{background:#1e3a8a;color:#fff;border-radius:5px;padding:10px 12px;font-size:12px;font-weight:700;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;flex-shrink:0;width:160px;line-height:1.5}
+.ft__q small{display:block;font-weight:400;font-size:10.5px;opacity:.85}
+.ft__q.nw{outline:2px solid var(--new)}
+.ft__br{display:flex;flex-direction:column;gap:8px;padding-left:26px;position:relative;flex:1}
+.ft__br::before{content:"";position:absolute;left:12px;top:12px;bottom:12px;width:2px;background:#cbd5e1}
+.ft__b{display:flex;align-items:center;gap:10px;position:relative}
+.ft__b::before{content:"";position:absolute;left:-14px;top:50%;width:14px;height:2px;background:#cbd5e1}
+.ft__s{width:66px;text-align:center;flex-shrink:0}
+.ft__r{background:#fff;border:1px solid var(--bd2);border-radius:5px;padding:8px 12px;font-size:12px;flex:1;min-width:200px;color:var(--fg2)}
+.ft__r.stop{border-left:4px solid #dc2626}
+.ft__r.mt{border-left:4px solid #d97706}
+.ft__r.ok{border-left:4px solid #16a34a}
+.ft__n{display:flex;flex-direction:column;gap:8px;flex:1}
+.tagd{display:inline-block;font-size:11.5px;background:var(--errbg);color:var(--err);border-radius:3px;padding:1px 6px;margin-left:2px;white-space:nowrap;vertical-align:middle}
+.tagd.mt{background:var(--warnbg);color:var(--warn)}
 code{background:#f5f7fa;border:1px solid var(--bd2);border-radius:3px;padding:0 5px;font-size:12px}
 /* 可互動區 */
 .demo{border:1px dashed var(--new);border-radius:8px;padding:12px 14px;background:#fffdfa;margin-top:10px}
@@ -178,25 +202,44 @@ code{background:#f5f7fa;border:1px solid var(--bd2);border-radius:3px;padding:0 
   <nav class="side">
     <div class="grp">OKF-2569 OKBet 充值改版</div>
     <a data-p="p0" class="on">需求目的與範圍</a>
-    <a data-p="p1">後台｜在線支付商戶配置（新）<span class="n">3</span></a>
-    <a data-p="p2">後台｜充值展示配置（新）TAB<span class="n">6</span></a>
-    <a data-p="p3">前台｜充值頁（PC／H5）<span class="n">3</span></a>
-    <a data-p="p4">顯示判斷流程<span class="n">1</span></a>
-    <a data-p="p5">上線順序<span class="n">1</span></a>
+    <a data-p="p1">後台｜銀行字典表<span class="n">1</span></a>
+    <a data-p="p2">後台｜在線商戶配置（新）充值 TAB<span class="n">3</span></a>
+    <a data-p="p3">後台｜充值展示配置（新）TAB<span class="n">8</span></a>
+    <a data-p="p4">前台｜充值頁（PC／H5）<span class="n">3</span></a>
+    <a data-p="p5">顯示判斷流程<span class="n">1</span></a>
+    <a data-p="p6">上線順序<span class="n">1</span></a>
   </nav>
 
   <div class="main">
-    <div class="crumb"><span class="doc">OKF-2569｜okbet_充值改版｜規格書_04｜2026-10-22</span><b id="crumbName">需求目的與範圍</b></div>
+    <div class="crumb"><span class="doc">OKF-2569｜okbet_充值改版｜規格書_32｜2026-10-29</span><b id="crumbName">需求目的與範圍</b></div>
     <div class="lgd">紅圈數字 <span class="mk">1</span>＝本次調整項，對照各頁下方「本次調整」逐條說明。<span class="tagn">本次新增</span>＝本次新增的欄位、頁籤或畫面。橘色虛線框＝可互動示意，可直接點選操作看畫面變化。畫面未標記處維持現狀，不在本單範圍。</div>
 
     <!-- ══════════ 0 需求目的與範圍 ══════════ -->
     <section class="pg on" id="p0">
       <div class="card"><h3><em>①</em>需求目的</h3>
         <ol style="margin:0;padding-left:20px;line-height:2;color:var(--fg2)">
-          <li>OKBet 前台充值入口改為依「充值方式」展示（GCash／Maya／GrabPay／Bank／QRPH／Others），會員點入口後選銀行或直接進入下一步，不再以商戶作為入口。</li>
-          <li>管理後台「在線支付商戶配置（新）」新增「充值方式」欄位，每個商戶歸屬一種充值方式。</li>
-          <li>管理後台「在線支付展示配置（新）」新增頁籤「充值展示配置（新）」，以充值方式為入口、以子渠道（銀行＋商戶，或僅商戶）為展示單位進行設定。</li>
-          <li>前台依「該會員可見的子渠道數」決定是否展示 Payment Bank 區塊：1 個直接進入下一步，2 個以上才展示 Payment Bank。</li>
+          <li>前台充值入口改為依「充值方式」展示（GCash／Maya／GrabPay／Bank／QRPH／Transfer／兌換碼）。
+            <ul style="list-style:none;padding-left:18px;margin:0">
+              <li>・會員點入口後選子渠道或直接進入下一步，不再以商戶作為入口。</li>
+            </ul>
+          </li>
+          <li>管理後台「在線商戶配置（新）」充值 TAB 新增「充值方式」欄位，標示每個商戶歸屬的充值方式。</li>
+          <li>管理後台「在線支付展示配置（新）」新增頁籤「充值展示配置（新）」。
+            <ul style="list-style:none;padding-left:18px;margin:0">
+              <li>・以充值方式為入口、以子渠道（銀行＋商戶，或僅商戶）為展示單位進行設定。</li>
+              <li>・頁籤內有「新版充值展示」開關，決定前台充值頁讀取新頁籤或原頁籤的設定。</li>
+              <li>・入口筆數、每筆入口的子渠道筆數、同一商戶或銀行被綁定的次數皆不限制。</li>
+              <li>・每筆入口可設定「子渠道前台展示」：該會員只能看到一個子渠道時，點入口後是否仍需點擊該子渠道。</li>
+            </ul>
+          </li>
+          <li>新頁籤的入口充值方式另含「兌換碼」。
+            <ul style="list-style:none;padding-left:18px;margin:0">
+              <li>・入口不綁商戶與子渠道，會員點入口後於充值頁展示兌換功能。</li>
+              <li>・兌換功能本身沿用既有兌換碼活動。</li>
+            </ul>
+          </li>
+          <li>「銀行字典表」充值 TAB 每家銀行只保留一筆、一個名稱；各商戶回傳的銀行名稱對應到字典表銀行的工作由後端處理。</li>
+          <li>商戶三態與預約維護沿用 OKF-2269：預約維護時段內的商戶視同維護，經子渠道反映到前台入口。</li>
         </ol>
       </div>
       <div class="card"><h3><em>②</em>充值方式清單</h3>
@@ -206,51 +249,79 @@ code{background:#f5f7fa;border:1px solid var(--bd2);border-radius:3px;padding:0 
           <tr><td>Maya</td><td>選商戶</td></tr>
           <tr><td>GrabPay</td><td>選商戶</td></tr>
           <tr><td>QRPH</td><td>選商戶</td></tr>
-          <tr><td>Bank</td><td>先選銀行，再選商戶</td><td class="l">銀行來源為「銀行字典表」充值 TAB；商戶為商戶回傳的銀行清單中含該銀行者。</td></tr>
-          <tr><td>Others</td><td>選商戶</td><td class="l">不屬於上列五種的付款方式，目前確定歸入的商戶：PayCools-BankTrans。</td></tr>
+          <tr><td>Bank</td><td>先選銀行，再選商戶</td><td class="l">銀行來源為「銀行字典表」充值 TAB。</td></tr>
+          <tr><td>Transfer</td><td>先選銀行，再選商戶</td><td class="l">銀行來源為「銀行字典表」充值 TAB。會員自行轉帳到指定帳戶、或送單後跳轉至第三方 APP／頁面完成付款的方式。目前確定歸入的商戶：PayCools-BankTrans。</td></tr>
+          <tr><td>兌換碼</td><td>無子渠道</td><td class="l">只在新頁籤的入口可選，商戶配置不可選。入口不綁商戶與銀行，會員點入口後展示兌換功能。</td></tr>
         </table>
-        <div class="hintG" style="margin-top:8px">充值方式清單不做後台頁面。既有商戶各自歸屬哪一種充值方式，由 RD 依下方分類原則判斷後帶入。</div>
+        <div class="hintG" style="margin-top:8px">充值方式清單不做後台頁面，選項由後端提供，後續若要新增由後端處理。商戶配置的充值方式下拉不含兌換碼，新頁籤入口的充值方式下拉含兌換碼。既有商戶各自歸屬哪一種充值方式，由 RD 依下方分類原則判斷後帶入；判斷不了的留空。</div>
       </div>
       <div class="card"><h3><em>③</em>充值方式分類原則</h3>
         <div class="hintG" style="margin-bottom:8px">分類依據為「會員實際用什麼工具付款」，不看商戶名稱、不看第三方公司。</div>
         <table class="st2" style="max-width:760px">
-          <tr><th style="width:90px">充值方式</th><th>歸入條件</th><th>例</th></tr>
+          <tr><th style="width:110px">充值方式</th><th>歸入條件</th><th>例</th></tr>
           <tr><td>GCash</td><td class="l">會員以 GCash 錢包付款的商戶，不分付款頁型態（QRPH、直連、小程序皆同）</td><td class="l">V5Pay充值 - GCash、wow_GCASH</td></tr>
           <tr><td>Maya</td><td class="l">會員以 Maya 錢包付款的商戶</td><td class="l">PayCools支付 - PAYMAYA</td></tr>
           <tr><td>GrabPay</td><td class="l">會員以 GrabPay 錢包付款的商戶</td><td class="l">GrabPaytest</td></tr>
           <tr><td>Bank</td><td class="l">會員先選銀行、再以該銀行網銀付款的商戶；此類商戶會回傳銀行清單</td><td class="l">FortunePay支付、ARX-2143-储值</td></tr>
           <tr><td>QRPH</td><td class="l">會員以 QRPH 掃碼付款、不限定特定錢包或銀行的商戶</td><td class="l">PayCools支付-QRPH、coins-qrph-okbet</td></tr>
-          <tr><td>Others</td><td class="l">不屬於上列五種的商戶，例如：會員自行轉帳到指定帳戶、送單後跳轉至第三方 APP 或頁面完成付款</td><td class="l">PayCools-BankTrans（確定）</td></tr>
+          <tr><td>Transfer</td><td class="l">不屬於上列五種的商戶，例如：會員自行轉帳到指定帳戶、送單後跳轉至第三方 APP 或頁面完成付款</td><td class="l">PayCools-BankTrans（確定）</td></tr>
         </table>
       </div>
       <div class="card"><h3><em>④</em>範圍</h3>
-        <table class="st2" style="max-width:720px">
-          <tr><th style="width:90px">平台</th><th>範圍內</th><th>範圍外（維持現狀）</th></tr>
-          <tr><td>OKBet</td><td class="l">管理後台：在線支付商戶配置（新）、在線支付展示配置（新）新頁籤<br>前台：PC、H5、APP 充值頁入口與子渠道展示</td><td class="l">在線支付展示配置（新）原頁籤「充值展示配置」「分頁類型設定」<br>充值頁其餘區塊（金額、優惠券、送單後流程）<br>提款側全部</td></tr>
-          <tr><td>WOWGames</td><td class="l">—</td><td class="l">前後台全部維持現狀。新頁籤不顯示；商戶配置的「充值方式」欄位會顯示但不生效</td></tr>
+        <table class="st2" style="max-width:760px">
+          <tr><th style="width:110px">範圍內</th><td class="l">管理後台：銀行字典表（充值 TAB 資料規則）、在線商戶配置（新）充值 TAB、在線支付展示配置（新）新頁籤與「新版充值展示」開關<br>前台：PC、H5、APP 充值頁入口與子渠道展示，僅開關开启時生效；关闭時前台維持現狀（讀「充值展示配置」頁籤）</td></tr>
+          <tr><th>範圍外<br>（維持現狀）</th><td class="l">「充值展示配置」「分页类型设定」頁籤的功能<br>充值頁其餘區塊（金額、優惠券、送單後流程）<br>提款側全部</td></tr>
         </table>
       </div>
     </section>
 
-    <!-- ══════════ 1 在線支付商戶配置（新） ══════════ -->
+    <!-- ══════════ 1 銀行字典表 ══════════ -->
     <section class="pg" id="p1">
-      <div class="card"><h3><em>①</em>列表</h3>
-        <div class="bar"><span class="sel">All<i>▾</i></span><span class="sel">状态<i>▾</i></span><span class="btn pri">搜索</span><span class="btn pri">新增</span></div>
+      <div class="card"><h3><em>①</em>充值 TAB 列表（畫面不變，資料規則調整）</h3>
+        <div class="tabs"><span class="on">充值</span><span>提款</span></div>
         <table class="lt">
-          <tr><th>#</th><th>支付名称</th><th class="nw">充值方式<span class="mk">1</span></th><th>渠道类型</th><th>支付类型</th><th>商户号</th><th>国家</th><th>币种</th><th>支付层级</th><th>VIP 等级</th><th>状态</th><th>操作</th></tr>
-          <tr><td>652</td><td>FortunePay支付</td><td>Bank</td><td>212 - FortunePay（充值）</td><td>FortunePay</td><td>FP-8821</td><td>菲律宾</td><td>PHP</td><td>默认层,第二层</td><td>全部</td><td><span class="chip ok">正常</span></td><td><span class="lnk">编辑</span><span class="lnk">删除</span></td></tr>
-          <tr><td>1038</td><td>V5Pay充值 - GCash</td><td>GCash</td><td>204 - Gcash（充值）</td><td>V5Pay - GCash</td><td>V5-7731</td><td>菲律宾</td><td>PHP</td><td>全部</td><td>全部</td><td><span class="chip ok">正常</span></td><td><span class="lnk">编辑</span><span class="lnk">删除</span></td></tr>
-          <tr><td>1047</td><td>PayCools支付-BankTrans</td><td>Others</td><td>315 - BankTransfer（充值）</td><td>PayCools支付-BankTrans</td><td>92d0…4eb</td><td>菲律宾</td><td>PHP</td><td>全部</td><td>全部</td><td><span class="chip ok">正常</span></td><td><span class="lnk">编辑</span><span class="lnk red" id="btnDelDemo">删除</span></td></tr>
+          <tr><th>#</th><th>银行名称<span class="mk">1</span></th><th>银行代码</th><th>种类</th><th>更新时间</th><th>操作</th></tr>
+          <tr><td>583</td><td>BDO</td><td>bdo</td><td>银行</td><td>2026-10-19 11:49:46</td><td><span class="lnk">编辑</span></td></tr>
+          <tr><td>585</td><td>BPI</td><td>bpi</td><td>银行</td><td>2026-10-20 15:51:48</td><td><span class="lnk">编辑</span></td></tr>
+          <tr><td>599</td><td>Metrobank</td><td>Metrobank</td><td>银行</td><td>2026-10-19 11:49:46</td><td><span class="lnk">编辑</span></td></tr>
+          <tr><td>1091</td><td>GCash</td><td>GCASH</td><td>电子钱包</td><td>2026-10-19 13:19:27</td><td><span class="lnk">编辑</span></td></tr>
+        </table>
+        <div class="hintG" style="margin-top:8px">示意：同一家銀行只有一筆、一個名稱。</div>
+      </div>
+      <div class="adj"><h4>本次調整</h4><ol>
+        <li><span class="mk">1</span><b>充值 TAB 每家銀行唯一一筆、一個名稱</b>
+          <ul class="sub">
+            <li>・同一家銀行在充值 TAB 只能存在一筆，银行名称只填一個名稱，不以分號併列多個名稱、不另建別名欄位。</li>
+            <li>・不同商戶回傳同一家銀行時名稱可能不同（例：Banco De Oro Unibank、BDO、BDO Online Bank Transfer、bdo），這些回傳名稱如何對應到字典表的那一筆銀行，由後端處理，後台不設定、列表不顯示對應關係。</li>
+            <li>・對應完成後，後台「充值展示配置（新）」的銀行下拉與前台 Payment Bank 都只以字典表的银行名称呈現。</li>
+            <li>・同一商戶回傳的清單中有多條對應到同一家銀行時，會員送單用哪一條由後端決定。</li>
+            <li>・既有資料中一筆銀行併列多個名稱者，上線前由 RD 整理為一個名稱。</li>
+          </ul>
+        </li>
+      </ol></div>
+    </section>
+
+    <!-- ══════════ 2 在線支付商戶配置（新） ══════════ -->
+    <section class="pg" id="p2">
+      <div class="card"><h3><em>①</em>列表</h3>
+        <div class="tabs"><span class="on">充值商户</span><span>提款商户</span></div><div class="bar"><span class="sel">All<i>▾</i></span><span class="sel">状态<i>▾</i></span><span class="btn pri">搜索</span><span class="btn pri">新增</span></div>
+        <table class="lt">
+          <tr><th>#</th><th>支付名称</th><th class="nw">充值方式<span class="mk">1</span></th><th>渠道类型</th><th>支付类型</th><th>商户号</th><th>国家</th><th>币种</th><th>支付层级</th><th>VIP 等级</th><th>状态</th><th>预约维护</th><th>操作</th></tr>
+          <tr><td>652</td><td>FortunePay支付</td><td>Bank</td><td>212 - FortunePay（充值）</td><td>FortunePay</td><td>FP-8821</td><td>菲律宾</td><td>PHP</td><td>默认层,第二层</td><td>全部</td><td><span class="chip ok">正常</span></td><td>2026-11-01 02:00 ～ 2026-11-01 06:00<br>＋</td><td><span class="lnk">编辑</span><span class="lnk">删除</span></td></tr>
+          <tr><td>1038</td><td>V5Pay充值 - GCash</td><td>GCash</td><td>204 - Gcash（充值）</td><td>V5Pay - GCash</td><td>V5-7731</td><td>菲律宾</td><td>PHP</td><td>全部</td><td>全部</td><td><span class="chip ok">正常</span></td><td>＋</td><td><span class="lnk">编辑</span><span class="lnk">删除</span></td></tr>
+          <tr><td>1047</td><td>PayCools支付-BankTrans</td><td>Transfer</td><td>315 - BankTransfer（充值）</td><td>PayCools支付-BankTrans</td><td>92d0…4eb</td><td>菲律宾</td><td>PHP</td><td>全部</td><td>全部</td><td><span class="chip ok">正常</span></td><td>＋</td><td><span class="lnk">编辑</span><span class="lnk red" id="btnDelDemo">删除</span></td></tr>
+          <tr><td>1072</td><td>coins-qrph-复制版</td><td></td><td>326 - dragonpay_qrph（充值）</td><td>Coins_QRPH</td><td>ZTR3…DgjA</td><td>菲律宾</td><td>PHP</td><td>全部</td><td>全部</td><td><span class="chip ok">正常</span></td><td>＋</td><td><span class="lnk">编辑</span><span class="lnk">删除</span></td></tr>
         </table>
       </div>
 
       <div class="card"><h3><em>②</em>新增／編輯彈窗（僅畫有調整的區塊，其餘區塊不變）</h3>
-        <div class="dlg"><div class="dh">编辑在线支付商户<span>×</span></div><div class="db">
+        <div class="hintG" style="margin-bottom:8px">列表的「预约维护」欄與商戶狀態三態為 OKF-2269 既有功能，本單不動；預約維護時段內該商戶視同維護，效果經子渠道反映到前台。</div>
+        <div class="dlg"><div class="dh">编辑充值商户<span>×</span></div><div class="db">
           <div class="fr"><label><span class="req">*</span>商户 #:</label><div class="fc"><div class="in ro">1047（自旧分页引入）</div></div></div>
           <div class="fr"><label><span class="req">*</span>渠道类型:</label><div class="fc"><div class="in ro">315 - BankTransfer（充值）<i>▾</i></div></div></div>
           <div class="fr"><label>支付类型:</label><div class="fc"><div class="in ro">PayCools支付-BankTrans<i>▾</i></div></div></div>
           <div class="fr"><label><span class="req">*</span>支付名称:</label><div class="fc"><div class="in">PayCools支付-BankTrans</div></div></div>
-          <div class="fr" style="background:var(--newbg);border-radius:6px"><label><span class="req">*</span>充值方式:<span class="mk">1</span></label><div class="fc"><div class="in" style="max-width:260px">Others<i>▾</i></div><span class="tagn">本次新增</span><div class="hintG">選項：GCash／Maya／GrabPay／Bank／QRPH／Others</div></div></div>
+          <div class="fr" style="background:var(--newbg);border-radius:6px"><label>充值方式:<span class="mk">1</span></label><div class="fc"><div class="in" style="max-width:260px">Transfer<i>▾</i></div><span class="tagn">本次新增</span><span class="hintG" style="flex-basis:auto">非必填，可留空。選項由後端提供。</span></div></div>
           <div class="fr"><label><span class="req">*</span>国家:</label><div class="fc"><div class="in ro" style="max-width:220px">菲律宾<i>▾</i></div></div></div>
           <div class="fr"><label><span class="req">*</span>币种:</label><div class="fc"><div class="in ro" style="max-width:220px">PHP<i>▾</i></div></div></div>
           <div class="hintG" style="padding:6px 0 2px">以下區塊（状态、排序、請求／回調、行为、金额、文案、层级）維持現狀。</div>
@@ -262,7 +333,7 @@ code{background:#f5f7fa;border:1px solid var(--bd2);border-radius:3px;padding:0 
           <span class="btn sm" id="btnDelDemo2">示範：點「删除」</span>
           <div id="delPrompt" style="display:none;margin-top:10px">
             <div class="prompt"><div class="t">提示</div>
-              <div class="m"><i>!</i><div>此商戶已綁定充值子渠道<br>刪除後，綁定此商戶的子渠道會一併刪除<br>是否確認刪除？</div></div>
+              <div class="m"><i>!</i><div>此商戶已綁定充值子渠道<br>刪除後，已綁定的子渠道前台將不再展示<br>是否確認刪除？</div></div>
               <div class="f"><span class="btn" id="btnDelCancel">取 消</span><span class="btn pri">确 定</span></div>
             </div>
           </div>
@@ -272,47 +343,54 @@ code{background:#f5f7fa;border:1px solid var(--bd2);border-radius:3px;padding:0 
       <div class="adj"><h4>本次調整</h4><ol>
         <li><span class="mk">1</span><b>新增「充值方式」</b>
           <ul class="sub">
-            <li>・新增／編輯彈窗：必填下拉，位置在「支付名称」與「支付类型」之間。新增與編輯皆可修改。</li>
-            <li>・選項固定六種：GCash／Maya／GrabPay／Bank／QRPH／Others。</li>
-            <li>・列表：於「支付名称」後新增「充值方式」欄。</li>
-            <li>・既有商戶：上線時由 RD 判斷各商戶歸屬的充值方式後帶入。</li>
-            <li>・WOWGames 平台同樣顯示此欄位，但不生效。</li>
+            <li>・新增／編輯彈窗：非必填下拉，可留空，位置在「支付名称」與「国家」之間。新增與編輯皆可修改。</li>
+            <li>・選項由後端提供，目前為 GCash／Maya／GrabPay／Bank／QRPH／Transfer；後續若要新增由後端處理，後台不做維護頁面。</li>
+            <li>・列表：於「支付名称」與「渠道类型」之間新增「充值方式」欄，留空者該格空白。</li>
+            <li>・既有商戶：上線時由 RD 依分類原則判斷各商戶歸屬的充值方式後帶入，判斷不了的留空。</li>
+            <li>・選項不含「兌換碼」；兌換碼只是新頁籤的入口類型，不是商戶。</li>
+            <li>・留空的商戶不會出現在「充值展示配置（新）」子渠道的商戶下拉中；補填後即可選到。</li>
+            <li>・「新版充值展示」开启時此欄位生效；关闭時不生效。</li>
           </ul>
         </li>
-        <li><span class="mk">2</span><b>刪除商戶的連動提示</b>
+        <li><span class="mk">2</span><b>刪除商戶的提示與標示</b>
           <ul class="sub">
-            <li>・點「删除」時，若此商戶已綁定於「充值展示配置（新）」任一子渠道，先彈出提示，文案如上方畫面。</li>
-            <li>・確認刪除後，綁定此商戶的子渠道一併刪除；該入口本身保留。</li>
-            <li>・未綁定任何子渠道的商戶，刪除流程維持現狀。</li>
+            <li>・點「删除」→ 現行確認窗「确认提交吗？」→ 確定後依序判斷：</li>
+            <li>　1. 此商戶為「充值展示配置」頁籤任一筆的顯示商戶 → 阻斷不可刪，提示沿用現行文案：「該商戶已綁定於『在線支付展示配置』，無法刪除。請先至該頁解除綁定（變更顯示商戶）或刪除對應展示設定後，再進行刪除。」</li>
+            <li>　2. 未綁上述、但已綁定於「充值展示配置（新）」任一子渠道 → 彈出上方畫面的警示，確定後才刪除。</li>
+            <li>　3. 兩邊皆未綁定 → 現行刪除流程。</li>
+            <li>・確認刪除後，子渠道不刪除：保留原本選定的商戶並標示「已删除」，前台該子渠道視同不可見。</li>
           </ul>
         </li>
-        <li><span class="mk">3</span><b>商戶可重複綁定</b>：同一個商戶可被「充值展示配置（新）」的多個子渠道綁定，不限次數。</li>
+        <li><span class="mk">3</span><b>商戶可重複綁定</b>：同一個商戶可被「充值展示配置（新）」的多個子渠道綁定，同一入口內、不同入口之間皆可，不限次數。</li>
       </ol></div>
     </section>
 
-    <!-- ══════════ 2 充值展示配置（新）TAB ══════════ -->
-    <section class="pg" id="p2">
+    <!-- ══════════ 3 充值展示配置（新）TAB ══════════ -->
+    <section class="pg" id="p3">
       <div class="card"><h3><em>①</em>頁籤與列表</h3>
         <div class="tabs"><span>充值展示配置</span><span class="on">充值展示配置（新）<span class="mk">1</span></span><span>分页类型设定</span></div>
-        <div class="alertbar">有 2 个状态正常的商户尚未绑定任何子渠道，请及时配置：V5Pay充值 - GCash、GrabPaytest<span class="mk">6</span></div>
+        <div class="bar" style="background:var(--newbg);border-radius:6px;padding:8px 12px"><label class="sw" style="font-size:13px;color:var(--fg)"><span style="font-weight:600">新版充值展示</span><span class="mk">2</span> <i class="on"></i> 开启</label><span class="tagn">本次新增</span><span class="hintG" style="flex-basis:auto">开启：前台充值页读取本页签设置。关闭：读取「充值展示配置」页签设置。切換時跳確認視窗。</span></div>
+        <div class="demo"><div class="dt">開關確認視窗（點下方按鈕切換看兩種文案）</div><span class="btn sm" id="btnSwOn">示範：关闭 → 开启</span><span class="btn sm" id="btnSwOff">示範：开启 → 关闭</span><div id="swPrompt" style="display:none;margin-top:10px"><div class="prompt"><div class="t">提示</div><div class="m"><i>!</i><div id="swPromptText"></div></div><div class="f"><span class="btn" id="btnSwCancel">取 消</span><span class="btn pri" id="btnSwOk">确 认</span></div></div></div></div>
+        <div class="alertbar">有 2 个状态正常的商户尚未绑定任何子渠道，请及时配置：V5Pay充值 - GCash、GrabPaytest<span class="mk">8</span></div>
         <div class="bar"><span class="btn pri">新增</span></div>
         <table class="lt">
-          <tr><th>充值方式</th><th>显示名</th><th>国家</th><th>币种</th><th>入口图示（日间）</th><th>入口图示（夜间）</th><th>分页归属</th><th>排序</th><th>子渠道数／商户数<span class="mk">5</span></th><th>前台是否显示<span class="mk">4</span></th><th>操作</th></tr>
-          <tr><td>GCash</td><td>GCash</td><td>菲律宾</td><td>PHP</td><td><span class="img b wide"></span></td><td><span class="img b wide"></span></td><td>all,ewallet</td><td>1</td><td><span class="lnk" id="btnPop">3／2</span></td><td><span class="chip ok">是</span></td><td><span class="lnk">编辑</span><span class="lnk">删除</span></td></tr>
-          <tr><td>Bank</td><td>Bank</td><td>菲律宾</td><td>PHP</td><td><span class="img wide"></span></td><td><span class="img wide"></span></td><td>all,bank</td><td>2</td><td><span class="lnk">5／2</span></td><td><span class="chip ok">是</span></td><td><span class="lnk">编辑</span><span class="lnk">删除</span></td></tr>
-          <tr><td>Maya</td><td>Maya</td><td>菲律宾</td><td>PHP</td><td><span class="img g wide"></span></td><td><span class="img g wide"></span></td><td>all,ewallet</td><td>3</td><td><span class="lnk">1／1</span></td><td><span class="chip ok">是</span></td><td><span class="lnk">编辑</span><span class="lnk">删除</span></td></tr>
-          <tr><td>Others</td><td>Bank Transfer</td><td>菲律宾</td><td>PHP</td><td><span class="img wide" style="background:#222"></span></td><td><span class="img wide" style="background:#222"></span></td><td>all,bank</td><td>9</td><td><span class="lnk">0／0</span></td><td><span class="chip gy">否</span></td><td><span class="lnk">编辑</span><span class="lnk">删除</span></td></tr>
+          <tr><th>充值方式</th><th>显示名</th><th>国家</th><th>币种</th><th>入口图示（日间）</th><th>入口图示（夜间）</th><th>分页归属</th><th>排序</th><th>子渠道数／商户数<span class="q">?<span class="tip">只统计使用中的子渠道与商户<br>子渠道状态为正常、且商户为正常或维护者才纳入<br>点击此栏数字可查看子渠道明细与商户状态</span></span><span class="mk">7</span></th><th>前台是否显示<span class="mk">6</span></th><th>子渠道前台展示<span class="q">?<span class="tip">当会员使用该充值方式时，若只能看到一个子渠道<br>选「是」：点击入口后，仍需点击该子渠道<br>选「否」：点击入口后，默认使用该子渠道，无需再次点选</span></span><span class="mk">5</span></th><th>操作</th></tr>
+          <tr><td>GCash</td><td>GCash</td><td>菲律宾</td><td>PHP</td><td><span class="img b wide"></span></td><td><span class="img b wide"></span></td><td>all,ewallet</td><td>1</td><td><span class="lnk" id="btnPop">3／2</span></td><td><span class="chip ok">是</span></td><td><span class="chip gy">否</span></td><td><span class="lnk">编辑</span><span class="lnk">删除</span></td></tr>
+          <tr><td>GCash</td><td>GCash VIP</td><td>菲律宾</td><td>PHP</td><td><span class="img b wide"></span></td><td><span class="img b wide"></span></td><td>all,ewallet</td><td>2</td><td><span class="lnk">1／1</span></td><td><span class="chip ok">是</span></td><td><span class="chip ok">是</span></td><td><span class="lnk">编辑</span><span class="lnk">删除</span></td></tr>
+          <tr><td>Bank</td><td>Bank</td><td>菲律宾</td><td>PHP</td><td><span class="img wide"></span></td><td><span class="img wide"></span></td><td>all,bank</td><td>3</td><td><span class="lnk">5／2</span></td><td><span class="chip ok">是</span></td><td><span class="chip gy">否</span></td><td><span class="lnk">编辑</span><span class="lnk">删除</span></td></tr>
+          <tr><td>Transfer</td><td>Transfer</td><td>菲律宾</td><td>PHP</td><td><span class="img g wide"></span></td><td><span class="img g wide"></span></td><td>all,bank</td><td>9</td><td><span class="lnk">0／0</span></td><td><span class="chip gy">否</span></td><td><span class="chip ok">是</span></td><td><span class="lnk">编辑</span><span class="lnk">删除</span></td></tr>
+          <tr><td>兌換碼</td><td>Redeem Code</td><td>菲律宾</td><td>PHP</td><td><span class="img wide" style="background:linear-gradient(135deg,#c48cf0,#8e44ad)"></span></td><td><span class="img wide" style="background:linear-gradient(135deg,#c48cf0,#8e44ad)"></span></td><td>all</td><td>99</td><td>—</td><td><span class="chip ok">是</span></td><td>—</td><td><span class="lnk">编辑</span><span class="lnk">删除</span></td></tr>
         </table>
         <div class="demo" id="popWrap" style="display:none"><div class="dt">子渠道數／商戶數 唯讀彈窗（點列表 GCash 那列的「3／2」開啟）</div>
           <div class="dlg" style="max-width:760px"><div class="dh">子渠道明细 — GCash<span id="btnPopClose">×</span></div><div class="db">
             <table class="lt">
               <tr><th>#</th><th>银行</th><th>商户</th><th>子渠道状态</th><th>商户状态</th><th>分页归属</th><th>排序</th></tr>
-              <tr><td>1</td><td>—</td><td>V5Pay充值 - GCash</td><td><span class="chip ok">正常</span></td><td><span class="chip ok">正常</span></td><td>all,ewallet</td><td>1</td></tr>
+              <tr><td>1</td><td>—</td><td>V5Pay充值 - GCash</td><td><span class="chip ok">正常</span></td><td><span class="chip mt">维护</span></td><td>all,ewallet</td><td>1</td></tr>
               <tr><td>2</td><td>—</td><td>PayCools支付-GCash</td><td><span class="chip ok">正常</span></td><td><span class="chip mt">维护</span></td><td>all,ewallet</td><td>2</td></tr>
               <tr><td>3</td><td>—</td><td>V5Pay充值 - GCash</td><td><span class="chip ok">正常</span></td><td><span class="chip ok">正常</span></td><td>all</td><td>3</td></tr>
-              <tr><td>4</td><td>—</td><td>wow_GCASH</td><td><span class="chip off">停用</span></td><td><span class="chip ok">正常</span></td><td>all,ewallet</td><td>4</td></tr>
+              <tr><td>4</td><td>—</td><td>wow_GCASH</td><td><span class="chip off">停用</span></td><td><span class="chip gy">已删除</span></td><td>all,ewallet</td><td>4</td></tr>
             </table>
-            <div class="hintG" style="margin-top:8px">純讀，不可編輯。列全部子渠道，不分狀態。</div>
+            <div class="hintG" style="margin-top:8px">純讀，不可編輯。列全部子渠道，不分狀態。商户状态顯示商戶的最終生效狀態（正常／维护／停用，預約維護時段內直接顯示「维护」）；商戶出現已删除、方式不符、已不支援時，此欄顯示該標籤字。</div>
           </div><div class="df"><span class="btn" id="btnPopClose2">关 闭</span></div></div>
         </div>
       </div>
@@ -320,7 +398,7 @@ code{background:#f5f7fa;border:1px solid var(--bd2);border-radius:3px;padding:0 
       <div class="card"><h3><em>②</em>新增／編輯（獨立分頁）</h3>
         <div class="bar"><span class="btn">返回列表</span></div>
         <div class="dlg" style="max-width:none"><div class="db">
-          <div class="fr"><label><span class="req">*</span>充值方式:<span class="mk">2</span></label><div class="fc"><select class="sel" id="dMethod" style="min-width:200px"><option>Bank</option><option>GCash</option><option>Maya</option><option>GrabPay</option><option>QRPH</option><option>Others</option></select><div class="hintG">新增時選擇，編輯時不可修改。</div></div></div>
+          <div class="fr"><label><span class="req">*</span>充值方式:<span class="mk">3</span></label><div class="fc"><select class="sel" id="dMethod" style="min-width:200px"><option>Bank</option><option>GCash</option><option>Maya</option><option>GrabPay</option><option>QRPH</option><option>Transfer</option><option>兌換碼</option></select><span class="hintG" style="flex-basis:auto">新增時選擇，編輯時不可修改。選「兌換碼」時，下方「子渠道前台展示」與「子渠道」區塊不顯示。</span></div></div>
           <div class="fr"><label>显示名(英文):</label><div class="fc"><div class="in">Bank</div></div></div>
           <div class="fr"><label>显示名(中文):</label><div class="fc"><div class="in">银行</div></div></div>
           <div class="fr"><label>显示名(越南文):</label><div class="fc"><div class="in"></div></div></div>
@@ -331,13 +409,15 @@ code{background:#f5f7fa;border:1px solid var(--bd2);border-radius:3px;padding:0 
           <div class="fr"><label><span class="req">*</span>入口图示（日间）:</label><div class="fc"><span class="up">选择文件</span><span class="thumb wide img"></span><span class="hintG" style="flex-basis:auto">建議尺寸：232 × 76</span></div></div>
           <div class="fr"><label><span class="req">*</span>入口图示（夜间）:</label><div class="fc"><span class="up">选择文件</span><span class="thumb wide img"></span><span class="hintG" style="flex-basis:auto">建議尺寸：232 × 76</span></div></div>
           <div class="fr"><label>分页归属:</label><div class="fc"><div class="ckl"><span><i class="on"></i>All</span><span><i></i>E-Wallets</span><span><i class="on"></i>Banks</span></div></div></div>
-          <div class="fr"><label>排序:</label><div class="fc"><div class="in" style="max-width:120px">2</div></div></div>
-          <div class="fr"><label><span class="req">*</span>前台是否显示:<span class="mk">4</span></label><div class="fc"><div class="rd"><span class="sel2"><b class="on"></b>是</span><span><b></b>否</span></div></div></div>
-          <div class="sep">子渠道<span class="mk">3</span></div>
-          <div class="demo"><div class="dt">可互動：切換上方「充值方式」看銀行欄出現／消失；按「＋ 新增一列」看兩筆以上時圖示欄出現；「删除」可減列。</div>
+          <div class="fr"><label>排序:</label><div class="fc"><div class="in" style="max-width:120px">3</div></div></div>
+          <div class="fr"><label><span class="req">*</span>前台是否显示:<span class="mk">6</span></label><div class="fc"><div class="rd"><span class="sel2"><b class="on"></b>是</span><span><b></b>否</span></div></div></div>
+          <div class="fr" id="rowSingle" style="background:var(--newbg);border-radius:6px"><label><span class="req">*</span>子渠道前台展示<span class="q">?<span class="tip">当会员使用该充值方式时，若只能看到一个子渠道<br>选「是」：点击入口后，仍需点击该子渠道<br>选「否」：点击入口后，默认使用该子渠道，无需再次点选</span></span>:<span class="mk">5</span></label><div class="fc"><div class="rd"><span><b></b>是</span><span class="sel2"><b class="on"></b>否</span></div><span class="tagn">本次新增</span><span class="hintG" style="flex-basis:auto">滑到「?」顯示說明。只在該會員實際可見的子渠道剩一個時生效；可見兩個以上時一律顯示子渠道區塊讓會員點選。</span></div></div>
+          <div id="blkSub"><div class="sep">子渠道<span class="q lft">?<span class="tip">已删除：商户已被删除或读取不到<br>方式不符：商户的充值方式、国家或币种与此入口不符<br>已不支援：商户已不支援该银行<br>已停用：商户已停用<br>维护中：商户维护中，含预约维护时段内</span></span><span class="mk">4</span></div>
+          <div class="demo"><div class="dt">可互動：切換上方「充值方式」看銀行欄出現／消失，選「兌換碼」整個子渠道區塊隱藏；「＋ 新增一列」加列、「删除」減列。商戶欄的標籤示意：第 2 到 6 列依序示範已删除、方式不符、已不支援、已停用、维护中五種標籤，名稱後緊接紅色標籤、仍顯示於該列；展開下拉時已刪除、已停用、維護中（含預約維護）、方式不符的商戶都不在選項內。</div>
             <table class="lt" id="dTable"></table>
             <div style="margin-top:8px"><span class="btn sm pri" id="dAdd">＋ 新增一列</span><span class="hintG" id="dHint" style="display:inline"></span></div>
-          </div>
+          </div></div>
+          <div id="blkRedeem" style="display:none" class="hintG">充值方式為兌換碼：無「子渠道前台展示」與「子渠道」區塊。</div>
         </div><div class="df"><span class="btn">取 消</span><span class="btn pri">确 定</span></div></div>
       </div>
 
@@ -345,47 +425,104 @@ code{background:#f5f7fa;border:1px solid var(--bd2);border-radius:3px;padding:0 
         <li><span class="mk">1</span><b>新增頁籤「充值展示配置（新）」</b>
           <ul class="sub">
             <li>・位置：在線支付展示配置（新），於「充值展示配置」與「分页类型设定」之間。</li>
-            <li>・僅平台為 OKBet 時顯示，WOWGames 不顯示。</li>
             <li>・新增、編輯為獨立分頁，操作方式同「充值展示配置」頁籤。</li>
-            <li>・列表欄位：充值方式／显示名／国家／币种／入口图示（日间）／入口图示（夜间）／分页归属／排序／子渠道数／商户数／前台是否显示／操作（编辑、删除）。</li>
+            <li>・列表欄位：充值方式／显示名／国家／币种／入口图示（日间）／入口图示（夜间）／分页归属／排序／子渠道数／商户数／前台是否显示／子渠道前台展示／操作（编辑、删除）。</li>
             <li>・分页归属沿用「分页类型设定」的分頁。</li>
+            <li>・刪除入口：沿用現行確認窗「确认提交吗？」，確定後整筆入口含子渠道設定一併刪除，前台即不顯示；兌換碼入口同。</li>
           </ul>
         </li>
-        <li><span class="mk">2</span><b>入口欄位</b>
+        <li><span class="mk">2</span><b>「新版充值展示」開關</b>
           <ul class="sub">
-            <li>・充值方式：必填，單選六種之一。新增時選擇，編輯時不可修改。同一個充值方式可建立多筆入口。</li>
-            <li>・显示名（英文／中文／越南文／菲律宾语／宿雾语）、国家、币种、入口图示（日间）、入口图示（夜间）、分页归属、排序：同「充值展示配置」頁籤的對應欄位規則；两張入口图示必填；分页归属預設不勾選。</li>
-            <li>・入口图示固定用此處上傳的圖，不因子渠道數量改變。</li>
+            <li>・位置：頁籤內最上方、「新增」按鈕之前。切換即生效，不需另外保存。</li>
+            <li>・开启：前台充值頁讀取本頁籤的入口與子渠道設定。</li>
+            <li>・关闭：前台充值頁讀取「充值展示配置」頁籤的設定，本頁籤的設定保留不動。</li>
+            <li>・預設关闭。不論開關开启或关闭，本頁籤皆可新增、編輯、刪除，不受影響。</li>
+            <li>・关闭切为开启时跳確認視窗：「开启后，前台充值页将套用本页签的设置。是否已配置完成并确认开启？」确认＝开启、取消＝維持关闭。</li>
+            <li>・开启切为关闭时跳確認視窗：「关闭后，前台充值页将套用「充值展示配置」页签的设置。是否已配置完成并确认关闭？」确认＝关闭、取消＝維持开启。</li>
           </ul>
         </li>
-        <li><span class="mk">3</span><b>子渠道表</b>
+        <li><span class="mk">3</span><b>入口欄位</b>
+          <ul class="sub">
+            <li>・充值方式：必填，單選。選項由後端提供，目前為 GCash／Maya／GrabPay／Bank／QRPH／Transfer／兌換碼，後續若要新增由後端處理。新增時選擇，編輯時不可修改。</li>
+            <li>・選「兌換碼」時：显示名、国家、币种、入口图示、分页归属、排序、前台是否显示照常填寫；「子渠道前台展示」與「子渠道」區塊不顯示、不需填；列表的子渠道前台展示、子渠道数／商户数顯示「—」。可建多筆。</li>
+            <li>・同一個充值方式可建立的入口筆數不限：例如同時存在兩筆 GCash、三筆 Bank、四筆 Maya 都可以，每一筆各自設定顯示名、圖示、排序與子渠道，前台一筆一顆磁貼。</li>
+            <li>・显示名（英文／中文／越南文／菲律宾语／宿雾语）、国家、币种、入口图示（日间）、入口图示（夜间）、分页归属、排序：同「充值展示配置」頁籤的對應欄位規則；兩張入口图示必填；分页归属預設不勾選。</li>
+            <li>・入口图示固定用此處上傳的圖。</li>
+          </ul>
+        </li>
+        <li><span class="mk">4</span><b>子渠道表</b>
           <ul class="sub">
             <li>・每一列為一個子渠道，用「＋ 新增一列」增加、「删除」移除，筆數不限，至少一筆才能保存。</li>
-            <li>・充值方式為 Bank：欄位＝银行／商户／子渠道图示（日间）／子渠道图示（夜间）／状态／分页归属／排序／操作。銀行下拉列出「銀行字典表」充值 TAB 全部銀行；選定銀行後，商戶下拉只列出：充值方式同為 Bank、國家與幣種與入口相同、狀態非停用、且商戶回傳的銀行清單中含該銀行的商戶。</li>
-            <li>・充值方式為 GCash／Maya／GrabPay／QRPH／Others：無银行欄，欄位＝商户／子渠道图示（日间）／子渠道图示（夜间）／状态／分页归属／排序／操作。商戶下拉列出：充值方式相同、國家與幣種與入口相同、狀態非停用的商戶。</li>
-            <li>・商戶下拉不排除已被綁定的商戶，同一個商戶可在同一入口或不同入口重複出現。</li>
-            <li>・子渠道图示（日间）（夜间）：子渠道只有一筆時不顯示這兩欄；兩筆以上時每一筆都顯示且必填，由一筆增加為兩筆時，原本那筆也要補上圖示才能保存。建議尺寸 232 × 76。</li>
-            <li>・状态：正常／维护／停用，預設正常。分页归属：預設不勾選。排序：數字。</li>
-            <li>・同商戶回傳的銀行清單中有多條對應到同一家銀行時，會員送單用哪一條由後端決定，後台不另外設定。</li>
+            <li>・欄位依充值方式分兩種：
+              <ul class="sub" style="padding-left:16px">
+                <li>Bank／Transfer：银行／商户／子渠道图示（日间）／子渠道图示（夜间）／状态／分页归属／排序／操作</li>
+                <li>GCash／Maya／GrabPay／QRPH：商户／子渠道图示（日间）／子渠道图示（夜间）／状态／分页归属／排序／操作（無银行欄）</li>
+              </ul>
+            </li>
+            <li>・银行下拉：列出「銀行字典表」充值 TAB 全部銀行。</li>
+            <li>・商户下拉，同時符合以下條件的商戶才列出：
+              <ul class="sub" style="padding-left:16px">
+                <li>充值方式與入口相同</li>
+                <li>國家、幣種與入口相同</li>
+                <li>最終生效狀態為正常（停用、維護、預約維護時段內皆不可選）</li>
+              </ul>
+            </li>
+            <li class="alertbar" style="list-style:none;margin:6px 0 6px -18px">待討論：Bank、Transfer 類的银行下拉與商户下拉是否互相過濾、如何過濾（例：商戶是否僅列支援該銀行者），待 RD 實作時再溝通確認。</li>
+            <li>・充值方式留空的商戶不出現在商戶下拉。</li>
+            <li>・同一個商戶、同一家銀行可被綁定的次數不限：同一入口內可重複，不同入口之間也可重複。商戶下拉與銀行下拉都不排除已被綁定者。</li>
+            <li>・商戶欄的標籤（編輯時）：該列原本選定的商戶出現下列情況時，商戶名稱後緊接紅色標籤（樣式同現行「商户已不支援」標籤），正常不標：
+              <ul class="sub" style="padding-left:16px">
+                <li>已删除：商戶已被刪除或讀取不到</li>
+                <li>方式不符：商戶的充值方式、國家或幣種與此入口不符</li>
+                <li>已不支援：商戶已不支援該列選定的銀行（Bank、Transfer 類）</li>
+                <li>已停用：商戶最終生效狀態為停用</li>
+                <li>维护中：商戶最終生效狀態為維護，含預約維護時段內</li>
+              </ul>
+            </li>
+            <li>・標籤只掛該列已選定的商戶；下拉選項不帶標籤，且不列出停用、維護、已刪除、方式不符的商戶。</li>
+            <li>・前四種（已删除、方式不符、已不支援、已停用）該子渠道前台不顯示、不計入子渠道数／商户数；维护中前台標維護不可點、仍計入。五種皆可重新選擇商戶。</li>
+            <li>・「子渠道」標題旁有「?」圖示，滑過顯示五種標籤的說明文案：<br>已删除：商户已被删除或读取不到<br>方式不符：商户的充值方式、国家或币种与此入口不符<br>已不支援：商户已不支援该银行<br>已停用：商户已停用<br>维护中：商户维护中，含预约维护时段内</li>
+            <li>・子渠道图示（日间）（夜间）：每一筆必填，不論子渠道筆數。建議尺寸 232 × 76。</li>
+            <li>・状态：子渠道自身的狀態，正常／维护／停用，預設正常。前台先依商戶最終生效狀態（含預約維護）判斷，再看此狀態，判斷流程在「顯示判斷流程」頁。</li>
+            <li>・分页归属：預設不勾選。排序：數字。</li>
+            <li>・保存時子渠道全部為停用：跳提醒「子渠道皆為停用，保存後此入口前台不顯示，是否繼續？」，確定後保存、「前台是否显示」自動改為否；之後把任一子渠道改回正常或維護，「前台是否显示」不會自動改回是，需人工開啟。</li>
           </ul>
         </li>
-        <li><span class="mk">4</span><b>前台是否显示</b>：新增／編輯單選是／否，預設是；列表同欄顯示。選否時此入口前台不顯示。</li>
-        <li><span class="mk">5</span><b>子渠道数／商户数</b>
+        <li><span class="mk">5</span><b>子渠道前台展示</b>
           <ul class="sub">
-            <li>・顯示格式「子渠道數／商戶數」，兩個數字都只計算子渠道狀態為正常者；商戶數為不重複商戶數。</li>
-            <li>・點擊開啟唯讀彈窗，列出此入口全部子渠道（不分狀態）：银行（僅商戶型態顯示「—」）／商户／子渠道状态／商户状态／分页归属／排序。</li>
-            <li>・商戶被刪除連動刪掉子渠道後，此欄依剩餘子渠道重新計算；全部刪光時顯示 0／0。</li>
+            <li>・新增／編輯單選是／否，必填，預設否；位置在「前台是否显示」與「子渠道」之間。列表同欄顯示，位置在「前台是否显示」之後，欄名同樣帶「?」說明。</li>
+            <li>・欄位名後有「?」圖示，滑過顯示說明文案：<br>当会员使用该充值方式时，若只能看到一个子渠道<br>选「是」：点击入口后，仍需点击该子渠道<br>选「否」：点击入口后，默认使用该子渠道，无需再次点选</li>
+            <li>・選「是」：該會員實際可見的子渠道只剩一個時，仍出子渠道區塊（只有一顆磁貼），會員點選後才進入該商戶的現行後續流程。</li>
+            <li>・選「否」：該會員實際可見的子渠道只剩一個時，不出子渠道區塊，點入口後默認使用該子渠道，直接進入該商戶的現行後續流程。</li>
+            <li>・「實際可見」以該會員為準：子渠道狀態、商戶狀態、支付層級、VIP 等級、GLife 門檻過濾後剩下的數量，不是後台設定的筆數。設定五個、該會員只看得到一個時，就依此選項決定。</li>
+            <li>・該會員可見的子渠道兩個以上時，此設定不生效，一律出子渠道區塊。</li>
+            <li>・前台有分頁時，可見子渠道數以會員所在分頁過濾後計算。</li>
+            <li>・子渠道區塊＝前台點入口後列出子渠道磁貼的區塊，目前標題為 Payment Bank；前台標題若變更，本規則不變。</li>
           </ul>
         </li>
-        <li><span class="mk">6</span><b>未綁定商戶提示</b>：列表上方提示「有 N 个状态正常的商户尚未绑定任何子渠道，请及时配置：{支付名称}、…」。計算範圍為本平台、狀態正常、且未出現在此頁籤任何子渠道的商戶；全部已綁定時不顯示。</li>
+        <li><span class="mk">6</span><b>前台是否显示</b>：新增／編輯單選是／否，預設是；列表同欄顯示。為三態判斷完成後的最後判斷：選否時，不論子渠道與商戶狀態為何，此入口前台一律不顯示。</li>
+        <li><span class="mk">7</span><b>子渠道数／商户数</b>
+          <ul class="sub">
+            <li>・顯示格式「子渠道數／商戶數」，計入條件：子渠道状态為正常、且商戶最終生效狀態為正常或維護；商戶停用、已删除、方式不符、已不支援的子渠道不計入。商戶數為不重複商戶數。</li>
+            <li>・欄名旁有「?」圖示，滑過顯示：<br>只统计使用中的子渠道与商户<br>子渠道状态为正常、且商户为正常或维护者才纳入<br>点击此栏数字可查看子渠道明细与商户状态</li>
+            <li>・點擊開啟唯讀彈窗，列出此入口全部子渠道（不分狀態）：银行（GCash／Maya／GrabPay／QRPH 顯示「—」）／商户／子渠道状态／商户状态／分页归属／排序。商户状态顯示商戶的最終生效狀態（狀態欄與預約維護時段取較嚴格者）：預約維護時段內直接顯示「维护」，不另標預約；商戶出現已删除、方式不符、已不支援時，此欄顯示該標籤字。</li>
+            <li>・兌換碼入口無子渠道，此欄顯示「—」、不可點。</li>
+            <li>・入口底下沒有任何子渠道計入時顯示 0／0，前台該入口自動不顯示。</li>
+          </ul>
+        </li>
+        <li><span class="mk">8</span><b>未綁定商戶提示</b>：列表上方提示「有 N 个状态正常的商户尚未绑定任何子渠道，请及时配置：{支付名称}、…」。計算範圍為本平台、狀態為正常且當下不在預約維護時段內、充值方式已填、且未出現在此頁籤任何子渠道的商戶；全部已綁定時不顯示。</li>
+      </ol></div>
+      <div class="adj" style="border-style:dashed"><h4>既有邏輯（沿用、不調整）</h4><ol>
+        <li><b>分页归属的顯示判斷</b>：入口與子渠道各自勾選；子渠道要顯示於某分頁，前提是入口也勾了該分頁。</li>
+        <li><b>入口未勾任何分页</b>：各分頁皆不顯示；與「前台是否显示」為兩層各自的判斷，互不衝突。</li>
       </ol></div>
     </section>
 
-    <!-- ══════════ 3 前台充值頁 ══════════ -->
-    <section class="pg" id="p3">
+    <!-- ══════════ 4 前台充值頁 ══════════ -->
+    <section class="pg" id="p4">
       <div class="card"><h3><em>①</em>後台設定 ↔ 前台畫面（可互動）</h3>
-        <div class="hintG" style="margin-bottom:6px">左側為「充值展示配置（新）」三筆入口的設定（示意，只列與前台顯示有關的欄位），右側為 OKBet 前台充值頁。改左側任一設定，右側即時變化；點右側入口看 Payment Bank 區塊的出現規則，再點 Payment Bank 的磁貼看進入該商戶後的畫面。右上可切換 PC／H5 版型，兩版邏輯相同。</div>
-        <div class="hintG" style="margin-bottom:10px">示範資料：<b>GCash</b> 入口三個子渠道（GCash1／GCash2／GCash3，各綁一個 GCash 商戶）；<b>Bank</b> 入口三個子渠道（BDO／BPI／Metrobank）；<b>Others</b> 入口兩個子渠道：InstaPay（綁 PayCools-BankTrans，點後進入該商戶現行流程，示意圖不畫、比照現有方式呈現）、ABC Pay（假設的商戶，送出後跳轉至第三方頁面付款，用來示範跳轉類在前台的呈現）。Maya／GrabPay／QRPH 三顆為陪襯，不可點。</div>
+        <div class="hintG" style="margin-bottom:6px">左側為「充值展示配置（新）」的開關與五筆入口的設定（示意，只列與前台顯示有關的欄位），右側為前台充值頁。改左側任一設定，右側即時變化；點右側入口看 Payment Bank 區塊的出現規則，再點 Payment Bank 的磁貼看進入該商戶後的畫面。右上可切換 PC／H5 版型，兩版邏輯相同。</div>
+        <div class="hintG" style="margin-bottom:10px">示範資料：<b>GCash</b> 入口三個子渠道（GCash1／GCash2／GCash3，各綁一個 GCash 商戶）；<b>GCash VIP</b> 為第二筆 GCash 充值方式的入口，只有一個子渠道、綁的商戶與 GCash1 相同，用來示範同一充值方式可建多筆入口、同一商戶可重複綁定，以及「子渠道前台展示」是／否的差別；<b>Bank</b> 入口三個子渠道（BDO／BPI／Metrobank）；<b>Transfer</b> 入口兩個子渠道：InstaPay（綁 PayCools-BankTrans，點後進入該商戶現行流程，示意圖不畫、比照現有方式呈現）、ABC Pay（假設的商戶，送出後跳轉至第三方頁面付款，用來示範跳轉類在前台的呈現）；Transfer 子渠道同樣先選銀行再選商戶，InstaPay／ABC Pay 磁貼名稱僅為示意。<b>Redeem Code</b> 為兌換碼入口，點後下方出兌換區塊。Maya／GrabPay／QRPH 三顆為陪襯，不可點。</div>
         <div class="sync">
           <div id="cfgPanel"></div>
           <div>
@@ -399,61 +536,97 @@ code{background:#f5f7fa;border:1px solid var(--bd2);border-radius:3px;padding:0 
       <div class="adj"><h4>本次調整</h4><ol>
         <li><span class="mk">1</span><b>Payment Methods 入口</b>
           <ul class="sub">
-            <li>・入口來源改為「充值展示配置（新）」頁籤：一筆入口＝一顆磁貼，磁貼圖片為入口图示（日間／夜間依主題），依排序排列。</li>
-            <li>・入口要顯示的條件：前台是否显示為是、且該會員可見的子渠道至少一個。可見的定義在「顯示判斷流程」頁。</li>
-            <li>・該會員可見的子渠道全部為維護時，入口顯示維護遮罩、不可點。</li>
+            <li>・「新版充值展示」开启時，入口來源為「充值展示配置（新）」頁籤：一筆入口＝一顆磁貼，磁貼圖片為入口图示（日間／夜間依主題），依排序排列。关闭時維持現狀，讀「充值展示配置」頁籤。</li>
+            <li>・入口＝該會員可見的子渠道結果的綜合判斷，正常 > 維護 > 不可見：任一子渠道正常 → 入口正常；沒有正常、有維護 → 入口維護遮罩、不可點；全部不可見 → 入口不顯示。與現行入口跟著商戶狀態走是同一條邏輯，只是經過子渠道。前台是否显示為最後判斷，沿用 2269。</li>
+            <li>・該會員沒有任何一個入口可顯示時，視同充值全部不顯示，點充值即被阻斷，提示沿用現行。</li>
+            <li>・兌換碼入口改由新頁籤的充值方式建立，顯示與否只看前台是否显示；點入口後的兌換行為沿用 2399 既有，本單不寫。</li>
             <li>・PC、H5、APP 三端相同。</li>
           </ul>
         </li>
         <li><span class="mk">2</span><b>點入口後</b>
           <ul class="sub">
-            <li>・該會員可見的子渠道為 1 個：不顯示 Payment Bank 區塊，直接進入該子渠道商戶的現行後續流程（金額區等）。</li>
             <li>・該會員可見的子渠道為 2 個以上：顯示 Payment Bank 區塊，一個子渠道一顆磁貼，磁貼圖片為子渠道图示，依子渠道排序排列；維護中的子渠道顯示維護遮罩、不可點。會員點選後才進入該子渠道商戶的現行後續流程。</li>
+            <li>・該會員可見的子渠道為 1 個且為正常，入口「子渠道前台展示」為否：不顯示 Payment Bank 區塊，直接進入該子渠道商戶的現行後續流程（金額區等）。</li>
+                        <li>・該會員可見的子渠道為 1 個且為正常，入口「子渠道前台展示」為是：顯示 Payment Bank 區塊，只有一顆磁貼，會員點選後才進入該商戶的現行後續流程。</li>
             <li>・Payment Bank 區塊標題與樣式沿用現行。</li>
-            <li>・Others 類入口的子渠道點選後同樣進入該商戶現行流程：PayCools-BankTrans 進入其現行畫面（InstaPay Transfer Guide、Transfer Details）；送出後才跳轉第三方頁面的商戶，依現行於送出後跳轉。</li>
+            <li>・Transfer 類入口的子渠道點選後同樣進入該商戶現行流程：PayCools-BankTrans 進入其現行畫面（InstaPay Transfer Guide、Transfer Details）；送出後才跳轉第三方頁面的商戶，依現行於送出後跳轉。</li>
           </ul>
         </li>
         <li><span class="mk">3</span><b>會員送單</b>：送單對象為會員選定子渠道所綁定的商戶；Bank 類子渠道帶該銀行，其餘類不帶銀行。金額上下限、手續費／返利、流水倍數等皆依該商戶現行設定。</li>
       </ol></div>
     </section>
 
-    <!-- ══════════ 4 顯示判斷流程 ══════════ -->
-    <section class="pg" id="p4">
-      <div class="card"><h3><em>①</em>OKBet 前台充值入口與子渠道顯示判斷（四層全列，橘框＝本次）</h3>
+    <!-- ══════════ 5 顯示判斷流程 ══════════ -->
+    <section class="pg" id="p5">
+      <div class="card"><h3><em>①</em>前置：讀取來源與入口類型</h3>
         <div class="flow">
-          <div class="fl"><div class="lv">第一層<small>充值渠道管理（新）</small></div><div class="nd"><b>在线支付（onlinePayment）渠道狀態</b><div class="r"><span>停用 → 充值全部不顯示</span><span>维护 → 全部入口維護</span><span>正常 → 往下</span></div></div></div>
+          <div class="fl"><div class="lv">前置 1<small>充值展示配置（新）開關</small></div><div class="nd nw"><b>新版充值展示</b><div class="r"><span>关闭 → 前台讀「充值展示配置」頁籤，依現行三態判斷呈現，本頁以下不適用</span><span>开启 → 前台讀「充值展示配置（新）」頁籤，依本頁判斷</span></div></div></div>
           <div class="arrow">↓</div>
-          <div class="fl"><div class="lv">第二層<small>充值展示配置（新）入口</small></div><div class="nd nw"><b>前台是否显示</b><div class="r"><span>否 → 入口不顯示</span><span>是 → 往下看子渠道</span></div></div></div>
+          <div class="fl"><div class="lv">前置 2<small>入口的充值方式</small></div><div class="nd nw"><b>充值方式＝兌換碼？</b><div class="r"><span>是 → 只看入口「前台是否显示」：是＝顯示、否＝不顯示；點入口後展示兌換功能，不走下方三態判斷。渠道停用＝充值頁無法進入時，兌換碼入口亦無法展示，此為進不了頁面所致，與兌換碼設置無關</span><span>否 → 往下</span></div></div></div>
           <div class="arrow">↓</div>
-          <div class="fl"><div class="lv">第三層<small>子渠道</small></div><div class="nd nw"><b>子渠道状态</b>（充值展示配置（新）設定）<div class="r"><span>停用 → 此子渠道不可見</span><span>维护 → 此子渠道維護</span><span>正常 → 往下</span></div></div></div>
-          <div class="arrow">↓</div>
-          <div class="fl"><div class="lv">第四層<small>商戶</small></div><div class="nd"><b>子渠道綁定的商戶</b>（在線支付商戶配置（新）設定，依該會員判斷）<div class="r"><span>商戶状态 停用 → 不可見</span><span>商戶状态 维护 → 維護</span><span>支付层级不符 → 不可見</span><span>VIP 等级不符 → 不可見</span><span>GLife 門檻規則不符 → 不可見</span><span>皆符合 → 可見且正常</span></div></div></div>
-          <div class="arrow">↓</div>
-          <div class="fl"><div class="lv">結果<small>該會員</small></div><div class="nd nw"><b>子渠道可見與維護</b>：第三層與第四層取嚴格者。任一停用或不符 → 不可見；任一維護 → 可見但維護；其餘 → 可見且正常。<br>
-            <b>入口顯示</b>：
-            <div class="r"><span>可見子渠道 0 個 → 入口不顯示</span><span>可見子渠道全部維護 → 入口維護遮罩</span><span>可見子渠道至少一個正常 → 入口正常</span></div>
-            <b>點入口後</b>：
-            <div class="r"><span>可見 1 個 → 直接進入該商戶後續流程</span><span>可見 2 個以上 → 顯示 Payment Bank，點選後進入</span></div>
-          </div></div>
+          <div class="fl"><div class="lv">前置 3<small>充值展示配置（新）</small></div><div class="nd nw"><b>是否已在「充值展示配置（新）」建立入口？</b><div class="r"><span>未建立 → 前台不顯示（設置即展示、不設置即不展示）</span><span>已建立 → 走下方三態判斷</span></div></div></div>
         </div>
       </div>
+
+      <div class="card"><h3><em>②</em>三態判斷流程圖（沿用 OKF-2269 的 渠道 → 商戶 → 子渠道 三層，最後判斷「前台是否显示」；橘框＝本次）</h3>
+        <div class="hintG" style="margin-bottom:10px">三態定義沿用全站統一：正常＝展示可用、維護＝展示標維護不可點、停用＝不展示。對入口底下每一個子渠道各跑一次圖一，得到該子渠道結果；再依圖二決定入口的呈現。各層先後查核順序與計算方式由 RD 自行實作，本頁定義結果。</div>
+        <div class="hintG" style="margin:6px 0">圖一：每個子渠道的三態結果</div>
+        <div class="ft"><div class="ft__lane"><div class="ft__q">渠道狀態？<small>充值渠道管理（新）在线支付</small></div><div class="ft__br"><div class="ft__b"><span class="ft__s"><span class="chip off">停用</span></span><div class="ft__r stop">充值全部不顯示（會員點充值即被阻斷）</div></div><div class="ft__b"><span class="ft__s"><span class="chip mt">维护</span></span><div class="ft__r mt">全部入口顯示維護、子渠道不顯示</div></div><div class="ft__b"><span class="ft__s"><span class="chip ok">正常</span></span><div class="ft__n"><div class="ft__lane" style="min-width:0"><div class="ft__q" style="background:#1d4ed8">商戶生效狀態？<small>在線商戶配置（新）充值 TAB<br>狀態欄與預約維護取嚴格者</small></div><div class="ft__br"><div class="ft__b"><span class="ft__s"><span class="chip gy">已删除</span></span><div class="ft__r stop">該子渠道不可見</div></div><div class="ft__b"><span class="ft__s"><span class="chip gy">方式不符</span></span><div class="ft__r stop">該子渠道不可見</div></div><div class="ft__b"><span class="ft__s"><span class="chip gy">已不支援</span></span><div class="ft__r stop">該子渠道不可見</div></div><div class="ft__b"><span class="ft__s"><span class="chip off">停用</span></span><div class="ft__r stop">該子渠道不可見</div></div><div class="ft__b"><span class="ft__s"><span class="chip mt">维护</span></span><div class="ft__n"><div class="ft__lane" style="min-width:0"><div class="ft__q nw" style="background:#3b82f6">子渠道状态？<small>充值展示配置（新）</small></div><div class="ft__br"><div class="ft__b"><span class="ft__s"><span class="chip off">停用</span></span><div class="ft__r stop">該子渠道不可見</div></div><div class="ft__b"><span class="ft__s"><span class="chip mt">维护</span></span><div class="ft__r mt">該子渠道顯示維護、不可點</div></div><div class="ft__b"><span class="ft__s"><span class="chip ok">正常</span></span><div class="ft__r mt">該子渠道顯示維護、不可點（商戶維護）</div></div></div></div></div></div><div class="ft__b"><span class="ft__s"><span class="chip ok">正常</span></span><div class="ft__n"><div class="ft__lane" style="min-width:0"><div class="ft__q nw" style="background:#3b82f6">子渠道状态？<small>充值展示配置（新）</small></div><div class="ft__br"><div class="ft__b"><span class="ft__s"><span class="chip off">停用</span></span><div class="ft__r stop">該子渠道不可見</div></div><div class="ft__b"><span class="ft__s"><span class="chip mt">维护</span></span><div class="ft__r mt">該子渠道顯示維護、不可點</div></div><div class="ft__b"><span class="ft__s"><span class="chip ok">正常</span></span><div class="ft__r ok">該子渠道可見、正常</div></div></div></div></div></div></div></div></div></div></div></div></div>
+        <div class="hintG" style="margin:14px 0 6px">圖二：入口的最終呈現（最後判斷「前台是否显示」，再以可見子渠道結果綜合判斷入口，正常 > 維護 > 不可見；1 個正常時依「子渠道前台展示」）</div>
+        <div class="ft"><div class="ft__lane"><div class="ft__q nw" style="background:#0f172a">前台是否显示？<small>充值展示配置（新）入口<br>三態判斷完成後的最後判斷</small></div><div class="ft__br"><div class="ft__b"><span class="ft__s"><span class="chip off">否</span></span><div class="ft__r stop">不論三態結果，此入口與其子渠道一律不顯示</div></div><div class="ft__b"><span class="ft__s"><span class="chip ok">是</span></span><div class="ft__n"><div class="ft__lane" style="min-width:0"><div class="ft__q nw" style="background:#1d4ed8">該會員可見的子渠道？<small>依上方三態結果</small></div><div class="ft__br"><div class="ft__b"><span class="ft__s">0 個</span><div class="ft__r stop">入口不顯示</div></div><div class="ft__b"><span class="ft__s">1 個、維護</span><div class="ft__r mt">入口顯示維護遮罩、不可點</div></div><div class="ft__b"><span class="ft__s">1 個、正常</span><div class="ft__n"><div class="ft__lane" style="min-width:0"><div class="ft__q nw" style="background:#3b82f6">子渠道前台展示？<small>可見子渠道只剩 1 個時</small></div><div class="ft__br"><div class="ft__b"><span class="ft__s"><span class="chip gy">否</span></span><div class="ft__r ok">點入口後默認使用該子渠道，直接進入該商戶後續流程</div></div><div class="ft__b"><span class="ft__s"><span class="chip ok">是</span></span><div class="ft__r ok">顯示 Payment Bank（一顆），點選後進入</div></div></div></div></div></div><div class="ft__b"><span class="ft__s">2 個以上<br>有正常</span><div class="ft__r ok">入口正常；點入口後顯示 Payment Bank（維護者標維護不可點），點選正常者後進入</div></div><div class="ft__b"><span class="ft__s">2 個以上<br>全部維護</span><div class="ft__r mt">入口顯示維護遮罩、不可點</div></div></div></div></div></div></div></div></div>
+        <div class="hintG" style="margin:12px 0 2px"><b>整體補充（跨所有入口，圖上不畫）</b></div>
+        <div class="nd" style="border:1px solid var(--bd);border-radius:6px;background:#fff;padding:8px 12px;font-size:12.5px;line-height:1.8;color:var(--fg2)">該會員經前置與圖一、圖二判斷後，<b>沒有任何一個入口可顯示</b>（含兌換碼入口）時，視同充值全部不顯示：會員點充值即被阻斷，提示沿用現行全渠道停用的阻斷提示。有任一入口可顯示（正常或維護遮罩）時，充值頁照常開啟，只顯示可顯示的入口。</div>
+      </div>
+
+      <div class="card"><h3><em>③</em>情境窮舉表（與圖一、圖二對應）</h3>
+        <div class="hintG" style="margin-bottom:8px">前提：新版充值展示＝开启、充值方式≠兌換碼。</div>
+        <div class="hintG" style="margin:6px 0">表一：子渠道三態結果（對應圖一）</div>
+        <table class="st2">
+          <tr><th>渠道狀態</th><th>商戶生效狀態<br>（含預約維護）</th><th>子渠道状态</th><th>該子渠道結果</th></tr>
+          <tr><td><span class="chip off">停用</span></td><td>任意</td><td>任意</td><td>不可見（充值全部不顯示）</td></tr>
+          <tr><td><span class="chip mt">维护</span></td><td>任意</td><td>任意</td><td>不可見（入口一律維護、子渠道不顯示）</td></tr>
+          <tr><td><span class="chip ok">正常</span></td><td><span class="chip gy">已删除</span>／<span class="chip gy">方式不符</span>／<span class="chip gy">已不支援</span></td><td>任意</td><td>不可見</td></tr>
+          <tr><td><span class="chip ok">正常</span></td><td><span class="chip off">停用</span></td><td>任意</td><td>不可見</td></tr>
+          <tr><td><span class="chip ok">正常</span></td><td><span class="chip mt">维护</span></td><td><span class="chip off">停用</span></td><td>不可見</td></tr>
+          <tr><td><span class="chip ok">正常</span></td><td><span class="chip mt">维护</span></td><td><span class="chip mt">维护</span>／<span class="chip ok">正常</span></td><td>可見、維護</td></tr>
+                    <tr><td><span class="chip ok">正常</span></td><td><span class="chip ok">正常</span></td><td><span class="chip off">停用</span></td><td>不可見</td></tr>
+          <tr><td><span class="chip ok">正常</span></td><td><span class="chip ok">正常</span></td><td><span class="chip mt">维护</span></td><td>可見、維護</td></tr>
+          <tr><td><span class="chip ok">正常</span></td><td><span class="chip ok">正常</span></td><td><span class="chip ok">正常</span></td><td>可見、正常</td></tr>
+        </table>
+        <div class="hintG" style="margin:12px 0 6px">表二：入口最終呈現（對應圖二）</div>
+        <table class="st2">
+          <tr><th>前台是否显示<br>（最後判斷）</th><th>可見子渠道數</th><th>該子渠道結果</th><th>子渠道前台展示</th><th>入口</th><th>點入口後</th></tr>
+          <tr><td>否</td><td>任意</td><td>任意</td><td>任意</td><td>不顯示</td><td>—</td></tr>
+          <tr><td>是</td><td>0</td><td>—</td><td>任意</td><td>不顯示</td><td>—</td></tr>
+          <tr><td>是</td><td>1</td><td>維護</td><td>任意</td><td>維護遮罩、不可點</td><td>—</td></tr>
+          <tr><td>是</td><td>1</td><td>正常</td><td>否</td><td>正常</td><td>直接進入該商戶後續流程</td></tr>
+          <tr><td>是</td><td>1</td><td>正常</td><td>是</td><td>正常</td><td>Payment Bank 一顆，點選後進入</td></tr>
+          <tr><td>是</td><td>2 以上</td><td>至少一個正常</td><td>任意</td><td>正常</td><td>Payment Bank 多顆（維護者標維護不可點），點選正常者後進入</td></tr>
+          <tr><td>是</td><td>2 以上</td><td>全部維護</td><td>任意</td><td>維護遮罩、不可點</td><td>—</td></tr>
+        </table>
+      </div>
+
       <div class="adj"><h4>本次調整</h4><ol>
-        <li><span class="mk">1</span><b>判斷順序</b>：第一層與第四層維持現行規則；第二層、第三層與「結果」為本次新增。可見數以該會員實際可見的子渠道計算，非後台設定筆數。</li>
+        <li><span class="mk">1</span><b>三態判斷沿用、新增前置、最後判斷與點入口後</b>：渠道與商戶（含 OKF-2269 的預約維護取嚴格者）維持現行規則；子渠道那層改為新頁籤設定的子渠道状态，入口由可見子渠道結果綜合判斷（正常 > 維護 > 不可見）；「前台是否显示」為三態判斷完成後的最後判斷；前置的開關只決定讀取來源、兌換碼入口只看前台是否显示，都不參與三態判斷；「子渠道前台展示」只影響點入口後的呈現。可見數以該會員實際可見的子渠道計算，非後台設定筆數。</li>
       </ol></div>
     </section>
 
-    <!-- ══════════ 5 上線順序 ══════════ -->
-    <section class="pg" id="p5">
+    <!-- ══════════ 6 上線順序 ══════════ -->
+    <section class="pg" id="p6">
       <div class="card"><h3><em>①</em>上線順序</h3>
-        <table class="st2" style="max-width:760px">
-          <tr><th style="width:60px">順序</th><th>動作</th><th>前台讀取來源</th></tr>
-          <tr><td>1</td><td class="l">後端與管理後台先上線：商戶配置「充值方式」欄位帶入、新頁籤「充值展示配置（新）」開放營運設定</td><td class="l">舊頁籤「充值展示配置」</td></tr>
-          <tr><td>2</td><td class="l">營運於新頁籤完成全部入口與子渠道設定</td><td class="l">舊頁籤「充值展示配置」</td></tr>
-          <tr><td>3</td><td class="l">OKBet 前台（PC／H5／APP）切換上線</td><td class="l">新頁籤「充值展示配置（新）」</td></tr>
+        <table class="st2" style="max-width:800px">
+          <tr><th style="width:60px">順序</th><th>動作</th><th>开关</th><th>前台讀取來源</th></tr>
+          <tr><td>1</td><td class="l">後端、管理後台、前端一併上線：商戶配置「充值方式」欄位帶入、新頁籤「充值展示配置（新）」開放營運設定、前端具備依開關讀取兩種來源的能力</td><td>关闭</td><td class="l">「充值展示配置」頁籤（現狀）</td></tr>
+          <tr><td>2</td><td class="l">營運於新頁籤完成全部入口與子渠道設定，並補齊商戶的充值方式</td><td>关闭</td><td class="l">「充值展示配置」頁籤（現狀）</td></tr>
+          <tr><td>3</td><td class="l">營運將「新版充值展示」切為开启</td><td>开启</td><td class="l">「充值展示配置（新）」頁籤</td></tr>
+          <tr><td>—</td><td class="l">之後若需切回，營運將開關切為关闭即可，新頁籤設定保留</td><td>关闭</td><td class="l">「充值展示配置」頁籤</td></tr>
         </table>
       </div>
+      <div class="card"><h3><em>②</em>新舊版範圍</h3>
+        <table class="st2" style="max-width:720px"><tr><th>版本</th><th>前台充值讀取來源</th></tr><tr><td>初版（未更新 APP）</td><td class="l">不讀新頁籤，不受本單影響</td></tr><tr><td>V2</td><td class="l">「新版充值展示」关闭時的讀取來源：「充值展示配置」頁籤</td></tr><tr><td>V3（本單新增）</td><td class="l">「新版充值展示」开启時的讀取來源：「充值展示配置（新）」頁籤</td></tr></table>
+      </div>
       <div class="adj"><h4>本次調整</h4><ol>
-        <li><span class="mk">1</span><b>不做資料轉移</b>：舊頁籤的 OKBet 資料不轉入新頁籤，新頁籤由營運自行建立。前台切換後舊頁籤保留不動，WOWGames 繼續讀取舊頁籤。</li>
+        <li><span class="mk">1</span><b>不做資料轉移、以開關切換</b>：舊頁籤的資料不轉入新頁籤，新頁籤由營運自行建立。前台讀取來源由「新版充值展示」開關決定，可雙向切換；舊頁籤保留不動。</li>
       </ol></div>
     </section>
   </div>
@@ -477,6 +650,10 @@ const showDel=()=>{document.getElementById('delPrompt').style.display='block';};
 document.getElementById('btnDelDemo').onclick=showDel;
 document.getElementById('btnDelDemo2').onclick=showDel;
 document.getElementById('btnDelCancel').onclick=()=>{document.getElementById('delPrompt').style.display='none';};
+const swShow=t=>{document.getElementById('swPromptText').innerHTML=t;document.getElementById('swPrompt').style.display='block';};
+document.getElementById('btnSwOn').onclick=()=>swShow('开启后，前台充值页将套用本页签的设置。<br>是否已配置完成并确认开启？');
+document.getElementById('btnSwOff').onclick=()=>swShow('关闭后，前台充值页将套用「充值展示配置」页签的设置。<br>是否已配置完成并确认关闭？');
+document.getElementById('btnSwCancel').onclick=document.getElementById('btnSwOk').onclick=()=>{document.getElementById('swPrompt').style.display='none';};
 
 /* ── 唯讀彈窗 ── */
 document.getElementById('btnPop').onclick=()=>{document.getElementById('popWrap').style.display='block';};
@@ -485,26 +662,33 @@ document.getElementById('btnPopClose').onclick=document.getElementById('btnPopCl
 /* ── 子渠道表 可互動 ── */
 const BANKS=['BDO','BPI','Metrobank','UnionBank','RCBC'];
 const MERCH={
-  Bank:[{n:'FortunePay支付',b:['BDO','BPI','Metrobank','UnionBank']},{n:'ARX-2143-储值',b:['BDO','RCBC','Metrobank']},{n:'V5PAY充值',b:['BPI']}],
+  兌換碼:[],
+  Bank:[{n:'FortunePay支付',b:['BDO','BPI','Metrobank','UnionBank']},{n:'ARX-2143-储值',b:['BDO','RCBC','Metrobank'],s:'已删除'},{n:'V5PAY充值',b:['BPI'],s:'已停用'},{n:'UnionPay-OKB',b:['UnionBank','BDO'],s:'维护中'},{n:'PayGo-网银',b:['RCBC'],s:'方式不符'},{n:'ABank支付',b:['Metrobank'],s:'已不支援'}],
   GCash:[{n:'V5Pay充值 - GCash'},{n:'PayCools支付-GCash'},{n:'wow_GCASH'}],
   Maya:[{n:'PayCools支付 - PAYMAYA'},{n:'maya-英文'}],
   GrabPay:[{n:'GrabPaytest'}],
   QRPH:[{n:'PayCools支付-QRPH'},{n:'coins-qrph-okbet'}],
-  Others:[{n:'PayCools支付-BankTrans'}]
+  Transfer:[{n:'PayCools支付-BankTrans',b:BANKS}]
 };
-let dRows=[{bank:'BDO',merch:'FortunePay支付',st:'正常',sort:1},{bank:'BPI',merch:'FortunePay支付',st:'正常',sort:2}];
+let dRows=[{bank:'BDO',merch:'FortunePay支付',st:'正常',sort:1},{bank:'BDO',merch:'ARX-2143-储值',st:'正常',sort:2},{bank:'RCBC',merch:'PayGo-网银',st:'正常',sort:3},{bank:'Metrobank',merch:'ABank支付',st:'正常',sort:4},{bank:'BPI',merch:'V5PAY充值',st:'正常',sort:5},{bank:'UnionBank',merch:'UnionPay-OKB',st:'正常',sort:6}];
 const dMethod=document.getElementById('dMethod');
-function merchOptions(m,bank){const list=MERCH[m]||[];return m==='Bank'?(bank?list.filter(x=>x.b.includes(bank)):[]):list;}
+function merchOptions(m,bank){const list=MERCH[m]||[];return (m==='Bank'||m==='Transfer')?list:list;}
 function renderD(){
-  const m=dMethod.value, isBank=m==='Bank', many=dRows.length>=2;
-  let h='<tr>'+(isBank?'<th>银行</th>':'')+'<th>商户</th>'+(many?'<th>子渠道图示（日间）</th><th>子渠道图示（夜间）</th>':'')+'<th>状态</th><th>分页归属</th><th>排序</th><th>操作</th></tr>';
+  const isRedeem=dMethod.value==='兌換碼';
+  document.getElementById('rowSingle').style.display=isRedeem?'none':'';
+  document.getElementById('blkSub').style.display=isRedeem?'none':'';
+  document.getElementById('blkRedeem').style.display=isRedeem?'':'none';
+  const m=dMethod.value, isBank=(m==='Bank'||m==='Transfer'), many=true;
+  let h='<tr>'+(isBank?'<th>银行</th>':'')+'<th>商户</th>'+(many?'<th>子渠道图示（日间）<br><span style="font-weight:400;font-size:11px;color:var(--fg3)">建议尺寸：232 × 76</span></th><th>子渠道图示（夜间）<br><span style="font-weight:400;font-size:11px;color:var(--fg3)">建议尺寸：232 × 76</span></th>':'')+'<th>状态</th><th>分页归属</th><th>排序</th><th>操作</th></tr>';
   dRows.forEach((r,i)=>{
-    const opts=merchOptions(m,r.bank);
-    if(opts.length && !opts.find(o=>o.n===r.merch)) r.merch=opts[0].n;
-    if(!opts.length) r.merch='';
+    const all=merchOptions(m,r.bank);
+    const cur=all.find(o=>o.n===r.merch);
+    const opts=all.filter(o=>!o.s);
+    if(!cur){ r.merch=opts.length?opts[0].n:''; }
+    const curTag=(all.find(o=>o.n===r.merch)||{}).s;
     h+='<tr>';
     if(isBank) h+='<td><select data-i="'+i+'" data-k="bank">'+BANKS.map(b=>'<option'+(b===r.bank?' selected':'')+'>'+b+'</option>').join('')+'</select></td>';
-    h+='<td><select data-i="'+i+'" data-k="merch">'+(opts.length?opts.map(o=>'<option'+(o.n===r.merch?' selected':'')+'>'+o.n+'</option>').join(''):'<option>（無可選商戶）</option>')+'</select></td>';
+    h+='<td><select data-i="'+i+'" data-k="merch">'+(r.merch&&!opts.find(o=>o.n===r.merch)?'<option selected>'+r.merch+'</option>':'')+(opts.length?opts.map(o=>'<option'+(o.n===r.merch?' selected':'')+'>'+o.n+'</option>').join(''):(r.merch?'':'<option>（無可選商戶）</option>'))+'</select>'+(curTag?'<span class="tagd'+(curTag==='维护中'?' mt':'')+'">'+curTag+'</span>':'')+'</td>';
     if(many) h+='<td><span class="up sm">选择文件</span><div class="hintR" style="font-size:10.5px">必填</div></td><td><span class="up sm">选择文件</span><div class="hintR" style="font-size:10.5px">必填</div></td>';
     h+='<td><select data-i="'+i+'" data-k="st">'+['正常','维护','停用'].map(s=>'<option'+(s===r.st?' selected':'')+'>'+s+'</option>').join('')+'</select></td>';
     h+='<td><div class="ckl" style="justify-content:center"><span><i></i>All</span><span><i></i>E-Wallets</span><span><i></i>Banks</span></div></td>';
@@ -512,51 +696,60 @@ function renderD(){
     h+='<td><span class="lnk red" data-del="'+i+'">删除</span></td></tr>';
   });
   document.getElementById('dTable').innerHTML=h;
-  document.getElementById('dHint').textContent=dRows.length===0?'　至少一筆子渠道才能保存。':(many?'　兩筆以上：每筆子渠道圖示必填。':'　一筆：不顯示子渠道圖示欄。');
+  document.getElementById('dHint').textContent=dRows.length===0?'　至少一筆子渠道才能保存。':'　每筆子渠道圖示必填。';
   document.querySelectorAll('#dTable select[data-k]').forEach(s=>s.onchange=e=>{dRows[e.target.dataset.i][e.target.dataset.k]=e.target.value;renderD();});
   document.querySelectorAll('#dTable [data-del]').forEach(x=>x.onclick=()=>{dRows.splice(+x.dataset.del,1);renderD();});
 }
-dMethod.onchange=()=>{const m=dMethod.value;dRows=dRows.map(r=>({bank:m==='Bank'?(r.bank||'BDO'):'',merch:'',st:r.st,sort:r.sort}));renderD();};
-document.getElementById('dAdd').onclick=()=>{dRows.push({bank:dMethod.value==='Bank'?'BDO':'',merch:'',st:'正常',sort:dRows.length+1});renderD();};
+dMethod.onchange=()=>{const m=dMethod.value;const hasBank=(m==='Bank'||m==='Transfer');dRows=dRows.map(r=>({bank:hasBank?(r.bank||'BDO'):'',merch:'',st:r.st,sort:r.sort}));renderD();};
+document.getElementById('dAdd').onclick=()=>{const m=dMethod.value;dRows.push({bank:(m==='Bank'||m==='Transfer')?'BDO':'',merch:'',st:'正常',sort:dRows.length+1});renderD();};
 renderD();
 
 /* ── 後台 ↔ 前台 連動 ── */
+let newOn=true;
 const ENT=[
-  {id:'gcash',name:'GCash',show:true,subs:[
+  {id:'gcash',name:'GCash',show:true,single:'skip',subs:[
     {label:'GCash1／V5Pay充值 - GCash',tile:'GCash1',st:'正常',mst:'正常',ok:true},
     {label:'GCash2／PayCools支付-GCash',tile:'GCash2',st:'正常',mst:'正常',ok:true},
     {label:'GCash3／wow_GCASH',tile:'GCash3',st:'正常',mst:'正常',ok:true}]},
-  {id:'bank',name:'Bank',show:true,subs:[
+  {id:'gcash2',name:'GCash VIP',show:true,single:'show',subs:[
+    {label:'GCash VIP／V5Pay充值 - GCash（與 GCash1 同一商戶）',tile:'GCash VIP',st:'正常',mst:'正常',ok:true}]},
+  {id:'bank',name:'Bank',show:true,single:'skip',subs:[
     {label:'BDO／FortunePay支付',tile:'BDO',st:'正常',mst:'正常',ok:true},
     {label:'BPI／FortunePay支付',tile:'BPI',st:'正常',mst:'正常',ok:true},
     {label:'Metrobank／ARX-2143-储值',tile:'Metrobank',st:'正常',mst:'正常',ok:true}]},
-  {id:'others',name:'Others',show:true,subs:[
+  {id:'redeem',name:'Redeem Code',show:true,redeem:true,subs:[]},
+  {id:'transfer',name:'Transfer',show:true,single:'show',subs:[
     {label:'InstaPay／PayCools支付-BankTrans',tile:'InstaPay',type:'transfer',st:'正常',mst:'正常',ok:true},
     {label:'ABC Pay／（假設）跳轉至第三方頁面付款的商戶',tile:'ABC Pay',type:'redirect',st:'正常',mst:'正常',ok:true}]}
 ];
 const STATIC=[{name:'Maya',cls:'g'},{name:'GrabPay',cls:'g'},{name:'QRPH',cls:'b'}];
-let fView='pc', fSel=null, fSub=null, fStep=null, fPrompt=false;
+let fView='pc', fSel=null, fSub=null, fPrompt=false;
 function evalEnt(e){
-  const subs=e.subs.map((s,i)=>{const vis=s.st!=='停用'&&s.mst!=='停用'&&s.ok;const mt=vis&&(s.st==='维护'||s.mst==='维护');return Object.assign({},s,{vis,mt,idx:i});});
+  if(e.redeem) return {subs:[],vis:[],state:e.show?'ok':'hide'};
+  const subs=e.subs.map((s,i)=>{const vis=s.st!=='停用'&&!['停用','已删除','方式不符','已不支援'].includes(s.mst)&&s.ok;const mt=vis&&(s.st==='维护'||s.mst==='维护');return Object.assign({},s,{vis,mt,idx:i});});
   const vis=subs.filter(s=>s.vis);
   const state=!e.show?'hide':(vis.length===0?'hide':(vis.every(s=>s.mt)?'mt':'ok'));
   return {subs,vis,state};
 }
 function renderCfg(){
-  let h='';
+  let h='<div class="cfgbox" style="background:var(--newbg)"><label class="sw" style="font-size:13px;color:var(--fg)"><span style="font-weight:600">新版充值展示</span> <i class="'+(newOn?'on':'')+'" id="swNew"></i> '+(newOn?'开启':'关闭')+'</label><div class="hintG" style="margin-top:4px">关闭時右側前台改讀「充值展示配置」頁籤，顯示現行畫面。</div></div>';
   ENT.forEach((e,ei)=>{
-    h+='<div class="cfgbox"><div class="ch">入口：'+e.name+'　<label class="sw" title="前台是否显示">前台是否显示 <i class="'+(e.show?'on':'')+'" data-sw="'+ei+'"></i> '+(e.show?'是':'否')+'</label></div>';
+    h+='<div class="cfgbox"><div class="ch">入口：'+e.name+(e.redeem?'（充值方式＝兌換碼）':'')+'　<label class="sw" title="前台是否显示">前台是否显示 <i class="'+(e.show?'on':'')+'" data-sw="'+ei+'"></i> '+(e.show?'是':'否')+'</label></div>';
+    if(e.redeem){h+='<div class="hintG">無子渠道，只看前台是否显示。</div></div>';return;}
+    h+='<div style="font-size:12px;color:var(--fg2);margin:0 0 6px">子渠道前台展示：<select data-single="'+ei+'"><option value="show"'+(e.single==='show'?' selected':'')+'>是</option><option value="skip"'+(e.single==='skip'?' selected':'')+'>否</option></select></div>';
     h+='<table class="lt"><tr><th style="width:36%">子渠道（圖示／商戶）</th><th>子渠道状态</th><th>商户状态</th><th>會員符合層級／VIP／GLife</th></tr>';
     e.subs.forEach((s,si)=>{
       h+='<tr><td style="text-align:left">'+s.label+'</td>';
       h+='<td><select data-e="'+ei+'" data-s="'+si+'" data-k="st">'+['正常','维护','停用'].map(x=>'<option'+(x===s.st?' selected':'')+'>'+x+'</option>').join('')+'</select></td>';
-      h+='<td><select data-e="'+ei+'" data-s="'+si+'" data-k="mst">'+['正常','维护','停用'].map(x=>'<option'+(x===s.mst?' selected':'')+'>'+x+'</option>').join('')+'</select></td>';
+      h+='<td><select data-e="'+ei+'" data-s="'+si+'" data-k="mst">'+['正常','维护','停用','已删除','方式不符','已不支援'].map(x=>'<option'+(x===s.mst?' selected':'')+'>'+x+'</option>').join('')+'</select></td>';
       h+='<td><div class="ckl" style="justify-content:center"><span><i class="'+(s.ok?'on':'')+'" data-e="'+ei+'" data-s="'+si+'" data-k="ok"></i>'+(s.ok?'符合':'不符合')+'</span></div></td></tr>';
     });
     h+='</table></div>';
   });
   document.getElementById('cfgPanel').innerHTML=h;
+  document.getElementById('swNew').onclick=()=>{newOn=!newOn;renderAll();};
   document.querySelectorAll('#cfgPanel [data-sw]').forEach(x=>x.onclick=()=>{ENT[+x.dataset.sw].show=!ENT[+x.dataset.sw].show;renderAll();});
+  document.querySelectorAll('#cfgPanel select[data-single]').forEach(s=>s.onchange=e=>{ENT[+e.target.dataset.single].single=e.target.value;renderAll();});
   document.querySelectorAll('#cfgPanel select[data-k]').forEach(s=>s.onchange=e=>{ENT[+e.target.dataset.e].subs[+e.target.dataset.s][e.target.dataset.k]=e.target.value;renderAll();});
   document.querySelectorAll('#cfgPanel i[data-k=ok]').forEach(x=>x.onclick=()=>{const s=ENT[+x.dataset.e].subs[+x.dataset.s];s.ok=!s.ok;renderAll();});
 }
@@ -571,48 +764,57 @@ function subFlow(s){
   }
   return AMT+'<div class="fempty" style="padding:4px 0">（此區為該商戶現行後續流程，沿用現狀）</div>';
 }
+function wrapFront(body,prompt){
+  if(fView==='pc') return '<div class="fe pc" style="position:relative"><div class="fhead">Wallet<i>×</i></div><div class="fnav"><div class="on">Deposit</div><div>Withdraw</div></div><div>'+body+'</div>'+prompt+'</div>';
+  return '<div class="fe h5" style="position:relative"><div class="fhead"><i>‹</i>Wallet<i>Record</i></div>'+body+prompt+'</div>';
+}
 function renderFront(){
   const notes=[];
+  if(!newOn){
+    const old=['wow-paycools-gcash','maya','GrabPay','FortunePay','Wow-CoinPH-webPay','CoinPH JOHN','QRPh','Bank Transfer','wow-paycools-maya'].map(n=>'<div class="tile" style="color:#9aa3b2"><span class="lg img b"></span>'+n+'</div>').join('');
+    const body='<div class="fbal">₱ 197,128.95<span>Fund Accounts</span></div><div class="fbox"><div class="ft">Payment Methods</div><div class="fgrid">'+old+'</div></div><div class="fempty">（開關关闭：前台讀「充值展示配置」頁籤，顯示現行的商戶入口，流程照現狀）</div>';
+    document.getElementById('frontPanel').innerHTML=wrapFront(body,'');
+    document.getElementById('frontNote').innerHTML='<b>新版充值展示＝关闭</b>：前台讀原頁籤設定，本頁籤的入口與子渠道都不生效。';
+    return;
+  }
   let entries='';
   ENT.forEach(e=>{
     const r=evalEnt(e);
     if(r.state==='hide'){notes.push('<b>'+e.name+'</b> 入口不顯示：'+(!e.show?'前台是否显示為否':'該會員可見子渠道 0 個'));return;}
     const on=fSel===e.id?' on':'';
-    entries+='<div class="tile'+(r.state==='mt'?' mt':'')+on+'" data-ent="'+e.id+'"><span class="lg img '+(e.id==='bank'?'':(e.id==='others'?'g':'b'))+'"></span>'+e.name+(r.state==='mt'?'<span class="veil">✕ 维护中</span>':'')+'</div>';
-    if(r.state==='mt') notes.push('<b>'+e.name+'</b> 入口維護：該會員可見子渠道全部維護');
+    if(r.state==='mt') notes.push('<b>'+e.name+'</b> 入口維護遮罩：可見子渠道沒有正常、只有維護');
+    entries+='<div class="tile'+(r.state==='mt'?' mt':'')+on+'" data-ent="'+e.id+'"><span class="lg img '+(e.id==='bank'?'':(e.id==='transfer'?'g':'b'))+'"'+(e.redeem?' style="background:linear-gradient(135deg,#c48cf0,#8e44ad)"':'')+'></span>'+e.name+(r.state==='mt'?'<span class="veil">✕ 维护中</span>':'')+'</div>';
   });
   STATIC.forEach(s=>{entries+='<div class="tile" style="color:#9aa3b2"><span class="lg img '+s.cls+'"></span>'+s.name+'</div>';});
   let bank='';let after='';
   const se=ENT.find(e=>e.id===fSel);
-  if(se){
+  if(se&&se.redeem){
+    notes.push('<b>Redeem Code</b>：兌換碼入口，不看子渠道與商戶 → 下方展示兌換功能（沿用既有兌換碼活動）');
+    after='<div class="fbox"><div class="ft">Redeem Code</div><div style="height:32px;border:1px solid #e1e5ec;border-radius:7px;display:flex;align-items:center;padding:0 10px;color:#9aa3b2;font-size:12px">請輸入兌換碼</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px"><span class="famt" style="display:block"><span style="width:100%">重置</span></span><div class="fsub" style="margin-top:0">提交</div></div></div><div class="fempty" style="padding:4px 0">（兌換行為與提示彈窗沿用既有兌換碼活動，本單不畫）</div>';
+  }else if(se){
     const r=evalEnt(se);
     if(r.state==='ok'){
-      if(r.vis.length>=2){
+      const showBank=r.vis.length>=2||(r.vis.length===1&&se.single==='show');
+      if(showBank){
         bank='<div class="fbox"><div class="ft">Payment Bank</div><div class="fgrid">'+r.vis.map(s=>tile(s.tile,'b','sub'+(s.mt?' mt':'')+(fSub===s.idx?' on':''),s.mt?'':'data-sub="'+s.idx+'"')).join('')+'</div></div>';
         const cur=r.vis.find(s=>s.idx===fSub);
-        if(cur){notes.push('<b>'+se.name+'</b>：可見子渠道 '+r.vis.length+' 個 → 顯示 Payment Bank；已點選 '+cur.tile+' → 進入該商戶現行後續流程');after=subFlow(cur);}
-        else{notes.push('<b>'+se.name+'</b>：可見子渠道 '+r.vis.length+' 個 → 顯示 Payment Bank，會員點選後才進入該商戶的現行後續流程');after='<div class="fempty">（點選 Payment Bank 磁貼後才出現該商戶的現行後續流程）</div>';}
+        const why=r.vis.length>=2?('可見子渠道 '+r.vis.length+' 個'):'可見子渠道 1 個、子渠道前台展示＝是';
+        if(cur){notes.push('<b>'+se.name+'</b>：'+why+' → 顯示 Payment Bank；已點選 '+cur.tile+' → 進入該商戶現行後續流程');after=subFlow(cur);}
+        else{notes.push('<b>'+se.name+'</b>：'+why+' → 顯示 Payment Bank，會員點選後才進入該商戶的現行後續流程');after='<div class="fempty">（點選 Payment Bank 磁貼後才出現該商戶的現行後續流程）</div>';}
       }else{
         const cur=r.vis[0];
-        notes.push('<b>'+se.name+'</b>：可見子渠道 1 個（'+cur.tile+'）→ 不顯示 Payment Bank，直接進入該商戶的現行後續流程');
+        notes.push('<b>'+se.name+'</b>：可見子渠道 1 個（'+cur.tile+'）、子渠道前台展示＝否 → 不出 Payment Bank，直接進入該商戶的現行後續流程');
         after=subFlow(cur);
       }
     }
   }else{after='<div class="fempty">（點上方入口）</div>';}
   const prompt=fPrompt?'<div style="position:absolute;inset:0;background:rgba(30,40,60,.45);display:flex;align-items:center;justify-content:center;border-radius:12px"><div style="background:#fff;border-radius:12px;padding:16px 18px;width:260px;text-align:center"><div style="font-weight:700;font-size:14px;color:#1f2d3d;margin-bottom:8px">Payment Information</div><div style="font-size:12px;color:#4a5568;line-height:1.8">此時已跳轉至該支付的頁面<br><span style="color:#9aa3b2">（示意：實際為開啟第三方付款頁）</span></div><div class="fsub" data-prompt-close="1" style="margin-top:12px">OK</div></div></div>':'';
   const body='<div class="fbal">₱ 197,128.95<span>Fund Accounts</span></div><div class="fbox"><div class="ft">Payment Methods</div><div class="fgrid">'+entries+'</div></div>'+bank+after;
-  let h='';
-  if(fView==='pc'){
-    h='<div class="fe pc" style="position:relative"><div class="fhead">Wallet<i>×</i></div><div class="fnav"><div class="on">Deposit</div><div>Withdraw</div></div><div>'+body+'</div>'+prompt+'</div>';
-  }else{
-    h='<div class="fe h5" style="position:relative"><div class="fhead"><i>‹</i>Wallet<i>Record</i></div>'+body+prompt+'</div>';
-  }
-  document.getElementById('frontPanel').innerHTML=h;
-  document.getElementById('frontNote').innerHTML=notes.length?notes.join('<br>'):'目前三個入口皆正常顯示。點入口看 Payment Bank 規則。';
-  document.querySelectorAll('#frontPanel [data-ent]').forEach(t=>t.onclick=()=>{if(t.classList.contains('mt'))return;fSel=t.dataset.ent;fSub=null;fStep=null;renderFront();});
-  document.querySelectorAll('#frontPanel [data-sub]').forEach(t=>t.onclick=()=>{fSub=+t.dataset.sub;fStep=null;renderFront();});
-  document.querySelectorAll('#frontPanel [data-step]').forEach(t=>t.onclick=()=>{fStep=t.dataset.step;renderFront();});
-  document.querySelectorAll('#frontPanel [data-submit]').forEach(t=>t.onclick=()=>{const e=ENT.find(x=>x.id===fSel);if(!e)return;const r=evalEnt(e);const cur=r.vis.length>=2?r.vis.find(s=>s.idx===fSub):r.vis[0];if(cur&&cur.type==='redirect'){fPrompt=true;renderFront();}});
+  document.getElementById('frontPanel').innerHTML=wrapFront(body,prompt);
+  document.getElementById('frontNote').innerHTML=notes.length?notes.join('<br>'):'目前五個入口皆正常顯示。點入口看 Payment Bank 規則；GCash VIP 與 GCash 的差別在「子渠道前台展示」的設定；Redeem Code 為兌換碼入口。';
+  document.querySelectorAll('#frontPanel [data-ent]').forEach(t=>t.onclick=()=>{if(t.classList.contains('mt'))return;fSel=t.dataset.ent;fSub=null;renderFront();});
+  document.querySelectorAll('#frontPanel [data-sub]').forEach(t=>t.onclick=()=>{fSub=+t.dataset.sub;renderFront();});
+  document.querySelectorAll('#frontPanel [data-submit]').forEach(t=>t.onclick=()=>{const e=ENT.find(x=>x.id===fSel);if(!e)return;const r=evalEnt(e);const showBank=r.vis.length>=2||(r.vis.length===1&&e.single==='show');const cur=showBank?r.vis.find(s=>s.idx===fSub):r.vis[0];if(cur&&cur.type==='redirect'){fPrompt=true;renderFront();}});
   document.querySelectorAll('#frontPanel [data-prompt-close]').forEach(t=>t.onclick=()=>{fPrompt=false;renderFront();});
 }
 function renderAll(){renderCfg();if(fSel){const e=ENT.find(x=>x.id===fSel);if(!e||evalEnt(e).state!=='ok'){fSel=null;fSub=null;}else{const r=evalEnt(e);if(fSub!==null&&!r.vis.find(s=>s.idx===fSub&&!s.mt))fSub=null;}}fPrompt=false;renderFront();}
