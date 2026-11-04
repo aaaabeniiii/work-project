@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>OKBet 充值改版 — 規格書_34（OKF-2569）</title>
+<title>OKBet 充值改版 — 規格書_37（OKF-2569）</title>
 <style>
 :root{
   --bd:#dcdfe6;--bd2:#ebeef5;--fg:#303133;--fg2:#606266;--fg3:#909399;
@@ -211,14 +211,14 @@ code{background:#f5f7fa;border:1px solid var(--bd2);border-radius:3px;padding:0 
   </nav>
 
   <div class="main">
-    <div class="crumb"><span class="doc">OKF-2569｜okbet_充值改版｜規格書_34｜2026-10-30</span><b id="crumbName">需求目的與範圍</b></div>
+    <div class="crumb"><span class="doc">OKF-2569｜okbet_充值改版｜規格書_37｜2026-10-30</span><b id="crumbName">需求目的與範圍</b></div>
     <div class="lgd">紅圈數字 <span class="mk">1</span>＝本次調整項，對照各頁下方「本次調整」逐條說明。<span class="tagn">本次新增</span>＝本次新增的欄位、頁籤或畫面。橘色虛線框＝可互動示意，可直接點選操作看畫面變化。畫面未標記處維持現狀，不在本單範圍。</div>
 
     <!-- ══════════ 0 需求目的與範圍 ══════════ -->
     <section class="pg on" id="p0">
       <div class="card"><h3><em>①</em>需求目的</h3>
         <ol style="margin:0;padding-left:20px;line-height:2;color:var(--fg2)">
-          <li>前台充值入口改為依「充值方式」展示（GCash／Maya／GrabPay／Bank／QRPH／Transfer／兌換碼）。
+          <li>前台充值入口改為依「充值方式」展示（GCash／Maya／GrabPay／Bank／QRPH／Transfer／Counter／兌換碼）。
             <ul style="list-style:none;padding-left:18px;margin:0">
               <li>・會員點入口後選子渠道或直接進入下一步，不再以商戶作為入口。</li>
             </ul>
@@ -250,6 +250,7 @@ code{background:#f5f7fa;border:1px solid var(--bd2);border-radius:3px;padding:0 
           <tr><td>QRPH</td><td>選商戶</td></tr>
           <tr><td>Bank</td><td>先選銀行，再選商戶</td><td class="l">銀行來源為「銀行字典表」充值 TAB。</td></tr>
           <tr><td>Transfer</td><td>先選銀行，再選商戶</td><td class="l">銀行來源為「銀行字典表」充值 TAB。會員自行轉帳到指定帳戶、或送單後跳轉至第三方 APP／頁面完成付款的方式。目前確定歸入的商戶：PayCools-BankTrans。</td></tr>
+          <tr><td>Counter</td><td>選商戶</td><td class="l">子渠道只選商戶，不選銀行。此類商戶不屬於 GCash／Maya／GrabPay／Bank／QRPH，且本身沒有子渠道（銀行）可選；會員跳轉至該商戶的支付頁面（櫃台）完成付款。</td></tr>
           <tr><td>兌換碼</td><td>無子渠道</td><td class="l">只在新頁籤的入口可選，商戶配置不可選。入口不綁商戶與銀行，會員點入口後展示兌換功能。</td></tr>
         </table>
         <div class="hintG" style="margin-top:8px">充值方式清單不做後台頁面，選項由後端提供，後續若要新增由後端處理。商戶配置的充值方式下拉不含兌換碼，新頁籤入口的充值方式下拉含兌換碼。既有商戶各自歸屬哪一種充值方式，由 RD 依下方分類原則判斷後帶入；判斷不了的留空。</div>
@@ -263,7 +264,8 @@ code{background:#f5f7fa;border:1px solid var(--bd2);border-radius:3px;padding:0 
           <tr><td>GrabPay</td><td class="l">會員以 GrabPay 錢包付款的商戶</td><td class="l">GrabPaytest</td></tr>
           <tr><td>Bank</td><td class="l">會員先選銀行、再以該銀行網銀付款的商戶；此類商戶會回傳銀行清單</td><td class="l">FortunePay支付、ARX-2143-储值</td></tr>
           <tr><td>QRPH</td><td class="l">會員以 QRPH 掃碼付款、不限定特定錢包或銀行的商戶</td><td class="l">PayCools支付-QRPH、coins-qrph-okbet</td></tr>
-          <tr><td>Transfer</td><td class="l">不屬於上列五種的商戶，例如：會員自行轉帳到指定帳戶、送單後跳轉至第三方 APP 或頁面完成付款</td><td class="l">PayCools-BankTrans（確定）</td></tr>
+          <tr><td>Transfer</td><td class="l">不屬於上列五種、且有子渠道可選的商戶</td><td class="l">PayCools-BankTrans（確定）</td></tr>
+          <tr><td>Counter</td><td class="l">不屬於上列五種、且沒有子渠道可選的商戶</td><td class="l">FortunePay-FPAY（確定）</td></tr>
         </table>
       </div>
       <div class="card"><h3><em>④</em>範圍</h3>
@@ -343,7 +345,7 @@ code{background:#f5f7fa;border:1px solid var(--bd2);border-radius:3px;padding:0 
         <li><span class="mk">1</span><b>新增「充值方式」</b>
           <ul class="sub">
             <li>・新增／編輯彈窗：非必填下拉，可留空，位置在「支付名称」與「国家」之間。新增與編輯皆可修改。</li>
-            <li>・選項由後端提供，目前為 GCash／Maya／GrabPay／Bank／QRPH／Transfer；後續若要新增由後端處理，後台不做維護頁面。</li>
+            <li>・選項由後端提供，目前為 GCash／Maya／GrabPay／Bank／QRPH／Transfer／Counter；後續若要新增由後端處理，後台不做維護頁面。</li>
             <li>・列表：於「支付名称」與「渠道类型」之間新增「充值方式」欄，留空者該格空白。</li>
             <li>・既有商戶：上線時由 RD 依分類原則判斷各商戶歸屬的充值方式後帶入，判斷不了的留空。</li>
             <li>・選項不含「兌換碼」；兌換碼只是新頁籤的入口類型，不是商戶。</li>
@@ -395,7 +397,7 @@ code{background:#f5f7fa;border:1px solid var(--bd2);border-radius:3px;padding:0 
       <div class="card"><h3><em>②</em>新增／編輯（獨立分頁）</h3>
         <div class="bar"><span class="btn">返回列表</span></div>
         <div class="dlg" style="max-width:none"><div class="db">
-          <div class="fr"><label><span class="req">*</span>充值方式:<span class="mk">2</span></label><div class="fc"><select class="sel" id="dMethod" style="min-width:200px"><option>Bank</option><option>GCash</option><option>Maya</option><option>GrabPay</option><option>QRPH</option><option>Transfer</option><option>兌換碼</option></select><span class="hintG" style="flex-basis:auto">新增時選擇，編輯時不可修改。選「兌換碼」時，下方「子渠道前台展示」與「子渠道」區塊不顯示。</span></div></div>
+          <div class="fr"><label><span class="req">*</span>充值方式:<span class="mk">2</span></label><div class="fc"><select class="sel" id="dMethod" style="min-width:200px"><option>Bank</option><option>GCash</option><option>Maya</option><option>GrabPay</option><option>QRPH</option><option>Transfer</option><option>Counter</option><option>兌換碼</option></select><span class="hintG" style="flex-basis:auto">新增時選擇，編輯時不可修改。選「兌換碼」時，下方「子渠道前台展示」與「子渠道」區塊不顯示。</span></div></div>
           <div class="fr"><label>显示名(英文):</label><div class="fc"><div class="in">Bank</div></div></div>
           <div class="fr"><label>显示名(中文):</label><div class="fc"><div class="in">银行</div></div></div>
           <div class="fr"><label>显示名(越南文):</label><div class="fc"><div class="in"></div></div></div>
@@ -430,7 +432,7 @@ code{background:#f5f7fa;border:1px solid var(--bd2);border-radius:3px;padding:0 
         </li>
         <li><span class="mk">2</span><b>入口欄位</b>
           <ul class="sub">
-            <li>・充值方式：必填，單選。選項由後端提供，目前為 GCash／Maya／GrabPay／Bank／QRPH／Transfer／兌換碼，後續若要新增由後端處理。新增時選擇，編輯時不可修改。</li>
+            <li>・充值方式：必填，單選。選項由後端提供，目前為 GCash／Maya／GrabPay／Bank／QRPH／Transfer／Counter／兌換碼，後續若要新增由後端處理。新增時選擇，編輯時不可修改。</li>
             <li>・選「兌換碼」時：显示名、国家、币种、入口图示、分页归属、排序、前台是否显示照常填寫；「子渠道前台展示」與「子渠道」區塊不顯示、不需填；列表的子渠道前台展示、子渠道数／商户数顯示「—」。可建多筆。</li>
             <li>・同一個充值方式可建立的入口筆數不限：例如同時存在兩筆 GCash、三筆 Bank、四筆 Maya 都可以，每一筆各自設定顯示名、圖示、排序與子渠道，前台一筆一顆磁貼。</li>
             <li>・显示名（英文／中文／越南文／菲律宾语／宿雾语）、国家、币种、入口图示（日间）、入口图示（夜间）、分页归属、排序：同「充值展示配置」頁籤的對應欄位規則；兩張入口图示必填；分页归属預設不勾選。</li>
@@ -443,7 +445,7 @@ code{background:#f5f7fa;border:1px solid var(--bd2);border-radius:3px;padding:0 
             <li>・欄位依充值方式分兩種：
               <ul class="sub" style="padding-left:16px">
                 <li>Bank／Transfer：银行／商户／子渠道图示（日间）／子渠道图示（夜间）／状态／分页归属／排序／操作</li>
-                <li>GCash／Maya／GrabPay／QRPH：商户／子渠道图示（日间）／子渠道图示（夜间）／状态／分页归属／排序／操作（無银行欄）</li>
+                <li>GCash／Maya／GrabPay／QRPH／Counter：商户／子渠道图示（日间）／子渠道图示（夜间）／状态／分页归属／排序／操作（無银行欄）</li>
               </ul>
             </li>
             <li>・银行下拉：列出「銀行字典表」充值 TAB 全部銀行。</li>
@@ -492,7 +494,7 @@ code{background:#f5f7fa;border:1px solid var(--bd2);border-radius:3px;padding:0 
           <ul class="sub">
             <li>・顯示格式「子渠道數／商戶數」，計入條件：子渠道状态為正常、且商戶最終生效狀態為正常或維護；商戶停用、已删除、方式不符、已不支援的子渠道不計入。商戶數為不重複商戶數。</li>
             <li>・欄名旁有「?」圖示，滑過顯示：<br>只统计使用中的子渠道与商户<br>子渠道状态为正常、且商户为正常或维护者才纳入<br>点击此栏数字可查看子渠道明细与商户状态</li>
-            <li>・點擊開啟唯讀彈窗，列出此入口全部子渠道（不分狀態）：银行（GCash／Maya／GrabPay／QRPH 顯示「—」）／商户／子渠道状态／商户状态／分页归属／排序。商户状态顯示商戶的最終生效狀態（狀態欄與預約維護時段取較嚴格者）：預約維護時段內直接顯示「维护」，不另標預約；商戶出現已删除、方式不符、已不支援時，此欄顯示該標籤字。</li>
+            <li>・點擊開啟唯讀彈窗，列出此入口全部子渠道（不分狀態）：银行（GCash／Maya／GrabPay／QRPH／Counter 顯示「—」）／商户／子渠道状态／商户状态／分页归属／排序。商户状态顯示商戶的最終生效狀態（狀態欄與預約維護時段取較嚴格者）：預約維護時段內直接顯示「维护」，不另標預約；商戶出現已删除、方式不符、已不支援時，此欄顯示該標籤字。</li>
             <li>・兌換碼入口無子渠道，此欄顯示「—」、不可點。</li>
             <li>・入口底下沒有任何子渠道計入時顯示 0／0，前台該入口自動不顯示。</li>
           </ul>
@@ -649,7 +651,8 @@ const MERCH={
   Maya:[{n:'PayCools支付 - PAYMAYA'},{n:'maya-英文'}],
   GrabPay:[{n:'GrabPaytest'}],
   QRPH:[{n:'PayCools支付-QRPH'},{n:'coins-qrph-okbet'}],
-  Transfer:[{n:'PayCools支付-BankTrans',b:BANKS}]
+  Transfer:[{n:'PayCools支付-BankTrans',b:BANKS}],
+  Counter:[{n:'FortunePay-FPAY'}]
 };
 let dRows=[{bank:'BDO',merch:'FortunePay支付',st:'正常',sort:1},{bank:'BDO',merch:'ARX-2143-储值',st:'正常',sort:2},{bank:'RCBC',merch:'PayGo-网银',st:'正常',sort:3},{bank:'Metrobank',merch:'ABank支付',st:'正常',sort:4},{bank:'BPI',merch:'V5PAY充值',st:'正常',sort:5},{bank:'UnionBank',merch:'UnionPay-OKB',st:'正常',sort:6}];
 const dMethod=document.getElementById('dMethod');
