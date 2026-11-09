@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>OKBet 充值改版 — 規格書_57（OKF-2569）</title>
+<title>OKBet 充值改版 — 規格書_58（OKF-2569）</title>
 <style>
 :root{
   --bd:#dcdfe6;--bd2:#ebeef5;--fg:#303133;--fg2:#606266;--fg3:#909399;
@@ -212,12 +212,12 @@ code{background:#f5f7fa;border:1px solid var(--bd2);border-radius:3px;padding:0 
   </nav>
 
   <div class="main">
-    <div class="crumb"><span class="doc">OKF-2569｜okbet_充值改版｜規格書_57｜2026-11-10</span><b id="crumbName">需求目的與範圍</b></div>
+    <div class="crumb"><span class="doc">OKF-2569｜okbet_充值改版｜規格書_58｜2026-11-10</span><b id="crumbName">需求目的與範圍</b></div>
     <div class="lgd">紅圈數字 <span class="mk">1</span>＝本次調整項，對照各頁下方「本次調整」逐條說明。<span class="tagn">本次新增</span>＝本次新增的欄位、頁籤或畫面。橘色虛線框＝可互動示意，可直接點選操作看畫面變化。畫面未標記處維持現狀，不在本單範圍。</div>
 
     <!-- ══════════ 0 需求目的與範圍 ══════════ -->
     <section class="pg on" id="p0">
-      <div style="background:#ffc9de;color:#1a1a1a;border-radius:6px;padding:8px 12px;margin-bottom:10px;font-size:13px">核對用：粉紅底＝_39 → _57 的累計變更處。正式發佈請用不含標示的版本。</div>
+      <div style="background:#ffc9de;color:#1a1a1a;border-radius:6px;padding:8px 12px;margin-bottom:10px;font-size:13px">核對用：粉紅底＝_39 → _57 的累計變更處；橘底＝_57 → _58 變更處（對照表移除「字典銀行被刪除」列、已不支援定義收斂）。正式發佈請用不含標示的版本。</div>
       <div class="card"><h3><em>①</em>需求目的</h3>
         <ol style="margin:0;padding-left:20px;line-height:2;color:var(--fg2)">
           <li>前台充值入口改為依「充值方式」展示（GCash／Maya／GrabPay／Bank／QRPH／Transfer／Counter／兌換碼）。
@@ -482,7 +482,7 @@ code{background:#f5f7fa;border:1px solid var(--bd2);border-radius:3px;padding:0 
           <div class="fr"><label>排序:</label><div class="fc"><div class="in" style="max-width:120px">3</div></div></div>
           <div class="fr"><label><span class="req">*</span>前台是否显示:<span class="mk">5</span></label><div class="fc"><div class="rd"><span class="sel2"><b class="on"></b>是</span><span><b></b>否</span></div></div></div>
           <div class="fr" id="rowSingle" style="background:var(--newbg);border-radius:6px"><label><span class="req">*</span>子渠道前台展示<span class="q">?<span class="tip">当会员使用该充值方式时，若只能看到一个子渠道<br>选「是」：点击入口后，仍需点击该子渠道<br>选「否」：点击入口后，默认使用该子渠道，无需再次点选</span></span>:<span class="mk">4</span></label><div class="fc"><div class="rd"><span><b></b>是</span><span class="sel2"><b class="on"></b>否</span></div><span class="tagn">本次新增</span><span class="hintG" style="flex-basis:auto">滑到「?」顯示說明。只在該會員實際可見的子渠道剩一個時生效；可見兩個以上時一律顯示子渠道區塊讓會員點選。</span></div></div>
-          <div id="blkSub"><div class="sep">子渠道<span class="q lft">?<span class="tip">已删除：商户已被删除或读取不到<br>方式不符：商户的充值方式、国家或币种与此入口不符<br>已不支援：<mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">商户已不支援该银行，或商户支援的银行已不在该银行分类内</mark><br>已停用：商户已停用<br>维护中：商户维护中，含预约维护时段内</span></span><span class="mk">3</span></div>
+          <div id="blkSub"><div class="sep">子渠道<span class="q lft">?<span class="tip">已删除：商户已被删除或读取不到<br>方式不符：商户的充值方式、国家或币种与此入口不符<br>已不支援：<mark style="background:#ffd9a8;color:#1a1a1a;padding:0 2px;border-radius:2px">商户支援的银行已不在该列「银行分类」所选的分类内，或该分类已停用</mark><br>已停用：商户已停用<br>维护中：商户维护中，含预约维护时段内</span></span><span class="mk">3</span></div>
           <div class="demo"><div class="dt">可互動：切換上方「充值方式」看<mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">銀行分類欄</mark>出現／消失，選「兌換碼」整個子渠道區塊隱藏；「＋ 新增一列」加列、「删除」減列。商戶欄的標籤示意：第 2 到 6 列依序示範已删除、方式不符、已不支援、已停用、维护中五種標籤，名稱後緊接紅色標籤、仍顯示於該列；展開下拉時已刪除、已停用、維護中（含預約維護）、方式不符的商戶都不在選項內。</div>
             <table class="lt" id="dTable"></table>
             <div style="margin-top:8px"><span class="btn sm pri" id="dAdd">＋ 新增一列</span><span class="hintG" id="dHint" style="display:inline"></span></div>
@@ -537,7 +537,7 @@ code{background:#f5f7fa;border:1px solid var(--bd2);border-radius:3px;padding:0 
               <ul class="sub" style="padding-left:16px">
                 <li>已删除：商戶已被刪除或讀取不到</li>
                 <li>方式不符：商戶的充值方式、國家或幣種與此入口不符</li>
-                <li>已不支援：<mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">商戶已不支援該銀行，或商戶支援的銀行已不在該列「银行分类」欄選定的分類內。只有充值方式為 Bank、Transfer 的入口會出現此標籤。</mark></li>
+                <li>已不支援：<mark style="background:#ffd9a8;color:#1a1a1a;padding:0 2px;border-radius:2px">該列商戶支援的銀行已不在「银行分类」欄選定的分類內，或該分類已停用。只有充值方式為 Bank、Transfer 的入口會出現此標籤。</mark></li>
                 <li>已停用：商戶最終生效狀態為停用</li>
                 <li>维护中：商戶最終生效狀態為維護，含預約維護時段內</li>
               </ul>
@@ -545,7 +545,7 @@ code{background:#f5f7fa;border:1px solid var(--bd2);border-radius:3px;padding:0 
             <li>・標籤只掛該列已選定的商戶；下拉選項不帶標籤，且不列出停用、維護、已刪除、方式不符的商戶。</li>
             <li>・前四種（已删除、方式不符、已不支援、已停用）該子渠道前台不顯示、不計入子渠道数／商户数；维护中前台標維護不可點、仍計入。五種皆可重新選擇商戶。</li>
             <li style="background:#ffc9de;color:#1a1a1a">・一列同時符合多種時只顯示一個，順序：已删除 → 方式不符 → 已不支援 → 已停用 → 维护中。</li>
-            <li>・「子渠道」標題旁有「?」圖示，滑過顯示五種標籤的說明文案：<br>已删除：商户已被删除或读取不到<br>方式不符：商户的充值方式、国家或币种与此入口不符<br>已不支援：<mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">商户已不支援该银行，或商户支援的银行已不在该银行分类内</mark><br>已停用：商户已停用<br>维护中：商户维护中，含预约维护时段内</li>
+            <li>・「子渠道」標題旁有「?」圖示，滑過顯示五種標籤的說明文案：<br>已删除：商户已被删除或读取不到<br>方式不符：商户的充值方式、国家或币种与此入口不符<br>已不支援：<mark style="background:#ffd9a8;color:#1a1a1a;padding:0 2px;border-radius:2px">商户支援的银行已不在该列「银行分类」所选的分类内，或该分类已停用</mark><br>已停用：商户已停用<br>维护中：商户维护中，含预约维护时段内</li>
             <li>・子渠道图示（日间）（夜间）：每一筆必填，不論子渠道筆數。建議尺寸 232 × 76。</li>
             <li>・状态：子渠道自身的狀態，正常／维护／停用，預設正常。前台先依商戶最終生效狀態（含預約維護）判斷，再看此狀態，判斷流程在「顯示判斷流程」頁。</li>
             <li>・分页归属：預設不勾選。排序：數字。</li>
@@ -577,7 +577,7 @@ code{background:#f5f7fa;border:1px solid var(--bd2);border-radius:3px;padding:0 
         <li><span class="mk">7</span><b>未綁定商戶提示</b>：列表上方提示「有 N 个状态正常的商户尚未绑定任何子渠道，请及时配置：{支付名称}、…」。計算範圍為本平台、狀態為正常且當下不在預約維護時段內、充值方式已填、且未出現在此頁籤任何子渠道的商戶；全部已綁定時不顯示。</li>
         <li style="background:#ffc9de;color:#1a1a1a"><span class="mk">8</span><b>「充值展示配置」頁籤（V2）子渠道新增删除</b>：子渠道列標示「商户已不支援」者，<mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">於排序欄右側（表格外）新增紅色垃圾桶圖示</mark><mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">，點擊跳「确认删除吗？」，確定後刪除該子渠道</mark>；正常者<mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">不顯示圖示</mark>。</li>
       </ol></div>
-      <div class="adj" style="background:#ffc9de;color:#1a1a1a"><h4>子渠道狀態對照表</h4><table class="lt"><tr><th class="l">情況</th><th class="l">子渠道列標示</th><th>前台</th><th>計入子渠道数／商户数</th></tr><tr><td class="l">子渠道狀態正常、商戶正常、銀行分類正常</td><td class="l">不標</td><td>顯示、可點</td><td>計入</td></tr><tr><td class="l">子渠道狀態設為維護</td><td class="l">不標</td><td>標維護、不可點</td><td>計入</td></tr><tr><td class="l">子渠道狀態設為停用</td><td class="l">不標</td><td>不顯示</td><td>不計</td></tr><tr><td class="l">商戶維護（含預約維護時段內）</td><td class="l">商戶後標「维护中」</td><td>標維護、不可點</td><td>計入</td></tr><tr><td class="l">商戶停用</td><td class="l">商戶後標「已停用」</td><td>不顯示</td><td>不計</td></tr><tr><td class="l">商戶的充值方式被改成與入口不同或被清空（例：入口是 GCash，商戶改成 Maya），或商戶的國家、幣種改成與入口不同</td><td class="l">商戶後標「方式不符」</td><td>不顯示</td><td>不計</td></tr><tr><td class="l">商戶被刪除或讀取不到</td><td class="l">商戶後標「已删除」</td><td>不顯示</td><td>不計</td></tr><tr><td class="l" colspan="4"><b>以下三種只會發生在充值方式為 Bank、Transfer 的入口（有银行分类欄）</b></td></tr><tr><td class="l">該列商戶在銀行字典表「充值」TAB 對應的那筆銀行被刪除</td><td class="l">商戶後標「已不支援」</td><td>不顯示</td><td>不計</td></tr><tr><td class="l">該列商戶在「充值」TAB 對應的那筆銀行被改到其他分類、或分類被清空</td><td class="l">商戶後標「已不支援」</td><td>不顯示</td><td>不計</td></tr><tr><td class="l">該列選定的分類在「充值银行分类」TAB 被<mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">停用</mark></td><td class="l">商戶後標「已不支援」；银行分类欄顯示「原分類名稱<mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">（已停用）</mark>」</td><td>不顯示</td><td>不計</td></tr><tr><td class="l">分類在「充值银行分类」TAB 改名</td><td class="l">不標，银行分类欄顯示新名稱</td><td>不受影響</td><td>不受影響</td></tr></table><div class="hintG" style="margin-top:8px">一列同時符合多種時只顯示一個標籤，順序：已删除 → 方式不符 → 已不支援 → 已停用 → 维护中。</div></div>
+      <div class="adj" style="background:#ffc9de;color:#1a1a1a"><h4>子渠道狀態對照表</h4><table class="lt"><tr><th class="l">情況</th><th class="l">子渠道列標示</th><th>前台</th><th>計入子渠道数／商户数</th></tr><tr><td class="l">子渠道狀態正常、商戶正常、銀行分類正常</td><td class="l">不標</td><td>顯示、可點</td><td>計入</td></tr><tr><td class="l">子渠道狀態設為維護</td><td class="l">不標</td><td>標維護、不可點</td><td>計入</td></tr><tr><td class="l">子渠道狀態設為停用</td><td class="l">不標</td><td>不顯示</td><td>不計</td></tr><tr><td class="l">商戶維護（含預約維護時段內）</td><td class="l">商戶後標「维护中」</td><td>標維護、不可點</td><td>計入</td></tr><tr><td class="l">商戶停用</td><td class="l">商戶後標「已停用」</td><td>不顯示</td><td>不計</td></tr><tr><td class="l">商戶的充值方式被改成與入口不同或被清空（例：入口是 GCash，商戶改成 Maya），或商戶的國家、幣種改成與入口不同</td><td class="l">商戶後標「方式不符」</td><td>不顯示</td><td>不計</td></tr><tr><td class="l">商戶被刪除或讀取不到</td><td class="l">商戶後標「已删除」</td><td>不顯示</td><td>不計</td></tr><tr><td class="l" colspan="4"><b>以下<mark style="background:#ffd9a8;color:#1a1a1a;padding:0 2px;border-radius:2px">兩種</mark>只會發生在充值方式為 Bank、Transfer 的入口（有银行分类欄）</b></td></tr><tr><td class="l">該列商戶在「充值」TAB 對應的那筆銀行被改到其他分類、或分類被清空</td><td class="l">商戶後標「已不支援」</td><td>不顯示</td><td>不計</td></tr><tr><td class="l">該列選定的分類在「充值银行分类」TAB 被<mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">停用</mark></td><td class="l">商戶後標「已不支援」；银行分类欄顯示「原分類名稱<mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">（已停用）</mark>」</td><td>不顯示</td><td>不計</td></tr><tr><td class="l">分類在「充值银行分类」TAB 改名</td><td class="l">不標，银行分类欄顯示新名稱</td><td>不受影響</td><td>不受影響</td></tr></table><div class="hintG" style="margin-top:8px">一列同時符合多種時只顯示一個標籤，順序：已删除 → 方式不符 → 已不支援 → 已停用 → 维护中。</div></div>
       <div class="adj" style="border-style:dashed"><h4>既有邏輯（沿用、不調整）</h4><ol>
         <li><b>分页归属的顯示判斷</b>：入口與子渠道各自勾選；子渠道要顯示於某分頁，前提是入口也勾了該分頁。</li>
         <li><b>入口未勾任何分页</b>：各分頁皆不顯示；與「前台是否显示」為兩層各自的判斷，互不衝突。</li>
