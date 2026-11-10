@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>OKBet 充值改版 — 規格書 V2.1（OKF-2569）</title>
+<title>OKBet 充值改版 — 規格書 V2.2（OKF-2569）</title>
 <style>
 :root{
   --bd:#dcdfe6;--bd2:#ebeef5;--fg:#303133;--fg2:#606266;--fg3:#909399;
@@ -203,7 +203,7 @@ code{background:#f5f7fa;border:1px solid var(--bd2);border-radius:3px;padding:0 
 <body>
 <div class="wrap">
   <nav class="side">
-    <div class="grp">OKF-2569 OKBet 充值改版<div style="font-size:12px;font-weight:600;color:var(--blue);margin-top:2px">V2.1｜2026-11-10</div></div>
+    <div class="grp">OKF-2569 OKBet 充值改版<div style="font-size:12px;font-weight:600;color:var(--blue);margin-top:2px">V2.2｜2026-11-10</div></div>
     <a data-p="p0" class="on">需求目的與範圍</a>
     <a data-p="p1">後台｜銀行字典表<span class="n">2</span></a>
     <a data-p="p2">後台｜在線商戶配置（新）充值 TAB<span class="n">3</span></a>
@@ -215,12 +215,12 @@ code{background:#f5f7fa;border:1px solid var(--bd2);border-radius:3px;padding:0 
   </nav>
 
   <div class="main">
-    <div class="crumb"><span class="doc">OKF-2569｜okbet_充值改版｜<b style="background:#ffc9de;color:#1a1a1a" style="color:var(--blue)">V2.1</b>（_66）｜2026-11-10</span><b id="crumbName">需求目的與範圍</b></div>
+    <div class="crumb"><span class="doc">OKF-2569｜okbet_充值改版｜<b style="background:#ffc9de;color:#1a1a1a" style="color:var(--blue)">V2.2</b>（_68）｜2026-11-10</span><b id="crumbName">需求目的與範圍</b></div>
     <div class="lgd">紅圈數字 <span class="mk">1</span>＝本次調整項，對照各頁下方「本次調整」逐條說明。<span class="tagn">本次新增</span>＝本次新增的欄位、頁籤或畫面。橘色虛線框＝可互動示意，可直接點選操作看畫面變化。畫面未標記處維持現狀，不在本單範圍。</div>
 
     <!-- ══════════ 0 需求目的與範圍 ══════════ -->
     <section class="pg on" id="p0">
-      <div style="background:#ffc9de;color:#1a1a1a;border-radius:6px;padding:8px 12px;margin-bottom:10px;font-size:13px">核對用：粉紅底＝今日 V2.1（_59～_66）變更處。版本更新紀錄頁為本次新增。正式發佈請用不含標示的版本。</div>
+      <div style="background:#ffc9de;color:#1a1a1a;border-radius:6px;padding:8px 12px;margin-bottom:10px;font-size:13px">核對用：粉紅底＝V2.1 與 V2.2 的變更處。正式發佈請用不含標示的版本。</div>
       <div class="card"><h3><em>①</em>需求目的</h3>
         <ol style="margin:0;padding-left:20px;line-height:2;color:var(--fg2)">
           <li>前台充值入口改為依「充值方式」展示（GCash／Maya／GrabPay／Bank／QRPH／Transfer／Counter／兌換碼）。
@@ -695,9 +695,14 @@ code{background:#f5f7fa;border:1px solid var(--bd2);border-radius:3px;padding:0 
     <section class="pg" id="p6">
       <div class="card"><h3><em>①</em>生產上線方式</h3>
         <ul class="adj">
-          <li>・後端：隨 1112 版本推上生產。</li>
-          <li>・前端：不隨 1112 版本推上生產，先推至生產測試環境供營運測試，確認沒問題後再推上生產。</li>
-          <li>・APP：不隨 1112 版本週更，獨立一版送審；待營運測試確認沒問題後再送審。</li>
+          <li style="background:#ffc9de;color:#1a1a1a">・UAT 版本：11/19</li>
+          <li style="background:#ffc9de;color:#1a1a1a">・生產版本：11/26
+            <ul class="sub">
+              <li>・後端：推上生產與生產測試環境。</li>
+              <li>・前端：僅推至生產測試環境供營運測試，確認沒問題後再推上生產。</li>
+              <li>・APP：不隨週更，單獨出一包送審；待營運測試確認沒問題後再送審。</li>
+            </ul>
+          </li>
           <li>・營運測試前，須於生產後台完成新頁籤全部入口與子渠道設定，並補齊商戶的充值方式、「充值」TAB 各筆的银行分类。</li>
         </ul>
       </div>
@@ -714,6 +719,7 @@ code{background:#f5f7fa;border:1px solid var(--bd2);border-radius:3px;padding:0 
       <div class="card"><h3>版本更新紀錄</h3>
         <table class="lt vlog">
           <tr><th style="width:70px">版本</th><th style="width:70px">日期</th><th class="l">更新內容／原因</th></tr>
+          <tr><td>V2.2</td><td>11/10</td><td class="l">依時程調整<br><br>調整：<br>1. <a data-go="p6">生產上線方式補時程：UAT 版本 11/19；生產版本 11/26（後端推生產與生產測試環境、前端僅推生產測試環境供營運測試、APP 單獨出一包送審）</a></td></tr>
           <tr><td>V2.1</td><td>11/10</td><td class="l">依 RD 回饋調整<br><br>調整：<br>1. <a data-go="p3">充值展示配置（新）子渠道表：標籤「已不支援」定義補回「商戶已不支援該銀行」（上游不再支援，由後端判斷），子渠道狀態對照表補回該列</a><br>2. <a data-go="p3">充值展示配置（新）子渠道表：商户欄、商户下拉與明細彈窗的商户欄明定顯示商戶的「支付名称」</a><br>3. <a data-go="p3">充值展示配置（新）子渠道表：商戶被刪除時，商戶名稱改顯示該商戶在在線商戶配置（新）充值 TAB 的「#」（例：#598（已删除）），商户下拉與明細彈窗同</a><br>4. <a data-go="p1">銀行字典表充值 TAB：「种类」刪除、原位置改放「支付类型」（唯讀，既有資料由 RD 補齊）；新增「新增」依支付类型匯入尚未在字典表的銀行，可同時設定银行分类</a><br>5. <a data-go="p1">銀行字典表：補配置順序（先充值展示配置再充值展示配置（新）不用匯入；先充值展示配置（新）須先匯入）</a><br>6. <a data-go="p3">充值展示配置（新）：商户下拉、已不支援、前台送單的商戶與字典銀行對應改以支付类型為準；「充值展示配置」頁籤帶入商戶時與字典表一致性檢查，缺少者自動補、多出者不刪</a><br>7. <a data-go="p3">充值展示配置（新）：入口的显示名改為單一欄位，多語系以「国际化列表」設定（列表显示名旁「+」）</a></td></tr>
           <tr><td>V2</td><td>11/9</td><td class="l">依 RD 回饋，銀行字典表改為分類制<br><br>新增：<br>1. <a data-go="p1">銀行字典表新增「充值银行分类」TAB：可新增、編輯，狀態正常／停用，不提供刪除；停用的分類不出現在下拉，已設定者顯示「分類名稱（已停用）」，列表停用者排最下</a><br>2. <a data-go="p1">銀行字典表「充值」TAB 新增「银行分类」欄位與「删除」功能；刪除時先判斷充值展示配置、再判斷充值展示配置（新）有無子渠道綁定，有綁定即阻斷；已綁定者調整分類時跳警示</a><br>3. <a data-go="p3">充值展示配置（新）新增「子渠道狀態對照表」，並明定一列同時符合多種時只顯示一個標籤的順序</a><br>4. <a data-go="p3">「充值展示配置」頁籤（V2）子渠道標「商户已不支援」者，於排序欄右側新增紅色垃圾桶可刪除該子渠道</a><br><br>調整：<br>1. <a data-go="p1">銀行字典表「充值」TAB 的「银行名称」改為「三方银行名称」，刪除原「每家銀行唯一一筆」規則</a><br>2. <a data-go="p3">充值展示配置（新）子渠道的「银行」改為「银行分类」：下拉來源改為「充值银行分类」TAB，商户下拉依分類篩選（原待討論黃框移除）</a><br>3. <a data-go="p3">標籤「已不支援」定義改為分類口徑；分類停用者银行分类欄顯示「原分類名稱（已停用）」</a><br>4. <a data-go="p4">前台會員送單：Bank、Transfer 類改為由後端對應到該商戶在此分類下的銀行，帶三方銀行代碼</a><br>5. <a data-go="p6">新舊版範圍：初版、V2 的 APP 說法改為「未更新至 V2」「已更新至 V2 但未更新至 V3」</a><br>6. <a data-go="p1">本單所有刪除確認文案統一為「确认删除吗？」</a><br>7. <a data-go="p0">需求目的、②充值方式清單、④範圍與生產上線方式同步更新</a></td></tr>
           <tr><td>V1</td><td>10/30</td><td class="l">初版發佈</td></tr>
