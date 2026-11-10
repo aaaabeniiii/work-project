@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>OKBet 充值改版 — 規格書_58（OKF-2569）</title>
+<title>OKBet 充值改版 — 規格書 V2.1（OKF-2569）</title>
 <style>
 :root{
   --bd:#dcdfe6;--bd2:#ebeef5;--fg:#303133;--fg2:#606266;--fg3:#909399;
@@ -65,6 +65,8 @@ select.sel{appearance:auto;cursor:pointer;color:var(--fg)}
 .tabs span{padding:8px 18px;font-size:13px;color:var(--fg2);cursor:pointer;margin-bottom:-2px;border-bottom:2px solid transparent}
 .tabs span.on{color:var(--blue);border-bottom-color:var(--blue);font-weight:600}
 .tabs span .tagn{padding:0 6px;margin:0 0 0 6px;border-bottom:none;font-size:11px;cursor:default}
+.vlog td.l{line-height:1.9}
+.vlog a[data-go]{color:var(--blue);text-decoration:underline;cursor:pointer}
 .dlg{border:1px solid var(--bd2);border-radius:8px;max-width:820px;background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.06)}
 .dh{display:flex;justify-content:space-between;align-items:center;padding:12px 18px;border-bottom:1px solid var(--bd2);font-size:14.5px;font-weight:600}
 .dh span{color:var(--fg3);font-weight:400;cursor:pointer}
@@ -201,7 +203,7 @@ code{background:#f5f7fa;border:1px solid var(--bd2);border-radius:3px;padding:0 
 <body>
 <div class="wrap">
   <nav class="side">
-    <div class="grp">OKF-2569 OKBet 充值改版</div>
+    <div class="grp">OKF-2569 OKBet 充值改版<div style="font-size:12px;font-weight:600;color:var(--blue);margin-top:2px">V2.1｜2026-11-10</div></div>
     <a data-p="p0" class="on">需求目的與範圍</a>
     <a data-p="p1">後台｜銀行字典表<span class="n">2</span></a>
     <a data-p="p2">後台｜在線商戶配置（新）充值 TAB<span class="n">3</span></a>
@@ -209,15 +211,16 @@ code{background:#f5f7fa;border:1px solid var(--bd2);border-radius:3px;padding:0 
     <a data-p="p4">前台｜充值頁（PC／H5）<span class="n">3</span></a>
     <a data-p="p5">顯示判斷流程<span class="n">1</span></a>
     <a data-p="p6">上線順序<span class="n">1</span></a>
+    <a data-p="p7">版本更新紀錄</a>
   </nav>
 
   <div class="main">
-    <div class="crumb"><span class="doc">OKF-2569｜okbet_充值改版｜規格書_58｜2026-11-10</span><b id="crumbName">需求目的與範圍</b></div>
+    <div class="crumb"><span class="doc">OKF-2569｜okbet_充值改版｜<b style="background:#ffc9de;color:#1a1a1a" style="color:var(--blue)">V2.1</b>（_66）｜2026-11-10</span><b id="crumbName">需求目的與範圍</b></div>
     <div class="lgd">紅圈數字 <span class="mk">1</span>＝本次調整項，對照各頁下方「本次調整」逐條說明。<span class="tagn">本次新增</span>＝本次新增的欄位、頁籤或畫面。橘色虛線框＝可互動示意，可直接點選操作看畫面變化。畫面未標記處維持現狀，不在本單範圍。</div>
 
     <!-- ══════════ 0 需求目的與範圍 ══════════ -->
     <section class="pg on" id="p0">
-      <div style="background:#ffc9de;color:#1a1a1a;border-radius:6px;padding:8px 12px;margin-bottom:10px;font-size:13px">核對用：粉紅底＝_39 → _57 的累計變更處；橘底＝_57 → _58 變更處（對照表移除「字典銀行被刪除」列、已不支援定義收斂）。正式發佈請用不含標示的版本。</div>
+      <div style="background:#ffc9de;color:#1a1a1a;border-radius:6px;padding:8px 12px;margin-bottom:10px;font-size:13px">核對用：粉紅底＝今日 V2.1（_59～_66）變更處。版本更新紀錄頁為本次新增。正式發佈請用不含標示的版本。</div>
       <div class="card"><h3><em>①</em>需求目的</h3>
         <ol style="margin:0;padding-left:20px;line-height:2;color:var(--fg2)">
           <li>前台充值入口改為依「充值方式」展示（GCash／Maya／GrabPay／Bank／QRPH／Transfer／Counter／兌換碼）。
@@ -239,7 +242,7 @@ code{background:#f5f7fa;border:1px solid var(--bd2);border-radius:3px;padding:0 
               <li>・兌換功能本身沿用既有兌換碼活動。</li>
             </ul>
           </li>
-          <li><mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">「銀行字典表」新增「充值银行分类」TAB；充值 TAB 新增「银行分类」欄位與刪除功能。</mark></li>
+          <li>「銀行字典表」新增「充值银行分类」TAB；充值 TAB 新增「银行分类」欄位與刪除功能<mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">，「种类」改放「支付类型」，新增依支付類型匯入銀行</mark>。</li>
           <li>商戶三態與預約維護沿用 OKF-2269：預約維護時段內的商戶視同維護，經子渠道反映到前台入口。</li>
         </ol>
       </div>
@@ -250,8 +253,8 @@ code{background:#f5f7fa;border:1px solid var(--bd2);border-radius:3px;padding:0 
           <tr><td>Maya</td><td>選商戶</td></tr>
           <tr><td>GrabPay</td><td>選商戶</td></tr>
           <tr><td>QRPH</td><td>選商戶</td></tr>
-          <tr><td>Bank</td><td>先選銀行，再選商戶</td><td class="l">銀行來源為「銀行字典表」<mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">充值银行分类</mark> TAB。</td></tr>
-          <tr><td>Transfer</td><td>先選銀行，再選商戶</td><td class="l">銀行來源為「銀行字典表」<mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">充值银行分类</mark> TAB。會員自行轉帳到指定帳戶、或送單後跳轉至第三方 APP／頁面完成付款的方式。目前確定歸入的商戶：PayCools-BankTrans。</td></tr>
+          <tr><td>Bank</td><td>先選銀行，再選商戶</td><td class="l">銀行來源為「銀行字典表」充值银行分类 TAB。</td></tr>
+          <tr><td>Transfer</td><td>先選銀行，再選商戶</td><td class="l">銀行來源為「銀行字典表」充值银行分类 TAB。會員自行轉帳到指定帳戶、或送單後跳轉至第三方 APP／頁面完成付款的方式。目前確定歸入的商戶：PayCools-BankTrans。</td></tr>
           <tr><td>Counter</td><td>選商戶</td><td class="l">子渠道只選商戶，不選銀行。此類商戶不屬於 GCash／Maya／GrabPay／Bank／QRPH，且本身沒有子渠道（銀行）可選；會員跳轉至該商戶的支付頁面（櫃台）完成付款。</td></tr>
           <tr><td>兌換碼</td><td>無子渠道</td><td class="l">只在新頁籤的入口可選，商戶配置不可選。入口不綁商戶與銀行，會員點入口後展示兌換功能。</td></tr>
         </table>
@@ -272,8 +275,8 @@ code{background:#f5f7fa;border:1px solid var(--bd2);border-radius:3px;padding:0 
       </div>
       <div class="card"><h3><em>④</em>範圍</h3>
         <table class="st2" style="max-width:760px">
-          <tr><th style="width:110px">範圍內</th><td class="l">管理後台：銀行字典表（<mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">新增充值银行分类 TAB；充值 TAB 新增银行分类欄位與刪除功能</mark>）、在線商戶配置（新）充值 TAB、在線支付展示配置（新）新頁籤<mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">；「充值展示配置」頁籤：子渠道「商户已不支援」者新增删除</mark><br>前台：PC、H5、APP 充值頁入口與子渠道展示；新版前端／APP 上線前，前台維持現狀（讀「充值展示配置」頁籤）</td></tr>
-          <tr><th>範圍外<br>（維持現狀）</th><td class="l">「充值展示配置」「分页类型设定」頁籤的功能<mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">（除子渠道新增删除外）</mark><br>充值頁其餘區塊（金額、優惠券、送單後流程）<br>提款側全部<br>WOWGames：前端未更換接口，仍讀「充值展示配置」頁籤（V2），不受本單影響</td></tr>
+          <tr><th style="width:110px">範圍內</th><td class="l">管理後台：銀行字典表（新增充值银行分类 TAB；充值 TAB 新增银行分类欄位與刪除功能<mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">、种类改放支付类型、依支付類型匯入銀行</mark>）、在線商戶配置（新）充值 TAB、在線支付展示配置（新）新頁籤；「充值展示配置」頁籤：子渠道「商户已不支援」者新增删除<mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">、帶入商戶時與字典表一致性檢查</mark><br>前台：PC、H5、APP 充值頁入口與子渠道展示；新版前端／APP 上線前，前台維持現狀（讀「充值展示配置」頁籤）</td></tr>
+          <tr><th>範圍外<br>（維持現狀）</th><td class="l">「充值展示配置」「分页类型设定」頁籤的功能（除子渠道新增删除外）<br>充值頁其餘區塊（金額、優惠券、送單後流程）<br>提款側全部<br>WOWGames：前端未更換接口，仍讀「充值展示配置」頁籤（V2），不受本單影響</td></tr>
         </table>
       </div>
     </section>
@@ -281,37 +284,49 @@ code{background:#f5f7fa;border:1px solid var(--bd2);border-radius:3px;padding:0 
     <!-- ══════════ 1 銀行字典表 ══════════ -->
     <section class="pg" id="p1">
       <div class="card"><h3><em>①</em>充值 TAB 列表</h3>
-        <div class="tabs"><span class="on">充值</span><span style="background:#ffc9de;color:#1a1a1a">充值银行分类<span class="tagn" style="background:#ffc9de;color:#1a1a1a">本次新增</span></span><span>提款</span></div>
+        <div class="tabs"><span class="on">充值</span><span>充值银行分类<span class="tagn">本次新增</span></span><span>提款</span></div>
+        <div class="bar"><span class="btn pri" style="background:#ffc9de;color:#1a1a1a">新增</span></div>
         <table class="lt">
-          <tr><th>#</th><th style="background:#ffc9de;color:#1a1a1a">银行分类<span class="mk">1</span><span class="tagn" style="background:#ffc9de;color:#1a1a1a">本次新增</span></th><th style="background:#ffc9de;color:#1a1a1a">三方银行名称<span class="mk">1</span></th><th>银行代码</th><th>种类</th><th>更新时间</th><th style="background:#ffc9de;color:#1a1a1a">操作</th></tr>
-          <tr><td>583</td><td style="background:#ffc9de;color:#1a1a1a">BDO</td><td>Banco De Oro Unibank</td><td>bdo</td><td>银行</td><td>2026-10-19 11:49:46</td><td><span class="lnk">编辑</span> <span class="lnk" style="background:#ffc9de;color:#1a1a1a">删除</span></td></tr>
-          <tr><td>584</td><td style="background:#ffc9de;color:#1a1a1a">BDO</td><td>BDO</td><td>BDO</td><td>银行</td><td>2026-10-19 11:49:46</td><td><span class="lnk">编辑</span> <span class="lnk" style="background:#ffc9de;color:#1a1a1a">删除</span></td></tr>
-          <tr><td>586</td><td style="background:#ffc9de;color:#1a1a1a">BDO</td><td>BDO Online Bank Transfer</td><td>BDOOBP</td><td>银行</td><td>2026-10-20 15:51:48</td><td><span class="lnk">编辑</span> <span class="lnk" style="background:#ffc9de;color:#1a1a1a">删除</span></td></tr>
-          <tr><td>585</td><td style="background:#ffc9de;color:#1a1a1a">BPI</td><td>BPI</td><td>bpi</td><td>银行</td><td>2026-10-20 15:51:48</td><td><span class="lnk">编辑</span> <span class="lnk" style="background:#ffc9de;color:#1a1a1a">删除</span></td></tr>
-          <tr><td>1091</td><td style="background:#ffc9de;color:#1a1a1a">Metrobank（已停用）</td><td>GCash</td><td>GCASH</td><td>电子钱包</td><td>2026-10-19 13:19:27</td><td><span class="lnk">编辑</span> <span class="lnk" style="background:#ffc9de;color:#1a1a1a">删除</span></td></tr>
+          <tr><th>#</th><th>银行分类<span class="mk">1</span><span class="tagn">本次新增</span></th><th>三方银行名称<span class="mk">1</span></th><th>银行代码</th><th style="background:#ffc9de;color:#1a1a1a">支付类型<span class="tagn" style="background:#ffc9de;color:#1a1a1a">本次新增</span></th><th>更新时间</th><th>操作</th></tr>
+          <tr><td>583</td><td>BDO</td><td>Banco De Oro Unibank</td><td>bdo</td><td style="background:#ffc9de;color:#1a1a1a">PayCools支付-BankTrans</td><td>2026-10-19 11:49:46</td><td><span class="lnk">编辑</span> <span class="lnk">删除</span></td></tr>
+          <tr><td>584</td><td>BDO</td><td>BDO</td><td>BDO</td><td style="background:#ffc9de;color:#1a1a1a">PayCools支付-BankTrans</td><td>2026-10-19 11:49:46</td><td><span class="lnk">编辑</span> <span class="lnk">删除</span></td></tr>
+          <tr><td>586</td><td>BDO</td><td>BDO Online Bank Transfer</td><td>BDOOBP</td><td style="background:#ffc9de;color:#1a1a1a">PayCools支付-BankTrans</td><td>2026-10-20 15:51:48</td><td><span class="lnk">编辑</span> <span class="lnk">删除</span></td></tr>
+          <tr><td>585</td><td>BPI</td><td>BPI</td><td>bpi</td><td style="background:#ffc9de;color:#1a1a1a">PayCools支付-BankTrans</td><td>2026-10-20 15:51:48</td><td><span class="lnk">编辑</span> <span class="lnk">删除</span></td></tr>
+          <tr><td>1091</td><td>Metrobank（已停用）</td><td>GCash</td><td>GCASH</td><td style="background:#ffc9de;color:#1a1a1a">Coins_QRPH</td><td>2026-10-19 13:19:27</td><td><span class="lnk">编辑</span> <span class="lnk">删除</span></td></tr>
         </table>
-        <div class="hintG" style="margin-top:8px"><mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">示意：不同三方名稱的 BDO 三筆各自保留，银行分类都設為 BDO；</mark><mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">GCash 那筆原本設定的分類已被停用，顯示「Metrobank（已停用）」。</mark></div>
-        <div class="dlg" style="margin-top:12px;max-width:520px" style="background:#ffc9de;color:#1a1a1a"><div class="dh">编辑银行<span>×</span></div><div class="db">
+        <div class="hintG" style="margin-top:8px">示意：不同三方名稱的 BDO 三筆各自保留，银行分类都設為 BDO；GCash 那筆原本設定的分類已被停用，顯示「Metrobank（已停用）」。</div>
+        <div class="dlg" style="margin-top:12px;max-width:520px"><div class="dh">编辑银行<span>×</span></div><div class="db">
+          <div class="fr" style="grid-template-columns:110px 1fr" style="background:#ffc9de;color:#1a1a1a"><label>支付类型:</label><div class="fc"><div class="in ro" style="max-width:240px">PayCools支付-BankTrans</div><span class="tagn" style="background:#ffc9de;color:#1a1a1a">本次新增</span></div></div>
           <div class="fr" style="grid-template-columns:110px 1fr"><label><span class="req">*</span>三方银行名称:</label><div class="fc"><div class="in" style="max-width:240px">Banco De Oro Unibank</div></div></div>
           <div class="fr" style="grid-template-columns:110px 1fr"><label><span class="req">*</span>银行代码:</label><div class="fc"><div class="in" style="max-width:240px">bdo</div></div></div>
-          <div class="fr" style="grid-template-columns:110px 1fr;background:var(--newbg);border-radius:6px" style="background:#ffc9de;color:#1a1a1a"><label>银行分类:<span class="mk">1</span></label><div class="fc"><div class="in" style="max-width:240px">BDO<i>▾</i></div><span class="tagn" style="background:#ffc9de;color:#1a1a1a">本次新增</span></div></div>
-          <div class="fr" style="grid-template-columns:110px 1fr"><label>种类:</label><div class="fc"><div class="in" style="max-width:240px">银行<i>▾</i></div></div></div>
+          <div class="fr" style="grid-template-columns:110px 1fr;background:var(--newbg);border-radius:6px"><label>银行分类:<span class="mk">1</span></label><div class="fc"><div class="in" style="max-width:240px">BDO<i>▾</i></div><span class="tagn">本次新增</span></div></div>
         </div><div class="df"><span class="btn">取 消</span><span class="btn pri">确 定</span></div></div>
-        <div class="hintG" style="margin-top:8px"><mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">編輯彈窗新增「银行分类」下拉，位置在「银行代码」與「种类」之間；其餘欄位維持現狀。</mark><mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">下拉不列停用的分類；原本已選定的停用分類仍顯示「分類名稱（已停用）」，重新保存時必須改選可用的分類。</mark></div>
+        <div class="hintG" style="margin-top:8px">編輯彈窗新增「银行分类」下拉，位置在「银行代码」之後；<mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">「种类」刪除，新增「支付类型」放在最上方，唯讀。</mark>下拉不列停用的分類；原本已選定的停用分類仍顯示「分類名稱（已停用）」，重新保存時必須改選可用的分類。</div>
+        <div class="dlg" style="margin-top:12px;max-width:640px" style="background:#ffc9de;color:#1a1a1a"><div class="dh">新增银行<span>×</span></div><div class="db">
+          <div class="fr" style="grid-template-columns:110px 1fr"><label><span class="req">*</span>支付类型:</label><div class="fc"><div class="in" style="max-width:240px">PayCools支付-BankTrans<i>▾</i></div></div></div>
+          <div class="sep" style="margin-top:8px">支援銀行<span class="q lft">?<span class="tip">已存入字典表的银行不会显示在此<br>此处仅新增尚未存入字典表的银行</span></span></div>
+          <table class="lt">
+            <tr><th><span class="req">*</span>三方银行名称</th><th><span class="req">*</span>银行代码</th><th>银行分类</th></tr>
+            <tr><td><div class="in" style="max-width:220px;margin:0 auto">Banco De Oro Unibank</div></td><td><div class="in" style="max-width:120px;margin:0 auto">bdo</div></td><td><div class="in" style="max-width:160px;margin:0 auto;color:var(--fg2)">请选择<i>▾</i></div></td></tr>
+            <tr><td><div class="in" style="max-width:220px;margin:0 auto">Bank of the Philippine Islands</div></td><td><div class="in" style="max-width:120px;margin:0 auto">bpi</div></td><td><div class="in" style="max-width:160px;margin:0 auto;color:var(--fg2)">请选择<i>▾</i></div></td></tr>
+            <tr><td><div class="in" style="max-width:220px;margin:0 auto">Metropolitan Bank</div></td><td><div class="in" style="max-width:120px;margin:0 auto">mbtc</div></td><td><div class="in" style="max-width:160px;margin:0 auto;color:var(--fg2)">请选择<i>▾</i></div></td></tr>
+          </table>
+        </div><div class="df"><span class="btn">取 消</span><span class="btn pri">确 定</span></div></div>
+        <div class="hintG" style="margin-top:8px"><mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">示意：選了 PayCools支付-BankTrans 後，只列出它底下還不在字典表的三筆；三方银行名称、银行代码為必填輸入框（預帶上游回傳值），银行分类預設為空、可在此先選。</mark></div>
         <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:12px">
-          <div style="flex:1;min-width:280px;max-width:380px" style="background:#ffc9de;color:#1a1a1a"><div class="hintG" style="margin-bottom:6px">刪除未被子渠道綁定的銀行</div>
+          <div style="flex:1;min-width:280px;max-width:380px"><div class="hintG" style="margin-bottom:6px">刪除未被子渠道綁定的銀行</div>
             <div class="prompt"><div class="t">提示</div>
               <div class="m"><i>!</i><div>确认删除吗？</div></div>
               <div class="f"><span class="btn">取 消</span><span class="btn pri">确 定</span></div>
             </div>
           </div>
-          <div style="flex:1;min-width:280px;max-width:380px" style="background:#ffc9de;color:#1a1a1a"><div class="hintG" style="margin-bottom:6px">刪除已被「充值展示配置」子渠道綁定的銀行（阻斷）</div>
+          <div style="flex:1;min-width:280px;max-width:380px"><div class="hintG" style="margin-bottom:6px">刪除已被「充值展示配置」子渠道綁定的銀行（阻斷）</div>
             <div class="prompt"><div class="t">提示</div>
               <div class="m"><i>!</i><div>此银行已绑定于「充值展示配置」的子渠道，无法删除。<br>请先至该页删除对应子渠道后，再进行删除。</div></div>
               <div class="f"><span class="btn pri">确 定</span></div>
             </div>
           </div>
-          <div style="flex:1;min-width:280px;max-width:380px" style="background:#ffc9de;color:#1a1a1a"><div class="hintG" style="margin-bottom:6px">刪除已被「充值展示配置（新）」子渠道綁定的銀行（阻斷）</div>
+          <div style="flex:1;min-width:280px;max-width:380px"><div class="hintG" style="margin-bottom:6px">刪除已被「充值展示配置（新）」子渠道綁定的銀行（阻斷）</div>
             <div class="prompt"><div class="t">提示</div>
               <div class="m"><i>!</i><div>此银行已绑定于「充值展示配置（新）」的子渠道，无法删除。<br>请先至该页更换商户或删除对应子渠道后，再进行删除。</div></div>
               <div class="f"><span class="btn pri">确 定</span></div>
@@ -319,10 +334,10 @@ code{background:#f5f7fa;border:1px solid var(--bd2);border-radius:3px;padding:0 
           </div>
         </div>
         <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:12px">
-          <div style="flex:1;min-width:280px;max-width:380px" style="background:#ffc9de;color:#1a1a1a"><div class="hintG" style="margin-bottom:6px">調整或清空未被子渠道綁定的銀行的分類</div>
+          <div style="flex:1;min-width:280px;max-width:380px"><div class="hintG" style="margin-bottom:6px">調整或清空未被子渠道綁定的銀行的分類</div>
             <div class="hintG" style="padding:10px;border:1px dashed var(--bd);border-radius:6px">不跳提示，編輯彈窗按「确定」直接保存。</div>
           </div>
-          <div style="flex:1;min-width:280px;max-width:380px" style="background:#ffc9de;color:#1a1a1a"><div class="hintG" style="margin-bottom:6px">調整或清空已被子渠道綁定的銀行的分類</div>
+          <div style="flex:1;min-width:280px;max-width:380px"><div class="hintG" style="margin-bottom:6px">調整或清空已被子渠道綁定的銀行的分類</div>
             <div class="prompt"><div class="t">提示</div>
               <div class="m"><i>!</i><div>此银行已绑定充值子渠道<br>调整分类后，已绑定的子渠道前台将不再展示<br>是否确认调整？</div></div>
               <div class="f"><span class="btn">取 消</span><span class="btn pri">确 定</span></div>
@@ -330,44 +345,47 @@ code{background:#f5f7fa;border:1px solid var(--bd2);border-radius:3px;padding:0 
           </div>
         </div>
       </div>
-      <div class="card" style="background:#ffc9de;color:#1a1a1a"><h3><em>②</em>充值银行分类 TAB<span class="mk">2</span><span class="tagn" style="background:#ffc9de;color:#1a1a1a">本次新增</span></h3>
+      <div class="card"><h3><em>②</em>充值银行分类 TAB<span class="mk">2</span><span class="tagn">本次新增</span></h3>
         <div class="tabs"><span>充值</span><span class="on">充值银行分类</span><span>提款</span></div>
         <div class="bar"><span class="btn pri">新增</span></div>
         <table class="lt">
-          <tr><th>#</th><th>分类名称</th><th>更新时间</th><th style="background:#ffc9de;color:#1a1a1a">状态</th><th style="background:#ffc9de;color:#1a1a1a">操作</th></tr>
+          <tr><th>#</th><th>分类名称</th><th>更新时间</th><th>状态</th><th>操作</th></tr>
           <tr><td>1</td><td>BDO</td><td>2026-11-09 10:00:00</td><td><span class="chip ok">正常</span></td><td><span class="lnk">编辑</span></td></tr>
           <tr><td>2</td><td>BPI</td><td>2026-11-09 10:00:00</td><td><span class="chip ok">正常</span></td><td><span class="lnk">编辑</span></td></tr>
           <tr><td>4</td><td>UnionBank</td><td>2026-11-10 09:30:00</td><td><span class="chip ok">正常</span></td><td><span class="lnk">编辑</span></td></tr>
-          <tr style="background:#ffc9de;color:#1a1a1a"><td>3</td><td>Metrobank</td><td>2026-11-10 11:20:00</td><td><span class="chip off">停用</span></td><td><span class="lnk">编辑</span></td></tr>
+          <tr><td>3</td><td>Metrobank</td><td>2026-11-10 11:20:00</td><td><span class="chip off">停用</span></td><td><span class="lnk">编辑</span></td></tr>
         </table>
-        <div class="hintG" style="margin-top:8px"><mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">示意：正常的在前；停用的排在最下面，依更新時間由早到晚，最近停用的在最底。操作只有「编辑」，沒有刪除。</mark></div>
+        <div class="hintG" style="margin-top:8px">示意：正常的在前；停用的排在最下面，依更新時間由早到晚，最近停用的在最底。操作只有「编辑」，沒有刪除。</div>
         <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:10px">
-          <div class="dlg" style="flex:1;min-width:300px;max-width:400px" style="background:#ffc9de;color:#1a1a1a"><div class="dh">新增银行分类<span>×</span></div><div class="db">
+          <div class="dlg" style="flex:1;min-width:300px;max-width:400px"><div class="dh">新增银行分类<span>×</span></div><div class="db">
             <div class="fr" style="grid-template-columns:80px 1fr"><label><span class="req">*</span>分类名称:</label><div class="fc"><div class="in"></div></div></div>
-            <div class="fr" style="grid-template-columns:80px 1fr" style="background:#ffc9de;color:#1a1a1a"><label><span class="req">*</span>状态:</label><div class="fc"><div class="rd"><span class="sel2"><b class="on"></b>正常</span><span><b></b>停用</span></div></div></div>
+            <div class="fr" style="grid-template-columns:80px 1fr"><label><span class="req">*</span>状态:</label><div class="fc"><div class="rd"><span class="sel2"><b class="on"></b>正常</span><span><b></b>停用</span></div></div></div>
           </div><div class="df"><span class="btn">取 消</span><span class="btn pri">确 定</span></div></div>
-          <div class="dlg" style="flex:1;min-width:300px;max-width:400px" style="background:#ffc9de;color:#1a1a1a"><div class="dh">编辑银行分类<span>×</span></div><div class="db">
+          <div class="dlg" style="flex:1;min-width:300px;max-width:400px"><div class="dh">编辑银行分类<span>×</span></div><div class="db">
             <div class="fr" style="grid-template-columns:80px 1fr"><label><span class="req">*</span>分类名称:</label><div class="fc"><div class="in">BDO</div></div></div>
-            <div class="fr" style="grid-template-columns:80px 1fr" style="background:#ffc9de;color:#1a1a1a"><label><span class="req">*</span>状态:</label><div class="fc"><div class="rd"><span class="sel2"><b class="on"></b>正常</span><span><b></b>停用</span></div></div></div>
+            <div class="fr" style="grid-template-columns:80px 1fr"><label><span class="req">*</span>状态:</label><div class="fc"><div class="rd"><span class="sel2"><b class="on"></b>正常</span><span><b></b>停用</span></div></div></div>
           </div><div class="df"><span class="btn">取 消</span><span class="btn pri">确 定</span></div></div>
         </div>
-        <div class="hintG" style="margin-top:8px"><mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">新增與編輯彈窗</mark><mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">欄位：分类名称（必填）、状态（正常／停用，預設正常），</mark><mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">標題分別為「新增银行分类」「编辑银行分类」。</mark></div>
+        <div class="hintG" style="margin-top:8px">新增與編輯彈窗欄位：分类名称（必填）、状态（正常／停用，預設正常），標題分別為「新增银行分类」「编辑银行分类」。</div>
       </div>
       <div class="adj"><h4>本次調整</h4><ol>
-        <li><span class="mk">1</span><b><mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">充值 TAB 新增銀行分類與刪除</mark></b>
+        <li><span class="mk">1</span><b>充值 TAB 新增銀行分類與刪除</b>
           <ul class="sub">
-            <li><mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">・原「银行名称」改為「三方银行名称」，用來存放三方回傳的銀行名稱。</mark></li>
-            <li><mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">・新增「银行分类」欄位：下拉選擇，來源為「充值银行分类」TAB，將不同三方名稱的銀行分類到同一個分類內；每一筆由營運自行設定，既有資料上線後亦由營運設定。</mark><mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">下拉不列停用的分類；原本已選定的停用分類仍顯示「分類名稱（已停用）」，重新保存時必須改選可用的分類。</mark></li>
-            <li><mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">・新增「删除」功能，可刪除該筆銀行。本 TAB 為「充值展示配置」（V2）與「充值展示配置（新）」（V3）共用，刪除時先判斷「充值展示配置」有無子渠道綁定，再判斷「充值展示配置（新）」；兩邊都未綁定才跳「确认删除吗？」，確定後刪除；任一邊有綁定則阻斷，提示依綁定位置帶入頁名：此银行已绑定于「充值展示配置」的子渠道，无法删除。请先至该页删除对应子渠道后，再进行删除。／此银行已绑定于「充值展示配置（新）」的子渠道，无法删除。请先至该页更换商户或删除对应子渠道后，再进行删除。兩邊都綁定時兩段都列。</mark></li>
-            <li><mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">・已被子渠道綁定的銀行，調整或清空「银行分类」時跳：此银行已绑定充值子渠道／调整分类后，已绑定的子渠道前台将不再展示／是否确认调整？</mark><mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">未被綁定時不跳提示，直接保存。</mark></li>
+            <li>・原「银行名称」改為「三方银行名称」，用來存放三方回傳的銀行名稱。</li>
+            <li><mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">・「种类」欄刪除，原位置改放「支付类型」：值為該銀行所屬上游的支付类型（同在線商戶配置（新）充值 TAB 的支付类型），用於對應上游銀行、防止重複新增；編輯彈窗放在最上方、唯讀。既有資料的支付类型於上線時由 RD 補齊。</mark></li>
+            <li><mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">・新增「新增」功能：彈窗上方選「支付类型」（來源為在線商戶配置（新）充值 TAB 的支付类型；沒有銀行子渠道的、或銀行皆已在字典表內的支付类型不列出），選定後下方「支援銀行」列出該支付類型底下尚未在字典表的銀行，一列一筆：三方银行名称、银行代码為必填輸入框（預帶上游回傳值）、银行分类下拉預設為空；「支援銀行」旁有「?」提示：已存入字典表的银行不会显示在此／此处仅新增尚未存入字典表的银行；無勾選框，按「确定」全部新增。</mark></li>
+            <li><mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">・配置順序：新商戶可直接在「充值展示配置」配置，帶入商戶時字典表會自動匯入該商戶的銀行，之後到「充值展示配置（新）」配置只需先在字典表設定银行分类，不用再匯入。若先在「充值展示配置（新）」配置，須先在字典表用「新增」匯入該支付类型的銀行；之後再到「充值展示配置」配置時，會檢查自動帶出的子渠道與字典表是否一致，缺少者自動補建，多出者不刪除。</mark></li>
+            <li>・新增「银行分类」欄位：下拉選擇，來源為「充值银行分类」TAB，將不同三方名稱的銀行分類到同一個分類內；每一筆由營運自行設定，既有資料上線後亦由營運設定。下拉不列停用的分類；原本已選定的停用分類仍顯示「分類名稱（已停用）」，重新保存時必須改選可用的分類。</li>
+            <li>・新增「删除」功能，可刪除該筆銀行。本 TAB 為「充值展示配置」（V2）與「充值展示配置（新）」（V3）共用，刪除時先判斷「充值展示配置」有無子渠道綁定，再判斷「充值展示配置（新）」；兩邊都未綁定才跳「确认删除吗？」，確定後刪除；任一邊有綁定則阻斷，提示依綁定位置帶入頁名：此银行已绑定于「充值展示配置」的子渠道，无法删除。请先至该页删除对应子渠道后，再进行删除。／此银行已绑定于「充值展示配置（新）」的子渠道，无法删除。请先至该页更换商户或删除对应子渠道后，再进行删除。兩邊都綁定時兩段都列。</li>
+            <li>・已被子渠道綁定的銀行，調整或清空「银行分类」時跳：此银行已绑定充值子渠道／调整分类后，已绑定的子渠道前台将不再展示／是否确认调整？未被綁定時不跳提示，直接保存。</li>
           </ul>
         </li>
-        <li><span class="mk">2</span><b><mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">新增「充值银行分类」TAB</mark></b>
+        <li><span class="mk">2</span><b>新增「充值银行分类」TAB</b>
           <ul class="sub">
-            <li><mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">・可新增、編輯</mark><mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">銀行分類，欄位：分类名称、状态（正常／停用，預設正常）；不提供刪除。</mark><mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">用於將「充值」TAB 內的銀行分類。</mark></li>
-            <li><mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">・改名：「充值」TAB 與子渠道直接顯示新名稱。</mark></li>
-            <li><mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">・停用：停用的分類不出現在「充值」TAB 的银行分类下拉與子渠道的银行分类下拉；已設定該分類的「充值」TAB 銀行，银行分类欄顯示「分類名稱（已停用）」，重新保存時必須改選可用的分類；綁該分類的子渠道標「已不支援」，银行分类欄顯示「分類名稱（已停用）」，重新選擇銀行分類與商戶後恢復；分類改回正常後全部恢復。</mark></li>
-            <li><mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">・列表排序：正常的在前；停用的排在最下面，依更新時間由早到晚，最近停用的在最底。</mark></li>
+            <li>・可新增、編輯銀行分類，欄位：分类名称、状态（正常／停用，預設正常）；不提供刪除。用於將「充值」TAB 內的銀行分類。</li>
+            <li>・改名：「充值」TAB 與子渠道直接顯示新名稱。</li>
+            <li>・停用：停用的分類不出現在「充值」TAB 的银行分类下拉與子渠道的银行分类下拉；已設定該分類的「充值」TAB 銀行，银行分类欄顯示「分類名稱（已停用）」，重新保存時必須改選可用的分類；綁該分類的子渠道標「已不支援」，银行分类欄顯示「分類名稱（已停用）」，重新選擇銀行分類與商戶後恢復；分類改回正常後全部恢復。</li>
+            <li>・列表排序：正常的在前；停用的排在最下面，依更新時間由早到晚，最近停用的在最底。</li>
           </ul>
         </li>
       </ol></div>
@@ -426,7 +444,7 @@ code{background:#f5f7fa;border:1px solid var(--bd2);border-radius:3px;padding:0 
         </li>
         <li><span class="mk">2</span><b>刪除商戶的提示與標示</b>
           <ul class="sub">
-            <li>・點「删除」→ 現行確認窗「<mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">确认删除吗？</mark>」→ 確定後依序判斷：</li>
+            <li>・點「删除」→ 現行確認窗「确认删除吗？」→ 確定後依序判斷：</li>
             <li>　1. 此商戶為「充值展示配置」頁籤任一筆的顯示商戶 → 阻斷不可刪，提示沿用現行文案：「該商戶已綁定於『在線支付展示配置』，無法刪除。請先至該頁解除綁定（變更顯示商戶）或刪除對應展示設定後，再進行刪除。」</li>
             <li>　2. 未綁上述、但已綁定於「充值展示配置（新）」任一子渠道 → 彈出上方畫面的警示，確定後才刪除。</li>
             <li>　3. 兩邊皆未綁定 → 現行刪除流程。</li>
@@ -444,21 +462,21 @@ code{background:#f5f7fa;border:1px solid var(--bd2);border-radius:3px;padding:0 
                         <div class="alertbar">有 2 个状态正常的商户尚未绑定任何子渠道，请及时配置：V5Pay充值 - GCash、GrabPaytest<span class="mk">7</span></div>
         <div class="bar"><span class="btn pri">新增</span></div>
         <table class="lt">
-          <tr><th>充值方式</th><th>显示名</th><th>国家</th><th>币种</th><th>入口图示（日间）</th><th>入口图示（夜间）</th><th>分页归属</th><th>排序</th><th>子渠道数／商户数<span class="q">?<span class="tip">只统计使用中（正常或维护）的子渠道与商户<br>子渠道或商户为停用、已删除等状态时不计入<br>点击此栏数字可查看子渠道明细与商户状态</span></span><span class="mk">6</span></th><th>前台是否显示<span class="mk">5</span></th><th>子渠道前台展示<span class="q">?<span class="tip">当会员使用该充值方式时，若只能看到一个子渠道<br>选「是」：点击入口后，仍需点击该子渠道<br>选「否」：点击入口后，默认使用该子渠道，无需再次点选</span></span><span class="mk">4</span></th><th>操作</th></tr>
-          <tr><td>GCash</td><td>GCash</td><td>菲律宾</td><td>PHP</td><td><span class="img b wide"></span></td><td><span class="img b wide"></span></td><td>all,ewallet</td><td>1</td><td><span class="lnk" id="btnPop">3／2</span></td><td><span class="chip ok">是</span></td><td><span class="chip gy">否</span></td><td><span class="lnk">编辑</span><span class="lnk">删除</span></td></tr>
-          <tr><td>GCash</td><td>GCash VIP</td><td>菲律宾</td><td>PHP</td><td><span class="img b wide"></span></td><td><span class="img b wide"></span></td><td>all,ewallet</td><td>2</td><td><span class="lnk">1／1</span></td><td><span class="chip ok">是</span></td><td><span class="chip ok">是</span></td><td><span class="lnk">编辑</span><span class="lnk">删除</span></td></tr>
-          <tr><td>Bank</td><td>Bank</td><td>菲律宾</td><td>PHP</td><td><span class="img wide"></span></td><td><span class="img wide"></span></td><td>all,bank</td><td>3</td><td><span class="lnk">5／2</span></td><td><span class="chip ok">是</span></td><td><span class="chip gy">否</span></td><td><span class="lnk">编辑</span><span class="lnk">删除</span></td></tr>
-          <tr><td>Transfer</td><td>Transfer</td><td>菲律宾</td><td>PHP</td><td><span class="img g wide"></span></td><td><span class="img g wide"></span></td><td>all,bank</td><td>9</td><td><span class="lnk">0／0</span></td><td><span class="chip gy">否</span></td><td><span class="chip ok">是</span></td><td><span class="lnk">编辑</span><span class="lnk">删除</span></td></tr>
-          <tr><td>兌換碼</td><td>Redeem Code</td><td>菲律宾</td><td>PHP</td><td><span class="img wide" style="background:linear-gradient(135deg,#c48cf0,#8e44ad)"></span></td><td><span class="img wide" style="background:linear-gradient(135deg,#c48cf0,#8e44ad)"></span></td><td>all</td><td>99</td><td>—</td><td><span class="chip ok">是</span></td><td>—</td><td><span class="lnk">编辑</span><span class="lnk">删除</span></td></tr>
+          <tr><th>充值方式</th><th style="background:#ffc9de;color:#1a1a1a">显示名</th><th>国家</th><th>币种</th><th>入口图示（日间）</th><th>入口图示（夜间）</th><th>分页归属</th><th>排序</th><th>子渠道数／商户数<span class="q">?<span class="tip">只统计使用中（正常或维护）的子渠道与商户<br>子渠道或商户为停用、已删除等状态时不计入<br>点击此栏数字可查看子渠道明细与商户状态</span></span><span class="mk">6</span></th><th>前台是否显示<span class="mk">5</span></th><th>子渠道前台展示<span class="q">?<span class="tip">当会员使用该充值方式时，若只能看到一个子渠道<br>选「是」：点击入口后，仍需点击该子渠道<br>选「否」：点击入口后，默认使用该子渠道，无需再次点选</span></span><span class="mk">4</span></th><th>操作</th></tr>
+          <tr><td>GCash</td><td>GCash<span style="background:#ffc9de;color:#1a1a1a" style="color:var(--blue);font-weight:700;margin-left:6px;cursor:pointer">+</span></td><td>菲律宾</td><td>PHP</td><td><span class="img b wide"></span></td><td><span class="img b wide"></span></td><td>all,ewallet</td><td>1</td><td><span class="lnk" id="btnPop">3／2</span></td><td><span class="chip ok">是</span></td><td><span class="chip gy">否</span></td><td><span class="lnk">编辑</span><span class="lnk">删除</span></td></tr>
+          <tr><td>GCash</td><td>GCash VIP<span style="background:#ffc9de;color:#1a1a1a" style="color:var(--blue);font-weight:700;margin-left:6px;cursor:pointer">+</span></td><td>菲律宾</td><td>PHP</td><td><span class="img b wide"></span></td><td><span class="img b wide"></span></td><td>all,ewallet</td><td>2</td><td><span class="lnk">1／1</span></td><td><span class="chip ok">是</span></td><td><span class="chip ok">是</span></td><td><span class="lnk">编辑</span><span class="lnk">删除</span></td></tr>
+          <tr><td>Bank</td><td>Bank<span style="background:#ffc9de;color:#1a1a1a" style="color:var(--blue);font-weight:700;margin-left:6px;cursor:pointer">+</span></td><td>菲律宾</td><td>PHP</td><td><span class="img wide"></span></td><td><span class="img wide"></span></td><td>all,bank</td><td>3</td><td><span class="lnk">5／2</span></td><td><span class="chip ok">是</span></td><td><span class="chip gy">否</span></td><td><span class="lnk">编辑</span><span class="lnk">删除</span></td></tr>
+          <tr><td>Transfer</td><td>Transfer<span style="background:#ffc9de;color:#1a1a1a" style="color:var(--blue);font-weight:700;margin-left:6px;cursor:pointer">+</span></td><td>菲律宾</td><td>PHP</td><td><span class="img g wide"></span></td><td><span class="img g wide"></span></td><td>all,bank</td><td>9</td><td><span class="lnk">0／0</span></td><td><span class="chip gy">否</span></td><td><span class="chip ok">是</span></td><td><span class="lnk">编辑</span><span class="lnk">删除</span></td></tr>
+          <tr><td>兌換碼</td><td>Redeem Code<span style="background:#ffc9de;color:#1a1a1a" style="color:var(--blue);font-weight:700;margin-left:6px;cursor:pointer">+</span></td><td>菲律宾</td><td>PHP</td><td><span class="img wide" style="background:linear-gradient(135deg,#c48cf0,#8e44ad)"></span></td><td><span class="img wide" style="background:linear-gradient(135deg,#c48cf0,#8e44ad)"></span></td><td>all</td><td>99</td><td>—</td><td><span class="chip ok">是</span></td><td>—</td><td><span class="lnk">编辑</span><span class="lnk">删除</span></td></tr>
         </table>
-        <div class="demo" id="popWrap" style="display:none"><div class="dt">子渠道數／商戶數 唯讀彈窗（點列表 GCash 那列的「3／2」開啟）</div>
+        <div class="demo" id="popWrap"><div class="dt">子渠道數／商戶數 唯讀彈窗：點列表「子渠道数／商户数」的數字後展示（以 GCash 那列的「3／2」為例）</div>
           <div class="dlg" style="max-width:760px"><div class="dh">子渠道明细 — GCash<span id="btnPopClose">×</span></div><div class="db">
             <table class="lt">
-              <tr><th>#</th><th style="background:#ffc9de;color:#1a1a1a">银行分类</th><th>商户</th><th>子渠道状态</th><th>商户状态</th><th>分页归属</th><th>排序</th></tr>
+              <tr><th>#</th><th>银行分类</th><th>商户</th><th>子渠道状态</th><th>商户状态</th><th>分页归属</th><th>排序</th></tr>
               <tr><td>1</td><td>—</td><td>V5Pay充值 - GCash</td><td><span class="chip ok">正常</span></td><td><span class="chip mt">维护</span></td><td>all,ewallet</td><td>1</td></tr>
               <tr><td>2</td><td>—</td><td>PayCools支付-GCash</td><td><span class="chip ok">正常</span></td><td><span class="chip mt">维护</span></td><td>all,ewallet</td><td>2</td></tr>
               <tr><td>3</td><td>—</td><td>V5Pay充值 - GCash</td><td><span class="chip ok">正常</span></td><td><span class="chip ok">正常</span></td><td>all</td><td>3</td></tr>
-              <tr><td>4</td><td>—</td><td>wow_GCASH</td><td><span class="chip off">停用</span></td><td><span class="chip gy">已删除</span></td><td>all,ewallet</td><td>4</td></tr>
+              <tr><td>4</td><td>—</td><td style="background:#ffc9de;color:#1a1a1a">#1102</td><td><span class="chip off">停用</span></td><td><span class="chip gy">已删除</span></td><td>all,ewallet</td><td>4</td></tr>
             </table>
             <div class="hintG" style="margin-top:8px">純讀，不可編輯。列全部子渠道，不分狀態。商户状态顯示商戶的最終生效狀態（正常／维护／停用，預約維護時段內直接顯示「维护」）；商戶出現已删除、方式不符、已不支援時，此欄顯示該標籤字。</div>
           </div><div class="df"><span class="btn" id="btnPopClose2">关 闭</span></div></div>
@@ -469,11 +487,7 @@ code{background:#f5f7fa;border:1px solid var(--bd2);border-radius:3px;padding:0 
         <div class="bar"><span class="btn">返回列表</span></div>
         <div class="dlg" style="max-width:none"><div class="db">
           <div class="fr"><label><span class="req">*</span>充值方式:<span class="mk">2</span></label><div class="fc"><select class="sel" id="dMethod" style="min-width:200px"><option>Bank</option><option>GCash</option><option>Maya</option><option>GrabPay</option><option>QRPH</option><option>Transfer</option><option>Counter</option><option>兌換碼</option></select><span class="hintG" style="flex-basis:auto">新增時選擇，編輯時不可修改。選「兌換碼」時，下方「子渠道前台展示」與「子渠道」區塊不顯示。</span></div></div>
-          <div class="fr"><label>显示名(英文):</label><div class="fc"><div class="in">Bank</div></div></div>
-          <div class="fr"><label>显示名(中文):</label><div class="fc"><div class="in">银行</div></div></div>
-          <div class="fr"><label>显示名(越南文):</label><div class="fc"><div class="in"></div></div></div>
-          <div class="fr"><label>显示名(菲律宾语):</label><div class="fc"><div class="in"></div></div></div>
-          <div class="fr"><label>显示名(宿雾语):</label><div class="fc"><div class="in"></div></div></div>
+          <div class="fr" style="background:#ffc9de;color:#1a1a1a"><label><span class="req">*</span>显示名:</label><div class="fc"><div class="in">Bank</div><span class="hintG" style="flex-basis:auto">多語系於列表显示名旁的「+」以「国际化列表」設定。</span></div></div>
           <div class="fr"><label><span class="req">*</span>国家:</label><div class="fc"><div class="in" style="max-width:220px">菲律宾<i>▾</i></div></div></div>
           <div class="fr"><label><span class="req">*</span>币种:</label><div class="fc"><div class="in" style="max-width:220px">PHP<i>▾</i></div></div></div>
           <div class="fr"><label><span class="req">*</span>入口图示（日间）:</label><div class="fc"><span class="up">选择文件</span><span class="thumb wide img"></span><span class="hintG" style="flex-basis:auto">建議尺寸：232 × 76</span></div></div>
@@ -482,8 +496,8 @@ code{background:#f5f7fa;border:1px solid var(--bd2);border-radius:3px;padding:0 
           <div class="fr"><label>排序:</label><div class="fc"><div class="in" style="max-width:120px">3</div></div></div>
           <div class="fr"><label><span class="req">*</span>前台是否显示:<span class="mk">5</span></label><div class="fc"><div class="rd"><span class="sel2"><b class="on"></b>是</span><span><b></b>否</span></div></div></div>
           <div class="fr" id="rowSingle" style="background:var(--newbg);border-radius:6px"><label><span class="req">*</span>子渠道前台展示<span class="q">?<span class="tip">当会员使用该充值方式时，若只能看到一个子渠道<br>选「是」：点击入口后，仍需点击该子渠道<br>选「否」：点击入口后，默认使用该子渠道，无需再次点选</span></span>:<span class="mk">4</span></label><div class="fc"><div class="rd"><span><b></b>是</span><span class="sel2"><b class="on"></b>否</span></div><span class="tagn">本次新增</span><span class="hintG" style="flex-basis:auto">滑到「?」顯示說明。只在該會員實際可見的子渠道剩一個時生效；可見兩個以上時一律顯示子渠道區塊讓會員點選。</span></div></div>
-          <div id="blkSub"><div class="sep">子渠道<span class="q lft">?<span class="tip">已删除：商户已被删除或读取不到<br>方式不符：商户的充值方式、国家或币种与此入口不符<br>已不支援：<mark style="background:#ffd9a8;color:#1a1a1a;padding:0 2px;border-radius:2px">商户支援的银行已不在该列「银行分类」所选的分类内，或该分类已停用</mark><br>已停用：商户已停用<br>维护中：商户维护中，含预约维护时段内</span></span><span class="mk">3</span></div>
-          <div class="demo"><div class="dt">可互動：切換上方「充值方式」看<mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">銀行分類欄</mark>出現／消失，選「兌換碼」整個子渠道區塊隱藏；「＋ 新增一列」加列、「删除」減列。商戶欄的標籤示意：第 2 到 6 列依序示範已删除、方式不符、已不支援、已停用、维护中五種標籤，名稱後緊接紅色標籤、仍顯示於該列；展開下拉時已刪除、已停用、維護中（含預約維護）、方式不符的商戶都不在選項內。</div>
+          <div id="blkSub"><div class="sep">子渠道<span class="q lft">?<span class="tip">已删除：商户已被删除或读取不到<br>方式不符：商户的充值方式、国家或币种与此入口不符<br>已不支援：<mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">商户已不支援该银行，或商户支援的银行已不在该列「银行分类」所选的分类内，或该分类已停用</mark><br>已停用：商户已停用<br>维护中：商户维护中，含预约维护时段内</span></span><span class="mk">3</span></div>
+          <div class="demo"><div class="dt">可互動：切換上方「充值方式」看銀行分類欄出現／消失，選「兌換碼」整個子渠道區塊隱藏；「＋ 新增一列」加列、「删除」減列。商戶欄的標籤示意：第 2 到 6 列依序示範已删除、方式不符、已不支援、已停用、维护中五種標籤，名稱後緊接紅色標籤、仍顯示於該列（已删除者名稱顯示為 #ID）；展開下拉時已刪除、已停用、維護中（含預約維護）、方式不符的商戶都不在選項內。</div>
             <table class="lt" id="dTable"></table>
             <div style="margin-top:8px"><span class="btn sm pri" id="dAdd">＋ 新增一列</span><span class="hintG" id="dHint" style="display:inline"></span></div>
           </div></div>
@@ -491,16 +505,16 @@ code{background:#f5f7fa;border:1px solid var(--bd2);border-radius:3px;padding:0 
         </div><div class="df"><span class="btn">取 消</span><span class="btn pri">确 定</span></div></div>
       </div>
 
-      <div class="card" style="background:#ffc9de;color:#1a1a1a"><h3><em>③</em>「充值展示配置」頁籤（V2）新增／編輯：子渠道删除<span class="mk">8</span></h3><div class="hintG" style="margin-bottom:8px">舊頁籤的新增／編輯頁其餘維持現狀，<mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">只在標示「商户已不支援」的列，於排序欄右側（表格外）新增紅色垃圾桶圖示；正常的列不顯示。</mark></div><table class="lt"><tr><th>银行</th><th>子渠道图示（日间）</th><th>子渠道图示（夜间）</th><th>状态</th><th>分页归属</th><th>排序</th><td style="border:none;background:transparent;width:36px"></td></tr><tr><td>Metrobank</td><td><span class="btn" style="font-size:11px">选择文件</span></td><td><span class="btn" style="font-size:11px">选择文件</span></td><td>正常<i>▾</i></td><td>All、Banks</td><td>0</td><td style="border:none;background:transparent"></td></tr><tr><td><s>BPI</s> <span class="tagn" style="color:#d9363e;border-color:#d9363e;background:#fff1f0">商户已不支援</span></td><td><span class="btn" style="font-size:11px">选择文件</span></td><td><span class="btn" style="font-size:11px">选择文件</span></td><td>正常<i>▾</i></td><td>All、Banks</td><td>0</td><td style="border:none;background:transparent;width:36px;text-align:center"><svg style="background:#ffc9de;color:#1a1a1a" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#e5484d" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;cursor:pointer"><title>删除</title><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg></td></tr><tr><td><s>BDO</s> <span class="tagn" style="color:#d9363e;border-color:#d9363e;background:#fff1f0">商户已不支援</span></td><td><span class="btn" style="font-size:11px">选择文件</span></td><td><span class="btn" style="font-size:11px">选择文件</span></td><td>正常<i>▾</i></td><td>—</td><td>0</td><td style="border:none;background:transparent;width:36px;text-align:center"><svg style="background:#ffc9de;color:#1a1a1a" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#e5484d" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;cursor:pointer"><title>删除</title><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg></td></tr></table><div style="margin-top:12px;max-width:380px"><div class="hintG" style="margin-bottom:6px">點垃圾桶圖示</div><div class="prompt"><div class="t">提示</div><div class="m"><i>!</i><div>确认删除吗？</div></div><div class="f"><span class="btn">取 消</span><span class="btn pri">确 定</span></div></div></div></div>
+      <div class="card"><h3><em>③</em>「充值展示配置」頁籤（V2）新增／編輯：子渠道删除<span class="mk">8</span></h3><div class="hintG" style="margin-bottom:8px">舊頁籤的新增／編輯頁其餘維持現狀，只在標示「商户已不支援」的列，於排序欄右側（表格外）新增紅色垃圾桶圖示；正常的列不顯示。</div><table class="lt"><tr><th>银行</th><th>子渠道图示（日间）</th><th>子渠道图示（夜间）</th><th>状态</th><th>分页归属</th><th>排序</th><td style="border:none;background:transparent;width:36px"></td></tr><tr><td>Metrobank</td><td><span class="btn" style="font-size:11px">选择文件</span></td><td><span class="btn" style="font-size:11px">选择文件</span></td><td>正常<i>▾</i></td><td>All、Banks</td><td>0</td><td style="border:none;background:transparent"></td></tr><tr><td><s>BPI</s> <span class="tagn" style="color:#d9363e;border-color:#d9363e;background:#fff1f0">商户已不支援</span></td><td><span class="btn" style="font-size:11px">选择文件</span></td><td><span class="btn" style="font-size:11px">选择文件</span></td><td>正常<i>▾</i></td><td>All、Banks</td><td>0</td><td style="border:none;background:transparent;width:36px;text-align:center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#e5484d" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;cursor:pointer"><title>删除</title><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg></td></tr><tr><td><s>BDO</s> <span class="tagn" style="color:#d9363e;border-color:#d9363e;background:#fff1f0">商户已不支援</span></td><td><span class="btn" style="font-size:11px">选择文件</span></td><td><span class="btn" style="font-size:11px">选择文件</span></td><td>正常<i>▾</i></td><td>—</td><td>0</td><td style="border:none;background:transparent;width:36px;text-align:center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#e5484d" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;cursor:pointer"><title>删除</title><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg></td></tr></table><div style="margin-top:12px;max-width:380px"><div class="hintG" style="margin-bottom:6px">點垃圾桶圖示</div><div class="prompt"><div class="t">提示</div><div class="m"><i>!</i><div>确认删除吗？</div></div><div class="f"><span class="btn">取 消</span><span class="btn pri">确 定</span></div></div></div></div>
 
       <div class="adj"><h4>本次調整</h4><ol>
         <li><span class="mk">1</span><b>新增頁籤「充值展示配置（新）」</b>
           <ul class="sub">
             <li>・位置：在線支付展示配置（新），於「充值展示配置」與「分页类型设定」之間。</li>
             <li>・新增、編輯為獨立分頁，操作方式同「充值展示配置」頁籤。</li>
-            <li>・列表欄位：充值方式／显示名／国家／币种／入口图示（日间）／入口图示（夜间）／分页归属／排序／子渠道数／商户数／前台是否显示／子渠道前台展示／操作（编辑、删除）。</li>
+            <li>・列表欄位：充值方式／显示名／国家／币种／入口图示（日间）／入口图示（夜间）／分页归属／排序／子渠道数／商户数／前台是否显示／子渠道前台展示／操作（编辑、删除）。<mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">显示名旁有藍色「+」，點擊開啟「国际化列表」設定多語系。</mark></li>
             <li>・分页归属沿用「分页类型设定」的分頁。</li>
-            <li>・刪除入口：沿用現行確認窗「<mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">确认删除吗？</mark>」，確定後整筆入口含子渠道設定一併刪除，前台即不顯示；兌換碼入口同。</li>
+            <li>・刪除入口：沿用現行確認窗「确认删除吗？」，確定後整筆入口含子渠道設定一併刪除，前台即不顯示；兌換碼入口同。</li>
           </ul>
         </li>
         <li><span class="mk">2</span><b>入口欄位</b>
@@ -508,7 +522,7 @@ code{background:#f5f7fa;border:1px solid var(--bd2);border-radius:3px;padding:0 
             <li>・充值方式：必填，單選。選項由後端提供，目前為 GCash／Maya／GrabPay／Bank／QRPH／Transfer／Counter／兌換碼，後續若要新增由後端處理。新增時選擇，編輯時不可修改。</li>
             <li>・選「兌換碼」時：显示名、国家、币种、入口图示、分页归属、排序、前台是否显示照常填寫；「子渠道前台展示」與「子渠道」區塊不顯示、不需填；列表的子渠道前台展示、子渠道数／商户数顯示「—」。可建多筆。</li>
             <li>・同一個充值方式可建立的入口筆數不限：例如同時存在兩筆 GCash、三筆 Bank、四筆 Maya 都可以，每一筆各自設定顯示名、圖示、排序與子渠道，前台一筆一顆磁貼。</li>
-            <li>・显示名（英文／中文／越南文／菲律宾语／宿雾语）、国家、币种、入口图示（日间）、入口图示（夜间）、分页归属、排序：同「充值展示配置」頁籤的對應欄位規則；兩張入口图示必填；分页归属預設不勾選。</li>
+            <li>・<mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">显示名：單一欄位、必填；多語系以列表显示名旁的「+」開啟「国际化列表」設定。</mark>国家、币种、入口图示（日间）、入口图示（夜间）、分页归属、排序：同「充值展示配置」頁籤的對應欄位規則；兩張入口图示必填；分页归属預設不勾選。</li>
             <li>・入口图示固定用此處上傳的圖。</li>
           </ul>
         </li>
@@ -517,35 +531,36 @@ code{background:#f5f7fa;border:1px solid var(--bd2);border-radius:3px;padding:0 
             <li>・每一列為一個子渠道，用「＋ 新增一列」增加、「删除」移除，筆數不限，至少一筆才能保存。</li>
             <li>・欄位依充值方式分兩種：
               <ul class="sub" style="padding-left:16px">
-                <li>Bank／Transfer：<mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">银行分类</mark>／商户／子渠道图示（日间）／子渠道图示（夜间）／状态／分页归属／排序／操作</li>
-                <li>GCash／Maya／GrabPay／QRPH／Counter：商户／子渠道图示（日间）／子渠道图示（夜间）／状态／分页归属／排序／操作（無<mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">银行分类</mark>欄）</li>
+                <li>Bank／Transfer：银行分类／商户／子渠道图示（日间）／子渠道图示（夜间）／状态／分页归属／排序／操作</li>
+                <li>GCash／Maya／GrabPay／QRPH／Counter：商户／子渠道图示（日间）／子渠道图示（夜间）／状态／分页归属／排序／操作（無银行分类欄）</li>
               </ul>
             </li>
-            <li>・<mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">银行分类下拉</mark>：<mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">來源為「充值银行分类」TAB，只列出至少有一筆「充值」TAB 銀行設定為該分類者。</mark></li>
-            <li style="background:#ffc9de;color:#1a1a1a">・該列綁定的分類被<mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">停用</mark>時，<mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">银行分类欄</mark>顯示「原分類名稱<mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">（已停用）</mark>」，商戶標「已不支援」；重新選擇銀行分類與商戶後恢復。</li>
+            <li>・银行分类下拉：來源為「充值银行分类」TAB，只列出至少有一筆「充值」TAB 銀行設定為該分類者。</li>
+            <li>・該列綁定的分類被停用時，银行分类欄顯示「原分類名稱（已停用）」，商戶標「已不支援」；重新選擇銀行分類與商戶後恢復。</li>
             <li>・商户下拉，同時符合以下條件的商戶才列出：
               <ul class="sub" style="padding-left:16px">
                 <li>充值方式與入口相同</li>
                 <li>國家、幣種與入口相同</li>
                 <li>最終生效狀態為正常（停用、維護、預約維護時段內皆不可選）</li>
-                <li style="background:#ffc9de;color:#1a1a1a">Bank、Transfer 類再加一條：商戶在「充值」TAB 有銀行設定為該列選定的分類</li>
+                <li>Bank、Transfer 類再加一條：<mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">商戶的支付类型底下（字典表「充值」TAB 中支付类型相同的銀行），有銀行設定為該列選定的分類</mark></li>
               </ul>
             </li>
             <li>・充值方式留空的商戶不出現在商戶下拉。</li>
-            <li>・同一個商戶、<mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">同一個銀行分類</mark>可被綁定的次數不限：同一入口內可重複，不同入口之間也可重複。商戶下拉與<mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">銀行分類下拉</mark>都不排除已被綁定者。</li>
+            <li style="background:#ffc9de;color:#1a1a1a">・商户欄、商户下拉與明細彈窗的商户欄，顯示商戶的「支付名称」。</li>
+            <li>・同一個商戶、同一個銀行分類可被綁定的次數不限：同一入口內可重複，不同入口之間也可重複。商戶下拉與銀行分類下拉都不排除已被綁定者。</li>
             <li>・商戶欄的標籤（編輯時）：該列原本選定的商戶出現下列情況時，商戶名稱後緊接紅色標籤（樣式同現行「商户已不支援」標籤），正常不標：
               <ul class="sub" style="padding-left:16px">
-                <li>已删除：商戶已被刪除或讀取不到</li>
+                <li>已删除：商戶已被刪除或讀取不到<mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">；商戶名稱改顯示該商戶在「在線商戶配置（新）」充值 TAB 的「#」，例：#598（已删除），商户下拉與明細彈窗同</mark></li>
                 <li>方式不符：商戶的充值方式、國家或幣種與此入口不符</li>
-                <li>已不支援：<mark style="background:#ffd9a8;color:#1a1a1a;padding:0 2px;border-radius:2px">該列商戶支援的銀行已不在「银行分类」欄選定的分類內，或該分類已停用。只有充值方式為 Bank、Transfer 的入口會出現此標籤。</mark></li>
+                <li>已不支援：<mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">商戶已不支援該銀行，或該列商戶支援的銀行已不在「银行分类」欄選定的分類內，或該分類已停用。只有充值方式為 Bank、Transfer 的入口會出現此標籤。<mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">商戶支援的銀行＝字典表「充值」TAB 中支付类型與該商戶相同的銀行。</mark></mark></li>
                 <li>已停用：商戶最終生效狀態為停用</li>
                 <li>维护中：商戶最終生效狀態為維護，含預約維護時段內</li>
               </ul>
             </li>
             <li>・標籤只掛該列已選定的商戶；下拉選項不帶標籤，且不列出停用、維護、已刪除、方式不符的商戶。</li>
             <li>・前四種（已删除、方式不符、已不支援、已停用）該子渠道前台不顯示、不計入子渠道数／商户数；维护中前台標維護不可點、仍計入。五種皆可重新選擇商戶。</li>
-            <li style="background:#ffc9de;color:#1a1a1a">・一列同時符合多種時只顯示一個，順序：已删除 → 方式不符 → 已不支援 → 已停用 → 维护中。</li>
-            <li>・「子渠道」標題旁有「?」圖示，滑過顯示五種標籤的說明文案：<br>已删除：商户已被删除或读取不到<br>方式不符：商户的充值方式、国家或币种与此入口不符<br>已不支援：<mark style="background:#ffd9a8;color:#1a1a1a;padding:0 2px;border-radius:2px">商户支援的银行已不在该列「银行分类」所选的分类内，或该分类已停用</mark><br>已停用：商户已停用<br>维护中：商户维护中，含预约维护时段内</li>
+            <li>・一列同時符合多種時只顯示一個，順序：已删除 → 方式不符 → 已不支援 → 已停用 → 维护中。</li>
+            <li>・「子渠道」標題旁有「?」圖示，滑過顯示五種標籤的說明文案：<br>已删除：商户已被删除或读取不到<br>方式不符：商户的充值方式、国家或币种与此入口不符<br>已不支援：<mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">商户已不支援该银行，或商户支援的银行已不在该列「银行分类」所选的分类内，或该分类已停用</mark><br>已停用：商户已停用<br>维护中：商户维护中，含预约维护时段内</li>
             <li>・子渠道图示（日间）（夜间）：每一筆必填，不論子渠道筆數。建議尺寸 232 × 76。</li>
             <li>・状态：子渠道自身的狀態，正常／维护／停用，預設正常。前台先依商戶最終生效狀態（含預約維護）判斷，再看此狀態，判斷流程在「顯示判斷流程」頁。</li>
             <li>・分页归属：預設不勾選。排序：數字。</li>
@@ -569,15 +584,15 @@ code{background:#f5f7fa;border:1px solid var(--bd2);border-radius:3px;padding:0 
           <ul class="sub">
             <li>・顯示格式「子渠道數／商戶數」，計入條件：子渠道状态為正常或維護、且商戶最終生效狀態為正常或維護；子渠道停用，或商戶停用、已删除、方式不符、已不支援的子渠道不計入。商戶數為不重複商戶數。</li>
             <li>・欄名旁有「?」圖示，滑過顯示：<br>只统计使用中（正常或维护）的子渠道与商户<br>子渠道或商户为停用、已删除等状态时不计入<br>点击此栏数字可查看子渠道明细与商户状态</li>
-            <li>・點擊開啟唯讀彈窗，列出此入口全部子渠道（不分狀態）：<mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">银行分类</mark>（<mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">分類<mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">已停用</mark>者顯示「原分類名稱<mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">（已停用）</mark>」；</mark>GCash／Maya／GrabPay／QRPH／Counter 顯示「—」）／商户／子渠道状态／商户状态／分页归属／排序。商户状态顯示商戶的最終生效狀態（狀態欄與預約維護時段取較嚴格者）：預約維護時段內直接顯示「维护」，不另標預約；商戶出現已删除、方式不符、已不支援時，此欄顯示該標籤字。</li>
+            <li>・點擊開啟唯讀彈窗，列出此入口全部子渠道（不分狀態）：银行分类（分類已停用者顯示「原分類名稱（已停用）」；GCash／Maya／GrabPay／QRPH／Counter 顯示「—」）／商户／子渠道状态／商户状态／分页归属／排序。商户状态顯示商戶的最終生效狀態（狀態欄與預約維護時段取較嚴格者）：預約維護時段內直接顯示「维护」，不另標預約；商戶出現已删除、方式不符、已不支援時，此欄顯示該標籤字。</li>
             <li>・兌換碼入口無子渠道，此欄顯示「—」、不可點。</li>
             <li>・入口底下沒有任何子渠道計入時顯示 0／0，前台該入口自動不顯示。</li>
           </ul>
         </li>
         <li><span class="mk">7</span><b>未綁定商戶提示</b>：列表上方提示「有 N 个状态正常的商户尚未绑定任何子渠道，请及时配置：{支付名称}、…」。計算範圍為本平台、狀態為正常且當下不在預約維護時段內、充值方式已填、且未出現在此頁籤任何子渠道的商戶；全部已綁定時不顯示。</li>
-        <li style="background:#ffc9de;color:#1a1a1a"><span class="mk">8</span><b>「充值展示配置」頁籤（V2）子渠道新增删除</b>：子渠道列標示「商户已不支援」者，<mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">於排序欄右側（表格外）新增紅色垃圾桶圖示</mark><mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">，點擊跳「确认删除吗？」，確定後刪除該子渠道</mark>；正常者<mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">不顯示圖示</mark>。</li>
+        <li><span class="mk">8</span><b>「充值展示配置」頁籤（V2）子渠道新增删除<mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">、與字典表一致性檢查</mark></b>：子渠道列標示「商户已不支援」者，於排序欄右側（表格外）新增紅色垃圾桶圖示，點擊跳「确认删除吗？」，確定後刪除該子渠道；正常者不顯示圖示。<mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">帶入商戶自動長出子渠道時，與字典表做一致性檢查：字典表缺少者自動補建（支付类型帶該商戶的支付类型），多出者不刪除。</mark></li>
       </ol></div>
-      <div class="adj" style="background:#ffc9de;color:#1a1a1a"><h4>子渠道狀態對照表</h4><table class="lt"><tr><th class="l">情況</th><th class="l">子渠道列標示</th><th>前台</th><th>計入子渠道数／商户数</th></tr><tr><td class="l">子渠道狀態正常、商戶正常、銀行分類正常</td><td class="l">不標</td><td>顯示、可點</td><td>計入</td></tr><tr><td class="l">子渠道狀態設為維護</td><td class="l">不標</td><td>標維護、不可點</td><td>計入</td></tr><tr><td class="l">子渠道狀態設為停用</td><td class="l">不標</td><td>不顯示</td><td>不計</td></tr><tr><td class="l">商戶維護（含預約維護時段內）</td><td class="l">商戶後標「维护中」</td><td>標維護、不可點</td><td>計入</td></tr><tr><td class="l">商戶停用</td><td class="l">商戶後標「已停用」</td><td>不顯示</td><td>不計</td></tr><tr><td class="l">商戶的充值方式被改成與入口不同或被清空（例：入口是 GCash，商戶改成 Maya），或商戶的國家、幣種改成與入口不同</td><td class="l">商戶後標「方式不符」</td><td>不顯示</td><td>不計</td></tr><tr><td class="l">商戶被刪除或讀取不到</td><td class="l">商戶後標「已删除」</td><td>不顯示</td><td>不計</td></tr><tr><td class="l" colspan="4"><b>以下<mark style="background:#ffd9a8;color:#1a1a1a;padding:0 2px;border-radius:2px">兩種</mark>只會發生在充值方式為 Bank、Transfer 的入口（有银行分类欄）</b></td></tr><tr><td class="l">該列商戶在「充值」TAB 對應的那筆銀行被改到其他分類、或分類被清空</td><td class="l">商戶後標「已不支援」</td><td>不顯示</td><td>不計</td></tr><tr><td class="l">該列選定的分類在「充值银行分类」TAB 被<mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">停用</mark></td><td class="l">商戶後標「已不支援」；银行分类欄顯示「原分類名稱<mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">（已停用）</mark>」</td><td>不顯示</td><td>不計</td></tr><tr><td class="l">分類在「充值银行分类」TAB 改名</td><td class="l">不標，银行分类欄顯示新名稱</td><td>不受影響</td><td>不受影響</td></tr></table><div class="hintG" style="margin-top:8px">一列同時符合多種時只顯示一個標籤，順序：已删除 → 方式不符 → 已不支援 → 已停用 → 维护中。</div></div>
+      <div class="adj"><h4>子渠道狀態對照表</h4><table class="lt"><tr><th class="l">情況</th><th class="l">子渠道列標示</th><th>前台</th><th>計入子渠道数／商户数</th></tr><tr><td class="l">子渠道狀態正常、商戶正常、銀行分類正常</td><td class="l">不標</td><td>顯示、可點</td><td>計入</td></tr><tr><td class="l">子渠道狀態設為維護</td><td class="l">不標</td><td>標維護、不可點</td><td>計入</td></tr><tr><td class="l">子渠道狀態設為停用</td><td class="l">不標</td><td>不顯示</td><td>不計</td></tr><tr><td class="l">商戶維護（含預約維護時段內）</td><td class="l">商戶後標「维护中」</td><td>標維護、不可點</td><td>計入</td></tr><tr><td class="l">商戶停用</td><td class="l">商戶後標「已停用」</td><td>不顯示</td><td>不計</td></tr><tr><td class="l">商戶的充值方式被改成與入口不同或被清空（例：入口是 GCash，商戶改成 Maya），或商戶的國家、幣種改成與入口不同</td><td class="l">商戶後標「方式不符」</td><td>不顯示</td><td>不計</td></tr><tr><td class="l">商戶被刪除或讀取不到</td><td class="l">商戶後標「已删除」</td><td>不顯示</td><td>不計</td></tr><tr><td class="l" colspan="4"><b>以下<mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">三種</mark>只會發生在充值方式為 Bank、Transfer 的入口（有银行分类欄）</b></td></tr><tr style="background:#ffc9de;color:#1a1a1a"><td class="l">該列商戶已不支援該銀行（上游不再支援，由後端判斷）</td><td class="l">商戶後標「已不支援」</td><td>不顯示</td><td>不計</td></tr><tr><td class="l">該列商戶在「充值」TAB 對應的那筆銀行被改到其他分類、或分類被清空</td><td class="l">商戶後標「已不支援」</td><td>不顯示</td><td>不計</td></tr><tr><td class="l">該列選定的分類在「充值银行分类」TAB 被停用</td><td class="l">商戶後標「已不支援」；银行分类欄顯示「原分類名稱（已停用）」</td><td>不顯示</td><td>不計</td></tr><tr><td class="l">分類在「充值银行分类」TAB 改名</td><td class="l">不標，银行分类欄顯示新名稱</td><td>不受影響</td><td>不受影響</td></tr></table><div class="hintG" style="margin-top:8px">一列同時符合多種時只顯示一個標籤，順序：已删除 → 方式不符 → 已不支援 → 已停用 → 维护中。</div></div>
       <div class="adj" style="border-style:dashed"><h4>既有邏輯（沿用、不調整）</h4><ol>
         <li><b>分页归属的顯示判斷</b>：入口與子渠道各自勾選；子渠道要顯示於某分頁，前提是入口也勾了該分頁。</li>
         <li><b>入口未勾任何分页</b>：各分頁皆不顯示；與「前台是否显示」為兩層各自的判斷，互不衝突。</li>
@@ -618,7 +633,7 @@ code{background:#f5f7fa;border:1px solid var(--bd2);border-radius:3px;padding:0 
             <li>・Transfer 類入口的子渠道點選後同樣進入該商戶現行流程：PayCools-BankTrans 進入其現行畫面（InstaPay Transfer Guide、Transfer Details）；送出後才跳轉第三方頁面的商戶，依現行於送出後跳轉。</li>
           </ul>
         </li>
-        <li><span class="mk">3</span><b>會員送單</b>：送單對象為會員選定子渠道所綁定的商戶；<mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">Bank、Transfer 類子渠道由後端對應到該商戶在此分類下的銀行，帶該筆的三方銀行代碼；同一商戶在此分類下有多筆時用哪一筆由後端決定。其餘類不帶銀行。</mark>金額上下限、手續費／返利、流水倍數等皆依該商戶現行設定。</li>
+        <li><span class="mk">3</span><b>會員送單</b>：送單對象為會員選定子渠道所綁定的商戶；Bank、Transfer 類子渠道由後端<mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">依商戶的支付类型，對應到字典表中設定為此分類的銀行</mark>，帶該筆的银行代码；同一商戶在此分類下有多筆時用哪一筆由後端決定。其餘類不帶銀行。金額上下限、手續費／返利、流水倍數等皆依該商戶現行設定。</li>
       </ol></div>
     </section>
 
@@ -683,15 +698,27 @@ code{background:#f5f7fa;border:1px solid var(--bd2);border-radius:3px;padding:0 
           <li>・後端：隨 1112 版本推上生產。</li>
           <li>・前端：不隨 1112 版本推上生產，先推至生產測試環境供營運測試，確認沒問題後再推上生產。</li>
           <li>・APP：不隨 1112 版本週更，獨立一版送審；待營運測試確認沒問題後再送審。</li>
-          <li>・營運測試前，須於生產後台完成新頁籤全部入口與子渠道設定，並補齊商戶的充值方式<mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">、「充值」TAB 各筆的银行分类</mark>。</li>
+          <li>・營運測試前，須於生產後台完成新頁籤全部入口與子渠道設定，並補齊商戶的充值方式、「充值」TAB 各筆的银行分类。</li>
         </ul>
       </div>
       <div class="card"><h3><em>②</em>新舊版範圍</h3>
-        <table class="st2" style="max-width:720px"><tr><th>版本</th><th>前台充值讀取來源</th></tr><tr><td>初版</td><td class="l"><mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">未更新至 V2 的 APP 使用；</mark>不讀新頁籤，不受本單影響</td></tr><tr><td>V2</td><td class="l">舊版前端、<mark style="background:#ffc9de;color:#1a1a1a;padding:0 2px;border-radius:2px">以及已更新至 V2 但未更新至 V3 的 APP</mark> 的讀取來源：「充值展示配置」頁籤；WOWGames 維持此版，不在此次更新內</td></tr><tr><td>V3（本單新增）</td><td class="l">新版前端與新版 APP 的讀取來源：「充值展示配置（新）」頁籤</td></tr></table>
+        <table class="st2" style="max-width:720px"><tr><th>版本</th><th>前台充值讀取來源</th></tr><tr><td>初版</td><td class="l">未更新至 V2 的 APP 使用；不讀新頁籤，不受本單影響</td></tr><tr><td>V2</td><td class="l">舊版前端、以及已更新至 V2 但未更新至 V3 的 APP 的讀取來源：「充值展示配置」頁籤；WOWGames 維持此版，不在此次更新內</td></tr><tr><td>V3（本單新增）</td><td class="l">新版前端與新版 APP 的讀取來源：「充值展示配置（新）」頁籤</td></tr></table>
       </div>
       <div class="adj"><h4>本次調整</h4><ol>
         <li><span class="mk">1</span><b>不做資料轉移</b>：舊頁籤的資料不轉入新頁籤，新頁籤由營運自行建立；舊頁籤保留不動。</li>
       </ol></div>
+    </section>
+
+    <!-- ══════════ 7 版本更新紀錄 ══════════ -->
+    <section class="pg" id="p7">
+      <div class="card"><h3>版本更新紀錄</h3>
+        <table class="lt vlog">
+          <tr><th style="width:70px">版本</th><th style="width:70px">日期</th><th class="l">更新內容／原因</th></tr>
+          <tr><td>V2.1</td><td>11/10</td><td class="l">依 RD 回饋調整<br><br>調整：<br>1. <a data-go="p3">充值展示配置（新）子渠道表：標籤「已不支援」定義補回「商戶已不支援該銀行」（上游不再支援，由後端判斷），子渠道狀態對照表補回該列</a><br>2. <a data-go="p3">充值展示配置（新）子渠道表：商户欄、商户下拉與明細彈窗的商户欄明定顯示商戶的「支付名称」</a><br>3. <a data-go="p3">充值展示配置（新）子渠道表：商戶被刪除時，商戶名稱改顯示該商戶在在線商戶配置（新）充值 TAB 的「#」（例：#598（已删除）），商户下拉與明細彈窗同</a><br>4. <a data-go="p1">銀行字典表充值 TAB：「种类」刪除、原位置改放「支付类型」（唯讀，既有資料由 RD 補齊）；新增「新增」依支付类型匯入尚未在字典表的銀行，可同時設定银行分类</a><br>5. <a data-go="p1">銀行字典表：補配置順序（先充值展示配置再充值展示配置（新）不用匯入；先充值展示配置（新）須先匯入）</a><br>6. <a data-go="p3">充值展示配置（新）：商户下拉、已不支援、前台送單的商戶與字典銀行對應改以支付类型為準；「充值展示配置」頁籤帶入商戶時與字典表一致性檢查，缺少者自動補、多出者不刪</a><br>7. <a data-go="p3">充值展示配置（新）：入口的显示名改為單一欄位，多語系以「国际化列表」設定（列表显示名旁「+」）</a></td></tr>
+          <tr><td>V2</td><td>11/9</td><td class="l">依 RD 回饋，銀行字典表改為分類制<br><br>新增：<br>1. <a data-go="p1">銀行字典表新增「充值银行分类」TAB：可新增、編輯，狀態正常／停用，不提供刪除；停用的分類不出現在下拉，已設定者顯示「分類名稱（已停用）」，列表停用者排最下</a><br>2. <a data-go="p1">銀行字典表「充值」TAB 新增「银行分类」欄位與「删除」功能；刪除時先判斷充值展示配置、再判斷充值展示配置（新）有無子渠道綁定，有綁定即阻斷；已綁定者調整分類時跳警示</a><br>3. <a data-go="p3">充值展示配置（新）新增「子渠道狀態對照表」，並明定一列同時符合多種時只顯示一個標籤的順序</a><br>4. <a data-go="p3">「充值展示配置」頁籤（V2）子渠道標「商户已不支援」者，於排序欄右側新增紅色垃圾桶可刪除該子渠道</a><br><br>調整：<br>1. <a data-go="p1">銀行字典表「充值」TAB 的「银行名称」改為「三方银行名称」，刪除原「每家銀行唯一一筆」規則</a><br>2. <a data-go="p3">充值展示配置（新）子渠道的「银行」改為「银行分类」：下拉來源改為「充值银行分类」TAB，商户下拉依分類篩選（原待討論黃框移除）</a><br>3. <a data-go="p3">標籤「已不支援」定義改為分類口徑；分類停用者银行分类欄顯示「原分類名稱（已停用）」</a><br>4. <a data-go="p4">前台會員送單：Bank、Transfer 類改為由後端對應到該商戶在此分類下的銀行，帶三方銀行代碼</a><br>5. <a data-go="p6">新舊版範圍：初版、V2 的 APP 說法改為「未更新至 V2」「已更新至 V2 但未更新至 V3」</a><br>6. <a data-go="p1">本單所有刪除確認文案統一為「确认删除吗？」</a><br>7. <a data-go="p0">需求目的、②充值方式清單、④範圍與生產上線方式同步更新</a></td></tr>
+          <tr><td>V1</td><td>10/30</td><td class="l">初版發佈</td></tr>
+        </table>
+      </div>
     </section>
   </div>
 </div>
@@ -723,7 +750,7 @@ document.getElementById('btnPopClose').onclick=document.getElementById('btnPopCl
 const BANKS=['BDO','BPI','Metrobank','UnionBank','RCBC'];
 const MERCH={
   兌換碼:[],
-  Bank:[{n:'FortunePay支付',b:['BDO','BPI','Metrobank','UnionBank']},{n:'ARX-2143-储值',b:['BDO','RCBC','Metrobank'],s:'已删除'},{n:'V5PAY充值',b:['BPI'],s:'已停用'},{n:'UnionPay-OKB',b:['UnionBank','BDO'],s:'维护中'},{n:'PayGo-网银',b:['RCBC'],s:'方式不符'},{n:'ABank支付',b:['Metrobank'],s:'已不支援'}],
+  Bank:[{n:'FortunePay支付',b:['BDO','BPI','Metrobank','UnionBank']},{n:'#598',b:['BDO','RCBC','Metrobank'],s:'已删除'},{n:'V5PAY充值',b:['BPI'],s:'已停用'},{n:'UnionPay-OKB',b:['UnionBank','BDO'],s:'维护中'},{n:'PayGo-网银',b:['RCBC'],s:'方式不符'},{n:'ABank支付',b:['Metrobank'],s:'已不支援'}],
   GCash:[{n:'V5Pay充值 - GCash'},{n:'PayCools支付-GCash'},{n:'wow_GCASH'}],
   Maya:[{n:'PayCools支付 - PAYMAYA'},{n:'maya-英文'}],
   GrabPay:[{n:'GrabPaytest'}],
@@ -731,7 +758,7 @@ const MERCH={
   Transfer:[{n:'PayCools支付-BankTrans',b:BANKS}],
   Counter:[{n:'FortunePay-FPAY'}]
 };
-let dRows=[{bank:'BDO',merch:'FortunePay支付',st:'正常',sort:1},{bank:'BDO',merch:'ARX-2143-储值',st:'正常',sort:2},{bank:'RCBC',merch:'PayGo-网银',st:'正常',sort:3},{bank:'Metrobank',merch:'ABank支付',st:'正常',sort:4},{bank:'BPI',merch:'V5PAY充值',st:'正常',sort:5},{bank:'UnionBank',merch:'UnionPay-OKB',st:'正常',sort:6}];
+let dRows=[{bank:'BDO',merch:'FortunePay支付',st:'正常',sort:1},{bank:'BDO',merch:'#598',st:'正常',sort:2},{bank:'RCBC',merch:'PayGo-网银',st:'正常',sort:3},{bank:'Metrobank',merch:'ABank支付',st:'正常',sort:4},{bank:'BPI',merch:'V5PAY充值',st:'正常',sort:5},{bank:'UnionBank',merch:'UnionPay-OKB',st:'正常',sort:6}];
 const dMethod=document.getElementById('dMethod');
 function merchOptions(m,bank){const list=MERCH[m]||[];return (m==='Bank'||m==='Transfer')?list:list;}
 function renderD(){
@@ -872,6 +899,7 @@ function renderFront(){
 function renderAll(){renderCfg();if(fSel){const e=ENT.find(x=>x.id===fSel);if(!e||evalEnt(e).state!=='ok'){fSel=null;fSub=null;}else{const r=evalEnt(e);if(fSub!==null&&!r.vis.find(s=>s.idx===fSub&&!s.mt))fSub=null;}}fPrompt=false;renderFront();}
 document.querySelectorAll('.ftabs span').forEach(s=>s.onclick=()=>{document.querySelectorAll('.ftabs span').forEach(x=>x.classList.remove('on'));s.classList.add('on');fView=s.dataset.v;renderFront();});
 renderAll();
+document.querySelectorAll('[data-go]').forEach(l=>l.addEventListener('click',()=>{const a=document.querySelector('.side a[data-p="'+l.dataset.go+'"]');if(a)a.click();window.scrollTo(0,0);}));
 </script>
 </body>
 </html>
