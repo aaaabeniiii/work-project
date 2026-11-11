@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OKF-2750 消息推送_新增自動消息 規格書 v1</title>
+<style>
+:root { color-scheme: light; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: #ffffff; color: #1f2329; }
+body { font-family: "PingFang SC", "PingFang TC", "Helvetica Neue", Helvetica, "Microsoft JhengHei", "microsoft yahei", arial, sans-serif; font-size: 14px; line-height: 1.7; }
+.doc { width: 1600px; margin: 0 auto; padding: 40px 40px 80px; background: #ffffff; }
+.doc h1 { font-size: 26px; line-height: 1.4; margin: 0 0 16px; font-weight: 600; }
+.doc h2 { font-size: 20px; line-height: 1.4; margin: 44px 0 14px; padding-bottom: 8px; border-bottom: 2px solid #1f2329; font-weight: 600; }
+.doc h3 { font-size: 16px; line-height: 1.4; margin: 26px 0 10px; font-weight: 600; }
+.doc p { margin: 8px 0; }
+.doc ul, .doc ol { margin: 8px 0; padding-left: 22px; }
+.doc li { margin: 4px 0; }
+.ui { font-family: "PingFang SC", "Helvetica Neue", Helvetica, "microsoft yahei", arial, STHeiTi, sans-serif; }
+
+/* spec tables */
+table.spec { border-collapse: collapse; width: 100%; margin: 10px 0 6px; table-layout: fixed; }
+table.spec th, table.spec td { border: 1px solid #c9cdd4; padding: 8px 10px; text-align: left; vertical-align: top; font-size: 14px; line-height: 1.6; }
+table.spec th { background: #f2f3f5; font-weight: 600; white-space: nowrap; }
+table.spec td.nw { white-space: nowrap; }
+.meta td:first-child { background: #f2f3f5; font-weight: 600; white-space: nowrap; width: 140px; }
+.note { background: #fff7e6; border: 1px solid #ffd591; padding: 10px 14px; margin: 12px 0; }
+.cap { font-size: 13px; color: #4e5969; margin: 6px 0 4px; }
+
+/* ---------- backend mockup (values taken from the live backend) ---------- */
+.bk { background: #d6e4f3; padding: 20px 21px 21px; width: 1520px; font-family: "PingFang SC", "Helvetica Neue", Helvetica, "microsoft yahei", arial, STHeiTi, sans-serif; font-size: 14px; line-height: normal; color: #000; }
+.bk .content-box { background: #fff; border-radius: 8px; padding: 10px; box-shadow: 1px 1px 2px rgba(82,90,102,.04), 2px 2px 8px rgba(82,90,102,.08); }
+.bk .crumb { padding: 10px; font-size: 14px; line-height: 14px; color: #31373d; white-space: nowrap; }
+.bk .crumb .sep { margin: 0 9px; color: #606266; }
+.bk .page-tags { background: #f5f7fa; padding: 4px 10px; height: 32px; margin: 0 0 10px; display: flex; white-space: nowrap; overflow: hidden; }
+.bk .ptag { height: 24px; line-height: 22px; padding: 0 9px; margin-right: 5px; font-size: 12px; color: #31373d; background: #fff; border: 1px solid #dcdfe6; border-radius: 3px; white-space: nowrap; }
+.bk .ptag.on { background: #1a56db; border-color: #1a56db; color: #fff; }
+.bk .ptag i { font-style: normal; margin-left: 6px; }
+.bk .el-tabs { border: 1px solid #dcdfe6; background: #fff; box-shadow: 0 2px 4px 0 rgba(0,0,0,.12), 0 0 6px 0 rgba(0,0,0,.04); }
+.bk .el-tabs__header { background: #f5f7fa; border-bottom: 1px solid #e4e7ed; height: 39px; display: flex; }
+.bk .el-tabs__item { height: 40px; line-height: 40px; padding: 0 20px; font-size: 14px; font-weight: 500; color: #909399; margin: -1px 0 0 -1px; border: 1px solid transparent; white-space: nowrap; }
+.bk .el-tabs__item.is-active { color: #409eff; background: #fff; border-right-color: #dcdfe6; border-left-color: #dcdfe6; }
+.bk .el-tabs__content { padding: 15px; }
+.bk .handle-box { height: 32px; margin: 0 0 5px; display: flex; align-items: center; white-space: nowrap; }
+.bk .sel { position: relative; display: inline-block; width: 120px; height: 32px; line-height: 30px; padding: 0 30px 0 15px; font-size: 13px; color: #c0c4cc; background: #fff; border: 1px solid #dcdfe6; border-radius: 4px; white-space: nowrap; overflow: hidden; }
+.bk .sel.val { color: #606266; }
+.bk .sel::after { content: ""; position: absolute; right: 12px; top: 11px; width: 6px; height: 6px; border-right: 1px solid #c0c4cc; border-bottom: 1px solid #c0c4cc; transform: rotate(45deg); }
+.bk .sel.noarrow::after { display: none; }
+.bk .sel.open { border-color: #409eff; }
+.bk .sel.open::after { top: 14px; transform: rotate(-135deg); }
+.bk .btn { display: inline-block; font-size: 12px; font-weight: 500; line-height: 12px; padding: 9px 15px; height: 32px; border-radius: 3px; border: 1px solid #dcdfe6; background: #fff; color: #606266; white-space: nowrap; text-align: center; }
+.bk .btn.primary { background: #409eff; border-color: #409eff; color: #fff; }
+.bk .btn.mini { padding: 7px 15px; height: 28px; }
+.bk .btn.success { background: #67c23a; border-color: #67c23a; color: #fff; }
+.bk .btn.warning { background: #e6a23c; border-color: #e6a23c; color: #fff; }
+.bk .btn.danger { background: #f56c6c; border-color: #f56c6c; color: #fff; }
+.bk .btn.danger.dis { background: #fab6b6; border-color: #fab6b6; }
+.bk .ml10 { margin-left: 10px; }
+.bk .mr10 { margin-right: 10px; }
+.bk table.el { border-collapse: collapse; width: 100%; table-layout: fixed; border: 1px solid #ebeef5; background: #fff; }
+.bk table.el th, .bk table.el td { border: 1px solid #ebeef5; padding: 8px 10px; text-align: center; font-size: 12px; line-height: 23px; }
+.bk table.el th { color: #909399; font-weight: 700; white-space: nowrap; height: 40px; }
+.bk table.el td { color: #606266; }
+.bk table.el.tight th, .bk table.el.tight td { padding: 8px 6px; white-space: nowrap; }
+.bk table.el td.ell { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.bk table.el td.ops { white-space: nowrap; padding: 8px 4px; }
+.bk table.el td.ops .btn { margin: 0 3px; }
+.bk .el-tag { display: inline-block; height: 20px; line-height: 19px; padding: 0 10px; font-size: 12px; border-radius: 10px; border: 1px solid transparent; white-space: nowrap; }
+.bk .el-tag.success { background: #f0f9eb; color: #67c23a; }
+.bk .el-tag.info { background: #f4f4f5; color: #909399; }
+.bk .pagination { margin: 20px 0; height: 32px; padding: 2px 5px; display: flex; justify-content: flex-end; align-items: center; white-space: nowrap; }
+.bk .pagination .total { font-size: 13px; color: #606266; margin-right: 10px; line-height: 28px; }
+.bk .pagination .pg { width: 30px; height: 28px; line-height: 28px; margin: 0 5px; text-align: center; font-size: 13px; border-radius: 2px; background: #f4f4f5; color: #c0c4cc; }
+.bk .pagination .pg.on { background: #409eff; color: #fff; font-weight: 700; }
+.bk .dropdown { position: absolute; z-index: 5; background: #fff; border: 1px solid #e4e7ed; border-radius: 4px; box-shadow: 0 2px 12px 0 rgba(0,0,0,.1); padding: 6px 0; }
+.bk .dropdown div { height: 31px; line-height: 31px; padding: 0 20px; font-size: 14px; color: #606266; white-space: nowrap; }
+.bk .dropdown div.new { color: #409eff; font-weight: 700; }
+
+/* dialog (活动消息「新增设定」) */
+.mask { background: #7f7f7f; padding: 30px 0; width: 1520px; }
+.el-dialog { width: 640px; margin: 0 auto; background: #fff; border-radius: 2px; box-shadow: 0 1px 3px rgba(0,0,0,.3); font-family: "PingFang SC", "Helvetica Neue", Helvetica, "microsoft yahei", arial, STHeiTi, sans-serif; line-height: normal; }
+.el-dialog__header { padding: 20px 20px 10px; display: flex; justify-content: space-between; align-items: center; }
+.el-dialog__title { font-size: 18px; line-height: 24px; color: #303133; white-space: nowrap; }
+.el-dialog__close { font-size: 16px; color: #909399; line-height: 24px; }
+.el-dialog__body { padding: 30px 20px; color: #606266; font-size: 14px; }
+.dialog-tips { font-size: 12px; color: #909399; margin: -10px 0 12px; line-height: 17px; }
+.el-form-item { margin: 0 0 18px; }
+.el-form-item__label { display: block; font-size: 14px; color: #606266; line-height: 32px; padding: 0 0 4px; white-space: nowrap; }
+.el-form-item__label.req::before { content: "*"; color: #f56c6c; margin-right: 4px; }
+.el-input { position: relative; height: 32px; line-height: 30px; padding: 0 15px; font-size: 13px; color: #606266; background: #fff; border: 1px solid #dcdfe6; border-radius: 4px; white-space: nowrap; overflow: hidden; }
+.el-input.ph { color: #c0c4cc; }
+.el-input.select::after { content: ""; position: absolute; right: 12px; top: 11px; width: 6px; height: 6px; border-right: 1px solid #c0c4cc; border-bottom: 1px solid #c0c4cc; transform: rotate(45deg); }
+.el-input .count { position: absolute; right: 10px; top: 0; color: #c0c4cc; font-size: 13px; }
+.el-textarea { position: relative; height: 90px; padding: 5px 15px; font-size: 13px; line-height: 19.5px; color: #606266; background: #fff; border: 1px solid #dcdfe6; border-radius: 4px; }
+.el-textarea .count { position: absolute; right: 10px; bottom: 4px; color: #909399; font-size: 12px; line-height: 20px; }
+.trigger-tips { background: #f5f5f5; color: #909399; font-size: 12px; line-height: 24px; padding: 6px 10px; margin: 6px 0 0; }
+.cbg { display: flex; align-items: center; height: 32px; white-space: nowrap; }
+.cb { display: inline-flex; align-items: center; margin-right: 30px; font-size: 14px; color: #606266; white-space: nowrap; }
+.cb .box { display: inline-block; width: 14px; height: 14px; border: 1px solid #dcdfe6; border-radius: 2px; background: #fff; margin-right: 10px; position: relative; }
+.cb.on { color: #409eff; }
+.cb.on .box { background: #409eff; border-color: #409eff; }
+.cb.on .box::after { content: ""; position: absolute; left: 4px; top: 1px; width: 3px; height: 7px; border-right: 1px solid #fff; border-bottom: 1px solid #fff; transform: rotate(45deg); }
+.el-dialog__footer { padding: 10px 20px 20px; text-align: right; }
+.el-dialog__footer .btn { display: inline-block; font-size: 12px; font-weight: 500; line-height: 12px; padding: 9px 15px; height: 32px; border-radius: 3px; border: 1px solid #dcdfe6; background: #fff; color: #606266; white-space: nowrap; }
+.el-dialog__footer .btn.primary { background: #409eff; border-color: #409eff; color: #fff; margin-left: 10px; }
+.two { display: flex; width: 1320px; background: #7f7f7f; padding: 30px 0; justify-content: space-around; align-items: flex-start; }
+.two .el-dialog { margin: 0; }
+
+/* flow */
+.flow { width: 1100px; margin: 14px 0; }
+.frow { display: flex; align-items: center; }
+.fbox { width: 560px; border: 1.5px solid #1f2329; padding: 10px 14px; background: #fff; font-size: 14px; line-height: 1.6; }
+.fbox.start, .fbox.end { background: #e8f3ff; border-radius: 22px; }
+.fbox.dec { background: #fffbe6; }
+.fno { width: 110px; text-align: center; font-size: 13px; color: #4e5969; white-space: nowrap; }
+.fstop { width: 300px; border: 1.5px solid #86909c; padding: 10px 14px; background: #f2f3f5; font-size: 14px; line-height: 1.6; }
+.fdown { width: 560px; text-align: center; font-size: 13px; color: #4e5969; line-height: 30px; white-space: nowrap; }
+
+/* dialog v2: 添加消息 dialog metrics + section blocks */
+.el-dialog.w857 { width: 857px; }
+.w857 .el-dialog__body { padding: 30px 20px; }
+.sec { margin: 0 0 8px; }
+.sec-head { border-bottom: 1px solid #ebeef5; padding: 0 0 10px; margin: 0 0 18px; }
+.sec-head span { display: inline-block; font-size: 15px; font-weight: 700; color: #303133; line-height: 16px; padding-left: 10px; border-left: 3px solid #409eff; white-space: nowrap; }
+.fi { display: flex; margin: 0 0 18px; }
+.fi .lb { flex: none; width: 150px; text-align: right; padding: 0 12px 0 0; font-size: 14px; color: #606266; line-height: 28px; white-space: nowrap; }
+.fi .lb.req::before { content: "*"; color: #f56c6c; margin-right: 4px; }
+.fi .ct { width: 458px; }
+.in28 { position: relative; height: 28px; line-height: 26px; padding: 0 15px; font-size: 12px; color: #606266; background: #fff; border: 1px solid #dcdfe6; border-radius: 4px; white-space: nowrap; overflow: hidden; }
+.in28.select::after { content: ""; position: absolute; right: 12px; top: 9px; width: 6px; height: 6px; border-right: 1px solid #c0c4cc; border-bottom: 1px solid #c0c4cc; transform: rotate(45deg); }
+.in28 .mid { display: inline-block; width: 40px; text-align: center; color: #303133; }
+.ta { height: 117px; padding: 5px 15px; font-size: 14px; line-height: 21px; color: #606266; background: #fff; border: 1px solid #dcdfe6; border-radius: 4px; }
+.cnt { font-size: 14px; color: #606266; line-height: 28px; }
+.hint { font-size: 12px; color: #909399; line-height: 20px; margin: 4px 0 0; }
+.cbg28 { display: flex; align-items: center; height: 28px; white-space: nowrap; }
+.dialog-footer { margin: 15px 0 -10px; text-align: right; white-space: nowrap; }
+.dialog-footer .btn { display: inline-block; font-size: 12px; font-weight: 500; line-height: 12px; padding: 9px 15px; height: 32px; border-radius: 3px; border: 1px solid #dcdfe6; background: #fff; color: #606266; white-space: nowrap; }
+.dialog-footer .btn.primary { background: #409eff; border-color: #409eff; color: #fff; margin-left: 10px; }
+
+/* dialog v3: section title and form metrics taken from 专项活动 > 每日存款活动 */
+.area-title { display: flex; align-items: center; font-size: 16px; font-weight: 500; color: #000; line-height: 22px; margin: 10px 0; white-space: nowrap; }
+.area-title .ic { flex: none; width: 16px; height: 16px; border-radius: 50%; background: #3299ff; color: #fff; font-size: 12px; font-weight: 700; line-height: 16px; text-align: center; margin-right: 1px; }
+.f3 { display: flex; margin: 0 0 18px; }
+.f3 .lb { flex: none; width: 142px; text-align: right; padding: 0 12px 0 0; font-size: 14px; color: #606266; line-height: 32px; white-space: nowrap; }
+.f3 .lb.req::before { content: "*"; color: #f56c6c; margin-right: 4px; }
+.f3 .ct { width: 560px; }
+.in32 { position: relative; width: 300px; height: 32px; line-height: 30px; padding: 0 15px; font-size: 13px; color: #606266; background: #fff; border: 1px solid #dcdfe6; border-radius: 4px; white-space: nowrap; overflow: hidden; }
+.in32.select::after { content: ""; position: absolute; right: 12px; top: 11px; width: 6px; height: 6px; border-right: 1px solid #c0c4cc; border-bottom: 1px solid #c0c4cc; transform: rotate(45deg); }
+.in32.range { width: 400px; padding: 0 10px; display: flex; align-items: center; }
+.in32.range .clock { flex: none; width: 12px; height: 12px; border: 1px solid #c0c4cc; border-radius: 50%; margin: 0 8px 0 2px; }
+.in32.range .d { flex: 1; text-align: center; }
+.in32.range .mid { flex: none; width: 20px; text-align: center; color: #303133; }
+.ta3 { width: 548px; height: 96px; padding: 5px 15px; font-size: 13px; line-height: 19.5px; color: #606266; background: #fff; border: 1px solid #dcdfe6; border-radius: 4px; }
+.cbg32 { display: flex; align-items: center; height: 32px; white-space: nowrap; }
+
+/* v4: "?" help icon + dark tooltip (pattern from 充值展示配置（新）新增／编辑), radios */
+.q { display: inline-block; width: 14px; height: 14px; border-radius: 50%; background: #409eff; color: #fff; font-size: 10px; font-weight: 700; line-height: 14px; text-align: center; margin: -3px 1px 0 5px; vertical-align: middle; font-family: arial, sans-serif; }
+.q.th { width: 12px; height: 12px; line-height: 12px; font-size: 9px; margin: -2px 0 0 5px; vertical-align: middle; }
+.tipdemo { position: relative; width: 857px; margin: 0 auto; background: #fff; padding: 96px 20px 14px; }
+.tip { position: absolute; background: #303133; color: #fff; font-size: 12px; line-height: 17px; padding: 10px; border-radius: 4px; white-space: nowrap; font-family: "PingFang SC", "Helvetica Neue", Helvetica, "microsoft yahei", arial, STHeiTi, sans-serif; }
+.tip::after { content: ""; position: absolute; left: 50%; bottom: -5px; margin-left: -6px; border-left: 6px solid transparent; border-right: 6px solid transparent; border-top: 6px solid #303133; }
+.tip.a1::after { left: 118px; }
+.rdg { display: flex; align-items: center; height: 32px; white-space: nowrap; }
+.rd { display: inline-flex; align-items: center; margin-right: 30px; font-size: 14px; font-weight: 500; color: #606266; white-space: nowrap; }
+.rd .dot { position: relative; display: inline-block; width: 14px; height: 14px; border: 1px solid #dcdfe6; border-radius: 50%; background: #fff; margin-right: 10px; }
+.rd.on { color: #409eff; }
+.rd.on .dot { border-color: #409eff; background: #409eff; }
+.rd.on .dot::after { content: ""; position: absolute; left: 4px; top: 4px; width: 4px; height: 4px; border-radius: 50%; background: #fff; }
+.in32.ph { color: #c0c4cc; }
+
+/* v7: one hover illustration per "?" */
+.tiprow { position: relative; margin: 0 0 22px; }
+.tiprow:last-child { margin-bottom: 0; }
+.tiprow .tip { left: 0; top: 0; }
+.tiprow .tip::after { left: 118px; }
+.tippanel { width: 857px; margin: 0 auto; background: #fff; padding: 16px 20px 14px; }
+.thdemo { position: relative; padding-top: 69px; }
+.thdemo .tip { left: 40px; top: 0; z-index: 2; }
+.thdemo .tip::after { left: 170px; }
+
+/* v8: 国际化列表 */
+.bk table.el td .tx { display: inline-block; max-width: calc(100% - 18px); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: bottom; }
+.plus { display: inline-block; color: #409eff; font-size: 15px; font-weight: 400; line-height: 23px; margin-left: 5px; vertical-align: bottom; font-family: arial, sans-serif; }
+.el-dialog.w1224 { width: 1224px; }
+.i18n-top { text-align: right; margin: 0 0 8px; }
+.i18n-box { border: 1px solid #ebeef5; border-radius: 4px; padding: 8px; }
+.i18n-box table.el { border-collapse: collapse; width: 100%; table-layout: fixed; border: 1px solid #ebeef5; background: #fff; }
+.i18n-box table.el th, .i18n-box table.el td { border: 1px solid #ebeef5; padding: 6px 10px; text-align: center; font-size: 12px; line-height: 23px; }
+.i18n-box table.el th { color: #909399; font-weight: 700; white-space: nowrap; }
+.i18n-box table.el td { color: #606266; white-space: nowrap; }
+.i18n-box .lk { color: #409eff; font-weight: 500; margin: 0 5px; }
+.i18n-pg { display: flex; justify-content: flex-end; align-items: center; margin: 18px 6px 8px; font-size: 13px; color: #606266; white-space: nowrap; }
+.i18n-pg span { margin-left: 22px; }
+.i18n-pg .cur { color: #409eff; font-weight: 700; }
+.i18n-pg .ar { color: #c0c4cc; }
+.btn-s { display: inline-block; font-size: 12px; font-weight: 500; line-height: 12px; padding: 9px 15px; height: 32px; border-radius: 3px; border: 1px solid #409eff; background: #409eff; color: #fff; white-space: nowrap; }
+.fi28 { display: flex; margin: 0 0 18px; }
+.fi28 .lb { flex: none; width: 150px; text-align: right; padding: 0 12px 0 0; font-size: 14px; color: #606266; line-height: 28px; white-space: nowrap; }
+.fi28 .lb::before { content: "*"; color: #f56c6c; margin-right: 4px; }
+.fi28 .ct { width: 500px; }
+.i28 { position: relative; height: 28px; line-height: 26px; padding: 0 15px; font-size: 12px; color: #606266; background: #fff; border: 1px solid #dcdfe6; border-radius: 4px; white-space: nowrap; overflow: hidden; }
+.i28.dis { background: #f5f7fa; border-color: #e4e7ed; color: #c0c4cc; }
+.i28.ph { color: #c0c4cc; }
+.i28.select::after { content: ""; position: absolute; right: 12px; top: 9px; width: 6px; height: 6px; border-right: 1px solid #c0c4cc; border-bottom: 1px solid #c0c4cc; transform: rotate(45deg); }
+.t28 { height: 44px; padding: 5px 15px; font-size: 12px; line-height: 18px; color: #c0c4cc; background: #fff; border: 1px solid #dcdfe6; border-radius: 4px; }
+
+/* v11: disabled select in edit dialog */
+.in32.dis { background: #f5f7fa; border-color: #e4e7ed; color: #c0c4cc; }
+
+</style>
+</head>
+<body>
+<div class="doc">
+
+<h1>OKF-2750 消息推送_新增自動消息 規格書</h1>
+<table class="spec meta">
+  <tr><td>版本</td><td>v1（2026-11-11）</td></tr>
+  <tr><td>需求單</td><td>OKF-2750 消息推送_新增自動消息（App 未更新會員充值成功提醒）</td></tr>
+  <tr><td>關聯需求單</td><td>OKF-2569 ok_bet充值改版（兩張單同版上線：UAT 11/19、生產 11/26）</td></tr>
+  <tr><td>影響範圍</td><td>管理後台：公告管理 &gt; 消息推送、公告管理 &gt; 消息列表、日志管理 &gt; 操作日志；後端：充值成功後的站內信發送</td></tr>
+</table>
+
+
+<h2>1. 需求目的</h2>
+<ol>
+  <li>新增 App 未更新會員的提醒機制：會員使用尚未更新的 App 充值成功時，系統自動發送站內信到該會員的用戶消息中心，提醒會員更新 App。</li>
+  <li>此提醒以「自动消息」功能實作，放在「消息推送」新增的「自动消息」頁籤。自動消息做成可套用的模板（类型 → 触发时机 → 适用类型范围），日後有其他需要自動發送站內信的情境時，在同一功能下新增類型與觸發時機即可。本期只提供類型「充值」、觸發時機「充值成功」。</li>
+  <li>可新增多條自動消息設定。每條設定可指定適用類型範圍（初版／旧版(V2)／新版(V3)）、消息發送時間、每日發送上限、用戶範圍、消息展示方式、消息標題、消息內容與是否帶按鈕跳轉連結，並可編輯、開啟或關閉。</li>
+  <li>消息標題與消息內容可透過「国际化列表」設定各語系的內容。</li>
+  <li>自動消息的發送紀錄統一顯示在「消息列表」，消息類型新增「自动消息」。</li>
+  <li>自動消息設定的新增、編輯、開啟、關閉、刪除寫入「操作日志」。</li>
+</ol>
+
+<h2>2. 功能位置</h2>
+<p>公告管理 &gt; 消息推送，在「活动消息」頁籤右側新增「自动消息」頁籤。頁籤內只有一個設定列表，不再分子頁籤。頁籤權限沿用「消息推送」頁面權限。</p>
+
+<h2>3. 自動消息列表</h2>
+<p class="cap">介面示意</p>
+<div class="bk">
+  <div class="content-box">
+    <div class="crumb">位置<span class="sep">&gt;</span>消息推送</div>
+    <div class="page-tags">
+      <span class="ptag">智能推播<i>×</i></span><span class="ptag">商品管理<i>×</i></span><span class="ptag on">消息推送<i>×</i></span><span class="ptag">消息列表<i>×</i></span><span class="ptag">操作日志<i>×</i></span>
+    </div>
+    <div class="el-tabs">
+      <div class="el-tabs__header">
+        <div class="el-tabs__item">app系统推送</div>
+        <div class="el-tabs__item">自定义消息</div>
+        <div class="el-tabs__item">定时消息</div>
+        <div class="el-tabs__item">短信群发</div>
+        <div class="el-tabs__item">活动消息</div>
+        <div class="el-tabs__item is-active">自动消息</div>
+      </div>
+      <div class="el-tabs__content">
+        <div class="handle-box">
+          <span class="sel mr10">类型</span><span class="sel mr10">状态</span><span class="btn primary">搜索</span><span class="btn primary ml10">新增</span>
+        </div>
+        <table class="el tight">
+          <colgroup>
+            <col style="width:48px"><col style="width:72px"><col style="width:100px"><col style="width:92px"><col style="width:104px"><col style="width:86px"><col style="width:90px"><col style="width:66px"><col style="width:84px"><col style="width:64px"><col style="width:96px"><col style="width:60px"><col style="width:86px"><col style="width:84px"><col style="width:198px">
+          </colgroup>
+          <tr>
+            <th>类型</th><th>触发时机</th><th>适用类型范围<span class="q th">?</span></th><th>消息展示方式</th><th>消息标题</th><th>消息内容</th><th>按钮跳转链接</th><th>用户范围</th><th>指定对象</th><th>每日上限</th><th>消息发送时间</th><th>状态</th><th>最后更新时间</th><th>操作人名称</th><th>操作</th>
+          </tr>
+          <tr>
+            <td>充值</td><td>充值成功</td><td>初版,<br>旧版(V2)</td><td>用户消息中心</td><td><span class="tx">Update Your OKBet App</span><span class="plus">+</span></td><td><span class="tx">Please download the latest version of the OKBet App.</span><span class="plus">+</span></td><td class="ell">/app-download</td><td>所有用户</td><td>—</td><td>1</td><td>2026/11/26 ~<br>2026/12/31</td>
+            <td><span class="el-tag success">开启</span></td><td>2026-11-27<br>09:30:15</td><td>abenidmin</td>
+            <td class="ops"><span class="btn mini warning">关闭</span><span class="btn mini primary">编辑</span><span class="btn mini danger dis">删除</span></td>
+          </tr>
+          <tr>
+            <td>充值</td><td>充值成功</td><td>新版(V3)</td><td>用户消息中心</td><td><span class="tx">Deposit Received</span><span class="plus">+</span></td><td><span class="tx">Thank you for your deposit. Enjoy the game!</span><span class="plus">+</span></td><td>—</td><td>支付层级</td><td class="ell">第二层</td><td>不限制</td><td>2026/12/01 ~<br>2026/12/07</td>
+            <td><span class="el-tag info">关闭</span></td><td>2026-11-26<br>11:20:45</td><td>abenidmin</td>
+            <td class="ops"><span class="btn mini success">开启</span><span class="btn mini primary">编辑</span><span class="btn mini danger">删除</span></td>
+          </tr>
+          <tr>
+            <td>充值</td><td>充值成功</td><td>旧版(V2)</td><td>用户消息中心</td><td><span class="tx">Update Reminder</span><span class="plus">+</span></td><td><span class="tx">A new version of the App is available.</span><span class="plus">+</span></td><td class="ell">/app-download</td><td>部分用户</td><td class="ell">okbet81336wa39,okbet83347i1rs</td><td>3</td><td>2026/11/26 ~<br>2026/11/30</td>
+            <td><span class="el-tag info">关闭</span></td><td>2026-11-26<br>09:12:08</td><td>abenidmin</td>
+            <td class="ops"><span class="btn mini success">开启</span><span class="btn mini primary">编辑</span><span class="btn mini danger">删除</span></td>
+          </tr>
+        </table>
+        <div class="pagination"><span class="total">Total 3</span><span class="pg">&lt;</span><span class="pg on">1</span><span class="pg">&gt;</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p class="cap">列表表頭「适用类型范围」的「?」圖示滑鼠移上時的示意</p>
+<div class="bk">
+  <div class="content-box">
+    <div class="thdemo">
+      <div class="tip thtip">初版：最旧版 App，充值使用「充值配置」的设定<br>旧版(V2)：尚未更新到最新版的 App，充值使用「充值配置（新）&gt; 在线支付展示配置（新）&gt; 充值展示配置」的设定<br>新版(V3)：已更新到最新版的 App，充值使用「充值配置（新）&gt; 在线支付展示配置（新）&gt; 充值展示配置（新）」的设定</div>
+      <table class="el tight" style="width:1330px;">
+        <colgroup>
+          <col style="width:48px"><col style="width:72px"><col style="width:100px"><col style="width:92px"><col style="width:104px"><col style="width:86px"><col style="width:90px"><col style="width:66px"><col style="width:84px"><col style="width:64px"><col style="width:96px"><col style="width:60px"><col style="width:86px"><col style="width:84px"><col style="width:198px">
+        </colgroup>
+        <tr>
+          <th>类型</th><th>触发时机</th><th>适用类型范围<span class="q th">?</span></th><th>消息展示方式</th><th>消息标题</th><th>消息内容</th><th>按钮跳转链接</th><th>用户范围</th><th>指定对象</th><th>每日上限</th><th>消息发送时间</th><th>状态</th><th>最后更新时间</th><th>操作人名称</th><th>操作</th>
+        </tr>
+          <tr>
+            <td>充值</td><td>充值成功</td><td>初版,<br>旧版(V2)</td><td>用户消息中心</td><td><span class="tx">Update Your OKBet App</span><span class="plus">+</span></td><td><span class="tx">Please download the latest version of the OKBet App.</span><span class="plus">+</span></td><td class="ell">/app-download</td><td>所有用户</td><td>—</td><td>1</td><td>2026/11/26 ~<br>2026/12/31</td>
+            <td><span class="el-tag success">开启</span></td><td>2026-11-27<br>09:30:15</td><td>abenidmin</td>
+            <td class="ops"><span class="btn mini warning">关闭</span><span class="btn mini primary">编辑</span><span class="btn mini danger dis">删除</span></td>
+          </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<h3>3.1 查詢列</h3>
+<table class="spec">
+  <colgroup><col style="width:160px"><col style="width:160px"><col></colgroup>
+  <tr><th>項目</th><th>類型</th><th>說明</th></tr>
+  <tr><td class="nw">类型</td><td>下拉單選</td><td>選項：充值。未選擇時查詢全部。</td></tr>
+  <tr><td class="nw">状态</td><td>下拉單選</td><td>選項：开启、关闭。未選擇時查詢全部。</td></tr>
+  <tr><td class="nw">搜索</td><td>按鈕</td><td>依上述條件查詢列表。</td></tr>
+  <tr><td class="nw">新增</td><td>按鈕</td><td>開啟「新增设定」彈窗。</td></tr>
+</table>
+
+<h3>3.2 列表欄位</h3>
+<p>列表依建立順序由新到舊排序（最新建立的設定在最上面），分頁元件與「活动消息」頁籤相同。</p>
+<table class="spec">
+  <colgroup><col style="width:160px"><col></colgroup>
+  <tr><th>欄位</th><th>說明</th></tr>
+  <tr><td class="nw">类型</td><td>該條設定的類型。本期只有「充值」。</td></tr>
+  <tr><td class="nw">触发时机</td><td>該條設定的觸發時機。本期「充值」底下只有「充值成功」。</td></tr>
+  <tr><td class="nw">适用类型范围</td><td>該條設定勾選的適用類型範圍，多個以半形逗號「,」分隔（例：初版,旧版(V2)），依 初版、旧版(V2)、新版(V3) 的順序顯示。表頭名稱後顯示「?」圖示，滑鼠移上顯示的說明與新增設定彈窗「适用类型范围」的說明相同：
+    <ul>
+      <li>初版：最旧版 App，充值使用「充值配置」的设定</li>
+      <li>旧版(V2)：尚未更新到最新版的 App，充值使用「充值配置（新）&gt; 在线支付展示配置（新）&gt; 充值展示配置」的设定</li>
+      <li>新版(V3)：已更新到最新版的 App，充值使用「充值配置（新）&gt; 在线支付展示配置（新）&gt; 充值展示配置（新）」的设定</li>
+    </ul>
+  </td></tr>
+  <tr><td class="nw">消息展示方式</td><td>該條設定的消息展示方式。本期只有「用户消息中心」，即站內信。</td></tr>
+  <tr><td class="nw">消息标题</td><td>該條設定新增時輸入的消息標題。超過欄寬以「…」截斷，滑鼠移上顯示完整內容。文字後固定顯示藍色「+」（开启、关闭狀態皆顯示），點擊開啟消息標題的「国际化列表」。</td></tr>
+  <tr><td class="nw">消息内容</td><td>該條設定新增時輸入的消息內容。超過欄寬以「…」截斷，滑鼠移上顯示完整內容。文字後固定顯示藍色「+」（开启、关闭狀態皆顯示），點擊開啟消息內容的「国际化列表」。</td></tr>
+  <tr><td class="nw">按钮跳转链接</td><td>按鈕跳轉連結選「是」時顯示填寫的連結，超過欄寬以「…」截斷，滑鼠移上顯示完整內容；選「否」時顯示「—」。</td></tr>
+  <tr><td class="nw">用户范围</td><td>沿用「自定义消息」既有的用戶範圍功能，不異動。顯示該條設定選擇的選項：部分用户／所有用户／支付层级／在线用户。</td></tr>
+  <tr><td class="nw">指定对象</td><td>沿用「自定义消息」列表「参数值」欄位的既有功能，欄位名稱改為「指定对象」。顯示選擇用戶範圍後所指定的對象：用戶範圍為「部分用户」時顯示填寫的會員帳號；為「支付层级」時顯示選擇的支付層級名稱（例：第二层）；為「所有用户」「在线用户」時顯示「—」。超過欄寬以「…」截斷，滑鼠移上顯示完整內容。</td></tr>
+  <tr><td class="nw">每日上限</td><td>該條設定的每日發送上限。設定值為 0 時顯示「不限制」。</td></tr>
+  <tr><td class="nw">消息发送时间</td><td>該條設定的消息發送時間，格式 YYYY/MM/DD ~ YYYY/MM/DD。</td></tr>
+  <tr><td class="nw">状态</td><td>开启（綠色標籤）／关闭（灰色標籤）。</td></tr>
+  <tr><td class="nw">最后更新时间</td><td>該條設定最後一次被新增、編輯、開啟或關閉的時間，格式 YYYY-MM-DD HH:mm:ss。</td></tr>
+  <tr><td class="nw">操作人名称</td><td>最後一次對該條設定執行新增、編輯、開啟或關閉的後台帳號。</td></tr>
+  <tr><td class="nw">操作</td><td>
+    <ul>
+      <li><b>开启</b>（狀態為关闭時顯示）：點擊後跳出確認視窗「确认开启吗？」，確認後狀態變為开启，立即生效；取消則不變更。</li>
+      <li><b>关闭</b>（狀態為开启時顯示）：點擊後跳出確認視窗「确认关闭吗？」，確認後狀態變為关闭，立即生效，之後不再依該條設定發送；取消則不變更。</li>
+      <li><b>编辑</b>：开启、关闭狀態皆可點擊。開啟「编辑设定」彈窗並帶入原設定值；「类型」「触发时机」不可修改，其餘欄位可修改。儲存後立即生效，之後的觸發依新設定判斷與發送；已發送的站內信不變動；狀態不變。</li>
+      <li><b>删除</b>：狀態為关闭時可點擊，跳出確認視窗「确认删除吗？」，確認後刪除該條設定，已發送的站內信與「消息列表」紀錄保留。狀態為开启時按鈕置灰不可點擊，須先關閉才能刪除。</li>
+    </ul>
+  </td></tr>
+</table>
+<ul>
+  <li>編輯「消息标题」「消息内容」只會修改新增設定時輸入的那一份內容；国际化列表內已設定的各語系內容不會跟著改，需另外由「+」修改。</li>
+  <li>同一時間可開啟多條設定，不限制類型、觸發時機或適用類型範圍是否重複。</li>
+</ul>
+
+<h3>3.3 國際化列表（消息標題、消息內容的各語系內容）</h3>
+<p>使用後台既有的「国际化列表」元件（與「自定义消息」「定时消息」的標題、內容旁「+」相同），元件本身不異動。消息標題與消息內容各自有一份国际化列表，需分別設定。</p>
+<p class="cap">介面示意：點擊列表消息標題旁的「+」開啟「国际化列表」</p>
+<div class="mask">
+  <div class="el-dialog w1224">
+    <div class="el-dialog__header"><span class="el-dialog__title">国际化列表</span><span class="el-dialog__close">×</span></div>
+    <div class="el-dialog__body" style="padding:20px 16px 16px;">
+      <div class="i18n-top"><span class="btn-s">＋ 新增</span></div>
+      <div class="i18n-box">
+        <table class="el">
+          <tr><th>行号</th><th>表名</th><th>字段名</th><th>语言</th><th>内容</th><th>操作</th></tr>
+          <tr><td>RD自定义</td><td>RD自定义</td><td>RD自定义</td><td>英语</td><td>Deposit Received</td><td><span class="lk">编辑</span><span class="lk">删除</span></td></tr>
+          <tr><td>RD自定义</td><td>RD自定义</td><td>RD自定义</td><td>菲律宾语</td><td>Natanggap ang Deposito</td><td><span class="lk">编辑</span><span class="lk">删除</span></td></tr>
+        </table>
+        <div class="i18n-pg"><span>Total 2</span><span class="ar">&lt;</span><span class="cur">1</span><span class="ar">&gt;</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+<p class="cap">介面示意：在「国际化列表」點擊「＋ 新增」</p>
+<div class="mask">
+  <div class="el-dialog w857">
+    <div class="el-dialog__header"><span class="el-dialog__title">新增</span><span class="el-dialog__close">×</span></div>
+    <div class="el-dialog__body">
+      <div class="fi28"><div class="lb">表名:</div><div class="ct"><div class="i28 dis">RD自定义</div></div></div>
+      <div class="fi28"><div class="lb">字段名:</div><div class="ct"><div class="i28 dis">RD自定义</div></div></div>
+      <div class="fi28"><div class="lb">行标识:</div><div class="ct"><div class="i28 dis">RD自定义</div></div></div>
+      <div class="fi28"><div class="lb">语言:</div><div class="ct"><div class="i28 select ph">Select</div></div></div>
+      <div class="fi28"><div class="lb">内容:</div><div class="ct"><div class="t28">内容</div></div></div>
+      <div class="dialog-footer"><span class="btn">取 消</span><span class="btn primary">确 定</span></div>
+    </div>
+  </div>
+</div>
+<table class="spec">
+  <colgroup><col style="width:180px"><col></colgroup>
+  <tr><th>項目</th><th>說明</th></tr>
+  <tr><td class="nw">開啟方式</td><td>列表「消息标题」或「消息内容」文字後的「+」。點消息標題的「+」開啟標題的国际化列表，點消息內容的「+」開啟內容的国际化列表。「+」固定顯示，开启、关闭狀態皆可操作。</td></tr>
+  <tr><td class="nw">国际化列表欄位</td><td>行号、表名、字段名、语言、内容、操作（编辑、删除）。行号、表名、字段名的值由 RD 自定義。右上角「＋ 新增」。</td></tr>
+  <tr><td class="nw">新增／編輯欄位</td><td>表名、字段名、行标识（列表欄位名為「行号」）的值由 RD 自定義，由系統自動帶入、不可修改；示意中以「RD自定义」表示。语言為下拉單選，選項為後台既有国际化列表的語言選項，不另外定義（目前為 简体中文,英语,越南文,菲律宾语,宿雾语）。内容為該語言要顯示的標題或內容，必填，規則與既有国际化列表相同。</td></tr>
+  <tr><td class="nw">會員看到的內容</td><td>會員使用的語系在国际化列表有設定時，站內信顯示該語系的內容；沒有設定時，顯示新增設定時輸入的消息標題、消息內容。標題與內容各自判斷。</td></tr>
+  <tr><td class="nw">修改後的生效方式</td><td>国际化列表的新增、編輯、刪除儲存後立即生效，不需先關閉設定。儲存後才發送的站內信使用新內容；儲存前已發送的站內信不變動。該條設定的狀態、每日發送上限的已發送封數不受影響。</td></tr>
+</table>
+
+<h2>4. 新增／編輯設定彈窗</h2>
+<p class="cap">介面示意：新增設定（彈窗內分三個區塊，區塊標題、欄位排列與元件比照專項活動 &gt; 每日存款活動的新增頁；示意為用戶範圍選擇「支付层级」、按鈕跳轉連結選擇「是」時的畫面）</p>
+<div class="mask">
+  <div class="el-dialog w857">
+    <div class="el-dialog__header"><span class="el-dialog__title">新增设定</span><span class="el-dialog__close">×</span></div>
+    <div class="el-dialog__body">
+
+      <div class="area-title"><span class="ic">!</span>触发条件配置</div>
+      <div class="f3"><div class="lb req">类型:</div><div class="ct"><div class="in32 select">充值</div></div></div>
+      <div class="f3"><div class="lb req">触发时机:</div><div class="ct"><div class="in32 select">充值成功</div></div></div>
+      <div class="f3"><div class="lb req">适用类型范围<span class="q">?</span>:</div><div class="ct">
+        <div class="cbg32"><span class="cb on"><span class="box"></span>初版</span><span class="cb on"><span class="box"></span>旧版(V2)</span><span class="cb"><span class="box"></span>新版(V3)</span></div>
+      </div></div>
+
+      <div class="area-title"><span class="ic">!</span>发送规则配置</div>
+      <div class="f3"><div class="lb req">消息发送时间<span class="q">?</span>:</div><div class="ct">
+        <div class="in32 range"><span class="clock"></span><span class="d">2026/11/26</span><span class="mid">~</span><span class="d">2026/12/31</span></div>
+      </div></div>
+      <div class="f3"><div class="lb req">每日发送上限<span class="q">?</span>:</div><div class="ct"><div class="in32">1</div></div></div>
+      <div class="f3"><div class="lb req">用户范围:</div><div class="ct"><div class="in32 select">支付层级</div></div></div>
+      <div class="f3"><div class="lb req">指定对象:</div><div class="ct"><div class="in32 select">第二层</div></div></div>
+
+      <div class="area-title"><span class="ic">!</span>消息内容配置</div>
+      <div class="f3"><div class="lb req">消息展示方式:</div><div class="ct"><div class="in32 select">用户消息中心</div></div></div>
+      <div class="f3"><div class="lb req">消息标题:</div><div class="ct"><div class="in32" style="width:548px;">Update Your OKBet App</div></div></div>
+      <div class="f3"><div class="lb req">消息内容:</div><div class="ct"><div class="ta3">Please download the latest version of the OKBet App.</div><div class="cnt">52/1000</div></div></div>
+      <div class="f3"><div class="lb req">按钮跳转链接<span class="q">?</span>:</div><div class="ct">
+        <div class="rdg"><span class="rd on"><span class="dot"></span>是</span><span class="rd"><span class="dot"></span>否</span></div>
+        <div class="in32" style="width:548px; margin-top:8px;">/app-download</div>
+      </div></div>
+
+      <div class="dialog-footer"><span class="btn">取 消</span><span class="btn primary">确 定</span></div>
+    </div>
+  </div>
+</div>
+
+<p class="cap">介面示意：編輯設定（標題為「编辑设定」，帶入原設定值；「类型」「触发时机」置灰不可修改，其餘與新增相同）</p>
+<div class="mask">
+  <div class="el-dialog w857">
+    <div class="el-dialog__header"><span class="el-dialog__title">编辑设定</span><span class="el-dialog__close">×</span></div>
+    <div class="el-dialog__body">
+
+      <div class="area-title"><span class="ic">!</span>触发条件配置</div>
+      <div class="f3"><div class="lb req">类型:</div><div class="ct"><div class="in32 select dis">充值</div></div></div>
+      <div class="f3"><div class="lb req">触发时机:</div><div class="ct"><div class="in32 select dis">充值成功</div></div></div>
+      <div class="f3"><div class="lb req">适用类型范围<span class="q">?</span>:</div><div class="ct">
+        <div class="cbg32"><span class="cb on"><span class="box"></span>初版</span><span class="cb on"><span class="box"></span>旧版(V2)</span><span class="cb"><span class="box"></span>新版(V3)</span></div>
+      </div></div>
+
+      <div class="area-title"><span class="ic">!</span>发送规则配置</div>
+      <div class="f3"><div class="lb req">消息发送时间<span class="q">?</span>:</div><div class="ct">
+        <div class="in32 range"><span class="clock"></span><span class="d">2026/11/26</span><span class="mid">~</span><span class="d">2026/12/31</span></div>
+      </div></div>
+      <div class="f3"><div class="lb req">每日发送上限<span class="q">?</span>:</div><div class="ct"><div class="in32">1</div></div></div>
+      <div class="f3"><div class="lb req">用户范围:</div><div class="ct"><div class="in32 select">所有用户</div></div></div>
+
+      <div class="area-title"><span class="ic">!</span>消息内容配置</div>
+      <div class="f3"><div class="lb req">消息展示方式:</div><div class="ct"><div class="in32 select">用户消息中心</div></div></div>
+      <div class="f3"><div class="lb req">消息标题:</div><div class="ct"><div class="in32" style="width:548px;">Update Your OKBet App</div></div></div>
+      <div class="f3"><div class="lb req">消息内容:</div><div class="ct"><div class="ta3">Please download the latest version of the OKBet App.</div><div class="cnt">52/1000</div></div></div>
+      <div class="f3"><div class="lb req">按钮跳转链接<span class="q">?</span>:</div><div class="ct">
+        <div class="rdg"><span class="rd on"><span class="dot"></span>是</span><span class="rd"><span class="dot"></span>否</span></div>
+        <div class="in32" style="width:548px; margin-top:8px;">/app-download</div>
+      </div></div>
+
+      <div class="dialog-footer"><span class="btn">取 消</span><span class="btn primary">确 定</span></div>
+    </div>
+  </div>
+</div>
+
+<p class="cap">彈窗內四個「?」圖示滑鼠移上時的示意（每次只會顯示滑鼠所在那一個）</p>
+<div class="mask" style="padding:20px 0;">
+  <div class="tippanel">
+    <div class="tiprow" style="padding-top:83px;">
+      <div class="tip">初版：最旧版 App，充值使用「充值配置」的设定<br>旧版(V2)：尚未更新到最新版的 App，充值使用「充值配置（新）&gt; 在线支付展示配置（新）&gt; 充值展示配置」的设定<br>新版(V3)：已更新到最新版的 App，充值使用「充值配置（新）&gt; 在线支付展示配置（新）&gt; 充值展示配置（新）」的设定</div>
+      <div class="f3" style="margin:0;"><div class="lb req">适用类型范围<span class="q">?</span>:</div><div class="ct">
+        <div class="cbg32"><span class="cb on"><span class="box"></span>初版</span><span class="cb on"><span class="box"></span>旧版(V2)</span><span class="cb"><span class="box"></span>新版(V3)</span></div>
+      </div></div>
+    </div>
+    <div class="tiprow" style="padding-top:49px;">
+      <div class="tip">只在这段日期内发送，从开始日 00:00:00 到结束日 23:59:59</div>
+      <div class="f3" style="margin:0;"><div class="lb req">消息发送时间<span class="q">?</span>:</div><div class="ct">
+        <div class="in32 range"><span class="clock"></span><span class="d">2026/11/26</span><span class="mid">~</span><span class="d">2026/12/31</span></div>
+      </div></div>
+    </div>
+    <div class="tiprow" style="padding-top:83px;">
+      <div class="tip">每位会员每天最多收到本条设定的封数<br>填 0 表示不限制<br>每天 00:00 重新计算</div>
+      <div class="f3" style="margin:0;"><div class="lb req">每日发送上限<span class="q">?</span>:</div><div class="ct"><div class="in32">1</div></div></div>
+    </div>
+    <div class="tiprow" style="padding-top:66px;">
+      <div class="tip">选「是」：站内信内显示按钮，会员点击后前往填写的链接<br>选「否」：站内信内不显示按钮</div>
+      <div class="f3" style="margin:0;"><div class="lb req">按钮跳转链接<span class="q">?</span>:</div><div class="ct">
+        <div class="rdg"><span class="rd"><span class="dot"></span>是</span><span class="rd on"><span class="dot"></span>否</span></div>
+      </div></div>
+    </div>
+  </div>
+</div>
+
+<h3>4.1 「?」說明圖示</h3>
+<ul>
+  <li>欄位的說明文字不直接顯示在畫面上，統一放在「?」圖示內。</li>
+  <li>圖示位置：欄位名稱之後、冒號之前。</li>
+  <li>滑鼠移到圖示上時，在圖示上方顯示深色底白字的提示框；滑鼠移開後消失。</li>
+  <li>圖示為藍色圓形「?」（色值 #409EFF），樣式與「充值配置（新）&gt; 提款渠道管理（新）」列表「层状态」表頭的「?」相同；提示框為深色底白字，樣式也與該處相同。</li>
+  <li>有「?」的位置共五處：彈窗內的 适用类型范围、消息发送时间、每日发送上限、按钮跳转链接 四個欄位，以及列表「适用类型范围」表頭。五處的提示文字與顯示方式皆如介面示意。</li>
+</ul>
+
+<h3>4.2 區塊一：触发条件配置</h3>
+<table class="spec">
+  <colgroup><col style="width:150px"><col style="width:140px"><col style="width:60px"><col></colgroup>
+  <tr><th>欄位</th><th>類型</th><th>必填</th><th>說明</th></tr>
+  <tr><td class="nw">类型</td><td>下拉單選</td><td>是</td><td>選項：充值（本期唯一選項，預設選取）。類型決定下方「触发时机」與「适用类型范围」的選項。</td></tr>
+  <tr><td class="nw">触发时机</td><td>下拉單選</td><td>是</td><td>選項依「类型」帶出。類型為「充值」時，選項：充值成功（本期唯一選項，預設選取）。</td></tr>
+  <tr><td class="nw">适用类型范围</td><td>核取方塊（多選）</td><td>是</td><td>選項依「类型」帶出。類型為「充值」時，選項：初版、旧版(V2)、新版(V3)，至少勾選一項，預設皆不勾選。<br>「?」提示文字（三行）：
+    <ul>
+      <li>初版：最旧版 App，充值使用「充值配置」的设定</li>
+      <li>旧版(V2)：尚未更新到最新版的 App，充值使用「充值配置（新）&gt; 在线支付展示配置（新）&gt; 充值展示配置」的设定</li>
+      <li>新版(V3)：已更新到最新版的 App，充值使用「充值配置（新）&gt; 在线支付展示配置（新）&gt; 充值展示配置（新）」的设定</li>
+    </ul>
+  </td></tr>
+</table>
+
+<h3>4.3 區塊二：发送规则配置</h3>
+<table class="spec">
+  <colgroup><col style="width:150px"><col style="width:140px"><col style="width:60px"><col></colgroup>
+  <tr><th>欄位</th><th>類型</th><th>必填</th><th>說明</th></tr>
+  <tr><td class="nw">消息发送时间</td><td>日期區間</td><td>是</td><td>選擇開始日期與結束日期，格式 YYYY/MM/DD ~ YYYY/MM/DD。結束日期不得早於開始日期，開始日期與結束日期可為同一天。<br>「?」提示文字：只在这段日期内发送，从开始日 00:00:00 到结束日 23:59:59</td></tr>
+  <tr><td class="nw">每日发送上限</td><td>數字輸入</td><td>是</td><td>只能輸入 0 以上的整數。0 表示不限制。<br>「?」提示文字（三行）：
+    <ul>
+      <li>每位会员每天最多收到本条设定的封数</li>
+      <li>填 0 表示不限制</li>
+      <li>每天 00:00 重新计算</li>
+    </ul>
+  </td></tr>
+  <tr><td class="nw">用户范围</td><td>下拉單選</td><td>是</td><td>沿用「自定义消息」既有的用戶範圍功能，選項不異動：部分用户、所有用户、支付层级、在线用户。預設「所有用户」。</td></tr>
+  <tr><td class="nw">指定对象</td><td>依用戶範圍變化</td><td>是</td><td>沿用「自定义消息」選擇用戶範圍後出現的附加欄位，既有功能不異動，只加上欄位名稱「指定对象」。
+    <ul>
+      <li>用戶範圍為「部分用户」：顯示多行輸入框，提示文字「多个用户名用,分开」，上限 30000 字，沿用「自定义消息」部分用户名單的字數限制，輸入框下方顯示字數「目前字數/30000」。</li>
+      <li>用戶範圍為「支付层级」：顯示下拉選單，提示文字「会员层级」，選項與「自定义消息」選擇支付层级時的「会员层级」下拉相同（例：默认层、第二层、第三层、第四层、第五层），單選。</li>
+      <li>用戶範圍為「所有用户」「在线用户」：不顯示此欄位。</li>
+    </ul>
+  </td></tr>
+</table>
+
+<h3>4.4 區塊三：消息内容配置</h3>
+<table class="spec">
+  <colgroup><col style="width:150px"><col style="width:140px"><col style="width:60px"><col></colgroup>
+  <tr><th>欄位</th><th>類型</th><th>必填</th><th>說明</th></tr>
+  <tr><td class="nw">消息展示方式</td><td>下拉單選</td><td>是</td><td>區塊內第一個欄位。選項只有「用户消息中心」，預設選取。不提供「app推送」。</td></tr>
+  <tr><td class="nw">消息标题</td><td>單行輸入</td><td>是</td><td>上限 200 字，沿用「自定义消息」消息標題的字數限制，提示文字「200个字元以内」。此處輸入的是預設顯示的標題；其他語系的標題在設定新增後，由列表消息標題旁的「+」開啟「国际化列表」新增。</td></tr>
+  <tr><td class="nw">消息内容</td><td>多行輸入</td><td>是</td><td>上限 1000 字，沿用「自定义消息」消息內容的字數限制，輸入框下方顯示字數「目前字數/1000」。此處輸入的是預設顯示的內容；其他語系的內容在設定新增後，由列表消息內容旁的「+」開啟「国际化列表」新增。</td></tr>
+  <tr><td class="nw">按钮跳转链接</td><td>單選（是／否）</td><td>是</td><td>預設「否」。
+    <ul>
+      <li>選「是」：選項下方顯示連結輸入框，提示文字「请输入链接」，必填。會員收到的站內信內顯示按鈕，點擊後前往填寫的連結（按鈕樣式與「活动消息」的站內信按鈕相同）。</li>
+      <li>選「否」：不顯示連結輸入框，站內信內不顯示按鈕。由「是」改選「否」時，已輸入的連結清空。</li>
+    </ul>
+    「?」提示文字（兩行）：
+    <ul>
+      <li>选「是」：站内信内显示按钮，会员点击后前往填写的链接</li>
+      <li>选「否」：站内信内不显示按钮</li>
+    </ul>
+  </td></tr>
+</table>
+
+<h3>4.5 按鈕</h3>
+<table class="spec">
+  <colgroup><col style="width:150px"><col></colgroup>
+  <tr><th>按鈕</th><th>說明</th></tr>
+  <tr><td class="nw">取 消</td><td>關閉彈窗，不儲存。</td></tr>
+  <tr><td class="nw">确 定</td><td>檢查必填與格式，未通過時於對應欄位下方顯示紅字提示且不關閉彈窗；通過後儲存並關閉彈窗、刷新列表。新增的設定狀態預設為「关闭」，須在列表點「开启」才生效；編輯不改變原本的狀態。</td></tr>
+</table>
+
+<h3>4.6 編輯時各欄位可否修改</h3>
+<table class="spec">
+  <colgroup><col style="width:220px"><col style="width:120px"><col></colgroup>
+  <tr><th>欄位</th><th>編輯時</th><th>說明</th></tr>
+  <tr><td class="nw">类型</td><td>不可修改</td><td>置灰顯示原設定值。</td></tr>
+  <tr><td class="nw">触发时机</td><td>不可修改</td><td>置灰顯示原設定值。</td></tr>
+  <tr><td class="nw">适用类型范围</td><td>可修改</td><td>規則與新增相同，至少勾選一項。</td></tr>
+  <tr><td class="nw">消息发送时间</td><td>可修改</td><td>規則與新增相同。</td></tr>
+  <tr><td class="nw">每日发送上限</td><td>可修改</td><td>修改後，當天已發送的封數照算，以新的上限繼續判斷。</td></tr>
+  <tr><td class="nw">用户范围、指定对象</td><td>可修改</td><td>規則與新增相同。</td></tr>
+  <tr><td class="nw">消息展示方式</td><td>可修改</td><td>本期只有「用户消息中心」一個選項。</td></tr>
+  <tr><td class="nw">消息标题、消息内容</td><td>可修改</td><td>只修改新增設定時輸入的那一份內容；国际化列表內已設定的各語系內容不會跟著改，需另外由列表的「+」修改。</td></tr>
+  <tr><td class="nw">按钮跳转链接</td><td>可修改</td><td>規則與新增相同。</td></tr>
+</table>
+<ul>
+  <li>編輯儲存後立即生效，开启中的設定不需先關閉。儲存後的觸發依新設定判斷與發送，儲存前已發送的站內信不變動。</li>
+  <li>編輯儲存後，列表的「最后更新时间」「操作人名称」更新。</li>
+</ul>
+
+<h2>5. 發送規則</h2>
+
+<h3>5.1 類型「充值」、觸發時機「充值成功」</h3>
+<ul>
+  <li>充值訂單的狀態變為「成功」的當下觸發，符合條件後立即發送，不延遲。</li>
+  <li>只有會員在前台送出的在線充值訂單會觸發。包含三方回調成功，以及後台在「充值纪录」對失敗訂單點「解锁通过」再點「通过」而變為成功的訂單。</li>
+  <li>管理後台手動加值、投注站／代理替會員線下充值的訂單不屬於任何一個適用類型範圍，不觸發。</li>
+</ul>
+
+<h3>5.2 適用類型範圍的判斷</h3>
+<p>以該筆充值訂單下單時使用的充值下單 API 判斷它屬於哪一個適用類型範圍，對照如下。只看訂單下單時使用的 API，訂單成功時以下單當時的 API 為準。</p>
+<table class="spec">
+  <colgroup><col style="width:220px"><col></colgroup>
+  <tr><th>後台選項（适用类型范围）</th><th>對應的充值下單 API</th></tr>
+  <tr><td>初版</td><td>初版充值下單 API</td></tr>
+  <tr><td>旧版(V2)</td><td>V5 充值下單 API（搭配 V2 充值配置 API）</td></tr>
+  <tr><td>新版(V3)</td><td>V6 充值下單 API（搭配 V3 充值配置 API）</td></tr>
+</table>
+
+<h3>5.3 消息發送時間</h3>
+<ul>
+  <li>觸發當下的平台時間（+08:00）落在開始日期 00:00:00 到結束日期 23:59:59 之間才發送。</li>
+  <li>尚未到開始日期或已超過結束日期時不發送，也不在「消息列表」產生紀錄。</li>
+  <li>「状态」與「消息发送时间」各自獨立：狀態為开启且觸發當下在消息發送時間內，兩者同時成立才發送。超過結束日期後，狀態欄不會自動變為关闭。</li>
+</ul>
+
+<h3>5.4 用戶範圍的判斷</h3>
+<p>用戶範圍沿用「自定义消息」既有功能，各選項的對象不異動。自動消息在觸發當下依下表判斷會員是否符合：</p>
+<table class="spec">
+  <colgroup><col style="width:180px"><col></colgroup>
+  <tr><th>用戶範圍</th><th>符合條件</th></tr>
+  <tr><td>部分用户</td><td>觸發的會員帳號在該條設定「指定对象」填寫的名單內。</td></tr>
+  <tr><td>所有用户</td><td>所有觸發的會員皆符合。</td></tr>
+  <tr><td>支付层级</td><td>觸發當下，會員所屬的支付層級為該條設定「指定对象」選擇的層級。</td></tr>
+  <tr><td>在线用户</td><td>觸發當下，會員為在線狀態。</td></tr>
+</table>
+
+<h3>5.5 每日發送上限</h3>
+<ul>
+  <li>以「每位會員、每條設定、每天」為單位計算：同一位會員一天內最多收到同一條設定的 N 封站內信。</li>
+  <li>N 為 0 時不限制，每次符合條件都發送。</li>
+  <li>每天 00:00（平台時間 +08:00）重新計算。</li>
+  <li>已達上限時該次不發送，也不在「消息列表」產生紀錄。</li>
+  <li>編輯每日發送上限後，當天已發送的封數照算，以新的上限繼續判斷。</li>
+</ul>
+
+<h3>5.6 多條設定同時開啟</h3>
+<ul>
+  <li>一筆充值成功時，所有狀態為「开启」的設定各自獨立判斷，互不影響。</li>
+  <li>同一筆充值符合多條設定時，每一條各發送一封站內信；每日發送上限也各自計算。</li>
+</ul>
+
+<h3>5.7 發送內容</h3>
+<ul>
+  <li>發送位置：會員的用戶消息中心（站內信）。不發送 app 推送。</li>
+  <li>標題、內容：會員使用的語系在該條設定的国际化列表有設定時，顯示該語系的標題、內容；沒有設定時，顯示新增設定時輸入的消息標題、消息內容。標題與內容各自判斷。</li>
+  <li>該條設定的按鈕跳轉連結為「是」時，站內信內顯示按鈕並連到設定的連結；為「否」時不顯示按鈕。</li>
+</ul>
+
+<h3>5.8 判斷流程（此為建議，實際判斷流程依 RD 實作方向為主）</h3>
+<div class="flow">
+  <div class="frow"><div class="fbox start">充值訂單狀態變為「成功」</div></div>
+  <div class="fdown">↓</div>
+  <div class="frow"><div class="fbox dec">該筆訂單是否為會員在前台送出的在線充值訂單？</div><div class="fno">— 否 →</div><div class="fstop">不發送，流程結束</div></div>
+  <div class="fdown">↓ 是</div>
+  <div class="frow"><div class="fbox dec">是否有狀態為「开启」、類型為「充值」且觸發時機為「充值成功」的自動消息設定？</div><div class="fno">— 否 →</div><div class="fstop">不發送，流程結束</div></div>
+  <div class="fdown">↓ 是（以下對每一條符合的設定各自判斷一次）</div>
+  <div class="frow"><div class="fbox dec">觸發當下是否在該條設定的消息發送時間內（開始日期 00:00:00 ～ 結束日期 23:59:59）？</div><div class="fno">— 否 →</div><div class="fstop">該條設定不發送，不產生紀錄</div></div>
+  <div class="fdown">↓ 是</div>
+  <div class="frow"><div class="fbox dec">該筆訂單所屬的版本（初版／旧版(V2)／新版(V3)）是否在該條設定勾選的適用類型範圍內？</div><div class="fno">— 否 →</div><div class="fstop">該條設定不發送，不產生紀錄</div></div>
+  <div class="fdown">↓ 是</div>
+  <div class="frow"><div class="fbox dec">充值成功的會員是否符合該條設定的用戶範圍與指定對象？</div><div class="fno">— 否 →</div><div class="fstop">該條設定不發送，不產生紀錄</div></div>
+  <div class="fdown">↓ 是</div>
+  <div class="frow"><div class="fbox dec">該條設定的每日發送上限為 0，或該會員當天已收到該條設定的封數小於上限？</div><div class="fno">— 否 →</div><div class="fstop">該條設定不發送，不產生紀錄</div></div>
+  <div class="fdown">↓ 是</div>
+  <div class="frow"><div class="fbox end">發送一封站內信到該會員的用戶消息中心；「消息列表」新增一筆紀錄；該會員當天該條設定的已發送封數加 1</div></div>
+</div>
+
+<h2>6. 消息列表調整</h2>
+<p>公告管理 &gt; 消息列表。自動消息每發送一封，列表新增一筆紀錄。</p>
+<p class="cap">介面示意（查詢列「消息类型」下拉新增「自动消息」）</p>
+<div class="bk" style="position:relative;">
+  <div class="content-box">
+    <div class="crumb">位置<span class="sep">&gt;</span>消息列表</div>
+    <div class="handle-box" style="margin:6px 0 12px;">
+      <span class="sel open mr10" style="width:110px;">消息类型</span><span class="sel noarrow mr10" style="width:275px;">会员名</span><span class="sel noarrow mr10" style="width:320px;">开始时间　　　~　　　结束时间</span><span class="btn primary">搜索</span>
+    </div>
+    <div class="dropdown" style="left:31px; top:104px; width:110px;">
+      <div>所有消息</div><div>消息通知</div><div>app推送</div><div>活动消息</div><div class="new">自动消息</div>
+    </div>
+    <table class="el">
+      <tr><th>标题</th><th>内容</th><th>消息类型</th><th>会员名</th><th>新增时间</th><th>操作人名称</th></tr>
+      <tr><td>Update Your OKBet App</td><td>Please download the latest version of the OKBet App.</td><td>自动消息</td><td>okbet81336wa39</td><td>2026-11-26 14:10:36</td><td>system</td></tr>
+      <tr><td>Activity News</td><td>You have received 1 bonus reward(s), 3 activity reward(s) waiting to be claimed</td><td>消息通知</td><td>okbet83347i1rs</td><td>2026-11-26 14:10:01</td><td>system</td></tr>
+      <tr><td>&nbsp;</td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>&nbsp;</td><td></td><td></td><td></td><td></td><td></td></tr>
+    </table>
+  </div>
+</div>
+<table class="spec">
+  <colgroup><col style="width:180px"><col></colgroup>
+  <tr><th>項目</th><th>說明</th></tr>
+  <tr><td class="nw">查詢列「消息类型」</td><td>下拉選項新增「自动消息」，排在「活动消息」之後。選取後只顯示自動消息的發送紀錄。</td></tr>
+  <tr><td class="nw">标题</td><td>該條設定發送當下「新增／編輯設定」所輸入的消息標題，不因會員語系或国际化列表的內容而不同。</td></tr>
+  <tr><td class="nw">内容</td><td>該條設定發送當下「新增／編輯設定」所輸入的消息內容，不因會員語系或国际化列表的內容而不同。</td></tr>
+  <tr><td class="nw">消息类型</td><td>顯示「自动消息」。</td></tr>
+  <tr><td class="nw">会员名</td><td>收到站內信的會員帳號。</td></tr>
+  <tr><td class="nw">新增时间</td><td>站內信的發送時間。</td></tr>
+  <tr><td class="nw">操作人名称</td><td>顯示「system」。</td></tr>
+</table>
+
+<h2>7. 操作日誌</h2>
+<p>日志管理 &gt; 操作日志。自動消息設定的以下操作各寫入一筆日誌，「操作类型」歸在既有的「公告」：</p>
+<table class="spec">
+  <colgroup><col style="width:160px"><col></colgroup>
+  <tr><th>操作</th><th>日誌詳情需包含</th></tr>
+  <tr><td>新增</td><td>操作人、操作時間、操作 IP、該條設定的完整內容。</td></tr>
+  <tr><td>編輯</td><td>操作人、操作時間、操作 IP、該條設定編輯後的完整內容。</td></tr>
+  <tr><td>開啟／關閉</td><td>操作人、操作時間、操作 IP、該條設定的識別編號與變更後的狀態。</td></tr>
+  <tr><td>刪除</td><td>操作人、操作時間、操作 IP、被刪除設定的完整內容。</td></tr>
+</table>
+
+<h2>8. 上線初始狀態</h2>
+<p>上線時自動消息列表沒有任何預設資料，由運營自行新增設定並開啟。</p>
+
+<h2>9. 待確認事項</h2>
+<table class="spec">
+  <colgroup><col style="width:50px"><col style="width:120px"><col><col style="width:330px"></colgroup>
+  <tr><th>#</th><th>對象</th><th>問題</th><th>本版暫定寫法</th></tr>
+  <tr><td>1</td><td>RD</td><td>「自定义消息」只發送正式帳號。「活动消息」與其他系統自動發送的站內信，測試帳號是否會收到？自動消息要比照哪一種？</td><td>尚未寫入規則，待回覆後補上。</td></tr>
+  <tr><td>2</td><td>RD</td><td>以「自定义消息」實測：新增時輸入標題、內容，並在国际化列表新增简体中文與英语後發送，「消息列表」的紀錄顯示的是英语的內容，不是新增時輸入的內容，且每位會員的紀錄都相同。消息列表目前是依什麼規則決定記錄哪一份內容？自動消息的紀錄是否可以記錄新增／編輯設定時輸入的內容？</td><td>消息列表記錄新增／編輯設定時輸入的消息標題、消息內容。</td></tr>
+</table>
+
+</div>
+</body>
+</html>
