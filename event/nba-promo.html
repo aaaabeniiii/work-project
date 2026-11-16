@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>籃球活動（專項活動）後台規格書 V91</title>
+<style>
+  :root{
+    --blue:#409EFF; --blue-bg:#ECF5FF; --blue-bd:#B3D8FF;
+    --red:#F56C6C; --green:#67C23A; --orange:#E6A23C;
+    --t1:#303133; --t2:#606266; --t3:#909399; --t4:#C0C4CC;
+    --bd:#DCDFE6; --bd2:#EBEEF5; --bg:#F2F3F5; --panel:#fff;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--t1);
+    font:14px/1.6 "PingFang SC","Microsoft YaHei","Helvetica Neue",Helvetica,Arial,sans-serif}
+  .page{width:1180px;margin:0 auto;padding:24px 0 80px}
+
+  /* ---------- document chrome ---------- */
+  .doc-head{background:var(--panel);border:1px solid var(--bd2);border-radius:4px;padding:20px 24px;margin-bottom:16px}
+  .doc-head h1{font-size:20px;margin:0 0 8px;font-weight:600}
+  .meta{color:var(--t2);white-space:nowrap}
+  .meta b{color:var(--t1);font-weight:600;margin-right:4px}
+  .meta span{margin-right:24px}
+  h2{font-size:16px;font-weight:600;margin:28px 0 10px;padding-left:10px;border-left:4px solid var(--blue);line-height:20px}
+  h3{font-size:14px;font-weight:600;margin:18px 0 8px;color:var(--t1)}
+  .note{background:#FDF6EC;border:1px solid #FAECD8;color:#E6A23C;border-radius:4px;padding:8px 12px;margin:8px 0}
+  .block{background:var(--panel);border:1px solid var(--bd2);border-radius:4px;padding:16px 20px;margin-bottom:12px}
+  ul.plain{margin:6px 0 6px 18px;padding:0}
+  ul.plain li{margin:3px 0}
+
+  /* spec tables */
+  table.spec{width:100%;border-collapse:collapse;table-layout:fixed;margin:8px 0}
+  table.spec th,table.spec td{border:1px solid var(--bd2);padding:7px 10px;vertical-align:top;text-align:left}
+  table.spec th{background:#F5F7FA;color:var(--t2);font-weight:600;white-space:nowrap}
+  table.spec td.c{white-space:normal;word-break:break-all}
+  .chg{background:#FDE2E7}
+  .legend{display:inline-block;background:#FDE2E7;border:1px solid #F4A7B9;border-radius:3px;padding:0 8px;line-height:22px;font-size:12px;color:var(--t2);margin-left:8px;vertical-align:middle}
+  .req{color:var(--red);margin-right:2px}
+
+  /* ---------- admin mock (Element UI look) ---------- */
+  .mock{background:var(--panel);border:1px solid var(--bd2);border-radius:4px;padding:18px 20px 22px;margin:8px 0 14px;position:relative}
+  .mock:before{content:"後台畫面示意";position:absolute;top:-1px;right:-1px;background:var(--blue);color:#fff;font-size:12px;padding:2px 10px;border-radius:0 4px 0 4px;line-height:18px}
+  .crumb{color:var(--t2);margin-bottom:12px;white-space:nowrap}
+  .crumb i{font-style:normal;color:var(--t4);margin:0 8px}
+  .tabs{display:flex;border-bottom:2px solid #E4E7ED;margin-bottom:18px}
+  .tabs span{padding:0 20px;height:40px;line-height:40px;color:var(--t2);white-space:nowrap;position:relative}
+  .tabs span.on{color:var(--blue)}
+  .tabs span.on:after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;background:var(--blue)}
+  .sec{display:flex;align-items:center;font-weight:600;margin:18px 0 12px;white-space:nowrap}
+  .sec:before{content:"!";display:inline-block;width:14px;height:14px;line-height:14px;text-align:center;border-radius:50%;background:var(--blue);color:#fff;font-size:11px;font-weight:700;margin-right:6px}
+  .row{display:flex;align-items:flex-start;margin:0 0 14px;min-height:32px}
+  .row .lb{width:170px;flex:0 0 170px;text-align:right;color:var(--t2);padding-right:12px;line-height:32px;white-space:nowrap;display:flex;justify-content:flex-end;align-items:center}
+  .row .fd{flex:1 1 auto;min-width:0;line-height:32px}
+  .ipt{display:inline-block;height:32px;line-height:30px;border:1px solid var(--bd);border-radius:4px;padding:0 12px;background:#fff;color:var(--t1);vertical-align:middle;white-space:nowrap;overflow:hidden}
+  .ipt.ph{color:var(--t4)}
+  .ipt.sel{padding-right:28px;position:relative}
+  .ipt.sel:after{content:"";position:absolute;right:10px;top:12px;border:5px solid transparent;border-top-color:var(--t4)}
+  .ipt.dis{background:#F5F7FA;color:var(--t4);border-color:#E4E7ED}
+  .ipt.w120{width:120px}.ipt.w160{width:160px}.ipt.w200{width:200px}.ipt.w260{width:260px}.ipt.w320{width:320px}
+  .unit{color:var(--t2);margin:0 8px}
+  .date{display:inline-flex;align-items:center;width:360px;height:32px;border:1px solid var(--bd);border-radius:4px;padding:0 10px;color:var(--t4);white-space:nowrap;vertical-align:middle}
+  .date i{font-style:normal;margin-right:8px;color:var(--t4)}
+  .date em{font-style:normal;margin:0 24px;color:var(--t4)}
+  .radio,.chk{display:inline-flex;align-items:center;margin-right:24px;color:var(--t2);white-space:nowrap;line-height:32px}
+  .radio:before{content:"";width:14px;height:14px;border:1px solid var(--bd);border-radius:50%;margin-right:7px;background:#fff}
+  .radio.on{color:var(--blue)}
+  .radio.on:before{border:4px solid var(--blue);width:6px;height:6px;background:#fff}
+  .radio.dis{color:var(--t4)}
+  .radio.dis:before{background:#F5F7FA;border-color:#E4E7ED}
+  .radio.dis.on:before{border:4px solid #C0C4CC;width:6px;height:6px}
+  .chk:before{content:"";width:14px;height:14px;border:1px solid var(--bd);border-radius:2px;margin-right:7px;background:#fff}
+  .chk.on{color:var(--blue)}
+  .chk.on:before{background:var(--blue);border-color:var(--blue);box-shadow:inset 0 0 0 2px var(--blue), inset 0 0 0 10px #fff;background:var(--blue) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14'><path d='M3.5 7.2 6 9.6 10.6 4.6' fill='none' stroke='white' stroke-width='1.6'/></svg>") no-repeat center;box-shadow:none}
+  .chk.dis{color:var(--t4)}
+  .chk.dis:before{background:#F5F7FA;border-color:#E4E7ED}
+  .btn{display:inline-block;height:32px;line-height:30px;padding:0 15px;border:1px solid var(--bd);border-radius:4px;background:#fff;color:var(--t2);white-space:nowrap;vertical-align:middle;font-size:13px}
+  .btn.p{background:var(--blue);border-color:var(--blue);color:#fff}
+  .btn.sm{height:28px;line-height:26px;padding:0 10px;font-size:12px}
+  .btn.dis{opacity:.5}
+  .lnk{color:var(--blue);white-space:nowrap}
+  .lnk.red{color:var(--red)}
+  .hint{color:var(--t3);font-size:12px;line-height:20px;margin-top:4px;white-space:nowrap}
+  .fileb{display:inline-block;height:32px;line-height:30px;padding:0 15px;border:1px dashed var(--bd);border-radius:4px;color:var(--t2);white-space:nowrap}
+  .pool{color:var(--t1);line-height:22px;margin-top:6px;word-break:break-all}
+  .pool b{font-weight:600}
+  .switch{display:inline-block;width:40px;height:20px;border-radius:10px;background:#DCDFE6;position:relative;vertical-align:middle;margin-right:8px}
+  .switch:after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#fff}
+  .switch.on{background:var(--blue)}.switch.on:after{left:22px}
+
+  /* admin table */
+  table.adm{width:100%;border-collapse:separate;border-spacing:0;border:1px solid var(--bd2);border-radius:4px;overflow:hidden;table-layout:fixed}
+  table.adm th{background:#fff;color:var(--t3);font-weight:600;padding:10px 8px;border-bottom:1px solid var(--bd2);text-align:center;white-space:nowrap}
+  table.adm td{padding:8px;border-bottom:1px solid var(--bd2);text-align:center;color:var(--t2);white-space:nowrap;vertical-align:middle}
+  table.adm tr:last-child td{border-bottom:0}
+  table.adm .ipt{height:28px;line-height:26px}
+  .tbl-tools{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+
+  /* modal */
+  .modal{border:1px solid var(--bd2);border-radius:4px;box-shadow:0 2px 12px rgba(0,0,0,.08);background:#fff;padding:18px 20px;margin:12px 0 4px;position:relative}
+  .modal:before{content:"彈窗示意";position:absolute;top:-1px;right:-1px;background:var(--t3);color:#fff;font-size:12px;padding:2px 10px;border-radius:0 4px 0 4px;line-height:18px}
+  .modal .ttl{font-size:16px;font-weight:600;margin-bottom:12px}
+  .modal .warn{color:var(--red);font-size:12px;line-height:20px;margin-bottom:8px}
+  .modal .foot{text-align:right;margin-top:14px}
+  .modal .foot .btn{margin-left:10px}
+  .sporttab{display:inline-flex;border:1px solid var(--bd);border-radius:4px;overflow:hidden;margin-bottom:12px}
+  .sporttab span{padding:0 16px;height:30px;line-height:30px;color:var(--t2);white-space:nowrap}
+  .sporttab span.on{background:var(--blue);color:#fff}
+  .cnt{color:var(--t2);white-space:nowrap}
+  .cnt b{color:var(--blue);font-weight:600}
+  .cnt b.zero{color:var(--red)}
+  .rw{display:inline-flex;align-items:center;width:320px;justify-content:flex-start}
+  .rw .ipt{flex:0 0 200px;width:200px}
+  .rw .unit{flex:0 0 112px;width:112px;text-align:left;margin:0 0 0 8px;white-space:nowrap}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px 16px;margin-top:10px}
+  .grid .chk{margin:0}
+
+  /* variant badge */
+  .var{display:inline-block;background:var(--blue-bg);border:1px solid var(--blue-bd);color:var(--blue);border-radius:4px;padding:0 8px;line-height:22px;font-size:12px;margin-left:8px;vertical-align:middle;white-space:nowrap}
+
+  /* flow */
+  .flow{background:#fff;border:1px solid var(--bd2);border-radius:4px;padding:16px 20px}
+  .flow ol{margin:0;padding-left:22px}
+  .flow li{margin:6px 0}
+  .flow li ul{margin:4px 0 4px 18px;padding:0;color:var(--t2)}
+  .flow li ul li{margin:2px 0}
+  .y{color:var(--green)}.n{color:var(--red)}
+  table.spec td ul{margin:0;padding-left:16px}
+  table.spec td ul li{margin:2px 0}
+  table.spec td ul ul{margin:2px 0 2px 0}
+  .doctabs{display:flex;gap:4px;margin:0 0 16px;border-bottom:2px solid #DCDFE6}
+  .doctabs span{padding:8px 18px;cursor:pointer;color:var(--t2);border:1px solid transparent;border-bottom:0;border-radius:4px 4px 0 0;margin-bottom:-2px;white-space:nowrap}
+  .doctabs span.on{background:#fff;color:var(--blue);border-color:#DCDFE6;border-bottom:2px solid #fff}
+  .dpage{display:none}.dpage.on{display:block}
+  .tipdemo{margin:10px 0 6px}
+  .tipdemo .cap{color:var(--t2);font-size:13px;margin-bottom:6px}
+  .tipdemo .gray{background:#8C8C8C;padding:28px 0}
+  .tipdemo .card{background:#fff;width:760px;margin:0 auto;padding:22px 24px 18px}
+  .tipdemo .row{margin-bottom:22px}
+  .tipdemo .row:last-child{margin-bottom:0}
+  .tipdemo .tipa{display:table;background:#303133;color:#fff;font-size:12px;line-height:18px;padding:7px 10px;border-radius:4px;margin:0 0 8px;position:relative;white-space:nowrap}
+  .tipdemo .tipa:after{content:"";position:absolute;left:14px;bottom:-6px;border:6px solid transparent;border-bottom:0;border-top-color:#303133}
+  .tipdemo .stack{display:flex;flex-direction:column;align-items:flex-start}
+  .chg-h{background:#FDE2E7}
+  .q{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;background:var(--blue);color:#fff;font-size:11px;font-weight:700;margin-left:5px;vertical-align:middle;position:relative;top:-1px;line-height:1}
+  .tip{display:table;background:#303133;color:#fff;font-size:12px;line-height:20px;padding:8px 12px;border-radius:4px;margin:6px 0 2px;white-space:nowrap;position:relative}
+  .tip:before{content:"";position:absolute;left:14px;top:-6px;border:6px solid transparent;border-top:0;border-bottom-color:#303133}
+  .wide .row .lb{width:300px;flex:0 0 300px}
+  .row.auto .lb{width:auto;flex:0 0 auto}
+  .row.wrap .lb{display:block;white-space:normal;line-height:20px;padding-top:6px;text-align:right}
+  .err{border-color:var(--red)!important}
+  .mbox-wrap{background:rgba(0,0,0,.5);padding:40px 0}
+  .mbox{width:420px;margin:0 auto;background:#fff;border-radius:4px;padding:16px 20px 14px;box-shadow:0 2px 12px rgba(0,0,0,.3);position:relative}
+  .mbox .t{font-size:18px;color:var(--t1);margin-bottom:12px}
+  .mbox .x{position:absolute;right:16px;top:14px;color:var(--t3);font-size:16px}
+  .mbox .m{color:var(--t2);margin-bottom:16px}
+  .mbox .f{text-align:right}
+  .mbox .f .btn{margin-left:10px}
+  .errmsg{color:var(--red);font-size:12px;line-height:18px;margin-top:2px;white-space:nowrap}
+  .wiz{display:flex;gap:14px}
+  .wiz .steps{width:200px;flex:0 0 200px;border:1px solid var(--bd2);border-radius:4px;padding:10px 0;background:#fff}
+  .wiz .steps div{display:flex;align-items:center;gap:10px;padding:8px 16px;color:var(--t2);white-space:nowrap}
+  .wiz .steps div i{width:20px;height:20px;border-radius:50%;border:1px solid var(--t4);font-style:normal;font-size:12px;display:flex;align-items:center;justify-content:center;color:var(--t3)}
+  .wiz .steps div.on{background:#ECF5FF;color:var(--blue)}
+  .wiz .steps div.on i{background:var(--blue);border-color:var(--blue);color:#fff}
+  .wiz .steps div.ok i{background:var(--blue);border-color:var(--blue);color:#fff}
+  .wiz .steps div.ok i:before{content:"✓"}
+  .wiz .body{flex:1;min-width:0}
+  .wiz .bar{display:flex;justify-content:space-between;align-items:center;border:1px solid var(--bd2);border-radius:4px;padding:10px 16px;margin-bottom:12px;background:#fff}
+  .wiz .bar b{color:var(--blue);font-weight:600}
+  .wiz .bar .btn{margin-left:8px}
+  .wiz .pane{border:1px solid var(--bd2);border-radius:4px;padding:16px 20px;background:#fff}
+  .wiz .pane .lead{color:var(--t3);font-size:13px;margin-bottom:12px}
+  .wiz .ttl{border-left:3px solid var(--blue);padding-left:8px;font-weight:600;margin:14px 0 12px}
+  .tagx{display:inline-block;background:#F4F4F5;border:1px solid #E9E9EB;color:#909399;border-radius:3px;padding:0 6px;line-height:20px;font-size:12px;margin-left:6px;vertical-align:middle}
+  .tagn{display:inline-block;background:#FDE2E7;border:1px solid #F4A7B9;color:#C0392B;border-radius:3px;padding:0 6px;line-height:20px;font-size:12px;margin-left:6px;vertical-align:middle}
+  .chk.dis.on:before{background:#F2F6FC url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14'><path d='M3.5 7.2 6 9.6 10.6 4.6' fill='none' stroke='%23C0C4CC' stroke-width='1.6'/></svg>") no-repeat center;border-color:#DCDFE6}
+  .upbtn{display:inline-flex;align-items:center;height:32px;padding:0 14px;border-radius:4px;background:var(--blue);color:#fff;white-space:nowrap;font-size:13px}
+  .upbtn:before{content:"";width:14px;height:14px;margin-right:6px;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'><path d='M19.4 10a7.5 7.5 0 0 0-14.3-2A5 5 0 0 0 6 18h13a4 4 0 0 0 .4-8zM13 13v3h-2v-3H8.5L12 9.5l3.5 3.5H13z'/></svg>") no-repeat center/contain}
+  .preview{display:flex;align-items:center;width:300px;height:96px;border:1px solid var(--bd);border-radius:4px;margin-top:8px;padding:0 14px;color:var(--t2);white-space:nowrap}
+  .preview .thumb{width:76px;height:64px;border-radius:4px;margin-right:14px;background:linear-gradient(135deg,#8EC5FC,#E0C3FC);flex:0 0 76px}
+  .numin{display:inline-flex;align-items:center;height:32px;border:1px solid var(--bd);border-radius:4px;overflow:hidden;vertical-align:middle}
+  .numin span{width:34px;text-align:center;line-height:30px;background:#F5F7FA;color:var(--t2)}
+  .numin span.v{width:120px;background:#fff;color:var(--t1);border-left:1px solid var(--bd);border-right:1px solid var(--bd)}
+  .tipdemo .card{padding:20px 24px 18px}
+  .tipdemo .frow{display:flex;align-items:center;margin-top:112px;white-space:nowrap;position:relative}
+  .tipdemo .frow .tipa{position:absolute;left:0;bottom:calc(100% + 8px);margin:0}
+  .tipdemo .frow .tipa:after{left:var(--ax,16px)}
+  .row.ipline .lb{width:auto;flex:0 0 auto;text-align:left}
+  .tipdemo .lbl{color:var(--t2);margin-right:12px;white-space:nowrap}
+.h5{--gold:#F5C64A;--gold2:#C8902A;--line:#2E55C8;--txt:#DCE6FF}
+.h5 .stage{display:flex;gap:12px;align-items:flex-start;flex-wrap:nowrap}
+.h5.one{margin:8px 0}
+.h5.one .cnt-demo .cap,.h5.one .cap{font-size:12px;color:var(--t2);margin-bottom:4px}
+.h5.one .cnt-demo .track .hcard{flex:0 0 100px}
+.h5.one .cnt-demo .court{padding:18px 0 12px}
+.h5.one .cnt-demo{flex:0 0 390px}
+.h5.one .blk .phone{border-radius:16px;border-width:3px}
+.h5.one .track{justify-content:center;overflow:visible;cursor:default}
+.h5 .stage.three{gap:0;justify-content:space-between}
+.h5 .pcol{display:flex;flex-direction:column;align-items:center;flex:0 0 390px}
+.h5 .pcap{font-size:13px;color:#303133;font-weight:600;margin-bottom:8px;white-space:nowrap}
+.h5 .stage.three .phone{width:376px;zoom:.96}
+.h5 .hpanel{background:#fff;border:1px solid #EBEEF5;border-radius:6px;padding:12px 14px;width:300px;flex:0 0 300px;font-size:13px;line-height:1.7}
+.h5 .hpanel b{display:block;margin-bottom:6px}
+.h5 .hpanel label{display:block;margin:4px 0;cursor:pointer}
+.h5 .hpanel small{color:#909399}
+.h5 .hnote{margin-top:14px;color:#606266;font-size:12px;line-height:1.7}
+
+.h5 .phone{width:390px;background:#040B2A;border-radius:28px;overflow:hidden;border:6px solid #111;box-shadow:0 10px 40px rgba(0,0,0,.35);font-family:"Helvetica Neue",Arial,"PingFang SC",sans-serif}
+.h5 .topbar{height:44px;background:#061238;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:16px;position:relative}
+.h5 .topbar .back{position:absolute;left:14px;font-size:22px;line-height:1}
+.h5 .hpage{background:#040B2A;padding-bottom:16px}
+
+/* ---------- hero ---------- */
+.h5 .hero{height:194px;overflow:hidden;background:#040B2A;line-height:0}
+.h5 .hero svg{display:block}
+
+/* ---------- section head + box ---------- */
+.h5 .hsec{margin:10px 10px 0;background:linear-gradient(90deg,#0A1A5E,#0D2478 60%,#0A1A5E);border:1px solid #1F3FA8;border-bottom:0;border-radius:6px 6px 0 0;padding:8px 13px;display:flex;justify-content:space-between;align-items:center;color:#fff;font-style:italic;font-weight:900;font-size:13px;letter-spacing:.2px;text-transform:uppercase;box-shadow:inset 0 1px 0 rgba(255,255,255,.12)}
+.h5 .hsec .cnt{font-style:normal;font-weight:600;font-size:10px;color:#C9D6FF;text-transform:none}
+.h5 .hsec .cnt b{font-weight:900;font-size:13px;color:#fff}
+.h5 .hsec .tag{font-style:normal;font-weight:400;font-size:10px;color:#9FB3E8;margin-left:6px;text-transform:none}
+.h5 .hbox{margin:0 10px;background:#071240;border:1px solid #1F3FA8;border-top:1px solid #162F8A;border-radius:0 0 6px 6px;padding:10px}
+
+/* ---------- debut pass ---------- */
+.h5 .court{position:relative;border-radius:4px;overflow:hidden;padding:18px 0 10px;display:block;background:linear-gradient(180deg,#030820 0%,#071a5a 40%,#0b2a8a 60%,#5a3a1a 78%,#A0693A 100%)}
+.h5 .court .floor{position:absolute;left:-30%;right:-30%;bottom:-2px;height:42%;background:
+  linear-gradient(180deg,rgba(255,255,255,.18),transparent 30%),
+  repeating-linear-gradient(90deg,rgba(0,0,0,.12) 0 10px,transparent 10px 13px),linear-gradient(180deg,#6E4420,#B57A3F);transform:perspective(180px) rotateX(58deg);transform-origin:bottom}
+.h5 .court .floor:after{content:"";position:absolute;left:50%;top:40%;width:120px;height:120px;margin-left:-60px;border:2px solid rgba(255,255,255,.35);border-radius:50%}
+.h5 .court .lights{position:absolute;inset:0;background:
+  radial-gradient(18% 10% at 20% 6%,rgba(255,255,255,.35),transparent 70%),
+  radial-gradient(18% 10% at 50% 4%,rgba(255,255,255,.35),transparent 70%),
+  radial-gradient(18% 10% at 80% 6%,rgba(255,255,255,.35),transparent 70%),
+  repeating-linear-gradient(90deg,transparent 0 22px,rgba(255,255,255,.05) 22px 24px) 0 0/100% 38% no-repeat}
+.h5 .track{position:relative;z-index:1;display:flex;gap:12px;padding:0 16px;scroll-padding:0 16px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;cursor:grab;user-select:none}
+.h5 .track.drag{cursor:grabbing;scroll-snap-type:none}
+.h5 .pcol:not(.inter) .track{justify-content:center;overflow:visible;cursor:default}
+.h5 .track::-webkit-scrollbar{display:none}
+.h5 .dots{position:relative;z-index:1;display:flex;justify-content:center;gap:6px;margin-top:10px}
+.h5 .dots i{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.35)}
+.h5 .dots i.on{background:#fff;width:14px;border-radius:3px}
+.h5 .hcard{position:relative;z-index:1;flex:0 0 90px;scroll-snap-align:start;height:140px;border-radius:7px;padding:10px 7px 9px;text-align:center;color:#fff;background:linear-gradient(170deg,rgba(45,90,220,.45) 0%,rgba(12,30,110,.85) 60%,rgba(8,20,80,.95) 100%);border:1px solid rgba(90,140,255,.55);box-shadow:inset 0 0 22px rgba(60,120,255,.2);display:flex;flex-direction:column;align-items:center;overflow:hidden}
+.h5 .hcard:before{content:"";position:absolute;inset:0;background:linear-gradient(118deg,transparent 35%,rgba(140,185,255,.22) 48%,transparent 58%,rgba(140,185,255,.12) 70%,transparent 78%);pointer-events:none}
+.h5 .hcard.sel{border-color:#fff;box-shadow:0 0 0 1.5px #fff,0 0 20px rgba(140,185,255,.9),inset 0 0 22px rgba(60,120,255,.2)}
+.h5 .hcard .lbl{font-size:9px;font-weight:800;line-height:1.25;height:23px;display:flex;align-items:flex-start;justify-content:center;gap:4px;text-align:left;color:#F3F6FF}
+.h5 .hcard .lbl i{display:inline-block;width:6px;height:13px;border-radius:1px;background:linear-gradient(90deg,#1D3FBF 50%,#E0262C 50%);flex:0 0 6px;margin-top:1px}
+.h5 .hcard svg{width:66px;height:66px;margin:4px 0 2px}
+.h5 .hcard .st{font-size:10px;color:#6F95F0;margin-top:auto;font-weight:600}
+.h5 .hcard.done .st{color:var(--gold);font-weight:800}
+.h5 .hcard.claimed .st{color:#fff;font-weight:800}
+.h5 .hcard.used .st{color:#7F88A8}
+
+/* ---------- free bet ---------- */
+.h5 .fb{display:flex;align-items:center;gap:8px;padding:8px 6px}
+.h5 .tray{display:flex;align-items:center;gap:6px;background:linear-gradient(180deg,#0E2270,#091A58);border:1px solid #1C3A9A;border-radius:8px;padding:6px 8px}
+.h5 .plaque{width:33px;height:66px;border-radius:5px;background:linear-gradient(180deg,#1E3FB8,#0B1E6E);border:1px solid #4C84FF;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;box-shadow:0 3px 8px rgba(0,0,0,.5)}
+.h5 .plaque i{width:14px;height:28px;border-radius:2px;background:linear-gradient(90deg,#1D3FBF 50%,#E0262C 50%)}
+.h5 .plaque i:after{content:"";display:block;width:7px;height:7px;border-radius:50%;background:#fff;margin:6px auto 0}
+.h5 .plaque span{font-size:6px;color:#fff;font-weight:800;letter-spacing:.5px}
+.h5 .tk{width:112px;height:72px;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#5a3a00;font-weight:900;background:linear-gradient(135deg,#FFF0B8 0%,#F5CF66 30%,#E2B043 60%,#B8841F 100%);clip-path:polygon(0 0,100% 0,100% 100%,0 100%);box-shadow:0 4px 12px rgba(0,0,0,.45);margin-left:0;border-radius:4px;border:1px solid #FFF2C0}
+.h5 .tk .cut{position:absolute;width:10px;height:10px;border-radius:50%;background:#0C1E66}
+.h5 .tk .cut.a{left:-5px;top:-5px}.h5 .tk .cut.b{right:-5px;top:-5px}.h5 .tk .cut.c{left:-5px;bottom:-5px}.h5 .tk .cut.d{right:-5px;bottom:-5px}
+.h5 .tk:before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;background:repeating-linear-gradient(180deg,#0C1E66 0 4px,transparent 4px 8px);opacity:.9}
+.h5 .tk:after{content:"";position:absolute;left:16px;top:6px;bottom:6px;border-left:1.5px dashed rgba(90,58,0,.5)}
+.h5 .tk .amt{font-size:23px;margin-left:10px;letter-spacing:1px;text-shadow:0 1px 0 #fff3c2}
+.h5 .tk .nm{margin-left:10px;font-size:7.5px;letter-spacing:1.5px;font-style:italic;opacity:.7;margin-top:1px}
+.h5 .tk.off{filter:grayscale(.5) brightness(.8)}
+.h5 .fb .r{flex:1;color:#fff;padding-left:2px}
+.h5 .fb .r .h{font-weight:800;font-size:15px;white-space:nowrap}
+.h5 .fb .r .d{font-size:8.5px;color:#9FB3E8;margin:2px 0 9px;white-space:nowrap}
+.h5 .fbtn{display:inline-block;min-width:110px;text-align:center;padding:8px 0;border-radius:7px;font-weight:900;font-size:12px;letter-spacing:1.4px;font-style:italic;text-transform:uppercase}
+.h5 .fbtn.lock{background:linear-gradient(180deg,#3B6FFF,#1A43D0);color:#fff;border:1px solid #6A96FF;box-shadow:0 3px 8px rgba(0,0,0,.4)}
+.h5 .fbtn.claim{background:linear-gradient(180deg,#FFD85A,#E39F1E);color:#4a2d00;box-shadow:0 0 14px rgba(245,198,74,.65)}
+.h5 .fbtn.used{background:#2A2F45;color:#8A93B0}
+.h5 .fbtn.exp{background:#3a1f28;color:#F48A8A}
+
+/* ---------- pick your game ---------- */
+.h5 .hhint{color:#C9D6FF;font-size:9px;margin:2px 0 9px}
+.h5 .games{display:flex;gap:8px;overflow:hidden}
+.h5 .g{min-width:200px;height:144px;border-radius:8px;padding:10px 10px;color:#fff;background:linear-gradient(110deg,#2545C8 0%,#5B2FD4 40%,#C4306F 75%,#D82B4C 100%);font-size:8px;position:relative;overflow:hidden}
+.h5 .g:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(120deg,transparent 0 18px,rgba(255,255,255,.05) 18px 20px)}
+.h5 .g.b{background:linear-gradient(110deg,#1E3FBF,#5B2FD4 60%,#7A3BE0)}
+.h5 .g .lg{font-size:7.5px;opacity:.9;margin-bottom:7px;display:flex;align-items:center;gap:4px}
+.h5 .g .lg:before{content:"";width:9px;height:9px;border-radius:50%;background:#fff;opacity:.8}
+.h5 .g .tm{display:flex;justify-content:space-between;align-items:center;gap:4px}
+.h5 .g .team{display:flex;flex-direction:column;align-items:flex-start;gap:4px;width:62px}
+.h5 .g .team .lg2{margin-left:8px}
+.h5 .g .team .lg2{width:26px;height:26px;border-radius:50%;background:radial-gradient(circle at 50% 50%,#fff 0 30%,#D62430 32% 60%,#fff 62% 70%,#1D3FBF 72%);box-shadow:0 1px 3px rgba(0,0,0,.4)}
+.h5 .g .team .nm{font-size:7px;line-height:1.3;text-align:left;white-space:nowrap}
+.h5 .g .sc{font-size:14px;font-weight:900;text-align:center;line-height:1}
+.h5 .g .sc small{display:block;font-size:6.5px;font-weight:400;opacity:.9;margin-top:3px}
+.h5 .g .odds{display:flex;justify-content:space-between;align-items:center;margin-top:8px}
+.h5 .g .o{background:#fff;color:#111;border-radius:4px;padding:3px 6px;font-weight:900;font-size:10px;text-align:center;min-width:54px;height:24px;line-height:1}
+.h5 .g .o small{display:block;font-weight:400;font-size:6.5px;color:#666}
+.h5 .g .w{font-size:8px;font-weight:700}
+
+/* ---------- how to play ---------- */
+.h5 .hstep{display:flex;gap:12px;align-items:center;background:linear-gradient(90deg,#0A1B60,#081548);border:1px solid #1E3C9C;border-radius:6px;padding:9px 12px;margin-bottom:7px;color:#fff}
+.h5 .hstep .n{font-size:30px;font-weight:900;font-style:italic;color:#2F6BFF;line-height:1;width:24px;text-shadow:0 0 10px rgba(47,107,255,.6)}
+.h5 .hstep .t{font-size:11px;font-weight:800}
+.h5 .hstep .s{font-size:8.5px;color:#9FB3E8;margin-top:3px}
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="doc-head">
+  <h1>籃球活動（活動配置（新）模板）後台規格書</h1>
+  <div class="meta">
+    <span><b>版本</b>V91</span>
+    <span><b>日期</b>2026-11-13</span>
+    <span><b>系統</b>管理後台（sportsadmin）</span>
+    <span><b>路徑</b>后台 › 活动配置（新） › 活动列表 › 新增活动 › 活动类型：篮球活动</span>
+    <span><b>狀態</b>待與營運確認（第十一節）</span>
+  </div>
+</div>
+
+<div class="doctabs"><span class="on" data-p="A">後台規格</span><span data-p="B">前台示意</span></div>
+<div class="dpage on" id="pA">
+<h2>一、需求目的</h2>
+<div class="block">
+  <ul class="plain">
+    <li>在「活动配置（新）」新增一個活動模板「篮球活动」，走既有的六步驟配置流程（活动模板设置 → 活动图片 → 参与对象与名单 → 活动条件 → 风控条件 → 提交预览）。</li>
+    <li>步驟 1、2、3、5、6 沿用模板共用欄位，只在步驟 1 加「展示时间」「未登入是否可见」、步驟 3 加「KYC 验证」。</li>
+    <li>步驟 4「活动条件」為本模板專屬：奖励配置（每日）、游戏配置、通用派奖配置。</li>
+    <li>獎勵為「体育投注券」（沿用 积分商城 › 优惠券管理 既有模板），達標後由會員在前台手動領取、系統直接派券，不走派奖审核。</li>
+    <li>每日任務達標判斷以會員當日累計數據與各項次「需求」比較，三種達成條件（总投注额／充值／体育投注额）各自獨立計算、各自獨立領取。</li>
+    <li>活动配置（新） › 活动报表 需支援本模板的明細與統計欄位。</li>
+  </ul>
+</div>
+<h2>二、配置流程總覽</h2>
+<div class="block">在 活动列表 點「新增活动」，步驟 1 的「活动类型」下拉多一個選項「篮球活动」；選定後步驟 2～6 依本模板呈現。每一步「下一步」時校驗該步必填（與現有模板相同），步驟 6 點「提交」寫入；「退出编辑」跳「确定退出编辑?未保存的修改将丢失」確認框。活動開啟中可再進入編輯，修改後立即生效。</div>
+<table class="spec">
+  <colgroup><col style="width:60px"><col style="width:150px"><col style="width:90px"><col></colgroup>
+  <tr><th>步驟</th><th>名稱</th><th>與現有模板</th><th>本模板的內容</th></tr>
+  <tr><td class="c">1</td><td class="c">活动模板设置</td><td class="c">共用＋新增</td><td>活动类型（新增「篮球活动」）、活动名称、币种、状态、活动时间；新增 展示时间、未登入是否可见。</td></tr>
+  <tr><td class="c">2</td><td class="c">活动图片</td><td class="c">共用</td><td>首页浮窗设置（PC／H5 图片、排序）、活动列表设置（PC／H5 图片、排序）、备注。與現有相同。</td></tr>
+  <tr><td class="c">3</td><td class="c">参与对象与名单</td><td class="c">共用＋新增</td><td>充值层级、指定代理、新会员限制、会员等级、用户标签、黑名单；新增 KYC 验证。</td></tr>
+  <tr><td class="c">4</td><td class="c">活动条件</td><td class="c">本模板專屬</td><td>奖励配置（每日）、游戏配置、通用派奖配置。</td></tr>
+  <tr><td class="c">5</td><td class="c">风控条件</td><td class="c">共用</td><td>同IP／同手机号／同姓名／同email 检测、自动拒绝。</td></tr>
+  <tr><td class="c">6</td><td class="c">提交预览</td><td class="c">共用</td><td>依步驟列出所有欄位摘要，確認後提交。</td></tr>
+</table>
+<h2>三、步驟 1 活动模板设置</h2>
+<div class="mock">
+  <div class="crumb">位置 <i>›</i> 活动配置(新) <i>›</i> 活动列表 <i>›</i> 新增活动</div>
+  <div class="wiz"><div class="steps"><div class="on"><i>1</i>活动模板设置</div><div class=""><i>2</i>活动图片</div><div class=""><i>3</i>参与对象与名单</div><div class=""><i>4</i>活动条件</div><div class=""><i>5</i>风控条件</div><div class=""><i>6</i>提交预览</div></div><div class="body">
+    <div class="bar"><b>活动配置步骤</b><span><span class="btn p">下一步</span><span class="btn" style="color:var(--red);border-color:#FBC4C4">退出编辑</span></span></div>
+    <div class="pane"><div class="lead">将活动模板配置保存至系统,系统将自动配置相关功能</div><div class="ttl">活动模板</div>
+  <div class="row"><div class="lb"><span class="req">*</span>活动类型:</div><div class="fd"><span class="ipt sel w320">篮球活动</span><span class="tagn">新增選項</span></div></div>
+  <div class="row"><div class="lb"><span class="req">*</span>活动名称:</div><div class="fd"><span class="ipt ph w320">请输入</span></div></div>
+  <div class="row"><div class="lb"><span class="req">*</span>币种:</div><div class="fd"><span class="ipt sel w320">PHP</span></div></div>
+  <div class="row"><div class="lb">状态:</div><div class="fd"><span class="radio on">关闭</span><span class="radio">开启</span></div></div>
+  <div class="row"><div class="lb"><span class="req">*</span>未登入是否可见<span class="q">?</span>:</div><div class="fd"><span class="radio">是</span><span class="radio on">否</span><span class="tagn">新增</span></div></div>
+  <div class="ttl">时间设定</div>
+  <div class="row"><div class="lb"><span class="req">*</span>活动时间:</div><div class="fd"><span class="date"><i>◷</i>开始时间<em>~</em>结束时间</span></div></div>
+  <div class="row"><div class="lb"><span class="req">*</span>展示时间:</div><div class="fd"><span class="date"><i>◷</i>开始时间<em>~</em>结束时间</span><span class="tagn">新增</span></div></div></div>
+  </div></div>
+</div>
+<table class="spec">
+  <colgroup><col style="width:140px"><col style="width:120px"><col style="width:70px"><col></colgroup>
+  <tr><th>欄位</th><th>元件</th><th>必填</th><th>規則</th></tr>
+  <tr><td class="c">活动类型</td><td class="c">下拉單選</td><td class="c">是</td><td>與現有模板相同，下拉新增選項「篮球活动」。</td></tr>
+  <tr><td class="c">活动名称</td><td class="c">文字輸入</td><td class="c">是</td><td>與現有模板相同。</td></tr>
+  <tr><td class="c">币种</td><td class="c">下拉單選</td><td class="c">是</td><td>與現有模板相同。</td></tr>
+  <tr><td class="c">状态</td><td class="c">單選</td><td class="c">是</td><td>與現有模板相同。</td></tr>
+  <tr><td class="c">未登入是否可见</td><td class="c">單選＋提示</td><td class="c">是</td><td>本模板新增。預設「否」。是：未登入的訪客可看到活動入口並開啟活動專屬頁，頁面純展示（不顯示任務進度與領取按鈕），點擊頁內任一按鈕導向登入。否：未登入不顯示入口，直接開啟活動頁網址導向登入。<br>欄位名稱後加「?」圖示，滑入顯示提示文案：<br>・是：未登入的访客可浏览活动专属页，点击页内任一按钮导向登入<br>・否：未登入时不显示活动入口，直接开启活动页网址导向登入</td></tr>
+  <tr><td class="c">活动时间</td><td class="c">日期時間區間</td><td class="c">是</td><td>與現有模板相同。活动时间即活動計算時間：只有此區間內產生的投注、充值才計入任務，區間外不計算、不可領取。<span>同為「篮球活动」的活動之間，活动时间、展示时间都不可重疊；保存時檢查，重疊則擋下提示「活动时间或展示时间与其他篮球活动重叠」。</span></td></tr>
+  <tr><td class="c">展示时间</td><td class="c">日期時間區間</td><td class="c">是</td><td>本模板新增。活動入口（首頁浮窗、Rewards › Promotion 活動卡片）顯示與活動頁可開啟的時間區間，與活动时间分開控制。展示時間內但不在活动时间內：頁面可開，任務列顯示「未開始」或「已結束」，領取按鈕不可點。結束時間不可早於活动时间結束。</td></tr>
+</table>
+<div class="tipdemo">
+  <div class="cap">「?」圖示滑鼠移上時的示意（每次只會顯示滑鼠所在那一個）</div>
+  <div class="gray"><div class="card">
+    <div class="frow"><div class="tipa">是：未登入的访客可浏览活动专属页，点击页内任一按钮导向登入<br>否：未登入时不显示活动入口，直接开启活动页网址导向登入</div><span class="lbl"><span class="req">*</span>未登入是否可见<span class="q">?</span>:</span><span class="radio">是</span><span class="radio on">否</span></div>
+  </div></div>
+</div>
+<h2>四、步驟 2 活动图片</h2>
+<div class="mock">
+  <div class="crumb">位置 <i>›</i> 活动配置(新) <i>›</i> 活动列表 <i>›</i> 新增活动</div>
+  <div class="wiz"><div class="steps"><div class="ok"><i></i>活动模板设置</div><div class="on"><i>2</i>活动图片</div><div class=""><i>3</i>参与对象与名单</div><div class=""><i>4</i>活动条件</div><div class=""><i>5</i>风控条件</div><div class=""><i>6</i>提交预览</div></div><div class="body">
+    <div class="bar"><b>活动配置步骤</b><span><span class="btn">上一步</span><span class="btn p">下一步</span><span class="btn" style="color:var(--red);border-color:#FBC4C4">退出编辑</span></span></div>
+    <div class="pane"><div class="lead">设置首页浮窗图片、活动列表图片及活动备注。活动列表图片用于前台 Rewards → Promotion 分类显示（Event time／标题依步骤1配置，排序照旧依有无角标）。</div>
+  <div class="ttl">首页浮窗设置</div>
+  <div style="padding:0 0 14px 4px"><span class="radio">开启</span><span class="radio on">关闭</span></div>
+  <div style="border-top:1px solid var(--bd2);margin:0 0 14px"></div>
+  <div class="ttl">活动列表设置</div>
+  <div style="padding:0 0 14px 4px"><span class="radio">开启</span><span class="radio on">关闭</span></div>
+  <div style="border-top:1px solid var(--bd2);margin:0 0 14px"></div>
+  <div class="ttl">备注</div>
+  <div class="ipt ph" style="display:block;width:100%;height:90px;line-height:20px;padding:8px 12px">请输入备注内容...</div></div>
+  </div></div>
+</div>
+<div class="mock">
+  <div class="hint" style="margin-bottom:8px">首页浮窗设置／活动列表设置選「开启」時（與現有模板相同）：</div>
+  <div class="ttl">首页浮窗设置</div>
+  <div style="padding:0 0 10px 4px"><span class="radio on">开启</span><span class="radio">关闭</span></div>
+  <div class="row"><div class="lb"><span class="req">*</span>PC 图片</div><div class="fd"><span class="fileb" style="width:120px;height:80px;line-height:78px;text-align:center">＋</span>　<span class="lnk red">删除</span></div></div>
+  <div class="row"><div class="lb"><span class="req">*</span>H5 图片</div><div class="fd"><span class="fileb" style="width:120px;height:80px;line-height:78px;text-align:center">＋</span>　<span class="lnk red">删除</span></div></div>
+  <div class="row"><div class="lb"></div><div class="fd"><div class="hint">图片格式:png、bmp、jpg、gif、webp;大小限制 5MB 内</div></div></div>
+  <div class="row"><div class="lb">排序：</div><div class="fd"><span class="ipt w120">0</span></div></div>
+  <div style="border-top:1px solid var(--bd2);margin:0 0 14px"></div>
+  <div class="ttl">活动列表设置</div>
+  <div style="padding:0 0 10px 4px"><span class="radio on">开启</span><span class="radio">关闭</span></div>
+  <div class="row"><div class="lb"><span class="req">*</span>PC 图片</div><div class="fd"><span class="fileb" style="width:120px;height:80px;line-height:78px;text-align:center">＋</span>　<span class="lnk red">删除</span></div></div>
+  <div class="row"><div class="lb"><span class="req">*</span>H5 图片</div><div class="fd"><span class="fileb" style="width:120px;height:80px;line-height:78px;text-align:center">＋</span>　<span class="lnk red">删除</span></div></div>
+  <div class="row"><div class="lb"></div><div class="fd"><div class="hint">用于前台 Rewards → Promotion 列表；图片格式：png、bmp、jpg、gif、webp；大小限制 5MB 内。</div></div></div>
+  <div class="row"><div class="lb">排序：</div><div class="fd"><span class="ipt w120">0</span></div></div>
+</div>
+<table class="spec">
+  <colgroup><col style="width:160px"><col></colgroup>
+  <tr><th>項目</th><th>規則</th></tr>
+  <tr><td class="c">整步</td><td>與現有模板相同，本模板不新增欄位。</td></tr>
+</table>
+<h2>五、步驟 3 参与对象与名单</h2>
+<div class="mock">
+  <div class="crumb">位置 <i>›</i> 活动配置(新) <i>›</i> 活动列表 <i>›</i> 新增活动</div>
+  <div class="wiz"><div class="steps"><div class="ok"><i></i>活动模板设置</div><div class="ok"><i></i>活动图片</div><div class="on"><i>3</i>参与对象与名单</div><div class=""><i>4</i>活动条件</div><div class=""><i>5</i>风控条件</div><div class=""><i>6</i>提交预览</div></div><div class="body">
+    <div class="bar"><b>活动配置步骤</b><span><span class="btn">上一步</span><span class="btn p">下一步</span><span class="btn" style="color:var(--red);border-color:#FBC4C4">退出编辑</span></span></div>
+    <div class="pane"><div class="lead">设置活动的参与对象与黑名单规则</div><div class="ttl">参与对象设置</div>
+  <div class="row"><div class="lb">1. 充值层级:</div><div class="fd"><span class="ipt sel w260">全选</span></div></div>
+  <div class="row"><div class="lb">2. 指定代理:</div><div class="fd" style="line-height:22px;padding-top:5px"><span class="radio on" style="display:flex;line-height:22px">不指定</span><span class="radio" style="display:flex;line-height:22px">指定代理线</span></div></div>
+  <div class="row"><div class="lb">3. 新会员限制:</div><div class="fd"><span class="switch"></span>活动开始后注册的新会员</div></div>
+  <div class="row"><div class="lb">4. 会员等级:</div><div class="fd"><span class="ipt sel w260">全选</span></div></div>
+  <div class="row"><div class="lb">5. 用户标签:</div><div class="fd"><span class="ipt sel w260 ph">请选择用户标签</span></div></div>
+  <div class="row"><div class="lb" id="kyclb"><span class="req">*</span>6. KYC 验证:</div><div class="fd"><span class="chk">未认证</span><span class="chk">部分认证</span><span class="chk">已认证</span><span class="tagn">新增</span></div></div>
+  <div class="ttl">黑名单设置</div>
+  <div class="row"><div class="lb">黑名单:</div><div class="fd"><span class="ipt ph w260" style="height:52px;line-height:50px">请输入,以逗号分隔多个用户名</span></div></div>
+  <div class="row"><div class="lb">用户标签:</div><div class="fd"><span class="ipt sel w260 ph">请选择用户标签</span></div></div></div>
+  </div></div>
+</div>
+<table class="spec">
+  <colgroup><col style="width:140px"><col style="width:120px"><col style="width:70px"><col></colgroup>
+  <tr><th>欄位</th><th>元件</th><th>必填</th><th>規則</th></tr>
+  <tr><td class="c">1～5、黑名单设置</td><td class="c">—</td><td class="c">—</td><td>與現有模板相同。</td></tr>
+  <tr><td class="c">6. KYC 验证</td><td class="c">多選勾選</td><td class="c">是</td><td>本模板新增。預設不勾，至少勾一項才可進下一步。會員當下的 KYC 狀態落在勾選範圍內才可領取；選項名稱沿用後台 KYC 狀態原名：未认证／部分认证／已认证。未符合者：前台活動頁可開、任務進度正常顯示，點領取時提示「请先完成 KYC 验证」，按「确定」導向 KYC 驗證頁。</td></tr>
+</table>
+<h2>六、步驟 4 活动条件（本模板專屬）</h2>
+<div class="mock">
+  <div class="crumb">位置 <i>›</i> 活动配置(新) <i>›</i> 活动列表 <i>›</i> 新增活动</div>
+  <div class="wiz"><div class="steps"><div class="ok"><i></i>活动模板设置</div><div class="ok"><i></i>活动图片</div><div class="ok"><i></i>参与对象与名单</div><div class="on"><i>4</i>活动条件</div><div class=""><i>5</i>风控条件</div><div class=""><i>6</i>提交预览</div></div><div class="body">
+    <div class="bar"><b>活动配置步骤</b><span><span class="btn">上一步</span><span class="btn p">下一步</span><span class="btn" style="color:var(--red);border-color:#FBC4C4">退出编辑</span></span></div>
+    <div class="pane"><div class="lead">活动开启中修改配置会立即影响未领取任务。</div><div style="padding:2px 0">
+  <div class="ttl">奖励配置（每日）</div>
+  <div class="tbl-tools" style="justify-content:flex-end"><span class="btn p sm">+ 新增</span></div>
+  <table class="adm" style="width:860px">
+    <colgroup><col style="width:50px"><col style="width:130px"><col style="width:90px"><col style="width:140px"><col style="width:240px"><col style="width:60px"><col style="width:90px"><col style="width:60px"></colgroup>
+    <tr><th>项次</th><th>达成条件<span class="q">?</span></th><th>需求</th><th>奖励类型</th><th>奖励</th><th>张数</th><th>排序<span class="q">?</span></th><th>操作</th></tr>
+    <tr><td><span class="req">*</span>1</td><td><span class="ipt sel ph" style="width:130px">请选择</span></td><td><span class="ipt ph" style="width:90px">请输入</span></td><td style="padding:6px 8px"><span class="ipt sel" style="width:120px">优惠券</span><br><span class="ipt sel" style="width:120px;margin-top:6px">体育投注券</span></td><td><span class="rw" style="width:236px"><span class="ipt sel ph" style="flex:0 0 140px;width:140px">请选择</span><span class="unit">（<span style="color:var(--red)">₱0</span> / <span style="color:var(--red)">0</span>H）</span></span></td><td><span class="ipt" style="width:50px">1</span></td><td><span class="ipt ph" style="width:70px">请输入</span></td><td><span class="lnk red">删除</span></td></tr>
+  </table>
+  <div class="ttl" style="margin-top:22px">游戏配置</div>
+  <div class="row"><div class="lb"><span class="req">*</span>适用类型:</div><div class="fd"><span class="chk dis on">篮球</span></div></div>
+  <div class="row"><div class="lb"><span class="req">*</span>可参与体育投注赛事<span class="q">?</span>:</div><div class="fd"><span class="radio on">全部</span><span class="radio">指定</span></div></div>
+  <div class="ttl">通用派奖配置</div>
+  <div class="row"><div class="lb">审核方式：</div><div class="fd"><span class="radio dis on">自动审核</span></div></div>
+  <div class="row"><div class="lb">领取方式：</div><div class="fd"><span class="radio dis on">手动领取</span></div></div>
+</div></div>
+  </div></div>
+</div>
+<h3>6-1 奖励配置（每日）</h3>
+<div style="display:inline-block;padding:2px 8px;color:var(--t2);margin:4px 0 6px">規則說明：每日 00:00（UTC+8）重置；各項次獨立判斷、每人每項次每日限領一次；最多 10 項</div>
+<div class="mock">
+<div class="sec">奖励配置（每日）</div>
+  <div class="tbl-tools" style="justify-content:flex-end"><span class="btn p sm">+ 新增</span></div>
+  <table class="adm">
+    <colgroup><col style="width:60px"><col style="width:150px"><col style="width:100px"><col style="width:150px"><col style="width:300px"><col style="width:70px"><col style="width:90px"><col style="width:70px"></colgroup>
+    <tr><th>项次</th><th>达成条件<span class="q">?</span></th><th>需求</th><th>奖励类型</th><th>奖励</th><th>张数</th><th>排序<span class="q">?</span></th><th>操作</th></tr>
+    <tr><td><span class="req">*</span>1</td><td><span class="ipt sel w160" style="width:150px">总投注额</span></td><td><span class="ipt" style="width:100px">200</span></td><td style="padding:6px 8px"><span class="ipt sel" style="width:120px">优惠券</span><br><span class="ipt sel" style="width:120px;margin-top:6px">体育投注券</span></td><td><span class="rw"><span class="ipt sel">Sport Free Bet 5</span><span class="unit">（₱5 / 72H）</span></span></td><td><span class="ipt" style="width:50px">1</span></td><td><span class="ipt" style="width:70px">1</span></td><td><span class="lnk red">删除</span></td></tr>
+    <tr><td><span class="req">*</span>2</td><td><span class="ipt sel" style="width:150px">充值</span></td><td><span class="ipt" style="width:100px">200</span></td><td style="padding:6px 8px"><span class="ipt sel" style="width:120px">优惠券</span><br><span class="ipt sel" style="width:120px;margin-top:6px">体育投注券</span></td><td><span class="rw"><span class="ipt sel">Sport Free Bet 5</span><span class="unit">（₱5 / 72H）</span></span></td><td><span class="ipt" style="width:50px">1</span></td><td><span class="ipt" style="width:70px">2</span></td><td><span class="lnk red">删除</span></td></tr>
+    <tr><td><span class="req">*</span>3</td><td><span class="ipt sel" style="width:150px">体育投注额</span></td><td><span class="ipt" style="width:100px">50</span></td><td style="padding:6px 8px"><span class="ipt sel" style="width:120px">优惠券</span><br><span class="ipt sel" style="width:120px;margin-top:6px">体育投注券</span></td><td><span class="rw"><span class="ipt sel">Sport Free Bet 10</span><span class="unit">（₱10 / 72H）</span></span></td><td><span class="ipt" style="width:50px">1</span></td><td><span class="ipt" style="width:70px">3</span></td><td><span class="lnk red">删除</span></td></tr>
+    <tr><td><span class="req">*</span>4</td><td><span class="ipt sel ph" style="width:150px">请选择</span></td><td><span class="ipt ph" style="width:100px">请输入</span></td><td style="padding:6px 8px"><span class="ipt sel" style="width:120px">优惠券</span><br><span class="ipt sel" style="width:120px;margin-top:6px">体育投注券</span></td><td><span class="rw"><span class="ipt sel ph">请选择</span><span class="unit">（<span style="color:var(--red)">₱0</span> / <span style="color:var(--red)">0</span>H）</span></span></td><td><span class="ipt" style="width:50px">1</span></td><td><span class="ipt ph" style="width:70px">请输入</span></td><td><span class="lnk red">删除</span></td></tr>
+  </table>
+
+  </div>
+<table class="spec">
+  <colgroup><col style="width:120px"><col style="width:120px"><col style="width:70px"><col></colgroup>
+  <tr><th>欄位</th><th>元件</th><th>必填</th><th>規則</th></tr>
+  <tr><td class="c">项次</td><td class="c">系統編號</td><td class="c">是</td><td>依新增順序自動編號 1、2、3…；刪除後重新編號。每一列只要存在就整列必填，項次前都帶 *。項次 1 固定存在、不可刪除；項次總數即本活動每日獎勵數量，上限 10，達 10 筆時「新增」按鈕反灰。</td></tr>
+  <tr><td class="c">达成条件</td><td class="c">下拉單選</td><td class="c">是</td><td>選項：总投注额／充值／体育投注额。<br>总投注额＝會員當日全站投注額（含自有體育與第三方遊戲）。<br>充值＝會員當日充值成功金額累計。<br>体育投注额＝會員當日自有體育投注額，範圍依「游戏配置 › 可参与体育投注赛事」：全部＝籃球所有賽事；指定＝所選聯賽底下全部賽事＋所選賽事的聯集。<br>同一筆體育投注同時計入总投注额與体育投注额。<span>用体育投注券下的注單不計有效投注，所以不計入总投注额與体育投注额。</span>同一達成條件可設多筆。<br>表頭「达成条件」後加「?」圖示，滑入顯示提示文案：<br>・总投注额：不分游戏的有效总投注额<br>・体育投注额：体育的有效总投注额<br>・各任务独立判断，同一笔投注可重复计入<br>・例：总投注额设定100、体育投注额设定100，会员下注体育100，两个任务同时达成</td></tr>
+  <tr><td class="c">需求</td><td class="c">數字輸入</td><td class="c">是</td><td>輸入框只接受正整數（其他字元無法輸入），填 0 視為未填。不同項次的需求值可重複。</td></tr>
+  <tr><td class="c">奖励类型</td><td class="c">兩個下拉單選（上下排）</td><td class="c">是</td><td>上面的下拉＝獎勵類型，沿用現有模板的獎勵類型下拉，本模板只開放「优惠券」、預設選定。<br>下面的下拉＝優惠券類型，本模板新增，列出 优惠券管理 的优惠券类别，本期只開放「体育投注券」、預設選定。</td></tr>
+  <tr><td class="c">奖励</td><td class="c">下拉單選＋帶出文字</td><td class="c">是</td><td>與現有模板相同的優惠券下拉（列出 优惠券配置 的券名稱），依上一欄選的優惠券類型自動過濾，本期只列 优惠券类别＝体育投注券 的券。選定後，於下拉選單右側（欄位內、選單外）自動帶出該券的投注面额與有效期，格式「（₱面额 / 有效期H）」，例：（₱2 / 120H）；尚未選擇時顯示「（₱0 / 0H）」，兩個 0 以紅色顯示；此文字唯讀，隨選擇即時更新。下拉選單固定寬度、帶出文字靠左固定寬度，整組置中於欄位內，各列下拉選單右緣對齊、括號左緣對齊。不同項次可選同一張券。</td></tr>
+  <tr><td class="c">张数</td><td class="c">數字輸入</td><td class="c">是</td><td>本模板新增。正整數，預設 1，上限 10。會員領取該項次時一次派發 N 張同一券，每張各自有獨立的券 ID 與有效期；報表「发放张数」依此累計。</td></tr>
+  <tr><td class="c">排序</td><td class="c">數字輸入＋提示</td><td class="c">否</td><td>輸入框只接受正整數（其他字元無法輸入）。決定前台活動頁 MY DEBUT PASS 任務卡（籃球）由左至右的順序，數字小的在前；排序數字相同或未填時，項次編號小的在前。<br>表頭「排序」後加「?」圖示，滑入顯示提示文案：<br>・前台活动页 MY DEBUT PASS 任务卡由左至右的顺序，数字小的在前<br>・排序数字相同时，项次编号小的在前</td></tr>
+  <tr><td class="c">操作</td><td class="c">刪除</td><td class="c">—</td><td>點擊即移除該列（不二次確認），保存後生效。活動開啟中刪除項次：該項次當日已領取紀錄保留，未領取者不可再領。</td></tr>
+</table>
+<div class="tipdemo">
+  <div class="cap">「?」圖示滑鼠移上時的示意（每次只會顯示滑鼠所在那一個）</div>
+  <div class="gray"><div class="card">
+    <div class="frow"><div class="tipa">总投注额：不分游戏的有效总投注额<br>体育投注额：体育的有效总投注额<br>各任务独立判断，同一笔投注可重复计入<br>例：总投注额设定100、体育投注额设定100，会员下注体育100，两个任务同时达成</div><table class="adm" style="width:420px"><colgroup><col style="width:60px"><col style="width:170px"><col style="width:150px"></colgroup><tr><th>项次</th><th>达成条件<span class="q">?</span></th><th>需求</th></tr><tr><td><span class="req">*</span>1</td><td><span class="ipt sel w160">总投注额</span></td><td><span class="ipt w120">200</span></td></tr></table></div>
+    <div class="frow"><div class="tipa">前台活动页 MY DEBUT PASS 任务卡由左至右的顺序，数字小的在前<br>排序数字相同时，项次编号小的在前</div><table class="adm" style="width:260px"><colgroup><col style="width:110px"><col style="width:150px"></colgroup><tr><th>排序<span class="q">?</span></th><th>操作</th></tr><tr><td><span class="ipt" style="width:70px">1</span></td><td><span class="lnk red">删除</span></td></tr></table></div></div></div>
+</div>
+
+<h3>達標與領取規則（固定邏輯，不開放設定）</h3>
+<div class="block">
+  <ul class="plain">
+    <li>統計週期：每日 00:00:00～23:59:59（UTC+8），以注單投注時間、充值成功時間歸日；次日 00:00 全部項次進度歸零。</li>
+    <li>達標判斷：每個項次都拿「會員當日累計值」與自己的需求比較，累計值 ≥ 需求即達標；累計值不會因某個項次達標或領取而扣除，各項次獨立、無順序限制。<br>例一：總投注額設 100、體育投注額設 100，會員下注體育 100 → 當日總投注額 100、體育投注額 100，兩個項次同時達成。<br>例二：體育投注額設兩筆，需求 50 與 100，會員當日體育投注累計 80 → 只有需求 50 的項次達成；累計到 120 → 兩筆都達成（不是 50＋100＝150 才達成第二筆）。</li>
+    <li>進度更新：依注單與充值紀錄定時更新（與其他專項活動相同頻率）；前台顯示「可領取」即代表已達標，點擊即派券。</li>
+    <li>領取：每人每項次每日一次；點擊後即派券，優惠券記錄來源標記「篮球活动」，有效期自派發起算。領取中鎖定該項次，防重複提交；派券失敗（券模板已刪除、優惠券系統開關關閉）回傳錯誤、該項次保持可領取。</li>
+    <li>每日重置：次日 00:00 所有項次進度歸零、領取狀態重置；前一日達標但未領取的項次不保留、不可補領。</li>
+    <li>體育投注額計算只取投注狀態為已確認的注單；取消／作廢的注單自累計值扣回，若扣回後低於已領取項次需求，不收回已派的券。</li>
+  </ul>
+</div>
+
+<!-- ============ 游戏配置 ============ -->
+<h3>6-2 游戏配置</h3>
+
+<div class="mock">
+<div class="sec" >游戏配置</div>
+  <div class="row"><div class="lb"><span class="req">*</span>适用类型:</div><div class="fd"><span class="chk dis on">篮球</span></div></div>
+  <div class="row"><div class="lb"><span class="req">*</span>可参与体育投注赛事<span class="q">?</span>:</div><div class="fd"><span class="radio on">全部</span><span class="radio">指定</span></div></div>
+</div>
+<div style="display:inline-block;padding:2px 8px;color:var(--t2);margin:4px 0 6px">規則說明：每日 00:00（UTC+8）重置；各項次獨立判斷、每人每項次每日限領一次；最多 10 項</div>
+<div class="mock">
+  <div class="hint" style="margin-bottom:8px">可参与体育投注赛事選「指定」時：</div>
+  <div class="sec">游戏配置</div>
+  <div class="row"><div class="lb"><span class="req">*</span>适用类型:</div><div class="fd"><span class="chk dis on">篮球</span></div></div>
+  <div class="row"><div class="lb"><span class="req">*</span>可参与体育投注赛事<span class="q">?</span>:</div><div class="fd"><span class="radio">全部</span><span class="radio on">指定</span></div></div>
+  <div class="row"><div class="lb"></div><div class="fd"><span class="btn p">选择联赛</span><span class="cnt" style="margin-left:10px">已选 <b class="zero">0</b> 个</span><div class="pool"><b>已选择联赛：</b></div></div></div>
+  <div class="row"><div class="lb"></div><div class="fd"><span class="btn p">选择赛事</span><span class="cnt" style="margin-left:10px">已选 <b class="zero">0</b> 场</span><div class="pool"><b>已选择赛事：</b></div></div></div>
+
+  <div style="display:inline-block;padding:2px 8px;color:var(--t2);margin:4px 0 6px"><span>規則說明：聯賽彈窗固定籃球，頁籤只剩普通联赛／冠军联赛；不限制選擇數量</span></div>
+  <div class="modal">
+    <div class="ttl">请选择联赛</div>
+    <div class="sporttab"><span class="on">普通联赛</span><span>冠军联赛</span></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+      <span><span class="ipt w160 ph">联赛ID</span>　<span class="ipt w200 ph">联赛名称</span>　<span class="btn p">搜索</span></span>
+      <span class="cnt">已选 <b>2</b> 个</span>
+    </div>
+    <table class="adm">
+      <colgroup><col style="width:50px"><col style="width:130px"><col><col style="width:160px"><col style="width:110px"><col style="width:220px"></colgroup>
+      <tr><th></th><th>联赛ID</th><th>名</th><th>联赛类别代码</th><th>联赛类型</th><th>开始/结束时间</th></tr>
+      <tr><td><span class="chk on" style="margin:0"></span></td><td>bl2001</td><td>NBA</td><td>USA</td><td>篮球</td><td>2026-10-21 ～ 2027-06-30</td></tr>
+      <tr><td><span class="chk on" style="margin:0"></span></td><td>bl2002</td><td>NBA G League</td><td>USA</td><td>篮球</td><td>2026-11-07 ～ 2027-04-30</td></tr>
+      <tr><td><span class="chk" style="margin:0"></span></td><td>bl2005</td><td>NCAA Men</td><td>USA</td><td>篮球</td><td>2026-11-03 ～ 2027-04-06</td></tr>
+      <tr><td><span class="chk" style="margin:0"></span></td><td>bl2010</td><td>WNBA</td><td>USA</td><td>篮球</td><td></td></tr>
+    </table>
+    <div class="foot"><span class="btn">取 消</span><span class="btn p">确 定</span></div>
+  </div>
+
+<div style="display:inline-block;padding:2px 8px;color:var(--t2);margin:4px 0 6px"><span>規則說明：賽事彈窗固定籃球；不限制選擇數量</span></div>
+  <div class="modal">
+    <div class="ttl">请选择赛事</div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+      <span><span class="ipt w160 ph">赛事ID</span>　<span class="ipt w200 ph">联赛名称</span>　<span class="date" style="width:300px"><i>◷</i>比赛开始时间<em>~</em></span>　<span class="btn p">搜索</span></span>
+      <span class="cnt">已选 <b>3</b> 场</span>
+    </div>
+    <table class="adm">
+      <colgroup><col style="width:50px"><col style="width:130px"><col style="width:150px"><col style="width:200px"><col><col style="width:90px"></colgroup>
+      <tr><th></th><th>赛事ID</th><th>比赛开始时间</th><th>联赛名称</th><th>主客队名称</th><th>比赛状态</th></tr>
+      <tr><td><span class="chk on" style="margin:0"></span></td><td>km137283376</td><td>2026-11-07 09:30</td><td>NBA</td><td>[主]Los Angeles Lakers [客]Boston Celtics</td><td>未开始</td></tr>
+      <tr><td><span class="chk" style="margin:0"></span></td><td>km137283388</td><td>2026-11-07 12:00</td><td>NBA G League</td><td>[主]Stockton Kings [客]Santa Cruz Warriors</td><td>未开始</td></tr>
+      <tr><td><span class="chk on" style="margin:0"></span></td><td>km137283410</td><td>2026-11-08 03:00</td><td>EuroLeague</td><td>[主]Olympiacos [客]Real Madrid</td><td>未开始</td></tr>
+      <tr><td><span class="chk on" style="margin:0"></span></td><td>km137283415</td><td>2026-11-08 03:45</td><td>EuroLeague</td><td>[主]Fenerbahçe [客]Barcelona</td><td>未开始</td></tr>
+    </table>
+    <div class="foot"><span class="btn">取 消</span><span class="btn p">确 定</span></div>
+  </div>
+</div>
+<table class="spec">
+  <colgroup><col style="width:160px"><col></colgroup>
+  <tr><th>項目</th><th>規則</th></tr>
+  <tr><td class="c">适用类型</td><td>本期只有「篮球」一個選項，固定勾選、不可取消，不顯示其他球類。</td></tr>
+  <tr><td class="c">可参与体育投注赛事</td><td>單選：全部／指定，預設「全部」。選「全部」時下方不顯示任何東西；選「指定」時下方才顯示「选择联赛」「选择赛事」兩顆按鈕與各自的已選清單；由指定切回全部時，已選清單清空。此設定只決定「体育投注额」這個達成條件的統計範圍，不影響前台 PICK YOUR GAME（該區塊吃推薦賽事後台），也不限制券的使用賽事。<br>全部：篮球所有賽事的投注皆計入。<br>指定：顯示「选择联赛」「选择赛事」兩顆按鈕與各自的已選清單；計入範圍＝所選聯賽底下全部賽事（含活動期間內新增的賽事）＋ 所選賽事，取聯集。保存時聯賽與賽事至少擇一有選擇，否則擋下提示「请至少选择一个联赛或赛事」。<br>欄位名稱後加「?」圖示，滑入顯示提示文案：<br>・全部：篮球所有赛事的投注皆计入「体育投注额」<br>・指定：只计入所选联赛底下的全部赛事 ＋ 所选赛事，两者取联集<br>・联赛与赛事可同时选择，互不影响；所选联赛下的全部赛事与单独勾选的赛事都会计入，重复的只算一次<br>・指定时联赛、赛事至少择一选择</td></tr>
+  <tr><td class="c">联赛与赛事互不过滤</td><td>兩個彈窗各自獨立：聯賽選了 NBA，賽事彈窗仍列出 NBA 的賽事、已勾選的 NBA 賽事也不會被移除；反之亦然。計算時同一場賽事被聯賽與賽事同時涵蓋只計一次。</td></tr>
+  <tr><td class="c">选择联赛 彈窗</td><td>直接套用 游戏管理 › 联赛管理 頁面（篩選、欄位、分頁都一樣），每列前面多一個勾選框。固定籃球，所以不顯示球類頁籤；頁籤只剩「普通联赛／冠军联赛」，兩個頁籤的勾選合併計算。不限制選擇數量，右上角顯示「已选 n 个」。</td></tr>
+  <tr><td class="c">选择赛事 彈窗</td><td>直接套用 游戏管理 › 赛事管理 頁面（篩選、欄位、分頁都一樣），每列前面多一個勾選框，「操作」欄不顯示；固定籃球，所以不顯示球類頁籤。不限制選擇數量，右上角顯示「已选 n 场」。</td></tr>
+  <tr><td class="c">外層顯示</td><td>只在「指定」時顯示。兩顆按鈕右側各顯示「已选 n 个／n 场」，n 為 0 時數字以紅色顯示；尚未選擇時「已选择联赛：」「已选择赛事：」後方留白；按鈕下方以文字列出已選清單，聯賽為「联赛ID 名」、賽事為「赛事ID 主队 vs 客队（月-日 時:分）」，以「、」分隔。已開賽或已結束的賽事仍保留在清單中，其投注不再新增。</td></tr>
+  <tr><td class="c">活動中修改</td><td>保存後立即生效，當日累計值依新範圍重算。</td></tr>
+</table>
+<div class="tipdemo">
+  <div class="cap">「?」圖示滑鼠移上時的示意（每次只會顯示滑鼠所在那一個）</div>
+  <div class="gray"><div class="card">
+    <div class="frow"><div class="tipa">全部：篮球所有赛事的投注皆计入「体育投注额」<br>指定：只计入所选联赛底下的全部赛事 ＋ 所选赛事，两者取联集<br>联赛与赛事可同时选择，互不影响；所选联赛下的全部赛事与单独勾选的赛事都会计入，重复的只算一次<br>指定时联赛、赛事至少择一选择</div><span class="lbl"><span class="req">*</span>可参与体育投注赛事<span class="q">?</span>:</span><span class="radio">全部</span><span class="radio">指定</span></div></div></div>
+</div>
+
+<h3>6-3 通用派奖配置</h3>
+<div class="mock">
+  <div class="sec">通用派奖配置</div>
+  <div class="row"><div class="lb">审核方式：</div><div class="fd"><span class="radio dis on">自动审核</span></div></div>
+  <div class="row"><div class="lb">领取方式：</div><div class="fd"><span class="radio dis on">手动领取</span></div></div>
+</div>
+<table class="spec">
+  <colgroup><col style="width:140px"><col style="width:120px"><col style="width:70px"><col></colgroup>
+  <tr><th>欄位</th><th>元件</th><th>必填</th><th>規則</th></tr>
+  <tr><td class="c">审核方式</td><td class="c">單選（固定、反灰）</td><td class="c">—</td><td>固定「自动审核」：領取後直接派券，不進入 派奖审核。</td></tr>
+  <tr><td class="c">领取方式</td><td class="c">單選（固定、反灰）</td><td class="c">—</td><td>固定「手动领取」：達標後會員須至前台活動頁點擊領取，系統即時派發該項次設定的体育投注券（优惠券记录新增一筆，來源＝篮球活动）。</td></tr>
+  <tr><td class="c">其他共用欄位</td><td class="c">—</td><td class="c">—</td><td>現有模板的「彩金所需流水倍数」「适用游戏范围」本模板不顯示（獎勵是券，流水倍數與適用遊戲由券本身決定）。</td></tr>
+</table>
+<h2>七、步驟 5 风控条件（與現有模板相同，無新增）</h2>
+<div class="mock">
+  <div class="crumb">位置 <i>›</i> 活动配置(新) <i>›</i> 活动列表 <i>›</i> 新增活动</div>
+  <div class="wiz"><div class="steps"><div class="ok"><i></i>活动模板设置</div><div class="ok"><i></i>活动图片</div><div class="ok"><i></i>参与对象与名单</div><div class="ok"><i></i>活动条件</div><div class="on"><i>5</i>风控条件</div><div class=""><i>6</i>提交预览</div></div><div class="body">
+    <div class="bar"><b>活动配置步骤</b><span><span class="btn">上一步</span><span class="btn p">下一步</span><span class="btn" style="color:var(--red);border-color:#FBC4C4">退出编辑</span></span></div>
+    <div class="pane"><div class="lead">设置活动的风险控制规则,确保活动安全进行</div><div class="ttl">风险检测设置</div>
+  <div class="row"><div class="lb">同IP检测:</div><div class="fd"><span class="switch"></span></div></div>
+  <div class="row"><div class="lb">同手机号检测:</div><div class="fd"><span class="switch"></span></div></div>
+  <div class="row"><div class="lb">同姓名检测:</div><div class="fd"><span class="switch"></span></div></div>
+  <div class="row"><div class="lb">同email检测:</div><div class="fd"><span class="switch"></span></div></div>
+  <div class="ttl">自动拒绝</div>
+  <div class="row"><div class="lb">自动拒绝:</div><div class="fd"><span class="switch"></span></div></div>
+  <div class="row"><div class="lb">触发条件:</div><div class="fd">当违反 <span class="ipt" style="width:70px">0</span> 笔以上,将自动拒绝</div></div></div>
+  </div></div>
+</div>
+<table class="spec">
+  <colgroup><col style="width:140px"><col style="width:120px"><col style="width:70px"><col></colgroup>
+  <tr><th>欄位</th><th>元件</th><th>必填</th><th>規則</th></tr>
+  <tr><td class="c">风险检测设置、自动拒绝</td><td class="c">—</td><td class="c">—</td><td>與現有模板相同。</td></tr>
+</table>
+<h2>八、步驟 6 提交预览</h2>
+<div class="mock">
+  <div class="crumb">位置 <i>›</i> 活动配置(新) <i>›</i> 活动列表 <i>›</i> 新增活动</div>
+  <div class="wiz"><div class="steps"><div class="ok"><i></i>活动模板设置</div><div class="ok"><i></i>活动图片</div><div class="ok"><i></i>参与对象与名单</div><div class="ok"><i></i>活动条件</div><div class="ok"><i></i>风控条件</div><div class="on"><i>6</i>提交预览</div></div><div class="body">
+    <div class="bar"><b>活动配置步骤</b><span><span class="btn">上一步</span><span class="btn p">提交</span><span class="btn" style="color:var(--red);border-color:#FBC4C4">退出编辑</span></span></div>
+    <div class="pane"><div class="lead">请确认以下活动配置信息,确认无误后点击提交按钮</div><table class="adm" style="table-layout:fixed">
+  <colgroup><col style="width:50px"><col style="width:120px"><col></colgroup>
+  <tr><th>步骤</th><th>相关字段</th><th></th></tr>
+  <tr style="vertical-align:top"><td style="padding-top:12px"><span style="display:inline-block;width:20px;height:20px;border-radius:50%;background:var(--blue);color:#fff;font-size:12px;line-height:20px">1</span></td><td style="text-align:left;padding-top:12px;white-space:normal">活动模板设置</td><td style="text-align:left;white-space:normal"><div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 24px;font-size:13px;padding:4px 0"><div style="display:flex;gap:6px;min-width:0"><span style="color:var(--t3);white-space:nowrap">活动ID：</span><span style="color:var(--t1);white-space:normal;word-break:break-all">—</span></div><div style="display:flex;gap:6px;min-width:0"><span style="color:var(--t3);white-space:nowrap">模板类型：</span><span style="color:var(--t1);white-space:normal;word-break:break-all">篮球活动</span></div><div style="display:flex;gap:6px;min-width:0"><span style="color:var(--t3);white-space:nowrap">状态：</span><span style="color:var(--t1);white-space:normal;word-break:break-all">关闭</span></div><div style="display:flex;gap:6px;min-width:0"><span style="color:var(--t3);white-space:nowrap">活动币种：</span><span style="color:var(--t1);white-space:normal;word-break:break-all">PHP</span></div><div style="display:flex;gap:6px;min-width:0"><span style="color:var(--t3);white-space:nowrap">活动名称：</span><span style="color:var(--t1);white-space:normal;word-break:break-all">MY NBA DEBUT</span></div><div style="display:flex;gap:6px;min-width:0"><span style="color:var(--t3);white-space:nowrap">活动时间：</span><span style="color:var(--t1);white-space:normal;word-break:break-all">2026-11-20 00:00:00 ~ 2027-01-31 23:59:59</span></div><div style="display:flex;gap:6px;min-width:0"><span style="color:var(--t3);white-space:nowrap"><b>展示时间</b>：</span><span style="color:var(--t1);white-space:normal;word-break:break-all">2026-11-18 00:00:00 ~ 2027-01-31 23:59:59</span></div><div style="display:flex;gap:6px;min-width:0"><span style="color:var(--t3);white-space:nowrap"><b>未登入是否可见</b>：</span><span style="color:var(--t1);white-space:normal;word-break:break-all">否</span></div></div></td></tr>
+  <tr style="vertical-align:top"><td style="padding-top:12px"><span style="display:inline-block;width:20px;height:20px;border-radius:50%;background:var(--blue);color:#fff;font-size:12px;line-height:20px">2</span></td><td style="text-align:left;padding-top:12px;white-space:normal">活动图片</td><td style="text-align:left;white-space:normal"><div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 24px;font-size:13px;padding:4px 0"><div style="display:flex;gap:6px;min-width:0"><span style="color:var(--t3);white-space:nowrap">首页浮窗：</span><span style="color:var(--t1);white-space:normal;word-break:break-all">开启</span></div><div style="display:flex;gap:6px;min-width:0"><span style="color:var(--t3);white-space:nowrap">PC 图片：</span><span style="color:var(--t1);white-space:normal;word-break:break-all">已上传</span></div><div style="display:flex;gap:6px;min-width:0"><span style="color:var(--t3);white-space:nowrap">H5 图片：</span><span style="color:var(--t1);white-space:normal;word-break:break-all">已上传</span></div><div style="display:flex;gap:6px;min-width:0"><span style="color:var(--t3);white-space:nowrap">首页浮窗排序：</span><span style="color:var(--t1);white-space:normal;word-break:break-all">0</span></div><div style="display:flex;gap:6px;min-width:0"><span style="color:var(--t3);white-space:nowrap">活动列表：</span><span style="color:var(--t1);white-space:normal;word-break:break-all">关闭</span></div><div style="display:flex;gap:6px;min-width:0"><span style="color:var(--t3);white-space:nowrap">备注：</span><span style="color:var(--t1);white-space:normal;word-break:break-all">—</span></div></div></td></tr>
+  <tr style="vertical-align:top"><td style="padding-top:12px"><span style="display:inline-block;width:20px;height:20px;border-radius:50%;background:var(--blue);color:#fff;font-size:12px;line-height:20px">3</span></td><td style="text-align:left;padding-top:12px;white-space:normal">参与对象与名单</td><td style="text-align:left;white-space:normal"><div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 24px;font-size:13px;padding:4px 0"><div style="display:flex;gap:6px;min-width:0"><span style="color:var(--t3);white-space:nowrap">充值层级：</span><span style="color:var(--t1);white-space:normal;word-break:break-all">全选</span></div><div style="display:flex;gap:6px;min-width:0"><span style="color:var(--t3);white-space:nowrap">指定代理：</span><span style="color:var(--t1);white-space:normal;word-break:break-all">不指定</span></div><div style="display:flex;gap:6px;min-width:0"><span style="color:var(--t3);white-space:nowrap">新会员限制：</span><span style="color:var(--t1);white-space:normal;word-break:break-all">否</span></div><div style="display:flex;gap:6px;min-width:0"><span style="color:var(--t3);white-space:nowrap">会员等级：</span><span style="color:var(--t1);white-space:normal;word-break:break-all">全选</span></div><div style="display:flex;gap:6px;min-width:0"><span style="color:var(--t3);white-space:nowrap">用户标签：</span><span style="color:var(--t1);white-space:normal;word-break:break-all">—</span></div><div style="display:flex;gap:6px;min-width:0"><span style="color:var(--t3);white-space:nowrap">用户标签(排除)：</span><span style="color:var(--t1);white-space:normal;word-break:break-all">—</span></div><div style="display:flex;gap:6px;min-width:0"><span style="color:var(--t3);white-space:nowrap">黑名单用户名：</span><span style="color:var(--t1);white-space:normal;word-break:break-all">—</span></div><div style="display:flex;gap:6px;min-width:0"><span style="color:var(--t3);white-space:nowrap"><b>KYC 验证</b>：</span><span style="color:var(--t1);white-space:normal;word-break:break-all">已认证</span></div></div></td></tr>
+  <tr style="vertical-align:top"><td style="padding-top:12px"><span style="display:inline-block;width:20px;height:20px;border-radius:50%;background:var(--blue);color:#fff;font-size:12px;line-height:20px">4</span></td><td style="text-align:left;padding-top:12px;white-space:normal">活动条件</td><td style="text-align:left;white-space:normal"><div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 24px;font-size:13px;padding:4px 0"><div style="display:flex;gap:6px;min-width:0"><span style="color:var(--t3);white-space:nowrap"><b>奖励配置</b>：</span><span style="color:var(--t1);white-space:normal;word-break:break-all">3 项</span></div><div style="display:flex;gap:6px;min-width:0"><span style="color:var(--t3);white-space:nowrap"><b>项次1</b>：</span><span style="color:var(--t1);white-space:normal;word-break:break-all">总投注额≥200 · 体育投注券 Sport Free Bet 5 x1 · 排序1</span></div><div style="display:flex;gap:6px;min-width:0"><span style="color:var(--t3);white-space:nowrap"><b>项次2</b>：</span><span style="color:var(--t1);white-space:normal;word-break:break-all">充值≥200 · 体育投注券 Sport Free Bet 5 x1 · 排序2</span></div><div style="display:flex;gap:6px;min-width:0"><span style="color:var(--t3);white-space:nowrap"><b>项次3</b>：</span><span style="color:var(--t1);white-space:normal;word-break:break-all">体育投注额≥50 · 体育投注券 Sport Free Bet 10 x1 · 排序3</span></div><div style="display:flex;gap:6px;min-width:0"><span style="color:var(--t3);white-space:nowrap"><b>适用类型</b>：</span><span style="color:var(--t1);white-space:normal;word-break:break-all">篮球</span></div><div style="display:flex;gap:6px;min-width:0"><span style="color:var(--t3);white-space:nowrap"><b>可参与体育投注赛事</b>：</span><span style="color:var(--t1);white-space:normal;word-break:break-all">指定：联赛 2 个、赛事 3 场</span></div><div style="display:flex;gap:6px;min-width:0"><span style="color:var(--t3);white-space:nowrap">审核方式：</span><span style="color:var(--t1);white-space:normal;word-break:break-all">自动审核</span></div><div style="display:flex;gap:6px;min-width:0"><span style="color:var(--t3);white-space:nowrap">领取方式：</span><span style="color:var(--t1);white-space:normal;word-break:break-all">手动领取</span></div></div></td></tr>
+  <tr style="vertical-align:top"><td style="padding-top:12px"><span style="display:inline-block;width:20px;height:20px;border-radius:50%;background:var(--blue);color:#fff;font-size:12px;line-height:20px">5</span></td><td style="text-align:left;padding-top:12px;white-space:normal">风控条件</td><td style="text-align:left;white-space:normal"><div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 24px;font-size:13px;padding:4px 0"><div style="display:flex;gap:6px;min-width:0"><span style="color:var(--t3);white-space:nowrap">同IP检测：</span><span style="color:var(--t1);white-space:normal;word-break:break-all">关闭</span></div><div style="display:flex;gap:6px;min-width:0"><span style="color:var(--t3);white-space:nowrap">同姓名检测：</span><span style="color:var(--t1);white-space:normal;word-break:break-all">关闭</span></div><div style="display:flex;gap:6px;min-width:0"><span style="color:var(--t3);white-space:nowrap">同手机号检测：</span><span style="color:var(--t1);white-space:normal;word-break:break-all">关闭</span></div><div style="display:flex;gap:6px;min-width:0"><span style="color:var(--t3);white-space:nowrap">同email检测：</span><span style="color:var(--t1);white-space:normal;word-break:break-all">关闭</span></div><div style="display:flex;gap:6px;min-width:0"><span style="color:var(--t3);white-space:nowrap">自动拒绝：</span><span style="color:var(--t1);white-space:normal;word-break:break-all">关闭</span></div></div></td></tr>
+</table></div>
+  </div></div>
+</div>
+<table class="spec">
+  <colgroup><col style="width:160px"><col></colgroup>
+  <tr><th>項目</th><th>規則</th></tr>
+  <tr><td class="c">整步</td><td>與現有模板相同；本模板新增的欄位（示意中粗體）加進對應步驟。</td></tr>
+</table>
+<h2>九、活动报表（活动配置（新） › 活动报表）</h2>
+<div class="block">沿用現有的活动报表頁，兩個頁籤（活动奖励统计／活动数据统计）的版面、篩選、欄位都與現有相同；本模板只在既有篩選選項與資料列內出現。</div>
+<h3>9-1 活动奖励统计</h3>
+<div class="mock">
+  <div class="crumb">位置 <i>›</i> 活动报表</div>
+  <div class="tabs"><span class="on">活动奖励统计</span><span>活动数据统计</span></div>
+  <div style="margin-bottom:12px;white-space:nowrap">
+    <span class="unit" style="margin:0 6px 0 0">活动 ID：</span><span class="ipt w160 ph">请输入</span>　
+    <span class="unit" style="margin:0 6px 0 0">活动类型：</span><span class="ipt sel w160">全选</span>　
+    <span class="unit" style="margin:0 6px 0 0">奖励类型：</span><span class="ipt sel w160">全选</span>
+  </div>
+  <div style="margin-bottom:12px;white-space:nowrap">
+    <span class="unit" style="margin:0 6px 0 0">起始日期 ~ 结束日期：</span><span class="date" style="width:380px"><i>◷</i>2026-11-20 00:00:00<em>~</em>2026-11-22 23:59:59</span>　
+    <span class="btn p">搜寻</span>　<span class="btn p">导出</span>
+  </div>
+  <div style="text-align:right;color:var(--t2);margin:0 4px 8px 0;white-space:nowrap">总金额：<b style="color:var(--red)">0.00</b>　　总积分：<b style="color:var(--blue)">0.00</b>　　总免费券：<b style="color:var(--green)">1,513</b></div>
+  <table class="adm">
+    <colgroup><col style="width:90px"><col style="width:80px"><col style="width:60px"><col style="width:130px"><col style="width:90px"><col style="width:80px"><col style="width:70px"><col style="width:70px"><col style="width:110px"><col style="width:70px"><col style="width:60px"></colgroup>
+    <tr><th>日期</th><th>活动类型</th><th>活动 ID</th><th>活动名称</th><th>奖励类型</th><th>奖励内容</th><th>参与人数</th><th>领取次数</th><th>派发金额(系统币)</th><th>积分小计</th><th>券张数</th></tr>
+    <tr><td>2026-11-22</td><td>篮球活动</td><td>230</td><td>MY NBA DEBUT</td><td>体育投注券</td><td>x 1 张</td><td>512</td><td>689</td><td>0.00</td><td>0.00</td><td>689</td></tr>
+    <tr><td>2026-11-21</td><td>篮球活动</td><td>230</td><td>MY NBA DEBUT</td><td>体育投注券</td><td>x 1 张</td><td>498</td><td>640</td><td>0.00</td><td>0.00</td><td>640</td></tr>
+    <tr><td>2026-11-20</td><td>篮球活动</td><td>230</td><td>MY NBA DEBUT</td><td>体育投注券</td><td>x 1 张</td><td>176</td><td>184</td><td>0.00</td><td>0.00</td><td>184</td></tr>
+  </table>
+</div>
+<table class="spec">
+  <colgroup><col style="width:160px"><col></colgroup>
+  <tr><th>項目</th><th>規則</th></tr>
+  <tr><td class="c">整頁</td><td>與現有相同。</td></tr>
+  <tr><td class="c">活动类型 篩選</td><td>選項新增「篮球活动」。</td></tr>
+  <tr><td class="c">奖励类型 篩選</td><td>選項新增「体育投注券」。</td></tr>
+  <tr><td class="c">本模板的資料列</td><td>與現有相同的統計方式：每日、每個活動、每一種獎勵一列（張數不同的項次視為不同獎勵，各一列）。奖励类型＝体育投注券；奖励内容格式同現有優惠券「x N 张」（N＝該獎勵的张数）；参与人数＝當日領取過該獎勵的會員數（不重複）；领取次数＝當日該獎勵的領取筆數；派发金额、积分小计＝0.00；券张数＝领取次数 × N。頁面右上「总免费券」依券张数累加。</td></tr>
+</table>
+<h3>9-2 活动数据统计</h3>
+<div class="mock">
+  <div class="crumb">位置 <i>›</i> 活动报表</div>
+  <div class="tabs"><span>活动奖励统计</span><span class="on">活动数据统计</span></div>
+  <div style="margin-bottom:12px;white-space:nowrap">
+    <span class="unit" style="margin:0 6px 0 0">活动 ID：</span><span class="ipt w120 ph">请输入</span>　
+    <span class="unit" style="margin:0 6px 0 0">会员账号：</span><span class="ipt w120 ph">请输入</span>　
+    <span class="unit" style="margin:0 6px 0 0">活动类型：</span><span class="ipt sel w120">全选</span>　
+    <span class="unit" style="margin:0 6px 0 0">奖励类型：</span><span class="ipt sel w120">全选</span>　
+    <span class="unit" style="margin:0 6px 0 0">状态：</span><span class="ipt sel w100" style="width:100px">全部</span>
+  </div>
+  <div style="margin-bottom:12px;white-space:nowrap">
+    <span class="unit" style="margin:0 6px 0 0">申请领取时间：</span><span class="date" style="width:380px"><i>◷</i>2026-11-20 00:00:00<em>~</em>2026-11-22 23:59:59</span>　
+    <span class="btn p">搜寻</span>　<span class="btn p">导出</span>
+  </div>
+  <table class="adm">
+    <colgroup><col style="width:60px"><col style="width:120px"><col style="width:80px"><col style="width:130px"><col style="width:90px"><col style="width:80px"><col style="width:70px"><col style="width:140px"><col style="width:140px"><col style="width:70px"></colgroup>
+    <tr><th>活动 ID</th><th>会员账号</th><th>活动类型</th><th>活动名称</th><th>奖励类型</th><th>奖励内容</th><th>天数</th><th>申请领取时间</th><th>审核时间</th><th>状态</th></tr>
+    <tr><td>230</td><td>okbet6703k8ndx</td><td>篮球活动</td><td>MY NBA DEBUT</td><td>体育投注券</td><td>x 1 张</td><td>项次1</td><td>2026-11-22 14:20:11</td><td>2026-11-22 14:20:11</td><td>已通过</td></tr>
+    <tr><td>230</td><td>okbet6703k8ndx</td><td>篮球活动</td><td>MY NBA DEBUT</td><td>体育投注券</td><td>x 1 张</td><td>项次3</td><td>2026-11-22 14:20:35</td><td>2026-11-22 14:20:35</td><td>已通过</td></tr>
+    <tr><td>230</td><td>okbet8548mj294</td><td>篮球活动</td><td>MY NBA DEBUT</td><td>体育投注券</td><td>x 1 张</td><td>项次2</td><td>2026-11-22 09:12:40</td><td>2026-11-22 09:12:40</td><td>已通过</td></tr>
+  </table>
+</div>
+<table class="spec">
+  <colgroup><col style="width:160px"><col></colgroup>
+  <tr><th>項目</th><th>規則</th></tr>
+  <tr><td class="c">整頁</td><td>與現有相同。</td></tr>
+  <tr><td class="c">本模板的資料列</td><td>與現有相同：每一次領取一列。奖励类型＝体育投注券；奖励内容「x N 张」；天数 欄本模板顯示「项次N」（讓營運知道是哪個任務領的）；申请领取时间＝會員點擊領取的時間；审核时间＝系統派券時間（自动审核，與申请领取时间相同）；状态＝已通过。活动类型、奖励类型篩選同 9-1 新增選項。</td></tr>
+  <tr><td class="c">券的後續</td><td>每張券的使用狀態在 积分商城 › 优惠券管理 › 优惠券记录 查，與現有相同。</td></tr>
+</table>
+<h2>十、必填未填時的提示</h2>
+<div class="block">
+  <ul class="plain">
+    <li>沿用現有模板的校驗方式：每一步點「下一步」時檢查該步必填，未通過的欄位外框轉紅、欄位下方顯示紅色提示文字，停留在該步；步驟 6 提交時再整體檢查一次。</li>
+    <li>提示文字規則：輸入框「请输入＋欄位名」、下拉／單選／多選「请选择＋欄位名」、上傳「请上传＋欄位名」。有預設值的欄位（状态、未登入是否可见、奖励类型、可参与体育投注赛事、审核方式、领取方式）不會出現未填狀態。</li>
+    <li>奖励配置的每一列只要存在就整列必填（項次前帶 *）：達成條件、需求、獎勵、張數任一未填都擋下；排序非必填。</li>
+  </ul>
+</div>
+<table class="spec">
+  <colgroup><col style="width:70px"><col style="width:200px"><col></colgroup>
+  <tr><th>步驟</th><th>欄位</th><th>未填時提示文字</th></tr>
+  <tr><td class="c">1</td><td class="c">活动名称</td><td>请输入活动名称</td></tr>
+  <tr><td class="c">1</td><td class="c">活动时间</td><td>请选择活动时间</td></tr>
+  <tr><td class="c">1</td><td class="c">展示时间</td><td>请选择展示时间</td></tr>
+  <tr><td class="c">2</td><td class="c">PC 图片／H5 图片</td><td>首页浮窗开启时：请上传PC图片／请上传H5图片（與現有相同）</td></tr>
+  <tr><td class="c">3</td><td class="c">KYC 验证</td><td>请选择KYC验证（三項皆未勾時提示）</td></tr>
+  <tr><td class="c">4</td><td class="c">达成条件</td><td>请选择达成条件（顯示在該列該欄位下方）</td></tr>
+  <tr><td class="c">4</td><td class="c">需求</td><td>请输入需求（未填或填 0 皆提示）</td></tr>
+  <tr><td class="c">4</td><td class="c">奖励</td><td>请选择奖励</td></tr>
+  <tr><td class="c">4</td><td class="c">张数</td><td>请输入张数（未填或填 0 皆提示）</td></tr>
+  <tr><td class="c">4</td><td class="c">选择联赛／选择赛事</td><td>请至少选择一个联赛或赛事（選「指定」且兩者皆未選時提示，顯示在兩顆按鈕下方）</td></tr>
+</table>
+<h2>十一、前台判斷</h2>
+
+<div class="block">適用 PC／H5／APP 三個渠道；入口為首頁浮窗、Rewards › Promotion 活動卡片（各自依活动图片的開關顯示）、直接開啟活動頁網址。</div>
+<div class="flow">
+  <ol>
+    <li><b>整體判斷</b>
+      <ul>
+        <li>活动状态＝关闭 → 所有入口不顯示；直接開網址 → 導回首頁。</li>
+        <li>活动状态＝开启 → 進入入口處判斷。</li>
+      </ul>
+    </li>
+    <li><b>入口處判斷</b>（入口＝首頁浮窗、Rewards › Promotion 活動卡片）
+      <ul>
+        <li>展示时间
+          <ul>
+            <li>不在展示时间內 → 所有入口不顯示；直接開網址 → 導回首頁。</li>
+            <li>在展示时间內 → 入口可見（浮窗、活動卡片依各自開關顯示，直接開網址可進活動頁），再進下一項判斷。</li>
+          </ul>
+        </li>
+        <li>活动图片 › 首页浮窗设置／活动列表设置
+          <ul>
+            <li>关闭 → 對應的入口不顯示（開關只管自己那個入口）；直接開網址 → 照常進入活動頁。</li>
+            <li>开启 → 對應的入口顯示，再進下一項判斷。</li>
+          </ul>
+        </li>
+        <li>登入狀態
+          <ul>
+            <li>未登入，且「未登入是否可见」＝否 → 入口不顯示；直接開網址 → 導向登入頁。</li>
+            <li>未登入，且「未登入是否可见」＝是 → 顯示入口，點擊進入活動頁（頁內行為依下一層）。</li>
+            <li>已登入 → 顯示入口，點擊進入活動頁。</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><b>進入頁面後判斷</b>
+      <ul>
+        <li>未登入，且「未登入是否可见」＝是 → 頁面純展示（無進度、無領取按鈕），點擊頁內任一按鈕 → 導向登入頁。</li>
+        <li>已登入，在展示时间內但不在活动时间內 → 任務卡顯示「未开始」或「已结束」，領取按鈕不可點。</li>
+        <li>已登入，在活动时间內 → 依各項次顯示任務卡狀態：
+          <ul>
+            <li>當日累計值 &lt; 需求 → 顯示進度（當日累計值 / 需求），按鈕不可點。</li>
+            <li>當日累計值 ≥ 需求，且當日未領 → 按鈕顯示「可领取」。</li>
+            <li>當日已領 → 按鈕顯示「已领取」，不可再點。</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><b>點擊「可领取」</b>（只檢查 KYC）
+      <ul>
+        <li>會員 KYC 狀態不在勾選範圍 → 不派券，提示「请先完成 KYC 验证」，按鈕維持「可领取」。</li>
+        <li>通過 → 派發該項次設定的体育投注券，寫入优惠券记录（來源：篮球活动）與活动报表，按鈕轉為「已领取」。</li>
+      </ul>
+    </li>
+    <li><b>每日重置</b>：次日 00:00（UTC+8）所有項次進度歸零、按鈕回到不可點；前一日未領取的項次不可補領。</li>
+  </ol>
+</div>
+<h2>十二、待與營運確認事項</h2>
+
+<table class="spec">
+  <colgroup><col style="width:40px"><col style="width:170px"><col style="width:430px"><col></colgroup>
+  <tr><th>#</th><th>項目</th><th>目前規格的做法</th><th>要營運確認的點</th></tr>
+  <tr><td class="c">1</td><td class="c">每日領取截止</td><td>當日達標須於當日 23:59:59（UTC+8）前領取；次日 00:00 所有項次歸零，未領取不保留、不補領，頁面不殘留前一日的任務。</td><td>是不是限定每天領：過了當天 23:59:59 就不給領。</td></tr>
+  <tr><td class="c">2</td><td class="c">KYC 未通過時的導向</td><td>點領取 → 提示「请先完成 KYC 验证」→ 按「确定」導向 KYC 驗證頁；「取消」或關閉留在活動頁，按鈕維持可領取。</td><td>確認提示文案與跳轉目的頁。</td></tr>
+  <tr><td class="c">3</td><td class="c">派發與領取的定義</td><td>達標時只在活動內記一筆「可領取」，不建券；會員點領取並通過 KYC、IP 後才建立體育投注券並派到帳。體育投注券沒有「已派待領」狀態，有效期自派發起算。報表時間欄擬改為「达标时间」「领取时间」。</td><td>確認不採「達標即派券、不用點領取」；若營運要那種，發放方式改自動派發、KYC 改在達標時判斷、IP 限制拿掉，是另一種設計。</td></tr>
+  <tr><td class="c">4</td><td class="c">活動入口範圍</td><td>沿用活動配置（新）的入口：首頁浮窗、Rewards › Promotion 活動卡片（各自有開關）、直接開啟活動頁網址。</td><td>活動文件功能地圖寫三個入口「首頁 Banner／主活動完成頁／優惠中心」。確認「首頁 Banner」＝首頁浮窗、「優惠中心」＝Rewards › Promotion 卡片；「主活動完成頁」指什麼、是否要另做。</td></tr>
+  <tr><td class="c">5</td><td class="c">體育投注額的統計範圍</td><td>後台可選全部，或指定聯賽＋賽事（互不過濾、取聯集）；只影響「體育投注額」任務的統計，不影響前台 PICK YOUR GAME 列的賽事，也不限制券能用在哪場。</td><td>確認本期營運要用「全部籃球」還是指定 NBA；以及是否接受「券不限賽事」。</td></tr>
+  <tr><td class="c">6</td><td class="c">未登入是否可見</td><td>預設「否」。選「是」時未登入可看活動頁但純展示，點任一按鈕導登入。</td><td>確認本期要開「是」還是「否」。</td></tr>
+  <tr><td class="c">7</td><td class="c">籃球卡的「已使用／Expired」</td><td>後台不處理；籃球卡領取後跟著券的狀態走（已領取→已使用／Expired），屬前台讀券狀態的呈現。</td><td>確認領取後籃球卡要不要顯示券的後續狀態，或領取後就固定顯示「已领取」。</td></tr>
+  <tr><td class="c">8</td><td class="c">活動開啟中修改奖励配置</td><td>改需求值、換券、改张数、刪項次，保存後立即生效。</td><td>當日已達標未領取的項次怎麼算：照新設定重算（可能變未達標）、還是當日維持舊設定；已達標未領的人點領取派幾張（舊张数或新张数）。</td></tr>
+  <tr><td class="c">9</td><td class="c">「当日」的歸日依據</td><td>依 UTC+8 自然日。</td><td>注單用投注時間還是結算時間歸日；充值用申請時間還是到帳時間。</td></tr>
+  <tr><td class="c">10</td><td class="c">體育投注額的注單範圍</td><td>只算已確認的注單；取消／作廢的注單從累計扣回。</td><td>是否只算已結算注單；扣回後低於需求但券已領走，券要不要收回。</td></tr>
+  <tr><td class="c">11</td><td class="c">券派發失敗</td><td>—</td><td>券模板被刪、優惠券系統開關關閉時，前台提示什麼、該項次維持可領取還是已領取、報表記不記。</td></tr>
+  <tr><td class="c">12</td><td class="c">活动报表的参与人数／领取次数</td><td>参与人数＝當日領取過該獎勵的會員數（不重複）；领取次数＝當日領取筆數。</td><td>参与人数要以「達標（可點領取）」還是「有領取」計，兩者都要去重；领取次数是不分帳號、每領一次算一次。</td></tr>
+</table>
+</div>
+<div class="dpage" id="pB">
+<h2>十三、前台活動頁示意（H5）</h2>
+<div class="block">依活動文件第一頁的手機截圖重刻，版面與區塊一致；左：對應需求的三個任務卡（已領取／可領取／未達標）。右：備案，任務超過三個時的五張卡版本，一次顯示三張可左右滑動、底下白點顯示位置；最右邊的狀態面板操作右邊那支手機。圖中 NBA 標誌未重現，以一般籃球圖樣代替；賽事卡隊名為虛構。此節只是畫面對照，不是前台規格。</div>
+<div class="h5">
+<div class="stage"><div class="pcol"><div class="pcap" style="padding:0 8px">對應活動需求：三個任務卡，不滑動、沒有白點</div><div class="phone" data-states="claimed,done,locked" data-sel="1">
+    <div class="topbar"><span class="back">‹</span>Promotion Details</div>
+    <div class="hpage">
+      <div class="hero"><svg viewBox="0 0 390 194" width="390" height="194" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="hbg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#07123F"/><stop offset="1" stop-color="#040B2A"/></linearGradient>
+            <radialGradient id="hglow" cx="75%" cy="40%" r="55%"><stop offset="0" stop-color="#2B5BE8" stop-opacity=".55"/><stop offset="1" stop-color="#2B5BE8" stop-opacity="0"/></radialGradient>
+            <linearGradient id="tkg" x1="0" x2="1"><stop offset="0" stop-color="#FFF0B8"/><stop offset=".5" stop-color="#F0C65C"/><stop offset="1" stop-color="#B8841F"/></linearGradient>
+            <radialGradient id="bk3" cx="38%" cy="30%" r="68%"><stop offset="0" stop-color="#FFB071"/><stop offset=".45" stop-color="#E86E24"/><stop offset="1" stop-color="#6E2A08"/></radialGradient>
+            <linearGradient id="rim2" x1="0" x2="1"><stop offset="0" stop-color="#FFE9A0"/><stop offset=".5" stop-color="#F0B33A"/><stop offset="1" stop-color="#B57A1A"/></linearGradient>
+            <g id="tkt"><rect x="-35" y="-13.5" width="70" height="27" rx="2" fill="url(#tkg)" stroke="#FFF2C0" stroke-width="1"/><rect x="-29" y="-9" width="7" height="18" rx="1" fill="#1D3FBF"/><rect x="-25.5" y="-9" width="3.5" height="18" fill="#E0262C"/><text x="4" y="4" font-size="10" font-weight="900" fill="#4a2d00" text-anchor="middle" font-family="Arial,sans-serif">₱1,000</text></g>
+          </defs>
+          <rect width="390" height="194" fill="url(#hbg)"/>
+          <rect width="390" height="194" fill="url(#hglow)"/>
+          <g stroke="#5A8CFF" stroke-opacity=".12" stroke-width="3"><path d="M160 0 L390 120 M120 0 L390 150 M200 0 L390 90 M60 194 L390 20"/></g>
+          <g fill="#FFE28A"><circle cx="150" cy="40" r="1.5"/><circle cx="230" cy="150" r="1.5"/><circle cx="300" cy="30" r="1.5"/><circle cx="120" cy="170" r="1.5"/><circle cx="340" cy="120" r="1.5"/><circle cx="190" cy="100" r="1"/></g>
+          <!-- backboard -->
+          <rect x="234" y="8" width="117" height="50" rx="3" fill="none" stroke="#B9C8F0" stroke-opacity=".5" stroke-width="2"/>
+          <!-- net -->
+          <g stroke="#fff" stroke-width="1.4" fill="none" opacity=".9">
+            <path d="M229 70 L250 183 M353 70 L332 183"/>
+            <path d="M232 84 Q291 112 350 84 M236 104 Q291 134 346 104 M240 124 Q291 154 342 124 M244 144 Q291 172 338 144 M248 164 Q291 186 334 164"/>
+            <path d="M232 84 Q291 56 350 84 M236 104 Q291 76 346 104 M240 124 Q291 96 342 124 M244 144 Q291 118 338 144 M248 164 Q291 140 334 164"/>
+          </g>
+          <!-- ball -->
+          <circle cx="291" cy="113" r="43" fill="url(#bk3)"/>
+          <path d="M250 107 Q291 76 332 107 M250 120 Q291 152 332 120 M291 70 V156 M262 82 Q291 113 262 144 M320 82 Q291 113 320 144" stroke="#3a1606" stroke-width="2.2" fill="none" opacity=".85"/>
+          <ellipse cx="274" cy="90" rx="12" ry="6" fill="#fff" fill-opacity=".35" transform="rotate(-30 274 90)"/>
+          <!-- rim -->
+          <ellipse cx="291" cy="66" rx="62" ry="15" fill="none" stroke="url(#rim2)" stroke-width="6"/>
+          <!-- tickets -->
+          <use href="#tkt" transform="translate(226 45) rotate(-35)"/>
+          <use href="#tkt" transform="translate(268 20) rotate(-75)"/>
+          <use href="#tkt" transform="translate(356 20) rotate(75)"/>
+          <use href="#tkt" transform="translate(382 98) rotate(90)"/>
+          <use href="#tkt" transform="translate(203 183) rotate(-25)"/>
+          <use href="#tkt" transform="translate(343 187) rotate(20)"/>
+          <use href="#tkt" transform="translate(378 62) rotate(60)"/>
+          <!-- logo block + titles -->
+          <rect x="18" y="54" width="29" height="54" rx="4" fill="#1D3FBF"/><rect x="32.5" y="54" width="14.5" height="54" rx="4" fill="#E0262C"/><rect x="32.5" y="54" width="6" height="54" fill="#E0262C"/><circle cx="32.5" cy="72" r="7" fill="#fff"/>
+          <text x="53" y="67" font-size="8.5" font-weight="900" font-style="italic" fill="#F5C64A" letter-spacing="1" font-family="Arial,sans-serif">DAILY CHALLENGE</text>
+          <text x="53" y="104" font-size="40" font-weight="900" font-style="italic" fill="#FFF4DC" letter-spacing="-1.5" font-family="'Arial Black',Arial,sans-serif" textLength="129" lengthAdjust="spacingAndGlyphs">MY NBA</text>
+          <text x="22" y="151" font-size="46" font-weight="900" font-style="italic" fill="#F3D27A" letter-spacing="-1.5" font-family="'Arial Black',Arial,sans-serif" textLength="111" lengthAdjust="spacingAndGlyphs">DEBUT</text>
+          <g transform="skewX(-12)" font-family="Arial,sans-serif" font-weight="900" font-style="italic" font-size="8.5" fill="#fff">
+            <rect x="168" y="112" width="56" height="12" fill="#D62430"/><text x="172" y="121">YOUR TEAM.</text>
+            <rect x="168" y="125" width="56" height="12" fill="#D62430"/><text x="172" y="134">YOUR FIRST</text>
+            <rect x="168" y="138" width="40" height="12" fill="#D62430"/><text x="172" y="147">TIP-OFF.</text>
+          </g>
+        </svg></div>
+
+      <div class="hsec"><span>My Debut Pass</span><span class="cnt"><b data-k="done">0 / 5</b> completed</span></div>
+      <div class="hbox"><div class="court"><div class="lights"></div><div class="floor"></div>
+        <div class="track">
+          <div class="hcard" data-i="0"><div class="lbl"><i></i>BET Over<br>₱200</div><svg viewBox="0 0 64 64"></svg><div class="st">Locked</div></div>
+          <div class="hcard" data-i="1"><div class="lbl"><i></i>Deposit<br>Over ₱200</div><svg viewBox="0 0 64 64"></svg><div class="st">Locked</div></div>
+          <div class="hcard" data-i="2"><div class="lbl"><i></i>Sport BET<br>Over ₱50</div><svg viewBox="0 0 64 64"></svg><div class="st">Locked</div></div>
+        </div>
+        
+      </div></div>
+
+      <div class="hsec"><span>Today’s Free Bet</span><span class="cnt"><b data-k="claimed">0 / 5</b> claimed</span></div>
+      <div class="hbox"><div class="fb">
+        <div class="tray"><div class="plaque"><i></i><span>OK</span></div>
+        <div class="tk off" data-k="tk"><span class="cut a"></span><span class="cut b"></span><span class="cut c"></span><span class="cut d"></span><div class="amt" data-k="amt">₱5</div><div class="nm">SPORT FREE BET</div></div>
+        <div class="plaque"><i></i><span>OK</span></div></div>
+        <div class="r"><div class="h">Sport Free Bet</div><div class="d" data-k="fbd">Finish Mission to Unlock</div><span class="fbtn lock" data-k="fbb">Locked</span></div>
+      </div></div>
+
+      <div class="hsec"><span>Pick Your Game<span class="tag">Pre-match</span></span></div>
+      <div class="hbox">
+        <div class="hhint">Example fixtures*Times are for illustration</div>
+        <div class="games">
+          <div class="g"><div class="lg">Korea KBL</div><div class="tm"><div class="team"><div class="lg2"></div><div class="nm">Seoul Knights<br>Seoul Knights</div></div><div class="sc">3 - 3<small>2nd Half<br>87:11</small></div><div class="team"><div class="lg2"></div><div class="nm">Busan Stars<br>Busan Stars</div></div></div><div class="odds"><div class="o"><small>U 1.5/2</small>1.89</div><span class="w">Winner</span><div class="o"><small>U 1.5/2</small>1.89</div></div></div>
+          <div class="g b"><div class="lg">Korea KBL</div><div class="tm"><div class="team"><div class="lg2"></div><div class="nm">Seoul Knights<br>Seoul Knights</div></div><div class="sc">3 - 3<small>2nd Half<br>87:11</small></div></div><div class="odds"><div class="o"><small>U 1.5/2</small>1.89</div><span class="w">Winner</span></div></div>
+        </div>
+      </div>
+
+      <div class="hsec"><span>How to Play</span></div>
+      <div class="hbox">
+        <div class="hstep"><div class="n">1</div><div><div class="t">Claim your Free Bet</div><div class="s">Get your ₱5 Sport Free Bet each qualifying day.</div></div></div>
+        <div class="hstep"><div class="n">2</div><div><div class="t">Choose an eligible pre-match game</div><div class="s">Pick from selected NBA pre-match fixtures.</div></div></div>
+        <div class="hstep"><div class="n">3</div><div><div class="t">Use your Free Bet to earn a stamp</div><div class="s">Place a qualifying bet with your Free Bet.</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  </div><div class="pcol inter"><div class="pcap" style="padding:0 8px">備案：超過三個任務時，一次顯示三張可左右滑動，底下白點顯示張數與位置</div><div class="phone" data-states="claimed,done,locked,used,expired" data-sel="1">
+    <div class="topbar"><span class="back">‹</span>Promotion Details</div>
+    <div class="hpage">
+      <div class="hero"><svg viewBox="0 0 390 194" width="390" height="194" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="hbg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#07123F"/><stop offset="1" stop-color="#040B2A"/></linearGradient>
+            <radialGradient id="hglow" cx="75%" cy="40%" r="55%"><stop offset="0" stop-color="#2B5BE8" stop-opacity=".55"/><stop offset="1" stop-color="#2B5BE8" stop-opacity="0"/></radialGradient>
+            <linearGradient id="tkg" x1="0" x2="1"><stop offset="0" stop-color="#FFF0B8"/><stop offset=".5" stop-color="#F0C65C"/><stop offset="1" stop-color="#B8841F"/></linearGradient>
+            <radialGradient id="bk3" cx="38%" cy="30%" r="68%"><stop offset="0" stop-color="#FFB071"/><stop offset=".45" stop-color="#E86E24"/><stop offset="1" stop-color="#6E2A08"/></radialGradient>
+            <linearGradient id="rim2" x1="0" x2="1"><stop offset="0" stop-color="#FFE9A0"/><stop offset=".5" stop-color="#F0B33A"/><stop offset="1" stop-color="#B57A1A"/></linearGradient>
+            <g id="tkt"><rect x="-35" y="-13.5" width="70" height="27" rx="2" fill="url(#tkg)" stroke="#FFF2C0" stroke-width="1"/><rect x="-29" y="-9" width="7" height="18" rx="1" fill="#1D3FBF"/><rect x="-25.5" y="-9" width="3.5" height="18" fill="#E0262C"/><text x="4" y="4" font-size="10" font-weight="900" fill="#4a2d00" text-anchor="middle" font-family="Arial,sans-serif">₱1,000</text></g>
+          </defs>
+          <rect width="390" height="194" fill="url(#hbg)"/>
+          <rect width="390" height="194" fill="url(#hglow)"/>
+          <g stroke="#5A8CFF" stroke-opacity=".12" stroke-width="3"><path d="M160 0 L390 120 M120 0 L390 150 M200 0 L390 90 M60 194 L390 20"/></g>
+          <g fill="#FFE28A"><circle cx="150" cy="40" r="1.5"/><circle cx="230" cy="150" r="1.5"/><circle cx="300" cy="30" r="1.5"/><circle cx="120" cy="170" r="1.5"/><circle cx="340" cy="120" r="1.5"/><circle cx="190" cy="100" r="1"/></g>
+          <!-- backboard -->
+          <rect x="234" y="8" width="117" height="50" rx="3" fill="none" stroke="#B9C8F0" stroke-opacity=".5" stroke-width="2"/>
+          <!-- net -->
+          <g stroke="#fff" stroke-width="1.4" fill="none" opacity=".9">
+            <path d="M229 70 L250 183 M353 70 L332 183"/>
+            <path d="M232 84 Q291 112 350 84 M236 104 Q291 134 346 104 M240 124 Q291 154 342 124 M244 144 Q291 172 338 144 M248 164 Q291 186 334 164"/>
+            <path d="M232 84 Q291 56 350 84 M236 104 Q291 76 346 104 M240 124 Q291 96 342 124 M244 144 Q291 118 338 144 M248 164 Q291 140 334 164"/>
+          </g>
+          <!-- ball -->
+          <circle cx="291" cy="113" r="43" fill="url(#bk3)"/>
+          <path d="M250 107 Q291 76 332 107 M250 120 Q291 152 332 120 M291 70 V156 M262 82 Q291 113 262 144 M320 82 Q291 113 320 144" stroke="#3a1606" stroke-width="2.2" fill="none" opacity=".85"/>
+          <ellipse cx="274" cy="90" rx="12" ry="6" fill="#fff" fill-opacity=".35" transform="rotate(-30 274 90)"/>
+          <!-- rim -->
+          <ellipse cx="291" cy="66" rx="62" ry="15" fill="none" stroke="url(#rim2)" stroke-width="6"/>
+          <!-- tickets -->
+          <use href="#tkt" transform="translate(226 45) rotate(-35)"/>
+          <use href="#tkt" transform="translate(268 20) rotate(-75)"/>
+          <use href="#tkt" transform="translate(356 20) rotate(75)"/>
+          <use href="#tkt" transform="translate(382 98) rotate(90)"/>
+          <use href="#tkt" transform="translate(203 183) rotate(-25)"/>
+          <use href="#tkt" transform="translate(343 187) rotate(20)"/>
+          <use href="#tkt" transform="translate(378 62) rotate(60)"/>
+          <!-- logo block + titles -->
+          <rect x="18" y="54" width="29" height="54" rx="4" fill="#1D3FBF"/><rect x="32.5" y="54" width="14.5" height="54" rx="4" fill="#E0262C"/><rect x="32.5" y="54" width="6" height="54" fill="#E0262C"/><circle cx="32.5" cy="72" r="7" fill="#fff"/>
+          <text x="53" y="67" font-size="8.5" font-weight="900" font-style="italic" fill="#F5C64A" letter-spacing="1" font-family="Arial,sans-serif">DAILY CHALLENGE</text>
+          <text x="53" y="104" font-size="40" font-weight="900" font-style="italic" fill="#FFF4DC" letter-spacing="-1.5" font-family="'Arial Black',Arial,sans-serif" textLength="129" lengthAdjust="spacingAndGlyphs">MY NBA</text>
+          <text x="22" y="151" font-size="46" font-weight="900" font-style="italic" fill="#F3D27A" letter-spacing="-1.5" font-family="'Arial Black',Arial,sans-serif" textLength="111" lengthAdjust="spacingAndGlyphs">DEBUT</text>
+          <g transform="skewX(-12)" font-family="Arial,sans-serif" font-weight="900" font-style="italic" font-size="8.5" fill="#fff">
+            <rect x="168" y="112" width="56" height="12" fill="#D62430"/><text x="172" y="121">YOUR TEAM.</text>
+            <rect x="168" y="125" width="56" height="12" fill="#D62430"/><text x="172" y="134">YOUR FIRST</text>
+            <rect x="168" y="138" width="40" height="12" fill="#D62430"/><text x="172" y="147">TIP-OFF.</text>
+          </g>
+        </svg></div>
+
+      <div class="hsec"><span>My Debut Pass</span><span class="cnt"><b data-k="done">0 / 5</b> completed</span></div>
+      <div class="hbox"><div class="court"><div class="lights"></div><div class="floor"></div>
+        <div class="track">
+          <div class="hcard" data-i="0"><div class="lbl"><i></i>BET Over<br>₱200</div><svg viewBox="0 0 64 64"></svg><div class="st">Locked</div></div>
+          <div class="hcard" data-i="1"><div class="lbl"><i></i>Deposit<br>Over ₱200</div><svg viewBox="0 0 64 64"></svg><div class="st">Locked</div></div>
+          <div class="hcard" data-i="2"><div class="lbl"><i></i>Sport BET<br>Over ₱50</div><svg viewBox="0 0 64 64"></svg><div class="st">Locked</div></div>
+          <div class="hcard" data-i="3"><div class="lbl"><i></i>Sport BET<br>Over ₱100</div><svg viewBox="0 0 64 64"></svg><div class="st">Locked</div></div>
+          <div class="hcard" data-i="4"><div class="lbl"><i></i>BET Over<br>₱500</div><svg viewBox="0 0 64 64"></svg><div class="st">Locked</div></div>
+        </div>
+        <div class="dots"><i></i><i></i><i></i><i></i><i></i></div>
+      </div></div>
+
+      <div class="hsec"><span>Today’s Free Bet</span><span class="cnt"><b data-k="claimed">0 / 5</b> claimed</span></div>
+      <div class="hbox"><div class="fb">
+        <div class="tray"><div class="plaque"><i></i><span>OK</span></div>
+        <div class="tk off" data-k="tk"><span class="cut a"></span><span class="cut b"></span><span class="cut c"></span><span class="cut d"></span><div class="amt" data-k="amt">₱5</div><div class="nm">SPORT FREE BET</div></div>
+        <div class="plaque"><i></i><span>OK</span></div></div>
+        <div class="r"><div class="h">Sport Free Bet</div><div class="d" data-k="fbd">Finish Mission to Unlock</div><span class="fbtn lock" data-k="fbb">Locked</span></div>
+      </div></div>
+
+      <div class="hsec"><span>Pick Your Game<span class="tag">Pre-match</span></span></div>
+      <div class="hbox">
+        <div class="hhint">Example fixtures*Times are for illustration</div>
+        <div class="games">
+          <div class="g"><div class="lg">Korea KBL</div><div class="tm"><div class="team"><div class="lg2"></div><div class="nm">Seoul Knights<br>Seoul Knights</div></div><div class="sc">3 - 3<small>2nd Half<br>87:11</small></div><div class="team"><div class="lg2"></div><div class="nm">Busan Stars<br>Busan Stars</div></div></div><div class="odds"><div class="o"><small>U 1.5/2</small>1.89</div><span class="w">Winner</span><div class="o"><small>U 1.5/2</small>1.89</div></div></div>
+          <div class="g b"><div class="lg">Korea KBL</div><div class="tm"><div class="team"><div class="lg2"></div><div class="nm">Seoul Knights<br>Seoul Knights</div></div><div class="sc">3 - 3<small>2nd Half<br>87:11</small></div></div><div class="odds"><div class="o"><small>U 1.5/2</small>1.89</div><span class="w">Winner</span></div></div>
+        </div>
+      </div>
+
+      <div class="hsec"><span>How to Play</span></div>
+      <div class="hbox">
+        <div class="hstep"><div class="n">1</div><div><div class="t">Claim your Free Bet</div><div class="s">Get your ₱5 Sport Free Bet each qualifying day.</div></div></div>
+        <div class="hstep"><div class="n">2</div><div><div class="t">Choose an eligible pre-match game</div><div class="s">Pick from selected NBA pre-match fixtures.</div></div></div>
+        <div class="hstep"><div class="n">3</div><div><div class="t">Use your Free Bet to earn a stamp</div><div class="s">Place a qualifying bet with your Free Bet.</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  </div><div class="hpanel">
+    <b>任務卡狀態（點狀態跳到對應的卡，點卡也會選中）</b>
+    <label><input type="radio" name="st" value="locked" checked> 未達標 Locked：藍色線框籃球、券卡反灰、按鈕 LOCKED</label>
+    <label><input type="radio" name="st" value="done"> 已達標可領取 Complete：金球、按鈕 CLAIM</label>
+    <label><input type="radio" name="st" value="claimed"> 已領取 Claimed：金球＋勾、按鈕 CLAIMED</label>
+    <label><input type="radio" name="st" value="used"> 已使用 Used：灰球、按鈕 USED</label>
+    <label><input type="radio" name="st" value="expired"> 券已過期 Expired：灰球、按鈕 EXPIRED（不恢復可領取）</label>
+    <small>TODAY’S FREE BET 只顯示目前選中那顆籃球對應的券；三顆籃球的順序與面額來自後台奖励配置的排序與奖励。</small>
+    <div class="hnote">文件六張圖對應：0/3 Locked → 1/3（第一顆 Complete，券可領）→ 1/3 claimed → 2/3 … 依此類推；圖中面額 ₱999／₱777／₱555 為示意，實際由後台奖励配置的券決定。NBA 標誌以藍紅色塊代替，賽事卡隊名為虛構。</div>
+  </div>
+</div>
+</div>
+
+
+
+<script>
+document.querySelectorAll('.doctabs span').forEach(function(t){t.addEventListener('click',function(){
+  document.querySelectorAll('.doctabs span').forEach(function(x){x.classList.remove('on')}); t.classList.add('on');
+  document.querySelectorAll('.dpage').forEach(function(p){p.classList.remove('on')}); document.getElementById('p'+t.dataset.p).classList.add('on');
+  window.scrollTo(0,0);
+});});
+</script>
+<script>
+(function(){
+  var DEFS='<defs><radialGradient id="gb" cx="36%" cy="30%" r="68%"><stop offset="0" stop-color="#FFF6D0"/><stop offset=".35" stop-color="#F3CC5A"/><stop offset=".75" stop-color="#B8841F"/><stop offset="1" stop-color="#5C3A08"/></radialGradient><filter id="glow"><feGaussianBlur stdDeviation="1.2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>';
+  var SEAMS='<path d="M3.5 22 Q32 6 60.5 22 M3.5 42 Q32 58 60.5 42 M32 3 V61 M15 9 Q38 32 15 55 M49 9 Q26 32 49 55"';
+  function ball(kind){
+    if(kind==='wire') return DEFS+'<g filter="url(#glow)"><circle cx="32" cy="32" r="29" fill="rgba(20,50,160,.18)" stroke="#3F86FF" stroke-width="1.6"/>'+SEAMS+' stroke="#3F86FF" stroke-width="1.3" fill="none"/></g>';
+    if(kind==='gold') return DEFS+'<circle cx="32" cy="32" r="29.5" fill="url(#gb)" stroke="#3a2608" stroke-width="1"/>'+SEAMS+' stroke="#2a1a06" stroke-width="2.2" fill="none" opacity=".85"/><ellipse cx="21" cy="17" rx="9" ry="4.5" fill="rgba(255,255,255,.6)" transform="rotate(-30 21 17)"/>';
+    if(kind==='check') return ball('gold')+'<circle cx="50" cy="50" r="10" fill="#1E5BFF" stroke="#fff" stroke-width="1.5"/><path d="M44 50 L48.5 54.5 L56.5 45.5" stroke="#fff" stroke-width="2.2" fill="none"/>';
+    return DEFS+'<circle cx="32" cy="32" r="29" fill="#4a4f66" stroke="#2a2f45" stroke-width="1"/>'+SEAMS+' stroke="#2a2f45" stroke-width="2" fill="none"/>';
+  }
+  var amts=['₱5','₱5','₱10','₱20','₱10'];
+  var txt={locked:'Locked',done:'Complete',claimed:'Claimed',used:'Used',expired:'Expired'};
+  var kinds={locked:'wire',done:'gold',claimed:'check',used:'grey',expired:'grey'};
+  function setup(ph,interactive){
+    var cards=[].slice.call(ph.querySelectorAll('.hcard'));
+    var state=ph.dataset.states.split(','); var sel=+ph.dataset.sel;
+    var q=function(k){return ph.querySelector('[data-k='+k+']')};
+    var noScroll=false;
+    function render(){
+      cards.forEach(function(c,i){
+        c.className='hcard '+(state[i]==='expired'?'used':state[i])+(i===sel?' sel':'');
+        c.querySelector('.st').textContent=txt[state[i]];
+        c.querySelector('svg').innerHTML=ball(kinds[state[i]]);
+      });
+      q('done').textContent=state.filter(function(s){return s!=='locked'}).length+' / '+state.length;
+      q('claimed').textContent=state.filter(function(s){return s==='claimed'||s==='used'||s==='expired'}).length+' / '+state.length;
+      [].slice.call(ph.querySelectorAll('.dots i')).forEach(function(d,i){d.className=i===sel?'on':''});
+      var tr=ph.querySelector('.track'); if(tr&&!noScroll){var c=cards[sel]; var L=c.offsetLeft-16, R=c.offsetLeft+c.clientWidth+16; if(L<tr.scrollLeft){tr.scrollTo({left:L,behavior:'smooth'});} else if(R>tr.scrollLeft+tr.clientWidth){tr.scrollTo({left:R-tr.clientWidth,behavior:'smooth'});}}
+      var s=state[sel], tk=q('tk'), b=q('fbb'), d=q('fbd');
+      q('amt').textContent=amts[sel];
+      tk.className='tk'+(s==='locked'||s==='used'||s==='expired'?' off':'');
+      if(s==='locked'){b.className='fbtn lock';b.textContent='Locked';d.textContent='Finish Mission to Unlock';}
+      else if(s==='done'){b.className='fbtn claim';b.textContent='Claim';d.textContent='Mission complete · Claim';}
+      else if(s==='claimed'){b.className='fbtn lock';b.textContent='Use Now';d.textContent='Saved to My voucher';}
+      else if(s==='used'){b.className='fbtn used';b.textContent='Used';d.textContent='Free Bet already used';}
+      else {b.className='fbtn exp';b.textContent='Expired';d.textContent='Free Bet expired';}
+      if(interactive){var r=document.querySelector('.h5 input[name=st][value='+s+']'); if(r) r.checked=true;}
+    }
+    var moved=false; var tr=ph.querySelector('.track');
+    cards.forEach(function(c,i){c.addEventListener('click',function(e){if(tr){return;} sel=i;render();});});
+    if(tr){
+      var down=false,sx=0,sl=0,t;
+      tr.addEventListener('pointerdown',function(e){down=true;moved=false;sx=e.clientX;sl=tr.scrollLeft;tr.classList.add('drag');tr.setPointerCapture(e.pointerId);});
+      tr.addEventListener('pointermove',function(e){if(!down)return; var dx=e.clientX-sx; if(Math.abs(dx)>4)moved=true; tr.scrollLeft=sl-dx;});
+      var up=function(e){if(!down)return; down=false; tr.classList.remove('drag'); if(!moved){var el=document.elementFromPoint(e.clientX,e.clientY); var c=el&&el.closest('.hcard'); if(c&&tr.contains(c)){sel=+c.dataset.i; render(); return;}} snap();};
+      tr.addEventListener('pointerup',up); tr.addEventListener('pointercancel',up);
+      function snap(){var x=tr.scrollLeft+16,best=0,bd=1e9; cards.forEach(function(c,i){var d=Math.abs(c.offsetLeft-x); if(d<bd){bd=d;best=i;}}); var max=tr.scrollWidth-tr.clientWidth; tr.scrollTo({left:Math.min(cards[best].offsetLeft-16,max),behavior:'smooth'});}
+
+    }
+    if(interactive){[].slice.call(document.querySelectorAll('.h5 input[name=st]')).forEach(function(r){r.addEventListener('change',function(){var i=state.indexOf(r.value); if(i>=0){sel=i;} render();});});}
+    render();
+  }
+  [].slice.call(document.querySelectorAll('.h5 .phone[data-states]')).forEach(function(ph){setup(ph, ph.closest('.pcol').classList.contains('inter'));});
+})();
+</script>
+
+
+
+<h2>十三之一、活動頁區塊說明</h2>
+<div class="block">把活動頁由上而下拆成六個區塊，逐塊說明元素與規則。狀態字樣（Locked／Complete／Claimed／Used／Expired、CLAIM／USE NOW）與文案都是示意，正式文案依設計稿。</div>
+<h3>① 頂部列</h3>
+<div class="h5 one"><div class="blk"><div class="phone" style="width:390px"><div class="hpage" style="padding-bottom:10px"><div class="topbar"><span class="back">‹</span>Promotion Details</div>
+    </div></div></div></div>
+<table class="spec"><colgroup><col style="width:170px"><col></colgroup><tr><th>元素</th><th>說明</th></tr><tr><td class="c">返回鍵</td><td><ul><li>回上一頁。</li></ul></td></tr><tr><td class="c">標題</td><td><ul><li>固定文字「Promotion Details」。</li></ul></td></tr></table>
+<h3>② 主視覺（Banner）</h3>
+<div class="h5 one"><div class="blk"><div class="phone" style="width:390px"><div class="hpage" style="padding-bottom:10px"><div class="hero"><svg viewBox="0 0 390 194" width="390" height="194" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="hbg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#07123F"/><stop offset="1" stop-color="#040B2A"/></linearGradient>
+            <radialGradient id="hglow" cx="75%" cy="40%" r="55%"><stop offset="0" stop-color="#2B5BE8" stop-opacity=".55"/><stop offset="1" stop-color="#2B5BE8" stop-opacity="0"/></radialGradient>
+            <linearGradient id="tkg" x1="0" x2="1"><stop offset="0" stop-color="#FFF0B8"/><stop offset=".5" stop-color="#F0C65C"/><stop offset="1" stop-color="#B8841F"/></linearGradient>
+            <radialGradient id="bk3" cx="38%" cy="30%" r="68%"><stop offset="0" stop-color="#FFB071"/><stop offset=".45" stop-color="#E86E24"/><stop offset="1" stop-color="#6E2A08"/></radialGradient>
+            <linearGradient id="rim2" x1="0" x2="1"><stop offset="0" stop-color="#FFE9A0"/><stop offset=".5" stop-color="#F0B33A"/><stop offset="1" stop-color="#B57A1A"/></linearGradient>
+            <g id="tkt"><rect x="-35" y="-13.5" width="70" height="27" rx="2" fill="url(#tkg)" stroke="#FFF2C0" stroke-width="1"/><rect x="-29" y="-9" width="7" height="18" rx="1" fill="#1D3FBF"/><rect x="-25.5" y="-9" width="3.5" height="18" fill="#E0262C"/><text x="4" y="4" font-size="10" font-weight="900" fill="#4a2d00" text-anchor="middle" font-family="Arial,sans-serif">₱1,000</text></g>
+          </defs>
+          <rect width="390" height="194" fill="url(#hbg)"/>
+          <rect width="390" height="194" fill="url(#hglow)"/>
+          <g stroke="#5A8CFF" stroke-opacity=".12" stroke-width="3"><path d="M160 0 L390 120 M120 0 L390 150 M200 0 L390 90 M60 194 L390 20"/></g>
+          <g fill="#FFE28A"><circle cx="150" cy="40" r="1.5"/><circle cx="230" cy="150" r="1.5"/><circle cx="300" cy="30" r="1.5"/><circle cx="120" cy="170" r="1.5"/><circle cx="340" cy="120" r="1.5"/><circle cx="190" cy="100" r="1"/></g>
+          <!-- backboard -->
+          <rect x="234" y="8" width="117" height="50" rx="3" fill="none" stroke="#B9C8F0" stroke-opacity=".5" stroke-width="2"/>
+          <!-- net -->
+          <g stroke="#fff" stroke-width="1.4" fill="none" opacity=".9">
+            <path d="M229 70 L250 183 M353 70 L332 183"/>
+            <path d="M232 84 Q291 112 350 84 M236 104 Q291 134 346 104 M240 124 Q291 154 342 124 M244 144 Q291 172 338 144 M248 164 Q291 186 334 164"/>
+            <path d="M232 84 Q291 56 350 84 M236 104 Q291 76 346 104 M240 124 Q291 96 342 124 M244 144 Q291 118 338 144 M248 164 Q291 140 334 164"/>
+          </g>
+          <!-- ball -->
+          <circle cx="291" cy="113" r="43" fill="url(#bk3)"/>
+          <path d="M250 107 Q291 76 332 107 M250 120 Q291 152 332 120 M291 70 V156 M262 82 Q291 113 262 144 M320 82 Q291 113 320 144" stroke="#3a1606" stroke-width="2.2" fill="none" opacity=".85"/>
+          <ellipse cx="274" cy="90" rx="12" ry="6" fill="#fff" fill-opacity=".35" transform="rotate(-30 274 90)"/>
+          <!-- rim -->
+          <ellipse cx="291" cy="66" rx="62" ry="15" fill="none" stroke="url(#rim2)" stroke-width="6"/>
+          <!-- tickets -->
+          <use href="#tkt" transform="translate(226 45) rotate(-35)"/>
+          <use href="#tkt" transform="translate(268 20) rotate(-75)"/>
+          <use href="#tkt" transform="translate(356 20) rotate(75)"/>
+          <use href="#tkt" transform="translate(382 98) rotate(90)"/>
+          <use href="#tkt" transform="translate(203 183) rotate(-25)"/>
+          <use href="#tkt" transform="translate(343 187) rotate(20)"/>
+          <use href="#tkt" transform="translate(378 62) rotate(60)"/>
+          <!-- logo block + titles -->
+          <rect x="18" y="54" width="29" height="54" rx="4" fill="#1D3FBF"/><rect x="32.5" y="54" width="14.5" height="54" rx="4" fill="#E0262C"/><rect x="32.5" y="54" width="6" height="54" fill="#E0262C"/><circle cx="32.5" cy="72" r="7" fill="#fff"/>
+          <text x="53" y="67" font-size="8.5" font-weight="900" font-style="italic" fill="#F5C64A" letter-spacing="1" font-family="Arial,sans-serif">DAILY CHALLENGE</text>
+          <text x="53" y="104" font-size="40" font-weight="900" font-style="italic" fill="#FFF4DC" letter-spacing="-1.5" font-family="'Arial Black',Arial,sans-serif" textLength="129" lengthAdjust="spacingAndGlyphs">MY NBA</text>
+          <text x="22" y="151" font-size="46" font-weight="900" font-style="italic" fill="#F3D27A" letter-spacing="-1.5" font-family="'Arial Black',Arial,sans-serif" textLength="111" lengthAdjust="spacingAndGlyphs">DEBUT</text>
+          <g transform="skewX(-12)" font-family="Arial,sans-serif" font-weight="900" font-style="italic" font-size="8.5" fill="#fff">
+            <rect x="168" y="112" width="56" height="12" fill="#D62430"/><text x="172" y="121">YOUR TEAM.</text>
+            <rect x="168" y="125" width="56" height="12" fill="#D62430"/><text x="172" y="134">YOUR FIRST</text>
+            <rect x="168" y="138" width="40" height="12" fill="#D62430"/><text x="172" y="147">TIP-OFF.</text>
+          </g>
+        </svg></div>
+
+      </div></div></div></div>
+<table class="spec"><colgroup><col style="width:170px"><col></colgroup><tr><th>元素</th><th>說明</th></tr><tr><td class="c">圖片</td><td><ul><li>整張主視覺由設計提供（含標題、副標、籃球籃網、金券）。</li></ul></td></tr></table>
+<h3>③ MY DEBUT PASS（任務卡）</h3>
+<div class="h5 one"><div class="blk"><div class="phone" style="width:390px"><div class="hpage" style="padding-bottom:10px"><div class="hsec"><span>My Debut Pass</span><span class="cnt"><b data-x="done">0 / 5</b> completed</span></div>
+      <div class="hbox"><div class="court"><div class="lights"></div><div class="floor"></div>
+        <div class="track">
+          <div class="hcard" data-j="0"><div class="lbl"><i></i>BET Over<br>₱200</div><svg viewBox="0 0 64 64"></svg><div class="st">Locked</div></div>
+          <div class="hcard" data-j="1"><div class="lbl"><i></i>Deposit<br>Over ₱200</div><svg viewBox="0 0 64 64"></svg><div class="st">Locked</div></div>
+          <div class="hcard" data-j="2"><div class="lbl"><i></i>Sport BET<br>Over ₱50</div><svg viewBox="0 0 64 64"></svg><div class="st">Locked</div></div>
+        </div>
+        
+      </div></div>
+
+      </div></div></div></div>
+<table class="spec"><colgroup><col style="width:170px"><col></colgroup><tr><th>元素</th><th>說明</th></tr><tr><td class="c">標題列</td><td><ul><li>左「MY DEBUT PASS」：固定文字。</li><li>右「N / M completed」：</li><li><ul><li>M＝後台 步驟4 奖励配置 的項次總數。</li><li>N＝當日已達標的項次數（達標即計，不論是否已領）。</li></ul></li></ul></td></tr><tr><td class="c">任務卡數量與順序</td><td><ul><li>後台每一個項次對應一張卡，M 個項次就 M 張。</li><li>由左至右依後台「排序」：數字小在前；排序相同或未填時，項次編號小在前。</li></ul></td></tr><tr><td class="c">卡上文字</td><td><ul><li>由後台「达成条件」＋「需求」組成：</li><li><ul><li>达成条件＝总投注额 → 「BET Over ₱{需求}」</li><li>达成条件＝充值 → 「Deposit Over ₱{需求}」</li><li>达成条件＝体育投注额 → 「Sport BET Over ₱{需求}」</li></ul></li><li>例：体育投注额、需求 50 → 「Sport BET Over ₱50」。</li><li>{需求} 帶後台數字。</li></ul></td></tr><tr><td class="c">籃球與狀態字</td><td><ul><li>未達標：藍色線框籃球，字「Locked」。</li><li>已達標未領取：金球，字「Complete」。</li><li>已領取：金球加藍勾，字「Claimed」。</li><li>券已使用：灰球，字「Used」。</li><li>券已過期：灰球，字「Expired」。</li></ul></td></tr><tr><td class="c">狀態判斷</td><td><ul><li>未達標：會員當日的累計數（依達成條件：全站投注／充值／體育投注）還沒到該項次的「需求」。</li><li>已達標：當日累計數 ≥ 該項次的「需求」。</li><li>已領取：當日已點領取並派券。</li><li>已使用／已過期：讀該張券在 优惠券记录 的狀態。</li></ul></td></tr><tr><td class="c">選中</td><td><ul><li>點任一張卡即選中（白色外框），下方 TODAY'S FREE BET 顯示該卡對應的券。</li><li>進頁預設選中排序第一張。</li></ul></td></tr><tr><td class="c">卡片張數與排法</td><td><ul><li>1 張：置中。</li><li>2 張：置中並排。</li><li>3 張：並排填滿，不滑動、無白點（對應本期需求）。</li><li>4 張以上（備案）：一次顯示三張，可左右滑動；底下白點數＝卡片數，亮點＝目前選中的卡。</li></ul><div class="h5 one" style="display:flex;gap:12px;flex-wrap:wrap"><div class="cnt-demo"><div class="cap">1 張</div><div class="phone" style="width:390px;border-radius:12px;border-width:3px"><div class="hpage" style="padding:8px 0"><div class="hbox" style="margin:0 10px"><div class="court"><div class="lights"></div><div class="floor"></div><div class="track"><div class="hcard claimed"><div class="lbl"><i></i>BET Over<br>₱200</div><svg viewBox="0 0 64 64"></svg><div class="st">Claimed</div></div></div></div></div></div></div></div><div class="cnt-demo"><div class="cap">2 張</div><div class="phone" style="width:390px;border-radius:12px;border-width:3px"><div class="hpage" style="padding:8px 0"><div class="hbox" style="margin:0 10px"><div class="court"><div class="lights"></div><div class="floor"></div><div class="track"><div class="hcard claimed"><div class="lbl"><i></i>BET Over<br>₱200</div><svg viewBox="0 0 64 64"></svg><div class="st">Claimed</div></div><div class="hcard done"><div class="lbl"><i></i>Deposit<br>Over ₱200</div><svg viewBox="0 0 64 64"></svg><div class="st">Complete</div></div></div></div></div></div></div></div><div class="cnt-demo"><div class="cap">3 張</div><div class="phone" style="width:390px;border-radius:12px;border-width:3px"><div class="hpage" style="padding:8px 0"><div class="hbox" style="margin:0 10px"><div class="court"><div class="lights"></div><div class="floor"></div><div class="track"><div class="hcard claimed"><div class="lbl"><i></i>BET Over<br>₱200</div><svg viewBox="0 0 64 64"></svg><div class="st">Claimed</div></div><div class="hcard done"><div class="lbl"><i></i>Deposit<br>Over ₱200</div><svg viewBox="0 0 64 64"></svg><div class="st">Complete</div></div><div class="hcard locked"><div class="lbl"><i></i>Sport BET<br>Over ₱50</div><svg viewBox="0 0 64 64"></svg><div class="st">Locked</div></div></div></div></div></div></div></div><div class="cnt-demo"><div class="cap">4 張（4 張以上）</div><div class="phone" style="width:390px;border-radius:12px;border-width:3px"><div class="hpage" style="padding:8px 0"><div class="hbox" style="margin:0 10px"><div class="court"><div class="lights"></div><div class="floor"></div><div class="track" style="justify-content:flex-start;overflow:hidden;padding:0 28px;gap:13px"><div class="hcard claimed"><div class="lbl"><i></i>BET Over<br>₱200</div><svg viewBox="0 0 64 64"></svg><div class="st">Claimed</div></div><div class="hcard done"><div class="lbl"><i></i>Deposit<br>Over ₱200</div><svg viewBox="0 0 64 64"></svg><div class="st">Complete</div></div><div class="hcard locked"><div class="lbl"><i></i>Sport BET<br>Over ₱50</div><svg viewBox="0 0 64 64"></svg><div class="st">Locked</div></div><div class="hcard locked"><div class="lbl"><i></i>Sport BET<br>Over ₱100</div><svg viewBox="0 0 64 64"></svg><div class="st">Locked</div></div></div><div class="dots"><i class=on></i><i></i><i></i><i></i></div></div></div></div></div></div></div></td></tr><tr><td class="c">掃光特效</td><td><ul><li>卡片轉為已達標（Complete）後，點擊該卡播放一次掃光。</li></ul></td></tr></table>
+<h3>④ TODAY'S FREE BET（券卡）</h3>
+<div class="h5 one"><div class="blk"><div class="phone" style="width:390px"><div class="hpage" style="padding-bottom:10px"><div class="hsec"><span>Today’s Free Bet</span><span class="cnt"><b data-x="claimed">0 / 5</b> claimed</span></div>
+      <div class="hbox"><div class="fb">
+        <div class="tray"><div class="plaque"><i></i><span>OK</span></div>
+        <div class="tk off" data-x="tk"><span class="cut a"></span><span class="cut b"></span><span class="cut c"></span><span class="cut d"></span><div class="amt" data-x="amt">₱5</div><div class="nm">SPORT FREE BET</div></div>
+        <div class="plaque"><i></i><span>OK</span></div></div>
+        <div class="r"><div class="h">Sport Free Bet</div><div class="d" data-x="fbd">Finish Mission to Unlock</div><span class="fbtn lock" data-x="fbb">Locked</span></div>
+      </div></div>
+
+      </div></div></div></div>
+<table class="spec"><colgroup><col style="width:170px"><col></colgroup><tr><th>元素</th><th>說明</th></tr><tr><td class="c">標題列</td><td><ul><li>左「TODAY'S FREE BET」：固定文字。</li><li>右「N / M claimed」：</li><li><ul><li>M＝後台奖励配置的項次總數。</li><li>N＝當日已領取的項次數。</li></ul></li></ul></td></tr><tr><td class="c">券卡</td><td><ul><li>顯示目前選中任務卡對應的券。</li><li>面額「₱N」＝後台該項次「奖励」所選券在 优惠券配置 的投注面额。</li><li>「SPORT FREE BET」字樣固定。</li><li>張數＞1 時面額右側加「×N」標記（N＝後台张数）。</li><div class="h5 one" style="display:flex;gap:16px;margin-top:6px"><div><div class="cap">张数＝1</div><div class="tk" style="margin:0"><div class="amt">₱5</div><div class="nm">SPORT FREE BET</div></div></div><div><div class="cap">张数＝3</div><div class="tk" style="margin:0"><div class="amt">₱5<span style="font-size:11px;margin-left:4px;background:#5a3a00;color:#FFE28A;border-radius:8px;padding:1px 6px;vertical-align:middle">×3</span></div><div class="nm">SPORT FREE BET</div></div></div></div><li>未達標／已使用／已過期：券卡反灰。</li><li>兩側徽章固定。</li></ul></td></tr><tr><td class="c">右側文字</td><td><ul><li>第一行固定「Sport Free Bet」。</li><li>第二行依狀態：</li><li><ul><li>未達標「Finish Mission to Unlock」</li><li>可領取「Mission complete · Claim」</li><li>已領取「Saved to My voucher」</li><li>已使用「Free Bet already used」</li><li>已過期「Free Bet expired」</li></ul></li></ul></td></tr><tr><td class="c">按鈕</td><td><ul><li>未達標：LOCKED，不可點。</li><li>可領取：CLAIM，點擊→檢查 KYC→派券（後台「张数」幾張就派幾張）→轉已領取。</li><li>已領取：USE NOW，導向體育籃球早盤頁，Bet Slip 可選該券。</li></ul></td></tr><tr><td class="c">KYC 未通過</td><td><ul><li>會員 KYC 狀態不在後台 步驟3「KYC 验证」勾選範圍內：點 CLAIM 提示「请先完成 KYC 验证」。</li><li>按「确定」導向 KYC 驗證頁；「取消」留在活動頁，按鈕維持 CLAIM。</li></ul></td></tr></table>
+<h3>⑤ PICK YOUR GAME（推薦賽事）</h3>
+<div class="h5 one"><div class="blk"><div class="phone" style="width:390px"><div class="hpage" style="padding-bottom:10px"><div class="hsec"><span>Pick Your Game<span class="tag">Pre-match</span></span></div>
+      <div class="hbox">
+        <div class="hhint">Example fixtures*Times are for illustration</div>
+        <div class="games">
+          <div class="g"><div class="lg">Korea KBL</div><div class="tm"><div class="team"><div class="lg2"></div><div class="nm">Seoul Knights<br>Seoul Knights</div></div><div class="sc">3 - 3<small>2nd Half<br>87:11</small></div><div class="team"><div class="lg2"></div><div class="nm">Busan Stars<br>Busan Stars</div></div></div><div class="odds"><div class="o"><small>U 1.5/2</small>1.89</div><span class="w">Winner</span><div class="o"><small>U 1.5/2</small>1.89</div></div></div>
+          <div class="g b"><div class="lg">Korea KBL</div><div class="tm"><div class="team"><div class="lg2"></div><div class="nm">Seoul Knights<br>Seoul Knights</div></div><div class="sc">3 - 3<small>2nd Half<br>87:11</small></div></div><div class="odds"><div class="o"><small>U 1.5/2</small>1.89</div><span class="w">Winner</span></div></div>
+        </div>
+      </div>
+
+      </div></div></div></div>
+<table class="spec"><colgroup><col style="width:170px"><col></colgroup><tr><th>元素</th><th>說明</th></tr><tr><td class="c">標題列</td><td><ul><li>左「PICK YOUR GAME」＋標籤「Pre-match」：固定文字。</li></ul></td></tr><tr><td class="c">資料來源</td><td><ul><li>推薦賽事後台（與體育頁 TOP MATCHES 同一份），不走本活動後台。</li><li>預設只顯示 NBA 賽事、早盤（不含滾球）。</li><li>依開賽時間近→遠排列，橫向滑動。</li></ul></td></tr><tr><td class="c">賽事卡元素</td><td><ul><li>沿用體育頁 TOP MATCHES 的賽事小卡。</li></ul></td></tr><tr><td class="c">點擊</td><td><ul><li>小卡上原本在 TOP MATCHES 可點的位置，在這裡全部改為導向該場「賽事詳情頁」。</li><li>包含白色賠率框：體育頁點它會直接下注，這裡不會，一樣導向賽事詳情頁。</li><li>不論原本各位置跳去哪裡，這裡一律跳賽事詳情頁。</li></ul></td></tr></table>
+<h3>⑥ HOW TO PLAY（玩法說明）</h3>
+<div class="h5 one"><div class="blk"><div class="phone" style="width:390px"><div class="hpage" style="padding-bottom:10px"><div class="hsec"><span>How to Play</span></div>
+      <div class="hbox">
+        <div class="hstep"><div class="n">1</div><div><div class="t">Claim your Free Bet</div><div class="s">Get your ₱5 Sport Free Bet each qualifying day.</div></div></div>
+        <div class="hstep"><div class="n">2</div><div><div class="t">Choose an eligible pre-match game</div><div class="s">Pick from selected NBA pre-match fixtures.</div></div></div>
+        <div class="hstep"><div class="n">3</div><div><div class="t">Use your Free Bet to earn a stamp</div><div class="s">Place a qualifying bet with your Free Bet.</div></div></div>
+</div></div></div></div>
+<table class="spec"><colgroup><col style="width:170px"><col></colgroup><tr><th>元素</th><th>說明</th></tr><tr><td class="c">三步說明</td><td><ul><li>固定文案，各一行標題＋一行小字：</li><li>1　Claim your Free Bet<br><span style="color:var(--t3)">Get your Sport Free Bet each qualifying day.</span></li><li>2　Choose an eligible pre-match game<br><span style="color:var(--t3)">Pick from selected NBA pre-match fixtures.</span></li><li>3　Use your Free Bet to earn a stamp<br><span style="color:var(--t3)">Place a qualifying bet with your Free Bet.</span></li></ul></td></tr></table>
+<h2>十四、前台待與營運確認事項</h2>
+<table class="spec">
+  <colgroup><col style="width:40px"><col style="width:200px"><col></colgroup>
+  <tr><th>#</th><th>項目</th><th>要確認的點</th></tr>
+  <tr><td class="c">1</td><td class="c">活動時間與規則文字</td><td><ul><li>設計稿目前沒有這塊，要不要加、放哪（HOW TO PLAY 下方或 Rules 彈窗）。</li><li>若加，內容：活動期間（後台活动时间起迄）、每日領取截止「每日 23:59:59（UTC+8）前領取，逾時作廢」、參與資格（後台 KYC 验证 勾選的狀態）、每人每項次每日限領一次。</li></ul></td></tr>
+  <tr><td class="c">2</td><td class="c">券已使用／已過期時的按鈕</td><td><ul><li>活動文件只畫了 LOCKED、USE NOW。</li><li>券已使用／已過期時，按鈕顯示 USED／EXPIRED（不可點）還是不顯示按鈕、只留右側狀態文字。</li></ul></td></tr>
+  <tr><td class="c">3</td><td class="c">PICK YOUR GAME 的說明行</td><td><ul><li>活動文件示意圖上有「Example fixtures*Times are for illustration」（示範賽事、時間僅供參考）。</li><li>我們直接接推薦賽事，顯示的是真實賽事，這行要不要拿掉。</li></ul></td></tr>
+  <tr><td class="c">4</td><td class="c">券卡與籃球卡的連動方向</td><td><ul><li>點籃球卡切換券卡已確定。</li><li>券卡本身能不能左右滑動、滑動時上方籃球卡要不要同步切換，待設計確認。</li></ul></td></tr>
+  <tr><td class="c">5</td><td class="c">不符合風控條件時的呈現</td><td><ul><li>後台步驟 5 的風險檢測（同IP／同手机号／同姓名／同email）與自动拒绝開啟時，會員被判定不符合：</li><li>前台是先擋在領取前（按鈕不可點）還是點領取後才擋。</li><li>要不要提示、提示文字是什麼（不能透露是哪一項風控）。</li><li>該筆在 活动数据统计 的「状态」顯示什麼（已拒绝？）。</li></ul></td></tr>
+  <tr><td class="c">6</td><td class="c">不符合參與條件時能不能看到活動頁</td><td><ul><li>步驟 3 的參與條件（充值层级、指定代理、新会员限制、会员等级、用户标签、黑名单、KYC 验证）任一不符合的會員：</li><li>入口（首頁浮窗、Rewards › Promotion 卡片）顯不顯示。</li><li>活動頁能不能開；能開的話任務進度要不要顯示、按鈕怎麼呈現。</li><li>要不要提示、提示文字。</li><li>KYC 目前定為：頁可開、進度照顯、點領取才提示並導 KYC 頁；其他條件是否比照。</li></ul></td></tr>
+  <tr><td class="c">7</td><td class="c">PICK YOUR GAME 推薦賽事裡沒有 NBA 時</td><td><ul><li>目前預設只顯示 NBA；推薦賽事是營運另外設的，當天可能沒有 NBA。</li><li>沒有 NBA 時要不要改顯示其他籃球賽事。</li><li>完全沒有可顯示的賽事時，區塊顯示空狀態還是整塊隱藏。</li></ul></td></tr>
+  <tr><td class="c">8</td><td class="c">未登入可見＝是時頁面怎麼顯示</td><td><ul><li>任務卡是不是全部 Locked、計數顯示 0 / M。</li><li>券卡與按鈕顯示什麼。</li></ul></td></tr>
+  <tr><td class="c">9</td><td class="c">進頁預設選中哪張卡</td><td><ul><li>排序第一張，還是第一張「可領取」的卡。</li></ul></td></tr>
+  <tr><td class="c">10</td><td class="c">「投籃成功回饋」的定義</td><td><ul><li>活動文件 03 狀態反饋寫「投籃成功回饋」「用券下注受理成功後，返回活動頁播放一次」。</li><li>「投籃成功」指的是什麼？</li><li>「用券下注受理成功後返回活動頁播放一次」要播什麼、什麼時候播？</li></ul></td></tr>
+  <tr><td class="c">11</td><td class="c">USE NOW 導向的體育頁</td><td><ul><li>要不要自動切到籃球早盤。</li><li>Bet Slip 要不要預選這張券。</li></ul></td></tr>
+</table>
+</div>
+</div>
+<script>
+(function(){
+  document.querySelectorAll('.tipdemo .frow').forEach(function(r){
+    var q=r.querySelector('.q'), t=r.querySelector('.tipa'); if(!q||!t) return;
+    var rr=r.getBoundingClientRect(), qr=q.getBoundingClientRect();
+    t.style.setProperty('--ax',(qr.left-rr.left+qr.width/2-6)+'px');
+  });
+  var k=document.getElementById('kyclb');
+  if(k){var rg=document.createRange(); rg.selectNodeContents(k); var x=rg.getBoundingClientRect().left-k.getBoundingClientRect().left;
+    document.querySelectorAll('#iplb, .iplb2').forEach(function(ip){ip.style.marginLeft=x+'px';});}
+})();
+</script>
+<script>
+(function(){
+  var DEFS='<defs><radialGradient id="gb2" cx="36%" cy="30%" r="68%"><stop offset="0" stop-color="#FFF6D0"/><stop offset=".35" stop-color="#F3CC5A"/><stop offset=".75" stop-color="#B8841F"/><stop offset="1" stop-color="#5C3A08"/></radialGradient></defs>';
+  var SEAMS='<path d="M3.5 22 Q32 6 60.5 22 M3.5 42 Q32 58 60.5 42 M32 3 V61 M15 9 Q38 32 15 55 M49 9 Q26 32 49 55"';
+  var wire=DEFS+'<circle cx="32" cy="32" r="29" fill="rgba(20,50,160,.18)" stroke="#3F86FF" stroke-width="1.6"/>'+SEAMS+' stroke="#3F86FF" stroke-width="1.3" fill="none"/>';
+  var gold=DEFS+'<circle cx="32" cy="32" r="29.5" fill="url(#gb2)" stroke="#3a2608" stroke-width="1"/>'+SEAMS+' stroke="#2a1a06" stroke-width="2.2" fill="none" opacity=".85"/>';
+  var st=['claimed','done','locked'];
+  [].slice.call(document.querySelectorAll('.h5.one .hcard')).forEach(function(c,i){var k=(c.className.match(/claimed|done|locked/)||[])[0]; if(!k){k=st[i%3]; c.className='hcard '+k+(i%3===1?' sel':'');} c.querySelector('.st').textContent={claimed:'Claimed',done:'Complete',locked:'Locked'}[k]; c.querySelector('svg').innerHTML=(k==='locked'?wire:gold)+(k==='claimed'?'<circle cx="50" cy="50" r="10" fill="#1E5BFF" stroke="#fff" stroke-width="1.5"/><path d="M44 50 L48.5 54.5 L56.5 45.5" stroke="#fff" stroke-width="2.2" fill="none"/>':'');});
+  var d=document.querySelector('.h5.one [data-x=done]'); if(d)d.textContent='2 / 3'; var c=document.querySelector('.h5.one [data-x=claimed]'); if(c)c.textContent='1 / 3';
+  var b=document.querySelector('.h5.one [data-x=fbb]'); if(b){b.className='fbtn claim';b.textContent='Claim';} var t=document.querySelector('.h5.one [data-x=fbd]'); if(t)t.textContent='Mission complete · Claim'; var tk=document.querySelector('.h5.one [data-x=tk]'); if(tk)tk.className='tk';
+})();
+</script>
+</body>
+</html>
