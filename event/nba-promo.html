@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>體育活動（專項活動）後台規格書 活動配置V2</title>
+<title>體育活動（專項活動）後台規格書 V2_45</title>
 <style>
   :root{
     --blue:#409EFF; --blue-bg:#ECF5FF; --blue-bd:#B3D8FF;
@@ -35,6 +35,7 @@
   table.spec th{background:#F5F7FA;color:var(--t2);font-weight:600;white-space:nowrap}
   table.spec td.c{white-space:normal;word-break:break-all}
   .chg{background:#FDE2E7}
+  .tbc{background:#FFF3B0}
   tr.chg>td{background:#FDE2E7}
   li.chg{background:#FDE2E7}
   .legend{display:inline-block;background:#FDE2E7;border:1px solid #F4A7B9;border-radius:3px;padding:0 8px;line-height:22px;font-size:12px;color:var(--t2);margin-left:8px;vertical-align:middle}
@@ -437,7 +438,8 @@
 /* dialog */
 .pr .ov{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:100;overflow:auto}
 .pr .md{background:#fff;border-radius:2px;width:620px;margin:120px auto 40px;box-shadow:0 1px 3px rgba(0,0,0,.3);display:flex;flex-direction:column}
-.pr .md.w{width:1000px}
+.pr .md.w{width:1180px}
+.pr table.gt td{white-space:nowrap;word-break:normal}
 .pr .md.sm{width:420px;border-radius:4px;border:1px solid var(--pbd2);box-shadow:0 2px 12px 0 rgba(0,0,0,.1);padding-bottom:10px;margin-top:35vh}
 .pr .md .mh2{padding:20px 20px 10px;font-size:18px;color:var(--pt1);display:flex;justify-content:space-between;align-items:center;line-height:24px}
 .pr .md .mh2 span{cursor:pointer;color:#000;font-size:16px;font-weight:400}
@@ -507,11 +509,11 @@
 <div class="doc-head">
   <h1>體育活動（活動配置（新）模板）後台規格書</h1>
   <div class="meta">
-    <span><b>版本</b>活動配置 V2</span>
+    <span><b>版本</b>V2_45</span>
     <span><b>日期</b>2026-11-13</span>
     <span><b>系統</b>管理後台（sportsadmin）</span>
     <span><b>路徑</b>后台 › 活动配置（新） › 活动列表 › 新增活动 › 活动类型：体育活动</span>
-    <span><b>狀態</b>活動配置（新）模板 V2 定版</span>
+    <span><b>狀態</b>活動配置（新）模板 V2</span> <span class="legend" style="background:#FFF3B0;border-color:#F5D000">黃底＝尚未取得正式確認的邏輯</span>
   </div>
 </div>
 
@@ -529,16 +531,30 @@
   </ul>
 </div>
 <h2>二、配置流程總覽</h2>
-<div class="block">在 活动列表 點「新增活动」，步驟 1 的「活动类型」下拉多一個選項「体育活动」；選定後步驟 2～6 依本模板呈現。每一步「下一步」時校驗該步必填（與現有模板相同），步驟 6 點「提交」寫入；「退出编辑」跳「确定退出编辑?未保存的修改将丢失」確認框。活動開啟中可再進入編輯，修改後立即生效。</div>
+<div class="block">
+  <ul class="plain">
+    <li>在 活动列表 點「新增活动」，步驟 1 的「活动类型」下拉多一個選項「体育活动」；選定後步驟 2～6 依本模板呈現。</li>
+    <li>每一步點「下一步」時校驗該步必填（與現有模板相同）；步驟 6 點「提交」寫入。</li>
+    <li>「退出编辑」跳「确定退出编辑?未保存的修改将丢失」確認框。</li>
+    <li>活動開啟中可再進入編輯，修改後立即生效。</li>
+    <li>活动列表 的操作與現有相同：
+      <ul>
+        <li>编辑：開啟同一套六步精靈（编辑活动），帶入原設定；活动类型 反灰不可更換（與現有相同）。</li>
+        <li>删除：状态＝开启 的活動不可刪除（删除 反灰）；关闭 的可刪，刪除前跳「确定删除该活动?」確認。</li>
+        <li>开启／关闭：切換活動狀態。</li>
+      </ul>
+    </li>
+  </ul>
+</div>
 <table class="spec">
   <colgroup><col style="width:60px"><col style="width:150px"><col style="width:90px"><col></colgroup>
   <tr><th>步驟</th><th>名稱</th><th>與現有模板</th><th>本模板的內容</th></tr>
-  <tr><td class="c">1</td><td class="c">活动模板设置</td><td class="c">共用＋新增</td><td>活动类型（新增「体育活动」）、活动名称、币种、状态、活动时间；新增 展示时间、未登入是否可见。</td></tr>
-  <tr><td class="c">2</td><td class="c">活动图片</td><td class="c">共用</td><td><ul><li>首页浮窗设置（PC／H5 图片、排序）、活动列表设置（PC／H5 图片、排序）、备注。</li><li>與現有相同。</li></ul></td></tr>
-  <tr><td class="c">3</td><td class="c">参与对象与名单</td><td class="c">共用＋新增</td><td>充值层级、指定代理、新会员限制、会员等级、用户标签、黑名单的用户标签（本模板反灰不可用）、黑名单輸入（可用）；新增 KYC 验证。</td></tr>
-  <tr><td class="c">4</td><td class="c">活动条件</td><td class="c">本模板專屬</td><td>奖励配置（每日）（達成條件 投注额／充值；投注额項次在需求欄上方選適用遊戲範圍：指定游戏／指定体育赛事）、通用派奖配置。</td></tr>
-  <tr><td class="c">5</td><td class="c">风控条件</td><td class="c">共用</td><td>同IP／同手机号／同姓名／同email 检测、自动拒绝。</td></tr>
-  <tr><td class="c">6</td><td class="c">提交预览</td><td class="c">共用</td><td>依步驟列出所有欄位摘要，確認後提交。</td></tr>
+  <tr><td class="c">1</td><td class="c">活动模板设置</td><td class="c">共用＋新增</td><td><ul><li>共用：活动类型、活动名称、币种、状态、活动时间</li><li>新增：活动类型 下拉多「体育活动」選項、展示时间、未登入是否可见</li></ul></td></tr>
+  <tr><td class="c">2</td><td class="c">活动图片</td><td class="c">共用</td><td><ul><li>共用：首页浮窗设置（PC／H5 图片、排序）、活动列表设置（PC／H5 图片、排序）、备注</li></ul></td></tr>
+  <tr><td class="c">3</td><td class="c">参与对象与名单</td><td class="c">共用＋新增</td><td><ul><li>共用：充值层级、指定代理、新会员限制、会员等级、用户标签、黑名单的用户标签（本模板反灰無法選擇）；黑名单 輸入（可用）</li><li>新增：KYC 验证</li></ul></td></tr>
+  <tr><td class="c">4</td><td class="c">活动条件</td><td class="c">本模板專屬</td><td><ul><li>共用：通用派奖配置（审核方式、领取方式，本模板固定反灰）</li><li>新增：奖励配置（每日）——达成条件 投注额／充值；投注额 項次在需求欄上方選適用遊戲範圍 指定游戏／指定体育赛事；奖励 体育投注券、张数、排序</li></ul></td></tr>
+  <tr><td class="c">5</td><td class="c">风控条件</td><td class="c">共用</td><td><ul><li>共用：同IP／同手机号／同姓名／同email 检测、自动拒绝</li></ul></td></tr>
+  <tr><td class="c">6</td><td class="c">提交预览</td><td class="c">共用</td><td><ul><li>共用：依步驟列出所有欄位摘要，確認後提交</li><li>新增：摘要內加入本模板新增的欄位</li></ul></td></tr>
 </table>
 <h2>三、步驟 1 活动模板设置</h2>
 <div class="mock">
@@ -563,9 +579,9 @@
   <tr><td class="c">活动名称</td><td class="c">文字輸入</td><td class="c">是</td><td>與現有模板相同。</td></tr>
   <tr><td class="c">币种</td><td class="c">下拉單選</td><td class="c">是</td><td>與現有模板相同。</td></tr>
   <tr><td class="c">状态</td><td class="c">單選</td><td class="c">是</td><td>與現有模板相同。</td></tr>
-  <tr><td class="c">未登入是否可见</td><td class="c">單選＋提示</td><td class="c">是</td><td><ul><li>本模板新增。預設「否」。是：未登入的訪客可看到活動入口並開啟活動專屬頁，頁面純展示（不顯示任務進度與領取按鈕），點擊頁內任一按鈕導向登入。否：未登入不顯示入口，直接開啟活動頁網址導向登入。</li><li>欄位名稱後加「?」圖示，滑入顯示提示文案：<ul><li>是：未登入的访客可浏览活动专属页，点击页内任一按钮导向登入</li><li>否：未登入时不显示活动入口，直接开启活动页网址导向登入</li></ul></li></ul></td></tr>
-  <tr><td class="c">活动时间</td><td class="c">日期時間區間</td><td class="c">是</td><td><ul><li>與現有模板相同。</li><li>活动时间即活動計算時間：只有此區間內產生的投注、充值才計入任務，區間外不計算、不可領取。</li><li>同為「体育活动」的活動之間，活动时间、展示时间都不可重疊；保存時檢查，重疊則擋下提示「活动时间或展示时间与其他体育活动重叠」。</li></ul></td></tr>
-  <tr><td class="c">展示时间</td><td class="c">日期時間區間</td><td class="c">是</td><td><ul><li>本模板新增。</li><li>活動入口（首頁浮窗、Rewards › Promotion 活動卡片）顯示與活動頁可開啟的時間區間，與活动时间分開控制。</li><li>展示時間內但不在活动时间內：頁面可開，任務列顯示「未開始」或「已結束」，領取按鈕不可點。</li><li>結束時間不可早於活动时间結束。</li></ul></td></tr>
+  <tr><td class="c">未登入是否可见</td><td class="c">單選＋提示</td><td class="c">是</td><td><ul><li>本模板新增。預設「否」。<ul><li>是：未登入的訪客可看到活動入口並開啟活動專屬頁，頁面純展示（不顯示任務進度與領取按鈕），點擊頁內任一按鈕導向登入。</li><li>否：未登入不顯示入口，直接開啟活動頁網址導向登入。</li></ul></li><li>欄位名稱後加「?」圖示，滑入顯示提示文案：<ul><li>是：未登入的访客可浏览活动专属页，点击页内任一按钮导向登入</li><li>否：未登入时不显示活动入口，直接开启活动页网址导向登入</li></ul></li></ul></td></tr>
+  <tr><td class="c">活动时间</td><td class="c">日期時間區間</td><td class="c">是</td><td><ul><li>與現有模板相同。</li><li>活动时间即活動計算時間：只有此區間內產生的投注、充值才計入任務，區間外不計算、不可領取。</li><li>同為「体育活动」的活動之間，活动时间、展示时间都不可重疊<span class="tbc">；步驟 1 按「下一步」時檢查</span>，重疊則擋下提示「活动时间或展示时间与其他体育活动重叠」。</li></ul></td></tr>
+  <tr><td class="c">展示时间</td><td class="c">日期時間區間</td><td class="c">是</td><td><ul><li>本模板新增。</li><li>活動入口（首頁浮窗、Rewards › Promotion 活動卡片）顯示與活動頁可開啟的時間區間，與活动时间分開控制。</li><li>展示時間內但不在活动时间內：頁面可開，<span class="tbc">任務列顯示「未開始」或「已結束」，領取按鈕不可點。</span></li><li>結束時間不可早於活动时间結束。</li></ul></td></tr>
 </table>
 <div class="tipdemo">
   <div class="cap">「?」圖示滑鼠移上時的示意（每次只會顯示滑鼠所在那一個）</div>
@@ -632,7 +648,7 @@
   <tr><th>欄位</th><th>元件</th><th>必填</th><th>規則</th></tr>
   <tr><td class="c">1～5 參與對象</td><td class="c">—</td><td class="c">—</td><td>與現有模板相同，無法選擇。</td></tr>
   <tr><td class="c">黑名单设置</td><td class="c">—</td><td class="c">—</td><td>與現有模板相同；只有「黑名单」輸入框可用，「用户标签」無法選擇。</td></tr>
-  <tr><td class="c">6. KYC 验证</td><td class="c">多選勾選</td><td class="c">是</td><td><ul><li>本模板新增。</li><li>預設不勾，至少勾一項才可進下一步。</li><li>會員當下的 KYC 狀態落在勾選範圍內才可領取；選項名稱沿用後台 KYC 狀態原名：未认证／部分认证／已认证。</li><li>未符合者：前台活動頁可開、任務進度正常顯示，點領取時提示「请先完成 KYC 验证」，按「确定」導向 KYC 驗證頁。</li></ul></td></tr>
+  <tr><td class="c">6. KYC 验证</td><td class="c">多選勾選</td><td class="c">是</td><td><ul><li>本模板新增。</li><li>預設不勾，至少勾一項才可進下一步。</li><li>會員當下的 KYC 狀態落在勾選範圍內才可領取；選項名稱沿用後台 KYC 狀態原名：未认证／<span class="tbc">部分认证</span>／已认证。</li><li><span class="tbc">未符合者：前台活動頁可開、任務進度正常顯示，點領取時提示「请先完成 KYC 验证」，按「确定」導向 KYC 驗證頁。</span></li></ul></td></tr>
 </table>
 <h2>六、步驟 4 活动条件（本模板專屬）</h2>
 <div class="mock">
@@ -668,18 +684,18 @@
   </div>
   <div class="modal">
     <div class="ttl">请选择联赛</div>
-    <div class="sporttab"><span class="on">普通联赛</span>冠军联赛</div>
+    <div style="display:flex;border-bottom:2px solid #E4E7ED;margin-bottom:14px"><span style="padding:0 20px;height:40px;line-height:40px;color:#409EFF;border-bottom:2px solid #409EFF;margin-bottom:-2px;font-size:14px">普通联赛</span><span style="padding:0 20px;height:40px;line-height:40px;color:#303133;font-size:14px">冠军联赛</span></div>
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
       <span><span class="ipt w160 ph">联赛ID</span>　<span class="ipt w200 ph">联赛名称</span>　<span class="btn p">搜索</span></span>
       <span class="cnt">已选 <b>2</b> 个</span>
     </div>
     <table class="adm">
-      <colgroup><col style="width:50px"><col style="width:130px"><col><col style="width:160px"><col style="width:110px"><col style="width:220px"></colgroup>
+      <colgroup><col style="width:50px"><col style="width:130px"><col><col style="width:160px"><col style="width:110px"><col style="width:190px"></colgroup>
       <tr><th></th><th>联赛ID</th><th>名</th><th>联赛类别代码</th><th>联赛类型</th><th>开始/结束时间</th></tr>
-      <tr><td><span class="chk on" style="margin:0"></span></td><td>bl2001</td><td>NBA</td><td>USA</td><td>篮球</td><td>2026-10-21 ～ 2027-06-30</td></tr>
-      <tr><td><span class="chk on" style="margin:0"></span></td><td>bl2002</td><td>NBA G League</td><td>USA</td><td>篮球</td><td>2026-11-07 ～ 2027-04-30</td></tr>
-      <tr><td><span class="chk" style="margin:0"></span></td><td>bl2005</td><td>NCAA Men</td><td>USA</td><td>篮球</td><td>2026-11-03 ～ 2027-04-06</td></tr>
-      <tr><td><span class="chk" style="margin:0"></span></td><td>bl2010</td><td>WNBA</td><td>USA</td><td>篮球</td><td></td></tr>
+      <tr><td><span class="chk on" style="margin:0"></span></td><td>bl2001</td><td>NBA</td><td>USA</td><td>篮球</td><td style="line-height:1.6">2026-10-21 20:00:00<br>2027-06-30 20:00:00</td></tr>
+      <tr><td><span class="chk on" style="margin:0"></span></td><td>bl2002</td><td>NBA G League</td><td>USA</td><td>篮球</td><td style="line-height:1.6">2026-11-07 20:00:00<br>2027-04-30 20:00:00</td></tr>
+      <tr><td><span class="chk" style="margin:0"></span></td><td>bl2005</td><td>NCAA Men</td><td>USA</td><td>篮球</td><td style="line-height:1.6">2026-11-03 20:00:00<br>2027-04-06 20:00:00</td></tr>
+      <tr><td><span class="chk" style="margin:0"></span></td><td>bl2010</td><td>WNBA</td><td>USA</td><td>篮球</td><td style="line-height:1.6">2027-05-15 20:00:00<br>2027-09-30 20:00:00</td></tr>
     </table>
     <div style="display:flex;justify-content:flex-end;align-items:center;gap:10px;color:var(--t2);font-size:13px;margin-top:10px;white-space:nowrap">Total 63　<span class="ipt sel" style="width:90px;height:28px;line-height:26px">20/page</span>　‹　<span style="color:var(--blue)">1</span>　2　3　4　›　Go to <span class="ipt" style="width:50px;height:28px;line-height:26px">1</span></div>
     <div class="foot"><span class="btn">取 消</span><span class="btn p">确 定</span></div>
@@ -687,34 +703,34 @@
   <div class="modal">
     <div class="ttl">请选择赛事</div>
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-      <span><span class="ipt w160 ph">赛事ID</span>　<span class="ipt w200 ph">联赛名称</span>　<span class="date" style="width:300px"><i>◷</i>比赛开始时间<em>~</em></span>　<span class="btn p">搜索</span></span>
+      <span><span class="ipt w120 ph">赛事ID</span>　<span class="date" style="width:260px"><i>▦</i>2026-11-17<em>~</em>2026-11-17</span>　<span class="ipt sel w160">全部联赛</span>　<span class="ipt sel w140 ph">Select</span>　<span class="btn p">搜索</span></span>
       <span class="cnt">已选 <b>3</b> 场</span>
     </div>
     <table class="adm">
-      <colgroup><col style="width:50px"><col style="width:130px"><col style="width:150px"><col style="width:200px"><col><col style="width:90px"></colgroup>
-      <tr><th></th><th>赛事ID</th><th>比赛开始时间</th><th>联赛名称</th><th>主客队名称</th><th>比赛状态</th></tr>
-      <tr><td><span class="chk on" style="margin:0"></span></td><td>km137283376</td><td>2026-11-07 09:30</td><td>NBA</td><td>[主]Los Angeles Lakers [客]Boston Celtics</td><td>未开始</td></tr>
-      <tr><td><span class="chk" style="margin:0"></span></td><td>km137283388</td><td>2026-11-07 12:00</td><td>NBA G League</td><td>[主]Stockton Kings [客]Santa Cruz Warriors</td><td>未开始</td></tr>
-      <tr><td><span class="chk on" style="margin:0"></span></td><td>km137283410</td><td>2026-11-08 03:00</td><td>EuroLeague</td><td>[主]Olympiacos [客]Real Madrid</td><td>未开始</td></tr>
-      <tr><td><span class="chk on" style="margin:0"></span></td><td>km137283415</td><td>2026-11-08 03:45</td><td>EuroLeague</td><td>[主]Fenerbahçe [客]Barcelona</td><td>未开始</td></tr>
+      <colgroup><col style="width:40px"><col style="width:120px"><col style="width:140px"><col style="width:130px"><col><col style="width:80px"><col style="width:90px"><col style="width:100px"><col style="width:140px"><col style="width:80px"></colgroup>
+      <tr><th></th><th>赛事ID</th><th>比赛开始时间</th><th>联赛名称</th><th>主客队名称</th><th>游戏类型</th><th>是否滚盘中</th><th>是否参加过关</th><th>新增时间</th><th>比赛状态</th></tr>
+      <tr><td><span class="chk on" style="margin:0"></span></td><td>km137283376</td><td>2026-11-18 09:30:00</td><td>NBA</td><td style="line-height:1.6">[主]Los Angeles Lakers<br>[客]Boston Celtics</td><td>篮球</td><td>否</td><td>是</td><td>2026-11-17 07:21:11</td><td>未开始</td></tr>
+      <tr><td><span class="chk" style="margin:0"></span></td><td>km137283388</td><td>2026-11-18 11:00:00</td><td>NBA</td><td style="line-height:1.6">[主]Golden State Warriors<br>[客]Denver Nuggets</td><td>篮球</td><td>否</td><td>是</td><td>2026-11-17 07:21:11</td><td>未开始</td></tr>
+      <tr><td><span class="chk on" style="margin:0"></span></td><td>km137283410</td><td>2026-11-19 03:00:00</td><td>EuroLeague</td><td style="line-height:1.6">[主]Olympiacos<br>[客]Real Madrid</td><td>篮球</td><td>否</td><td>是</td><td>2026-11-17 07:21:11</td><td>未开始</td></tr>
+      <tr><td><span class="chk on" style="margin:0"></span></td><td>km137283415</td><td>2026-11-19 03:45:00</td><td>EuroLeague</td><td style="line-height:1.6">[主]Fenerbahçe<br>[客]Barcelona</td><td>篮球</td><td>否</td><td>是</td><td>2026-11-17 07:21:11</td><td>未开始</td></tr>
     </table>
-    <div style="display:flex;justify-content:flex-end;align-items:center;gap:10px;color:var(--t2);font-size:13px;margin-top:10px;white-space:nowrap">Total 63　<span class="ipt sel" style="width:90px;height:28px;line-height:26px">20/page</span>　‹　<span style="color:var(--blue)">1</span>　2　3　4　›　Go to <span class="ipt" style="width:50px;height:28px;line-height:26px">1</span></div>
+    <div style="display:flex;justify-content:flex-end;align-items:center;gap:10px;color:var(--t2);font-size:13px;margin-top:10px;white-space:nowrap">Total 128　<span class="ipt sel" style="width:90px;height:28px;line-height:26px">20/page</span>　‹　<span style="color:var(--blue)">1</span>　2　3　4　5　6　7　›　Go to <span class="ipt" style="width:50px;height:28px;line-height:26px">1</span></div>
     <div class="foot"><span class="btn">取 消</span><span class="btn p">确 定</span></div>
   </div>
 </div>
 <table class="spec">
   <colgroup><col style="width:120px"><col style="width:120px"><col style="width:70px"><col></colgroup>
   <tr><th>欄位</th><th>元件</th><th>必填</th><th>規則</th></tr>
-  <tr><td class="c">项次</td><td class="c">系統編號</td><td class="c">是</td><td><ul><li>依新增順序自動編號 1、2、3…；刪除後重新編號。</li><li>每一列只要存在就整列必填，項次前都帶 *。</li><li>項次 1 固定存在、不可刪除；項次總數即本活動每日獎勵數量，上限 10，達 10 筆時「新增」按鈕反灰。</li></ul></td></tr>
-  <tr><td class="c">达成条件</td><td class="c">下拉單選</td><td class="c">是</td><td><ul><li>選項：投注额／充值。</li><li>投注额＝會員當日在適用遊戲範圍（在「需求」欄上方設定）內的有效投注額。</li><li>充值＝會員當日充值成功金額累計。</li><li>同一筆投注可同時計入多個投注额項次（各項次依自己的適用遊戲範圍判斷）。用体育投注券下的注單不計有效投注，所以不計入。同一達成條件可設多筆。</li></ul></td></tr>
-  <tr><td class="c">需求</td><td class="c">下拉＋數字輸入（上下排）</td><td class="c">是</td><td><ul><li>达成条件＝投注额時，欄位上方先有一個下拉（適用遊戲範圍）：指定游戏／指定体育赛事，預設「指定游戏」；下方才是需求數字。指定游戏 本期固定全選＝请选择游戏 彈窗清單內的全部（含自有体育與所有廠商遊戲）。达成条件＝充值時只有需求數字。</li><li>需求：輸入框只接受正整數（其他字元無法輸入），填 0 視為未填。項次之間的達成條件、適用遊戲範圍、需求可以完全相同，不限制。</li></ul></td></tr>
+  <tr><td class="c">项次</td><td class="c">系統編號</td><td class="c">是</td><td><ul><li>依新增順序自動編號 1、2、3…；刪除後重新編號。</li><li>每一列只要存在就整列必填，項次前都帶 *。</li><li>至少保留一個項次：只剩一列時該列「删除」反灰不可點；項次總數即本活動每日獎勵數量，上限 10，達 10 筆時「新增」按鈕反灰。</li></ul></td></tr>
+  <tr><td class="c">达成条件</td><td class="c">下拉單選</td><td class="c">是</td><td><ul><li>選項：投注额／充值。</li><li>投注额＝會員當日在適用遊戲範圍（在「需求」欄上方設定）內的有效投注額。</li><li>充值＝會員當日充值成功金額累計。</li><li><span class="tbc">同一筆投注可同時計入多個投注额項次（各項次依自己的適用遊戲範圍判斷）。用体育投注券下的注單不計有效投注，所以不計入。同一達成條件可設多筆。</span></li></ul></td></tr>
+  <tr><td class="c">需求</td><td class="c">下拉＋數字輸入（上下排）</td><td class="c">是</td><td><ul><li>达成条件＝投注额時，欄位上方先有一個下拉（適用遊戲範圍）：指定游戏／指定体育赛事，預設「指定游戏」；下方才是需求數字。指定游戏 本期固定全選＝请选择游戏 彈窗清單內的全部（含自有体育與所有廠商遊戲）。达成条件＝充值時只有需求數字。</li><li>需求：只能輸入數字，小數點、負號、字母打不進去（輸入即被擋），填 0 視為未填。項次之間的達成條件、適用遊戲範圍、需求可以完全相同，不限制。</li></ul></td></tr>
   <tr><td class="c">展開區</td><td class="c">列下方展開區</td><td class="c">依選項</td><td><ul><li>依適用遊戲範圍的值，在該列正下方接一個淺灰展開區，內容從达成条件欄對齊開始（项次欄留白）：<ul><li>指定游戏：展開「选择游戏」按鈕＋「已选择 全部 游戏」摘要。按鈕與彈窗沿用 预约活动 步驟 4「适用游戏范围」的「请选择游戏」彈窗（全选／廠商／遊戲勾選）。本期先不開放指定選遊戲：彈窗固定全選、所有選項反灰不可取消，摘要固定「已选择 全部 游戏」。</li><li>指定体育赛事：展開 适用类型（本期固定「篮球」反灰打勾）與 可参与体育投注赛事（全部／指定，預設全部）；選「指定」時再接「选择联赛」「选择赛事」兩顆按鈕與已選清單。</li></ul></li><li>切換範圍選項時清空原本的選擇。</li></ul></td></tr>
   <tr><td class="c">可参与体育投注赛事</td><td class="c">單選＋提示</td><td class="c">指定体育赛事時必填</td><td><ul><li>單選：全部／指定，預設「全部」。只決定該項次「投注额」的統計範圍，不影響前台 PICK YOUR GAME 列的賽事，也不限制券的使用賽事。</li><li>全部：篮球所有賽事的投注皆計入。</li><li>指定：計入範圍＝所選聯賽底下全部賽事（含活動期間內新增的賽事）＋ 所選賽事，取聯集；保存時聯賽與賽事至少擇一有選擇，否則擋下提示「请至少选择一个联赛或赛事」。</li><li>欄位名稱後加「?」圖示，滑入顯示提示文案：<ul><li>全部：篮球所有赛事的投注皆计入</li><li>指定：只计入所选联赛底下的全部赛事 ＋ 所选赛事，两者取联集</li><li>联赛与赛事可同时选择，互不影响；所选联赛下的全部赛事与单独勾选的赛事都会计入，重复的只算一次</li><li>指定时联赛、赛事至少择一选择</li></ul></li></ul></td></tr>
-  <tr><td class="c">选择联赛 彈窗</td><td class="c">按鈕＋彈窗</td><td class="c">—</td><td><ul><li>直接套用 游戏管理 › 联赛管理 頁面（篩選、欄位都一樣），每列前面多一個勾選框。</li><li>固定籃球，所以不顯示球類頁籤；頁籤只剩「普通联赛／冠军联赛」，兩個頁籤的勾選合併計算。</li><li><span>清單用分頁（與後台相同：每頁筆數可選 10／20／30／40／50／100，預設 20；可跳頁），不用捲軸；跨頁、跨頁籤的勾選都保留，右上角「已选 n 个」統計全部已勾選。</li><li></span>不限制選擇數量。</li><li>兩個彈窗各自獨立、互不過濾；計算時同一場賽事被聯賽與賽事同時涵蓋只計一次。</li></ul></td></tr>
-  <tr><td class="c">选择赛事 彈窗</td><td class="c">按鈕＋彈窗</td><td class="c">—</td><td><ul><li>直接套用 游戏管理 › 赛事管理 頁面（篩選、欄位都一樣），每列前面多一個勾選框，「操作」欄不顯示；固定籃球，所以不顯示球類頁籤。</li><li><span>清單用分頁（與後台相同：每頁筆數可選 10／20／30／40／50／100，預設 20；可跳頁），不用捲軸；跨頁、跨篩選條件的勾選都保留，右上角「已选 n 场」統計全部已勾選。</li><li></span>不限制選擇數量。</li></ul></td></tr>
+  <tr><td class="c">选择联赛 彈窗</td><td class="c">按鈕＋彈窗</td><td class="c">—</td><td><ul><li>直接套用 游戏管理 › 联赛管理 頁面（篩選、欄位都一樣：联赛ID、名、联赛类别代码、联赛类型、开始/结束时间——上下兩行，第一行開始時間、第二行結束時間），每列前面多一個勾選框。</li><li>固定籃球，所以不顯示球類頁籤；頁籤只剩「普通联赛／冠军联赛」，兩個頁籤的勾選合併計算。</li><li>清單用分頁（與後台相同：每頁筆數可選 10／20／30／40／50／100，預設 20；可跳頁），不用捲軸；跨頁、跨頁籤的勾選都保留，右上角「已选 n 个」統計全部已勾選。</li><li>不限制選擇數量。</li><li>兩個彈窗各自獨立、互不過濾；計算時同一場賽事被聯賽與賽事同時涵蓋只計一次。</li></ul></td></tr>
+  <tr><td class="c">选择赛事 彈窗</td><td class="c">按鈕＋彈窗</td><td class="c">—</td><td><ul><li>直接套用 游戏管理 › 赛事管理 頁面：篩選列＝赛事ID、日期區間（預設當天）、联赛下拉（全部联赛）、比赛状态下拉（未开始／比赛中／已结束／延期／已取消）、搜索；欄位＝赛事ID、比赛开始时间、联赛名称、主客队名称（[主]／[客] 兩行）、游戏类型、是否滚盘中、是否参加过关、新增时间、比赛状态；每列前面多一個勾選框，「操作」欄不顯示；固定籃球，所以不顯示球類頁籤。</li><li>清單用分頁（與後台相同：每頁筆數可選 10／20／30／40／50／100，預設 20；可跳頁），不用捲軸；跨頁、跨篩選條件的勾選都保留，右上角「已选 n 场」統計全部已勾選。</li><li>不限制選擇數量。</li></ul></td></tr>
   <tr><td class="c">已選清單顯示</td><td class="c">文字</td><td class="c">—</td><td><ul><li>兩顆按鈕右側各顯示「已选 n 个」「已选 n 场」，n 為 0 時數字紅色。</li><li>按鈕下方兩行，格式一致：「已选择联赛：」「已选择赛事：」粗體開頭，後接清單，每筆為「ID 名稱」，以「、」分隔，依勾選順序排列，超過一行自動換行、不截斷：<ul><li>聯賽：联赛ID＋名，例「bl2001 NBA」。</li><li>賽事：赛事ID＋主队 vs 客队，例「km137283376 Los Angeles Lakers vs Boston Celtics」。</li></ul></li><li>尚未選擇時冒號後留白。活動中修改保存後立即生效，當日累計值依新範圍重算。</li></ul></td></tr>
   <tr><td class="c">奖励类型</td><td class="c">下拉單選</td><td class="c">是</td><td>沿用現有模板的獎勵類型下拉，本模板只開放「优惠券」、預設選定。</td></tr>
-  <tr><td class="c">奖励</td><td class="c">兩個下拉單選（上下排）</td><td class="c">是</td><td><ul><li>上面的下拉＝優惠券類型，本模板新增，列出 优惠券管理 的优惠券类别，本期只開放「体育投注券」、預設選定。</li><li>下面的下拉＝與現有模板相同的優惠券下拉（列出 优惠券配置 的券名稱），依上面選的類型自動過濾，本期只列 优惠券类别＝体育投注券 的券。不同項次可選同一張券。</li></ul></td></tr>
+  <tr><td class="c">奖励</td><td class="c">兩個下拉單選（上下排）</td><td class="c">是</td><td><ul><li>上面的下拉＝優惠券類型，本模板新增，列出 优惠券管理 的优惠券类别，<span class="tbc">本期只開放「体育投注券」、預設選定。</span></li><li>下面的下拉＝與現有模板相同的優惠券下拉（列出 优惠券配置 的券名稱），依上面選的類型自動過濾，本期只列 优惠券类别＝体育投注券 的券。不同項次可選同一張券。</li></ul></td></tr>
   <tr><td class="c">张数</td><td class="c">數字輸入</td><td class="c">是</td><td><ul><li>本模板新增。</li><li>正整數，預設 1，最大 9999。</li><li>會員領取該項次時一次派發 N 張同一券，每張各自有獨立的券 ID 與有效期；報表「券张数」依此累計。</li></ul></td></tr>
   <tr><td class="c">排序</td><td class="c">數字輸入＋提示</td><td class="c">否</td><td><ul><li>輸入框只接受正整數（其他字元無法輸入）。決定前台活動頁 MY DEBUT PASS 任務卡（籃球）由左至右的順序，數字小的在前；排序數字相同或未填時，項次編號小的在前。</li><li>表頭「排序」後加「?」圖示，滑入顯示提示文案：<ul><li>前台活动页 MY DEBUT PASS 任务卡由左至右的顺序，数字小的在前</li><li>排序数字相同时，项次编号小的在前</li></ul></li></ul></td></tr>
   <tr><td class="c">操作</td><td class="c">刪除</td><td class="c">—</td><td><ul><li>點擊即移除該列（含展開區，不二次確認），保存後生效。</li><li>活動開啟中刪除項次：該項次當日已領取紀錄保留，未領取者不可再領。</li></ul></td></tr>
@@ -734,12 +750,12 @@
 <h3>達標與領取規則（固定邏輯，不開放設定）</h3>
 <div class="block">
   <ul class="plain">
-    <li>統計週期：每日 00:00:00～23:59:59（UTC+8），以注單投注時間、充值成功時間歸日；次日 00:00 全部項次進度歸零。</li>
+    <li>統計週期：每日 00:00:00～23:59:59（UTC+8），<span class="tbc">以注單投注時間、充值成功時間歸日</span>；次日 00:00 全部項次進度歸零。</li>
     <li>達標判斷：每個項次都拿「會員當日累計值」與自己的需求比較，累計值 ≥ 需求即達標；投注额項次的累計值只算該項次適用遊戲範圍內的有效投注。累計值不會因某個項次達標或領取而扣除，各項次獨立、無順序限制。<br>例一：項次 1 投注额（指定游戏）設 100、項次 2 投注额（指定体育赛事）設 100，會員在指定賽事下注 100 → 兩個項次同時達成。<br>例二：投注额（指定游戏）設兩筆，需求 50 與 100，會員當日累計 80 → 只有需求 50 的項次達成；累計到 120 → 兩筆都達成（不是 50＋100＝150 才達成第二筆）。</li>
     <li>進度更新：依注單與充值紀錄定時更新（與其他模板相同頻率）；前台顯示「可領取」即代表已達標，點擊即派券。</li>
-    <li>領取：每人每項次每日一次；點擊後即派券（張數依該項次「张数」），優惠券記錄來源標記「体育活动」，有效期自派發起算。領取中鎖定該項次，防重複提交；派券失敗（券模板已刪除、優惠券系統開關關閉）回傳錯誤、該項次保持可領取。</li>
-    <li>每日重置：次日 00:00 所有項次進度歸零、領取狀態重置；前一日達標但未領取的項次不保留、不可補領。</li>
-    <li>投注额計算只取投注狀態為已確認的注單；取消／作廢的注單自累計值扣回，若扣回後低於已領取項次需求，不收回已派的券。</li>
+    <li>領取：每人每項次每日一次；點擊後即派券（張數依該項次「张数」），優惠券記錄來源標記「体育活动」，有效期自派發起算。領取中鎖定該項次，防重複提交；<span class="tbc">派券失敗（券模板已刪除、優惠券系統開關關閉）回傳錯誤、該項次保持可領取。</span></li>
+    <li><span class="tbc">每日重置：次日 00:00 所有項次進度歸零、領取狀態重置；前一日達標但未領取的項次不保留、不可補領。</span></li>
+    <li><span class="tbc">投注额計算只取投注狀態為已確認的注單；取消／作廢的注單自累計值扣回，若扣回後低於已領取項次需求，不收回已派的券。</span></li>
   </ul>
 </div>
 
@@ -776,7 +792,7 @@
 <table class="spec">
   <colgroup><col style="width:140px"><col style="width:120px"><col style="width:70px"><col></colgroup>
   <tr><th>欄位</th><th>元件</th><th>必填</th><th>規則</th></tr>
-  <tr><td class="c">风险检测设置、自动拒绝</td><td class="c">—</td><td class="c">—</td><td>與現有模板相同。</td></tr>
+  <tr><td class="c"><span class="tbc">风险检测设置、自动拒绝</span></td><td class="c">—</td><td class="c">—</td><td>與現有模板相同。</td></tr>
 </table>
 <h2>八、步驟 6 提交预览</h2>
 <div class="mock">
@@ -800,7 +816,7 @@
   <tr><td class="c">整步</td><td>與現有模板相同；本模板新增的欄位（示意中粗體）加進對應步驟。</td></tr>
 </table>
 <h2>九、活动报表（活动配置（新） › 活动报表）</h2>
-<div class="block">沿用現有的活动报表頁，兩個頁籤（活动奖励统计／活动数据统计）的版面、篩選、欄位都與現有相同；本模板只在既有篩選選項與資料列內出現。</div>
+<div class="block"><ul class="plain"><li>沿用現有的活动报表頁，兩個頁籤（活动奖励统计／活动数据统计）的版面、篩選、欄位都與現有相同；</li><li>本模板只在既有篩選選項與資料列內出現。</li></ul></div>
 <h3>9-1 活动奖励统计</h3>
 <div class="mock">
   <div class="crumb">位置 <i>›</i> 活动报表</div>
@@ -882,6 +898,8 @@
   <tr><td class="c">1</td><td class="c">活动名称</td><td>请填写活动名称</td><td>未填</td></tr>
   <tr><td class="c">1</td><td class="c">活动时间</td><td>请填写活动时间</td><td>起或迄任一未填</td></tr>
   <tr><td class="c">1</td><td class="c">展示时间</td><td>请填写展示时间</td><td>起或迄任一未填</td></tr>
+  <tr><td class="c">1</td><td class="c">展示时间</td><td>展示时间结束不可早于活动时间结束</td><td>展示时间結束 &lt; 活动时间結束</td></tr>
+  <tr><td class="c">1</td><td class="c">活动时间／展示时间</td><td>活动时间或展示时间与其他体育活动重叠</td><td>與其他「体育活动」的活动时间或展示时间有重疊<span class="tbc">（步驟 1 下一步時檢查）</span></td></tr>
   <tr><td class="c">2</td><td class="c">PC 图片</td><td>请填写PC图片</td><td>首页浮窗设置或活动列表设置＝开启且未上傳（與現有模板相同）</td></tr>
   <tr><td class="c">2</td><td class="c">H5 图片</td><td>请填写H5图片</td><td>同上</td></tr>
   <tr><td class="c">3</td><td class="c">KYC 验证</td><td>请填写KYC验证</td><td>三項皆未勾</td></tr>
@@ -892,7 +910,7 @@
 </table>
 <h2>十一、前台判斷</h2>
 
-<div class="block">適用 PC／H5／APP 三個渠道；入口為首頁浮窗、Rewards › Promotion 活動卡片（各自依活动图片的開關顯示）、直接開啟活動頁網址。</div>
+<div class="block"><ul class="plain"><li>適用 PC／H5／APP 三個渠道；</li><li>入口為首頁浮窗、Rewards › Promotion 活動卡片（各自依活动图片的開關顯示）、直接開啟活動頁網址。</li></ul></div>
 <div class="flow">
   <ol>
     <li><b>整體判斷</b>
@@ -927,7 +945,7 @@
     <li><b>進入頁面後判斷</b>
       <ul>
         <li>未登入，且「未登入是否可见」＝是 → 頁面純展示（無進度、無領取按鈕），點擊頁內任一按鈕 → 導向登入頁。</li>
-        <li>已登入，在展示时间內但不在活动时间內 → 任務卡顯示「未开始」或「已结束」，領取按鈕不可點。</li>
+        <li>已登入，在展示时间內但不在活动时间內 → <span class="tbc">任務卡顯示「未开始」或「已结束」，領取按鈕不可點。</span></li>
         <li>已登入，在活动时间內 → 依各項次顯示任務卡狀態：
           <ul>
             <li>當日累計值 &lt; 需求 → 顯示進度（當日累計值 / 需求），按鈕不可點。</li>
@@ -1292,7 +1310,7 @@ document.querySelectorAll('.doctabs span').forEach(function(t){t.addEventListene
       </div></div>
 
       </div></div></div></div>
-<table class="spec"><colgroup><col style="width:170px"><col></colgroup><tr><th>元素</th><th>說明</th></tr><tr><td class="c">標題列</td><td><ul><li>左「MY DEBUT PASS」：固定文字。</li><li>右「N / M completed」：</li><li><ul><li>M＝後台 步驟4 奖励配置 的項次總數。</li><li>N＝當日已達標的項次數（達標即計，不論是否已領）。</li></ul></li></ul></td></tr><tr><td class="c">任務卡數量與順序</td><td><ul><li>後台每一個項次對應一張卡，M 個項次就 M 張。</li><li>由左至右依後台「排序」：數字小在前；排序相同或未填時，項次編號小在前。</li></ul></td></tr><tr><td class="c">卡上文字</td><td><ul><li>由後台「达成条件」「适用游戏范围」＋「需求」組成：</li><li><ul><li>投注额＋指定游戏 → 「BET Over ₱{需求}」</li><li>投注额＋适用游戏范围＝指定体育赛事 → 「Sport BET Over ₱{需求}」</li><li>充值 → 「Deposit Over ₱{需求}」</li></ul></li><li>例：投注额、指定体育赛事、需求 50 → 「Sport BET Over ₱50」。</li><li>{需求} 帶後台數字。</li></ul></td></tr><tr><td class="c">籃球與狀態字</td><td><ul><li>未達標：藍色線框籃球，字「Locked」。</li><li>已達標未領取：金球，字「Complete」。</li><li>已領取：金球加藍勾，字「Claimed」。</li><li>券已使用：灰球，字「Used」。</li><li>券已過期：灰球，字「Expired」。</li></ul></td></tr><tr><td class="c">狀態判斷</td><td><ul><li>未達標：會員當日的累計數（依達成條件：適用遊戲範圍內的投注／充值）還沒到該項次的「需求」。</li><li>已達標：當日累計數 ≥ 該項次的「需求」。</li><li>已領取：當日已點領取並派券。</li><li>已使用／已過期：讀該張券在 优惠券记录 的狀態。</li></ul></td></tr><tr><td class="c">選中</td><td><ul><li>點任一張卡即選中（白色外框），下方 TODAY'S FREE BET 顯示該卡對應的券。</li><li>進頁預設選中排序第一張。</li></ul></td></tr><tr><td class="c">卡片張數與排法</td><td><ul><li>1 張：置中。</li><li>2 張：置中並排。</li><li>3 張：並排填滿，不滑動、無白點（對應本期需求）。</li><li>4 張以上（備案）：一次顯示三張，可左右滑動；底下白點數＝卡片數，亮點＝目前選中的卡。</li></ul><div class="h5 one" style="display:flex;gap:12px;flex-wrap:wrap"><div class="cnt-demo"><div class="cap">1 張</div><div class="phone" style="width:390px;border-radius:12px;border-width:3px"><div class="hpage" style="padding:8px 0"><div class="hbox" style="margin:0 10px"><div class="court"><div class="lights"></div><div class="floor"></div><div class="track"><div class="hcard claimed"><div class="lbl"><i></i>BET Over<br>₱200</div><svg viewBox="0 0 64 64"></svg><div class="st">Claimed</div></div></div></div></div></div></div></div><div class="cnt-demo"><div class="cap">2 張</div><div class="phone" style="width:390px;border-radius:12px;border-width:3px"><div class="hpage" style="padding:8px 0"><div class="hbox" style="margin:0 10px"><div class="court"><div class="lights"></div><div class="floor"></div><div class="track"><div class="hcard claimed"><div class="lbl"><i></i>BET Over<br>₱200</div><svg viewBox="0 0 64 64"></svg><div class="st">Claimed</div></div><div class="hcard done"><div class="lbl"><i></i>Deposit<br>Over ₱200</div><svg viewBox="0 0 64 64"></svg><div class="st">Complete</div></div></div></div></div></div></div></div><div class="cnt-demo"><div class="cap">3 張</div><div class="phone" style="width:390px;border-radius:12px;border-width:3px"><div class="hpage" style="padding:8px 0"><div class="hbox" style="margin:0 10px"><div class="court"><div class="lights"></div><div class="floor"></div><div class="track"><div class="hcard claimed"><div class="lbl"><i></i>BET Over<br>₱200</div><svg viewBox="0 0 64 64"></svg><div class="st">Claimed</div></div><div class="hcard done"><div class="lbl"><i></i>Deposit<br>Over ₱200</div><svg viewBox="0 0 64 64"></svg><div class="st">Complete</div></div><div class="hcard locked"><div class="lbl"><i></i>Sport BET<br>Over ₱50</div><svg viewBox="0 0 64 64"></svg><div class="st">Locked</div></div></div></div></div></div></div></div><div class="cnt-demo"><div class="cap">4 張（4 張以上）</div><div class="phone" style="width:390px;border-radius:12px;border-width:3px"><div class="hpage" style="padding:8px 0"><div class="hbox" style="margin:0 10px"><div class="court"><div class="lights"></div><div class="floor"></div><div class="track" style="justify-content:flex-start;overflow:hidden;padding:0 28px;gap:13px"><div class="hcard claimed"><div class="lbl"><i></i>BET Over<br>₱200</div><svg viewBox="0 0 64 64"></svg><div class="st">Claimed</div></div><div class="hcard done"><div class="lbl"><i></i>Deposit<br>Over ₱200</div><svg viewBox="0 0 64 64"></svg><div class="st">Complete</div></div><div class="hcard locked"><div class="lbl"><i></i>Sport BET<br>Over ₱50</div><svg viewBox="0 0 64 64"></svg><div class="st">Locked</div></div><div class="hcard locked"><div class="lbl"><i></i>Sport BET<br>Over ₱100</div><svg viewBox="0 0 64 64"></svg><div class="st">Locked</div></div></div><div class="dots"><i class=on></i><i></i><i></i><i></i></div></div></div></div></div></div></div></td></tr><tr><td class="c">掃光特效</td><td><ul><li>卡片轉為已達標（Complete）後，點擊該卡播放一次掃光。</li></ul></td></tr></table>
+<table class="spec"><colgroup><col style="width:170px"><col></colgroup><tr><th>元素</th><th>說明</th></tr><tr><td class="c">標題列</td><td><ul><li>左「MY DEBUT PASS」：固定文字。</li><li>右「N / M completed」：<ul><li>M＝後台 步驟4 奖励配置 的項次總數。</li><li>N＝當日已達標的項次數（達標即計，不論是否已領）。</li></ul></li></ul></td></tr><tr><td class="c">任務卡數量與順序</td><td><ul><li>後台每一個項次對應一張卡，M 個項次就 M 張。</li><li>由左至右依後台「排序」：數字小在前；排序相同或未填時，項次編號小在前。</li></ul></td></tr><tr><td class="c">卡上文字</td><td><ul><li>由後台「达成条件」「适用游戏范围」＋「需求」組成：<ul><li>投注额＋指定游戏 → 「BET Over ₱{需求}」</li><li>投注额＋适用游戏范围＝指定体育赛事 → 「Sport BET Over ₱{需求}」</li><li>充值 → 「Deposit Over ₱{需求}」</li></ul></li><li>例：投注额、指定体育赛事、需求 50 → 「Sport BET Over ₱50」。</li><li>{需求} 帶後台數字。</li></ul></td></tr><tr><td class="c">籃球與狀態字</td><td><ul><li>未達標：藍色線框籃球，字「Locked」。</li><li>已達標未領取：金球，字「Complete」。</li><li>已領取：金球加藍勾，字「Claimed」。</li><li>券已使用：灰球，字「Used」。</li><li>券已過期：灰球，字「Expired」。</li></ul></td></tr><tr><td class="c">狀態判斷</td><td><ul><li>未達標：會員當日的累計數（依達成條件：適用遊戲範圍內的投注／充值）還沒到該項次的「需求」。</li><li>已達標：當日累計數 ≥ 該項次的「需求」。</li><li>已領取：當日已點領取並派券。</li><li>已使用／已過期：讀該張券在 优惠券记录 的狀態。</li></ul></td></tr><tr><td class="c">選中</td><td><ul><li>點任一張卡即選中（白色外框），下方 TODAY'S FREE BET 顯示該卡對應的券。</li><li>進頁預設選中排序第一張。</li></ul></td></tr><tr><td class="c">卡片張數與排法</td><td><ul><li>1 張：置中。</li><li>2 張：置中並排。</li><li>3 張：並排填滿，不滑動、無白點（對應本期需求）。</li><li>4 張以上（備案）：一次顯示三張，可左右滑動；底下白點數＝卡片數，亮點＝目前選中的卡。</li></ul><div class="h5 one" style="display:flex;gap:12px;flex-wrap:wrap"><div class="cnt-demo"><div class="cap">1 張</div><div class="phone" style="width:390px;border-radius:12px;border-width:3px"><div class="hpage" style="padding:8px 0"><div class="hbox" style="margin:0 10px"><div class="court"><div class="lights"></div><div class="floor"></div><div class="track"><div class="hcard claimed"><div class="lbl"><i></i>BET Over<br>₱200</div><svg viewBox="0 0 64 64"></svg><div class="st">Claimed</div></div></div></div></div></div></div></div><div class="cnt-demo"><div class="cap">2 張</div><div class="phone" style="width:390px;border-radius:12px;border-width:3px"><div class="hpage" style="padding:8px 0"><div class="hbox" style="margin:0 10px"><div class="court"><div class="lights"></div><div class="floor"></div><div class="track"><div class="hcard claimed"><div class="lbl"><i></i>BET Over<br>₱200</div><svg viewBox="0 0 64 64"></svg><div class="st">Claimed</div></div><div class="hcard done"><div class="lbl"><i></i>Deposit<br>Over ₱200</div><svg viewBox="0 0 64 64"></svg><div class="st">Complete</div></div></div></div></div></div></div></div><div class="cnt-demo"><div class="cap">3 張</div><div class="phone" style="width:390px;border-radius:12px;border-width:3px"><div class="hpage" style="padding:8px 0"><div class="hbox" style="margin:0 10px"><div class="court"><div class="lights"></div><div class="floor"></div><div class="track"><div class="hcard claimed"><div class="lbl"><i></i>BET Over<br>₱200</div><svg viewBox="0 0 64 64"></svg><div class="st">Claimed</div></div><div class="hcard done"><div class="lbl"><i></i>Deposit<br>Over ₱200</div><svg viewBox="0 0 64 64"></svg><div class="st">Complete</div></div><div class="hcard locked"><div class="lbl"><i></i>Sport BET<br>Over ₱50</div><svg viewBox="0 0 64 64"></svg><div class="st">Locked</div></div></div></div></div></div></div></div><div class="cnt-demo"><div class="cap">4 張（4 張以上）</div><div class="phone" style="width:390px;border-radius:12px;border-width:3px"><div class="hpage" style="padding:8px 0"><div class="hbox" style="margin:0 10px"><div class="court"><div class="lights"></div><div class="floor"></div><div class="track" style="justify-content:flex-start;overflow:hidden;padding:0 28px;gap:13px"><div class="hcard claimed"><div class="lbl"><i></i>BET Over<br>₱200</div><svg viewBox="0 0 64 64"></svg><div class="st">Claimed</div></div><div class="hcard done"><div class="lbl"><i></i>Deposit<br>Over ₱200</div><svg viewBox="0 0 64 64"></svg><div class="st">Complete</div></div><div class="hcard locked"><div class="lbl"><i></i>Sport BET<br>Over ₱50</div><svg viewBox="0 0 64 64"></svg><div class="st">Locked</div></div><div class="hcard locked"><div class="lbl"><i></i>Sport BET<br>Over ₱100</div><svg viewBox="0 0 64 64"></svg><div class="st">Locked</div></div></div><div class="dots"><i class=on></i><i></i><i></i><i></i></div></div></div></div></div></div></div></td></tr><tr><td class="c">掃光特效</td><td><ul><li>卡片轉為已達標（Complete）後，點擊該卡播放一次掃光。</li></ul></td></tr></table>
 <h3>④ TODAY'S FREE BET（券卡）</h3>
 <div class="h5 one"><div class="blk"><div class="phone" style="width:390px"><div class="hpage" style="padding-bottom:10px"><div class="hsec">Today’s Free Bet<span class="cnt"><b data-x="claimed">0 / 5</b> claimed</span></div>
       <div class="hbox"><div class="fb">
@@ -1303,7 +1321,7 @@ document.querySelectorAll('.doctabs span').forEach(function(t){t.addEventListene
       </div></div>
 
       </div></div></div></div>
-<table class="spec"><colgroup><col style="width:170px"><col></colgroup><tr><th>元素</th><th>說明</th></tr><tr><td class="c">標題列</td><td><ul><li>左「TODAY'S FREE BET」：固定文字。</li><li>右「N / M claimed」：</li><li><ul><li>M＝後台奖励配置的項次總數。</li><li>N＝當日已領取的項次數。</li></ul></li></ul></td></tr><tr><td class="c">券卡</td><td><ul><li>顯示目前選中任務卡對應的券。</li><li>面額「₱N」＝後台該項次「奖励」所選券在 优惠券配置 的投注面额。</li><li>「SPORT FREE BET」字樣固定。</li><li>張數＞1 時面額右側加「×N」標記（N＝後台张数）。</li><div class="h5 one" style="display:flex;gap:16px;margin-top:6px"><div><div class="cap">张数＝1</div><div class="tk" style="margin:0"><div class="amt">₱5</div><div class="nm">SPORT FREE BET</div></div></div><div><div class="cap">张数＝3</div><div class="tk" style="margin:0"><div class="amt">₱5<span style="font-size:11px;margin-left:4px;background:#5a3a00;color:#FFE28A;border-radius:8px;padding:1px 6px;vertical-align:middle">×3</span></div><div class="nm">SPORT FREE BET</div></div></div></div><li>未達標／已使用／已過期：券卡反灰。</li><li>兩側徽章固定。</li></ul></td></tr><tr><td class="c">右側文字</td><td><ul><li>第一行固定「Sport Free Bet」。</li><li>第二行依狀態：</li><li><ul><li>未達標「Finish Mission to Unlock」</li><li>可領取「Mission complete · Claim」</li><li>已領取「Saved to My voucher」</li><li>已使用「Free Bet already used」</li><li>已過期「Free Bet expired」</li></ul></li></ul></td></tr><tr><td class="c">按鈕</td><td><ul><li>未達標：LOCKED，不可點。</li><li>可領取：CLAIM，點擊→檢查 KYC→派券（後台「张数」幾張就派幾張）→轉已領取。</li><li>已領取：USE NOW，導向體育籃球早盤頁，Bet Slip 可選該券。</li></ul></td></tr><tr><td class="c">KYC 未通過</td><td><ul><li>會員 KYC 狀態不在後台 步驟3「KYC 验证」勾選範圍內：點 CLAIM 提示「请先完成 KYC 验证」。</li><li>按「确定」導向 KYC 驗證頁；「取消」留在活動頁，按鈕維持 CLAIM。</li></ul></td></tr></table>
+<table class="spec"><colgroup><col style="width:170px"><col></colgroup><tr><th>元素</th><th>說明</th></tr><tr><td class="c">標題列</td><td><ul><li>左「TODAY'S FREE BET」：固定文字。</li><li>右「N / M claimed」：<ul><li>M＝後台奖励配置的項次總數。</li><li>N＝當日已領取的項次數。</li></ul></li></ul></td></tr><tr><td class="c">券卡</td><td><ul><li>顯示目前選中任務卡對應的券。</li><li>面額「₱N」＝後台該項次「奖励」所選券在 优惠券配置 的投注面额。</li><li>「SPORT FREE BET」字樣固定。</li><li>張數＞1 時面額右側加「×N」標記（N＝後台张数）。</li><div class="h5 one" style="display:flex;gap:16px;margin-top:6px"><div><div class="cap">张数＝1</div><div class="tk" style="margin:0"><div class="amt">₱5</div><div class="nm">SPORT FREE BET</div></div></div><div><div class="cap">张数＝3</div><div class="tk" style="margin:0"><div class="amt">₱5<span style="font-size:11px;margin-left:4px;background:#5a3a00;color:#FFE28A;border-radius:8px;padding:1px 6px;vertical-align:middle">×3</span></div><div class="nm">SPORT FREE BET</div></div></div></div><li>未達標／已使用／已過期：券卡反灰。</li><li>兩側徽章固定。</li></ul></td></tr><tr><td class="c">右側文字</td><td><ul><li>第一行固定「Sport Free Bet」。</li><li>第二行依狀態：<ul><li>未達標「Finish Mission to Unlock」</li><li>可領取「Mission complete · Claim」</li><li>已領取「Saved to My voucher」</li><li>已使用「Free Bet already used」</li><li>已過期「Free Bet expired」</li></ul></li></ul></td></tr><tr><td class="c">按鈕</td><td><ul><li>未達標：LOCKED，不可點。</li><li>可領取：CLAIM，點擊→檢查 KYC→派券（後台「张数」幾張就派幾張）→轉已領取。</li><li>已領取：USE NOW，導向體育籃球早盤頁，Bet Slip 可選該券。</li></ul></td></tr><tr><td class="c">KYC 未通過</td><td><ul><li>會員 KYC 狀態不在後台 步驟3「KYC 验证」勾選範圍內：點 CLAIM 提示「请先完成 KYC 验证」。</li><li>按「确定」導向 KYC 驗證頁；「取消」留在活動頁，按鈕維持 CLAIM。</li></ul></td></tr></table>
 <h3>⑤ PICK YOUR GAME（推薦賽事）</h3>
 <div class="h5 one"><div class="blk"><div class="phone" style="width:390px"><div class="hpage" style="padding-bottom:10px"><div class="hsec"><span>Pick Your Game<span class="tag">Pre-match</span></span></div>
       <div class="hbox">
@@ -1400,8 +1418,8 @@ document.querySelectorAll('.doctabs span').forEach(function(t){t.addEventListene
 (function(){
   var $=function(q,el){return (el||document).querySelector(q)}, $$=function(q,el){return [].slice.call((el||document).querySelectorAll(q))};
   var COUPONS=[{id:'c1',name:'Sport Free Bet 5',amt:5,h:120},{id:'c2',name:'Sport Free Bet 10',amt:10,h:120},{id:'c3',name:'Sport Free Bet 20',amt:20,h:72},{id:'c4',name:'测试用的体育投注券',amt:2,h:24}];
-  var LEAGUES=[['bl2001','NBA','USA','篮球'],['bl2002','NBA G League','USA','篮球'],['bl2005','NCAA Men','USA','篮球'],['bl2010','WNBA','USA','篮球'],['bl2020','EuroLeague','EUR','篮球'],['bl2031','Korea KBL','KOR','篮球'],['bl2044','Japan B.League One','JPN','篮球']];
-  var MATCHES=[['km137283376','2026-11-07 09:30','NBA','Los Angeles Lakers vs Boston Celtics'],['km137283388','2026-11-07 11:00','NBA','Golden State Warriors vs Denver Nuggets'],['km137283410','2026-11-08 03:00','EuroLeague','Olympiacos vs Real Madrid'],['km137283415','2026-11-08 03:45','EuroLeague','Fenerbahçe vs Barcelona'],['km137283420','2026-11-08 18:05','Korea KBL','Seoul SK Knights vs Busan KCC Egis'],['km137283431','2026-11-09 10:30','NBA','Miami Heat vs Chicago Bulls']];
+  var LEAGUES=[['bl2001','NBA','USA','篮球','2026-10-21 20:00:00','2027-06-30 20:00:00'],['bl2002','NBA G League','USA','篮球','2026-11-07 20:00:00','2027-04-30 20:00:00'],['bl2005','NCAA Men','USA','篮球','2026-11-03 20:00:00','2027-04-06 20:00:00'],['bl2010','WNBA','USA','篮球','2027-05-15 20:00:00','2027-09-30 20:00:00'],['bl2020','EuroLeague','EUR','篮球','2026-09-30 20:00:00','2027-05-25 20:00:00'],['bl2031','Korea KBL','KOR','篮球','2026-10-04 20:00:00','2027-04-10 20:00:00'],['bl2044','Japan B.League One','JPN','篮球','2026-10-03 20:00:00','2027-05-30 20:00:00']];
+  var MATCHES=[['km137283376','2026-11-18 09:30:00','NBA','Los Angeles Lakers vs Boston Celtics','2026-11-17 07:21:11'],['km137283388','2026-11-18 11:00:00','NBA','Golden State Warriors vs Denver Nuggets','2026-11-17 07:21:11'],['km137283410','2026-11-19 03:00:00','EuroLeague','Olympiacos vs Real Madrid','2026-11-17 07:21:11'],['km137283415','2026-11-19 03:45:00','EuroLeague','Fenerbahçe vs Barcelona','2026-11-17 07:21:11'],['km137283420','2026-11-19 18:05:00','Korea KBL','Seoul SK Knights vs Busan KCC Egis','2026-11-17 07:21:11'],['km137283431','2026-11-20 10:30:00','NBA','Miami Heat vs Chicago Bulls','2026-11-17 07:21:11']];
   var acts=[], editId=null, step=1, A=null, nextId=230;
   function blank(){return {id:null,type:'体育活动',name:'',cur:'PHP',status:'关闭',guest:'否',t1:'',t2:'',s1:'',s2:'',float:'关闭',fpc:false,fh5:false,fsort:0,list:'关闭',lpc:false,lh5:false,lsort:0,memo:'',kyc:[],black:'',items:[item()],risk:{ip:false,phone:false,name:false,email:false,auto:false,n:0}};}
   function item(){return {cond:'',scope:'指定游戏',need:'',ctype:'体育投注券',coupon:'',qty:1,sort:'',sportAll:'全部',leagues:[],matches:[]};}
@@ -1418,13 +1436,14 @@ document.querySelectorAll('.doctabs span').forEach(function(t){t.addEventListene
       +'<div style="overflow-x:auto"><table class="lt" style="min-width:1320px;table-layout:fixed"><colgroup><col style="width:60px"><col style="width:60px"><col style="width:60px"><col style="width:120px"><col style="width:70px"><col style="width:90px"><col style="width:110px"><col style="width:180px"><col style="width:90px"><col style="width:90px"><col style="width:90px"><col style="width:120px"><col style="width:110px"><col style="width:130px"></colgroup>'
       +'<tr><th>ID ⇅</th><th>排序 ⇅</th><th>状态</th><th>起止时间 ⇅</th><th>币种</th><th>语系</th><th>活动模板</th><th>活动名称</th><th>预览图片</th><th>黑名单</th><th>指定代理</th><th>参与 / 中奖人数</th><th>彩金所需流水倍数</th><th>操作</th></tr>';
     if(!acts.length) h+='<tr><td colspan="14" style="color:var(--pt4);padding:30px">No Data</td></tr>';
-    acts.forEach(function(a){h+='<tr><td>'+a.id+'</td><td>'+(a.fsort||0)+'</td><td style="color:'+(a.status=='开启'?'#67C23A':'#F56C6C')+'">'+a.status+'</td><td>'+ymd(a.t1)+'<br>'+ymd(a.t2)+'</td><td>'+a.cur+'</td><td>—</td><td>'+a.type+'</td><td style="white-space:normal">'+esc(a.name)+'</td><td><span class="btn p sm">上传</span></td><td>'+(a.black?esc(a.black).slice(0,12):'—')+'</td><td>—</td><td>0 / 0</td><td>—</td><td><span class="lnk" data-e="'+a.id+'">编辑</span> <span style="color:var(--pbd)">|</span> <span class="lnk r">删除</span><br><span class="lnk" data-t="'+a.id+'" style="color:'+(a.status=='开启'?'#67C23A':'#F56C6C')+'">'+(a.status=='开启'?'关闭':'开启')+'</span></td></tr>';});
+    acts.forEach(function(a){h+='<tr><td>'+a.id+'</td><td>'+(a.fsort||0)+'</td><td style="color:'+(a.status=='开启'?'#67C23A':'#F56C6C')+'">'+a.status+'</td><td>'+ymd(a.t1)+'<br>'+ymd(a.t2)+'</td><td>'+a.cur+'</td><td>—</td><td>'+a.type+'</td><td style="white-space:normal">'+esc(a.name)+'</td><td><span class="btn p sm">上传</span></td><td>'+(a.black?esc(a.black).slice(0,12):'—')+'</td><td>—</td><td>— / —</td><td>—</td><td><span class="lnk" data-e="'+a.id+'">编辑</span> <span style="color:var(--pbd)">|</span> '+(a.status=='开启'?'<span class="lnk" style="color:var(--pt4);cursor:not-allowed">删除</span>':'<span class="lnk r" data-d="'+a.id+'">删除</span>')+'<br><span class="lnk" data-t="'+a.id+'" style="color:'+(a.status=='开启'?'#67C23A':'#F56C6C')+'">'+(a.status=='开启'?'关闭':'开启')+'</span></td></tr>';});
     h+='</table></div><div class="pg"><span class="tot">Total '+acts.length+'</span><select><option>10/page</option><option selected>20/page</option><option>30/page</option><option>40/page</option><option>50/page</option><option>100/page</option></select><span class="arr">‹</span><span class="n on">1</span><span class="arr">›</span><span class="jump">Go to<input type="text" value="1"></span></div></div>';
     $('#prList').innerHTML=h;
     enhanceSelects($('#prList'));
     $('#prNew').onclick=function(){A=blank();editId=null;step=1;openWiz();};
     $$('#prList [data-e]').forEach(function(el){el.onclick=function(){A=JSON.parse(JSON.stringify(acts.find(function(a){return a.id==el.dataset.e})));editId=A.id;step=1;openWiz();};});
     $$('#prList [data-t]').forEach(function(el){el.onclick=function(){var a=acts.find(function(a){return a.id==el.dataset.t}); a.status=a.status=='开启'?'关闭':'开启'; renderList(); renderFE();};});
+    $$('#prList [data-d]').forEach(function(el){el.onclick=function(){confirmBox('提示','确定删除该活动?',function(){acts=acts.filter(function(a){return a.id!=el.dataset.d}); renderList(); renderFE(); toast('删除成功',true);});};});
   }
   function openWiz(){$('#prWiz').style.display='block';$('#prList').style.display='none';renderWiz();}
   function closeWiz(){$('#prWiz').style.display='none';$('#prList').style.display='block';}
@@ -1530,6 +1549,7 @@ document.querySelectorAll('.doctabs span').forEach(function(t){t.addEventListene
     if(step==4){
       $('#addItem').onclick=function(){if(A.items.length<10){A.items.push(item());renderWiz();}};
       $$('[data-k]',p).forEach(function(el){el.onchange=function(){var it=A.items[+el.dataset.i]; var k=el.dataset.k; if(k=='cond'){it.cond=el.value;if(it.cond!='投注额'){it.scope='指定游戏';}renderWiz();return;} if(k=='scope'){it.scope=el.value;it.sportAll='全部';it.leagues=[];it.matches=[];renderWiz();return;} if(k=='need'||k=='qty'||k=='sort'){it[k]=el.value;return;} it[k]=el.value;};});
+      $$('input[data-k=need],input[data-k=qty],input[data-k=sort]',p).forEach(function(inp){inp.setAttribute('inputmode','numeric'); inp.onkeydown=function(e){if(['.','-','e','E','+'].indexOf(e.key)>=0)e.preventDefault();}; inp.oninput=function(){var v=inp.value.replace(/[^0-9]/g,''); if(inp.dataset.k=='qty'&&+v>9999)v=v.slice(0,-1); inp.value=v; A.items[+inp.dataset.i][inp.dataset.k]=v;};});
       $$('[data-del-item]').forEach(function(el){el.onclick=function(){A.items.splice(+el.dataset.delItem,1);renderWiz();};});
       A.items.forEach(function(it,i){$$('input[name=f_sa'+i+']').forEach(function(r){r.onchange=function(){it.sportAll=r.value;if(r.value=='全部'){it.leagues=[];it.matches=[];}renderWiz();};});});
       $$('[data-games]').forEach(function(b){b.onclick=gameModal;});
@@ -1539,7 +1559,7 @@ document.querySelectorAll('.doctabs span').forEach(function(t){t.addEventListene
     if(step==5){$$('[data-sw]').forEach(function(s){s.onclick=function(){A.risk[s.dataset.sw]=!A.risk[s.dataset.sw];renderWiz();};}); if($('#f_rn'))$('#f_rn').onchange=function(){A.risk.n=+this.value||0;};}
   }
   function validate(st){
-    if(st==1){if(!A.type)return '请填写活动类型'; if(!A.name.trim())return '请填写活动名称'; if(!A.t1||!A.t2)return '请填写活动时间'; if(!A.s1||!A.s2)return '请填写展示时间';
+    if(st==1){if(!A.type)return '请填写活动类型'; if(!A.name.trim())return '请填写活动名称'; if(!A.t1||!A.t2)return '请填写活动时间'; if(!A.s1||!A.s2)return '请填写展示时间'; if(A.s2<A.t2)return '展示时间结束不可早于活动时间结束';
       var ov=acts.some(function(b){return b.id!=editId&&b.type=='体育活动'&&(A.t1<=b.t2&&b.t1<=A.t2||A.s1<=b.s2&&b.s1<=A.s2);}); if(ov)return '活动时间或展示时间与其他体育活动重叠';}
     if(st==2){if(A.float=='开启'){if(!A.fpc)return '请填写PC图片'; if(!A.fh5)return '请填写H5图片';} if(A.list=='开启'){if(!A.lpc)return '请填写PC图片'; if(!A.lh5)return '请填写H5图片';}}
     if(st==3){if(!A.kyc.length)return '请填写KYC验证';}
@@ -1564,17 +1584,17 @@ document.querySelectorAll('.doctabs span').forEach(function(t){t.addEventListene
   function gameModal(){var games=['Baccarat','7up7down','梅杜莎','舞龙争霸','Agent Ace','Ali Baba','All-star Fishing','Andar Bahar','Arena Fighter','Bangla Beauty','Bao boon chin','Bingo Adventure','Bingo Carnaval','Bombing Fishing','Bonus Hunter','Boxing King','Cash Coin','Charge/Buffalo','Chicken Dash','Chin Shi Huang'];
     var b='<div class="scroll" style="margin:-20px -20px -20px;padding:0 20px"><div class="gall" style="margin:0 -20px"><label class="ck" style="margin:0"><input type="checkbox" checked disabled><span style="font-size:14px;font-weight:500;color:#333">全选</span></label></div><div class="ggrp"><div class="gh"><label class="ck" style="margin:0"><input type="checkbox" checked disabled><span>体育</span></label></div></div><div class="ggrp"><div class="gh"><label class="ck" style="margin:0"><input type="checkbox" checked disabled><span>JILI</span></label></div><div class="gl">'+games.map(function(g){return '<label class="ck"><input type="checkbox" checked disabled><span>'+g+'</span></label>';}).join('')+'</div></div></div>';
     modal('请选择游戏',b,function(){return true;});}
-  function pickModal(kind,i){var it=A.items[i]; var sel=(kind=='league'?it.leagues:it.matches).slice(); var tab='普通联赛', page=1, PS=20, kw='';
+  function pickModal(kind,i){var it=A.items[i]; var sel=(kind=='league'?it.leagues:it.matches).slice(); var tab='普通联赛', page=1, PS=20, kw='', kw2='', kw3='';
     var ov=modal(kind=='league'?'请选择联赛':'请选择赛事','',function(){if(kind=='league')it.leagues=sel;else it.matches=sel;renderWiz();return true;},true);
-    function draw(){var rows=(kind=='league'?LEAGUES:MATCHES).filter(function(r){return !kw||r.join(' ').toLowerCase().indexOf(kw.toLowerCase())>=0;}); if(kind=='league'&&tab=='冠军联赛')rows=[];
-      var h=(kind=='league'?'<div class="tabs2"><span class="'+(tab=='普通联赛'?'on':'')+'" data-tab="普通联赛">普通联赛</span><span class="'+(tab=='冠军联赛'?'on':'')+'" data-tab="冠军联赛">冠军联赛</span></div>':'')+'<div class="stags"><span class="on">篮球</span></div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><div style="display:flex;gap:10px">'+(kind=='league'?'<input type="text" id="mkw" placeholder="联赛ID" value="'+esc(kw)+'" style="width:160px"><input type="text" placeholder="联赛名称" style="width:160px">':'<input type="text" id="mkw" placeholder="赛事ID" value="'+esc(kw)+'" style="width:160px"><input type="text" placeholder="联赛名称" style="width:160px"><input type="text" placeholder="队名" style="width:160px">')+'<span class="btn p" id="mq">搜索</span></div><span style="font-size:13px">已选 <b style="color:var(--pb)">'+sel.length+'</b> '+(kind=='league'?'个':'场')+'</span></div>';
-      h+='<table class="gt"><tr><th style="width:40px"></th>'+(kind=='league'?'<th>联赛ID</th><th>名</th><th>联赛类别代码</th><th>联赛类型</th>':'<th>赛事ID</th><th>比赛开始时间</th><th>联赛名称</th><th>主客队名称</th><th>游戏类型</th><th>比赛状态</th>')+'</tr>';
+    function draw(){var rows=(kind=='league'?LEAGUES:MATCHES).filter(function(r){var ok=(!kw||r[0].toLowerCase().indexOf(kw.toLowerCase())>=0); if(kind=='league')ok=ok&&(!kw2||r[1].toLowerCase().indexOf(kw2.toLowerCase())>=0); else ok=ok&&(!kw2||r[2]==kw2)&&(!kw3||kw3=='未开始'); return ok;}); if(kind=='league'&&tab=='冠军联赛')rows=[];
+      var h=(kind=='league'?'<div class="tabs2"><span class="'+(tab=='普通联赛'?'on':'')+'" data-tab="普通联赛">普通联赛</span><span class="'+(tab=='冠军联赛'?'on':'')+'" data-tab="冠军联赛">冠军联赛</span></div>':'')+'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><div style="display:flex;gap:10px">'+(kind=='league'?'<input type="text" id="mkw" placeholder="联赛ID" value="'+esc(kw)+'" style="width:160px"><input type="text" id="mkw2" placeholder="联赛名称" value="'+esc(kw2)+'" style="width:160px">':'<input type="text" id="mkw" placeholder="赛事ID" value="'+esc(kw)+'" style="width:120px"><div class="dr" style="width:260px;cursor:default"><span class="ico">▦</span><span class="v">2026-11-17</span><span class="sep2">~</span><span class="v">2026-11-17</span></div><select id="mkw2" style="width:160px"><option value="">全部联赛</option>'+LEAGUES.map(function(l){return '<option'+(kw2==l[1]?' selected':'')+'>'+l[1]+'</option>';}).join('')+'</select><select id="mkw3" style="width:140px" class="ph"><option value="">Select</option><option>未开始</option><option>比赛中</option><option>已结束</option><option>延期</option><option>已取消</option></select>')+'<span class="btn p" id="mq">搜索</span></div><span style="font-size:13px">已选 <b style="color:var(--pb)">'+sel.length+'</b> '+(kind=='league'?'个':'场')+'</span></div>';
+      h+='<table class="gt"><tr><th style="width:40px"></th>'+(kind=='league'?'<th>联赛ID</th><th>名</th><th>联赛类别代码</th><th>联赛类型</th><th>开始/结束时间</th>':'<th>赛事ID</th><th>比赛开始时间</th><th>联赛名称</th><th>主客队名称</th><th>游戏类型</th><th>是否滚盘中</th><th>是否参加过关</th><th>新增时间</th><th>比赛状态</th>')+'</tr>';
       if(!rows.length)h+='<tr><td colspan="8" style="color:var(--pt4);padding:24px">No Data</td></tr>';
-      rows.forEach(function(r){h+='<tr><td><input type="checkbox" data-id="'+r[0]+'"'+(sel.indexOf(r[0])>=0?' checked':'')+'></td>'+(kind=='league'?'<td>'+r[0]+'</td><td>'+r[1]+'</td><td>'+r[2]+'</td><td>'+r[3]+'</td>':'<td>'+r[0]+'</td><td>'+r[1]+'</td><td>'+r[2]+'</td><td>'+r[3]+'</td><td>篮球</td><td>未开始</td>')+'</tr>';});
+      rows.forEach(function(r){h+='<tr><td><label class="ck" style="margin:0"><input type="checkbox" data-id="'+r[0]+'"'+(sel.indexOf(r[0])>=0?' checked':'')+'><span></span></label></td>'+(kind=='league'?'<td>'+r[0]+'</td><td>'+r[1]+'</td><td>'+r[2]+'</td><td>'+r[3]+'</td><td style="line-height:1.6">'+r[4]+'<br>'+r[5]+'</td>':'<td>'+r[0]+'</td><td>'+r[1]+'</td><td>'+r[2]+'</td><td style="line-height:1.6">[主]'+r[3].split(' vs ')[0]+'<br>[客]'+r[3].split(' vs ')[1]+'</td><td>篮球</td><td>否</td><td>是</td><td>'+r[4]+'</td><td>未开始</td>')+'</tr>';});
       h+='</table><div class="pg"><span class="tot">Total '+rows.length+'</span><select><option>10/page</option><option selected>20/page</option><option>30/page</option><option>40/page</option><option>50/page</option><option>100/page</option></select><span class="arr">‹</span><span class="n on">1</span><span class="arr">›</span><span class="jump">Go to<input type="text" value="1"></span></div>';
       $('.mb',ov).innerHTML=h; enhanceSelects(ov);
       $$('[data-tab]',ov).forEach(function(t){t.onclick=function(){tab=t.dataset.tab;draw();};});
-      $('#mq',ov).onclick=function(){kw=$('#mkw',ov).value;draw();};
+      $('#mq',ov).onclick=function(){kw=$('#mkw',ov).value; kw2=$('#mkw2',ov)?$('#mkw2',ov).value:''; kw3=$('#mkw3',ov)?$('#mkw3',ov).value:''; draw();};
       $$('input[data-id]',ov).forEach(function(c){c.onchange=function(){if(c.checked){if(sel.indexOf(c.dataset.id)<0)sel.push(c.dataset.id);}else sel=sel.filter(function(x){return x!=c.dataset.id;}); draw();};});}
     draw();}
 
