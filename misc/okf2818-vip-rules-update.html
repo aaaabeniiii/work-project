@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VIP Rules 說明調整</title>
+<style>
+:root {
+  --page: #eef2f5;
+  --panel: #ffffff;
+  --ink: #0e2433;
+  --ink-2: #4a6170;
+  --line: #cfd9e0;
+  --pick: #fde3ec;
+  --pick-line: #e0457b;
+  --tag-ink: #a3214f;
+  --mark-swatch: #ffb3cd;
+  --focus: #025be8;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --page: #06141d;
+    --panel: #0d2230;
+    --ink: #eaf2f6;
+    --ink-2: #a9c0cc;
+    --line: #25404f;
+    --pick: #3a1f2c;
+    --pick-line: #ff7fb0;
+    --tag-ink: #ffa9c8;
+    --mark-swatch: #c2567f;
+    --focus: #5aacf9;
+  }
+}
+* { box-sizing: border-box; }
+html { background: var(--page); }
+body {
+  margin: 0; height: 100vh; overflow: hidden;
+  display: flex; flex-direction: column;
+  background: var(--page); color: var(--ink);
+  font-family: "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", -apple-system, system-ui, sans-serif;
+  font-size: 15px; line-height: 1.6;
+}
+.top { flex: 0 0 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 24px; padding: 14px 20px; border-bottom: 1px solid var(--line); background: var(--panel); }
+.top h1 { margin: 0; font-size: 18px; font-weight: 600; line-height: 1.3; }
+.top p { margin: 2px 0 0; color: var(--ink-2); font-size: 13px; }
+.toggle { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border: 1px solid var(--line); border-radius: 8px; font-size: 14px; cursor: pointer; user-select: none; }
+.toggle input { width: 16px; height: 16px; margin: 0; accent-color: #e0457b; }
+.swatch { display: inline-block; width: 22px; height: 12px; border-radius: 2px; background: var(--mark-swatch); }
+input:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+.cols { flex: 1 1 auto; min-height: 0; display: grid; grid-template-columns: 430px minmax(0, 1fr); }
+.pane { overflow: auto; min-height: 0; }
+.pane-left { padding: 20px; border-right: 1px solid var(--line); }
+.pane-right { padding: 20px 24px 40px; }
+.pane-title { margin: 0 0 4px; font-size: 16px; font-weight: 600; }
+.pane-hint { margin: 0 0 14px; color: var(--ink-2); font-size: 13px; }
+
+/* ===== 右：Word 內容 ===== */
+.group { margin: 0 0 18px; max-width: 760px; }
+.item { display: flex; gap: 10px; align-items: flex-start; padding: 8px 10px; border: 1px solid transparent; border-radius: 8px; cursor: pointer; }
+.item:hover { background: var(--panel); }
+.item.on { background: var(--pick); border-color: var(--pick-line); }
+.item input { flex: 0 0 auto; width: 16px; height: 16px; margin: 4px 0 0; accent-color: #e0457b; }
+.item .body { flex: 1 1 auto; min-width: 0; }
+.item .txt { font-family: -apple-system, system-ui, "Segoe UI", Roboto, "PingFang TC", sans-serif; }
+.item.h .txt { font-weight: 700; font-size: 16px; }
+.item .detail { display: none; margin-top: 6px; padding-top: 6px; border-top: 1px dashed var(--line); color: var(--ink-2); font-size: 13px; }
+.item.on .detail { display: block; }
+.item .detail q { quotes: none; font-family: -apple-system, system-ui, "Segoe UI", Roboto, sans-serif; }
+.item.skip { cursor: default; color: var(--ink-2); }
+.item.skip:hover { background: none; }
+.item.skip .nobox { flex: 0 0 16px; text-align: center; }
+.item.skip .detail { display: block; border-top: 0; padding-top: 0; margin-top: 2px; }
+.tag { display: inline-block; margin-left: 6px; padding: 0 7px; border: 1px solid var(--line); border-radius: 999px; font-size: 12px; line-height: 20px; white-space: nowrap; color: var(--ink-2); vertical-align: 1px; font-weight: 400; }
+.tag.new { border-color: var(--pick-line); background: var(--pick-line); color: #fff; }
+.tag.rewrite { border-color: var(--pick-line); color: var(--tag-ink); }
+.tag.tweak { border-style: dashed; border-color: var(--pick-line); color: var(--tag-ink); }
+@media (prefers-color-scheme: dark) { .tag.new { color: #2a0d19; } }
+.wt { border-collapse: collapse; font-size: 13px; margin: 2px 0; }
+.wt th, .wt td { border: 1px solid var(--line); padding: 2px 10px; text-align: center; font-weight: 400; }
+.wt th { font-weight: 600; }
+details { max-width: 760px; margin: 0 0 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); padding: 10px 14px; }
+details summary { cursor: pointer; font-weight: 600; }
+details ul { margin: 10px 0 2px; padding-left: 20px; }
+details li { margin: 0 0 8px; }
+details .en { display: block; color: var(--ink-2); font-size: 13px; font-family: -apple-system, system-ui, "Segoe UI", Roboto, sans-serif; }
+
+/* ===== 左：手機畫面。數值取自測試站 Rules 彈窗的實際樣式（設計寬 390）===== */
+.phone {
+  width: 390px; max-width: 100%; margin: 0 auto;
+  position: relative; overflow: hidden;
+  background: linear-gradient(180deg, #45282d 0px, #1a2234 127px);
+  font-family: -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  line-height: normal;
+}
+.phone .mask { position: absolute; inset: 0; background: rgba(13, 34, 69, 0.45); }
+.vip-bar { position: relative; height: 37px; display: flex; align-items: center; justify-content: space-between; padding: 0 15px 0 11px; }
+.vip-bar .back { width: 18px; height: 18px; display: block; }
+.vip-bar .ttl { position: absolute; left: 0; right: 0; top: 9px; text-align: center; color: #fff; font-size: 16px; font-weight: 500; line-height: 19.5px; }
+.vip-bar .lnk { position: relative; color: #5aacf9; font-size: 14px; }
+.drawer { position: relative; margin-top: 90px; border-radius: 16px 16px 0 0; overflow: hidden; box-shadow: rgba(13, 34, 69, 0.12) 0 -8px 32px; background: #0b283a; padding-bottom: 12px; }
+.dragHandle { width: 36px; height: 4px; border-radius: 100px; background: #b7d0de; margin: 10px auto 2px; }
+.titleBar { display: flex; justify-content: space-between; align-items: center; padding: 6px 16px 12px; }
+.titleBarSpacer { flex: 0 0 28px; width: 28px; height: 28px; }
+.titleCenter { flex: 1 1 auto; display: flex; justify-content: center; align-items: center; gap: 8px; min-height: 18px; }
+.titleCenter svg { width: 48px; height: 8px; color: #b7d0de; flex-shrink: 0; }
+.titlePkgText { color: #fff; letter-spacing: -0.408px; white-space: nowrap; font-family: Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 15px; font-weight: 500; line-height: 22px; }
+.closeInHeader { width: 28px; height: 28px; color: #b7d0de; display: flex; justify-content: center; align-items: center; font-size: 20px; font-weight: 300; line-height: 1; }
+.scroll { padding-right: 2px; }
+.sectionTitle { margin: 0 0 4px; padding: 0 16px; color: #fff; font-size: 14px; font-weight: 500; line-height: normal; }
+.bulletRow { display: flex; align-items: flex-start; gap: 4px; padding: 0 16px 0 24px; }
+.bulletMark { width: 5px; height: 5px; border-radius: 50%; background: #b7d0de; flex-shrink: 0; margin-top: 4px; }
+.bulletText { flex: 1 1 0%; min-width: 0; color: #b7d0de; font-size: 12px; font-weight: 400; line-height: normal; }
+.bulletText b { font-weight: 700; }
+.brand { color: #025be8; }
+.tableWrap { padding: 0 16px 16px; }
+.rtable { width: 100%; color: #b7d0de; text-align: center; border-collapse: collapse; font-size: 10px; font-weight: 500; }
+.rtable th, .rtable td { vertical-align: middle; border: 0.5px solid #b7d0de; padding: 6px 8px; font-weight: 500; }
+.rtable td.num { font-size: 12px; }
+
+/* 對應與改動標記 */
+.phone [data-k] { cursor: pointer; }
+.phone [data-k].sel { background: rgba(255, 105, 160, 0.22); box-shadow: 0 0 0 1.5px #ff7fb0 inset; }
+.phone table[data-k].sel { box-shadow: 0 0 0 2px #ff7fb0; }
+.chg { border-radius: 2px; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+.phone .sel .chg, body.all-marks .phone .chg { background: rgba(255, 105, 160, 0.5); }
+
+@media (max-width: 860px) {
+  body { height: auto; overflow: visible; display: block; }
+  .cols { display: block; }
+  .pane { overflow: visible; }
+  .pane-left { border-right: 0; border-bottom: 1px solid var(--line); }
+}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <div>
+    <h1>VIP Rules 說明調整</h1>
+    <p>OKF-2818　左：調整後的 Rules 畫面（樣式取自測試站 H5 彈窗）　右：原始需求 Word（VIP_Rules_Updated_Copywriting.docx）的內容</p>
+  </div>
+  <label class="toggle"><input type="checkbox" id="marks"> <span class="swatch" aria-hidden="true"></span> 同時標示所有改動處</label>
+</div>
+
+<div class="cols">
+
+<div class="pane pane-left" id="leftPane">
+<div class="phone" id="phone">
+  <div class="vip-bar">
+    <svg class="back" viewBox="0 0 18 18" fill="none" stroke="#e6e6e6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11.5 3.5L6 9l5.5 5.5"/></svg>
+    <div class="ttl">VIP</div>
+    <span class="lnk">Rules</span>
+  </div>
+  <div class="mask"></div>
+
+  <div class="drawer">
+    <div class="dragHandle" aria-hidden="true"></div>
+    <div class="titleBar">
+      <span class="titleBarSpacer" aria-hidden="true"></span>
+      <div class="titleCenter">
+        <svg viewBox="0 0 48 8" fill="none" aria-hidden="true"><g opacity="0.5"><rect width="5.81544" height="5.81544" transform="matrix(0.725878 0.687824 -0.725878 0.687824 43.7788 0)" fill="currentColor"/><path d="M42.7837 3.05725V4.94287L0 4.00006L42.7837 3.05725Z" fill="currentColor"/></g></svg>
+        <span class="titlePkgText">Rules</span>
+        <svg viewBox="0 0 48 8" fill="none" aria-hidden="true"><g opacity="0.5"><rect width="5.81544" height="5.81544" transform="matrix(-0.725878 0.687824 0.725878 0.687824 4.22119 0)" fill="currentColor"/><path d="M5.21627 3.05725V4.94287L48 4.00006L5.21627 3.05725Z" fill="currentColor"/></g></svg>
+      </div>
+      <span class="closeInHeader" aria-hidden="true">×</span>
+    </div>
+
+    <div class="scroll">
+
+      <h2 class="sectionTitle" data-k="h-gm"><span class="chg">General Mechanics</span></h2>
+      <div class="bulletRow" data-k="gm1"><span class="bulletMark"></span><div class="bulletText"><span class="chg"><b>Automatic Membership:</b> All OKBet account members are automatically enrolled in the VIP Program upon registration.</span></div></div>
+      <div class="bulletRow" data-k="gm2"><span class="bulletMark"></span><div class="bulletText"><span class="chg"><b>How to Rank Up:</b> Members can progress to higher VIP levels by accumulating Growth Values through bets on eligible products: Sports, Egames, Perya, and Live Dealer Games.</span></div></div>
+      <div class="bulletRow" data-k="gm3"><span class="bulletMark"></span><div class="bulletText"><span class="chg"><b>Rewards &amp; Bonuses:</b> Reaching a new VIP level unlocks corresponding rewards and bonuses. The Upgrade Bonus can be claimed once per account for every new VIP level achieved.</span></div></div>
+      <div class="bulletRow" data-k="gm4"><span class="bulletMark"></span><div class="bulletText"><span class="chg"><b>VIP Level Retention:</b> Once a member reaches a VIP level, the level will be retained without monthly turnover-based downgrades.</span></div></div>
+      <div class="bulletRow" data-k="gm5"><span class="bulletMark"></span><div class="bulletText"><span class="chg"><b>System Governance:</b> All Growth Value thresholds, VIP level configurations, bonus amounts, and regression speed parameters are governed by automated system settings.</span></div></div>
+
+      <h2 class="sectionTitle" data-k="h-gvc">Growth Value Calculation</h2>
+      <div class="tableWrap">
+        <table class="rtable" data-k="gvc-table">
+          <thead><tr><th>Product</th><th><span class="chg">Bet Growth Value</span></th></tr></thead>
+          <tbody>
+            <tr><td>Sports</td><td class="num">2x</td></tr>
+            <tr><td><span class="chg">Live Dealer, Egames, Perya</span></td><td class="num">1x</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="sectionTitle" data-k="h-ex"><span class="chg">Example: Player 1</span></h3>
+      <div class="bulletRow" data-k="ex1"><span class="bulletMark"></span><div class="bulletText"><span class="chg">Player 1 bets ₱5,000 on Sports and another ₱5,000 on Perya. Therefore, the computation would be for Sports (₱5,000 x 2 = ₱10,000) and Perya (₱5,000 x 1 = ₱5,000) = <b>15,000 Total Growth Value.</b></span></div></div>
+
+      <h2 class="sectionTitle" data-k="h-lv"><span class="chg">VIP Levels &amp; Requirements</span></h2>
+      <div class="tableWrap">
+        <table class="rtable" data-k="lv-table">
+          <thead><tr><th><span class="chg">VIP Level</span></th><th><span class="chg">Upgrade Points</span></th><th><span class="chg">Upgrade Bonus</span></th><th>Birthday Bonus</th></tr></thead>
+          <tbody>
+            <tr><td>VIP 0</td><td class="num">-</td><td class="num">-</td><td class="num">-</td></tr>
+            <tr><td>VIP 1</td><td class="num">5,000</td><td class="num">₱10</td><td class="num">-</td></tr>
+            <tr><td>VIP 2</td><td class="num">100,000</td><td class="num">₱100</td><td class="num">-</td></tr>
+            <tr><td>VIP 3</td><td class="num">1,000,000</td><td class="num">₱500</td><td class="num">₱500</td></tr>
+            <tr><td>VIP 4</td><td class="num">10,000,000</td><td class="num">₱5,000</td><td class="num">₱1,000</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 class="sectionTitle" data-k="h-ur"><span class="chg">Upgrade Requirements</span></h2>
+      <div class="bulletRow" data-k="ur1"><span class="bulletMark"></span><div class="bulletText"><span class="chg">Members can reach higher VIP levels by accumulating the required Growth Values through eligible betting activities.</span></div></div>
+      <div class="bulletRow" data-k="ur2"><span class="bulletMark"></span><div class="bulletText"><span class="chg">Upon meeting the required Growth Value, members will qualify for the corresponding VIP level.</span></div></div>
+      <div class="bulletRow" data-k="ur3"><span class="bulletMark"></span><div class="bulletText"><span class="chg">VIP level upgrades will be processed on the following day after 3:50 AM.</span></div></div>
+      <div class="bulletRow" data-k="ur4"><span class="bulletMark"></span><div class="bulletText"><span class="chg">Growth Values are updated daily starting at 3:50 AM onwards.</span></div></div>
+      <div class="bulletRow" data-k="ur5"><span class="bulletMark"></span><div class="bulletText"><span class="chg">Members who successfully reach a new VIP level will receive the corresponding Upgrade Bonus.</span></div></div>
+
+      <h2 class="sectionTitle" data-k="h-rt"><span class="chg">VIP Level Retention</span></h2>
+      <div class="bulletRow" data-k="rt1"><span class="bulletMark"></span><div class="bulletText"><span class="chg">Members will retain their achieved VIP level without monthly turnover-based downgrades.</span></div></div>
+      <div class="bulletRow" data-k="rt2"><span class="bulletMark"></span><div class="bulletText"><span class="chg">No monthly VIP Retain requirements will be imposed.</span></div></div>
+      <div class="bulletRow" data-k="rt3"><span class="bulletMark"></span><div class="bulletText"><span class="chg">Failure to meet a higher VIP level's Growth Value requirement will not result in a deduction or downgrade of the member's existing VIP level.</span></div></div>
+      <div class="bulletRow" data-k="rt4"><span class="bulletMark"></span><div class="bulletText"><span class="chg">Members can continue accumulating Growth Values to qualify for higher VIP levels.</span></div></div>
+
+      <h2 class="sectionTitle" data-k="h-tc">Terms and Conditions</h2>
+      <div class="bulletRow" data-k="tc1"><span class="bulletMark"></span><div class="bulletText">The promotion applies to Perya, Slots, Casino, Sports, Arcade, Poker and Numeric games.</div></div>
+      <div class="bulletRow" data-k="tc2"><span class="bulletMark"></span><div class="bulletText">Rewards earned are non-transferable and cannot be exchanged for other items or <span class="chg">credits.</span></div></div>
+      <div class="bulletRow" data-k="tc3"><span class="bulletMark"></span><div class="bulletText">The following individuals are not eligible <span class="chg">to participate in this promotion</span>: employees of <span class="brand">OKBet</span>, their immediate family members up to the second degree of affinity, operators of gaming sites, banned individuals, <span class="chg">as well as</span> government officials or employees.</div></div>
+      <div class="bulletRow" data-k="tc4"><span class="bulletMark"></span><div class="bulletText">In the event of suspected fraudulent or suspicious activities, <span class="brand">OKBet</span> reserves the right to close the player's account, and any associated winnings or bonuses may be forfeited.</div></div>
+      <div class="bulletRow" data-k="tc5"><span class="bulletMark"></span><div class="bulletText"><span class="brand">OKBet</span> retains the right to modify or terminate this promotion without prior notice, subject to PAGCOR approval.</div></div>
+      <div class="bulletRow" data-k="tc6"><span class="bulletMark"></span><div class="bulletText">All materials and prizes will be shouldered by <span class="brand">OKBet</span>.</div></div>
+
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="pane pane-right" id="rightPane">
+  <h2 class="pane-title">Word 內容：VIP Rules Updated Copywriting</h2>
+  <p class="pane-hint">點任一條，左邊會捲到對應位置並標出來；點左邊的字也會反過來選到這裡。選中的那條會顯示現行前台原本的寫法。</p>
+
+  <div id="wordList"></div>
+
+  <details>
+    <summary>現行有、Word 沒有的內容（調整後不再顯示）</summary>
+    <ul>
+      <li>章節編號「1.」「2.」「3.」「4.」</li>
+      <li>等級表下方的流水備註<span class="en">*Note: Level-Up Bonus and Birthday Bonus require 1× turnover before withdrawal.</span></li>
+      <li>升級獎金的手動領取與重複升級說明<span class="en">…must be manually claimed before any level change. Re-leveling to the same tier will not grant the bonus again.</span></li>
+      <li>生日獎金的兩條規則<span class="en">The Birthday Bonus is awarded on the player's birthday (from 12:00 AM)… manually claimed within the birth month. / 30+ days registration required…</span></li>
+      <li>「3. Growth Value Deduction Rate (%)」整段與扣減率表</li>
+      <li>「4. Inactivity Rule」整段與回歸倍數表</li>
+      <li>T&amp;C 第 1 條的「E-bingo」</li>
+    </ul>
+  </details>
+
+  <details>
+    <summary>Word 未指定的呈現方式（本示意的處理）</summary>
+    <ul>
+      <li>粗體：Word 裡「Automatic Membership:」等開頭與「15,000 Total Growth Value.」是粗體，示意照 Word 以粗體呈現。現行前台的強調是藍字。</li>
+      <li>「Example: Player 1」用小標樣式呈現。</li>
+      <li>T&amp;C 裡「OKBet」的藍字沿用現行；Word 沒有標色，所以 General Mechanics 裡的 OKBet 沒有上藍。</li>
+      <li>示意把彈窗攤開成全長；實際是螢幕 85% 高、內容可捲動。背景的 VIP 頁只畫了標題列。</li>
+    </ul>
+  </details>
+</div>
+
+</div>
+
+<script>
+(function () {
+  var TAGS = { 'new': '新增', 'rewrite': '改寫', 'tweak': '微調', 'same': '未改', 'skip': '未放入畫面' };
+
+  // 右側資料：依 Word 的段落順序。t = 型態（h 標題 / p 條列 / skip 不在畫面上）
+  var groups = [
+    [
+      { k: 'h-gm', t: 'h', tag: 'rewrite', html: 'General Mechanics', d: '現行標題：<q>1. VIP Program Overview</q>' },
+      { k: 'gm1', t: 'p', tag: 'rewrite', html: '<b>Automatic Membership:</b> All OKBet account members are automatically enrolled in the VIP Program upon registration.', d: '現行：<q>All players are automatically enrolled in the VIP Program.</q>' },
+      { k: 'gm2', t: 'p', tag: 'rewrite', html: '<b>How to Rank Up:</b> Members can progress to higher VIP levels by accumulating Growth Values through bets on eligible products: Sports, Egames, Perya, and Live Dealer Games.', d: '現行：<q>Place valid bets to earn Growth Value and level up VIP tiers.</q>' },
+      { k: 'gm3', t: 'p', tag: 'rewrite', html: '<b>Rewards &amp; Bonuses:</b> Reaching a new VIP level unlocks corresponding rewards and bonuses. The Upgrade Bonus can be claimed once per account for every new VIP level achieved.', d: '現行相近的一條：<q>The Level-Up Bonus is awarded ONCE per VIP level and must be manually claimed before any level change. Re-leveling to the same tier will not grant the bonus again.</q><br>差異：Level-Up Bonus 改稱 Upgrade Bonus；「須手動領取」與「重複升級不再發」沒有了。' },
+      { k: 'gm4', t: 'p', tag: 'new', html: '<b>VIP Level Retention:</b> Once a member reaches a VIP level, the level will be retained without monthly turnover-based downgrades.', d: '現行是相反的規則：<q>Once leveled up, VIP status is valid for 1 month (T+1) and reviewed on the 1st of each month.</q>' },
+      { k: 'gm5', t: 'p', tag: 'new', html: '<b>System Governance:</b> All Growth Value thresholds, VIP level configurations, bonus amounts, and regression speed parameters are governed by automated system settings.', d: '現行沒有這一條。' }
+    ],
+    [
+      { k: 'h-gvc', t: 'h', tag: 'same', html: 'Growth Value Calculation', d: '現行同名（原本是「1. VIP Program Overview」底下的小標）。' },
+      { k: 'gvc-table', t: 'p', tag: 'tweak', html: '<table class="wt"><tr><th>Product</th><th>Bet Growth Value</th></tr><tr><td>Sports</td><td>2x</td></tr><tr><td>Live Dealer, Egames, Perya</td><td>1x</td></tr></table>', d: '表頭：<q>₱1 Valid Bet Growth Value</q> → <q>Bet Growth Value</q><br>產品：<q>All other games</q> → <q>Live Dealer, Egames, Perya</q><br>倍數 2x／1x 沒變。' },
+      { t: 'skip', html: 'Click the image to view the sheet.', d: '判斷是文件工具嵌入表格的提示字，不是要上線的文案。' },
+      { k: 'h-ex', t: 'h', tag: 'new', html: 'Example: Player 1', d: '現行沒有範例。' },
+      { k: 'ex1', t: 'p', tag: 'new', html: 'Player 1 bets ₱5,000 on Sports and another ₱5,000 on Perya. Therefore, the computation would be for Sports (₱5,000 x 2 = ₱10,000) and Perya (₱5,000 x 1 = ₱5,000) = <b>15,000 Total Growth Value.</b>', d: '現行沒有範例。' }
+    ],
+    [
+      { k: 'h-lv', t: 'h', tag: 'rewrite', html: 'VIP Levels &amp; Requirements', d: '現行標題：<q>2. VIP Level-Up Requirement &amp; Rewards</q>' },
+      { k: 'lv-table', t: 'p', tag: 'tweak', html: '<table class="wt"><tr><th>VIP Level</th><th>Upgrade Points</th><th>Upgrade Bonus</th><th>Birthday Bonus</th></tr><tr><td>VIP 0</td><td>-</td><td>-</td><td>-</td></tr><tr><td>VIP 1</td><td>5,000</td><td>₱10</td><td>-</td></tr><tr><td>VIP 2</td><td>100,000</td><td>₱100</td><td>-</td></tr><tr><td>VIP 3</td><td>1,000,000</td><td>₱500</td><td>₱500</td></tr><tr><td>VIP 4</td><td>10,000,000</td><td>₱5,000</td><td>₱1,000</td></tr></table>', d: '表頭：<q>Level</q> → <q>VIP Level</q>；<q>Growth Value Required</q> → <q>Upgrade Points</q>；<q>Level-Up Bonus</q> → <q>Upgrade Bonus</q><br>VIP 0–4 的數字都沒變。' },
+      { t: 'skip', html: 'Click the image to view the sheet.', d: '判斷是文件工具嵌入表格的提示字，不是要上線的文案。' }
+    ],
+    [
+      { k: 'h-ur', t: 'h', tag: 'new', html: 'Upgrade Requirements', d: '現行沒有這個標題，相關句子原本放在等級表下方。' },
+      { k: 'ur1', t: 'p', tag: 'new', html: 'Members can reach higher VIP levels by accumulating the required Growth Values through eligible betting activities.', d: '現行沒有這一條。' },
+      { k: 'ur2', t: 'p', tag: 'new', html: 'Upon meeting the required Growth Value, members will qualify for the corresponding VIP level.', d: '現行沒有這一條。' },
+      { k: 'ur3', t: 'p', tag: 'rewrite', html: 'VIP level upgrades will be processed on the following day after 3:50 AM.', d: '現行：<q>VIP levels are based on Growth Value from valid bets and update the next day after 4:00 AM.</q><br>差異：時間 4:00 AM → 3:50 AM。' },
+      { k: 'ur4', t: 'p', tag: 'rewrite', html: 'Growth Values are updated daily starting at 3:50 AM onwards.', d: '現行（成長值表下方的備註）：<q>*Note: Growth Value updates daily at 4:00 AM.</q><br>差異：時間 4:00 AM → 3:50 AM，位置從表格下方移到這一段。' },
+      { k: 'ur5', t: 'p', tag: 'new', html: 'Members who successfully reach a new VIP level will receive the corresponding Upgrade Bonus.', d: '現行沒有這一條。' }
+    ],
+    [
+      { k: 'h-rt', t: 'h', tag: 'new', html: 'VIP Level Retention', d: '現行沒有這一段。' },
+      { k: 'rt1', t: 'p', tag: 'new', html: 'Members will retain their achieved VIP level without monthly turnover-based downgrades.', d: '現行是相反的規則：<q>Players must earn enough Growth Value toward the next VIP level to maintain their current level.</q>' },
+      { k: 'rt2', t: 'p', tag: 'new', html: 'No monthly VIP Retain requirements will be imposed.', d: '現行沒有這一條。' },
+      { k: 'rt3', t: 'p', tag: 'new', html: 'Failure to meet a higher VIP level\'s Growth Value requirement will not result in a deduction or downgrade of the member\'s existing VIP level.', d: '現行是相反的規則：<q>If the requirement is not met, a Growth Value Deduction Rate (%) will be applied.</q>' },
+      { k: 'rt4', t: 'p', tag: 'new', html: 'Members can continue accumulating Growth Values to qualify for higher VIP levels.', d: '現行沒有這一條。' }
+    ],
+    [
+      { k: 'h-tc', t: 'h', tag: 'same', html: 'Terms and Conditions', d: '現行同名。' },
+      { k: 'tc1', t: 'p', tag: 'tweak', html: 'The promotion applies to Perya, Slots, Casino, Sports, Arcade, Poker and Numeric games.', d: '現行：<q>…Sports, Arcade, E-bingo, Poker and Numeric games.</q><br>差異：拿掉 E-bingo。' },
+      { k: 'tc2', t: 'p', tag: 'tweak', html: 'Rewards earned are non-transferable and cannot be exchanged for other items or credits.', d: '差異：句尾補上句點，其餘相同。' },
+      { k: 'tc3', t: 'p', tag: 'tweak', html: 'The following individuals are not eligible to participate in this promotion: employees of OKBet, their immediate family members up to the second degree of affinity, operators of gaming sites, banned individuals, as well as government officials or employees.', d: '現行：<q>The following individuals are not eligible: … banned individuals, and government officials or employees.</q><br>差異：加上「to participate in this promotion」；「and」改成「as well as」。' },
+      { k: 'tc4', t: 'p', tag: 'same', html: 'In the event of suspected fraudulent or suspicious activities, OKBet reserves the right to close the player\'s account, and any associated winnings or bonuses may be forfeited.', d: '跟現行相同。' },
+      { k: 'tc5', t: 'p', tag: 'same', html: 'OKBet retains the right to modify or terminate this promotion without prior notice, subject to PAGCOR approval.', d: '跟現行相同。' },
+      { k: 'tc6', t: 'p', tag: 'same', html: 'All materials and prizes will be shouldered by OKBet.', d: '跟現行相同。' }
+    ]
+  ];
+
+  var list = document.getElementById('wordList');
+  var phone = document.getElementById('phone');
+  var calm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var how = calm ? 'auto' : 'smooth';
+
+  groups.forEach(function (g) {
+    var box = document.createElement('div');
+    box.className = 'group';
+    g.forEach(function (it) {
+      var row;
+      if (it.t === 'skip') {
+        row = document.createElement('div');
+        row.className = 'item skip';
+        row.innerHTML = '<span class="nobox" aria-hidden="true">–</span><span class="body"><span class="txt">' + it.html + '</span><span class="tag">' + TAGS.skip + '</span><span class="detail">' + it.d + '</span></span>';
+      } else {
+        row = document.createElement('label');
+        row.className = 'item' + (it.t === 'h' ? ' h' : '');
+        row.setAttribute('data-k', it.k);
+        row.innerHTML = '<input type="radio" name="w" value="' + it.k + '"><span class="body"><span class="txt">' + it.html + '</span><span class="tag ' + it.tag + '">' + TAGS[it.tag] + '</span><span class="detail">' + it.d + '</span></span>';
+      }
+      box.appendChild(row);
+    });
+    list.appendChild(box);
+  });
+
+  function select(k, from) {
+    var i, old = phone.querySelectorAll('.sel');
+    for (i = 0; i < old.length; i++) old[i].classList.remove('sel');
+    old = list.querySelectorAll('.item.on');
+    for (i = 0; i < old.length; i++) old[i].classList.remove('on');
+    var left = phone.querySelector('[data-k="' + k + '"]');
+    var right = list.querySelector('.item[data-k="' + k + '"]');
+    if (right) { right.classList.add('on'); right.querySelector('input').checked = true; }
+    if (left) { left.classList.add('sel'); }
+    if (from === 'right' && left) left.scrollIntoView({ block: 'center', behavior: how });
+    if (from === 'left' && right) right.scrollIntoView({ block: 'nearest', behavior: how });
+  }
+
+  list.addEventListener('change', function (e) {
+    if (e.target && e.target.name === 'w') select(e.target.value, 'right');
+  });
+  phone.addEventListener('click', function (e) {
+    var el = e.target.closest ? e.target.closest('[data-k]') : null;
+    if (el) select(el.getAttribute('data-k'), 'left');
+  });
+
+  var marks = document.getElementById('marks');
+  function syncMarks() { document.body.classList.toggle('all-marks', marks.checked); }
+  marks.addEventListener('change', syncMarks);
+  syncMarks();
+
+  select('h-gm', 'init');
+})();
+</script>
+</body>
+</html>
