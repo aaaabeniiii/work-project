@@ -56,6 +56,13 @@ input:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
 .pane-title { margin: 0 0 4px; font-size: 16px; font-weight: 600; }
 .pane-hint { margin: 0 0 14px; color: var(--ink-2); font-size: 13px; }
 
+.theme-tabs { position: sticky; top: -20px; z-index: 3; display: flex; justify-content: center; gap: 0; width: 390px; max-width: 100%; margin: -20px auto 0; padding: 14px 0 12px; background: var(--page); }
+.theme-tabs button { flex: 1 1 0; padding: 7px 0; border: 1px solid var(--line); background: var(--panel); color: var(--ink-2); font: inherit; font-size: 14px; cursor: pointer; }
+.theme-tabs button:first-child { border-radius: 8px 0 0 8px; }
+.theme-tabs button:last-child { border-radius: 0 8px 8px 0; border-left: 0; }
+.theme-tabs button.on { background: var(--ink); border-color: var(--ink); color: var(--panel); font-weight: 600; }
+.theme-tabs button:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
 /* ===== 右：Word 內容 ===== */
 .group { margin: 0 0 18px; max-width: 760px; }
 .item { display: flex; gap: 10px; align-items: flex-start; padding: 8px 10px; border: 1px solid transparent; border-radius: 8px; cursor: pointer; }
@@ -88,41 +95,45 @@ details .en { display: block; color: var(--ink-2); font-size: 13px; font-family:
 
 /* ===== 左：手機畫面。數值取自測試站 Rules 彈窗的實際樣式（設計寬 390）===== */
 .phone {
+  --r-bg: #0b283a; --r-t1: #ffffff; --r-t2: #b7d0de; --r-ic: #b7d0de;
   width: 390px; max-width: 100%; margin: 0 auto;
   position: relative; overflow: hidden;
   background: linear-gradient(180deg, #45282d 0px, #1a2234 127px);
   font-family: -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
   line-height: normal;
 }
+.phone.day { --r-bg: #ffffff; --r-t1: #0d2245; --r-t2: #6d7693; --r-ic: #6d7693; }
 .phone .mask { position: absolute; inset: 0; background: rgba(13, 34, 69, 0.45); }
 .vip-bar { position: relative; height: 37px; display: flex; align-items: center; justify-content: space-between; padding: 0 15px 0 11px; }
 .vip-bar .back { width: 18px; height: 18px; display: block; }
 .vip-bar .ttl { position: absolute; left: 0; right: 0; top: 9px; text-align: center; color: #fff; font-size: 16px; font-weight: 500; line-height: 19.5px; }
 .vip-bar .lnk { position: relative; color: #5aacf9; font-size: 14px; }
-.drawer { position: relative; margin-top: 90px; border-radius: 16px 16px 0 0; overflow: hidden; box-shadow: rgba(13, 34, 69, 0.12) 0 -8px 32px; background: #0b283a; padding-bottom: 12px; }
-.dragHandle { width: 36px; height: 4px; border-radius: 100px; background: #b7d0de; margin: 10px auto 2px; }
+.drawer { position: relative; margin-top: 90px; border-radius: 16px 16px 0 0; overflow: hidden; box-shadow: rgba(13, 34, 69, 0.12) 0 -8px 32px; background: var(--r-bg); padding-bottom: 12px; }
+.dragHandle { width: 36px; height: 4px; border-radius: 100px; background: var(--r-ic); margin: 10px auto 2px; }
 .titleBar { display: flex; justify-content: space-between; align-items: center; padding: 6px 16px 12px; }
 .titleBarSpacer { flex: 0 0 28px; width: 28px; height: 28px; }
 .titleCenter { flex: 1 1 auto; display: flex; justify-content: center; align-items: center; gap: 8px; min-height: 18px; }
-.titleCenter svg { width: 48px; height: 8px; color: #b7d0de; flex-shrink: 0; }
-.titlePkgText { color: #fff; letter-spacing: -0.408px; white-space: nowrap; font-family: Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 15px; font-weight: 500; line-height: 22px; }
-.closeInHeader { width: 28px; height: 28px; color: #b7d0de; display: flex; justify-content: center; align-items: center; font-size: 20px; font-weight: 300; line-height: 1; }
+.titleCenter svg { width: 48px; height: 8px; color: var(--r-ic); flex-shrink: 0; }
+.titlePkgText { color: var(--r-t1); letter-spacing: -0.408px; white-space: nowrap; font-family: Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 15px; font-weight: 500; line-height: 22px; }
+.closeInHeader { width: 28px; height: 28px; color: var(--r-ic); display: flex; justify-content: center; align-items: center; font-size: 20px; font-weight: 300; line-height: 1; }
 .scroll { padding-right: 2px; }
-.sectionTitle { margin: 0 0 4px; padding: 0 16px; color: #fff; font-size: 14px; font-weight: 500; line-height: normal; }
+.sectionTitle { margin: 0 0 4px; padding: 0 16px; color: var(--r-t1); font-size: 14px; font-weight: 500; line-height: normal; }
 .bulletRow { display: flex; align-items: flex-start; gap: 4px; padding: 0 16px 0 24px; }
-.bulletMark { width: 5px; height: 5px; border-radius: 50%; background: #b7d0de; flex-shrink: 0; margin-top: 4px; }
-.bulletText { flex: 1 1 0%; min-width: 0; color: #b7d0de; font-size: 12px; font-weight: 400; line-height: normal; }
+.bulletMark { width: 5px; height: 5px; border-radius: 50%; background: var(--r-ic); flex-shrink: 0; margin-top: 4px; }
+.bulletText { flex: 1 1 0%; min-width: 0; color: var(--r-t2); font-size: 12px; font-weight: 400; line-height: normal; }
 .bulletText b { font-weight: 700; }
 .brand { color: #025be8; }
 .tableWrap { padding: 0 16px 16px; }
-.rtable { width: 100%; color: #b7d0de; text-align: center; border-collapse: collapse; font-size: 10px; font-weight: 500; }
-.rtable th, .rtable td { vertical-align: middle; border: 0.5px solid #b7d0de; padding: 6px 8px; font-weight: 500; }
+.rtable { width: 100%; color: var(--r-t2); text-align: center; border-collapse: collapse; font-size: 10px; font-weight: 500; }
+.rtable th, .rtable td { vertical-align: middle; border: 0.5px solid var(--r-t2); padding: 6px 8px; font-weight: 500; }
 .rtable td.num { font-size: 12px; }
 
 /* 對應與改動標記 */
 .phone [data-k] { cursor: pointer; }
 .phone [data-k].sel { background: rgba(255, 105, 160, 0.22); box-shadow: 0 0 0 1.5px #ff7fb0 inset; }
 .phone table[data-k].sel { box-shadow: 0 0 0 2px #ff7fb0; }
+.phone.day [data-k].sel { box-shadow: 0 0 0 1.5px #e0457b inset; }
+.phone.day table[data-k].sel { box-shadow: 0 0 0 2px #e0457b; }
 .chg { border-radius: 2px; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
 .phone .sel .chg, body.all-marks .phone .chg { background: rgba(255, 105, 160, 0.5); }
 
@@ -132,6 +143,12 @@ details .en { display: block; color: var(--ink-2); font-size: 13px; font-family:
   .pane { overflow: visible; }
   .pane-left { border-right: 0; border-bottom: 1px solid var(--line); }
 }
+.controls { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+.controls select { font: inherit; font-size: 14px; padding: 5px 8px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); color: var(--ink); }
+.controls select:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.toggle.off { opacity: 0.45; cursor: default; }
+.item .kk { display: none; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12px; font-weight: 600; margin-right: 8px; padding: 0 6px; border: 1px solid var(--line); border-radius: 4px; white-space: nowrap; }
+body.i18n .item .kk { display: inline-block; }
 </style>
 </head>
 <body>
@@ -139,14 +156,22 @@ details .en { display: block; color: var(--ink-2); font-size: 13px; font-family:
 <div class="top">
   <div>
     <h1>VIP Rules 說明調整</h1>
-    <p>OKF-2818　左：調整後的 Rules 畫面（樣式取自測試站 H5 彈窗）　右：原始需求 Word（VIP_Rules_Updated_Copywriting.docx）的內容</p>
+    <p>OKF-2818　左：調整後的 Rules 畫面（夜間／日間，樣式取自測試站）　右：原始需求 Word（VIP_Rules_Updated_Copywriting.docx）的內容</p>
   </div>
-  <label class="toggle"><input type="checkbox" id="marks"> <span class="swatch" aria-hidden="true"></span> 同時標示所有改動處</label>
+  <div class="controls">
+    <label class="toggle"><input type="checkbox" id="i18n"> 套用翻譯表（顯示編號）</label>
+    <label id="langBox" hidden>語系 <select id="lang" aria-label="語系"><option value="1" selected>en</option><option value="0">zh</option><option value="2">ph</option><option value="3">vi</option><option value="4">ceb</option></select></label>
+    <label class="toggle" id="marksBox"><input type="checkbox" id="marks"> <span class="swatch" aria-hidden="true"></span> 同時標示所有改動處</label>
+  </div>
 </div>
 
 <div class="cols">
 
 <div class="pane pane-left" id="leftPane">
+<div class="theme-tabs" role="tablist" aria-label="主題">
+  <button type="button" role="tab" id="tab-night" class="on" aria-selected="true">夜間</button>
+  <button type="button" role="tab" id="tab-day" aria-selected="false">日間</button>
+</div>
 <div class="phone" id="phone">
   <div class="vip-bar">
     <svg class="back" viewBox="0 0 18 18" fill="none" stroke="#e6e6e6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11.5 3.5L6 9l5.5 5.5"/></svg>
@@ -161,7 +186,7 @@ details .en { display: block; color: var(--ink-2); font-size: 13px; font-family:
       <span class="titleBarSpacer" aria-hidden="true"></span>
       <div class="titleCenter">
         <svg viewBox="0 0 48 8" fill="none" aria-hidden="true"><g opacity="0.5"><rect width="5.81544" height="5.81544" transform="matrix(0.725878 0.687824 -0.725878 0.687824 43.7788 0)" fill="currentColor"/><path d="M42.7837 3.05725V4.94287L0 4.00006L42.7837 3.05725Z" fill="currentColor"/></g></svg>
-        <span class="titlePkgText">Rules</span>
+        <span class="titlePkgText" id="ruleTitle">Rules</span>
         <svg viewBox="0 0 48 8" fill="none" aria-hidden="true"><g opacity="0.5"><rect width="5.81544" height="5.81544" transform="matrix(-0.725878 0.687824 0.725878 0.687824 4.22119 0)" fill="currentColor"/><path d="M5.21627 3.05725V4.94287L48 4.00006L5.21627 3.05725Z" fill="currentColor"/></g></svg>
       </div>
       <span class="closeInHeader" aria-hidden="true">×</span>
@@ -232,7 +257,7 @@ details .en { display: block; color: var(--ink-2); font-size: 13px; font-family:
 
 <div class="pane pane-right" id="rightPane">
   <h2 class="pane-title">Word 內容：VIP Rules Updated Copywriting</h2>
-  <p class="pane-hint">點任一條，左邊會捲到對應位置並標出來；點左邊的字也會反過來選到這裡。選中的那條會顯示現行前台原本的寫法。</p>
+  <p class="pane-hint">點任一條，左邊會捲到對應位置並標出來；點左邊的字也會反過來選到這裡。選中的那條會顯示現行前台原本的寫法。點頁面其他地方即取消標示。</p>
 
   <div id="wordList"></div>
 
@@ -252,10 +277,13 @@ details .en { display: block; color: var(--ink-2); font-size: 13px; font-family:
   <details>
     <summary>Word 未指定的呈現方式（本示意的處理）</summary>
     <ul>
+      <li>套用翻譯表：勾選右上「套用翻譯表（顯示編號）」後，左邊畫面改用翻譯表的文字，並以「編號:文字」顯示（同前台 i18nKey 模式），可切換語系；右邊每一條前面會顯示對應的翻譯編號。前面沒有編號的字只用英文、不套翻譯表：等級表的 VIP 0～VIP 4、倍數 2x／1x、數值與金額。翻譯表的文字不含粗體標記，所以勾選後不顯示粗體。en 以外的語系為依英文擬的翻譯，待翻譯人員確認。</li>
       <li>粗體：Word 裡「Automatic Membership:」等開頭與「15,000 Total Growth Value.」是粗體，示意照 Word 以粗體呈現。現行前台的強調是藍字。</li>
       <li>「Example: Player 1」用小標樣式呈現。</li>
       <li>T&amp;C 裡「OKBet」的藍字沿用現行；Word 沒有標色，所以 General Mechanics 裡的 OKBet 沒有上藍。</li>
-      <li>示意把彈窗攤開成全長；實際是螢幕 85% 高、內容可捲動。背景的 VIP 頁只畫了標題列。</li>
+      <li>示意把彈窗攤開成全長；實際是螢幕 85% 高、內容可捲動。背景的 VIP 頁只畫了標題列，日間與夜間用同一張背景示意。</li>
+      <li>日間／夜間：文案相同，顏色沿用現行主題。夜間底色 #0b283a、標題 #ffffff、內文與表格框線 #b7d0de；日間底色 #ffffff、標題 #0d2245、內文與表格框線 #6d7693。</li>
+      <li>PC／H5：內文樣式相同（同一元件，寬 390）。示意以 H5 的底部彈窗呈現；PC 為置中彈窗（390×695、四角圓角 16、無上方拖曳條、標題字 20px）。</li>
     </ul>
   </details>
 </div>
@@ -314,6 +342,16 @@ details .en { display: block; color: var(--ink-2); font-size: 13px; font-family:
     ]
   ];
 
+  // ===== 翻譯表：勾選「套用翻譯表」後，左邊改用翻譯表文字並顯示編號（同前台 i18nKey 模式）=====
+  var T = {"VR0058": ["基本规则", "General Mechanics", "General Mechanics", "Cơ chế chung", "General Mechanics"], "VR0059": ["自动加入：所有OKBet账户会员在注册后将自动加入VIP计划。", "Automatic Membership: All OKBet account members are automatically enrolled in the VIP Program upon registration.", "Automatic Membership: Lahat ng OKBet account members ay automatic na kasali sa VIP Program pagka-register.", "Tự động tham gia: Tất cả thành viên có tài khoản OKBet được tự động tham gia chương trình VIP ngay khi đăng ký.", "Automatic Membership: Ang tanan nga OKBet account members, automatic na nga naka-enroll sa VIP Program inig register."], "VR0060": ["升级方式：会员在指定产品（体育、电子游戏、Perya及真人荷官游戏）投注累积成长值，即可提升VIP等级。", "How to Rank Up: Members can progress to higher VIP levels by accumulating Growth Values through bets on eligible products: Sports, Egames, Perya, and Live Dealer Games.", "How to Rank Up: Makakaakyat ang members sa mas mataas na VIP level sa pag-ipon ng Growth Value mula sa bets sa eligible products: Sports, Egames, Perya, at Live Dealer Games.", "Cách thăng cấp: Thành viên có thể lên cấp VIP cao hơn bằng cách tích lũy Giá trị Tăng trưởng thông qua cược ở các sản phẩm hợp lệ: Sports, Egames, Perya và Live Dealer Games.", "How to Rank Up: Makasaka ang members sa mas taas nga VIP level pinaagi sa pagtigom og Growth Value gikan sa bets sa eligible products: Sports, Egames, Perya, ug Live Dealer Games."], "VR0061": ["奖励与奖金：达到新的VIP等级即可解锁相应的奖励与奖金。每个账户每达到一个新的VIP等级，可领取一次升级奖励。", "Rewards & Bonuses: Reaching a new VIP level unlocks corresponding rewards and bonuses. The Upgrade Bonus can be claimed once per account for every new VIP level achieved.", "Rewards & Bonuses: Kapag naabot ang bagong VIP level, maa-unlock ang katumbas na rewards at bonuses. Ang Upgrade Bonus ay pwedeng i-claim isang beses kada account sa bawat bagong VIP level na maabot.", "Phần thưởng & Tiền thưởng: Đạt cấp VIP mới sẽ mở khóa các phần thưởng và tiền thưởng tương ứng. Thưởng nâng cấp có thể nhận một lần cho mỗi tài khoản với mỗi cấp VIP mới đạt được.", "Rewards & Bonuses: Kung maabot ang bag-ong VIP level, ma-unlock ang katugbang nga rewards ug bonuses. Ang Upgrade Bonus pwede i-claim ka-usa kada account sa matag bag-ong VIP level nga maabot."], "VR0062": ["VIP等级保留：会员达到某一VIP等级后，该等级将予以保留，不会因每月流水而降级。", "VIP Level Retention: Once a member reaches a VIP level, the level will be retained without monthly turnover-based downgrades.", "VIP Level Retention: Kapag naabot ng member ang isang VIP level, mananatili ito at walang monthly downgrade na naka-base sa turnover.", "Giữ cấp VIP: Khi thành viên đạt một cấp VIP, cấp đó sẽ được giữ nguyên, không bị hạ cấp hằng tháng dựa trên doanh số cược.", "VIP Level Retention: Kung maabot sa member ang usa ka VIP level, magpabilin kini ug walay monthly downgrade nga base sa turnover."], "VR0063": ["系统管理：所有成长值门槛、VIP等级配置、奖金金额及回归速度参数，均由系统自动设定管理。", "System Governance: All Growth Value thresholds, VIP level configurations, bonus amounts, and regression speed parameters are governed by automated system settings.", "System Governance: Lahat ng Growth Value thresholds, VIP level configurations, bonus amounts, at regression speed parameters ay naka-base sa automated system settings.", "Quản lý hệ thống: Tất cả ngưỡng Giá trị Tăng trưởng, cấu hình cấp VIP, mức thưởng và tham số tốc độ hồi quy đều do cài đặt hệ thống tự động quản lý.", "System Governance: Ang tanan nga Growth Value thresholds, VIP level configurations, bonus amounts, ug regression speed parameters kay naka-base sa automated system settings."], "VR0064": ["投注成长值", "Bet Growth Value", "Bet Growth Value", "Giá trị Tăng trưởng theo cược", "Bet Growth Value"], "VR0065": ["真人荷官、电子游戏、Perya", "Live Dealer, Egames, Perya", "Live Dealer, Egames, Perya", "Live Dealer, Egames, Perya", "Live Dealer, Egames, Perya"], "VR0066": ["示例：玩家1", "Example: Player 1", "Example: Player 1", "Ví dụ: Người chơi 1", "Example: Player 1"], "VR0067": ["玩家1在体育投注₱5,000，并在Perya投注₱5,000。因此计算方式为：体育（₱5,000 x 2 = ₱10,000）加Perya（₱5,000 x 1 = ₱5,000）= 总成长值15,000。", "Player 1 bets ₱5,000 on Sports and another ₱5,000 on Perya. Therefore, the computation would be for Sports (₱5,000 x 2 = ₱10,000) and Perya (₱5,000 x 1 = ₱5,000) = 15,000 Total Growth Value.", "Si Player 1 ay tumaya ng ₱5,000 sa Sports at ₱5,000 pa sa Perya. Kaya ang computation ay Sports (₱5,000 x 2 = ₱10,000) at Perya (₱5,000 x 1 = ₱5,000) = 15,000 Total Growth Value.", "Người chơi 1 cược ₱5,000 vào Sports và thêm ₱5,000 vào Perya. Do đó, cách tính là Sports (₱5,000 x 2 = ₱10,000) và Perya (₱5,000 x 1 = ₱5,000) = tổng 15,000 Giá trị Tăng trưởng.", "Si Player 1 nipusta og ₱5,000 sa Sports ug laing ₱5,000 sa Perya. Busa ang computation kay Sports (₱5,000 x 2 = ₱10,000) ug Perya (₱5,000 x 1 = ₱5,000) = 15,000 Total Growth Value."], "VR0068": ["VIP等级与条件", "VIP Levels & Requirements", "VIP Levels & Requirements", "Cấp VIP và điều kiện", "VIP Levels & Requirements"], "VR0069": ["VIP等级", "VIP Level", "VIP Level", "Cấp VIP", "VIP Level"], "VR0070": ["升级积分", "Upgrade Points", "Upgrade Points", "Điểm nâng cấp", "Upgrade Points"], "VR0071": ["升级奖励", "Upgrade Bonus", "Upgrade Bonus", "Thưởng nâng cấp", "Upgrade Bonus"], "VR0072": ["升级条件", "Upgrade Requirements", "Upgrade Requirements", "Điều kiện nâng cấp", "Upgrade Requirements"], "VR0073": ["会员通过符合条件的投注累积所需成长值，即可达到更高的VIP等级。", "Members can reach higher VIP levels by accumulating the required Growth Values through eligible betting activities.", "Maaabot ng members ang mas mataas na VIP level sa pag-ipon ng required Growth Value mula sa eligible na pagtaya.", "Thành viên có thể đạt cấp VIP cao hơn bằng cách tích lũy đủ Giá trị Tăng trưởng yêu cầu thông qua các hoạt động cược hợp lệ.", "Maabot sa members ang mas taas nga VIP level pinaagi sa pagtigom sa required Growth Value gikan sa eligible nga pagpusta."], "VR0074": ["达到所需成长值后，会员即符合相应VIP等级的资格。", "Upon meeting the required Growth Value, members will qualify for the corresponding VIP level.", "Kapag naabot ang required Growth Value, magiging qualified ang member sa katumbas na VIP level.", "Khi đạt Giá trị Tăng trưởng yêu cầu, thành viên sẽ đủ điều kiện lên cấp VIP tương ứng.", "Kung maabot ang required Growth Value, ma-qualify ang member sa katugbang nga VIP level."], "VR0075": ["VIP等级升级将于次日凌晨3:50后处理。", "VIP level upgrades will be processed on the following day after 3:50 AM.", "Ipo-process ang VIP level upgrade kinabukasan pagkatapos ng 3:50 AM.", "Việc nâng cấp VIP sẽ được xử lý vào ngày hôm sau, sau 3:50 AM.", "I-process ang VIP level upgrade sa sunod nga adlaw human sa 3:50 AM."], "VR0076": ["成长值每日凌晨3:50起更新。", "Growth Values are updated daily starting at 3:50 AM onwards.", "Ina-update ang Growth Value araw-araw simula 3:50 AM.", "Giá trị Tăng trưởng được cập nhật mỗi ngày từ 3:50 AM trở đi.", "Gina-update ang Growth Value kada adlaw sugod alas 3:50 AM."], "VR0077": ["成功达到新VIP等级的会员将获得相应的升级奖励。", "Members who successfully reach a new VIP level will receive the corresponding Upgrade Bonus.", "Ang members na makaabot sa bagong VIP level ay makakatanggap ng katumbas na Upgrade Bonus.", "Thành viên đạt cấp VIP mới sẽ nhận được Thưởng nâng cấp tương ứng.", "Ang members nga makaabot sa bag-ong VIP level makadawat sa katugbang nga Upgrade Bonus."], "VR0078": ["VIP等级保留", "VIP Level Retention", "VIP Level Retention", "Giữ cấp VIP", "VIP Level Retention"], "VR0079": ["会员将保留已达到的VIP等级，不会因每月流水而降级。", "Members will retain their achieved VIP level without monthly turnover-based downgrades.", "Mananatili sa members ang naabot nilang VIP level at walang monthly downgrade na naka-base sa turnover.", "Thành viên sẽ giữ nguyên cấp VIP đã đạt được, không bị hạ cấp hằng tháng dựa trên doanh số cược.", "Magpabilin sa members ang naabot nilang VIP level ug walay monthly downgrade nga base sa turnover."], "VR0080": ["不设每月VIP保级要求。", "No monthly VIP Retain requirements will be imposed.", "Walang monthly VIP Retain requirement na ipapatupad.", "Không áp dụng yêu cầu giữ cấp VIP hằng tháng.", "Walay monthly VIP Retain requirement nga ipatuman."], "VR0081": ["未达到更高VIP等级的成长值要求，不会导致会员现有VIP等级被扣减或降级。", "Failure to meet a higher VIP level's Growth Value requirement will not result in a deduction or downgrade of the member's existing VIP level.", "Kapag hindi naabot ang Growth Value requirement ng mas mataas na VIP level, hindi mababawasan o ida-downgrade ang kasalukuyang VIP level ng member.", "Việc không đạt yêu cầu Giá trị Tăng trưởng của cấp VIP cao hơn sẽ không dẫn đến khấu trừ hoặc hạ cấp VIP hiện tại của thành viên.", "Kung dili maabot ang Growth Value requirement sa mas taas nga VIP level, dili makuhaan o ma-downgrade ang karon nga VIP level sa member."], "VR0082": ["会员可继续累积成长值，以达到更高VIP等级的资格。", "Members can continue accumulating Growth Values to qualify for higher VIP levels.", "Pwedeng ituloy ng members ang pag-ipon ng Growth Value para maging qualified sa mas mataas na VIP level.", "Thành viên có thể tiếp tục tích lũy Giá trị Tăng trưởng để đủ điều kiện lên các cấp VIP cao hơn.", "Pwede ipadayon sa members ang pagtigom og Growth Value para ma-qualify sa mas taas nga VIP level."], "VR0083": ["本活动适用于Perya、老虎机、赌场、体育、街机、扑克及数字游戏。", "The promotion applies to Perya, Slots, Casino, Sports, Arcade, Poker and Numeric games.", "Applicable sa Perya, Slots, Casino, Sports, Arcade, Poker at Numeric games.", "Khuyến mãi áp dụng cho Perya, Slots, Casino, Sports, Arcade, Poker và trò chơi số.", "Applicable sa tanang games: Perya, Slots, Casino, Sports, Arcade, Poker, Numeric."], "VR0084": ["所获得奖励不可转让，亦不可兑换为其他物品或额度", "Rewards earned are non-transferable and cannot be exchanged for other items or credits.", "Ang rewards ay hindi transferable at hindi pwedeng ipalit.", "Phần thưởng không thể chuyển nhượng và không thể đổi sang vật phẩm hoặc tín dụng khác", "Dili transferable ang rewards."], "VR0085": ["以下人员不得参与：OKBet员工、其二等亲属、博彩网站运营者、被封禁用户及政府官员或员工。", "The following individuals are not eligible to participate in this promotion: employees of <span style=\"color: {{}};\">OKBet</span>, their immediate family members up to the second degree of affinity, operators of gaming sites, banned individuals, as well as government officials or employees.", "Hindi eligible ang employees, pamilya, operators, banned users, at government personnel.", "Những người sau không đủ điều kiện: nhân viên OKBet, người thân đến bậc hai, nhà vận hành trang game, người bị cấm, và quan chức hoặc nhân viên chính phủ.", "Dili eligible ang employees, pamilya, operators, banned ug government personnel."], "VR0086": ["规则", "Rules", "Patakaran", "Quy định", "Palisiya"], "VR0087": ["体育", "Sports", "Sports", "Sports", "Sports"], "VR0088": ["条款与细则", "Terms and Conditions", "Terms and Conditions", "Điều khoản và Điều kiện", "Terms and Conditions"], "VR0006": ["成长值计算", "Growth Value Calculation", "Pagkalkula ng Growth Value", "Cách tính Giá trị Tăng trưởng", "Pagkalkula ng Growth Value"], "VR0007": ["产品", "Product", "Product", "Sản phẩm", "Product"], "VR0014": ["生日奖励", "Birthday Bonus", "Birthday Bonus", "Thưởng sinh nhật", "Birthday Bonus"], "VR0055": ["如发现可疑或欺诈行为，OKBet有权关闭账户，并没收相关奖金或收益。", "In the event of suspected fraudulent or suspicious activities, <span style=\"color: {{}};\">OKBet</span> reserves the right to close the player's account, and any associated winnings or bonuses may be forfeited.", "May karapatan ang OKBet na i-close ang account kung may fraudulent activity.", "Nếu phát hiện gian lận hoặc hành vi đáng ngờ, OKBet có quyền đóng tài khoản và tịch thu tiền thắng hoặc thưởng liên quan.", "Pwede i-close sa OKBet ang account kung naa'y fraud."], "VR0056": ["OKBet保留在获得PAGCOR批准后修改或终止本活动的权利，恕不另行通知。", "<span style=\"color: {{}};\">OKBet</span> retains the right to modify or terminate this promotion without prior notice, subject to PAGCOR approval.", "Maaaring baguhin o itigil ang promo na may approval ng PAGCOR.", "OKBet có quyền thay đổi hoặc chấm dứt khuyến mãi mà không cần thông báo trước, tùy theo phê duyệt của PAGCOR.", "Pwede usbon o ihunong ang promo nga naa'y PAGCOR approval."], "VR0057": ["所有物料及奖品均由OKBet承担。", "All materials and prizes will be shouldered by <span style=\"color: {{}};\">OKBet</span>.", "Lahat ng gastos ay sagot ng OKBet.", "Tất cả vật phẩm và giải thưởng do OKBet chịu trách nhiệm.", "Tanang gasto, sagot sa OKBet."]};
+  var KEYMAP = {"h-gm": "VR0058", "gm1": "VR0059", "gm2": "VR0060", "gm3": "VR0061", "gm4": "VR0062", "gm5": "VR0063", "h-gvc": "VR0006", "h-ex": "VR0066", "ex1": "VR0067", "h-lv": "VR0068", "h-ur": "VR0072", "ur1": "VR0073", "ur2": "VR0074", "ur3": "VR0075", "ur4": "VR0076", "ur5": "VR0077", "h-rt": "VR0078", "rt1": "VR0079", "rt2": "VR0080", "rt3": "VR0081", "rt4": "VR0082", "h-tc": "VR0088", "tc1": "VR0083", "tc2": "VR0084", "tc3": "VR0085", "tc4": "VR0055", "tc5": "VR0056", "tc6": "VR0057"};
+  var CELLS = {"gvc-table": [["VR0007", "VR0064"], ["VR0087", null], ["VR0065", null]], "lv-table": [["VR0069", "VR0070", "VR0071", "VR0014"]]};
+  function keysOf(k) {
+    if (KEYMAP[k]) return KEYMAP[k];
+    if (CELLS[k]) { var a = []; CELLS[k].forEach(function (r) { r.forEach(function (c) { if (c) a.push(c); }); }); return a.join('、'); }
+    return '';
+  }
+
   var list = document.getElementById('wordList');
   var phone = document.getElementById('phone');
   var calm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -332,7 +370,7 @@ details .en { display: block; color: var(--ink-2); font-size: 13px; font-family:
         row = document.createElement('label');
         row.className = 'item' + (it.t === 'h' ? ' h' : '');
         row.setAttribute('data-k', it.k);
-        row.innerHTML = '<input type="radio" name="w" value="' + it.k + '"><span class="body"><span class="txt">' + it.html + '</span><span class="tag ' + it.tag + '">' + TAGS[it.tag] + '</span><span class="detail">' + it.d + '</span></span>';
+        row.innerHTML = '<input type="radio" name="w" value="' + it.k + '"><span class="body"><span class="kk">' + keysOf(it.k) + '</span><span class="txt">' + it.html + '</span><span class="tag ' + it.tag + '">' + TAGS[it.tag] + '</span><span class="detail">' + it.d + '</span></span>';
       }
       box.appendChild(row);
     });
@@ -365,7 +403,64 @@ details .en { display: block; color: var(--ink-2); font-size: 13px; font-family:
   marks.addEventListener('change', syncMarks);
   syncMarks();
 
-  select('h-gm', 'init');
+  var lang = 1, i18nOn = false, saved = [];
+  function esc(x) { return x.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  // 翻譯表內的 <span style="color: {{}};"> 是強調字標記，{{}} 由前台帶入顏色
+  function tr(key) { var v = T[key][lang]; return key + ':' + (v.indexOf('<span') >= 0 ? v.replace(/\{\{\}\}/g, '#025be8') : esc(v)); }
+  function slots() {
+    var out = [[document.getElementById('ruleTitle'), 'VR0086']], k, el;
+    for (k in KEYMAP) {
+      el = phone.querySelector('[data-k="' + k + '"]');
+      out.push([el.querySelector('.bulletText') || el, KEYMAP[k]]);
+    }
+    for (k in CELLS) {
+      var trs = phone.querySelector('table[data-k="' + k + '"]').rows;
+      CELLS[k].forEach(function (r, i) { r.forEach(function (key, j) { if (key) out.push([trs[i].cells[j], key]); }); });
+    }
+    return out;
+  }
+  function applyI18n() {
+    var sl = slots(), i;
+    if (i18nOn) {
+      if (!saved.length) for (i = 0; i < sl.length; i++) saved.push(sl[i][0].innerHTML);
+      for (i = 0; i < sl.length; i++) sl[i][0].innerHTML = tr(sl[i][1]);
+    } else if (saved.length) {
+      for (i = 0; i < sl.length; i++) sl[i][0].innerHTML = saved[i];
+      saved = [];
+    }
+    document.body.classList.toggle('i18n', i18nOn);
+    document.getElementById('langBox').hidden = !i18nOn;
+    marks.disabled = i18nOn;
+    document.getElementById('marksBox').classList.toggle('off', i18nOn);
+  }
+  document.getElementById('i18n').addEventListener('change', function (e) { i18nOn = e.target.checked; applyI18n(); });
+  document.getElementById('lang').addEventListener('change', function (e) { lang = parseInt(e.target.value, 10); applyI18n(); });
+
+  var tabNight = document.getElementById('tab-night'), tabDay = document.getElementById('tab-day');
+  function setTheme(day) {
+    phone.classList.toggle('day', day);
+    tabDay.classList.toggle('on', day); tabNight.classList.toggle('on', !day);
+    tabDay.setAttribute('aria-selected', day ? 'true' : 'false');
+    tabNight.setAttribute('aria-selected', day ? 'false' : 'true');
+  }
+  tabNight.addEventListener('click', function () { setTheme(false); });
+  tabDay.addEventListener('click', function () { setTheme(true); });
+
+  // 點到左邊對應區塊或右邊條列以外的地方，取消粉色標示（頁籤與「同時標示所有改動處」除外）
+  function clearSel() {
+    var i, old = phone.querySelectorAll('.sel');
+    for (i = 0; i < old.length; i++) old[i].classList.remove('sel');
+    old = list.querySelectorAll('.item.on');
+    for (i = 0; i < old.length; i++) old[i].classList.remove('on');
+    old = list.querySelectorAll('input:checked');
+    for (i = 0; i < old.length; i++) old[i].checked = false;
+  }
+  document.addEventListener('click', function (e) {
+    var t = e.target;
+    if (!t.closest) return;
+    if (t.closest('#phone [data-k]') || t.closest('#wordList .item[data-k]') || t.closest('.theme-tabs') || t.closest('.controls')) return;
+    clearSel();
+  });
 })();
 </script>
 </body>
