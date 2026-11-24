@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>新客活動 前台互動原型 _10</title>
+<title>新客活動 前台互動原型 _11</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
 <style>
@@ -307,12 +307,12 @@ img{display:block;max-width:100%}
 <div class="panel">
   <div class="draft">這是運營提供的初版設計稿，實際內容依照最終設計稿為主。</div>
   <h1>新客活動 前台互動原型</h1>
-  <div class="sub">版本 _10 ・ 給營運點擊看效果用，畫面以活動文件為準，只有活動相關的地方可以點</div>
+  <div class="sub">版本 _11 ・ 給營運點擊看效果用，畫面以活動文件為準，只有活動相關的地方可以點</div>
   <h3>會員身分</h3>
   <div class="seg" id="segU"><button data-v="1" class="on">活動會員</button><button data-v="0">非活動會員</button></div>
   <h3>今天的完成狀態</h3>
   <div class="seg" id="segS"><button data-v="0" class="on">沒有完成</button><button data-v="1">完成一個</button><button data-v="2">完成兩個</button><button data-v="3">完成三個</button></div>
-  <div style="font-size:12.5px;color:#6b7280;margin-top:6px">切換後領取狀態會重置，再到小卡按 Claim 領取，一張小卡領一次。領取後切換頁面（底部選單或下方按鈕）才會反灰並重新排序。</div>
+  <div style="font-size:12.5px;color:#6b7280;margin-top:6px">切換後領取狀態會重置，再到小卡按 Claim 領取，一張小卡領一次。領取後小卡馬上反灰並移到最後面。</div>
   <h3>點 Claim 時的結果</h3>
   <div class="seg" id="segM"><button data-v="ok" class="on">領取成功</button><button data-v="kyc">KYC 未通過</button><button data-v="fail">領取失敗（IP 等）</button></div>
   <div style="font-size:12.5px;color:#6b7280;margin-top:6px">KYC 未通過跳 KYC 提示，其他任何原因失敗都跳同一則 toast，獎勵都保留為 Claim。</div>
@@ -324,7 +324,7 @@ img{display:block;max-width:100%}
   <h3>可以點的地方</h3>
   <ul>
     <li>首頁小卡：Claim 跳領取結果（成功提示、KYC 提示或失敗 toast，依面板設定），Deposit 跳提示「跳轉至充值頁面」，點按鈕以外的地方跳到活動頁。</li>
-    <li>首頁小卡排序：依檔位排。領取當下按鈕馬上變成灰色的 Claimed（不能再點），小卡本身不反灰、位置不動。切換頁面重新讀取資料後，整張小卡才反灰並移到最後。今天全部領完後，同樣在切換頁面後才會倒數消失、小卡區換成一張橫幅。</li>
+    <li>首頁小卡排序：依檔位排。領取後整張小卡馬上反灰、按鈕變成 Claimed，並移到最後面。今天全部領完後，倒數消失、小卡區換成一張橫幅。</li>
     <li>首頁右上 Deposit（帶禮物盒）：跳提示「跳轉至充值頁面」。</li>
     <li>活動頁：Claim 與首頁小卡相同，Deposit 跳提示「跳轉至充值頁面」，左上「‹」返回。</li>
     <li>个人中心：Deposit 為活動樣式（紅底加禮物盒），跳提示「跳轉至充值頁面」。餘額下方的廣告欄位放本活動圖，點擊跳到活動頁。</li>
@@ -337,13 +337,13 @@ img{display:block;max-width:100%}
 
 </section>
 <section id="sec2"><h2 class="sh">2. 首頁-Deposit按鈕</h2><div class="sgrid"><div class="demo bg-home" id="d2"></div><div class="sdesc"><ul><li><b>位置：</b>首頁頂部個人資訊列右側的 Deposit 按鈕。</li><li><b>新增：</b>活動會員的 Deposit 按鈕左上加一個禮物盒圖示。</li><li><b>動態：</b>禮物盒每 3 秒輕晃一次，提醒今天有存款獎勵。</li><li><b>顯示條件：</b>只有參與對象內的活動會員才有禮物盒，非活動會員維持原本的一般樣式（示意右側）。</li><li><b>點擊：</b>跳轉至充值頁面。原型以提示「跳轉至充值頁面」代替。</li></ul></div></div></section>
-<section id="sec3"><h2 class="sh">3. 首頁-活動展示模組</h2><div class="sgrid"><div class="demo bg-home" id="d3"></div><div class="sdesc"><ul><li><b>位置：</b>首頁遊戲分類列下方、Must-Try 上方，採用樣式 A。</li><li><b>顯示條件：</b>活动状态开启、會員在參與對象內才顯示，非活動會員完全看不到。</li><li><b>標題列：</b>Newcomer Daily Deposit，右側倒數計時到當天 23:50:00（停止統計），每秒更新。</li><li><b>任務小卡：</b>一個檔位一張，數量依後台當天該等級的設定（1～10 張）。橫向排列，手機可以左右滑，電腦可以按住拖曳。</li><li><b>小卡內容：</b>禮物盒圖（含獎金標籤）、Deposit ₱門檻 get ₱獎金、進度條、當日累計／門檻、按鈕。</li><li><b>按鈕狀態：</b>Deposit：還沒達標，點擊跳轉至充值頁面。Claim：達標還沒領，按鈕每 1.4 秒輕微放大縮小提醒，點擊領取。Claimed：已領取，灰色不能點。</li><li><b>點擊其他地方：</b>點小卡上按鈕以外的地方，跳到活動頁。</li><li><b>排序：</b>依檔位排。領取當下按鈕馬上變灰（Claimed），小卡位置不動。切換頁面重新讀取資料後，整張小卡才反灰並移到最後。</li></ul></div></div></section>
-<section id="sec4"><h2 class="sh">4. 首頁-活動展示模組（今日已完成）</h2><div class="sgrid"><div class="demo bg-home" id="d4"></div><div class="sdesc"><ul><li><b>觸發時機：</b>今天全部檔位都已領取，且切換頁面重新讀取資料後。</li><li><b>變化：</b>倒數計時不顯示，任務小卡整排換成一張橫幅。</li><li><b>點擊：</b>點橫幅跳到活動頁。</li><li><b>內容：</b>橫幅圖文待營運提供，目前為示意。</li></ul></div></div></section>
+<section id="sec3"><h2 class="sh">3. 首頁-活動展示模組</h2><div class="sgrid"><div class="demo bg-home" id="d3"></div><div class="sdesc"><ul><li><b>位置：</b>首頁遊戲分類列下方、Must-Try 上方，採用樣式 A。</li><li><b>顯示條件：</b>活动状态开启、會員在參與對象內才顯示，非活動會員完全看不到。</li><li><b>標題列：</b>Newcomer Daily Deposit，右側倒數計時到當天 23:50:00（停止統計），每秒更新。</li><li><b>任務小卡：</b>一個檔位一張，數量依後台當天該等級的設定（1～10 張）。橫向排列，手機可以左右滑，電腦可以按住拖曳。</li><li><b>小卡內容：</b>禮物盒圖（含獎金標籤）、Deposit ₱門檻 get ₱獎金、進度條、當日累計／門檻、按鈕。</li><li><b>按鈕狀態：</b>Deposit：還沒達標，點擊跳轉至充值頁面。Claim：達標還沒領，按鈕每 1.4 秒輕微放大縮小提醒，點擊領取。Claimed：已領取，灰色不能點。</li><li><b>點擊其他地方：</b>點小卡上按鈕以外的地方，跳到活動頁。</li><li><b>排序：</b>依檔位排。領取後整張小卡馬上反灰、按鈕變成 Claimed，並移到最後面。</li></ul></div></div></section>
+<section id="sec4"><h2 class="sh">4. 首頁-活動展示模組（今日已完成）</h2><div class="sgrid"><div class="demo bg-home" id="d4"></div><div class="sdesc"><ul><li><b>觸發時機：</b>今天全部檔位都已領取時，領完最後一張就換。</li><li><b>變化：</b>倒數計時不顯示，任務小卡整排換成一張橫幅。</li><li><b>點擊：</b>點橫幅跳到活動頁。</li><li><b>內容：</b>橫幅圖文待營運提供，目前為示意。</li></ul></div></div></section>
 <section id="sec5"><h2 class="sh">5. 活動頁-頁首與主視覺</h2><div class="sgrid"><div class="demo bg-act" id="d5"></div><div class="sdesc"><ul><li><b>位置：</b>從首頁小卡、首頁橫幅、个人中心廣告欄位點進來的活動頁上方。</li><li><b>頁首：</b>白底「Reward details」，左上「‹」回到上一頁並重新讀取資料。</li><li><b>主視覺：</b>Newcomer 30 Days promo 活動圖，右下 Rules 按鈕（原型不可點）。</li><li><b>標題列：</b>Daily Deposit，右側倒數計時規則與首頁相同（到 23:50:00）。</li></ul></div></div></section>
-<section id="sec6"><h2 class="sh">6. 活動頁-每日任務卡</h2><div class="sgrid"><div class="demo bg-act" id="d6"></div><div class="sdesc"><ul><li><b>位置：</b>活動頁 Daily Deposit 下方，一個檔位一張，由上往下排。</li><li><b>卡片內容：</b>左上緞帶標籤（獎金）、禮物盒圖、Deposit ₱門檻 get ₱獎金、進度條、當日累計／門檻、按鈕。</li><li><b>按鈕狀態：</b>與首頁小卡相同：Deposit 跳轉至充值頁面，Claim 領取，Claimed 灰色不能點。</li><li><b>排序：</b>與首頁相同，領取當下只有按鈕變灰，重新讀取資料後整張反灰並移到最後。</li><li><b>全部領完：</b>重新讀取資料後，每張卡右側改顯示「Tomorrow Deposit rewards will available in hh:mm:ss」，倒數到次日 00:00（示意最下方）。</li></ul></div></div></section>
+<section id="sec6"><h2 class="sh">6. 活動頁-每日任務卡</h2><div class="sgrid"><div class="demo bg-act" id="d6"></div><div class="sdesc"><ul><li><b>位置：</b>活動頁 Daily Deposit 下方，一個檔位一張，由上往下排。</li><li><b>卡片內容：</b>左上緞帶標籤（獎金）、禮物盒圖、Deposit ₱門檻 get ₱獎金、進度條、當日累計／門檻、按鈕。</li><li><b>按鈕狀態：</b>與首頁小卡相同：Deposit 跳轉至充值頁面，Claim 領取，Claimed 灰色不能點。</li><li><b>排序：</b>與首頁相同，領取後整張卡馬上反灰並移到最後面。</li><li><b>全部領完：</b>每張卡右側改顯示「Tomorrow Deposit rewards will available in hh:mm:ss」，倒數到次日 00:00（示意最下方）。</li></ul></div></div></section>
 <section id="sec7"><h2 class="sh">7. 个人中心-Deposit按鈕</h2><div class="sgrid"><div class="demo bg-my" id="d7"></div><div class="sdesc"><ul><li><b>位置：</b>个人中心 Account Balance 下方的 Deposit 按鈕。</li><li><b>新增：</b>活動會員的 Deposit 改為活動樣式：紅底、金色外框，左上加金色禮物盒圖示。</li><li><b>動態：</b>禮物盒每 3 秒輕晃一次。</li><li><b>顯示條件：</b>只有活動會員是活動樣式，非活動會員維持原本樣式（示意下方）。</li><li><b>點擊：</b>跳轉至充值頁面，與原本相同。</li></ul></div></div></section>
 <section id="sec8"><h2 class="sh">8. 个人中心-廣告欄位</h2><div class="sgrid"><div class="demo bg-my" id="d8"></div><div class="sdesc"><ul><li><b>位置：</b>个人中心 Account Balance 下方的廣告欄位（現有廣告位）。</li><li><b>顯示條件：</b>活動會員顯示本活動的廣告圖，非活動會員顯示原本的廣告（示意下方）。</li><li><b>圖片來源：</b>後台 活动图片 › 个人中心广告设置 上傳，H5 建議尺寸 640×118。</li><li><b>點擊：</b>跳到活動頁。</li></ul></div></div></section>
-<section id="sec9"><h2 class="sh">9. 彈窗-領取成功</h2><div class="sgrid"><div class="demo bg-dim" id="d9"></div><div class="sdesc"><ul><li><b>觸發：</b>按 Claim 且領取成功。</li><li><b>樣式：</b>沿用任務中心的領取成功彈窗：上方金幣、Reward received successfully、紅字獎金金額、Confirm 按鈕。</li><li><b>點擊：</b>Confirm 關閉彈窗，回到原頁，該檔按鈕已是灰色 Claimed。</li><li><b>入帳：</b>獎金以彩金入帳，同時產生流水要求（本金＋獎金）× 流水倍數。</li></ul></div></div></section>
+<section id="sec9"><h2 class="sh">9. 彈窗-領取成功</h2><div class="sgrid"><div class="demo bg-dim" id="d9"></div><div class="sdesc"><ul><li><b>觸發：</b>按 Claim 且領取成功。</li><li><b>樣式：</b>沿用任務中心的領取成功彈窗：上方金幣、Reward received successfully、紅字獎金金額、Confirm 按鈕。</li><li><b>點擊：</b>Confirm 關閉彈窗，回到原頁，該檔小卡已反灰並移到最後面。</li><li><b>入帳：</b>獎金以彩金入帳，同時產生流水要求（本金＋獎金）× 流水倍數。</li></ul></div></div></section>
 <section id="sec10"><h2 class="sh">10. 彈窗-KYC 驗證</h2><div class="sgrid"><div class="demo bg-dim" id="d10"></div><div class="sdesc"><ul><li><b>觸發：</b>按 Claim 時，會員的 KYC 狀態不在後台 KYC 验证勾選的範圍內。</li><li><b>文案：</b>標題 Verify Your Identity，內文與下一行照示意。</li><li><b>點擊：</b>VERIFY NOW 跳轉至 KYC 驗證頁面，LATER 關閉彈窗。</li><li><b>獎勵：</b>不派發，保留為 Claim，驗證完成後要自己再按一次 Claim。</li></ul><div class="snote">內文的「daily Sport Free Bet」是體育活動的用詞，本活動是存款獎金，文案待確認。</div></div></div></section>
 <section id="sec11"><h2 class="sh">11. 提示-領取失敗</h2><div class="sgrid"><div class="demo bg-dim" id="d11"></div><div class="sdesc"><ul><li><b>觸發：</b>按 Claim 時，KYC 以外的任何原因領取失敗，例如同一 IP 今天領取的帳號數已到上限。</li><li><b>樣式：</b>畫面中間的 toast，約 2.2 秒自動消失。</li><li><b>文案：</b>Unable to claim your reward. Please try again later.</li><li><b>獎勵：</b>不派發，保留為 Claim，之後可以再領。</li></ul></div></div></section>
 </main>
@@ -419,9 +419,9 @@ function claim(i,where){
     log(`點擊${PN[where]}${TN(i)}小卡的「Claim」按鈕`, '會員目前的 KYC 狀態不在後台 KYC 验证勾選的範圍內，不派發獎金，跳出 KYC 提示。獎勵保留為 Claim，驗證完成後仍要自己再按一次 Claim。'); return;}
   if(st.mode==='fail'){toast('Unable to claim your reward. Please try again later.');
     log(`點擊${PN[where]}${TN(i)}小卡的「Claim」按鈕`, '領取失敗（例如同一 IP 今天領取的帳號數已到上限，或其他任何原因），不派發獎金，跳 toast「Unable to claim your reward. Please try again later.」。獎勵保留為 Claim，之後可以再領。'); return;}
-  st.claimed[i]=true; document.getElementById('mam').textContent=fmt(TIERS[i].bonus); document.getElementById('mask').classList.add('on'); render();
+  st.claimed[i]=true; refresh(); seen[st.cur]=snap(); document.getElementById('mam').textContent=fmt(TIERS[i].bonus); document.getElementById('mask').classList.add('on'); render();
   const all=st.claimed.every(x=>x);
-  log(`點擊${PN[where]}${TN(i)}小卡的「Claim」按鈕`, `領取${TN(i)}獎金 ₱${fmt(TIERS[i].bonus)}，跳出領取成功提示，獎金以彩金入帳並產生流水要求。按鈕馬上變成灰色的 Claimed、不能再點，小卡本身先不反灰、位置不動，切換頁面重新讀取資料後，整張小卡才反灰並移到最後。` + (all?'今天全部檔位都領完了，切換頁面重新讀取資料後，首頁倒數不顯示、小卡換成一張橫幅。':''));
+  log(`點擊${PN[where]}${TN(i)}小卡的「Claim」按鈕`, `領取${TN(i)}獎金 ₱${fmt(TIERS[i].bonus)}，跳出領取成功提示，獎金以彩金入帳並產生流水要求。這張小卡馬上反灰、按鈕變成 Claimed 不能再點，並移到最後面。` + (all?(where==='home'?'今天全部檔位都領完了，倒數計時不顯示，禮物小卡變成一張橫幅。':'今天全部檔位都領完了，每張卡改顯示明天的倒數。'):''));
 }
 function kycGo(){document.getElementById('kmask').classList.remove('on');toast('跳轉至 KYC 驗證頁面');log('點擊 KYC 提示的「VERIFY NOW」','跳轉至 KYC 驗證頁面（原型只跳提示）。驗證完成後回到原頁，獎勵仍是 Claim，要再按一次才會領取。');}
 function kycLater(){document.getElementById('kmask').classList.remove('on');log('點擊 KYC 提示的「LATER」','關閉提示，回到原頁，獎勵仍是 Claim。');}
@@ -521,12 +521,12 @@ function cmpHead(cd){return `<div class="cmp-h"><img class="t" src="${IMG.titleH
 function renderDemos(){
   const set=(id,h)=>{const e=document.getElementById(id); if(e) e.innerHTML=h;};
   set('d2', `<div class="cap">活動會員</div>${dHeader(true)}<div class="cap">非活動會員</div>${dHeader(false)}`);
-  set('d3', `<div class="cmp" style="margin:0">${cmpHead(true)}<div class="cards" style="padding-bottom:10px">${dCard(0,800,'claimed',false)}${dCard(1,800,'claim',false)}${dCard(2,800,'dep',false)}</div></div>
-    <div class="cap">依序：剛領取（按鈕變灰）、達標可領（Claim）、未達標（Deposit）。重新讀取資料後：</div>
+  set('d3', `<div class="cmp" style="margin:0">${cmpHead(true)}<div class="cards" style="padding-bottom:10px">${dCard(0,800,'claim',false)}${dCard(1,800,'claim',false)}${dCard(2,800,'dep',false)}</div></div>
+    <div class="cap">領取前：第 1、2 檔達標可領（Claim），第 3 檔未達標（Deposit）。領取第 1 檔後：</div>
     <div class="cmp" style="margin:0">${cmpHead(true)}<div class="cards" style="padding-bottom:10px">${dCard(1,800,'claim',false)}${dCard(2,800,'dep',false)}${dCard(0,800,'done',true)}</div></div>`);
   set('d4', `<div class="cmp" style="margin:0">${cmpHead(false)}<div class="allbanner"><img src="${IMG.g200}"><div class="tx lil">All rewards claimed today!<small>Come back tomorrow for new deposit rewards</small></div></div></div>`);
   set('d5', `<div class="ahd" style="position:relative;padding-top:0;height:44px"><div class="bk" style="top:0"></div><span>Reward details</span></div><div class="herobox"><img src="${IMG.hero}"><div class="strip lil">Newcomer <em>30</em> Days promo</div></div><div class="dd"><img class="t" src="${IMG.titleDaily}"><div class="cd lil"><img src="${IMG.hourglass}"><span class="cdt">14 : 22 : 59</span></div></div>`);
-  set('d6', `${dActCard(1,800,'claim',false)}${dActCard(0,800,'claimed',false)}<div class="cap">全部領完、重新讀取資料後：</div>${dActCard(0,2000,'done',false,true)}`);
+  set('d6', `${dActCard(1,800,'claim',false)}${dActCard(2,800,'dep',false)}${dActCard(0,800,'done',true)}<div class="cap">全部領完後：</div>${dActCard(0,2000,'done',false,true)}`);
   const myB=(sp)=>`<div class="bc"><div class="lb">Account Balance</div><div class="amt"><i></i>323,421.95</div><div class="btns">${sp?`<div class="b sp lil"><span class="gi2">${gift2()}</span>Deposit</div>`:'<div class="b">Deposit</div>'}<div class="b">Withdraw</div></div></div>`;
   set('d7', `<div class="cap">活動會員</div>${myB(true)}<div class="cap">非活動會員</div>${myB(false)}`);
   set('d8', `<div class="cap">活動會員</div><div class="ad act"><img src="${IMG.g15}"><div class="tx lil">Newcomer 30 Days promo<small>Deposit daily, get up to ₱265 a day</small></div><span class="go lil">GO</span></div><div class="cap">非活動會員（原本的廣告）</div><div class="ad"><img src="${IMG.adDef}" style="width:100%;height:100%;object-fit:cover"></div>`);
